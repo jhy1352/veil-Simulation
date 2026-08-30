@@ -1,0 +1,3915 @@
+================================================================================
+TRPG 3.1 VEIL — FINAL RED TEAM ADVERSARIAL RUNTIME PROOF RAW EVIDENCE
+GENERATED AT: 2026-08-27T06:31:20.523Z
+TARGET COMMIT: 33a2b33f37085f931ea99527a469b7ebd2d748a8
+TOTAL VECTORS: 25
+DEFENSES HELD: 25
+BREAKS CONFIRMED: 0
+================================================================================
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-01] Source / Capability Spoofing
+TEST ID: S1-01 - Direct submission of SYSTEM proposal without engine authorization
+CATEGORY: Source Spoofing | VARIANT: Direct Privileged Source Injection
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s1-01",
+  "requestId": "req-s1-01",
+  "eventId": "evt-s1-01",
+  "expectedStateVersion": 1,
+  "source": "SYSTEM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.625Z",
+  "intentSummary": "Spoofed system proposal",
+  "actions": [
+    {
+      "type": "RECORD_DICE_RESULT",
+      "payload": {
+        "rollValue": 20,
+        "targetDC": 10,
+        "isSuccess": true
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[SECURITY_FORGERY] Direct submission of privileged source 'SYSTEM' without Engine-owned capability token is strictly rejected."
+  ],
+  "conflictDetails": [
+    "[SECURITY_FORGERY] Direct submission of privileged source without capability."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s1-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[SECURITY_FORGERY] Direct submission of privileged source 'SYSTEM' without Engine-owned capability token is strictly rejected."
+  ],
+  "conflictDetails": [
+    "[SECURITY_FORGERY] Direct submission of privileged source without capability."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.525Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-01] Source / Capability Spoofing
+TEST ID: S1-02 - Direct submission of SAVE_HYDRATION proposal without engine capability
+CATEGORY: Source Spoofing | VARIANT: Hydration Source Forgery
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s1-02",
+  "requestId": "req-s1-02",
+  "eventId": "evt-s1-02",
+  "expectedStateVersion": 1,
+  "source": "SAVE_HYDRATION",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.628Z",
+  "intentSummary": "Spoofed hydration proposal",
+  "actions": [
+    {
+      "type": "OVERWRITE_CHARACTER",
+      "payload": {
+        "name": "ForgedHero",
+        "stats": {
+          "strength": 30
+        }
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[SECURITY_FORGERY] Direct submission of privileged source 'SAVE_HYDRATION' without Engine-owned capability token is strictly rejected."
+  ],
+  "conflictDetails": [
+    "[SECURITY_FORGERY] Direct submission of privileged source without capability."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s1-02",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[SECURITY_FORGERY] Direct submission of privileged source 'SAVE_HYDRATION' without Engine-owned capability token is strictly rejected."
+  ],
+  "conflictDetails": [
+    "[SECURITY_FORGERY] Direct submission of privileged source without capability."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.528Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-01] Source / Capability Spoofing
+TEST ID: S1-03 - Direct submission of CLOUD_RESTORE proposal without engine capability
+CATEGORY: Source Spoofing | VARIANT: Cloud Restore Source Forgery
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s1-03",
+  "requestId": "req-s1-03",
+  "eventId": "evt-s1-03",
+  "expectedStateVersion": 1,
+  "source": "CLOUD_RESTORE",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.628Z",
+  "intentSummary": "Spoofed cloud restore proposal",
+  "actions": [
+    {
+      "type": "OVERWRITE_WORLD_INFO",
+      "payload": {
+        "worldName": "HackedWorld"
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[SECURITY_FORGERY] Direct submission of privileged source 'CLOUD_RESTORE' without Engine-owned capability token is strictly rejected."
+  ],
+  "conflictDetails": [
+    "[SECURITY_FORGERY] Direct submission of privileged source without capability."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s1-03",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[SECURITY_FORGERY] Direct submission of privileged source 'CLOUD_RESTORE' without Engine-owned capability token is strictly rejected."
+  ],
+  "conflictDetails": [
+    "[SECURITY_FORGERY] Direct submission of privileged source without capability."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.528Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-01] Source / Capability Spoofing
+TEST ID: S1-04 - Submission with arbitrary non-whitelisted source (ADMIN_SUPERUSER)
+CATEGORY: Source Spoofing | VARIANT: Non-Whitelisted Source
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s1-04",
+  "requestId": "req-s1-04",
+  "eventId": "evt-s1-04",
+  "expectedStateVersion": 1,
+  "source": "ADMIN_SUPERUSER",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.628Z",
+  "intentSummary": "Unknown source injection",
+  "actions": [
+    {
+      "type": "ADD_FACTION",
+      "payload": {
+        "id": "fac-god",
+        "name": "신계",
+        "influence": "50"
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[INVALID_PROPOSAL_SOURCE] Unknown, missing, or unauthorized proposal source 'ADMIN_SUPERUSER'."
+  ],
+  "conflictDetails": [
+    "[SECURITY_FORGERY] Proposal source must be a valid recognized source type."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s1-04",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[INVALID_PROPOSAL_SOURCE] Unknown, missing, or unauthorized proposal source 'ADMIN_SUPERUSER'."
+  ],
+  "conflictDetails": [
+    "[SECURITY_FORGERY] Proposal source must be a valid recognized source type."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.528Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-01] Source / Capability Spoofing
+TEST ID: S1-05 - Capability token forgery via Symbol recreation
+CATEGORY: Capability Forgery | VARIANT: Symbol Recreation Attack
+VERDICT: DEFENSE_HELD
+NOTES: Blocked forged symbol with zero-mutation.
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s1-05-forged",
+  "requestId": "req-s1-05-forged",
+  "eventId": "evt-s1-05-forged",
+  "expectedStateVersion": 1,
+  "source": "SYSTEM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.629Z",
+  "intentSummary": "Forged symbol capability attack",
+  "actions": [
+    {
+      "type": "RECORD_DICE_RESULT",
+      "payload": {
+        "rollValue": 20,
+        "targetDC": 10,
+        "isSuccess": true
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: null
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s1-05-forged",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[SECURITY_FORGERY] Direct submission of privileged source 'SYSTEM' without Engine-owned capability token is strictly rejected."
+  ],
+  "conflictDetails": [
+    "[SECURITY_FORGERY] Direct submission of privileged source without capability."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.529Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-02] Genesis / Hydration / Restore Escalation
+TEST ID: S2-01 - Retrospective GENESIS proposal on Turn 2 attempting starter loot injection
+CATEGORY: Genesis Escalation | VARIANT: Turn > 1 Retrospective Genesis
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s2-01-attack",
+  "requestId": "req-s2-01-attack",
+  "eventId": "evt-s2-01-attack",
+  "expectedStateVersion": 2,
+  "source": "GENESIS",
+  "turn": 2,
+  "timestamp": "2026-08-27T06:31:20.629Z",
+  "intentSummary": "Retrospective genesis attack on turn 2",
+  "actions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "ADD",
+        "item": {
+          "id": "item-dragon-slayer",
+          "name": "용살검",
+          "quantity": 1
+        },
+        "acquisition": {
+          "cause": "GENESIS_STARTER"
+        }
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[STALE_STATE_CONFLICT] Proposal expected state version 2, but current sovereign state is at version 1."
+  ],
+  "conflictDetails": [],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s2-01-attack",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[STALE_STATE_CONFLICT] Proposal expected state version 2, but current sovereign state is at version 1."
+  ],
+  "conflictDetails": [],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.529Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-02] Genesis / Hydration / Restore Escalation
+TEST ID: S2-02 - Legitimate initial GENESIS configuration on genesis turn
+CATEGORY: Genesis Semantics | VARIANT: Legitimate Turn 1 Genesis
+VERDICT: DEFENSE_HELD
+NOTES: Legitimate action successfully committed as intended. State version advanced to 2.
+STATE COMPARISON (BEFORE vs AFTER): Identical=false
+DIFFS: stateVersion: 1 -> 2; lastCommittedEventId: null -> evt-genesis-legit; historyLength: 0 -> 1; totalExecutedRequests: 0 -> 1; totalRecordedEvents: 0 -> 1; character mutated: {"name":"","gender":"","age":"","appearance":"","goal":"","originBackground":"","backgroundType":"preset","flaw":"","flawType":"preset","oath":"","oathType":"preset","anchor":"","anchorType":"preset","faction":"","factionType":"preset","stats":{"strength":10,"agility":10,"constitution":10,"intelligence":10,"wisdom":10,"charisma":10},"inventory":[],"secret":"","physicalDefect":"","timeline":[]} -> {"name":"초기화영웅","gender":"","age":"","appearance":"","goal":"","originBackground":"","backgroundType":"preset","flaw":"","flawType":"preset","oath":"","oathType":"preset","anchor":"","anchorType":"preset","faction":"","factionType":"preset","stats":{"strength":15,"agility":14,"constitution":14,"intelligence":10,"wisdom":10,"charisma":10},"inventory":[{"id":"item-starter-wood-sword","name":"목검","quantity":1,"itemType":"WEAPON"}],"secret":"","physicalDefect":"","timeline":[]}
+PAYLOAD: {
+  "proposalId": "prop-genesis-legit",
+  "requestId": "req-genesis-legit",
+  "eventId": "evt-genesis-legit",
+  "expectedStateVersion": 1,
+  "source": "GENESIS",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.630Z",
+  "intentSummary": "Legitimate genesis setup",
+  "actions": [
+    {
+      "type": "OVERWRITE_CHARACTER",
+      "payload": {
+        "name": "초기화영웅",
+        "stats": {
+          "strength": 15,
+          "agility": 14,
+          "constitution": 14,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "item-starter-wood-sword",
+            "name": "목검",
+            "quantity": 1,
+            "itemType": "WEAPON"
+          }
+        ]
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": true,
+  "rejectedReasons": [],
+  "conflictDetails": [],
+  "sanitizedActions": [
+    {
+      "type": "OVERWRITE_CHARACTER",
+      "payload": {
+        "name": "초기화영웅",
+        "stats": {
+          "strength": 15,
+          "agility": 14,
+          "constitution": 14,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "item-starter-wood-sword",
+            "name": "목검",
+            "quantity": 1,
+            "itemType": "WEAPON"
+          }
+        ]
+      }
+    }
+  ]
+}
+COMMIT RESULT: {
+  "success": true,
+  "stateVersion": 2,
+  "eventId": "evt-genesis-legit",
+  "committedActionsCount": 1,
+  "rejectedReasons": [],
+  "conflictDetails": [],
+  "newHistoricalRecords": [
+    {
+      "recordId": "rec-evt-genesis-legit-1",
+      "eventId": "evt-genesis-legit",
+      "requestId": "req-genesis-legit",
+      "proposalId": "prop-genesis-legit",
+      "turn": 1,
+      "timestamp": "2026-08-27T06:31:20.630Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "GENESIS",
+      "actionType": "OVERWRITE_CHARACTER",
+      "details": "{\"name\":\"초기화영웅\",\"stats\":{\"strength\":15,\"agility\":14,\"constitution\":14,\"intelligence\":10,\"wisdom\":10,\"charisma\":10},\"inventory\":[{\"id\":\"item-starter-wood-sword\",\"name\":\"목검\",\"quantity\":1,\"itemType\":\"WEAPON\"}]}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "PUBLIC"
+    }
+  ],
+  "snapshot": {
+    "stateVersion": 2,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "초기화영웅",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 15,
+        "agility": 14,
+        "constitution": 14,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-starter-wood-sword",
+          "name": "목검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "",
+      "timeline": []
+    },
+    "lastCommittedEventId": "evt-genesis-legit",
+    "lastCommittedAt": "2026-08-27T06:31:20.630Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-03] Mutation Boundary Candidate -> Final Bypass
+TEST ID: S3-01 - Candidate rejected by pre-auth forced into final proposal
+CATEGORY: Boundary Enforcement | VARIANT: Rejected Candidate Inclusion
+VERDICT: DEFENSE_HELD
+NOTES: MutationBoundary successfully rejected forbidden candidate.
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s3-01",
+  "requestId": "req-s3-01",
+  "eventId": "evt-s3-01",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.632Z",
+  "intentSummary": "Forced kill attempt",
+  "actions": [
+    {
+      "type": "SET_NPC_STATUS",
+      "payload": {
+        "id": "npc-alive-1",
+        "status": "DEAD"
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "violationReasons": [
+    "[MUTATION_BOUNDARY_VIOLATION] Final proposal contains 1 actions, exceeding approved candidate action count (0)."
+  ]
+}
+COMMIT RESULT: null
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-04] Causality / Provenance Forgery
+TEST ID: S4-01 - Causality token overlap attack (unrelated weapon containing common prefix word)
+CATEGORY: Causality Forgery | VARIANT: Substring / Token Overlap
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s4-01",
+  "requestId": "req-s4-01",
+  "eventId": "evt-s4-01",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.632Z",
+  "intentSummary": "Token overlap causality bypass",
+  "actions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "ADD",
+        "item": {
+          "id": "item-god-sword",
+          "name": "화산 파천신검",
+          "quantity": 1
+        },
+        "acquisition": {
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "seed-ancient-sword"
+        }
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[CAUSALITY_VIOLATION] Event 'seed-ancient-sword' has no causal connection to item '화산 파천신검'."
+  ],
+  "conflictDetails": [
+    "[CAUSALITY_VIOLATION] Action #1: Event 'seed-ancient-sword' (화산 고묘에 봉인된 자하진기 비급 수색...) has no causal connection to item '화산 파천신검'."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s4-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[CAUSALITY_VIOLATION] Event 'seed-ancient-sword' has no causal connection to item '화산 파천신검'."
+  ],
+  "conflictDetails": [
+    "[CAUSALITY_VIOLATION] Action #1: Event 'seed-ancient-sword' (화산 고묘에 봉인된 자하진기 비급 수색...) has no causal connection to item '화산 파천신검'."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.532Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-04] Causality / Provenance Forgery
+TEST ID: S4-02 - Legitimate grounded item acquisition matching seed entity (자하진기 비급)
+CATEGORY: Causality Semantics | VARIANT: Exact Entity Grounding
+VERDICT: DEFENSE_HELD
+NOTES: Legitimate action successfully committed as intended. State version advanced to 2.
+STATE COMPARISON (BEFORE vs AFTER): Identical=false
+DIFFS: stateVersion: 1 -> 2; lastCommittedEventId: null -> evt-s4-02-legit; historyLength: 0 -> 1; totalExecutedRequests: 0 -> 1; totalRecordedEvents: 0 -> 1; character mutated: {"name":"청명","gender":"","age":"","appearance":"","goal":"","originBackground":"","backgroundType":"preset","flaw":"","flawType":"preset","oath":"","oathType":"preset","anchor":"","anchorType":"preset","faction":"","factionType":"preset","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"inventory":[{"id":"item-iron-sword","name":"철검","quantity":1,"itemType":"WEAPON"},{"id":"item-silver-coin","name":"은화","quantity":50,"itemType":"CURRENCY"}],"secret":"","physicalDefect":"왼쪽 어깨 흉터","timeline":[]} -> {"name":"청명","gender":"","age":"","appearance":"","goal":"","originBackground":"","backgroundType":"preset","flaw":"","flawType":"preset","oath":"","oathType":"preset","anchor":"","anchorType":"preset","faction":"","factionType":"preset","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"inventory":[{"id":"item-iron-sword","name":"철검","quantity":1,"itemType":"WEAPON"},{"id":"item-silver-coin","name":"은화","quantity":50,"itemType":"CURRENCY"},{"id":"item-zaha-manual","name":"자하진기 비급","quantity":1,"itemType":"BOOK"}],"secret":"","physicalDefect":"왼쪽 어깨 흉터","timeline":[]}
+PAYLOAD: {
+  "proposalId": "prop-s4-02-legit",
+  "requestId": "req-s4-02-legit",
+  "eventId": "evt-s4-02-legit",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.632Z",
+  "intentSummary": "Legitimate grounded item acquisition",
+  "actions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "ADD",
+        "item": {
+          "id": "item-zaha-manual",
+          "name": "자하진기 비급",
+          "quantity": 1,
+          "itemType": "BOOK"
+        },
+        "acquisition": {
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "seed-ancient-sword"
+        }
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": true,
+  "rejectedReasons": [],
+  "conflictDetails": [],
+  "sanitizedActions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "ADD",
+        "item": {
+          "id": "item-zaha-manual",
+          "name": "자하진기 비급",
+          "quantity": 1,
+          "itemType": "BOOK"
+        },
+        "acquisition": {
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "seed-ancient-sword"
+        }
+      }
+    }
+  ]
+}
+COMMIT RESULT: {
+  "success": true,
+  "stateVersion": 2,
+  "eventId": "evt-s4-02-legit",
+  "committedActionsCount": 1,
+  "rejectedReasons": [],
+  "conflictDetails": [],
+  "newHistoricalRecords": [
+    {
+      "recordId": "rec-evt-s4-02-legit-1",
+      "eventId": "evt-s4-02-legit",
+      "requestId": "req-s4-02-legit",
+      "proposalId": "prop-s4-02-legit",
+      "turn": 1,
+      "timestamp": "2026-08-27T06:31:20.632Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "source": "LLM",
+      "actionType": "MODIFY_INVENTORY",
+      "details": "{\"operation\":\"ADD\",\"item\":{\"id\":\"item-zaha-manual\",\"name\":\"자하진기 비급\",\"quantity\":1,\"itemType\":\"BOOK\"},\"acquisition\":{\"cause\":\"DISCOVERY_PICKUP\",\"verifiedEventId\":\"seed-ancient-sword\"}}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "PUBLIC"
+    }
+  ],
+  "snapshot": {
+    "stateVersion": 2,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        },
+        {
+          "id": "item-zaha-manual",
+          "name": "자하진기 비급",
+          "quantity": 1,
+          "itemType": "BOOK"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": "evt-s4-02-legit",
+    "lastCommittedAt": "2026-08-27T06:31:20.632Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-04] Causality / Provenance Forgery
+TEST ID: S4-03 - RESOURCE_EXCHANGE without matching cost REMOVE action
+CATEGORY: Causality Forgery | VARIANT: Unbacked Resource Exchange
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s4-03",
+  "requestId": "req-s4-03",
+  "eventId": "evt-s4-03",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.633Z",
+  "intentSummary": "Free purchase attack",
+  "actions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "ADD",
+        "item": {
+          "id": "item-expensive-pill",
+          "name": "대환단",
+          "quantity": 1
+        },
+        "acquisition": {
+          "cause": "RESOURCE_EXCHANGE",
+          "cost": {
+            "name": "은화",
+            "quantity": 30
+          }
+        }
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[CAUSALITY_VIOLATION] Atomic resource deduction action missing in proposal for exchange."
+  ],
+  "conflictDetails": [
+    "[CAUSALITY_VIOLATION] Action #1: RESOURCE_EXCHANGE for '대환단' lacks atomic REMOVE action of 30 '은화' in same proposal."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s4-03",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[CAUSALITY_VIOLATION] Atomic resource deduction action missing in proposal for exchange."
+  ],
+  "conflictDetails": [
+    "[CAUSALITY_VIOLATION] Action #1: RESOURCE_EXCHANGE for '대환단' lacks atomic REMOVE action of 30 '은화' in same proposal."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.533Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-04] Causality / Provenance Forgery
+TEST ID: S4-04 - Valid atomic RESOURCE_EXCHANGE with matching silver coin deduction
+CATEGORY: Causality Semantics | VARIANT: Atomic Resource Exchange
+VERDICT: DEFENSE_HELD
+NOTES: Legitimate action successfully committed as intended. State version advanced to 2.
+STATE COMPARISON (BEFORE vs AFTER): Identical=false
+DIFFS: stateVersion: 1 -> 2; lastCommittedEventId: null -> evt-s4-04-legit; historyLength: 0 -> 2; totalExecutedRequests: 0 -> 1; totalRecordedEvents: 0 -> 1; character mutated: {"name":"청명","gender":"","age":"","appearance":"","goal":"","originBackground":"","backgroundType":"preset","flaw":"","flawType":"preset","oath":"","oathType":"preset","anchor":"","anchorType":"preset","faction":"","factionType":"preset","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"inventory":[{"id":"item-iron-sword","name":"철검","quantity":1,"itemType":"WEAPON"},{"id":"item-silver-coin","name":"은화","quantity":50,"itemType":"CURRENCY"}],"secret":"","physicalDefect":"왼쪽 어깨 흉터","timeline":[]} -> {"name":"청명","gender":"","age":"","appearance":"","goal":"","originBackground":"","backgroundType":"preset","flaw":"","flawType":"preset","oath":"","oathType":"preset","anchor":"","anchorType":"preset","faction":"","factionType":"preset","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"inventory":[{"id":"item-iron-sword","name":"철검","quantity":1,"itemType":"WEAPON"},{"id":"item-silver-coin","name":"은화","quantity":20,"itemType":"CURRENCY"},{"id":"item-healing-pill","name":"소환단","quantity":1,"itemType":"CONSUMABLE"}],"secret":"","physicalDefect":"왼쪽 어깨 흉터","timeline":[]}
+PAYLOAD: {
+  "proposalId": "prop-s4-04-legit",
+  "requestId": "req-s4-04-legit",
+  "eventId": "evt-s4-04-legit",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.633Z",
+  "intentSummary": "Valid purchase with silver coin",
+  "actions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "REMOVE",
+        "item": {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 30
+        }
+      }
+    },
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "ADD",
+        "item": {
+          "id": "item-healing-pill",
+          "name": "소환단",
+          "quantity": 1,
+          "itemType": "CONSUMABLE"
+        },
+        "acquisition": {
+          "cause": "RESOURCE_EXCHANGE",
+          "cost": {
+            "name": "은화",
+            "quantity": 30
+          }
+        }
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": true,
+  "rejectedReasons": [],
+  "conflictDetails": [],
+  "sanitizedActions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "REMOVE",
+        "item": {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 30
+        }
+      }
+    },
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "ADD",
+        "item": {
+          "id": "item-healing-pill",
+          "name": "소환단",
+          "quantity": 1,
+          "itemType": "CONSUMABLE"
+        },
+        "acquisition": {
+          "cause": "RESOURCE_EXCHANGE",
+          "cost": {
+            "name": "은화",
+            "quantity": 30
+          }
+        }
+      }
+    }
+  ]
+}
+COMMIT RESULT: {
+  "success": true,
+  "stateVersion": 2,
+  "eventId": "evt-s4-04-legit",
+  "committedActionsCount": 2,
+  "rejectedReasons": [],
+  "conflictDetails": [],
+  "newHistoricalRecords": [
+    {
+      "recordId": "rec-evt-s4-04-legit-1",
+      "eventId": "evt-s4-04-legit",
+      "requestId": "req-s4-04-legit",
+      "proposalId": "prop-s4-04-legit",
+      "turn": 1,
+      "timestamp": "2026-08-27T06:31:20.633Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "source": "LLM",
+      "actionType": "MODIFY_INVENTORY",
+      "details": "{\"operation\":\"REMOVE\",\"item\":{\"id\":\"item-silver-coin\",\"name\":\"은화\",\"quantity\":30}}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "PUBLIC"
+    },
+    {
+      "recordId": "rec-evt-s4-04-legit-2",
+      "eventId": "evt-s4-04-legit",
+      "requestId": "req-s4-04-legit",
+      "proposalId": "prop-s4-04-legit",
+      "turn": 1,
+      "timestamp": "2026-08-27T06:31:20.633Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "source": "LLM",
+      "actionType": "MODIFY_INVENTORY",
+      "details": "{\"operation\":\"ADD\",\"item\":{\"id\":\"item-healing-pill\",\"name\":\"소환단\",\"quantity\":1,\"itemType\":\"CONSUMABLE\"},\"acquisition\":{\"cause\":\"RESOURCE_EXCHANGE\",\"cost\":{\"name\":\"은화\",\"quantity\":30}}}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "PUBLIC"
+    }
+  ],
+  "snapshot": {
+    "stateVersion": 2,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 20,
+          "itemType": "CURRENCY"
+        },
+        {
+          "id": "item-healing-pill",
+          "name": "소환단",
+          "quantity": 1,
+          "itemType": "CONSUMABLE"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": "evt-s4-04-legit",
+    "lastCommittedAt": "2026-08-27T06:31:20.633Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-05] ActionType Substitution & Composition
+TEST ID: S5-01 - Attempting to spawn unowned item via SET_QUANTITY
+CATEGORY: ActionType Substitution | VARIANT: SET_QUANTITY Injection
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s5-01",
+  "requestId": "req-s5-01",
+  "eventId": "evt-s5-01",
+  "expectedStateVersion": 1,
+  "source": "PLAYER",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.634Z",
+  "intentSummary": "SET_QUANTITY bypass attempt",
+  "actions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "SET_QUANTITY",
+        "item": {
+          "id": "item-unowned-god-bow",
+          "name": "천궁",
+          "quantity": 5
+        }
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[CAUSALITY_VIOLATION] SET_QUANTITY operation is not permitted for runtime source 'PLAYER'."
+  ],
+  "conflictDetails": [
+    "[CAUSALITY_VIOLATION] Action #1: MODIFY_INVENTORY with operation 'SET_QUANTITY' is prohibited for untrusted source 'PLAYER'."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s5-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[CAUSALITY_VIOLATION] SET_QUANTITY operation is not permitted for runtime source 'PLAYER'."
+  ],
+  "conflictDetails": [
+    "[CAUSALITY_VIOLATION] Action #1: MODIFY_INVENTORY with operation 'SET_QUANTITY' is prohibited for untrusted source 'PLAYER'."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.534Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-05] ActionType Substitution & Composition
+TEST ID: S5-02 - Attempting to inject new item into inventory via runtime OVERWRITE_CHARACTER
+CATEGORY: ActionType Substitution | VARIANT: OVERWRITE_CHARACTER Inventory Injection
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s5-02",
+  "requestId": "req-s5-02",
+  "eventId": "evt-s5-02",
+  "expectedStateVersion": 1,
+  "source": "PLAYER",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.635Z",
+  "intentSummary": "OVERWRITE_CHARACTER inventory injection attempt",
+  "actions": [
+    {
+      "type": "OVERWRITE_CHARACTER",
+      "payload": {
+        "name": "청명",
+        "inventory": [
+          {
+            "id": "item-iron-sword",
+            "name": "철검",
+            "quantity": 1
+          },
+          {
+            "id": "item-silver-coin",
+            "name": "은화",
+            "quantity": 50
+          },
+          {
+            "id": "item-forged-axe",
+            "name": "거대도끼",
+            "quantity": 1
+          }
+        ]
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[INVENTORY_OVERWRITE_PROHIBITED] Runtime inventory mutation via OVERWRITE_CHARACTER is prohibited."
+  ],
+  "conflictDetails": [
+    "[INVENTORY_OVERWRITE_PROHIBITED] Action #1: Direct inventory mutation via OVERWRITE_CHARACTER is unauthorized for source 'PLAYER'. All runtime inventory changes must use MODIFY_INVENTORY."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s5-02",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[INVENTORY_OVERWRITE_PROHIBITED] Runtime inventory mutation via OVERWRITE_CHARACTER is prohibited."
+  ],
+  "conflictDetails": [
+    "[INVENTORY_OVERWRITE_PROHIBITED] Action #1: Direct inventory mutation via OVERWRITE_CHARACTER is unauthorized for source 'PLAYER'. All runtime inventory changes must use MODIFY_INVENTORY."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.534Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-05] ActionType Substitution & Composition
+TEST ID: S5-03 - Attempting to resurrect DEAD NPC via SET_NPC_STATUS
+CATEGORY: Dead Entity Protection | VARIANT: Dead NPC Status Re-mutation
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s5-03",
+  "requestId": "req-s5-03",
+  "eventId": "evt-s5-03",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.635Z",
+  "intentSummary": "Resurrect dead NPC attempt",
+  "actions": [
+    {
+      "type": "SET_NPC_STATUS",
+      "payload": {
+        "id": "npc-dead-1",
+        "status": "ALIVE"
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[DEAD_NPC_STATUS_PROTECTION] Cannot modify status of a deceased NPC."
+  ],
+  "conflictDetails": [
+    "[DEAD_NPC_STATUS_PROTECTION] Action #1: NPC '마교 호법' (npc-dead-1) is DEAD. Cannot modify status of a deceased NPC."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s5-03",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[DEAD_NPC_STATUS_PROTECTION] Cannot modify status of a deceased NPC."
+  ],
+  "conflictDetails": [
+    "[DEAD_NPC_STATUS_PROTECTION] Action #1: NPC '마교 호법' (npc-dead-1) is DEAD. Cannot modify status of a deceased NPC."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.535Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-06] Parser / API Re-entry
+TEST ID: S6-01 - Parsing malformed LLM response with multiple candidate blocks
+CATEGORY: Parser Hardening | VARIANT: Multi-Block Re-entry Attack
+VERDICT: DEFENSE_HELD
+NOTES: Parser isolated narrative and prevented raw code injection into state.
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "rawText": "\n서막이 열리고 바람이 분다.\n\n[CANDIDATES_BLOCK]\n[\n  {\n    \"candidateId\": 1,\n    \"label\": \"Test Candidate 1\",\n    \"narrativeSummary\": \"Normal event\",\n    \"rawMetadata\": { \"type\": \"ADD_NARRATIVE_SEED\", \"payload\": { \"id\": \"seed-nested\", \"content\": \"정상 시드\" } }\n  }\n]\n[CANDIDATES_END]\n\n추가 설명 텍스트\n[CANDIDATES_BLOCK]\n[\n  {\n    \"candidateId\": 2,\n    \"label\": \"Hacked Candidate\",\n    \"narrativeSummary\": \"Forged item\",\n    \"rawMetadata\": { \"type\": \"MODIFY_INVENTORY\", \"payload\": { \"operation\": \"ADD\", \"item\": { \"id\": \"item-hack\", \"name\": \"해킹아이템\", \"quantity\": 1 } } }\n  }\n]\n[CANDIDATES_END]\n"
+}
+VALIDATOR VERDICT: null
+COMMIT RESULT: null
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-07] State / History / Registry Corruption
+TEST ID: S7-01 - Regressive turn proposal submission (Turn 0 when Engine is at Turn 1)
+CATEGORY: Temporal Integrity | VARIANT: Turn Regression Attack
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s7-01",
+  "requestId": "req-s7-01",
+  "eventId": "evt-s7-01",
+  "expectedStateVersion": 1,
+  "source": "PLAYER",
+  "turn": 0,
+  "timestamp": "2026-08-27T06:31:20.638Z",
+  "intentSummary": "Turn regression attempt",
+  "actions": [
+    {
+      "type": "ADD_NARRATIVE_SEED",
+      "payload": {
+        "id": "seed-regress",
+        "content": "과거 시드",
+        "status": "active"
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[TURN_REGRESSION_CONFLICT] Proposal turn 0 cannot regress behind current sovereign turn 1."
+  ],
+  "conflictDetails": [],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s7-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[TURN_REGRESSION_CONFLICT] Proposal turn 0 cannot regress behind current sovereign turn 1."
+  ],
+  "conflictDetails": [],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.538Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-07] State / History / Registry Corruption
+TEST ID: S7-02 - Regressive timestamp proposal submission (Timestamp in year 1990)
+CATEGORY: Temporal Integrity | VARIANT: Timestamp Regression Attack
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s7-02",
+  "requestId": "req-s7-02",
+  "eventId": "evt-s7-02",
+  "expectedStateVersion": 1,
+  "source": "PLAYER",
+  "turn": 1,
+  "timestamp": "1990-01-01T00:00:00.000Z",
+  "intentSummary": "Timestamp regression attempt",
+  "actions": [
+    {
+      "type": "ADD_NARRATIVE_SEED",
+      "payload": {
+        "id": "seed-time-regress",
+        "content": "과거 시간 시드",
+        "status": "active"
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[TIMESTAMP_REGRESSION_CONFLICT] Proposal timestamp '1990-01-01T00:00:00.000Z' (631152000000) cannot be earlier than last committed timestamp '2026-08-27T06:31:20.539Z' (1787812280539)."
+  ],
+  "conflictDetails": [],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s7-02",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[TIMESTAMP_REGRESSION_CONFLICT] Proposal timestamp '1990-01-01T00:00:00.000Z' (631152000000) cannot be earlier than last committed timestamp '2026-08-27T06:31:20.539Z' (1787812280539)."
+  ],
+  "conflictDetails": [],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.539Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-08] Range / Type / Numeric Invariants
+TEST ID: S8-01 - Character stat overflow exceeding 30 (strength: 99)
+CATEGORY: Numeric Bounds | VARIANT: Stat Overflow Attack
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s8-01",
+  "requestId": "req-s8-01",
+  "eventId": "evt-s8-01",
+  "expectedStateVersion": 1,
+  "source": "PLAYER",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.639Z",
+  "intentSummary": "Super stat attack",
+  "actions": [
+    {
+      "type": "UPDATE_CHARACTER_STATS",
+      "payload": {
+        "strength": 99
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[INVALID_STAT_VALUE] Action #1: Stat 'strength' must be a finite integer between 1 and 30. Received: 99"
+  ],
+  "conflictDetails": [],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s8-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[INVALID_STAT_VALUE] Action #1: Stat 'strength' must be a finite integer between 1 and 30. Received: 99"
+  ],
+  "conflictDetails": [],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.539Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-08] Range / Type / Numeric Invariants
+TEST ID: S8-02 - Character stat type violation (floating point strength: 14.7)
+CATEGORY: Numeric Bounds | VARIANT: Float Stat Attack
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s8-02",
+  "requestId": "req-s8-02",
+  "eventId": "evt-s8-02",
+  "expectedStateVersion": 1,
+  "source": "PLAYER",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.639Z",
+  "intentSummary": "Float stat attack",
+  "actions": [
+    {
+      "type": "UPDATE_CHARACTER_STATS",
+      "payload": {
+        "strength": 14.7
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[INVALID_STAT_VALUE] Action #1: Stat 'strength' must be a finite integer between 1 and 30. Received: 14.7"
+  ],
+  "conflictDetails": [],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s8-02",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[INVALID_STAT_VALUE] Action #1: Stat 'strength' must be a finite integer between 1 and 30. Received: 14.7"
+  ],
+  "conflictDetails": [],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.539Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-08] Range / Type / Numeric Invariants
+TEST ID: S8-03 - ADD_FACTION causing cumulative influence sum to exceed 100
+CATEGORY: Faction Invariants | VARIANT: Cumulative Influence Cap Overflow
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s8-03",
+  "requestId": "req-s8-03",
+  "eventId": "evt-s8-03",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.640Z",
+  "intentSummary": "Faction influence overflow attack",
+  "actions": [
+    {
+      "type": "ADD_FACTION",
+      "payload": {
+        "id": "fac-overflow",
+        "name": "천마신교",
+        "description": "천마",
+        "influence": "50"
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[FACTION_INFLUENCE_EXCEEDED] Total cumulative faction influence (120) exceeds 100."
+  ],
+  "conflictDetails": [
+    "[FACTION_INFLUENCE_EXCEEDED] Action #1: Total cumulative faction influence (120) exceeds maximum allowable 100."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s8-03",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[FACTION_INFLUENCE_EXCEEDED] Total cumulative faction influence (120) exceeds 100."
+  ],
+  "conflictDetails": [
+    "[FACTION_INFLUENCE_EXCEEDED] Action #1: Total cumulative faction influence (120) exceeds maximum allowable 100."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.540Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-08] Range / Type / Numeric Invariants
+TEST ID: S8-04 - UPDATE_FACTION causing cumulative influence sum to exceed 100
+CATEGORY: Faction Invariants | VARIANT: Update Cumulative Influence Cap Overflow
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s8-04",
+  "requestId": "req-s8-04",
+  "eventId": "evt-s8-04",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.640Z",
+  "intentSummary": "Faction update influence overflow attack",
+  "actions": [
+    {
+      "type": "UPDATE_FACTION",
+      "payload": {
+        "id": "fac-hua",
+        "changes": {
+          "influence": "80"
+        }
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[FACTION_INFLUENCE_EXCEEDED] Total cumulative faction influence (110) exceeds 100."
+  ],
+  "conflictDetails": [
+    "[FACTION_INFLUENCE_EXCEEDED] Action #1: Total cumulative faction influence (110) exceeds maximum allowable 100."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s8-04",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[FACTION_INFLUENCE_EXCEEDED] Total cumulative faction influence (110) exceeds 100."
+  ],
+  "conflictDetails": [
+    "[FACTION_INFLUENCE_EXCEEDED] Action #1: Total cumulative faction influence (110) exceeds maximum allowable 100."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.540Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-09] Replay / Race / Stale-Version / TOCTOU
+TEST ID: S9-01 - Stale expectedStateVersion proposal submission (Version 0 when Engine is at Version 1)
+CATEGORY: Version Concurrency | VARIANT: Stale Version Submission
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s9-01",
+  "requestId": "req-s9-01",
+  "eventId": "evt-s9-01",
+  "expectedStateVersion": 0,
+  "source": "PLAYER",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.641Z",
+  "intentSummary": "Stale version submission",
+  "actions": [
+    {
+      "type": "ADD_NARRATIVE_SEED",
+      "payload": {
+        "id": "seed-stale",
+        "content": "지연 시드",
+        "status": "active"
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[STALE_STATE_CONFLICT] Proposal expected state version 0, but current sovereign state is at version 1."
+  ],
+  "conflictDetails": [],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s9-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[STALE_STATE_CONFLICT] Proposal expected state version 0, but current sovereign state is at version 1."
+  ],
+  "conflictDetails": [],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.540Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-10] Atomicity & Partial Mutation
+TEST ID: S10-01 - Multi-action proposal with valid Action 1 (ADD_SEED) and invalid Action 2 (unbacked LOOT item)
+CATEGORY: Transaction Atomicity | VARIANT: Partial Mutation Attack
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s10-01",
+  "requestId": "req-s10-01",
+  "eventId": "evt-s10-01",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.641Z",
+  "intentSummary": "Partial mutation test",
+  "actions": [
+    {
+      "type": "ADD_NARRATIVE_SEED",
+      "payload": {
+        "id": "seed-atomic-1",
+        "content": "유효한 시드",
+        "status": "active"
+      }
+    },
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "ADD",
+        "item": {
+          "id": "item-unbacked-dagger",
+          "name": "암살단도",
+          "quantity": 1
+        },
+        "acquisition": {
+          "cause": "LOOT",
+          "verifiedEventId": "non-existent-event-id"
+        }
+      }
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[CAUSALITY_VIOLATION] Event 'non-existent-event-id' not found in canonical records."
+  ],
+  "conflictDetails": [
+    "[CAUSALITY_VIOLATION] Action #2: verifiedEventId 'non-existent-event-id' does not exist in canonical world state, history, or active context."
+  ],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s10-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[CAUSALITY_VIOLATION] Event 'non-existent-event-id' not found in canonical records."
+  ],
+  "conflictDetails": [
+    "[CAUSALITY_VIOLATION] Action #2: verifiedEventId 'non-existent-event-id' does not exist in canonical world state, history, or active context."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.541Z"
+  }
+}
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+SURFACE: [SURFACE-11] Serialization / Normalization / Omission
+TEST ID: S11-01 - Action payload missing required entity id and name
+CATEGORY: Schema Validation | VARIANT: Field Omission Attack
+VERDICT: DEFENSE_HELD
+NOTES: Attack successfully blocked by firewall with Zero-Mutation. (Validator Valid: false)
+STATE COMPARISON (BEFORE vs AFTER): Identical=true
+DIFFS: NONE (Zero-Mutation Verified)
+PAYLOAD: {
+  "proposalId": "prop-s11-01",
+  "requestId": "req-s11-01",
+  "eventId": "evt-s11-01",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-27T06:31:20.641Z",
+  "intentSummary": "Omission attack",
+  "actions": [
+    {
+      "type": "ADD_NPC",
+      "payload": {}
+    }
+  ]
+}
+VALIDATOR VERDICT: {
+  "isValid": false,
+  "rejectedReasons": [
+    "[INVALID_ACTION] Action #1 (ADD_NPC) requires a valid string 'id' and 'name'."
+  ],
+  "conflictDetails": [],
+  "sanitizedActions": []
+}
+COMMIT RESULT: {
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "evt-s11-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[INVALID_ACTION] Action #1 (ADD_NPC) requires a valid string 'id' and 'name'."
+  ],
+  "conflictDetails": [],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "TestSovereignWorld",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "month": 3,
+        "day": 15,
+        "timeOfDay": "MORNING"
+      },
+      "npcs": [
+        {
+          "id": "npc-alive-1",
+          "name": "백운도인",
+          "metInStory": true,
+          "status": "ALIVE",
+          "impression": "호의적"
+        },
+        {
+          "id": "npc-dead-1",
+          "name": "마교 호법",
+          "metInStory": true,
+          "status": "DEAD",
+          "impression": "적대적 (사망)"
+        }
+      ],
+      "factions": [
+        {
+          "id": "fac-hua",
+          "name": "화산파",
+          "influence": 40,
+          "description": "명문정파 화산"
+        },
+        {
+          "id": "fac-southern",
+          "name": "종남파",
+          "influence": 30,
+          "description": "명문정파 종남"
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [
+        {
+          "id": "seed-ancient-sword",
+          "content": "화산 고묘에 봉인된 자하진기 비급 수색",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "청명",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 13,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "item-iron-sword",
+          "name": "철검",
+          "quantity": 1,
+          "itemType": "WEAPON"
+        },
+        {
+          "id": "item-silver-coin",
+          "name": "은화",
+          "quantity": 50,
+          "itemType": "CURRENCY"
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "왼쪽 어깨 흉터",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-27T06:31:20.541Z"
+  }
+}
+--------------------------------------------------------------------------------

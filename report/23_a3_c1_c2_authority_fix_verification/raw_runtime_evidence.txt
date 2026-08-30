@@ -1,0 +1,45 @@
+================================================================================
+VEIL — A3 / C1 / C2 COMPREHENSIVE RED-TEAM ADVERSARIAL VERIFICATION RUNNER
+================================================================================
+================================================================================
+SECTION 1: A3 ADVERSARIAL TESTS (STALE VERIFIED CLAIM REPLAY)
+================================================================================
+>>> [A3.1 Fresh Claim @ Vn]: PASS (strength 10 -> 14, v=3)
+>>> [A3.2 Stale Claim Replay @ Vn+1]: BLOCK (SUCCESS)
+    Rejected Reasons: ["[STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 2, but current stateVersion is 4."]
+>>> [A3.3 Same Proposal Multi-Action]: PASS (intel 10 -> 15, v=3)
+================================================================================
+SECTION 2: C1 ADVERSARIAL TESTS (PLAYER CHARACTER OVERWRITE)
+================================================================================
+>>> [C1.1 PLAYER All Stats=30 Overwrite]: BLOCK (SUCCESS)
+    Rejected Reasons: ["[PROVENANCE_VIOLATION] Stat mutation via OVERWRITE_CHARACTER is unauthorized for source 'PLAYER'."]
+>>> [C1.2 PLAYER Partial Stat Overwrite]: BLOCK (SUCCESS)
+>>> [C1.3 Genesis Valid Path]: PASS (Genesis stats set to 12)
+>>> [C1.4 Engine-Authorized Valid Path]: PASS (strength 10 -> 18)
+>>> [C1.5 Unchanged Stats / Cosmetic Update]: PASS
+================================================================================
+SECTION 3: C2 ADVERSARIAL TESTS (SYNTHETIC EVENT GROUNDING)
+================================================================================
+>>> [C2.1 Synthetic Active Seed Grounding]: BLOCK (SUCCESS)
+    Rejected Reasons: ["[PROVENANCE_VIOLATION] Unbacked stat mutation for 'strength' is rejected without VerifiedClaim."]
+>>> [C2.2 ProposalParser No Auto-verifiedEventId]: PASS
+    Parsed payload: {"strength":12}
+>>> [C2.3 Exact Gate-Issued Claim]: PASS (strength 10 -> 16)
+>>> [C2.4 Entity Mismatch Block]: BLOCK (SUCCESS)
+>>> [C2.5 Attribute Mismatch Block]: BLOCK (SUCCESS)
+>>> [C2.6 Value Mismatch Block]: BLOCK (SUCCESS)
+================================================================================
+SECTION 4: MANDATORY REGRESSION MATRIX (A1-G1)
+================================================================================
+>>> [B1 Name Alias Authority]: BLOCK (SUCCESS)
+>>> [C3 Genesis Replay Block]: BLOCK (SUCCESS)
+>>> [D1 Hydration Integrity]: BLOCK (SUCCESS)
+>>> [D2 RequestId Idempotency]: BLOCK (SUCCESS)
+>>> [E1 Timestamp Regression]: BLOCK (SUCCESS)
+>>> [F1 Snapshot Immutability]: PASS
+>>> [F2 History Immutability]: PASS
+>>> [G1 Intra-Proposal Inventory Causality]: BLOCK (SUCCESS)
+================================================================================
+SUMMARY: Total Tests: 22, PASSED: 22, FAILED: 0
+VERDICT: ALL ADVERSARIAL ATTACKS SUCCESSFULLY BLOCKED & VALID PATHS PRESERVED
+================================================================================

@@ -1,0 +1,2544 @@
+================================================================================
+TRPG 3.1 VEIL — CONFIRMED BREAK PROPAGATION & VARIANT HUNT FORENSIC REPORT
+Generated: 2026-08-29T08:23:33.742Z
+================================================================================
+
+SUMMARY:
+Total Vectors Evaluated: 12
+Confirmed ENGINE BREAKS: 4
+DEFENSE HELD: 8
+HOLD: 0
+
+--------------------------------------------------------------------------------
+DETAILED VECTOR FORENSIC AUDIT:
+--------------------------------------------------------------------------------
+
+[VECTOR #1] PROP-FACTION-01 — ADD_FACTION Semantic Identity Collision & Omitted Influence
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Identity Invariant
+TARGET COMPONENT: EngineValidator.ADD_FACTION
+DESCRIPTION: ADD_FACTION validates ID uniqueness but fails to check semantic name collision or enforce influence schema when omitted.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Faction name collision was rejected.
+
+RAW VERDICT:
+{
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "ev-fac-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[FACTION_CONFLICT] Cannot add duplicate Faction name 'Iron Vanguard'."
+  ],
+  "conflictDetails": [
+    "[FACTION_CONFLICT] Action #1: Faction with name 'Iron Vanguard' already exists in state."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "Eldoria",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [
+        {
+          "id": "fac-1",
+          "name": "Iron Vanguard",
+          "influence": 40
+        },
+        {
+          "id": "fac-2",
+          "name": "Mage Guild",
+          "influence": 30
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": "The King is a disguised shapeshifter",
+      "seeds": [
+        {
+          "id": "seed-1",
+          "content": "Ancient chest buried under the oak tree",
+          "status": "active"
+        },
+        {
+          "id": "seed-2",
+          "content": "Whispering cavern has a glowing rune",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "Chapter 1: The Gathering",
+        "upcomingChapters": [
+          "Chapter 2: The Storm",
+          "Chapter 3: The Climax"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [
+        "The crow watches from the tower"
+      ],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "Kaelen",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 15,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 13
+      },
+      "inventory": [
+        {
+          "id": "item-gold",
+          "name": "Gold Coin",
+          "quantity": 50
+        }
+      ],
+      "secret": "True heir of the fallen crown",
+      "physicalDefect": "Scar across left eye",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-29T08:23:33.730Z"
+  }
+}
+
+BEFORE STATE:
+[
+  {
+    "id": "fac-1",
+    "name": "Iron Vanguard",
+    "influence": 40
+  },
+  {
+    "id": "fac-2",
+    "name": "Mage Guild",
+    "influence": 30
+  }
+]
+
+AFTER STATE:
+[
+  {
+    "id": "fac-1",
+    "name": "Iron Vanguard",
+    "influence": 40
+  },
+  {
+    "id": "fac-2",
+    "name": "Mage Guild",
+    "influence": 30
+  }
+]
+--------------------------------------------------------------------------------
+
+[VECTOR #2] PROP-SEED-01 — Dormant Narrative Seed Limit Bypass and Causality Exploitation
+CLASSIFICATION: ENGINE BREAK
+CATEGORY: Cardinality & Causality Invariant
+TARGET COMPONENT: EngineValidator.ADD_NARRATIVE_SEED & MODIFY_INVENTORY
+DESCRIPTION: ADD_NARRATIVE_SEED filters only active seeds when enforcing 3-seed limit, allowing infinite dormant seeds which are still recognized as active obtainable context by MODIFY_INVENTORY.
+
+EVIDENCE DETAILS:
+ENGINE BREAK: Total seeds grew to 5 (exceeding 3-seed limit) via dormant status, and 'seed-4' was successfully consumed to acquire 'silver dagger'.
+
+RAW VERDICT:
+{
+  "fillRes": {
+    "success": true,
+    "stateVersion": 2,
+    "eventId": "ev-seed-fill",
+    "committedActionsCount": 3,
+    "rejectedReasons": [],
+    "conflictDetails": [],
+    "newHistoricalRecords": [
+      {
+        "recordId": "rec-ev-seed-fill-1",
+        "eventId": "ev-seed-fill",
+        "requestId": "req-seed-fill",
+        "proposalId": "prop-seed-fill",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:33.734Z",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "source": "LLM",
+        "actionType": "ADD_NARRATIVE_SEED",
+        "details": "{\"id\":\"seed-3\",\"content\":\"Dormant seed 3\",\"status\":\"dormant\"}",
+        "stateVersionAfterCommit": 2,
+        "informationAccess": "PUBLIC"
+      },
+      {
+        "recordId": "rec-ev-seed-fill-2",
+        "eventId": "ev-seed-fill",
+        "requestId": "req-seed-fill",
+        "proposalId": "prop-seed-fill",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:33.734Z",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "source": "LLM",
+        "actionType": "ADD_NARRATIVE_SEED",
+        "details": "{\"id\":\"seed-4\",\"content\":\"Dormant seed 4 with silver dagger item\",\"status\":\"dormant\"}",
+        "stateVersionAfterCommit": 2,
+        "informationAccess": "PUBLIC"
+      },
+      {
+        "recordId": "rec-ev-seed-fill-3",
+        "eventId": "ev-seed-fill",
+        "requestId": "req-seed-fill",
+        "proposalId": "prop-seed-fill",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:33.734Z",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "source": "LLM",
+        "actionType": "ADD_NARRATIVE_SEED",
+        "details": "{\"id\":\"seed-5\",\"content\":\"Dormant seed 5 with magic ring item\",\"status\":\"dormant\"}",
+        "stateVersionAfterCommit": 2,
+        "informationAccess": "PUBLIC"
+      }
+    ],
+    "snapshot": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Eldoria",
+        "worldType": "popular_genre",
+        "settingDescription": "",
+        "toneStyle": "원작 고유의 문체 충실 재현",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [
+          {
+            "id": "fac-1",
+            "name": "Iron Vanguard",
+            "influence": 40
+          },
+          {
+            "id": "fac-2",
+            "name": "Mage Guild",
+            "influence": 30
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": "The King is a disguised shapeshifter",
+        "seeds": [
+          {
+            "id": "seed-1",
+            "content": "Ancient chest buried under the oak tree",
+            "status": "active"
+          },
+          {
+            "id": "seed-2",
+            "content": "Whispering cavern has a glowing rune",
+            "status": "active"
+          },
+          {
+            "id": "seed-3",
+            "content": "Dormant seed 3",
+            "status": "dormant"
+          },
+          {
+            "id": "seed-4",
+            "content": "Dormant seed 4 with silver dagger item",
+            "status": "dormant"
+          },
+          {
+            "id": "seed-5",
+            "content": "Dormant seed 5 with magic ring item",
+            "status": "dormant"
+          }
+        ],
+        "chapters": {
+          "currentChapter": "Chapter 1: The Gathering",
+          "upcomingChapters": [
+            "Chapter 2: The Storm",
+            "Chapter 3: The Climax"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [
+          "The crow watches from the tower"
+        ],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Kaelen",
+        "gender": "",
+        "age": "",
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 12,
+          "constitution": 15,
+          "intelligence": 10,
+          "wisdom": 11,
+          "charisma": 13
+        },
+        "inventory": [
+          {
+            "id": "item-gold",
+            "name": "Gold Coin",
+            "quantity": 50
+          }
+        ],
+        "secret": "True heir of the fallen crown",
+        "physicalDefect": "Scar across left eye",
+        "timeline": []
+      },
+      "lastCommittedEventId": "ev-seed-fill",
+      "lastCommittedAt": "2026-08-29T08:23:33.734Z"
+    }
+  },
+  "causalitySucceeded": true
+}
+
+BEFORE STATE:
+{
+  "seedsCount": 2,
+  "seeds": [
+    {
+      "id": "seed-1",
+      "content": "Ancient chest buried under the oak tree",
+      "status": "active"
+    },
+    {
+      "id": "seed-2",
+      "content": "Whispering cavern has a glowing rune",
+      "status": "active"
+    }
+  ]
+}
+
+AFTER STATE:
+{
+  "seedsCount": 5,
+  "seeds": [
+    {
+      "id": "seed-1",
+      "content": "Ancient chest buried under the oak tree",
+      "status": "active"
+    },
+    {
+      "id": "seed-2",
+      "content": "Whispering cavern has a glowing rune",
+      "status": "active"
+    },
+    {
+      "id": "seed-3",
+      "content": "Dormant seed 3",
+      "status": "dormant"
+    },
+    {
+      "id": "seed-4",
+      "content": "Dormant seed 4 with silver dagger item",
+      "status": "dormant"
+    },
+    {
+      "id": "seed-5",
+      "content": "Dormant seed 5 with magic ring item",
+      "status": "dormant"
+    }
+  ],
+  "causalitySucceeded": true
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #3] PROP-SEED-02 — RESOLVE_NARRATIVE_SEED Duplicate Resolution & Payload Pollution
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Lifecycle Invariant
+TARGET COMPONENT: EngineValidator.RESOLVE_NARRATIVE_SEED
+DESCRIPTION: RESOLVE_NARRATIVE_SEED lacks check for already-resolved seeds and does not validate resolutionSummary string, resulting in corrupted seed content like "(Resolved: undefined)".
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Duplicate seed resolution was rejected.
+
+RAW VERDICT:
+{
+  "success": false,
+  "stateVersion": 2,
+  "eventId": "ev-res-2",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[SEED_ALREADY_RESOLVED] Seed 'seed-1' is already resolved or inactive."
+  ],
+  "conflictDetails": [
+    "[SEED_ALREADY_RESOLVED] Action #1: Cannot resolve seed ID 'seed-1' because its status is 'resolved' (expected 'active')."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 2,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "Eldoria",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [
+        {
+          "id": "fac-1",
+          "name": "Iron Vanguard",
+          "influence": 40
+        },
+        {
+          "id": "fac-2",
+          "name": "Mage Guild",
+          "influence": 30
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": "The King is a disguised shapeshifter",
+      "seeds": [
+        {
+          "id": "seed-1",
+          "content": "Ancient chest buried under the oak tree (Resolved: Found the gold coins)",
+          "status": "resolved"
+        },
+        {
+          "id": "seed-2",
+          "content": "Whispering cavern has a glowing rune",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "Chapter 1: The Gathering",
+        "upcomingChapters": [
+          "Chapter 2: The Storm",
+          "Chapter 3: The Climax"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [
+        "The crow watches from the tower"
+      ],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "Kaelen",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 15,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 13
+      },
+      "inventory": [
+        {
+          "id": "item-gold",
+          "name": "Gold Coin",
+          "quantity": 50
+        }
+      ],
+      "secret": "True heir of the fallen crown",
+      "physicalDefect": "Scar across left eye",
+      "timeline": []
+    },
+    "lastCommittedEventId": "ev-res-1",
+    "lastCommittedAt": "2026-08-29T08:23:33.738Z"
+  }
+}
+
+BEFORE STATE:
+{
+  "id": "seed-1",
+  "content": "Ancient chest buried under the oak tree (Resolved: Found the gold coins)",
+  "status": "resolved"
+}
+
+AFTER STATE:
+{
+  "id": "seed-1",
+  "content": "Ancient chest buried under the oak tree (Resolved: Found the gold coins)",
+  "status": "resolved"
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #4] PROP-STAT-01 — OVERWRITE_CHARACTER Stat Inflation (100 vs 1-30 Bound)
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Range & Invariant Discrepancy
+TARGET COMPONENT: EngineValidator.OVERWRITE_CHARACTER vs UPDATE_CHARACTER_STATS
+DESCRIPTION: UPDATE_CHARACTER_STATS enforces a strict 1-30 range, but OVERWRITE_CHARACTER permits player to set all stats to 100 without causality or checks.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: 100 stat value rejected.
+
+RAW VERDICT:
+{
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "ev-stat-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[INVALID_STAT_VALUE] Action #1: OVERWRITE_CHARACTER stat 'strength' must be a finite integer between 1 and 30. Received: 100",
+    "[INVALID_STAT_VALUE] Action #1: OVERWRITE_CHARACTER stat 'agility' must be a finite integer between 1 and 30. Received: 100",
+    "[INVALID_STAT_VALUE] Action #1: OVERWRITE_CHARACTER stat 'constitution' must be a finite integer between 1 and 30. Received: 100",
+    "[INVALID_STAT_VALUE] Action #1: OVERWRITE_CHARACTER stat 'intelligence' must be a finite integer between 1 and 30. Received: 100",
+    "[INVALID_STAT_VALUE] Action #1: OVERWRITE_CHARACTER stat 'wisdom' must be a finite integer between 1 and 30. Received: 100",
+    "[INVALID_STAT_VALUE] Action #1: OVERWRITE_CHARACTER stat 'charisma' must be a finite integer between 1 and 30. Received: 100"
+  ],
+  "conflictDetails": [],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "Eldoria",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [
+        {
+          "id": "fac-1",
+          "name": "Iron Vanguard",
+          "influence": 40
+        },
+        {
+          "id": "fac-2",
+          "name": "Mage Guild",
+          "influence": 30
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": "The King is a disguised shapeshifter",
+      "seeds": [
+        {
+          "id": "seed-1",
+          "content": "Ancient chest buried under the oak tree",
+          "status": "active"
+        },
+        {
+          "id": "seed-2",
+          "content": "Whispering cavern has a glowing rune",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "Chapter 1: The Gathering",
+        "upcomingChapters": [
+          "Chapter 2: The Storm",
+          "Chapter 3: The Climax"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [
+        "The crow watches from the tower"
+      ],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "Kaelen",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 15,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 13
+      },
+      "inventory": [
+        {
+          "id": "item-gold",
+          "name": "Gold Coin",
+          "quantity": 50
+        }
+      ],
+      "secret": "True heir of the fallen crown",
+      "physicalDefect": "Scar across left eye",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-29T08:23:33.738Z"
+  }
+}
+
+BEFORE STATE:
+{
+  "strength": 14,
+  "agility": 12,
+  "constitution": 15,
+  "intelligence": 10,
+  "wisdom": 11,
+  "charisma": 13
+}
+
+AFTER STATE:
+{
+  "strength": 14,
+  "agility": 12,
+  "constitution": 15,
+  "intelligence": 10,
+  "wisdom": 11,
+  "charisma": 13
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #5] PROP-SEC-01 — Character Secret Provenance Bypass via OVERWRITE_CHARACTER
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Provenance Boundary
+TARGET COMPONENT: EngineValidator.OVERWRITE_CHARACTER
+DESCRIPTION: SET_CHARACTER_SECRET strictly blocks PLAYER source via Provenance Violation, but OVERWRITE_CHARACTER allows PLAYER to mutate character.secret without any check.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Secret overwrite blocked.
+
+RAW VERDICT:
+{
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "ev-sec-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[PROVENANCE_VIOLATION] Secret modification via OVERWRITE_CHARACTER is unauthorized."
+  ],
+  "conflictDetails": [
+    "[PROVENANCE_VIOLATION] Action #1: Protagonist secret cannot be modified via OVERWRITE_CHARACTER without engine authorization."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "Eldoria",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [
+        {
+          "id": "fac-1",
+          "name": "Iron Vanguard",
+          "influence": 40
+        },
+        {
+          "id": "fac-2",
+          "name": "Mage Guild",
+          "influence": 30
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": "The King is a disguised shapeshifter",
+      "seeds": [
+        {
+          "id": "seed-1",
+          "content": "Ancient chest buried under the oak tree",
+          "status": "active"
+        },
+        {
+          "id": "seed-2",
+          "content": "Whispering cavern has a glowing rune",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "Chapter 1: The Gathering",
+        "upcomingChapters": [
+          "Chapter 2: The Storm",
+          "Chapter 3: The Climax"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [
+        "The crow watches from the tower"
+      ],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "Kaelen",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 15,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 13
+      },
+      "inventory": [
+        {
+          "id": "item-gold",
+          "name": "Gold Coin",
+          "quantity": 50
+        }
+      ],
+      "secret": "True heir of the fallen crown",
+      "physicalDefect": "Scar across left eye",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-29T08:23:33.738Z"
+  }
+}
+
+BEFORE STATE:
+"True heir of the fallen crown"
+
+AFTER STATE:
+"True heir of the fallen crown"
+--------------------------------------------------------------------------------
+
+[VECTOR #6] PROP-DEF-01 — Physical Defect Mutation via Substring Inclusion Trick in OVERWRITE_CHARACTER
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Immutability Bypass
+TARGET COMPONENT: actionApplier.OVERWRITE_CHARACTER
+DESCRIPTION: ActionApplier checks if incoming.physicalDefect.includes(character.physicalDefect) and overwrites if true, allowing player to declare the defect "healed and cured".
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Physical defect rewrite blocked.
+
+RAW VERDICT:
+{
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "ev-def-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[PHYSICAL_DEFECT_IMMUTABILITY] Physical defect cannot be negated or cured."
+  ],
+  "conflictDetails": [
+    "[PHYSICAL_DEFECT_IMMUTABILITY] Action #1: Cannot negate or cure existing canonical physicalDefect 'Scar across left eye' with 'Scar across left eye is completely healed and cured'."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "Eldoria",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [
+        {
+          "id": "fac-1",
+          "name": "Iron Vanguard",
+          "influence": 40
+        },
+        {
+          "id": "fac-2",
+          "name": "Mage Guild",
+          "influence": 30
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": "The King is a disguised shapeshifter",
+      "seeds": [
+        {
+          "id": "seed-1",
+          "content": "Ancient chest buried under the oak tree",
+          "status": "active"
+        },
+        {
+          "id": "seed-2",
+          "content": "Whispering cavern has a glowing rune",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "Chapter 1: The Gathering",
+        "upcomingChapters": [
+          "Chapter 2: The Storm",
+          "Chapter 3: The Climax"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [
+        "The crow watches from the tower"
+      ],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "Kaelen",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 15,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 13
+      },
+      "inventory": [
+        {
+          "id": "item-gold",
+          "name": "Gold Coin",
+          "quantity": 50
+        }
+      ],
+      "secret": "True heir of the fallen crown",
+      "physicalDefect": "Scar across left eye",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-29T08:23:33.738Z"
+  }
+}
+
+BEFORE STATE:
+"Scar across left eye"
+
+AFTER STATE:
+"Scar across left eye"
+--------------------------------------------------------------------------------
+
+[VECTOR #7] PROP-WORLD-01 — Narrative State, Secret Lore, and Chapter Wipe via OVERWRITE_WORLD_INFO
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Unchecked Authority / Field Omission
+TARGET COMPONENT: EngineValidator.OVERWRITE_WORLD_INFO
+DESCRIPTION: OVERWRITE_WORLD_INFO validates npcs/factions/seeds but completely ignores secretLore, unresolvedForeshadows, dcHistory, and chapters, allowing player to wipe or rewrite them.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: World overwrite payload blocked.
+
+RAW VERDICT:
+{
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "ev-world-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (OVERWRITE_WORLD_INFO) is unauthorized for source 'PLAYER'."
+  ],
+  "conflictDetails": [
+    "[ACL_VIOLATION] Proposal source 'PLAYER' is not authorized to execute action 'OVERWRITE_WORLD_INFO'."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "Eldoria",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [
+        {
+          "id": "fac-1",
+          "name": "Iron Vanguard",
+          "influence": 40
+        },
+        {
+          "id": "fac-2",
+          "name": "Mage Guild",
+          "influence": 30
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": "The King is a disguised shapeshifter",
+      "seeds": [
+        {
+          "id": "seed-1",
+          "content": "Ancient chest buried under the oak tree",
+          "status": "active"
+        },
+        {
+          "id": "seed-2",
+          "content": "Whispering cavern has a glowing rune",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "Chapter 1: The Gathering",
+        "upcomingChapters": [
+          "Chapter 2: The Storm",
+          "Chapter 3: The Climax"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [
+        "The crow watches from the tower"
+      ],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "Kaelen",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 15,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 13
+      },
+      "inventory": [
+        {
+          "id": "item-gold",
+          "name": "Gold Coin",
+          "quantity": 50
+        }
+      ],
+      "secret": "True heir of the fallen crown",
+      "physicalDefect": "Scar across left eye",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-29T08:23:33.739Z"
+  }
+}
+
+BEFORE STATE:
+{
+  "foreshadows": [
+    "The crow watches from the tower"
+  ],
+  "lore": "The King is a disguised shapeshifter",
+  "chapters": {
+    "currentChapter": "Chapter 1: The Gathering",
+    "upcomingChapters": [
+      "Chapter 2: The Storm",
+      "Chapter 3: The Climax"
+    ]
+  }
+}
+
+AFTER STATE:
+{
+  "foreshadows": [
+    "The crow watches from the tower"
+  ],
+  "lore": "The King is a disguised shapeshifter",
+  "chapters": {
+    "currentChapter": "Chapter 1: The Gathering",
+    "upcomingChapters": [
+      "Chapter 2: The Storm",
+      "Chapter 3: The Climax"
+    ]
+  }
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #8] PROP-OFF-01 — RECORD_OFFSCREEN_EVENT Duplicate ID & Unchecked Entity References
+CLASSIFICATION: ENGINE BREAK
+CATEGORY: Identity & Entity Integrity
+TARGET COMPONENT: EngineValidator.RECORD_OFFSCREEN_EVENT
+DESCRIPTION: RECORD_OFFSCREEN_EVENT does not enforce ID uniqueness for offscreenRecords and does not validate factionId or involvedNpcIds against existing entities.
+
+EVIDENCE DETAILS:
+ENGINE BREAK: Two offscreenRecords committed with identical ID 'static-offscreen-id' referencing non-existent factions and phantom NPCs.
+
+RAW VERDICT:
+{
+  "success": true,
+  "stateVersion": 2,
+  "eventId": "ev-off-01",
+  "committedActionsCount": 2,
+  "rejectedReasons": [],
+  "conflictDetails": [],
+  "newHistoricalRecords": [
+    {
+      "recordId": "rec-ev-off-01-1",
+      "eventId": "ev-off-01",
+      "requestId": "req-off-01",
+      "proposalId": "prop-off-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "RECORD_OFFSCREEN_EVENT",
+      "details": "{\"id\":\"static-offscreen-id\",\"eventDescription\":\"First offscreen event\",\"factionId\":\"non-existent-faction-xyz\",\"involvedNpcIds\":[\"phantom-npc-1\",\"phantom-npc-2\"]}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "PUBLIC"
+    },
+    {
+      "recordId": "rec-ev-off-01-2",
+      "eventId": "ev-off-01",
+      "requestId": "req-off-01",
+      "proposalId": "prop-off-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "RECORD_OFFSCREEN_EVENT",
+      "details": "{\"id\":\"static-offscreen-id\",\"eventDescription\":\"Second offscreen event with duplicate ID\",\"factionId\":\"non-existent-faction-abc\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "PUBLIC"
+    }
+  ],
+  "snapshot": {
+    "stateVersion": 2,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "Eldoria",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [
+        {
+          "id": "fac-1",
+          "name": "Iron Vanguard",
+          "influence": 40
+        },
+        {
+          "id": "fac-2",
+          "name": "Mage Guild",
+          "influence": 30
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": "The King is a disguised shapeshifter",
+      "seeds": [
+        {
+          "id": "seed-1",
+          "content": "Ancient chest buried under the oak tree",
+          "status": "active"
+        },
+        {
+          "id": "seed-2",
+          "content": "Whispering cavern has a glowing rune",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "Chapter 1: The Gathering",
+        "upcomingChapters": [
+          "Chapter 2: The Storm",
+          "Chapter 3: The Climax"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [
+        "The crow watches from the tower"
+      ],
+      "cameraOffscreenEvents": [
+        "First offscreen event",
+        "Second offscreen event with duplicate ID"
+      ],
+      "offscreenRecords": [
+        {
+          "id": "static-offscreen-id",
+          "eventDescription": "First offscreen event",
+          "factionId": "non-existent-faction-xyz",
+          "involvedNpcIds": [
+            "phantom-npc-1",
+            "phantom-npc-2"
+          ],
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-08-29T08:23:33.739Z",
+          "visibility": "HIDDEN"
+        },
+        {
+          "id": "static-offscreen-id",
+          "eventDescription": "Second offscreen event with duplicate ID",
+          "factionId": "non-existent-faction-abc",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-08-29T08:23:33.739Z",
+          "visibility": "HIDDEN"
+        }
+      ]
+    },
+    "character": {
+      "name": "Kaelen",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 15,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 13
+      },
+      "inventory": [
+        {
+          "id": "item-gold",
+          "name": "Gold Coin",
+          "quantity": 50
+        }
+      ],
+      "secret": "True heir of the fallen crown",
+      "physicalDefect": "Scar across left eye",
+      "timeline": []
+    },
+    "lastCommittedEventId": "ev-off-01",
+    "lastCommittedAt": "2026-08-29T08:23:33.739Z"
+  }
+}
+
+BEFORE STATE:
+[]
+
+AFTER STATE:
+[
+  {
+    "id": "static-offscreen-id",
+    "eventDescription": "First offscreen event",
+    "factionId": "non-existent-faction-xyz",
+    "involvedNpcIds": [
+      "phantom-npc-1",
+      "phantom-npc-2"
+    ],
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "timestamp": "2026-08-29T08:23:33.739Z",
+    "visibility": "HIDDEN"
+  },
+  {
+    "id": "static-offscreen-id",
+    "eventDescription": "Second offscreen event with duplicate ID",
+    "factionId": "non-existent-faction-abc",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "timestamp": "2026-08-29T08:23:33.739Z",
+    "visibility": "HIDDEN"
+  }
+]
+--------------------------------------------------------------------------------
+
+[VECTOR #9] PROP-RUMOR-01 — ADD_RUMOR Unbounded Array Flooding & Duplication
+CLASSIFICATION: ENGINE BREAK
+CATEGORY: Cardinality Invariant
+TARGET COMPONENT: EngineValidator.ADD_RUMOR
+DESCRIPTION: ADD_RUMOR has no array size limit, rate limit, or duplicate text detection, allowing unbounded memory inflation.
+
+EVIDENCE DETAILS:
+ENGINE BREAK: 50 rumors committed in a single proposal without cardinality bounds or deduplication.
+
+RAW VERDICT:
+{
+  "success": true,
+  "stateVersion": 2,
+  "eventId": "ev-rumor-01",
+  "committedActionsCount": 50,
+  "rejectedReasons": [],
+  "conflictDetails": [],
+  "newHistoricalRecords": [
+    {
+      "recordId": "rec-ev-rumor-01-1",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #1\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-2",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #2\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-3",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #3\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-4",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #4\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-5",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #5\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-6",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #6\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-7",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #7\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-8",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #8\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-9",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #9\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-10",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #10\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-11",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #11\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-12",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #12\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-13",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #13\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-14",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #14\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-15",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #15\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-16",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #16\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-17",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #17\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-18",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #18\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-19",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #19\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-20",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #20\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-21",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #21\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-22",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #22\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-23",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #23\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-24",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #24\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-25",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #25\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-26",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #26\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-27",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #27\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-28",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #28\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-29",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #29\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-30",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #30\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-31",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #31\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-32",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #32\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-33",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #33\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-34",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #34\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-35",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #35\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-36",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #36\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-37",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #37\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-38",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #38\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-39",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #39\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-40",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #40\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-41",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #41\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-42",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #42\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-43",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #43\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-44",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #44\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-45",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #45\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-46",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #46\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-47",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #47\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-48",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #48\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-49",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #49\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    },
+    {
+      "recordId": "rec-ev-rumor-01-50",
+      "eventId": "ev-rumor-01",
+      "requestId": "req-rumor-01",
+      "proposalId": "prop-rumor-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:23:33.739Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "LLM",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"Identical Duplicate Rumor Text #50\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    }
+  ],
+  "snapshot": {
+    "stateVersion": 2,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "Eldoria",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [
+        {
+          "id": "fac-1",
+          "name": "Iron Vanguard",
+          "influence": 40
+        },
+        {
+          "id": "fac-2",
+          "name": "Mage Guild",
+          "influence": 30
+        }
+      ],
+      "publicRumors": [
+        "Identical Duplicate Rumor Text #1",
+        "Identical Duplicate Rumor Text #2",
+        "Identical Duplicate Rumor Text #3",
+        "Identical Duplicate Rumor Text #4",
+        "Identical Duplicate Rumor Text #5",
+        "Identical Duplicate Rumor Text #6",
+        "Identical Duplicate Rumor Text #7",
+        "Identical Duplicate Rumor Text #8",
+        "Identical Duplicate Rumor Text #9",
+        "Identical Duplicate Rumor Text #10",
+        "Identical Duplicate Rumor Text #11",
+        "Identical Duplicate Rumor Text #12",
+        "Identical Duplicate Rumor Text #13",
+        "Identical Duplicate Rumor Text #14",
+        "Identical Duplicate Rumor Text #15",
+        "Identical Duplicate Rumor Text #16",
+        "Identical Duplicate Rumor Text #17",
+        "Identical Duplicate Rumor Text #18",
+        "Identical Duplicate Rumor Text #19",
+        "Identical Duplicate Rumor Text #20",
+        "Identical Duplicate Rumor Text #21",
+        "Identical Duplicate Rumor Text #22",
+        "Identical Duplicate Rumor Text #23",
+        "Identical Duplicate Rumor Text #24",
+        "Identical Duplicate Rumor Text #25",
+        "Identical Duplicate Rumor Text #26",
+        "Identical Duplicate Rumor Text #27",
+        "Identical Duplicate Rumor Text #28",
+        "Identical Duplicate Rumor Text #29",
+        "Identical Duplicate Rumor Text #30",
+        "Identical Duplicate Rumor Text #31",
+        "Identical Duplicate Rumor Text #32",
+        "Identical Duplicate Rumor Text #33",
+        "Identical Duplicate Rumor Text #34",
+        "Identical Duplicate Rumor Text #35",
+        "Identical Duplicate Rumor Text #36",
+        "Identical Duplicate Rumor Text #37",
+        "Identical Duplicate Rumor Text #38",
+        "Identical Duplicate Rumor Text #39",
+        "Identical Duplicate Rumor Text #40",
+        "Identical Duplicate Rumor Text #41",
+        "Identical Duplicate Rumor Text #42",
+        "Identical Duplicate Rumor Text #43",
+        "Identical Duplicate Rumor Text #44",
+        "Identical Duplicate Rumor Text #45",
+        "Identical Duplicate Rumor Text #46",
+        "Identical Duplicate Rumor Text #47",
+        "Identical Duplicate Rumor Text #48",
+        "Identical Duplicate Rumor Text #49",
+        "Identical Duplicate Rumor Text #50"
+      ],
+      "secretLore": "The King is a disguised shapeshifter",
+      "seeds": [
+        {
+          "id": "seed-1",
+          "content": "Ancient chest buried under the oak tree",
+          "status": "active"
+        },
+        {
+          "id": "seed-2",
+          "content": "Whispering cavern has a glowing rune",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "Chapter 1: The Gathering",
+        "upcomingChapters": [
+          "Chapter 2: The Storm",
+          "Chapter 3: The Climax"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [
+        "The crow watches from the tower"
+      ],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "Kaelen",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 15,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 13
+      },
+      "inventory": [
+        {
+          "id": "item-gold",
+          "name": "Gold Coin",
+          "quantity": 50
+        }
+      ],
+      "secret": "True heir of the fallen crown",
+      "physicalDefect": "Scar across left eye",
+      "timeline": []
+    },
+    "lastCommittedEventId": "ev-rumor-01",
+    "lastCommittedAt": "2026-08-29T08:23:33.739Z"
+  }
+}
+
+BEFORE STATE:
+{
+  "rumorsCount": 0
+}
+
+AFTER STATE:
+{
+  "rumorsCount": 50
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #10] PROP-LLM2-RUMOR-01 — LLM #2 Boundary ADD_RUMOR Property Injection Bypass
+CLASSIFICATION: ENGINE BREAK
+CATEGORY: Mutation Boundary Subset Violation
+TARGET COMPONENT: validateLLM2MutationBoundary.ADD_RUMOR
+DESCRIPTION: isActionSemanticSubset for ADD_RUMOR only checks string rumor text and completely ignores injected extra payload properties in the final action.
+
+EVIDENCE DETAILS:
+ENGINE BREAK: LLM #2 Mutation Boundary permitted unapproved properties ('injectedExtraPayload', 'sneakyField') in ADD_RUMOR payload.
+
+RAW VERDICT:
+{
+  "isValid": true,
+  "violationReasons": []
+}
+
+BEFORE STATE:
+{
+  "rumor": "The king has fallen ill"
+}
+
+AFTER STATE:
+{
+  "rumor": "The king has fallen ill",
+  "injectedExtraPayload": "UNAUTHORIZED_INJECTION_FLAG",
+  "sneakyField": {
+    "admin": true
+  }
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #11] PROP-LLM2-FACTION-01 — LLM #2 Boundary ADD_FACTION Influence Inflation Fallthrough
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Mutation Boundary Subset Violation
+TARGET COMPONENT: validateLLM2MutationBoundary.ADD_FACTION
+DESCRIPTION: ADD_FACTION falls through to default isSemanticSubsetEqual which checks exact value match. Let us see if modified influence is caught.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Boundary correctly rejected modified faction influence (isSemanticSubsetEqual caught value mismatch).
+
+RAW VERDICT:
+{
+  "isValid": false,
+  "violationReasons": [
+    "[MUTATION_BOUNDARY_VIOLATION] Action #1 (ADD_FACTION) is not authorized in approved candidate. Details: No matching unused candidate action found."
+  ]
+}
+
+BEFORE STATE:
+{
+  "id": "fac-new",
+  "name": "Shadow Guild",
+  "influence": 20
+}
+
+AFTER STATE:
+{
+  "id": "fac-new",
+  "name": "Shadow Guild",
+  "influence": 30
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #12] PROP-ACL-01 — Source-Action ACL Enforcement for Unauthorized Action (PLAYER ADVANCE_TIME)
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Access Control
+TARGET COMPONENT: EngineValidator.SOURCE_ACTION_ACL
+DESCRIPTION: PLAYER source attempts to execute ADVANCE_TIME which is reserved for LLM/SYSTEM/GENESIS.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: EngineValidator rejected unauthorized action 'ADVANCE_TIME' for source 'PLAYER' with ACL_VIOLATION.
+
+RAW VERDICT:
+{
+  "success": false,
+  "stateVersion": 1,
+  "eventId": "ev-acl-01",
+  "committedActionsCount": 0,
+  "rejectedReasons": [
+    "[UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (ADVANCE_TIME) is unauthorized for source 'PLAYER'."
+  ],
+  "conflictDetails": [
+    "[ACL_VIOLATION] Proposal source 'PLAYER' is not authorized to execute action 'ADVANCE_TIME'."
+  ],
+  "newHistoricalRecords": [],
+  "snapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "Eldoria",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [
+        {
+          "id": "fac-1",
+          "name": "Iron Vanguard",
+          "influence": 40
+        },
+        {
+          "id": "fac-2",
+          "name": "Mage Guild",
+          "influence": 30
+        }
+      ],
+      "publicRumors": [],
+      "secretLore": "The King is a disguised shapeshifter",
+      "seeds": [
+        {
+          "id": "seed-1",
+          "content": "Ancient chest buried under the oak tree",
+          "status": "active"
+        },
+        {
+          "id": "seed-2",
+          "content": "Whispering cavern has a glowing rune",
+          "status": "active"
+        }
+      ],
+      "chapters": {
+        "currentChapter": "Chapter 1: The Gathering",
+        "upcomingChapters": [
+          "Chapter 2: The Storm",
+          "Chapter 3: The Climax"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [
+        "The crow watches from the tower"
+      ],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "Kaelen",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 12,
+        "constitution": 15,
+        "intelligence": 10,
+        "wisdom": 11,
+        "charisma": 13
+      },
+      "inventory": [
+        {
+          "id": "item-gold",
+          "name": "Gold Coin",
+          "quantity": 50
+        }
+      ],
+      "secret": "True heir of the fallen crown",
+      "physicalDefect": "Scar across left eye",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-08-29T08:23:33.740Z"
+  }
+}
+
+BEFORE STATE:
+{
+  "year": 1,
+  "season": "SPRING",
+  "formattedTime": "1년 봄"
+}
+
+AFTER STATE:
+{
+  "year": 1,
+  "season": "SPRING",
+  "formattedTime": "1년 봄"
+}
+--------------------------------------------------------------------------------

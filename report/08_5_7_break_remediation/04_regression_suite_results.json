@@ -1,0 +1,469 @@
+{
+  "timestamp": "2026-08-29T08:17:23.499Z",
+  "totalTests": 92,
+  "passed": 92,
+  "failed": 0,
+  "allPassed": true,
+  "tests": [
+    {
+      "testId": "TEST-01",
+      "description": "Normal Commit: Valid proposal increments stateVersion and commits state atomically",
+      "passed": true
+    },
+    {
+      "testId": "TEST-02",
+      "description": "Validation Failure: Invalid stat values or missing entity rejected with reasons",
+      "passed": true
+    },
+    {
+      "testId": "TEST-03",
+      "description": "Idempotency: Re-submitting identical requestId is blocked without mutating state",
+      "passed": true
+    },
+    {
+      "testId": "TEST-04",
+      "description": "Knowledge Graph: build and traverse knowledge graph safely",
+      "passed": true
+    },
+    {
+      "testId": "TEST-05",
+      "description": "Proposal Builder: CandidatePacket converts accurately to StateTransitionProposal",
+      "passed": true
+    },
+    {
+      "testId": "TEST-06",
+      "description": "Narrative Defense: Seed max 3 cap, deduplication, and resolution semantics",
+      "passed": true
+    },
+    {
+      "testId": "TEST-07",
+      "description": "Dice Safety: recommendedDC does not emit RECORD_DICE_RESULT; player DC clamped to 1-20",
+      "passed": true
+    },
+    {
+      "testId": "TEST-08",
+      "description": "Stat Safety: Delta clamped to -10~+10, final stat clamped to 1~30",
+      "passed": true
+    },
+    {
+      "testId": "TEST-09",
+      "description": "Reject & Safe No-Commit: Invalid proposal leaves snapshot, version, and history completely unmutated",
+      "passed": true
+    },
+    {
+      "testId": "TEST-10",
+      "description": "Hydration Compatibility: Preserves valid stateVersion, avoids history.length fallback, matches projections",
+      "passed": true
+    },
+    {
+      "testId": "TEST-11",
+      "description": "Adversarial Overwrite: Reject resurrection of historically dead NPC",
+      "passed": true
+    },
+    {
+      "testId": "TEST-12",
+      "description": "Snapshot Mutability Defense: External mutation of snapshot/history does not affect Canonical State",
+      "passed": true
+    },
+    {
+      "testId": "TEST-13",
+      "description": "Hydration Schema Immunity: Reject malformed snapshots without guessing repair values",
+      "passed": true
+    },
+    {
+      "testId": "TEST-14",
+      "description": "Atomic Rollback: Intra-proposal failure leaves Canonical State, History, and Idempotency untouched",
+      "passed": true
+    },
+    {
+      "testId": "TEST-15",
+      "description": "Adversarial Character Overwrite: Permanent physicalDefect is preserved and cannot be erased",
+      "passed": true
+    },
+    {
+      "testId": "TEST-16",
+      "description": "Source -> Action ACL: Reject unauthorized actions for given proposal source",
+      "passed": true
+    },
+    {
+      "testId": "TEST-A",
+      "description": "Prompt Contamination Audit: Engine prompt contains zero hardcoded chapter titles or preset seeds",
+      "passed": true
+    },
+    {
+      "testId": "TEST-B",
+      "description": "Empty Roadmap: Engine formats empty upcomingChapters as request for pure dynamic creation",
+      "passed": true
+    },
+    {
+      "testId": "TEST-C",
+      "description": "1-Chapter Roadmap: Engine preserves single chapter and requests dynamic completion of 2 slots",
+      "passed": true
+    },
+    {
+      "testId": "TEST-D",
+      "description": "2-Chapter Roadmap: Engine preserves 2 chapters and requests dynamic completion of 1 slot",
+      "passed": true
+    },
+    {
+      "testId": "TEST-E",
+      "description": "Dynamic Roadmap Commit: LLM proposed dynamic 3-chapter roadmap is safely validated and committed",
+      "passed": true
+    },
+    {
+      "testId": "TEST-F",
+      "description": "Player Divergence: Player actions divergent from roadmap execute freely without rejection",
+      "passed": true
+    },
+    {
+      "testId": "TEST-G",
+      "description": "Genre Isolation: Non-Wuxia genres (Cyberpunk, Sci-Fi) contain zero Wuxia terms in engine fallbacks",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H",
+      "description": "Canon Isolation: Engine snapshot strictly contains only canonically committed entities",
+      "passed": true
+    },
+    {
+      "testId": "TEST-I",
+      "description": "New Creation: LLM-proposed new NPCs, narrative seeds, and offscreen events commit seamlessly",
+      "passed": true
+    },
+    {
+      "testId": "TEST-J",
+      "description": "Error Transparency: Parser handles malformed or failed LLM responses without inventing fake narrative",
+      "passed": true
+    },
+    {
+      "testId": "TEST-K",
+      "description": "Roadmap Replanning: Dynamic replanning replaces previous roadmap safely and atomically",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-A",
+      "description": "Causality Defense: Retroactive/unbacked ADD by LLM is rejected without mutating Canonical State",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-B",
+      "description": "Causality Validation: Valid RESOURCE_EXCHANGE deducts cost and adds acquired item atomically",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-C",
+      "description": "Causality Atomicity: Insufficient cost rejects entire proposal without partial state change",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-D",
+      "description": "Causality Defense: RESOURCE_EXCHANGE missing matching atomic REMOVE is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-E",
+      "description": "Causality Defense: Non-whitelisted cause types (e.g. self-declared MAGIC_SPAWN) rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-A",
+      "description": "Adversarial Defense: Double-spending 1 REMOVE for multiple ADDs is strictly rejected with zero mutation",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-B",
+      "description": "Adversarial Defense: Cost name/id mismatch or non-existent cost resource is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-C",
+      "description": "Permissiveness: Split REMOVE actions aggregating to total cost succeed atomically",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-D",
+      "description": "Permissiveness: Multiple independent valid transactions in one proposal succeed atomically",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-E",
+      "description": "Permissiveness: Inverted ADD/REMOVE order with sufficient total removal succeeds atomically",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-F",
+      "description": "Adversarial Defense: Overdrafting REMOVE beyond owned inventory is rejected by virtual draft execution",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-G",
+      "description": "Ownership Boundary: DISCOVERY_PICKUP with valid trusted event grounding commits cleanly to Canonical Inventory",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-H",
+      "description": "Ownership Boundary: GIFT_REWARD with valid trusted event grounding commits cleanly to Canonical Inventory",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-I",
+      "description": "Ownership Boundary: LOOT with valid trusted event grounding commits cleanly to Canonical Inventory",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-J",
+      "description": "Ownership Boundary: GENESIS_STARTER at genesis turn commits cleanly to Canonical Inventory",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-K",
+      "description": "Adversarial Defense: Unbacked inventory ADD without acquisition cause is strictly rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-H4-L",
+      "description": "Adversarial Defense: Unsupported acquisition cause is rejected by Validator Firewall",
+      "passed": true
+    },
+    {
+      "testId": "TEST-39",
+      "description": "SET_QUANTITY Causality Bypass: LLM/PLAYER cannot use SET_QUANTITY to bypass causality",
+      "passed": true
+    },
+    {
+      "testId": "TEST-40",
+      "description": "LLM Dice Result Authority: LLM cannot inject rollValue in RECORD_DICE_RESULT",
+      "passed": true
+    },
+    {
+      "testId": "TEST-41",
+      "description": "Permanent Physical Defect Immutability: Established defect cannot be overwritten",
+      "passed": true
+    },
+    {
+      "testId": "TEST-42",
+      "description": "Dead NPC State Modification Defense: DEAD NPC cannot be modified via UPDATE_NPC",
+      "passed": true
+    },
+    {
+      "testId": "TEST-43",
+      "description": "Yellow Security Boundaries: Narrative seed limit (max 3) and integer stat bounds",
+      "passed": true
+    },
+    {
+      "testId": "TEST-44",
+      "description": "RED-01: LLM RECORD_PHYSICAL_DEFECT rejected via ACL; PLAYER/SYSTEM valid defect commits and is immutable",
+      "passed": true
+    },
+    {
+      "testId": "TEST-45",
+      "description": "RED-02: LLM RECORD_DICE_RESULT rejected; candidate.recommendedDC does not pollute dcHistory; PLAYER roll commits",
+      "passed": true
+    },
+    {
+      "testId": "TEST-46",
+      "description": "RED-03: DEAD NPC cannot be re-mutated via SET_NPC_STATUS; Impression remains unpolluted; Normal NPC status works",
+      "passed": true
+    },
+    {
+      "testId": "TEST-47",
+      "description": "YELLOW-01: Unsupported inventory operations (INJECT, OVERWRITE) rejected with INVALID_ACTION; standard ops work",
+      "passed": true
+    },
+    {
+      "testId": "TEST-48",
+      "description": "YELLOW-02: Stats outside 1-30 (0, 31, 99, 1.5) rejected; boundary stats (1, 30) commit successfully",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-A",
+      "description": "Adversarial Test A: DISCOVERY_PICKUP with no event grounding is rejected without inventory mutation",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-B",
+      "description": "Adversarial Test B: DISCOVERY_PICKUP with non-existent verifiedEventId is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-C",
+      "description": "Adversarial Test C: DISCOVERY_PICKUP grounded by actual world event passes with Inventory +1",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-D",
+      "description": "Adversarial Test D: Valid event linked to causally unrelated item is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-E",
+      "description": "Adversarial Test E: Normal RESOURCE_EXCHANGE with atomic cost deduction succeeds cleanly",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-F",
+      "description": "Adversarial Test F: GIFT_REWARD and LOOT without verified event grounding are rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-G",
+      "description": "Adversarial Test G: Resolved or inactive narrative seeds cannot be used for acquisition",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-H",
+      "description": "Adversarial Test H: Untrusted runtime cannot forge SYSTEM source or retrospective GENESIS_STARTER",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-I",
+      "description": "Adversarial Test I: Grounded discovery ADD followed by transfer/consume REMOVE completes full lifecycle",
+      "passed": true
+    },
+    {
+      "testId": "TEST-CAUSALITY-J",
+      "description": "Adversarial Test J: Reusing an already consumed event to spawn duplicate items is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-OVERWRITE-INV-A",
+      "description": "Adversarial Defense: Player runtime OVERWRITE_CHARACTER attempting to inject new item is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-OVERWRITE-INV-B",
+      "description": "Adversarial Defense: LLM attempting OVERWRITE_CHARACTER is rejected via ACL",
+      "passed": true
+    },
+    {
+      "testId": "TEST-OVERWRITE-INV-C",
+      "description": "Genesis & Save Hydration: OVERWRITE_CHARACTER initializes canonical inventory cleanly",
+      "passed": true
+    },
+    {
+      "testId": "TEST-OVERWRITE-INV-D",
+      "description": "Player Profile Edit: OVERWRITE_CHARACTER with preserved inventory succeeds cleanly",
+      "passed": true
+    },
+    {
+      "testId": "TEST-OVERWRITE-INV-E",
+      "description": "Adversarial Defense: Undefined quantity attack via OVERWRITE_CHARACTER is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-OVERWRITE-INV-F",
+      "description": "Adversarial Defense: ID-only cross forgery via OVERWRITE_CHARACTER is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-OVERWRITE-INV-G",
+      "description": "Adversarial Defense: Name-only cross forgery via OVERWRITE_CHARACTER is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-OVERWRITE-INV-H",
+      "description": "Adversarial Defense: Order permutation via OVERWRITE_CHARACTER is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-SEC-4A-DIRECT-FORGERY",
+      "description": "Security Trust Boundary 4-A: Direct submitProposal with privileged sources is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-SEC-4B-INTERNAL-API-ABUSE",
+      "description": "Security Trust Boundary 4-B: External caller cannot invoke unexposed or elevated internal APIs",
+      "passed": true
+    },
+    {
+      "testId": "TEST-SEC-4C-CAPABILITY-FORGERY",
+      "description": "Security Trust Boundary 4-C: Capability forgery via symbol creation, prototype injection, or object cloning fails",
+      "passed": true
+    },
+    {
+      "testId": "TEST-SEC-4D-GENUINE-INTERNAL-SYSTEM",
+      "description": "Security Trust Boundary 4-D: Genuine internal engine execution path commits SYSTEM proposals safely",
+      "passed": true
+    },
+    {
+      "testId": "TEST-94",
+      "description": "Article 9/16 Inventory Identity: exact match on ID and SET_QUANTITY cannot invent non-existent items",
+      "passed": true
+    },
+    {
+      "testId": "TEST-95",
+      "description": "Temporal Integrity: Proposal turn cannot regress behind current sovereign turn",
+      "passed": true
+    },
+    {
+      "testId": "TEST-96",
+      "description": "Temporal Integrity: Proposal timestamp cannot regress earlier than last committed timestamp",
+      "passed": true
+    },
+    {
+      "testId": "TEST-A2-1",
+      "description": "Provenance Boundary: UPDATE_NPC without pre-existing canonical entity is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-A2-2",
+      "description": "Provenance Boundary: UPDATE_FACTION without pre-existing canonical entity is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-A2-3",
+      "description": "Provenance Boundary: SET_WORLD_METADATA from untrusted source (LLM/PLAYER) is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-A2-4",
+      "description": "Provenance Boundary: SET_CHARACTER_SECRET from untrusted source (LLM/PLAYER) is rejected",
+      "passed": true
+    },
+    {
+      "testId": "TEST-A2-5",
+      "description": "5.7 Self-Proof Defense: Intra-proposal seed/offscreen action cannot satisfy causality evidence",
+      "passed": true
+    },
+    {
+      "testId": "TEST-A2-6",
+      "description": "LLM Creative Freedom: New NPCs, Factions, Narrative Seeds, and Offscreen Events commit cleanly without restriction",
+      "passed": true
+    },
+    {
+      "testId": "TEST-VEC-01-V3-04-SOURCE-FORGERY",
+      "description": "VEC-01: Direct submission of SAVE_HYDRATION, CLOUD_RESTORE, or unknown sources is rejected with Zero-Mutation",
+      "passed": true
+    },
+    {
+      "testId": "TEST-VEC-02-V3-05-RETROSPECTIVE-GENESIS",
+      "description": "VEC-02: Retrospective GENESIS proposal beyond initial genesis turn is rejected with Zero-Mutation",
+      "passed": true
+    },
+    {
+      "testId": "TEST-VEC-03-V4-01-CAUSAL-TOKEN-OVERLAP",
+      "description": "VEC-03: Substring/token overlap without exact item entity grounding is rejected; grounded entity passes",
+      "passed": true
+    },
+    {
+      "testId": "TEST-VEC-04-V2-03-FACTION-INFLUENCE-INVARIANT",
+      "description": "VEC-04: ADD_FACTION and OVERWRITE_WORLD_INFO strictly enforce influence boundaries and total cap (<=100)",
+      "passed": true
+    },
+    {
+      "testId": "TEST-VEC-05-V2-04-UPDATE-FACTION-INFLUENCE-INVARIANT",
+      "description": "VEC-05: UPDATE_FACTION strictly enforces influence boundaries and cumulative total cap",
+      "passed": true
+    },
+    {
+      "testId": "TEST-ROOT-01-CLAIM-BINDING-BYPASS",
+      "description": "Root 1 Remediation: Wildcard (*)/empty claim attributes are rejected by ImmigrationGate, and cannot bypass canonical validation",
+      "passed": true
+    },
+    {
+      "testId": "TEST-ROOT-02-UNCHECKED-CHARACTER-STATS",
+      "description": "Root 2 Remediation: Unchecked UPDATE_CHARACTER_STATS from untrusted sources is strictly rejected with Zero-Mutation",
+      "passed": true
+    }
+  ]
+}

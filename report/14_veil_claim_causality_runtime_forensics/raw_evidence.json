@@ -1,0 +1,1428 @@
+{
+  "total": 25,
+  "defended": 12,
+  "exploited": 8,
+  "expectedBehavior": 5,
+  "results": [
+    {
+      "testId": "TEST-A1-EXACT-CLAIM-UPDATE-NPC",
+      "category": "TARGET_1_UPDATE_NPC",
+      "targetVector": "Exact Claim Grounding",
+      "description": "Admit exact claim (trust: 85) and verify UPDATE_NPC succeeds and transitions Canonical State",
+      "verdict": "EXPECTED_BEHAVIOR",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "Sovereign Commit Gate",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 85,
+          "affinity": 50
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 1,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_NPC",
+            "payload": {
+              "id": "npc-hyeon-gong",
+              "changes": {
+                "trust": 85
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "callGraphTrace": "ImmigrationGate.admit -> EngineValidator.validate (hasMatchingVerifiedClaim) -> SovereignEngine.submitProposal -> Commit"
+    },
+    {
+      "testId": "TEST-A2-EXISTENCE-WILDCARD-UNGROUNDED-MUTATION",
+      "category": "TARGET_1_UPDATE_NPC",
+      "targetVector": "EXISTENCE Claim Wildcard Bypass",
+      "description": "Attempt to use an EXISTENCE claim to bypass attribute-specific verification on UPDATE_NPC (trust=99, role=Grand Emperor)",
+      "verdict": "EXPLOITED",
+      "vulnerabilityDiscovered": true,
+      "pipelineStage": "EngineValidator (hasMatchingVerifiedClaim wildcard check)",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Grand Emperor",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 99,
+          "affinity": 50
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 1,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_NPC",
+            "payload": {
+              "id": "npc-hyeon-gong",
+              "changes": {
+                "trust": 99,
+                "role": "Grand Emperor"
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "exploitDetails": "CRITICAL: hasMatchingVerifiedClaim treats targetAttribute: EXISTENCE as a wildcard, allowing arbitrary ungrounded mutations on any attribute.",
+      "callGraphTrace": "ImmigrationGate.admit(EXISTENCE) -> EngineValidator.validate -> hasMatchingVerifiedClaim(c.targetAttribute === EXISTENCE) -> Bypass -> Commit"
+    },
+    {
+      "testId": "TEST-A3-NAME-BASED-ALTERNATIVE-ENTITY-MATCHING",
+      "category": "TARGET_1_UPDATE_NPC",
+      "targetVector": "Alternative Entity ID Matching",
+      "description": "Verify if claim issued for NPC Name (\"현공 방장\") authorizes UPDATE_NPC on ID (\"npc-hyeon-gong\")",
+      "verdict": "EXPECTED_BEHAVIOR",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator.hasMatchingVerifiedClaim",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 75,
+          "affinity": 50
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 1,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_NPC",
+            "payload": {
+              "id": "npc-hyeon-gong",
+              "changes": {
+                "trust": 75
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "callGraphTrace": "ImmigrationGate.admit(Name) -> EngineValidator.hasMatchingVerifiedClaim(alternativeEntityId: targetNpc.name) -> Commit"
+    },
+    {
+      "testId": "TEST-A4-PARTIAL-CLAIM-MULTI-FIELD-INJECTION",
+      "category": "TARGET_1_UPDATE_NPC",
+      "targetVector": "Partial Verification Sneak",
+      "description": "Provide claim for 1 attribute (trust) while mutating 2 attributes (trust, affinity)",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator.UPDATE_NPC multi-field check",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'affinity'."
+        ],
+        "conflictDetails": [
+          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM UPDATE_NPC field 'affinity' for 'npc-hyeon-gong' lacks a matching Gate-issued VerifiedClaim (Entity='npc-hyeon-gong', Attribute='affinity')."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.UPDATE_NPC -> for of Object.entries(changes) -> Unverified affinity rejected"
+    },
+    {
+      "testId": "TEST-A5-DEAD-NPC-MUTATION-WITH-CLAIM",
+      "category": "TARGET_1_UPDATE_NPC",
+      "targetVector": "Dead Entity Invariant Override",
+      "description": "Attempt to mutate DEAD NPC attributes using a valid Gate-issued VerifiedClaim",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator DEAD_NPC_STATUS_PROTECTION",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-dead-elder",
+          "name": "망자 장로",
+          "status": "DEAD",
+          "impression": "None",
+          "role": "Former Elder",
+          "affiliation": "소림사",
+          "personality": "Stern",
+          "trust": 0,
+          "affinity": 0
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-dead-elder",
+          "name": "망자 장로",
+          "status": "DEAD",
+          "impression": "None",
+          "role": "Former Elder",
+          "affiliation": "소림사",
+          "personality": "Stern",
+          "trust": 0,
+          "affinity": 0
+        }
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[DEAD_NPC_STATUS_PROTECTION] Dead NPC cannot be modified or transition away from DEAD status."
+        ],
+        "conflictDetails": [
+          "[DEAD_NPC_STATUS_PROTECTION] Action #1: NPC '망자 장로' (npc-dead-elder) is DEAD and cannot be modified or revived."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.UPDATE_NPC -> targetNpc.status === DEAD -> Blocked before claim evaluation"
+    },
+    {
+      "testId": "TEST-A6-IMMUTABLE-ID-MUTATION-ATTEMPT",
+      "category": "TARGET_1_UPDATE_NPC",
+      "targetVector": "Immutable Field Protection",
+      "description": "Attempt to mutate immutable NPC ID field via UPDATE_NPC",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator IMMUTABLE_FIELD_PROTECTION",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[IMMUTABLE_FIELD_PROTECTION] Entity ID is immutable and cannot be updated."
+        ],
+        "conflictDetails": [
+          "[IMMUTABLE_FIELD_PROTECTION] Action #1: Cannot mutate NPC immutable identifier 'id' from 'npc-hyeon-gong' to 'npc-hyeon-gong-hijacked'."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.UPDATE_NPC -> changes.id !== id -> Blocked"
+    },
+    {
+      "testId": "TEST-A7-NAME-COLLISION-VIA-UPDATE-NPC",
+      "category": "TARGET_1_UPDATE_NPC",
+      "targetVector": "Name Uniqueness Invariant",
+      "description": "Attempt to rename NPC to an existing NPC name using a verified claim",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator NPC_CONFLICT",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[NPC_CONFLICT] Cannot update NPC to conflicting name '청허 도장'."
+        ],
+        "conflictDetails": [
+          "[NPC_CONFLICT] Action #1: NPC name '청허 도장' collides with existing NPC."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.UPDATE_NPC -> draftWorld.npcs.some(name collision) -> Blocked"
+    },
+    {
+      "testId": "TEST-A8-VALUE-MISMATCH-CLAIM-VS-ACTION",
+      "category": "TARGET_1_UPDATE_NPC",
+      "targetVector": "Value Grounding Check",
+      "description": "Attempt to submit UPDATE_NPC with value (90) inflated above verified claim value (70)",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator.hasMatchingVerifiedClaim isDeepEqual",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'trust'."
+        ],
+        "conflictDetails": [
+          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM UPDATE_NPC field 'trust' for 'npc-hyeon-gong' lacks a matching Gate-issued VerifiedClaim (Entity='npc-hyeon-gong', Attribute='trust')."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.hasMatchingVerifiedClaim -> isDeepEqual(70, 90) -> false -> Blocked"
+    },
+    {
+      "testId": "TEST-A9-FORGED-CLONED-CLAIM-OBJECT",
+      "category": "TARGET_1_UPDATE_NPC",
+      "targetVector": "WeakSet Capability Identity",
+      "description": "Attempt to bypass gate using structurally identical JSON clone of a VerifiedClaim",
+      "verdict": "EXPLOITED",
+      "vulnerabilityDiscovered": true,
+      "pipelineStage": "ImmigrationGate.isValidVerifiedClaim (WeakSet.has)",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[FORGED_CLAIM_REJECTED] Attached claim #1 fails Immigration Gate signature or structure verification."
+        ],
+        "conflictDetails": [],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator -> ImmigrationGate.isValidVerifiedClaim(forgedClone) -> WeakSet.has() === false -> Rejected"
+    },
+    {
+      "testId": "TEST-B1-EXACT-CLAIM-UPDATE-FACTION",
+      "category": "TARGET_2_UPDATE_FACTION",
+      "targetVector": "Exact Faction Grounding",
+      "description": "Admit exact claim (influence: 35) and verify UPDATE_FACTION succeeds and updates Canonical State",
+      "verdict": "EXPECTED_BEHAVIOR",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "Sovereign Commit Gate",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-shaolin",
+          "name": "소림사",
+          "influence": 30,
+          "description": "정파의 태두",
+          "hostility": 0
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-shaolin",
+          "name": "소림사",
+          "influence": 35,
+          "description": "정파의 태두",
+          "hostility": 0
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 1,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_FACTION",
+            "payload": {
+              "id": "faction-shaolin",
+              "changes": {
+                "influence": 35
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "callGraphTrace": "ImmigrationGate.admit -> EngineValidator (UPDATE_FACTION) -> Sovereign Commit"
+    },
+    {
+      "testId": "TEST-B2-FACTION-INFLUENCE-CUMULATIVE-OVERFLOW",
+      "category": "TARGET_2_UPDATE_FACTION",
+      "targetVector": "Cumulative Invariant vs Claim Authority",
+      "description": "Attempt to update faction influence with valid claim to value causing cumulative sum > 100",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator FACTION_INFLUENCE_EXCEEDED",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": [
+          {
+            "id": "faction-shaolin",
+            "inf": 30
+          },
+          {
+            "id": "faction-wudang",
+            "inf": 25
+          },
+          {
+            "id": "faction-mount-hua",
+            "inf": 20
+          }
+        ]
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": [
+          {
+            "id": "faction-shaolin",
+            "inf": 30
+          },
+          {
+            "id": "faction-wudang",
+            "inf": 25
+          },
+          {
+            "id": "faction-mount-hua",
+            "inf": 20
+          }
+        ]
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[FACTION_INFLUENCE_EXCEEDED] Total cumulative faction influence cannot exceed 100."
+        ],
+        "conflictDetails": [
+          "[FACTION_INFLUENCE_EXCEEDED] Action #1: Updating faction 'faction-shaolin' influence to 60 causes total cumulative influence (105) to exceed 100."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.UPDATE_FACTION -> otherTotal + incomingNum > 100 -> Blocked"
+    },
+    {
+      "testId": "TEST-B3-FACTION-NAME-COLLISION",
+      "category": "TARGET_2_UPDATE_FACTION",
+      "targetVector": "Faction Name Uniqueness Invariant",
+      "description": "Attempt to rename a faction to an existing faction name with a valid claim",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator FACTION_CONFLICT",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-wudang",
+          "name": "무당파",
+          "influence": 25,
+          "description": "도교 문파",
+          "hostility": 0
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-wudang",
+          "name": "무당파",
+          "influence": 25,
+          "description": "도교 문파",
+          "hostility": 0
+        }
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[FACTION_CONFLICT] Cannot update Faction to conflicting name '소림사'."
+        ],
+        "conflictDetails": [
+          "[FACTION_CONFLICT] Action #1: Faction name '소림사' collides with existing faction."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.UPDATE_FACTION -> draftWorld.factions.some(name collision) -> Blocked"
+    },
+    {
+      "testId": "TEST-B4-FACTION-EXISTENCE-WILDCARD-BYPASS",
+      "category": "TARGET_2_UPDATE_FACTION",
+      "targetVector": "EXISTENCE Claim Wildcard Bypass",
+      "description": "Attempt to use Faction EXISTENCE claim to mutate ungrounded description",
+      "verdict": "EXPLOITED",
+      "vulnerabilityDiscovered": true,
+      "pipelineStage": "EngineValidator.hasMatchingVerifiedClaim",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-wudang",
+          "name": "무당파",
+          "influence": 25,
+          "description": "도교 문파",
+          "hostility": 0
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-wudang",
+          "name": "무당파",
+          "influence": 25,
+          "description": "완전히 타락한 마교 분파",
+          "hostility": 0
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 1,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_FACTION",
+            "payload": {
+              "id": "faction-wudang",
+              "changes": {
+                "description": "완전히 타락한 마교 분파"
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "exploitDetails": "CRITICAL: Faction UPDATE_FACTION permits arbitrary description mutation when an EXISTENCE claim is provided.",
+      "callGraphTrace": "ImmigrationGate.admit(EXISTENCE) -> EngineValidator.hasMatchingVerifiedClaim -> Bypass -> Commit"
+    },
+    {
+      "testId": "TEST-C1-EXACT-STATUS-CLAIM-COMMIT",
+      "category": "TARGET_3_SET_NPC_STATUS",
+      "targetVector": "Status Transition Grounding",
+      "description": "Admit exact status claim (MISSING) and verify SET_NPC_STATUS commits cleanly",
+      "verdict": "EXPECTED_BEHAVIOR",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "Sovereign Commit Gate",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "MISSING",
+          "impression": "[STATUS: MISSING] Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 1,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "SET_NPC_STATUS",
+            "payload": {
+              "id": "npc-hyeon-gong",
+              "status": "MISSING"
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "callGraphTrace": "ImmigrationGate.admit -> EngineValidator (SET_NPC_STATUS) -> Sovereign Commit"
+    },
+    {
+      "testId": "TEST-C2-DEAD-NPC-REVIVAL-ATTEMPT",
+      "category": "TARGET_3_SET_NPC_STATUS",
+      "targetVector": "Dead Entity Permanent Status Invariant",
+      "description": "Attempt to revive a DEAD NPC to ALIVE status using a Gate-issued VerifiedClaim",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator DEAD_NPC_STATUS_PROTECTION",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-dead-elder",
+          "name": "망자 장로",
+          "status": "DEAD",
+          "impression": "None",
+          "role": "Former Elder",
+          "affiliation": "소림사",
+          "personality": "Stern",
+          "trust": 0,
+          "affinity": 0
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-dead-elder",
+          "name": "망자 장로",
+          "status": "DEAD",
+          "impression": "None",
+          "role": "Former Elder",
+          "affiliation": "소림사",
+          "personality": "Stern",
+          "trust": 0,
+          "affinity": 0
+        }
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[DEAD_NPC_STATUS_PROTECTION] Cannot modify status of a deceased NPC."
+        ],
+        "conflictDetails": [
+          "[DEAD_NPC_STATUS_PROTECTION] Action #1: NPC '망자 장로' (npc-dead-elder) is DEAD. Cannot modify status of a deceased NPC."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.SET_NPC_STATUS -> targetNpc.status === DEAD -> Blocked"
+    },
+    {
+      "testId": "TEST-D1-INTRA-PROPOSAL-CONTRADICTION",
+      "category": "INTRA_PROPOSAL_PIPELINE",
+      "targetVector": "Intra-Proposal Action Atomicity",
+      "description": "Single proposal containing contradictory actions on same entity/attribute with both claims admitted",
+      "verdict": "EXPLOITED",
+      "vulnerabilityDiscovered": true,
+      "pipelineStage": "Virtual Draft Sequential Execution",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 20,
+          "affinity": 50
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 2,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_NPC",
+            "payload": {
+              "id": "npc-hyeon-gong",
+              "changes": {
+                "trust": 80
+              }
+            }
+          },
+          {
+            "type": "UPDATE_NPC",
+            "payload": {
+              "id": "npc-hyeon-gong",
+              "changes": {
+                "trust": 20
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 2
+      },
+      "exploitDetails": "WARNING: Single proposal with contradictory mutations sequentially overwrites without intra-proposal conflict rejection.",
+      "callGraphTrace": "EngineValidator -> applies Action 1 (trust=80) -> applies Action 2 (trust=20) -> Sequential Commit"
+    },
+    {
+      "testId": "TEST-D2-INTRA-PROPOSAL-DRAFT-PROVENANCE",
+      "category": "INTRA_PROPOSAL_PIPELINE",
+      "targetVector": "Draft Provenance Boundary",
+      "description": "Attempt to ADD an NPC and UPDATE it in the same proposal before prior canonical commit",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator PROVENANCE_VIOLATION",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": null
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[PROVENANCE_VIOLATION] Entity 'npc-brand-new' has no pre-existing canonical evidence in currentState."
+        ],
+        "conflictDetails": [
+          "[PROVENANCE_VIOLATION] Action #2: Cannot execute UPDATE_NPC on entity 'npc-brand-new' without pre-existing canonical evidence in currentState. Draft entities created in the same proposal cannot be confirmed or modified via UPDATE_NPC without prior canonical commit."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.UPDATE_NPC -> canonicalNpc not in currentState -> PROVENANCE_VIOLATION -> Blocked"
+    },
+    {
+      "testId": "TEST-E1-SAME-TURN-POST-COMMIT-REPLAY",
+      "category": "POST_COMMIT_TEMPORAL_LIFECYCLE",
+      "targetVector": "Single-Use Authority Consumption",
+      "description": "Attempt to reuse the identical VerifiedClaim object in a second proposal after successful commit",
+      "verdict": "EXPLOITED",
+      "vulnerabilityDiscovered": true,
+      "pipelineStage": "Sovereign Commit Gate (Claim Consumption)",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 3,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 80,
+          "affinity": 50
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 2,
+      "historyCountDelta": 2,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_NPC",
+            "payload": {
+              "id": "npc-hyeon-gong",
+              "changes": {
+                "trust": 80
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "exploitDetails": "CONFIRMED BREAK: VerifiedClaim is not revoked or consumed upon commit; replaying the in-memory object in subsequent proposals succeeds.",
+      "callGraphTrace": "ImmigrationGate.admit -> Proposal 1 Commit -> Proposal 2 submitProposal(same claim) -> Commit Succeeded"
+    },
+    {
+      "testId": "TEST-E2-STALE-CLAIM-FUTURE-TURN-REPLAY",
+      "category": "POST_COMMIT_TEMPORAL_LIFECYCLE",
+      "targetVector": "Turn Boundary Temporal Decoupling",
+      "description": "Replay a Turn 1 VerifiedClaim (verifiedAtTurn: 1) in a Turn 5 proposal",
+      "verdict": "EXPLOITED",
+      "vulnerabilityDiscovered": true,
+      "pipelineStage": "EngineValidator hasMatchingVerifiedClaim (Turn Check)",
+      "stateBefore": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-shaolin",
+          "name": "소림사",
+          "influence": 40,
+          "description": "정파의 태두",
+          "hostility": 0
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 3,
+        "turn": 5,
+        "targetEntitySummary": {
+          "id": "faction-shaolin",
+          "name": "소림사",
+          "influence": 40,
+          "description": "정파의 태두",
+          "hostility": 0
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 2,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_FACTION",
+            "payload": {
+              "id": "faction-shaolin",
+              "changes": {
+                "influence": 40
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "exploitDetails": "CONFIRMED BREAK: hasMatchingVerifiedClaim does not validate c.verifiedAtTurn === proposal.turn; Turn 1 claim committed at Turn 5.",
+      "callGraphTrace": "EngineValidator.hasMatchingVerifiedClaim -> Ignores c.verifiedAtTurn -> Commit Succeeded"
+    },
+    {
+      "testId": "TEST-E3-HISTORICAL-STATE-REVERSAL-EXPLOIT",
+      "category": "POST_COMMIT_TEMPORAL_LIFECYCLE",
+      "targetVector": "Historical State Reversal",
+      "description": "Replay Turn 1 claim (infl=35) at Turn 3 to overwrite Turn 2 decline (infl=10) back to 35 without fresh evidence",
+      "verdict": "EXPLOITED",
+      "vulnerabilityDiscovered": true,
+      "pipelineStage": "EngineValidator / Sovereign Commit",
+      "stateBefore": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-shaolin",
+          "name": "소림사",
+          "influence": 35,
+          "description": "정파의 태두",
+          "hostility": 0
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 3,
+        "turn": 3,
+        "targetEntitySummary": {
+          "id": "faction-shaolin",
+          "name": "소림사",
+          "influence": 35,
+          "description": "정파의 태두",
+          "hostility": 0
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 2,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_FACTION",
+            "payload": {
+              "id": "faction-shaolin",
+              "changes": {
+                "influence": 35
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "exploitDetails": "CONFIRMED BREAK: Replaying historical claim reversed genuine Turn 2 defeat back to 35 without fresh grounding.",
+      "callGraphTrace": "Turn 1 Commit(35) -> Turn 2 Defeat(10) -> Turn 3 Replay Claim(35) -> State Reversed to 35"
+    },
+    {
+      "testId": "TEST-F1-CROSS-ENTITY-CLAIM-HIJACKING",
+      "category": "CROSS_AUTHORITY_BLEEDING",
+      "targetVector": "Entity Boundary Validation",
+      "description": "Attempt to use a claim issued for Shaolin to authorize mutation on Wudang",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator hasMatchingVerifiedClaim (Entity Check)",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-wudang",
+          "name": "무당파",
+          "influence": 25,
+          "description": "도교 문파",
+          "hostility": 0
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-wudang",
+          "name": "무당파",
+          "influence": 25,
+          "description": "도교 문파",
+          "hostility": 0
+        }
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on Faction 'faction-wudang' field 'influence'."
+        ],
+        "conflictDetails": [
+          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM UPDATE_FACTION field 'influence' for 'faction-wudang' lacks a matching Gate-issued VerifiedClaim (Entity='faction-wudang', Attribute='influence')."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.hasMatchingVerifiedClaim -> entityId !== targetEntityId -> Blocked"
+    },
+    {
+      "testId": "TEST-F2-CROSS-ATTRIBUTE-CLAIM-HIJACKING",
+      "category": "CROSS_AUTHORITY_BLEEDING",
+      "targetVector": "Attribute Boundary Validation",
+      "description": "Attempt to use an influence claim to authorize a hostility attribute mutation",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator hasMatchingVerifiedClaim (Attribute Check)",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-shaolin",
+          "name": "소림사",
+          "influence": 30,
+          "description": "정파의 태두",
+          "hostility": 0
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "faction-shaolin",
+          "name": "소림사",
+          "influence": 30,
+          "description": "정파의 태두",
+          "hostility": 0
+        }
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [
+          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on Faction 'faction-shaolin' field 'hostility'."
+        ],
+        "conflictDetails": [
+          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM UPDATE_FACTION field 'hostility' for 'faction-shaolin' lacks a matching Gate-issued VerifiedClaim (Entity='faction-shaolin', Attribute='hostility')."
+        ],
+        "sanitizedActions": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "callGraphTrace": "EngineValidator.hasMatchingVerifiedClaim -> targetAttribute !== attribute -> Blocked"
+    },
+    {
+      "testId": "TEST-F3-CROSS-ENGINE-INSTANCE-WEAKSET-BLEED",
+      "category": "CROSS_AUTHORITY_BLEEDING",
+      "targetVector": "Module Scope WeakSet Singleton",
+      "description": "Submit a VerifiedClaim issued on Engine Instance A into an independent Engine Instance B",
+      "verdict": "EXPLOITED",
+      "vulnerabilityDiscovered": true,
+      "pipelineStage": "ImmigrationGate Module-level ISSUED_VERIFIED_CLAIMS WeakSet",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 88,
+          "affinity": 50
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 1,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_NPC",
+            "payload": {
+              "id": "npc-hyeon-gong",
+              "changes": {
+                "trust": 88
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "exploitDetails": "CONFIRMED BREAK: ISSUED_VERIFIED_CLAIMS WeakSet is module-scoped, allowing claims to cross engine session boundaries.",
+      "callGraphTrace": "Engine A admit -> ISSUED_VERIFIED_CLAIMS.add -> Engine B submitProposal -> WeakSet.has(claimA) === true -> Commit"
+    },
+    {
+      "testId": "TEST-G1-POST-REJECTION-RETRY-RESILIENCE",
+      "category": "FAILURE_PATH_RETENTION",
+      "targetVector": "Post-Rejection Claim Availability",
+      "description": "Verify claim remains available for clean retry after previous proposal was rejected",
+      "verdict": "EXPECTED_BEHAVIOR",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "EngineValidator & Commit Gate",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 50,
+          "affinity": 50
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "targetEntitySummary": {
+          "id": "npc-hyeon-gong",
+          "name": "현공 방장",
+          "status": "ALIVE",
+          "impression": "Neutral",
+          "role": "Abbot",
+          "affiliation": "소림사",
+          "personality": "Calm",
+          "trust": 85,
+          "affinity": 50
+        }
+      },
+      "stateMutated": true,
+      "stateVersionDelta": 1,
+      "historyCountDelta": 1,
+      "validatorVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "UPDATE_NPC",
+            "payload": {
+              "id": "npc-hyeon-gong",
+              "changes": {
+                "trust": 85
+              }
+            }
+          }
+        ]
+      },
+      "commitResult": {
+        "success": true,
+        "committedActionsCount": 1
+      },
+      "callGraphTrace": "Proposal 1 Rejected -> Claim retained in WeakSet -> Proposal 2 Retry -> Commit Succeeded"
+    },
+    {
+      "testId": "TEST-G2-MUTATION-BOUNDARY-TAMPER-BLOCK",
+      "category": "MUTATION_BOUNDARY_CONTRACT",
+      "targetVector": "LLM#2 Mutation Boundary Enforcement",
+      "description": "Validate that LLM#2 final proposal value inflation (trust=99 vs candidate trust=80) is strictly blocked by boundary",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "validateLLM2MutationBoundary",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": null
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "targetEntitySummary": null
+      },
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
+      "validatorVerdict": {
+        "isValid": false,
+        "rejectedReasons": [],
+        "conflictDetails": []
+      },
+      "commitResult": {
+        "success": false,
+        "committedActionsCount": 0
+      },
+      "boundaryCheckResult": {
+        "isValid": false,
+        "violationReasons": [
+          "[MUTATION_BOUNDARY_VIOLATION] Action #1 (UPDATE_NPC) is not authorized in approved candidate. Details: [MUTATION_BOUNDARY_VIOLATION] NPC property 'changes' value was modified from candidate."
+        ]
+      },
+      "callGraphTrace": "validateLLM2MutationBoundary -> isActionSemanticSubset -> Value Mismatch -> MUTATION_BOUNDARY_VIOLATION"
+    }
+  ]
+}

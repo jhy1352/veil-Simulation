@@ -1,0 +1,64 @@
+SOURCE MANIFEST & HASH REGISTRY
+================================================================================
+Generated At: 2026-08-29T08:48:34.936Z
+Baseline Commit: 4754fa5ac1419e3b1d3d6963b297d99b5776b060
+
+[PRODUCTION SOURCE SNAPSHOTS]
+Path: src/engine/state.ts
+Hash: a65c5a825428f83b77364c0ed3fcc4b4dbd0e4e212c941398a23aad5d25a3d80
+Status: HEAD (4754fa5 Baseline)
+Preserved At: production_source_snapshot/state.ts
+
+Path: src/engine/validator.ts
+Hash: 45ef78c76c736ba731deafd770fc0d72a25d8a1c8e32e4753a18089325f30a30
+Status: HEAD (4754fa5 Baseline)
+Preserved At: production_source_snapshot/validator.ts
+
+Path: src/engine/immigrationGate.ts
+Hash: 43bd33b62152db6d20efc29acd73ab1692dfd5fa8afcba952f7f123fd64eb261
+Status: HEAD (4754fa5 Baseline)
+Preserved At: production_source_snapshot/immigrationGate.ts
+
+Path: src/engine/mutationBoundary.ts
+Hash: 585db9ac8b05cfd6fb27dcc2286489223d3a3eede666746c469f0afd688b2a39
+Status: HEAD (4754fa5 Baseline)
+Preserved At: production_source_snapshot/mutationBoundary.ts
+
+Path: src/engine/proposalParser.ts
+Hash: 022758b335de059914a36e287424daa2518786b4b33141678fc8e1ff9a134fc6
+Status: HEAD (4754fa5 Baseline)
+Preserved At: production_source_snapshot/proposalParser.ts
+
+Path: src/engine/types.ts
+Hash: cdb52f998f0177389f80b5440958b87b6a82289df52980d0c03a28261d7f278a
+Status: HEAD (4754fa5 Baseline)
+Preserved At: production_source_snapshot/types.ts
+
+Path: src/engine/actionApplier.ts
+Hash: c2814c02fc741816bb126f00607a79790eec32b89bbdfd50c5a32a23b138f164
+Status: HEAD (4754fa5 Baseline)
+Preserved At: production_source_snapshot/actionApplier.ts
+
+Path: src/engine/internalCapability.ts
+Hash: 6e8379fdbfb342c7b87a5fdf28e5d41e8a3a564461231318b63dd4049c2f3e53
+Status: HEAD (4754fa5 Baseline)
+Preserved At: production_source_snapshot/internalCapability.ts
+
+Path: src/utils/factory.ts
+Hash: b3c459883aafb7bc9eaeb28803a7be016b00c4a10970e8951261e61550ecc63e
+Status: HEAD (4754fa5 Baseline)
+Preserved At: production_source_snapshot/factory.ts
+
+[FAILED RUNNER SNAPSHOTS]
+Path: scripts/confirmed_break_forensic_reattack.ts
+Hash: 89dd1d82a231f246f7886a4a06f33c23bccec0062d312f630be8a665b0cf76a5
+Preserved At: runner_source_snapshot/confirmed_break_forensic_reattack.ts
+
+Path: scripts/adversarial_forensic_suite.ts
+Hash: 4f74723c1686d6aade8b3e8d96403e6ae1e4521c67734c917b0c081554dddc57
+Preserved At: runner_source_snapshot/adversarial_forensic_suite.ts
+
+Path: scripts/adversarial_runtime_break_runner.ts
+Hash: cd1eb149d48ea0a0cbc0c94a73e20e31b5fc910bc9fdf096ae748304d903f9ca
+Preserved At: runner_source_snapshot/adversarial_runtime_break_runner.ts
+

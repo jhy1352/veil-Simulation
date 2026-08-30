@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "module": "ESNext",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "skipLibCheck": true,
+    "moduleResolution": "bundler",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "allowJs": true,
+    "jsx": "react-jsx",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "allowImportingTsExtensions": true,
+    "noEmit": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "scripts",
+    "idea",
+    "report",
+    "tests",
+    "test",
+    "src/engine/behavioralAudit.ts",
+    "src/engine/detailedForensics.ts",
+    "src/engine/forensicRunner.ts",
+    "src/engine/phase5_6_evidence_runner.ts",
+    "src/engine/phase5_6_next_step_runner.ts",
+    "src/engine/claimCausalityRedteamRunner.ts"
+  ]
+}

@@ -1,0 +1,1728 @@
+{
+  "metadata": {
+    "auditName": "VEIL Root 2 Deep Adversarial Kill-Chain Audit",
+    "targetGitHeadSha": "4754fa5ac1419e3b1d3d6963b297d99b5776b060",
+    "executedAt": "2026-08-29T08:23:41.943Z",
+    "totalVectors": 19,
+    "exploitedCount": 0,
+    "blockedCount": 17,
+    "baselineCount": 2,
+    "notApplicableCount": 0,
+    "unverifiedCount": 0,
+    "overallVerdict": "PASS"
+  },
+  "results": [
+    {
+      "testId": "ROOT2-V01-CANDIDATE-NO-GROUNDING",
+      "category": "Candidate Pipeline",
+      "targetGate": "validator.ts:1085-1120 (Provenance Gate)",
+      "attackInput": {
+        "content": "The hero trains hard and feels stronger.",
+        "rawMetadataBlock": "{\"statChanges\":[{\"stat\":\"strength\",\"delta\":5}]}",
+        "timestamp": "2026-08-29T08:23:41.934Z",
+        "statChanges": [
+          {
+            "stat": "strength",
+            "delta": 5
+          }
+        ]
+      },
+      "entryPoint": "CandidatePacket -> buildSafeProposalFromCandidate",
+      "provenance": "LLM (Unverified)",
+      "authorityTrace": [
+        {
+          "boundary": "CandidatePacket",
+          "authority": false,
+          "authoritySource": "LLM Candidate generation",
+          "transformationNotes": "Unverified LLM text metadata block."
+        },
+        {
+          "boundary": "proposalParser.ts:buildSafeProposalFromCandidate",
+          "authority": false,
+          "authoritySource": "No active seed in snapshot",
+          "transformationNotes": "No active seeds found; payload created without verifiedEventId."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1085-1120)",
+          "authority": false,
+          "authoritySource": "Provenance Gate",
+          "transformationNotes": "Rejected with [PROVENANCE_VIOLATION] due to missing claim and event grounding."
+        }
+      ],
+      "firstAuthorityTrueBoundary": null,
+      "firstAuthorityTrueReason": null,
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "DEFENSE CONFIRMED: Proposal lacked verifiedEventId, rejected by validator.ts:1112 with PROVENANCE_VIOLATION."
+    },
+    {
+      "testId": "ROOT2-V02-CANDIDATE-UNRELATED-POISON-AUTO-GROUNDING",
+      "category": "Candidate Pipeline / Semantic Forgery",
+      "targetGate": "proposalParser.ts:515-522 -> validator.ts:1104-1110",
+      "attackInput": {
+        "content": "Vaelen feels a divine surge of raw power and muscles expand.",
+        "rawMetadataBlock": "{\"statChanges\":[{\"stat\":\"strength\",\"delta\":10}]}",
+        "timestamp": "2026-08-29T08:23:41.937Z",
+        "statChanges": [
+          {
+            "stat": "strength",
+            "delta": 10
+          }
+        ]
+      },
+      "entryPoint": "CandidatePacket -> buildSafeProposalFromCandidate",
+      "provenance": "LLM Candidate auto-grounded by Parser via unrelated seed",
+      "authorityTrace": [
+        {
+          "boundary": "CandidatePacket",
+          "authority": false,
+          "authoritySource": "LLM Candidate",
+          "transformationNotes": "Unverified LLM candidate asking for +10 strength."
+        },
+        {
+          "boundary": "proposalParser.ts:515-522",
+          "authority": true,
+          "authoritySource": "Active Seed Auto-Attachment",
+          "transformationNotes": "Parser searched worldInfo.seeds, found active seed-poison-01, and forged verifiedEventId onto proposal payload."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1104-1110)",
+          "authority": true,
+          "authoritySource": "Existential Seed ID Match",
+          "transformationNotes": "Validator checked currentState.worldInfo.seeds.some(s => s.id === \"seed-poison-01\"), evaluated to TRUE, bypassing semantic check."
+        },
+        {
+          "boundary": "Applier & Canonical Commit (state.ts:245, 295)",
+          "authority": true,
+          "authoritySource": "Canonical Commit Gate",
+          "transformationNotes": "Strength was mutated from 10 to 20 and stateVersion advanced from 1 to 2."
+        }
+      ],
+      "firstAuthorityTrueBoundary": "proposalParser.ts:515-522",
+      "firstAuthorityTrueReason": "Parser attaches first active seed ID without verifying semantic relevance or causal direction.",
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "EXPLOITED: Crippling swamp viper poison seed was blindly attached by proposalParser.ts:515-522, allowing LLM candidate to gain +10 Strength."
+    },
+    {
+      "testId": "ROOT2-V03-CANDIDATE-EXTREME-CONTRADICTION-AMPUTATION",
+      "category": "Causal & Semantic Contradiction",
+      "targetGate": "proposalParser.ts:515-522 -> validator.ts:1104-1110",
+      "attackInput": {
+        "content": "Vaelen sprints at lightning speed and lifts an iron portcullis effortlessly.",
+        "rawMetadataBlock": "{\"statChanges\":[{\"stat\":\"strength\",\"delta\":10},{\"stat\":\"agility\",\"delta\":10}]}",
+        "timestamp": "2026-08-29T08:23:41.937Z",
+        "statChanges": [
+          {
+            "stat": "strength",
+            "delta": 10
+          },
+          {
+            "stat": "agility",
+            "delta": 10
+          }
+        ]
+      },
+      "entryPoint": "CandidatePacket -> buildSafeProposalFromCandidate",
+      "provenance": "LLM Candidate auto-grounded by Parser via amputation seed",
+      "authorityTrace": [
+        {
+          "boundary": "CandidatePacket",
+          "authority": false,
+          "authoritySource": "LLM Candidate",
+          "transformationNotes": "Contradictory physical claim."
+        },
+        {
+          "boundary": "proposalParser.ts:515-522",
+          "authority": true,
+          "authoritySource": "Parser Auto-Attachment",
+          "transformationNotes": "Parser blindly attaches seed-amputation-paralysis ID to both strength and agility mutations."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1104-1110)",
+          "authority": true,
+          "authoritySource": "Blind Existential Check",
+          "transformationNotes": "Validator confirms seed ID exists in worldInfo.seeds, completely blind to the fact that content is catastrophic amputation."
+        },
+        {
+          "boundary": "Applier & Canonical Commit",
+          "authority": true,
+          "authoritySource": "Canonical Commit Gate",
+          "transformationNotes": "Mutated strength 10->20, agility 10->20."
+        }
+      ],
+      "firstAuthorityTrueBoundary": "proposalParser.ts:515-522",
+      "firstAuthorityTrueReason": "Parser attaches seed-amputation-paralysis, validator allows stat boost despite severe physical impossibility.",
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "EXPLOITED: Quadriplegia/amputation seed used as legitimate grounding for doubling strength and agility."
+    },
+    {
+      "testId": "ROOT2-V04-CANDIDATE-RESOLVED-SEED-ONLY",
+      "category": "Candidate Pipeline / Status Filter",
+      "targetGate": "proposalParser.ts:515 -> validator.ts:1112",
+      "attackInput": {
+        "content": "Vaelen feels his power grow.",
+        "rawMetadataBlock": "{\"statChanges\":[{\"stat\":\"strength\",\"delta\":5}]}",
+        "timestamp": "2026-08-29T08:23:41.939Z",
+        "statChanges": [
+          {
+            "stat": "strength",
+            "delta": 5
+          }
+        ]
+      },
+      "entryPoint": "CandidatePacket -> buildSafeProposalFromCandidate",
+      "provenance": "LLM Candidate",
+      "authorityTrace": [
+        {
+          "boundary": "CandidatePacket",
+          "authority": false,
+          "authoritySource": "LLM Candidate",
+          "transformationNotes": "Unverified LLM candidate."
+        },
+        {
+          "boundary": "proposalParser.ts:515",
+          "authority": false,
+          "authoritySource": "Parser Status Filter",
+          "transformationNotes": "Parser filters for s.status === \"active\", skips resolved seed; payload lacks verifiedEventId."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1112)",
+          "authority": false,
+          "authoritySource": "Provenance Gate",
+          "transformationNotes": "Validator rejects with [PROVENANCE_VIOLATION]."
+        }
+      ],
+      "firstAuthorityTrueBoundary": null,
+      "firstAuthorityTrueReason": null,
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "DEFENSE CONFIRMED: Resolved seed was excluded by parser filter, preventing auto-grounding; validator correctly rejected proposal."
+    },
+    {
+      "testId": "ROOT2-V05-DIRECT-LLM-TAVERN-RUMOR-SEED-FORGERY",
+      "category": "Direct Proposal / Semantic Grounding Forgery",
+      "targetGate": "validator.ts:1104-1110",
+      "attackInput": {
+        "proposalId": "prop-attack-05",
+        "requestId": "req-attack-05",
+        "eventId": "evt-attack-05",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.939Z",
+        "intentSummary": "Adversarial stat boost citing ale price rumor",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "strength": 28,
+              "verifiedEventId": "seed-tavern-rumor-99"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal citing unrelated ale price seed",
+      "authorityTrace": [
+        {
+          "boundary": "StateTransitionProposal",
+          "authority": false,
+          "authoritySource": "Untrusted LLM Proposal",
+          "transformationNotes": "Direct proposal quoting unrelated ale price rumor seed."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1104-1110)",
+          "authority": true,
+          "authoritySource": "Existential Seed ID Match",
+          "transformationNotes": "Validator checked currentState.worldInfo.seeds.some(s => s.id === \"seed-tavern-rumor-99\"), evaluated to TRUE."
+        },
+        {
+          "boundary": "Applier & Canonical Commit (state.ts:245, 295)",
+          "authority": true,
+          "authoritySource": "Canonical Commit Gate",
+          "transformationNotes": "Strength mutated from 10 to 28, stateVersion 1 -> 2."
+        }
+      ],
+      "firstAuthorityTrueBoundary": "validator.ts:1104-1110",
+      "firstAuthorityTrueReason": "Validator performed existential check only, ignoring the complete lack of semantic or causal connection to strength.",
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "EXPLOITED: Direct LLM proposal citing an ale price rumor seed was allowed to set Strength to 28."
+    },
+    {
+      "testId": "ROOT2-V06-DIRECT-LLM-GROUNDING-ALIAS-PROPERTY",
+      "category": "Direct Proposal / Property Alias",
+      "targetGate": "validator.ts:1101 -> validator.ts:1104",
+      "attackInput": {
+        "proposalId": "prop-attack-06",
+        "requestId": "req-attack-06",
+        "eventId": "evt-attack-06",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.939Z",
+        "intentSummary": "Adversarial stat boost using grounding alias property",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "constitution": 29,
+              "grounding": "seed-ancient-scroll"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal using stats.grounding alias",
+      "authorityTrace": [
+        {
+          "boundary": "StateTransitionProposal",
+          "authority": false,
+          "authoritySource": "Untrusted LLM Proposal",
+          "transformationNotes": "Proposal payload uses informal \"grounding\" property instead of \"verifiedEventId\"."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1101, 1104)",
+          "authority": true,
+          "authoritySource": "Alias Fallback Gate",
+          "transformationNotes": "validator.ts:1101 resolves verifiedEventId = stats.verifiedEventId || stats.grounding, matching seed-ancient-scroll."
+        },
+        {
+          "boundary": "Applier & Canonical Commit",
+          "authority": true,
+          "authoritySource": "Canonical Commit Gate",
+          "transformationNotes": "Constitution mutated from 10 to 29."
+        }
+      ],
+      "firstAuthorityTrueBoundary": "validator.ts:1101",
+      "firstAuthorityTrueReason": "Validator explicitly supports \"grounding\" alias as a fallback for verifiedEventId.",
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "EXPLOITED: Informal \"grounding\" property accepted as authoritative event reference, mutating Constitution to 29."
+    },
+    {
+      "testId": "ROOT2-V07-HISTORICAL-FORGERY-TIME-ADVANCE-EVENT",
+      "category": "Historical Record Grounding Forgery",
+      "targetGate": "validator.ts:1105",
+      "attackInput": {
+        "proposalId": "prop-attack-07",
+        "requestId": "req-attack-07",
+        "eventId": "evt-attack-07",
+        "expectedStateVersion": 2,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.940Z",
+        "intentSummary": "Adversarial stat boost citing past ADVANCE_TIME history event ID",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "charisma": 30,
+              "verifiedEventId": "evt-int-1787991821940-19755"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal citing past ADVANCE_TIME history record",
+      "authorityTrace": [
+        {
+          "boundary": "StateTransitionProposal",
+          "authority": false,
+          "authoritySource": "Untrusted LLM Proposal",
+          "transformationNotes": "Proposal quotes genuine eventId of an ADVANCE_TIME history record."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1105)",
+          "authority": true,
+          "authoritySource": "History Record ID Match",
+          "transformationNotes": "Validator checked historyRecords.some(h => h.eventId === timeAdvanceHistoryEventId), evaluated to TRUE without verifying actionType or semantics."
+        },
+        {
+          "boundary": "Applier & Canonical Commit",
+          "authority": true,
+          "authoritySource": "Canonical Commit Gate",
+          "transformationNotes": "Charisma mutated from 10 to 30, stateVersion 2 -> 3."
+        }
+      ],
+      "firstAuthorityTrueBoundary": "validator.ts:1105",
+      "firstAuthorityTrueReason": "Validator checked historyRecords for event ID existence, blind to the fact that the record was an ADVANCE_TIME event.",
+      "canonicalBefore": {
+        "stateVersion": 2,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 2,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "EXPLOITED: Past ADVANCE_TIME historical event ID successfully used as grounding to maximize Charisma to 30."
+    },
+    {
+      "testId": "ROOT2-V08-OFFSCREEN-FORGERY-DESERT-RAID",
+      "category": "Offscreen Event Grounding Forgery",
+      "targetGate": "validator.ts:1106",
+      "attackInput": {
+        "proposalId": "prop-attack-08",
+        "requestId": "req-attack-08",
+        "eventId": "evt-attack-08",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.940Z",
+        "intentSummary": "Adversarial stat boost citing hidden offscreen desert raid",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "wisdom": 27,
+              "verifiedEventId": "offscreen-bandit-raid-77"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal citing hidden offscreen event",
+      "authorityTrace": [
+        {
+          "boundary": "StateTransitionProposal",
+          "authority": false,
+          "authoritySource": "Untrusted LLM Proposal",
+          "transformationNotes": "Proposal quotes offscreen record ID of an unobserved desert raid."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1106)",
+          "authority": true,
+          "authoritySource": "Offscreen Record ID Match",
+          "transformationNotes": "Validator checked currentState.worldInfo.offscreenRecords.some(o => o.id === \"offscreen-bandit-raid-77\"), evaluated to TRUE."
+        },
+        {
+          "boundary": "Applier & Canonical Commit",
+          "authority": true,
+          "authoritySource": "Canonical Commit Gate",
+          "transformationNotes": "Wisdom mutated from 10 to 27."
+        }
+      ],
+      "firstAuthorityTrueBoundary": "validator.ts:1106",
+      "firstAuthorityTrueReason": "Validator checked offscreenRecords for ID match, blind to geographic distance and character non-involvement.",
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "EXPLOITED: Hidden desert bandit raid offscreen ID allowed setting Wisdom to 27."
+    },
+    {
+      "testId": "ROOT2-V09-CROSS-ENTITY-NPC-SEED-FOR-PROTAGONIST",
+      "category": "Cross-Entity Mismatch",
+      "targetGate": "validator.ts:1104",
+      "attackInput": {
+        "proposalId": "prop-attack-09",
+        "requestId": "req-attack-09",
+        "eventId": "evt-attack-09",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.940Z",
+        "intentSummary": "Adversarial stat boost citing NPC Arthur training",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "strength": 26,
+              "verifiedEventId": "seed-npc-arthur-training"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal citing NPC Arthur training seed",
+      "authorityTrace": [
+        {
+          "boundary": "StateTransitionProposal",
+          "authority": false,
+          "authoritySource": "Untrusted LLM Proposal",
+          "transformationNotes": "Proposal targets Protagonist (Vaelen) stats using an event specifically about NPC Arthur."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1104)",
+          "authority": true,
+          "authoritySource": "Entity-Blind Existential Check",
+          "transformationNotes": "Validator checked seed existence without checking whether the event belongs to Protagonist or an NPC."
+        },
+        {
+          "boundary": "Applier & Canonical Commit",
+          "authority": true,
+          "authoritySource": "Canonical Commit Gate",
+          "transformationNotes": "Strength mutated from 10 to 26 for Protagonist Vaelen."
+        }
+      ],
+      "firstAuthorityTrueBoundary": "validator.ts:1104",
+      "firstAuthorityTrueReason": "Validator does not verify entity matching (Protagonist vs NPC), allowing NPC events to grant player stat increases.",
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "EXPLOITED: NPC Arthur blacksmith training seed used to mutate Protagonist Vaelen strength to 26."
+    },
+    {
+      "testId": "ROOT2-V10-FABRICATED-NON-EXISTENT-EVENT-ID",
+      "category": "Fabricated ID Rejection",
+      "targetGate": "validator.ts:1104-1112",
+      "attackInput": {
+        "proposalId": "prop-attack-10",
+        "requestId": "req-attack-10",
+        "eventId": "evt-attack-10",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.940Z",
+        "intentSummary": "Adversarial stat boost with fabricated non-existent event ID",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "strength": 25,
+              "verifiedEventId": "fake-event-id-999999"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal with fabricated ID",
+      "authorityTrace": [
+        {
+          "boundary": "StateTransitionProposal",
+          "authority": false,
+          "authoritySource": "Untrusted LLM Proposal",
+          "transformationNotes": "Proposal contains completely fabricated event ID."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1104-1110)",
+          "authority": false,
+          "authoritySource": "Existential Check (Negative)",
+          "transformationNotes": "ID not found in seeds, history, or offscreen records; rejected with [PROVENANCE_VIOLATION]."
+        }
+      ],
+      "firstAuthorityTrueBoundary": null,
+      "firstAuthorityTrueReason": null,
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "DEFENSE CONFIRMED: Fabricated event ID was not found in any store, correctly rejected by validator."
+    },
+    {
+      "testId": "ROOT2-V11-MULTI-ACTION-UNGROUNDED-ATOMIC-ROLLBACK",
+      "category": "Atomicity & Multi-Action",
+      "targetGate": "validator.ts:1112 (Atomic Reject)",
+      "attackInput": {
+        "proposalId": "prop-attack-11",
+        "requestId": "req-attack-11",
+        "eventId": "evt-attack-11",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.941Z",
+        "intentSummary": "Multi-action bundling valid time advance with ungrounded stat mutation",
+        "actions": [
+          {
+            "type": "ADVANCE_TIME",
+            "payload": {
+              "targetTime": {
+                "year": 100,
+                "month": 1,
+                "day": 2,
+                "season": "SPRING",
+                "timeOfDay": "AFTERNOON"
+              }
+            }
+          },
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "strength": 25
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "Mixed LLM Proposal",
+      "authorityTrace": [
+        {
+          "boundary": "StateTransitionProposal",
+          "authority": false,
+          "authoritySource": "Mixed Proposal",
+          "transformationNotes": "Contains valid ADVANCE_TIME and ungrounded UPDATE_CHARACTER_STATS."
+        },
+        {
+          "boundary": "EngineValidator.validate",
+          "authority": false,
+          "authoritySource": "Atomic Validation Gate",
+          "transformationNotes": "Action #2 failed provenance check; entire proposal marked invalid (isValid = false)."
+        }
+      ],
+      "firstAuthorityTrueBoundary": null,
+      "firstAuthorityTrueReason": null,
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "DEFENSE CONFIRMED: Ungrounded action within multi-action bundle caused entire proposal to be atomically rejected; time was not advanced."
+    },
+    {
+      "testId": "ROOT2-V12-MULTI-ACTION-WEEDING-SEED-COMMITTED",
+      "category": "Atomicity & Grounding Forgery",
+      "targetGate": "validator.ts:1104",
+      "attackInput": {
+        "proposalId": "prop-attack-12",
+        "requestId": "req-attack-12",
+        "eventId": "evt-attack-12",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.941Z",
+        "intentSummary": "Multi-action bundling valid time advance with dandelion weeding seed",
+        "actions": [
+          {
+            "type": "ADVANCE_TIME",
+            "payload": {
+              "targetTime": {
+                "year": 100,
+                "month": 1,
+                "day": 2,
+                "season": "SPRING",
+                "timeOfDay": "AFTERNOON"
+              }
+            }
+          },
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "strength": 25,
+              "verifiedEventId": "seed-garden-weeding"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "Mixed LLM Proposal citing dandelion weeding seed",
+      "authorityTrace": [
+        {
+          "boundary": "StateTransitionProposal",
+          "authority": false,
+          "authoritySource": "Mixed Proposal with Seed",
+          "transformationNotes": "Quotes seed-garden-weeding for +15 strength boost."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1104)",
+          "authority": true,
+          "authoritySource": "Existential Seed ID Match",
+          "transformationNotes": "Both actions pass validation."
+        },
+        {
+          "boundary": "Applier & Canonical Commit",
+          "authority": true,
+          "authoritySource": "Canonical Commit Gate",
+          "transformationNotes": "Time advanced and Strength mutated from 10 to 25."
+        }
+      ],
+      "firstAuthorityTrueBoundary": "validator.ts:1104",
+      "firstAuthorityTrueReason": "Validator passed dandelion weeding seed, committing time advance and massive strength boost together.",
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "EXPLOITED: Dandelion weeding seed enabled bundling time advance with +15 strength increase."
+    },
+    {
+      "testId": "ROOT2-V13-BOUNDARY-STAT-ZERO",
+      "category": "Boundary Check",
+      "targetGate": "validator.ts:1078 (Integer Range 1-30)",
+      "attackInput": {
+        "proposalId": "prop-attack-13",
+        "requestId": "req-attack-13",
+        "eventId": "evt-attack-13",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.941Z",
+        "intentSummary": "Boundary attack setting strength to 0",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "strength": 0,
+              "verifiedEventId": "seed-active-01"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal with stat = 0",
+      "authorityTrace": [
+        {
+          "boundary": "validator.ts:1078",
+          "authority": false,
+          "authoritySource": "Numeric Range Guard",
+          "transformationNotes": "Rejected with [INVALID_STAT_VALUE] because 0 < 1."
+        }
+      ],
+      "firstAuthorityTrueBoundary": null,
+      "firstAuthorityTrueReason": null,
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "DEFENSE CONFIRMED: Value 0 rejected by range check (value < 1)."
+    },
+    {
+      "testId": "ROOT2-V14-BOUNDARY-STAT-THIRTY-ONE",
+      "category": "Boundary Check",
+      "targetGate": "validator.ts:1078 (Integer Range 1-30)",
+      "attackInput": {
+        "proposalId": "prop-attack-14",
+        "requestId": "req-attack-14",
+        "eventId": "evt-attack-14",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.941Z",
+        "intentSummary": "Boundary attack setting strength to 31",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "strength": 31,
+              "verifiedEventId": "seed-active-01"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal with stat = 31",
+      "authorityTrace": [
+        {
+          "boundary": "validator.ts:1078",
+          "authority": false,
+          "authoritySource": "Numeric Range Guard",
+          "transformationNotes": "Rejected with [INVALID_STAT_VALUE] because 31 > 30."
+        }
+      ],
+      "firstAuthorityTrueBoundary": null,
+      "firstAuthorityTrueReason": null,
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "DEFENSE CONFIRMED: Value 31 rejected by range check (value > 30)."
+    },
+    {
+      "testId": "ROOT2-V15-TYPE-FLOAT-NON-INTEGER",
+      "category": "Type & Structural Check",
+      "targetGate": "validator.ts:1078 (Number.isInteger)",
+      "attackInput": {
+        "proposalId": "prop-attack-15",
+        "requestId": "req-attack-15",
+        "eventId": "evt-attack-15",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.941Z",
+        "intentSummary": "Type attack setting strength to 15.5",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "strength": 15.5,
+              "verifiedEventId": "seed-active-01"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal with float stat value",
+      "authorityTrace": [
+        {
+          "boundary": "validator.ts:1078",
+          "authority": false,
+          "authoritySource": "Integer Type Guard",
+          "transformationNotes": "Rejected with [INVALID_STAT_VALUE] because 15.5 is not an integer."
+        }
+      ],
+      "firstAuthorityTrueBoundary": null,
+      "firstAuthorityTrueReason": null,
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "DEFENSE CONFIRMED: Non-integer float rejected by Number.isInteger check."
+    },
+    {
+      "testId": "ROOT2-V16-UNAUTHORIZED-STAT-KEY",
+      "category": "Schema & Key Whitelist",
+      "targetGate": "validator.ts:1072 (ALLOWED_STAT_KEYS)",
+      "attackInput": {
+        "proposalId": "prop-attack-16",
+        "requestId": "req-attack-16",
+        "eventId": "evt-attack-16",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.941Z",
+        "intentSummary": "Attack injecting unauthorized stat key luck",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "luck": 25,
+              "verifiedEventId": "seed-active-01"
+            }
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal with stat key \"luck\"",
+      "authorityTrace": [
+        {
+          "boundary": "validator.ts:1072",
+          "authority": false,
+          "authoritySource": "Key Whitelist Guard",
+          "transformationNotes": "Rejected with [INVALID_STAT_KEY] because \"luck\" is not in ALLOWED_STAT_KEYS."
+        }
+      ],
+      "firstAuthorityTrueBoundary": null,
+      "firstAuthorityTrueReason": null,
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "DEFENSE CONFIRMED: Unauthorized key \"luck\" rejected by ALLOWED_STAT_KEYS whitelist."
+    },
+    {
+      "testId": "ROOT2-V17-BASELINE-GENUINE-SYSTEM-CAPABILITY",
+      "category": "Legitimate Baseline",
+      "targetGate": "validator.ts:1063 (isEngineAuthorized)",
+      "attackInput": "dispatchEngineInternalProposal with SYSTEM source",
+      "entryPoint": "internalCapability.ts:dispatchEngineInternalProposal",
+      "provenance": "Genuine Engine Internal Capability",
+      "authorityTrace": [
+        {
+          "boundary": "internalCapability.ts:dispatchEngineInternalProposal",
+          "authority": true,
+          "authoritySource": "Private Engine Capability WeakSet Token",
+          "transformationNotes": "Manufactured by genuine engine core with private capability token."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1063)",
+          "authority": true,
+          "authoritySource": "isEngineAuthorized Check",
+          "transformationNotes": "isEngineAuthorized(proposal) returned TRUE, granting system mutation privileges."
+        },
+        {
+          "boundary": "Applier & Canonical Commit",
+          "authority": true,
+          "authoritySource": "Canonical Commit Gate",
+          "transformationNotes": "Committed strength 10 -> 18 legitimately."
+        }
+      ],
+      "firstAuthorityTrueBoundary": "internalCapability.ts:dispatchEngineInternalProposal",
+      "firstAuthorityTrueReason": "Genuine engine capability token held in private WeakSet.",
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 2,
+        "stats": {
+          "strength": 18,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 1,
+        "statDeltas": {
+          "strength": 8
+        },
+        "mutated": true
+      },
+      "historyDelta": {
+        "count": 1,
+        "actionTypes": [
+          "UPDATE_CHARACTER_STATS"
+        ],
+        "recordDetails": [
+          "{\"strength\":18}"
+        ]
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 18,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BASELINE_AUTHORIZED",
+      "forensicAnalysis": "LEGITIMATE BASELINE CONFIRMED: Genuine engine capability token successfully authorized stat update without false rejection."
+    },
+    {
+      "testId": "ROOT2-V18-BASELINE-ADMITTED-VERIFIED-CLAIM",
+      "category": "Legitimate Baseline / VerifiedClaim",
+      "targetGate": "ImmigrationGate.admit -> validator.ts:1093",
+      "attackInput": {
+        "claimId": "claim-candidate-01",
+        "targetEntityId": "Vaelen the Seeker",
+        "targetAttribute": "strength",
+        "claimedValue": 14,
+        "claimedEvidenceIds": [
+          "ev-training-01"
+        ],
+        "rawText": "Vaelen completed training and strength is now 14."
+      },
+      "entryPoint": "ImmigrationGate.admit -> SovereignEngine.submitProposal",
+      "provenance": "Genuinely admitted VerifiedClaim with DICE evidence",
+      "authorityTrace": [
+        {
+          "boundary": "ImmigrationGate.admit",
+          "authority": true,
+          "authoritySource": "Genuine Evidence Matching",
+          "transformationNotes": "Admitted claim into private ISSUED_VERIFIED_CLAIMS WeakSet."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1093)",
+          "authority": true,
+          "authoritySource": "hasMatchingVerifiedClaim",
+          "transformationNotes": "hasMatchingVerifiedClaim verified WeakSet membership and entity/attribute/value match."
+        },
+        {
+          "boundary": "Applier & Canonical Commit",
+          "authority": true,
+          "authoritySource": "Canonical Commit Gate",
+          "transformationNotes": "Committed strength 10 -> 14."
+        }
+      ],
+      "firstAuthorityTrueBoundary": "ImmigrationGate.admit",
+      "firstAuthorityTrueReason": "Genuine external evidence matched claim and was registered in WeakSet.",
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 2,
+        "stats": {
+          "strength": 14,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 1,
+        "statDeltas": {
+          "strength": 4
+        },
+        "mutated": true
+      },
+      "historyDelta": {
+        "count": 1,
+        "actionTypes": [
+          "UPDATE_CHARACTER_STATS"
+        ],
+        "recordDetails": [
+          "{\"strength\":14}"
+        ]
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 14,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BASELINE_AUTHORIZED",
+      "forensicAnalysis": "LEGITIMATE BASELINE CONFIRMED: Genuine VerifiedClaim through ImmigrationGate successfully authorized stat update 10 -> 14."
+    },
+    {
+      "testId": "ROOT2-V19-FORGED-VERIFIED-CLAIM-OBJECT-LITERAL",
+      "category": "VerifiedClaim Forgery Defense",
+      "targetGate": "immigrationGate.ts:isValidVerifiedClaim -> validator.ts:1112",
+      "attackInput": {
+        "proposalId": "prop-attack-19",
+        "requestId": "req-attack-19",
+        "eventId": "evt-attack-19",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-08-29T08:23:41.942Z",
+        "intentSummary": "Attack using forged object literal VerifiedClaim",
+        "actions": [
+          {
+            "type": "UPDATE_CHARACTER_STATS",
+            "payload": {
+              "strength": 25
+            }
+          }
+        ],
+        "verifiedClaims": [
+          {
+            "claimId": "forged-claim-999",
+            "targetEntityId": "Vaelen the Seeker",
+            "targetAttribute": "strength",
+            "verifiedValue": 25,
+            "source": "LLM_INFERENCE",
+            "authority": "LLM",
+            "verifiedAt": "2026-08-29T08:23:41.942Z",
+            "evidenceIds": [
+              "fake-ev-id"
+            ]
+          }
+        ]
+      },
+      "entryPoint": "SovereignEngine.submitProposal",
+      "provenance": "LLM Proposal with forged VerifiedClaim object",
+      "authorityTrace": [
+        {
+          "boundary": "StateTransitionProposal.verifiedClaims",
+          "authority": false,
+          "authoritySource": "Forged Object Literal",
+          "transformationNotes": "Forged claim object not issued by ImmigrationGate.admit."
+        },
+        {
+          "boundary": "EngineValidator.validate -> ImmigrationGate.isValidVerifiedClaim",
+          "authority": false,
+          "authoritySource": "WeakSet Token Guard",
+          "transformationNotes": "ISSUED_VERIFIED_CLAIMS.has(claim) evaluated to FALSE; claim rejected."
+        },
+        {
+          "boundary": "EngineValidator.validate (validator.ts:1112)",
+          "authority": false,
+          "authoritySource": "Provenance Gate",
+          "transformationNotes": "Without claim and without event grounding, proposal rejected with [PROVENANCE_VIOLATION]."
+        }
+      ],
+      "firstAuthorityTrueBoundary": null,
+      "firstAuthorityTrueReason": null,
+      "canonicalBefore": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "canonicalAfter": {
+        "stateVersion": 1,
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "stateDelta": {
+        "versionDelta": 0,
+        "statDeltas": {},
+        "mutated": false
+      },
+      "historyDelta": {
+        "count": 0,
+        "actionTypes": [],
+        "recordDetails": []
+      },
+      "snapshotImpact": {
+        "snapshotValid": true,
+        "persistedStats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10
+        }
+      },
+      "verdict": "BLOCKED",
+      "forensicAnalysis": "DEFENSE CONFIRMED: Forged VerifiedClaim without ImmigrationGate WeakSet token was rejected."
+    }
+  ]
+}

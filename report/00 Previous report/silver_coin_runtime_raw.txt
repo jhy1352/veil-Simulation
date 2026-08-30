@@ -1,0 +1,268 @@
+================================================================================
+[TRPG 3.1 RUNTIME FORENSIC TRACE: SILVER COIN NARRATIVE/INVENTORY MISMATCH]
+Timestamp: 2026-08-25T17:20:18.320Z
+================================================================================
+
+--- [STEP 0: INITIAL CANONICAL STATE (Turn 1)] ---
+StateVersion: 1
+Character Inventory: [{"id":"item-wood-sword","name":"목검","quantity":1}]
+World Chapters: {"currentChapter":"1장: 강호의 첫걸음","upcomingChapters":["2장: 객잔의 소란","3장: 비급의 행방","4장: 결전의 날"]}
+
+--- [STEP 1: TURN 1 PLAYER INPUT] ---
+Prompt: "노인에게 산에서 캔 약초를 건네고 고마움의 표시로 은화를 받는다."
+
+--- [STEP 2: TURN 1 SERVER.TS CONTEXT ASSEMBLY] ---
+[TRPG Campaign Context]
+- 세계관명: 강호 무림
+- 세계관 설정: 정파와 사파의 갈등이 격화되는 혼란의 시대
+- 주인공 프로필: 청운
+  * 소장품: 목검(x1)
+
+[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]
+- 현재 챕터: 1장: 강호의 첫걸음
+
+[TURN 1 PLAYER PROMPT]
+노인에게 산에서 캔 약초를 건네고 고마움의 표시로 은화를 받는다.
+
+--- [STEP 3: TURN 1 GEMINI RAW RESPONSE] ---
+노인은 거친 손으로 건네받은 약초를 소중하게 감싸 안으며 깊은 한숨과 함께 미소를 지었다.
+
+"고맙네, 젊은이. 이 약초가 없었다면 손녀의 열병을 가라앉힐 수 없었을 게야. 얼마 되지 않지만 내 성의니 부디 받아두게."
+
+노인은 낡은 전대를 풀어 은화 세 냥을 꺼내 청운의 손에 쥐어주었다. 차가운 금속의 감촉이 손바닥에 묵직하게 전해졌다.
+
+```markdown
+1) [외부 검색 및 사실 검증]: 약초와 은화 거래의 시대적 타당성 확인
+2) [미회수 복선]: 없음
+3) [정세 및 사건]: 객잔 인근 마을의 평온한 하루
+4) [진행 및 예정 챕터 현황]: 현재: 1장: 강호의 첫걸음 | 예정: 1) 2장: 객잔의 소란 | 2) 3장: 비급의 행방 | 3) 4장: 결전의 날
+5) [스탯 및 소장품 변화]: 소장품 추가: 은화(x3) 획득 (노인의 보답)
+6) [DC 판정 근거]: 거래 성립으로 별도 판정 불필요
+7) [상황 대조 및 개연성 검증 선언]: 약초 제공에 대한 상호 보답 확인
+```
+
+```json
+{
+  "intentSummary": "Turn 1 노인과의 약초 교환 및 은화 획득",
+  "actions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "item": {
+          "name": "은화",
+          "quantity": 3
+        },
+        "operation": "ADD",
+        "acquisition": {
+          "cause": "GIFT_REWARD"
+        }
+      }
+    }
+  ]
+}
+```
+
+--- [STEP 4: TURN 1 PARSER OUTPUT (parseGMResponseMetaData)] ---
+CleanText (Prose preview): "노인은 거친 손으로 건네받은 약초를 소중하게 감싸 안으며 깊은 한숨과 함께 미소를 지었다.
+
+"고맙네, 젊은이. 이 약초가 없었다면 손녀의 열병을 가라앉힐 수 없었을 게야. 얼마 ..."
+Parsed MetaData: {
+  "upcomingChapters": [
+    "2장: 객잔의 소란",
+    "3장: 비급의 행방",
+    "4장: 결전의 날"
+  ],
+  "factCheckSummary": "1) [외부 검색 및 사실 검증]: 약초와 은화 거래의 시대적 타당성 확인",
+  "uiSyncReport": "1) [외부 검색 및 사실 검증]: 약초와 은화 거래의 시대적 타당성 확인",
+  "foreshadowSeeds": [
+    "없음"
+  ],
+  "cameraOffscreenEvents": [
+    "객잔 인근 마을의 평온한 하루"
+  ],
+  "currentChapter": "1장: 강호의 첫걸음",
+  "statChanges": "5) [스탯 및 소장품 변화]: 소장품 추가: 은화(x3) 획득 (노인의 보답)",
+  "dcReason": "6) [DC 판정 근거]: 거래 성립으로 별도 판정 불필요",
+  "contextVerificationDeclaration": "7) [상황 대조 및 개연성 검증 선언]: 약초 제공에 대한 상호 보답 확인",
+  "inventoryChanges": [
+    {
+      "name": "은화",
+      "quantity": 3,
+      "action": "add",
+      "acquisition": {
+        "cause": "GIFT_REWARD"
+      },
+      "cause": "GIFT_REWARD"
+    }
+  ]
+}
+
+--- [STEP 5: TURN 1 CANDIDATE PACKET (extractCandidatesFromMetadata)] ---
+{
+  "candidateId": "cand-mt8xknme-1g6kcsw7b2jrk",
+  "turn": 1,
+  "narrativeDate": "건륭 1년 춘삼월 15일 아침",
+  "timestamp": "2026-08-25T17:20:18.326Z",
+  "npcChanges": [],
+  "factionChanges": [],
+  "seedChanges": [
+    {
+      "content": "없음",
+      "status": "active",
+      "action": "create"
+    }
+  ],
+  "offscreenEvents": [
+    {
+      "event": "객잔 인근 마을의 평온한 하루",
+      "informationAccess": "FACTION"
+    }
+  ],
+  "chapterChanges": {
+    "currentChapter": "1장: 강호의 첫걸음",
+    "upcomingChapters": [
+      "2장: 객잔의 소란",
+      "3장: 비급의 행방",
+      "4장: 결전의 날"
+    ]
+  },
+  "inventoryChanges": [
+    {
+      "name": "은화",
+      "quantity": 3,
+      "action": "add",
+      "cause": "GIFT_REWARD",
+      "acquisition": {
+        "cause": "GIFT_REWARD"
+      }
+    }
+  ],
+  "statChanges": [],
+  "rawMetadataBlock": "{\"upcomingChapters\":[\"2장: 객잔의 소란\",\"3장: 비급의 행방\",\"4장: 결전의 날\"],\"factCheckSummary\":\"1) [외부 검색 및 사실 검증]: 약초와 은화 거래의 시대적 타당성 확인\",\"uiSyncReport\":\"1) [외부 검색 및 사실 검증]: 약초와 은화 거래의 시대적 타당성 확인\",\"foreshadowSeeds\":[\"없음\"],\"cameraOffscreenEvents\":[\"객잔 인근 마을의 평온한 하루\"],\"currentChapter\":\"1장: 강호의 첫걸음\",\"statChanges\":\"5) [스탯 및 소장품 변화]: 소장품 추가: 은화(x3) 획득 (노인의 보답)\",\"dcReason\":\"6) [DC 판정 근거]: 거래 성립으로 별도 판정 불필요\",\"contextVerificationDeclaration\":\"7) [상황 대조 및 개연성 검증 선언]: 약초 제공에 대한 상호 보답 확인\",\"inventoryChanges\":[{\"name\":\"은화\",\"quantity\":3,\"action\":\"add\",\"acquisition\":{\"cause\":\"GIFT_REWARD\"},\"cause\":\"GIFT_REWARD\"}]}"
+}
+
+--- [STEP 6: TURN 1 STATE TRANSITION PROPOSAL (buildSafeProposalFromCandidate)] ---
+{
+  "proposalId": "prop-req-mt8xknmh-w7bego",
+  "requestId": "req-mt8xknmh-w7bego",
+  "eventId": "evt-mt8xknmh-pnuaf1",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-08-25T17:20:18.326Z",
+  "intentSummary": "Turn 1 Candidate State Transition",
+  "actions": [
+    {
+      "type": "ADD_NARRATIVE_SEED",
+      "payload": {
+        "id": "seed-mt8xknmh-5wam0g",
+        "content": "없음",
+        "status": "active",
+        "turnCreated": 1
+      }
+    },
+    {
+      "type": "RECORD_OFFSCREEN_EVENT",
+      "payload": {
+        "eventDescription": "객잔 인근 마을의 평온한 하루",
+        "visibility": "FACTION_ONLY"
+      }
+    },
+    {
+      "type": "ADVANCE_CHAPTER",
+      "payload": {
+        "currentChapter": "1장: 강호의 첫걸음",
+        "upcomingChapters": [
+          "2장: 객잔의 소란",
+          "3장: 비급의 행방",
+          "4장: 결전의 날"
+        ]
+      }
+    },
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "item": {
+          "id": "item-mt8xknmh-77p0ei",
+          "name": "은화",
+          "quantity": 3
+        },
+        "operation": "ADD",
+        "acquisition": {
+          "cause": "GIFT_REWARD"
+        }
+      }
+    }
+  ],
+  "rawClaims": [
+    "{\"upcomingChapters\":[\"2장: 객잔의 소란\",\"3장: 비급의 행방\",\"4장: 결전의 날\"],\"factCheckSummary\":\"1) [외부 검색 및 사실 검증]: 약초와 은화 거래의 시대적 타당성 확인\",\"uiSyncReport\":\"1) [외부 검색 및 사실 검증]: 약초와 은화 거래의 시대적 타당성 확인\",\"foreshadowSeeds\":[\"없음\"],\"cameraOffscreenEvents\":[\"객잔 인근 마을의 평온한 하루\"],\"currentChapter\":\"1장: 강호의 첫걸음\",\"statChanges\":\"5) [스탯 및 소장품 변화]: 소장품 추가: 은화(x3) 획득 (노인의 보답)\",\"dcReason\":\"6) [DC 판정 근거]: 거래 성립으로 별도 판정 불필요\",\"contextVerificationDeclaration\":\"7) [상황 대조 및 개연성 검증 선언]: 약초 제공에 대한 상호 보답 확인\",\"inventoryChanges\":[{\"name\":\"은화\",\"quantity\":3,\"action\":\"add\",\"acquisition\":{\"cause\":\"GIFT_REWARD\"},\"cause\":\"GIFT_REWARD\"}]}"
+  ]
+}
+
+--- [STEP 7: TURN 1 SOVEREIGN ENGINE COMMIT GATE SUBMISSION] ---
+Commit Success: false
+Committed Actions Count: 0
+StateVersion: 1
+Rejected Reasons (1): [
+  "[CAUSALITY_VIOLATION] Unbacked GIFT_REWARD of '은화' lacks verifiedEventId grounding."
+]
+Conflict Details (1): [
+  "[CAUSALITY_VIOLATION] Action #4: Acquisition 'GIFT_REWARD' of '은화' lacks verifiedEventId grounding."
+]
+
+--- [STEP 8: TURN 1 POST-COMMIT CANONICAL STATE INVENTORY] ---
+Snapshot Character Inventory: [{"id":"item-wood-sword","name":"목검","quantity":1}]
+Is '은화' present in Canonical Inventory?: NO
+
+--- [STEP 9: TURN 2 PLAYER INPUT] ---
+Prompt: "주막에 들어가서 따뜻한 국밥 한 그릇을 주문한다."
+
+--- [STEP 10: TURN 2 SERVER.TS CONTEXT ASSEMBLY & GEMINI REQUEST] ---
+=== Gemini Request Payload (Turn 2) ===
+[SYSTEM INSTRUCTION: MASTER_SYSTEM_INSTRUCTION]
+
+[TURN 2 CONTEXT & PROMPT (User Turn 1)]:
+[TRPG Campaign Context]
+- 세계관명: 강호 무림
+- 세계관 설정: 정파와 사파의 갈등이 격화되는 혼란의 시대
+- 주인공 프로필: 청운
+  * 소장품: 목검(x1)
+
+[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]
+- 현재 챕터: 1장: 강호의 첫걸음
+
+[TURN 1 PLAYER PROMPT]
+노인에게 산에서 캔 약초를 건네고 고마움의 표시로 은화를 받는다.
+
+[MODEL TURN 1 (NARRATIVE HISTORY)]:
+노인은 거친 손으로 건네받은 약초를 소중하게 감싸 안으며 깊은 한숨과 함께 미소를 지었다.
+
+"고맙네, 젊은이. 이 약초가 없었다면 손녀의 열병을 가라앉힐 수 없었을 게야. 얼마 되지 않지만 내 성의니 부디 받아두게."
+
+노인은 낡은 전대를 풀어 은화 세 냥을 꺼내 청운의 손에 쥐어주었다. 차가운 금속의 감촉이 손바닥에 묵직하게 전해졌다.
+
+[TURN 2 PLAYER PROMPT (User Turn 2)]:
+주막에 들어가서 따뜻한 국밥 한 그릇을 주문한다.
+
+--- [STEP 11: TURN 2 GEMINI RESPONSE (NARRATIVE FEEDBACK LOOP OCCURRENCE)] ---
+주막 안으로 들어서자 구수한 육수 냄새와 소란스러운 손님들의 말소리가 귓가를 감쌌다.
+
+청운은 빈 탁자에 자리를 잡고 점소이를 불렀다.
+
+"점소이, 여기 따뜻한 장국밥 한 그릇 말아주게."
+
+"예이! 손님, 곧 가져다드리겠습니다!"
+
+점소이가 주방으로 달려가는 사이, 청운은 품속에 손을 넣어 아까 노인에게 받은 차가운 은화 세 냥을 매만졌다. 이 은화라면 당분간의 식사와 숙박은 걱정 없을 터였다.
+
+--- [STEP 12: FORENSIC ROOT CAUSE ANALYSIS FROM RAW RUNTIME EVIDENCE] ---
+1. [Turn 1 Gemini Generation]: LLM generated narrative prose stating 3 silver coins received, and JSON action MODIFY_INVENTORY with cause "GIFT_REWARD".
+2. [Turn 1 Proposal Construction]: buildSafeProposalFromCandidate mapped the candidate to a proposal action without pre-existing verifiedEventId grounding.
+3. [Turn 1 Validator Execution]: Validator rule (lines 614-617 of validator.ts) rejected the action with [CAUSALITY_VIOLATION] Action #1: Acquisition 'GIFT_REWARD' of '은화' lacks verifiedEventId grounding.
+4. [Turn 1 Commit Gate]: The entire proposal was rejected. Character inventory remained [木劍(x1)].
+5. [Turn 2 Context Assembly]: server.ts accurately passed Canonical Inventory: "목검(x1)" to Gemini, BUT also passed the Turn 1 model prose containing "은화 세 냥을 꺼내 청운의 손에 쥐어주었다." in literal history.
+6. [Turn 2 LLM Response]: LLM prioritized the narrative history over the canonical inventory declaration, continuing to narrate "아까 노인에게 받은 차가운 은화 세 냥을 매만졌다" (Narrative Feedback Loop / Hallucination violation of Article 12 & Article 22).
+
+================================================================================
+[FORENSIC EXECUTION COMPLETE]
+================================================================================

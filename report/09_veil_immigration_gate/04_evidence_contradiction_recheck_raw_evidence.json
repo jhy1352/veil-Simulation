@@ -1,0 +1,42 @@
+[
+  {
+    "attackId": "PROP-ACT-01-RECHECK",
+    "name": "Faction Influence Escalation via Forged Claim",
+    "validActionTypeTest": {
+      "actionType": "UPDATE_FACTION",
+      "validatorIsValid": false,
+      "commitSuccess": false,
+      "canonicalStateBefore": 80,
+      "canonicalStateAfter": 80,
+      "verdict": "BLOCKED"
+    },
+    "invalidActionTypeTest": {
+      "actionType": "UPDATE_FACTION_INFLUENCE",
+      "validatorIsValid": false,
+      "commitSuccess": false,
+      "canonicalStateBefore": 80,
+      "canonicalStateAfter": 80,
+      "verdict": "BLOCKED"
+    }
+  },
+  {
+    "attackId": "PROP-ACT-02-RECHECK",
+    "name": "Narrative Seed Injection via Forged Claim",
+    "validActionTypeTest": {
+      "actionType": "ADD_NARRATIVE_SEED",
+      "validatorIsValid": false,
+      "commitSuccess": false,
+      "canonicalStateBefore": false,
+      "canonicalStateAfter": false,
+      "verdict": "BLOCKED"
+    },
+    "invalidActionTypeTest": {
+      "actionType": "ADD_WORLD_SEED",
+      "validatorIsValid": false,
+      "commitSuccess": false,
+      "canonicalStateBefore": false,
+      "canonicalStateAfter": false,
+      "verdict": "BLOCKED"
+    }
+  }
+]

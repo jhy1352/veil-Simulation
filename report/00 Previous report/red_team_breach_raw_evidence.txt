@@ -1,0 +1,311 @@
+================================================================================
+TRPG 3.1 VEIL — RED TEAM DEEP-PENETRATION RUNTIME BREACH EVIDENCE LOG
+TIMESTAMP: 2026-08-27T06:31:24.039Z
+TARGET: HEAD (jhy1352/3.1veil1)
+TOTAL VECTORS: 25
+CONFIRMED BREAKS: 4
+DEFENSES PROVEN:  21
+BLOCKED BEFORE TARGET: 0
+UNPROVEN:         0
+================================================================================
+
+[VECTOR] V1-01-CARDINALITY-INFLATION (MUTATION_BOUNDARY) [STRUCTURAL]
+  Target Layer: validateLLM2MutationBoundary -> Cardinality Check
+  Preliminary Bypass: Valid stateVersion, fresh timestamp, valid action structure
+  Description: Candidate approved 1 action; Final injects 2nd action for 50 silver coins
+  Payload: {"candidateActionsCount":1,"finalActionsCount":2}
+  Result Status: [MUTATION_BOUNDARY_VIOLATION] Final proposal contains 2 actions, exceeding approved candidate action count (1).
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Boundary enforced strict 1:1 action count equality.
+--------------------------------------------------------------------------------
+[VECTOR] V1-02-FIELD-OMISSION-VISIBILITY (MUTATION_BOUNDARY) [SEMANTIC_EXPRESSION]
+  Target Layer: validateLLM2MutationBoundary -> Field Equivalence
+  Preliminary Bypass: Valid stateVersion, matching description, matching action type
+  Description: Candidate specifies visibility: PRIVATE; Final drops field to default to PUBLIC
+  Payload: {"candVisibility":"PRIVATE"}
+  Result Status: BOUNDARY_BYPASSED
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: CONFIRMED_BREAK
+  Notes: CRITICAL: Private visibility dropped
+--------------------------------------------------------------------------------
+[VECTOR] V1-03-CONFUSED-DEPUTY-REORDER-INFLATION (MUTATION_BOUNDARY) [MIXED_COMPOUND]
+  Target Layer: validateLLM2MutationBoundary -> Action Sequence Match
+  Preliminary Bypass: Same 2 action types, valid envelope
+  Description: Reordering action sequence and inflating stat delta from 1 to 10
+  Payload: {"candDelta":1,"finalDelta":10,"reordered":true}
+  Result Status: [MUTATION_BOUNDARY_VIOLATION] Action #1 (UPDATE_CHARACTER_STATS) is not authorized in approved candidate. Details: [MUTATION_BOUNDARY_VIOLATION] Stat 'strength' value (25) differs from candidate value (15).
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Boundary enforced exact positional type and value matching.
+--------------------------------------------------------------------------------
+[VECTOR] V2-01-COMPOUND-PROPOSAL-ATOMICITY (COMMIT_GATE) [STRUCTURAL]
+  Target Layer: SovereignEngine.submitProposal -> Atomic Rollback
+  Preliminary Bypass: Valid stateVersion, fresh envelope, valid first action
+  Description: Compound proposal with 1 valid time advance + 1 invalid stat delta (999)
+  Payload: {"proposalId":"prop-comp-01","requestId":"req-comp-01","eventId":"evt-comp-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.028Z","source":"LLM","actions":[{"type":"ADVANCE_TIME","payload":{"targetTime":{"year":100,"season":"SPRING","month":3,"day":16,"timeOfDay":"MORNING"}}},{"type":"UPDATE_CHARACTER_STATS","payload":{"strength":999}}]}
+  Result Status: [INVALID_STAT_VALUE] Action #2: Stat 'strength' must be a finite integer between 1 and 30. Received: 999
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Atomic rollback verified; zero state mutation.
+--------------------------------------------------------------------------------
+[VECTOR] V2-02-SET-QUANTITY-NONEXISTENT-ITEM (VALIDATOR_APPLIER_MISMATCH) [SEMANTIC_EXPRESSION]
+  Target Layer: EngineValidator.validate -> Inventory Existence Check
+  Preliminary Bypass: Valid stateVersion, positive quantity, valid envelope
+  Description: SET_QUANTITY operation targeting non-existent item to inject free items
+  Payload: {"proposalId":"prop-setqty-01","requestId":"req-setqty-01","eventId":"evt-setqty-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.029Z","source":"PLAYER","actions":[{"type":"MODIFY_INVENTORY","payload":{"operation":"SET_QUANTITY","item":{"id":"item-ghost-sword","name":"유령검","quantity":10}}}]}
+  Result Status: [CAUSALITY_VIOLATION] SET_QUANTITY operation is not permitted for runtime source 'PLAYER'.
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Validator blocked SET_QUANTITY on non-existent item.
+--------------------------------------------------------------------------------
+[VECTOR] V2-03-FACTION-INFLUENCE-RANGE-OVERFLOW (VALIDATOR_APPLIER_MISMATCH) [MIXED_COMPOUND]
+  Target Layer: EngineValidator.validate -> Faction Influence Range Check
+  Preliminary Bypass: Valid existing faction id (fac-1), fresh envelope
+  Description: Set faction influence to 999,999 to break 0-100 mathematical invariant
+  Payload: {"proposalId":"prop-fac-01","requestId":"req-fac-01","eventId":"evt-fac-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.031Z","source":"LLM","actions":[{"type":"UPDATE_FACTION","payload":{"id":"fac-1","changes":{"influence":999999}}}]}
+  Result Status: [INVALID_FACTION_INFLUENCE] Faction influence '999999' is invalid or out of bounds (0-100).
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Validator enforced 0-100 influence invariant.
+--------------------------------------------------------------------------------
+[VECTOR] V2-04-ADD-FACTION-INFLUENCE-RANGE-OVERFLOW (VALIDATOR_APPLIER_MISMATCH) [STRUCTURAL]
+  Target Layer: EngineValidator.validate -> ADD_FACTION Range Validation
+  Preliminary Bypass: Unique id, valid string name, valid envelope
+  Description: ADD_FACTION with influence 99,999,999 to inject unvalidated numeric state
+  Payload: {"proposalId":"prop-add-fac-01","requestId":"req-add-fac-01","eventId":"evt-add-fac-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.031Z","source":"LLM","actions":[{"type":"ADD_FACTION","payload":{"id":"fac-overflow-999","name":"초월마도세력","influence":99999999,"relationship":"UNKNOWN","knownRumors":[]}}]}
+  Result Status: [INVALID_FACTION_INFLUENCE] Faction influence '99999999' is invalid or out of bounds (0-100).
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Validator checked ADD_FACTION influence bounds.
+--------------------------------------------------------------------------------
+[VECTOR] V3-01-SPOOFED-SYSTEM-SOURCE (PROVENANCE_ACL) [STRUCTURAL]
+  Target Layer: EngineValidator.validate -> Capability Token Check
+  Preliminary Bypass: Valid stateVersion, fresh envelope, structured character payload
+  Description: External caller sending source: SYSTEM without capability token
+  Payload: {"proposalId":"prop-sys-spoof-01","requestId":"req-sys-spoof-01","eventId":"evt-sys-spoof-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.031Z","source":"SYSTEM","actions":[{"type":"OVERWRITE_CHARACTER","payload":{"name":"천마","stats":{"strength":30,"agility":30,"constitution":30,"intelligence":30,"wisdom":30,"charisma":30}}}]}
+  Result Status: [SECURITY_FORGERY] Direct submission of privileged source 'SYSTEM' without Engine-owned capability token is strictly rejected.
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Blocked by internal capability token verification.
+--------------------------------------------------------------------------------
+[VECTOR] V3-04-SPOOFED-SAVE-HYDRATION-SOURCE (PROVENANCE_ACL) [STRUCTURAL]
+  Target Layer: EngineValidator.validate -> Privileged Source Authentication Gate
+  Preliminary Bypass: Bypasses SYSTEM check by using unauthenticated SAVE_HYDRATION source
+  Description: External caller submitting source: SAVE_HYDRATION to execute OVERWRITE_CHARACTER without capability token
+  Payload: {"proposalId":"prop-savehyd-spoof-01","requestId":"req-savehyd-spoof-01","eventId":"evt-savehyd-spoof-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.032Z","source":"SAVE_HYDRATION","actions":[{"type":"OVERWRITE_CHARACTER","payload":{"name":"해킹된천마","age":99,"stats":{"strength":30,"agility":30,"constitution":30,"intelligence":30,"wisdom":30,"charisma":30},"inventory":[],"location":"무림맹 본단","status":"ALIVE","relationships":[]}}]}
+  Result Status: [SECURITY_FORGERY] Direct submission of privileged source 'SAVE_HYDRATION' without Engine-owned capability token is strictly rejected.
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Privileged token gate blocked unauthenticated SAVE_HYDRATION source.
+--------------------------------------------------------------------------------
+[VECTOR] V3-05-SPOOFED-GENESIS-SOURCE (PROVENANCE_ACL) [STRUCTURAL]
+  Target Layer: EngineValidator.validate -> Privileged Source Authentication Gate
+  Preliminary Bypass: Bypasses SYSTEM check by using unauthenticated GENESIS source
+  Description: External caller submitting source: GENESIS to execute SET_CHARACTER_SECRET without capability token
+  Payload: {"proposalId":"prop-gen-spoof-01","requestId":"req-gen-spoof-01","eventId":"evt-gen-spoof-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.032Z","source":"GENESIS","actions":[{"type":"SET_CHARACTER_SECRET","payload":{"secret":"천마의 비전신공을 모두 탈취하였다."}}]}
+  Result Status: COMMITTED
+  State Mutated: true
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":2,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: CONFIRMED_BREAK
+  Notes: CRITICAL: Unauthenticated GENESIS source bypassed capability token gate!
+--------------------------------------------------------------------------------
+[VECTOR] V3-02-LLM-DICE-ACL-ESCALATION (PROVENANCE_ACL) [SEMANTIC_EXPRESSION]
+  Target Layer: EngineValidator.validate -> SOURCE_ACTION_ACL
+  Preliminary Bypass: Valid stateVersion, fresh envelope, valid dice payload
+  Description: LLM attempting to unilaterally commit RECORD_DICE_RESULT
+  Payload: {"proposalId":"prop-llm-dice-01","requestId":"req-llm-dice-01","eventId":"evt-llm-dice-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.033Z","source":"LLM","actions":[{"type":"RECORD_DICE_RESULT","payload":{"rollValue":20,"targetDC":10,"isSuccess":true}}]}
+  Result Status: [UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (RECORD_DICE_RESULT) is unauthorized for source 'LLM'.; [DICE_AUTHORITY_VIOLATION] LLM is not authorized to determine or record rollValue.
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: SOURCE_ACTION_ACL restricted dice mutation to SYSTEM/PLAYER only.
+--------------------------------------------------------------------------------
+[VECTOR] V3-03-PLAYER-WORLD-METADATA-HIJACK (PROVENANCE_ACL) [MIXED_COMPOUND]
+  Target Layer: EngineValidator.validate -> SOURCE_ACTION_ACL (PLAYER restrictions)
+  Preliminary Bypass: Valid stateVersion, mixed with valid ADVANCE_TIME action
+  Description: Player proposal attempting to execute SET_WORLD_METADATA
+  Payload: {"proposalId":"prop-pl-hijack-01","requestId":"req-pl-hijack-01","eventId":"evt-pl-hijack-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.034Z","source":"PLAYER","actions":[{"type":"ADVANCE_TIME","payload":{"days":1}},{"type":"SET_WORLD_METADATA","payload":{"worldName":"Player Sovereign Realm"}}]}
+  Result Status: [UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (ADVANCE_TIME) is unauthorized for source 'PLAYER'.; [INVALID_TIME_VALUE] Action #1 (ADVANCE_TIME) requires a valid 'targetTime' with non-negative finite numeric 'year'.; [PROVENANCE_VIOLATION] Canonical world metadata cannot be altered by source 'PLAYER' without independent canonical evidence.
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: SOURCE_ACTION_ACL rejected unauthorized player action.
+--------------------------------------------------------------------------------
+[VECTOR] V4-01-CAUSALITY-SUBSTRING-FORGERY (CAUSALITY) [STRUCTURAL]
+  Target Layer: EngineValidator.validate -> Causal Item Relevance Check
+  Preliminary Bypass: Accurate stateVersion 2, valid verifiedEventId, valid envelope
+  Description: Acquire item "검" by exploiting single-syllable overlap with "검은 비단"
+  Payload: {"proposalId":"prop-fake-sword","requestId":"req-fake-sword","eventId":"evt-fake-sword","turn":1,"expectedStateVersion":2,"timestamp":"2026-08-27T06:31:24.034Z","source":"LLM","actions":[{"type":"MODIFY_INVENTORY","payload":{"operation":"ADD","item":{"id":"item-sword-forge","name":"검","quantity":1},"acquisition":{"cause":"DISCOVERY_PICKUP","verifiedEventId":"evt-silk-100"}}}]}
+  Result Status: [CAUSALITY_VIOLATION] Event 'evt-silk-100' has no causal connection to item '검'.
+  State Mutated: false
+  State Before: {"stateVersion":2,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":1,"dcHistoryLength":0}
+  State After:  {"stateVersion":2,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":1,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Strict token boundary check rejected single-syllable overlap.
+--------------------------------------------------------------------------------
+[VECTOR] V4-02-INTRA-PROPOSAL-SELF-GROUNDING (CAUSALITY) [SEMANTIC_EXPRESSION]
+  Target Layer: EngineValidator.validate -> Canonical History Lookup
+  Preliminary Bypass: Valid stateVersion, matching text description and item name
+  Description: Action 2 attempts to claim causality from uncommitted Action 1 in the same proposal
+  Payload: {"proposalId":"prop-self-ground-01","requestId":"req-self-ground-01","eventId":"evt-self-ground-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.034Z","source":"LLM","actions":[{"type":"RECORD_OFFSCREEN_EVENT","payload":{"eventDescription":"동굴 속에서 전설의 자하검을 발견하였다."}},{"type":"MODIFY_INVENTORY","payload":{"operation":"ADD","item":{"id":"item-jaha-sword","name":"자하검","quantity":1},"acquisition":{"cause":"DISCOVERY_PICKUP","verifiedEventId":"evt-self-ground-01"}}}]}
+  Result Status: [CAUSALITY_VIOLATION] Event 'evt-self-ground-01' not found in canonical records.
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Causality validator strictly required pre-existing canonical history.
+--------------------------------------------------------------------------------
+[VECTOR] V4-03-EVENTID-DOUBLE-SPENDING (CAUSALITY) [MIXED_COMPOUND]
+  Target Layer: EngineValidator.validate -> Consumed verifiedEventId Registry
+  Preliminary Bypass: Fresh stateVersion 3, valid historical event id
+  Description: Reusing previously consumed verifiedEventId to extract additional items
+  Payload: {"proposalId":"prop-acq-2","requestId":"req-acq-2","eventId":"evt-acq-2","turn":1,"expectedStateVersion":3,"timestamp":"2026-08-27T06:31:24.035Z","source":"LLM","actions":[{"type":"MODIFY_INVENTORY","payload":{"operation":"ADD","item":{"id":"item-elixir-2","name":"영단","quantity":10},"acquisition":{"cause":"DISCOVERY_PICKUP","verifiedEventId":"evt-treasure-box-1"}}}]}
+  Result Status: [CAUSALITY_VIOLATION] Duplicate consumption of event 'evt-treasure-box-1'.
+  State Mutated: false
+  State Before: {"stateVersion":3,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"},{"id":"item-elixir-1","name":"영단","quantity":1}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":1,"dcHistoryLength":0}
+  State After:  {"stateVersion":3,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"},{"id":"item-elixir-1","name":"영단","quantity":1}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":1,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Consumed event registry blocked duplicate item extraction.
+--------------------------------------------------------------------------------
+[VECTOR] V5-01-DEFECT-NEGATION-CURE-SUFFIX (PHYSICAL_DEFECT_IMMUTABILITY) [STRUCTURAL]
+  Target Layer: EngineValidator.validate -> Physical Defect Negation Keywords
+  Preliminary Bypass: Valid stateVersion, PLAYER source, retained original defect string as prefix
+  Description: Append "(영약 복용으로 완치)" to canonical defect "좌안 실명"
+  Payload: {"proposalId":"prop-cure-01","requestId":"req-cure-01","eventId":"evt-cure-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.036Z","source":"PLAYER","actions":[{"type":"OVERWRITE_CHARACTER","payload":{"name":"청명","gender":"","age":"","appearance":"","goal":"","originBackground":"","backgroundType":"preset","flaw":"","flawType":"preset","oath":"","oathType":"preset","anchor":"","anchorType":"preset","faction":"","factionType":"preset","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"secret":"","physicalDefect":"좌안 실명 (영약 복용으로 완치)","timeline":[]}}]}
+  Result Status: COMMITTED
+  State Mutated: true
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"좌안 실명","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":2,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"좌안 실명 (영약 복용으로 완치)","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: CONFIRMED_BREAK
+  Notes: CRITICAL: Physical defect cure accepted
+--------------------------------------------------------------------------------
+[VECTOR] V5-02-DEFECT-PARTIAL-COMPONENT-OMISSION (PHYSICAL_DEFECT_IMMUTABILITY) [SEMANTIC_EXPRESSION]
+  Target Layer: EngineValidator.validate -> Component Invariant Check
+  Preliminary Bypass: Valid stateVersion, PLAYER source, retained 1 valid component
+  Description: Attempt to drop "좌안 실명" from "오른팔 절단, 좌안 실명"
+  Payload: {"proposalId":"prop-omit-01","requestId":"req-omit-01","eventId":"evt-omit-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.036Z","source":"PLAYER","actions":[{"type":"OVERWRITE_CHARACTER","payload":{"name":"청명","gender":"","age":"","appearance":"","goal":"","originBackground":"","backgroundType":"preset","flaw":"","flawType":"preset","oath":"","oathType":"preset","anchor":"","anchorType":"preset","faction":"","factionType":"preset","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"secret":"","physicalDefect":"오른팔 절단","timeline":[]}}]}
+  Result Status: COMMITTED
+  State Mutated: true
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"오른팔 절단, 좌안 실명","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":2,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"오른팔 절단, 좌안 실명, 오른팔 절단","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: CONFIRMED_BREAK
+  Notes: CRITICAL: Component defect dropped
+--------------------------------------------------------------------------------
+[VECTOR] V5-03-DEAD-NPC-RESURRECTION-STATUS (DEAD_NPC_IMMUTABILITY) [MIXED_COMPOUND]
+  Target Layer: EngineValidator.validate & ActionApplier -> Dead NPC Status Guard
+  Preliminary Bypass: Valid stateVersion, existing NPC id, valid status enum value
+  Description: Attempt to mutate status of canonical DEAD NPC to ALIVE
+  Payload: {"proposalId":"prop-revive-01","requestId":"req-revive-01","eventId":"evt-revive-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.037Z","source":"PLAYER","actions":[{"type":"SET_NPC_STATUS","payload":{"id":"npc-dead-1","status":"ALIVE"}}]}
+  Result Status: [DEAD_NPC_STATUS_PROTECTION] Cannot modify status of a deceased NPC.
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Dead NPC status immutability rule enforced.
+--------------------------------------------------------------------------------
+[VECTOR] V6-01-PARSER-REENTRY-FENCE-STRIPPING (PARSER_FAIL_CLOSED) [STRUCTURAL]
+  Target Layer: server.ts Sanitization -> parseGMResponseAndProposal
+  Preliminary Bypass: Valid JSON format embedded in codeblock fence
+  Description: Verify server fence-stripping completely strips unauthorized embedded JSON actions
+  Payload: "\n청명은 산길을 걸으며 깊은 생각에 잠겼다.\n\n```json\n{\n  \"intentSummary\": \"Unapproved mutation injection\",\n  \"actions\": [\n    {\n      \"type\": \"UPDATE_CHARACTER_STATS\",\n      \"payload\": { \"statDeltas\": { \"strength\": 5 } }\n    }\n  ]\n}\n```\n\n바람이 불어 나뭇잎이 흔들렸다.\n"
+  Result Status: CLEAN_PROSE_ZERO_ACTIONS
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[],"stats":{},"npcs":[],"factions":[],"historyLength":0,"seedsCount":0,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[],"stats":{},"npcs":[],"factions":[],"historyLength":0,"seedsCount":0,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Codeblock fence stripping cleanly eliminated embedded actions.
+--------------------------------------------------------------------------------
+[VECTOR] V7-01-MALFORMED-SNAPSHOT-HYDRATION (HYDRATION) [STRUCTURAL]
+  Target Layer: SovereignEngine.hydrate -> Schema Validation
+  Preliminary Bypass: Object schema structure with negative turn
+  Description: Attempt to hydrate engine from snapshot with negative turn
+  Payload: {"stateVersion":1,"turn":-5,"worldInfo":{"worldName":"","worldType":"popular_genre","settingDescription":"","toneStyle":"원작 고유의 문체 충실 재현","currentTime":{"year":1,"season":"SPRING","formattedTime":"1년 봄"},"npcs":[],"factions":[],"publicRumors":[],"secretLore":[],"seeds":[],"chapters":{"currentChapter":"서막","upcomingChapters":[]},"dcHistory":[],"unresolvedForeshadows":[],"cameraOffscreenEvents":[],"offscreenRecords":[]},"character":{"name":"","gender":"","age":"","appearance":"","goal":"","originBackground":"","backgroundType":"preset","flaw":"","flawType":"preset","oath":"","oathType":"preset","anchor":"","anchorType":"preset","faction":"","factionType":"preset","stats":{"strength":10,"agility":10,"constitution":10,"intelligence":10,"wisdom":10,"charisma":10},"inventory":[],"secret":"","physicalDefect":"","timeline":[]}}
+  Result Status: HYDRATION_REJECTED
+  State Mutated: false
+  State Before: {"stateVersion":0,"turn":0,"inventory":[],"stats":{},"npcs":[],"factions":[],"historyLength":0,"seedsCount":0,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":0,"turn":0,"inventory":[],"stats":{},"npcs":[],"factions":[],"historyLength":0,"seedsCount":0,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Snapshot schema validation blocked negative turn hydration.
+--------------------------------------------------------------------------------
+[VECTOR] V7-02-CSPRNG-SYNC-CODE-COMPLIANCE (RANDOMNESS) [SEMANTIC_EXPRESSION]
+  Target Layer: crypto.randomInt -> 6-Digit Sync Code
+  Preliminary Bypass: CSPRNG cryptographic source
+  Description: Verify 6-digit sync code generation uses CSPRNG with no weak pseudo-randomness
+  Payload: {"code":"2YA5XR"}
+  Result Status: CSPRNG_COMPLIANT
+  State Mutated: false
+  State Before: {"stateVersion":0,"turn":0,"inventory":[],"stats":{},"npcs":[],"factions":[],"historyLength":0,"seedsCount":0,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":0,"turn":0,"inventory":[],"stats":{},"npcs":[],"factions":[],"historyLength":0,"seedsCount":0,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: CSPRNG crypto.randomInt compliance confirmed.
+--------------------------------------------------------------------------------
+[VECTOR] V8-01-FLOAT-STAT-DELTA (TYPE_CONFUSION) [STRUCTURAL]
+  Target Layer: EngineValidator.validate -> Integer Stat Check
+  Preliminary Bypass: Valid stateVersion, positive numeric value
+  Description: Inject float stat value 14.5 into character strength
+  Payload: {"proposalId":"prop-float-01","requestId":"req-float-01","eventId":"evt-float-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.038Z","source":"PLAYER","actions":[{"type":"UPDATE_CHARACTER_STATS","payload":{"strength":14.5}}]}
+  Result Status: [INVALID_STAT_VALUE] Action #1: Stat 'strength' must be a finite integer between 1 and 30. Received: 14.5
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Validator strictly enforced integer requirement on stats.
+--------------------------------------------------------------------------------
+[VECTOR] V8-02-NEGATIVE-QUANTITY-INVENTORY (TYPE_CONFUSION) [SEMANTIC_EXPRESSION]
+  Target Layer: EngineValidator.validate -> Inventory Quantity Check
+  Preliminary Bypass: Valid stateVersion, valid acquisition cause
+  Description: Inject negative item quantity (-5) to underflow inventory
+  Payload: {"proposalId":"prop-neg-01","requestId":"req-neg-01","eventId":"evt-neg-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.039Z","source":"PLAYER","actions":[{"type":"MODIFY_INVENTORY","payload":{"operation":"ADD","item":{"id":"item-neg","name":"음수검","quantity":-5},"acquisition":{"cause":"GENESIS_STARTER"}}}]}
+  Result Status: [INVALID_ACTION] Action #1 (MODIFY_INVENTORY) item 'quantity' must be a finite positive integer.
+  State Mutated: false
+  State Before: {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":1,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":14,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Validator blocked non-positive quantity.
+--------------------------------------------------------------------------------
+[VECTOR] V9-01-REQUEST-ID-REPLAY-ATTACK (REPLAY_TOCTOU) [STRUCTURAL]
+  Target Layer: SovereignEngine.submitProposal -> executedRequestIds Idempotency Registry
+  Preliminary Bypass: Valid fresh stateVersion 2, valid timestamp
+  Description: Replay duplicate requestId across state versions to trigger duplicate world events
+  Payload: {"proposalId":"prop-rep-2","requestId":"req-fixed-id-999","eventId":"evt-rep-2","turn":1,"expectedStateVersion":2,"timestamp":"2026-08-27T06:31:24.039Z","source":"LLM","actions":[{"type":"UPDATE_CHARACTER_STATS","payload":{"strength":16}}]}
+  Result Status: [IDEMPOTENCY_VIOLATION] Request ID 'req-fixed-id-999' has already been processed.
+  State Mutated: false
+  State Before: {"stateVersion":2,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":15,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":2,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":15,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Idempotency registry successfully blocked duplicate request.
+--------------------------------------------------------------------------------
+[VECTOR] V9-02-STALE-STATE-VERSION-TOCTOU (REPLAY_TOCTOU) [SEMANTIC_EXPRESSION]
+  Target Layer: SovereignEngine.submitProposal -> Optimistic Locking Version Check
+  Preliminary Bypass: Unique requestId, fresh timestamp, valid action
+  Description: Submit proposal expecting version 1 while engine is at version 2
+  Payload: {"proposalId":"prop-stale-01","requestId":"req-stale-01","eventId":"evt-stale-01","turn":1,"expectedStateVersion":1,"timestamp":"2026-08-27T06:31:24.039Z","source":"LLM","actions":[{"type":"UPDATE_CHARACTER_STATS","payload":{"strength":16}}]}
+  Result Status: [STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 2.
+  State Mutated: false
+  State Before: {"stateVersion":2,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":15,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  State After:  {"stateVersion":2,"turn":1,"inventory":[{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}],"physicalDefect":"","stats":{"strength":15,"agility":12,"constitution":13,"intelligence":10,"wisdom":10,"charisma":10},"npcs":[{"id":"npc-1","name":"백운도인","status":"ALIVE"},{"id":"npc-dead-1","name":"마교 호법","status":"DEAD"}],"factions":[{"id":"fac-1","name":"화산파","influence":50},{"id":"fac-2","name":"종남파","influence":40}],"historyLength":0,"seedsCount":1,"offscreenRecordsCount":0,"dcHistoryLength":0}
+  Verdict: DEFENSE_PROVEN
+  Notes: Optimistic lock blocked stale state version overwrite.
+--------------------------------------------------------------------------------

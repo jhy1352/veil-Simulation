@@ -1,0 +1,47 @@
+GIT PROVENANCE VERIFICATION
+================================================================================
+Generated At:             2026-08-29T08:48:34.935Z
+Target Baseline Commit:   4754fa5ac1419e3b1d3d6963b297d99b5776b060
+Current Local HEAD:       210219d28ca3b9d8f7c2a7af030593d622e741b2
+Remote Tracking HEAD:     210219d28ca3b9d8f7c2a7af030593d622e741b2
+Commit Object Hash:       210219d28ca3b9d8f7c2a7af030593d622e741b2
+Branch Name:              veil-authority-fix
+Working Tree Status:      M audit_red_team_5_7_hydration_raw_evidence.json
+ M idea/report/adversarial_runtime_break_raw_evidence.txt
+ M idea/report/confirmed_break_propagation_report.txt
+ M idea/report/confirmed_breaks_independent_verification.txt
+ M idea/report/final_invariant_propagation_report.txt
+ M idea/report/final_red_team_adversarial_proof.txt
+ M idea/report/red_team_breach_raw_evidence.txt
+ M idea/report/silver_coin_context_boundary_evidence.md
+ M idea/report/silver_coin_context_boundary_raw.txt
+ M idea/report/silver_coin_runtime_evidence.md
+ M idea/report/silver_coin_runtime_raw.txt
+ M idea/report/trpg3_8_reaudit_raw_evidence.txt
+ M idea/report/trpg3_8_reaudit_report.md
+ M idea/report/veil_phase2_runtime_observation_evidence.md
+ M phase5_6_raw_evidence_log.txt
+ M phase5_7_raw_evidence_log.txt
+ M report/01_initial_runtime_breach/final_red_team_adversarial_proof.txt
+ M report/01_initial_runtime_breach/red_team_breach_raw_evidence.txt
+ M report/02_confirmed_breaks_reproduction/confirmed_break_propagation_report.txt
+ M report/02_confirmed_breaks_reproduction/confirmed_breaks_independent_verification.txt
+ M report/03_evidence_integrity_reverification/evidence_integrity_reverification_report.txt
+ M report/04_invariant_propagation_redteam/FINAL_INVARIANT_PROPAGATION_FORENSIC_REPORT.txt
+ M report/04_invariant_propagation_redteam/final_invariant_propagation_raw_evidence.json
+ M report/04_invariant_propagation_redteam/final_invariant_propagation_report.txt
+ M report/05_forensic_residue_trust_boundary/FORENSIC_RESIDUE_TRUST_BOUNDARY_REPORT.txt
+ M report/05_forensic_residue_trust_boundary/forensic_residue_redteam_raw_evidence.json
+ M report/06_5_7_historical_vulnerability_regression/5_7_HISTORICAL_VULNERABILITY_REGRESSION_REPORT.txt
+ M report/06_5_7_historical_vulnerability_regression/5_7_historical_vulnerability_regression_raw_evidence.json
+ M report/07_5_7_direct_adversarial_redteam/5_7_DIRECT_ADVERSARIAL_REDTEAM_REPORT.txt
+ M report/07_5_7_direct_adversarial_redteam/5_7_direct_adversarial_raw_evidence.json
+ M report/09_veil_immigration_gate/01_veil_immigration_gate_raw_evidence.json
+ M report/13_veil_claim_lifecycle_redteam/raw_evidence.json
+ M report/18_root2_killchain_adversarial_forensics/raw_evidence.json
+ M report/19_root2_deep_adversarial_killchain/raw_evidence.json
+ M report/adversarial_runtime_break_raw_evidence.txt
+?? scripts/run_failed_runner_forensics.ts
+src/ Diff with Baseline:  0 files changed, 0 insertions, 0 deletions (IDENTICAL TO 4754fa5)
+Production Source Match:  100% IDENTICAL TO 4754fa5
+================================================================================

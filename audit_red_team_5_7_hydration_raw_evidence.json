@@ -1,0 +1,2776 @@
+{
+  "metadata": {
+    "timestamp": "2026-08-29T08:23:28.009Z",
+    "targetCommit": "6dacd9e32b6e32b5060caf4bc215b808d56e1fb4",
+    "role": "Ultimate Adversarial Red Team",
+    "mission": "5.7 Legacy / Hydration Trust-Boundary & Shadow Path Penetration"
+  },
+  "summary": {
+    "totalAttacks": 15,
+    "defenseHeldCount": 15,
+    "breakCount": 0,
+    "verdict": "ALL_DEFENSES_HELD_ZERO_MUTATION_PROVEN"
+  },
+  "auditResults": [
+    {
+      "category": "POSITIVE_CONTROL",
+      "attackId": "POS-01-COMPARATOR-MUTATION-SENSITIVITY",
+      "attackTitle": "Positive Control: Comparator detects single-field character inventory mutation",
+      "targetPath": "Independent Snapshot Comparator",
+      "payloadSummary": {
+        "injectedItem": "금화 x999"
+      },
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-08-29T08:23:28.011Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 1,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 0,
+          "totalHistoricalRecords": 0,
+          "lastEventId": null
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-08-29T08:23:28.011Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            },
+            {
+              "id": "item-forged-99",
+              "name": "금화",
+              "quantity": 999
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 1,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 0,
+          "totalHistoricalRecords": 0,
+          "lastEventId": null
+        }
+      },
+      "comparison": {
+        "isIdentical": false,
+        "diffs": [
+          "character mutated: {\"name\":\"청명\",\"gender\":\"\",\"age\":\"\",\"appearance\":\"\",\"goal\":\"\",\"originBackground\":\"\",\"backgroundType\":\"preset\",\"flaw\":\"\",\"flawType\":\"preset\",\"oath\":\"\",\"oathType\":\"preset\",\"anchor\":\"\",\"anchorType\":\"preset\",\"faction\":\"\",\"factionType\":\"preset\",\"stats\":{\"strength\":12,\"agility\":14,\"constitution\":12,\"intelligence\":10,\"wisdom\":10,\"charisma\":10},\"inventory\":[{\"id\":\"item-sword-1\",\"name\":\"화산목검\",\"quantity\":1,\"itemType\":\"WEAPON\"},{\"id\":\"item-silver-50\",\"name\":\"은화\",\"quantity\":50,\"itemType\":\"CURRENCY\"}],\"secret\":\"화산대공 전승자\",\"physicalDefect\":\"우측 어깨 자상\",\"timeline\":[]} -> {\"name\":\"청명\",\"gender\":\"\",\"age\":\"\",\"appearance\":\"\",\"goal\":\"\",\"originBackground\":\"\",\"backgroundType\":\"preset\",\"flaw\":\"\",\"flawType\":\"preset\",\"oath\":\"\",\"oathType\":\"preset\",\"anchor\":\"\",\"anchorType\":\"preset\",\"faction\":\"\",\"factionType\":\"preset\",\"stats\":{\"strength\":12,\"agility\":14,\"constitution\":12,\"intelligence\":10,\"wisdom\":10,\"charisma\":10},\"inventory\":[{\"id\":\"item-sword-1\",\"name\":\"화산목검\",\"quantity\":1,\"itemType\":\"WEAPON\"},{\"id\":\"item-silver-50\",\"name\":\"은화\",\"quantity\":50,\"itemType\":\"CURRENCY\"},{\"id\":\"item-forged-99\",\"name\":\"금화\",\"quantity\":999}],\"secret\":\"화산대공 전승자\",\"physicalDefect\":\"우측 어깨 자상\",\"timeline\":[]}"
+        ]
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Comparator successfully triggered on synthetic single-field state divergence."
+    },
+    {
+      "category": "POSITIVE_CONTROL",
+      "attackId": "POS-02-COMPARATOR-VERSION-SENSITIVITY",
+      "attackTitle": "Positive Control: Comparator detects stateVersion drift",
+      "targetPath": "Independent Snapshot Comparator",
+      "payloadSummary": {
+        "injectedVersion": 999
+      },
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-08-29T08:23:28.011Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 1,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 0,
+          "totalHistoricalRecords": 0,
+          "lastEventId": null
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 999,
+        "turn": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-08-29T08:23:28.011Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 1,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 0,
+          "totalHistoricalRecords": 0,
+          "lastEventId": null
+        }
+      },
+      "comparison": {
+        "isIdentical": false,
+        "diffs": [
+          "stateVersion: 1 -> 999"
+        ]
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Comparator successfully triggered on version divergence."
+    },
+    {
+      "category": "PERSISTENCE_HYDRATION",
+      "attackId": "ATTACK-1.1-FORGED-LOCALSTORAGE-HYDRATION",
+      "attackTitle": "Attack 1.1: Direct hydration of client-tampered localStorage snapshot",
+      "targetPath": "SovereignEngine.hydrate() -> Snapshot Schema & State Restoration",
+      "payloadSummary": {
+        "injectedItems": "천마신검",
+        "strength": 999,
+        "physicalDefect": ""
+      },
+      "validatorVerdict": {
+        "isValid": true,
+        "errors": []
+      },
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-08-29T08:23:28.012Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 1,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 0,
+          "totalHistoricalRecords": 0,
+          "lastEventId": null
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 5,
+        "turn": 5,
+        "lastCommittedEventId": "evt-fake-123",
+        "lastCommittedAt": "2026-08-29T08:23:28.012Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 999,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            },
+            {
+              "id": "item-cheat-sword",
+              "name": "천마신검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 5,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 1,
+          "totalHistoricalRecords": 0,
+          "lastEventId": "evt-fake-123"
+        }
+      },
+      "comparison": {
+        "isIdentical": false,
+        "diffs": [
+          "stateVersion: 1 -> 5",
+          "turn: 1 -> 5",
+          "lastCommittedEventId: null -> evt-fake-123",
+          "totalRecordedEvents: 0 -> 1",
+          "character mutated: {\"name\":\"청명\",\"gender\":\"\",\"age\":\"\",\"appearance\":\"\",\"goal\":\"\",\"originBackground\":\"\",\"backgroundType\":\"preset\",\"flaw\":\"\",\"flawType\":\"preset\",\"oath\":\"\",\"oathType\":\"preset\",\"anchor\":\"\",\"anchorType\":\"preset\",\"faction\":\"\",\"factionType\":\"preset\",\"stats\":{\"strength\":12,\"agility\":14,\"constitution\":12,\"intelligence\":10,\"wisdom\":10,\"charisma\":10},\"inventory\":[{\"id\":\"item-sword-1\",\"name\":\"화산목검\",\"quantity\":1,\"itemType\":\"WEAPON\"},{\"id\":\"item-silver-50\",\"name\":\"은화\",\"quantity\":50,\"itemType\":\"CURRENCY\"}],\"secret\":\"화산대공 전승자\",\"physicalDefect\":\"우측 어깨 자상\",\"timeline\":[]} -> {\"name\":\"청명\",\"gender\":\"\",\"age\":\"\",\"appearance\":\"\",\"goal\":\"\",\"originBackground\":\"\",\"backgroundType\":\"preset\",\"flaw\":\"\",\"flawType\":\"preset\",\"oath\":\"\",\"oathType\":\"preset\",\"anchor\":\"\",\"anchorType\":\"preset\",\"faction\":\"\",\"factionType\":\"preset\",\"stats\":{\"strength\":999,\"agility\":14,\"constitution\":12,\"intelligence\":10,\"wisdom\":10,\"charisma\":10},\"inventory\":[{\"id\":\"item-sword-1\",\"name\":\"화산목검\",\"quantity\":1,\"itemType\":\"WEAPON\"},{\"id\":\"item-silver-50\",\"name\":\"은화\",\"quantity\":50,\"itemType\":\"CURRENCY\"},{\"id\":\"item-cheat-sword\",\"name\":\"천마신검\",\"quantity\":1,\"itemType\":\"WEAPON\"}],\"secret\":\"화산대공 전승자\",\"physicalDefect\":\"\",\"timeline\":[]}"
+        ]
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Hydrated snapshot schema validity: true. SovereignEngine.hydrate restored snapshot."
+    },
+    {
+      "category": "PERSISTENCE_HYDRATION",
+      "attackId": "ATTACK-1.2-FORGED-HISTORY-REGRESSION",
+      "attackTitle": "Attack 1.2: Hydration with regressed history timestamps/turns/versions",
+      "targetPath": "SovereignEngine.hydrate() -> History Sequence Integrity Firewall",
+      "payloadSummary": {
+        "turnRegression": "2 -> 1",
+        "timestampRegression": "10:00 -> 09:00"
+      },
+      "hydrationError": "[HYDRATION_INTEGRITY_VIOLATION] History timestamp regression at index 1: '2026-08-27T09:00:00.000Z' precedes '2026-08-27T10:00:00.000Z'.",
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-08-29T08:23:28.012Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 1,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 0,
+          "totalHistoricalRecords": 0,
+          "lastEventId": null
+        }
+      },
+      "stateAfter": null,
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Hydration Firewall strictly aborted with: [HYDRATION_INTEGRITY_VIOLATION] History timestamp regression at index 1: '2026-08-27T09:00:00.000Z' precedes '2026-08-27T10:00:00.000Z'."
+    },
+    {
+      "category": "PERSISTENCE_HYDRATION",
+      "attackId": "ATTACK-1.3-STALE-SNAPSHOT-HISTORY-MISMATCH",
+      "attackTitle": "Attack 1.3: Hydration of stale snapshot with stateVersion < history stateVersionAfterCommit",
+      "targetPath": "SovereignEngine.hydrate() -> Snapshot vs History Version Invariant",
+      "payloadSummary": {
+        "snapshotVersion": 3,
+        "historyVersion": 5
+      },
+      "hydrationError": "[HYDRATION_INTEGRITY_VIOLATION] Snapshot stateVersion (3) precedes last history version (5).",
+      "stateBefore": null,
+      "stateAfter": null,
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Hydration strictly rejected version inversion: [HYDRATION_INTEGRITY_VIOLATION] Snapshot stateVersion (3) precedes last history version (5)."
+    },
+    {
+      "category": "PERSISTENCE_HYDRATION",
+      "attackId": "ATTACK-1.4-EVENT-ID-HISTORY-MISMATCH",
+      "attackTitle": "Attack 1.4: Hydration of snapshot with lastCommittedEventId mismatching last history eventId",
+      "targetPath": "SovereignEngine.hydrate() -> EventId Provenance Chain Check",
+      "payloadSummary": {
+        "snapshotEventId": "evt-forged-fake",
+        "historyLastEventId": "evt-legit-99"
+      },
+      "hydrationError": "[HYDRATION_INTEGRITY_VIOLATION] Snapshot lastCommittedEventId 'evt-forged-fake' does not match last history eventId 'evt-legit-99'.",
+      "stateBefore": null,
+      "stateAfter": null,
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Hydration strictly rejected EventId discrepancy: [HYDRATION_INTEGRITY_VIOLATION] Snapshot lastCommittedEventId 'evt-forged-fake' does not match last history eventId 'evt-legit-99'."
+    },
+    {
+      "category": "REPLAY_AUTHORITY",
+      "attackId": "ATTACK-2.1-POST-HYDRATION-REPLAY-ATTACK",
+      "attackTitle": "Attack 2.1: Idempotency registry population from history blocks duplicate requestId replay",
+      "targetPath": "SovereignEngine.hydrate() -> executedRequestIds extraction -> submitProposal()",
+      "payloadSummary": {
+        "replayedRequestId": "req-prior-1"
+      },
+      "commitVerdict": {
+        "success": false,
+        "stateVersion": 2,
+        "eventId": "evt-replay-test",
+        "committedActionsCount": 0,
+        "rejectedReasons": [
+          "[IDEMPOTENCY_VIOLATION] Request ID 'req-prior-1' has already been processed."
+        ],
+        "conflictDetails": [],
+        "newHistoricalRecords": [],
+        "snapshot": {
+          "stateVersion": 2,
+          "turn": 1,
+          "worldInfo": {
+            "worldName": "HydrationBaselineWorld",
+            "worldType": "popular_genre",
+            "settingDescription": "",
+            "toneStyle": "원작 고유의 문체 충실 재현",
+            "currentTime": {
+              "year": 1,
+              "season": "SPRING",
+              "month": 1,
+              "day": 1,
+              "timeOfDay": "MORNING"
+            },
+            "npcs": [
+              {
+                "id": "npc-elder",
+                "name": "장문인",
+                "metInStory": true,
+                "status": "ALIVE",
+                "impression": "신뢰"
+              }
+            ],
+            "factions": [
+              {
+                "id": "fac-hua",
+                "name": "화산파",
+                "influence": 30,
+                "description": "화산파"
+              },
+              {
+                "id": "fac-southern",
+                "name": "종남파",
+                "influence": 25,
+                "description": "종남파"
+              }
+            ],
+            "publicRumors": [],
+            "secretLore": [],
+            "seeds": [
+              {
+                "id": "seed-quest",
+                "content": "자하진경 수색",
+                "status": "active"
+              }
+            ],
+            "chapters": {
+              "currentChapter": "1장: 서막",
+              "upcomingChapters": [
+                "2장: 파란",
+                "3장: 격변",
+                "4장: 결전"
+              ]
+            },
+            "dcHistory": [],
+            "unresolvedForeshadows": [],
+            "cameraOffscreenEvents": [],
+            "offscreenRecords": []
+          },
+          "character": {
+            "name": "청명",
+            "gender": "",
+            "age": "",
+            "appearance": "",
+            "goal": "",
+            "originBackground": "",
+            "backgroundType": "preset",
+            "flaw": "",
+            "flawType": "preset",
+            "oath": "",
+            "oathType": "preset",
+            "anchor": "",
+            "anchorType": "preset",
+            "faction": "",
+            "factionType": "preset",
+            "stats": {
+              "strength": 12,
+              "agility": 14,
+              "constitution": 12,
+              "intelligence": 10,
+              "wisdom": 10,
+              "charisma": 10
+            },
+            "inventory": [
+              {
+                "id": "item-sword-1",
+                "name": "화산목검",
+                "quantity": 1,
+                "itemType": "WEAPON"
+              },
+              {
+                "id": "item-silver-50",
+                "name": "은화",
+                "quantity": 50,
+                "itemType": "CURRENCY"
+              }
+            ],
+            "secret": "화산대공 전승자",
+            "physicalDefect": "우측 어깨 자상",
+            "timeline": []
+          },
+          "lastCommittedEventId": "evt-prior-1",
+          "lastCommittedAt": "2026-08-27T10:00:00.000Z"
+        }
+      },
+      "stateBefore": {
+        "stateVersion": 2,
+        "turn": 1,
+        "lastCommittedEventId": "evt-prior-1",
+        "lastCommittedAt": "2026-08-27T10:00:00.000Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 1,
+        "history": [
+          {
+            "recordId": "rec-1",
+            "eventId": "evt-prior-1",
+            "requestId": "req-prior-1",
+            "proposalId": "prop-prior-1",
+            "actionType": "ADVANCE_TIME",
+            "stateVersionAfterCommit": 2,
+            "turn": 1,
+            "timestamp": "2026-08-27T10:00:00.000Z",
+            "informationAccess": "PUBLIC",
+            "details": "prior event"
+          }
+        ],
+        "diagnostics": {
+          "stateVersion": 2,
+          "totalExecutedRequests": 2,
+          "totalRecordedEvents": 1,
+          "totalHistoricalRecords": 1,
+          "lastEventId": "evt-prior-1"
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "lastCommittedEventId": "evt-prior-1",
+        "lastCommittedAt": "2026-08-27T10:00:00.000Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 1,
+        "history": [
+          {
+            "recordId": "rec-1",
+            "eventId": "evt-prior-1",
+            "requestId": "req-prior-1",
+            "proposalId": "prop-prior-1",
+            "actionType": "ADVANCE_TIME",
+            "stateVersionAfterCommit": 2,
+            "turn": 1,
+            "timestamp": "2026-08-27T10:00:00.000Z",
+            "informationAccess": "PUBLIC",
+            "details": "prior event"
+          }
+        ],
+        "diagnostics": {
+          "stateVersion": 2,
+          "totalExecutedRequests": 2,
+          "totalRecordedEvents": 1,
+          "totalHistoricalRecords": 1,
+          "lastEventId": "evt-prior-1"
+        }
+      },
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Replay attack was strictly rejected by Idempotency Firewall: [IDEMPOTENCY_VIOLATION] Request ID 'req-prior-1' has already been processed."
+    },
+    {
+      "category": "REPLAY_AUTHORITY",
+      "attackId": "ATTACK-2.2-POST-HYDRATION-DUPLICATE-EVENT-ID",
+      "attackTitle": "Attack 2.2: Idempotency registry blocks duplicate eventId submission post-hydration",
+      "targetPath": "SovereignEngine.hydrate() -> recordedEventIds extraction -> submitProposal()",
+      "payloadSummary": {
+        "replayedEventId": "evt-prior-1"
+      },
+      "commitVerdict": {
+        "success": false,
+        "stateVersion": 2,
+        "eventId": "evt-prior-1",
+        "committedActionsCount": 0,
+        "rejectedReasons": [
+          "[EVENT_CONFLICT] Event ID 'evt-prior-1' already exists in historical event registry."
+        ],
+        "conflictDetails": [],
+        "newHistoricalRecords": [],
+        "snapshot": {
+          "stateVersion": 2,
+          "turn": 1,
+          "worldInfo": {
+            "worldName": "HydrationBaselineWorld",
+            "worldType": "popular_genre",
+            "settingDescription": "",
+            "toneStyle": "원작 고유의 문체 충실 재현",
+            "currentTime": {
+              "year": 1,
+              "season": "SPRING",
+              "month": 1,
+              "day": 1,
+              "timeOfDay": "MORNING"
+            },
+            "npcs": [
+              {
+                "id": "npc-elder",
+                "name": "장문인",
+                "metInStory": true,
+                "status": "ALIVE",
+                "impression": "신뢰"
+              }
+            ],
+            "factions": [
+              {
+                "id": "fac-hua",
+                "name": "화산파",
+                "influence": 30,
+                "description": "화산파"
+              },
+              {
+                "id": "fac-southern",
+                "name": "종남파",
+                "influence": 25,
+                "description": "종남파"
+              }
+            ],
+            "publicRumors": [],
+            "secretLore": [],
+            "seeds": [
+              {
+                "id": "seed-quest",
+                "content": "자하진경 수색",
+                "status": "active"
+              }
+            ],
+            "chapters": {
+              "currentChapter": "1장: 서막",
+              "upcomingChapters": [
+                "2장: 파란",
+                "3장: 격변",
+                "4장: 결전"
+              ]
+            },
+            "dcHistory": [],
+            "unresolvedForeshadows": [],
+            "cameraOffscreenEvents": [],
+            "offscreenRecords": []
+          },
+          "character": {
+            "name": "청명",
+            "gender": "",
+            "age": "",
+            "appearance": "",
+            "goal": "",
+            "originBackground": "",
+            "backgroundType": "preset",
+            "flaw": "",
+            "flawType": "preset",
+            "oath": "",
+            "oathType": "preset",
+            "anchor": "",
+            "anchorType": "preset",
+            "faction": "",
+            "factionType": "preset",
+            "stats": {
+              "strength": 12,
+              "agility": 14,
+              "constitution": 12,
+              "intelligence": 10,
+              "wisdom": 10,
+              "charisma": 10
+            },
+            "inventory": [
+              {
+                "id": "item-sword-1",
+                "name": "화산목검",
+                "quantity": 1,
+                "itemType": "WEAPON"
+              },
+              {
+                "id": "item-silver-50",
+                "name": "은화",
+                "quantity": 50,
+                "itemType": "CURRENCY"
+              }
+            ],
+            "secret": "화산대공 전승자",
+            "physicalDefect": "우측 어깨 자상",
+            "timeline": []
+          },
+          "lastCommittedEventId": "evt-prior-1",
+          "lastCommittedAt": "2026-08-27T10:00:00.000Z"
+        }
+      },
+      "stateBefore": {
+        "stateVersion": 2,
+        "turn": 1,
+        "lastCommittedEventId": "evt-prior-1",
+        "lastCommittedAt": "2026-08-27T10:00:00.000Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 1,
+        "history": [
+          {
+            "recordId": "rec-1",
+            "eventId": "evt-prior-1",
+            "requestId": "req-prior-1",
+            "proposalId": "prop-prior-1",
+            "actionType": "ADVANCE_TIME",
+            "stateVersionAfterCommit": 2,
+            "turn": 1,
+            "timestamp": "2026-08-27T10:00:00.000Z",
+            "informationAccess": "PUBLIC",
+            "details": "prior event"
+          }
+        ],
+        "diagnostics": {
+          "stateVersion": 2,
+          "totalExecutedRequests": 2,
+          "totalRecordedEvents": 1,
+          "totalHistoricalRecords": 1,
+          "lastEventId": "evt-prior-1"
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 2,
+        "turn": 1,
+        "lastCommittedEventId": "evt-prior-1",
+        "lastCommittedAt": "2026-08-27T10:00:00.000Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 1,
+        "history": [
+          {
+            "recordId": "rec-1",
+            "eventId": "evt-prior-1",
+            "requestId": "req-prior-1",
+            "proposalId": "prop-prior-1",
+            "actionType": "ADVANCE_TIME",
+            "stateVersionAfterCommit": 2,
+            "turn": 1,
+            "timestamp": "2026-08-27T10:00:00.000Z",
+            "informationAccess": "PUBLIC",
+            "details": "prior event"
+          }
+        ],
+        "diagnostics": {
+          "stateVersion": 2,
+          "totalExecutedRequests": 2,
+          "totalRecordedEvents": 1,
+          "totalHistoricalRecords": 1,
+          "lastEventId": "evt-prior-1"
+        }
+      },
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Duplicate EventId was strictly blocked: [EVENT_CONFLICT] Event ID 'evt-prior-1' already exists in historical event registry."
+    },
+    {
+      "category": "REPLAY_AUTHORITY",
+      "attackId": "ATTACK-2.3-STALE-STATE-VERSION-REJECTION",
+      "attackTitle": "Attack 2.3: Stale/mismatched expectedStateVersion rejected with zero canonical mutation",
+      "targetPath": "EngineValidator.validate() -> State Version Concurrency Guard",
+      "payloadSummary": {
+        "engineVersion": 1,
+        "expectedStateVersion": 999
+      },
+      "commitVerdict": {
+        "success": false,
+        "stateVersion": 1,
+        "eventId": "evt-stale-1",
+        "committedActionsCount": 0,
+        "rejectedReasons": [
+          "[STALE_STATE_CONFLICT] Proposal expected state version 999, but current sovereign state is at version 1."
+        ],
+        "conflictDetails": [],
+        "newHistoricalRecords": [],
+        "snapshot": {
+          "stateVersion": 1,
+          "turn": 1,
+          "worldInfo": {
+            "worldName": "HydrationBaselineWorld",
+            "worldType": "popular_genre",
+            "settingDescription": "",
+            "toneStyle": "원작 고유의 문체 충실 재현",
+            "currentTime": {
+              "year": 1,
+              "season": "SPRING",
+              "month": 1,
+              "day": 1,
+              "timeOfDay": "MORNING"
+            },
+            "npcs": [
+              {
+                "id": "npc-elder",
+                "name": "장문인",
+                "metInStory": true,
+                "status": "ALIVE",
+                "impression": "신뢰"
+              }
+            ],
+            "factions": [
+              {
+                "id": "fac-hua",
+                "name": "화산파",
+                "influence": 30,
+                "description": "화산파"
+              },
+              {
+                "id": "fac-southern",
+                "name": "종남파",
+                "influence": 25,
+                "description": "종남파"
+              }
+            ],
+            "publicRumors": [],
+            "secretLore": [],
+            "seeds": [
+              {
+                "id": "seed-quest",
+                "content": "자하진경 수색",
+                "status": "active"
+              }
+            ],
+            "chapters": {
+              "currentChapter": "1장: 서막",
+              "upcomingChapters": [
+                "2장: 파란",
+                "3장: 격변",
+                "4장: 결전"
+              ]
+            },
+            "dcHistory": [],
+            "unresolvedForeshadows": [],
+            "cameraOffscreenEvents": [],
+            "offscreenRecords": []
+          },
+          "character": {
+            "name": "청명",
+            "gender": "",
+            "age": "",
+            "appearance": "",
+            "goal": "",
+            "originBackground": "",
+            "backgroundType": "preset",
+            "flaw": "",
+            "flawType": "preset",
+            "oath": "",
+            "oathType": "preset",
+            "anchor": "",
+            "anchorType": "preset",
+            "faction": "",
+            "factionType": "preset",
+            "stats": {
+              "strength": 12,
+              "agility": 14,
+              "constitution": 12,
+              "intelligence": 10,
+              "wisdom": 10,
+              "charisma": 10
+            },
+            "inventory": [
+              {
+                "id": "item-sword-1",
+                "name": "화산목검",
+                "quantity": 1,
+                "itemType": "WEAPON"
+              },
+              {
+                "id": "item-silver-50",
+                "name": "은화",
+                "quantity": 50,
+                "itemType": "CURRENCY"
+              }
+            ],
+            "secret": "화산대공 전승자",
+            "physicalDefect": "우측 어깨 자상",
+            "timeline": []
+          },
+          "lastCommittedEventId": null,
+          "lastCommittedAt": "2026-08-29T08:23:28.016Z"
+        }
+      },
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-08-29T08:23:28.016Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 1,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 0,
+          "totalHistoricalRecords": 0,
+          "lastEventId": null
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-08-29T08:23:28.016Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 1,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 0,
+          "totalHistoricalRecords": 0,
+          "lastEventId": null
+        }
+      },
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "State version mismatch was strictly rejected: [STALE_STATE_CONFLICT] Proposal expected state version 999, but current sovereign state is at version 1."
+    },
+    {
+      "category": "LEGACY_DEBUG_RESIDUE",
+      "attackId": "ATTACK-3.1-DIAGNOSTIC-STATE-VERSION-TAMPERING",
+      "attackTitle": "Attack 3.1: Attacker forges diagnostics.stateVersion to desync and disrupt Commit Gate",
+      "targetPath": "App.tsx getOrInitEngine() -> diagnostics.stateVersion -> SovereignEngine.hydrate()",
+      "payloadSummary": {
+        "forgedDiagStateVersion": 100,
+        "proposalExpectedVersion": 1
+      },
+      "commitVerdict": {
+        "success": false,
+        "stateVersion": 100,
+        "eventId": "evt-norm-1",
+        "committedActionsCount": 0,
+        "rejectedReasons": [
+          "[STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 100."
+        ],
+        "conflictDetails": [],
+        "newHistoricalRecords": [],
+        "snapshot": {
+          "stateVersion": 100,
+          "turn": 1,
+          "worldInfo": {
+            "worldName": "HydrationBaselineWorld",
+            "worldType": "popular_genre",
+            "settingDescription": "",
+            "toneStyle": "원작 고유의 문체 충실 재현",
+            "currentTime": {
+              "year": 1,
+              "season": "SPRING",
+              "month": 1,
+              "day": 1,
+              "timeOfDay": "MORNING"
+            },
+            "npcs": [
+              {
+                "id": "npc-elder",
+                "name": "장문인",
+                "metInStory": true,
+                "status": "ALIVE",
+                "impression": "신뢰"
+              }
+            ],
+            "factions": [
+              {
+                "id": "fac-hua",
+                "name": "화산파",
+                "influence": 30,
+                "description": "화산파"
+              },
+              {
+                "id": "fac-southern",
+                "name": "종남파",
+                "influence": 25,
+                "description": "종남파"
+              }
+            ],
+            "publicRumors": [],
+            "secretLore": [],
+            "seeds": [
+              {
+                "id": "seed-quest",
+                "content": "자하진경 수색",
+                "status": "active"
+              }
+            ],
+            "chapters": {
+              "currentChapter": "1장: 서막",
+              "upcomingChapters": [
+                "2장: 파란",
+                "3장: 격변",
+                "4장: 결전"
+              ]
+            },
+            "dcHistory": [],
+            "unresolvedForeshadows": [],
+            "cameraOffscreenEvents": [],
+            "offscreenRecords": []
+          },
+          "character": {
+            "name": "청명",
+            "gender": "",
+            "age": "",
+            "appearance": "",
+            "goal": "",
+            "originBackground": "",
+            "backgroundType": "preset",
+            "flaw": "",
+            "flawType": "preset",
+            "oath": "",
+            "oathType": "preset",
+            "anchor": "",
+            "anchorType": "preset",
+            "faction": "",
+            "factionType": "preset",
+            "stats": {
+              "strength": 12,
+              "agility": 14,
+              "constitution": 12,
+              "intelligence": 10,
+              "wisdom": 10,
+              "charisma": 10
+            },
+            "inventory": [
+              {
+                "id": "item-sword-1",
+                "name": "화산목검",
+                "quantity": 1,
+                "itemType": "WEAPON"
+              },
+              {
+                "id": "item-silver-50",
+                "name": "은화",
+                "quantity": 50,
+                "itemType": "CURRENCY"
+              }
+            ],
+            "secret": "화산대공 전승자",
+            "physicalDefect": "우측 어깨 자상",
+            "timeline": []
+          },
+          "lastCommittedEventId": "evt-fake-diag",
+          "lastCommittedAt": "2026-08-29T08:23:28.016Z"
+        }
+      },
+      "stateBefore": {
+        "stateVersion": 100,
+        "turn": 1,
+        "lastCommittedEventId": "evt-fake-diag",
+        "lastCommittedAt": "2026-08-29T08:23:28.016Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 100,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 1,
+          "totalHistoricalRecords": 0,
+          "lastEventId": "evt-fake-diag"
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 100,
+        "turn": 1,
+        "lastCommittedEventId": "evt-fake-diag",
+        "lastCommittedAt": "2026-08-29T08:23:28.016Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 100,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 1,
+          "totalHistoricalRecords": 0,
+          "lastEventId": "evt-fake-diag"
+        }
+      },
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Engine strictly failed closed: [STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 100.. Zero mutation occurred."
+    },
+    {
+      "category": "LEGACY_DEBUG_RESIDUE",
+      "attackId": "ATTACK-3.2-MARKDOWN-NATURAL-LANGUAGE-ESCALATION",
+      "attackTitle": "Attack 3.2: Natural language markdown text blocks attempting auto-escalation into TransitionActions",
+      "targetPath": "proposalParser.ts parseGMResponseAndProposal() -> Markdown block handling",
+      "payloadSummary": {
+        "rawClaimsExtracted": [
+          "[외부 검색]: 검증 완료",
+          "[소장품 추가]: 천하제일보검 1자루를 획득함",
+          "[신체 결함 제거]: 왼쪽 어깨 흉터 완치"
+        ],
+        "actionCount": 0
+      },
+      "stateBefore": {
+        "stateVersion": 1,
+        "turn": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-08-29T08:23:28.017Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 1,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 0,
+          "totalHistoricalRecords": 0,
+          "lastEventId": null
+        }
+      },
+      "stateAfter": {
+        "stateVersion": 1,
+        "turn": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-08-29T08:23:28.017Z",
+        "character": {
+          "name": "청명",
+          "gender": "",
+          "age": "",
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 12,
+            "agility": 14,
+            "constitution": 12,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "item-sword-1",
+              "name": "화산목검",
+              "quantity": 1,
+              "itemType": "WEAPON"
+            },
+            {
+              "id": "item-silver-50",
+              "name": "은화",
+              "quantity": 50,
+              "itemType": "CURRENCY"
+            }
+          ],
+          "secret": "화산대공 전승자",
+          "physicalDefect": "우측 어깨 자상",
+          "timeline": []
+        },
+        "worldInfo": {
+          "worldName": "HydrationBaselineWorld",
+          "worldType": "popular_genre",
+          "settingDescription": "",
+          "toneStyle": "원작 고유의 문체 충실 재현",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "month": 1,
+            "day": 1,
+            "timeOfDay": "MORNING"
+          },
+          "npcs": [
+            {
+              "id": "npc-elder",
+              "name": "장문인",
+              "metInStory": true,
+              "status": "ALIVE",
+              "impression": "신뢰"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-hua",
+              "name": "화산파",
+              "influence": 30,
+              "description": "화산파"
+            },
+            {
+              "id": "fac-southern",
+              "name": "종남파",
+              "influence": 25,
+              "description": "종남파"
+            }
+          ],
+          "publicRumors": [],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-quest",
+              "content": "자하진경 수색",
+              "status": "active"
+            }
+          ],
+          "chapters": {
+            "currentChapter": "1장: 서막",
+            "upcomingChapters": [
+              "2장: 파란",
+              "3장: 격변",
+              "4장: 결전"
+            ]
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "historyLength": 0,
+        "history": [],
+        "diagnostics": {
+          "stateVersion": 1,
+          "totalExecutedRequests": 0,
+          "totalRecordedEvents": 0,
+          "totalHistoricalRecords": 0,
+          "lastEventId": null
+        }
+      },
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Parser strictly treated markdown lines as diagnostic rawClaims without synthesizing TransitionActions."
+    },
+    {
+      "category": "MUTATION_BOUNDARY_SHADOW",
+      "attackId": "ATTACK-4.1-ADVANCE-CHAPTER-CURRENT-CHAPTER-MUTATION",
+      "attackTitle": "Attack 4.1: Final proposal mutates approved currentChapter in ADVANCE_CHAPTER",
+      "targetPath": "mutationBoundary.ts validateLLM2MutationBoundary() -> ADVANCE_CHAPTER",
+      "payloadSummary": {
+        "approved": "2장: 화산의 폭풍",
+        "final": "2장: 변조된 챕터"
+      },
+      "boundaryVerdict": {
+        "isValid": false,
+        "violationReasons": [
+          "[MUTATION_BOUNDARY_VIOLATION] Action #1 (ADVANCE_CHAPTER) is not authorized in approved candidate. Details: [MUTATION_BOUNDARY_VIOLATION] Chapter advancement '2장: 변조된 챕터' does not match candidate '2장: 화산의 폭풍'."
+        ]
+      },
+      "stateBefore": null,
+      "stateAfter": null,
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Boundary strictly rejected currentChapter tampering: [MUTATION_BOUNDARY_VIOLATION] Action #1 (ADVANCE_CHAPTER) is not authorized in approved candidate. Details: [MUTATION_BOUNDARY_VIOLATION] Chapter advancement '2장: 변조된 챕터' does not match candidate '2장: 화산의 폭풍'."
+    },
+    {
+      "category": "MUTATION_BOUNDARY_SHADOW",
+      "attackId": "ATTACK-4.2-ADD-RUMOR-CONTENT-TAMPERING",
+      "attackTitle": "Attack 4.2: Final proposal alters approved rumor text in ADD_RUMOR",
+      "targetPath": "mutationBoundary.ts validateLLM2MutationBoundary() -> ADD_RUMOR",
+      "payloadSummary": {
+        "approved": "종남파...",
+        "final": "화산파..."
+      },
+      "boundaryVerdict": {
+        "isValid": false,
+        "violationReasons": [
+          "[MUTATION_BOUNDARY_VIOLATION] Action #1 (ADD_RUMOR) is not authorized in approved candidate. Details: [MUTATION_BOUNDARY_VIOLATION] Rumor content mismatch."
+        ]
+      },
+      "stateBefore": null,
+      "stateAfter": null,
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Boundary strictly rejected rumor content mismatch: [MUTATION_BOUNDARY_VIOLATION] Action #1 (ADD_RUMOR) is not authorized in approved candidate. Details: [MUTATION_BOUNDARY_VIOLATION] Rumor content mismatch."
+    },
+    {
+      "category": "MUTATION_BOUNDARY_SHADOW",
+      "attackId": "ATTACK-4.3-CARDINALITY-INFLATION",
+      "attackTitle": "Attack 4.3: Final proposal contains extra actions exceeding candidate cardinality",
+      "targetPath": "mutationBoundary.ts validateLLM2MutationBoundary() -> Cardinality Check",
+      "payloadSummary": {
+        "approvedCount": 1,
+        "finalCount": 2
+      },
+      "boundaryVerdict": {
+        "isValid": false,
+        "violationReasons": [
+          "[MUTATION_BOUNDARY_VIOLATION] Final proposal contains 2 actions, exceeding approved candidate action count (1)."
+        ]
+      },
+      "stateBefore": null,
+      "stateAfter": null,
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Boundary strictly rejected action count inflation: [MUTATION_BOUNDARY_VIOLATION] Final proposal contains 2 actions, exceeding approved candidate action count (1)."
+    },
+    {
+      "category": "MUTATION_BOUNDARY_SHADOW",
+      "attackId": "ATTACK-4.4-ACTION-REUSE-DOUBLE-SPEND",
+      "attackTitle": "Attack 4.4: Attempting to match 2 final actions against 1 approved candidate action",
+      "targetPath": "mutationBoundary.ts validateLLM2MutationBoundary() -> 1-to-1 Matching",
+      "payloadSummary": {
+        "candidateActions": 1,
+        "duplicatedFinalActions": 2
+      },
+      "boundaryVerdict": {
+        "isValid": false,
+        "violationReasons": [
+          "[MUTATION_BOUNDARY_VIOLATION] Final proposal contains 2 actions, exceeding approved candidate action count (1)."
+        ]
+      },
+      "stateBefore": null,
+      "stateAfter": null,
+      "comparison": {
+        "isIdentical": true,
+        "diffs": []
+      },
+      "classification": "DEFENSE HELD",
+      "analysis": "Boundary strictly prevented action reuse double-spend: [MUTATION_BOUNDARY_VIOLATION] Final proposal contains 2 actions, exceeding approved candidate action count (1)."
+    }
+  ]
+}

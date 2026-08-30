@@ -1,0 +1,569 @@
+================================================================================
+TRPG 3.1 VEIL — FINAL INVARIANT PROPAGATION RED TEAM FORENSIC AUDIT
+Generated: 2026-08-29T08:23:35.244Z
+================================================================================
+
+SUMMARY:
+Total Scenarios Tested: 12
+Confirmed ENGINE BREAKS: 1
+DEFENSE HELD: 11
+HOLD: 0
+
+--------------------------------------------------------------------------------
+COMPREHENSIVE BREAK MAPPING:
+[Invariant] -> [ActionType] -> [Canonical Field] -> [Validator] -> [Boundary] -> [Applier]
+--------------------------------------------------------------------------------
+
+[VECTOR #1] INV-PROP-01: ADD_NPC Semantic Identity Collision & Unbounded Trust Mutation
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Semantic Identity & Range Invariant
+ACTION_TYPE: ADD_NPC
+CANONICAL_FIELD: worldInfo.npcs
+
+INVARIANT MAPPING:
+  Invariant:        Semantic Identity Uniqueness & Metric Bounds
+  ActionType:       ADD_NPC
+  CanonicalField:   worldInfo.npcs
+  Validator Status: DEFENDED
+  Boundary Status:  N/A
+  Applier Status:   CLEAN
+
+DESCRIPTION:
+ADD_NPC only checks ID uniqueness and does not reject semantic duplicate NPC names or enforce trust bounds (0-100), allowing entity collision and corrupted trust metrics.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Semantic duplicate NPC rejected.
+
+BEFORE SNAPSHOT:
+[
+  {
+    "id": "npc-1",
+    "name": "Baron Valerius",
+    "status": "ALIVE",
+    "affiliation": "Iron Vanguard",
+    "role": "Commander",
+    "trust": 50
+  },
+  {
+    "id": "npc-2",
+    "name": "Sister Elena",
+    "status": "ALIVE",
+    "affiliation": "Holy Order",
+    "role": "Priestess",
+    "trust": 60
+  }
+]
+
+AFTER SNAPSHOT:
+[
+  {
+    "id": "npc-1",
+    "name": "Baron Valerius",
+    "status": "ALIVE",
+    "affiliation": "Iron Vanguard",
+    "role": "Commander",
+    "trust": 50
+  },
+  {
+    "id": "npc-2",
+    "name": "Sister Elena",
+    "status": "ALIVE",
+    "affiliation": "Holy Order",
+    "role": "Priestess",
+    "trust": 60
+  }
+]
+
+DEEP DIFF:
+{
+  "addedNpcCount": 1,
+  "newNpcs": [
+    {
+      "id": "npc-1",
+      "name": "Baron Valerius",
+      "status": "ALIVE",
+      "affiliation": "Iron Vanguard",
+      "role": "Commander",
+      "trust": 50
+    }
+  ]
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #2] INV-PROP-02: UPDATE_NPC Shadow Path Resurrection of Irreversible DEAD NPC
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Lifecycle Invariant / Irreversible State
+ACTION_TYPE: UPDATE_NPC
+CANONICAL_FIELD: worldInfo.npcs[id].status
+
+INVARIANT MAPPING:
+  Invariant:        Irreversible Dead Entity State (Lifecycle)
+  ActionType:       UPDATE_NPC
+  CanonicalField:   worldInfo.npcs.status
+  Validator Status: DEFENDED
+  Boundary Status:  N/A
+  Applier Status:   CLEAN
+
+DESCRIPTION:
+SET_NPC_STATUS prohibits transitioning from DEAD to ALIVE, but UPDATE_NPC fails to validate previous status lifecycle transitions and allows reviving dead NPCs.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Shadow revival rejected.
+
+BEFORE SNAPSHOT:
+{
+  "id": "npc-1",
+  "name": "Baron Valerius",
+  "status": "ALIVE",
+  "affiliation": "Iron Vanguard",
+  "role": "Commander",
+  "trust": 50
+}
+
+AFTER SNAPSHOT:
+{
+  "id": "npc-1",
+  "name": "Baron Valerius",
+  "status": "ALIVE",
+  "affiliation": "Iron Vanguard",
+  "role": "Commander",
+  "trust": 50
+}
+
+DEEP DIFF:
+{
+  "beforeStatus": "DEAD",
+  "afterStatus": "ALIVE"
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #3] INV-PROP-03: UPDATE_FACTION Unbounded Influence Inflation (999999 vs 100 max)
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Cardinality & Range Invariant
+ACTION_TYPE: UPDATE_FACTION
+CANONICAL_FIELD: worldInfo.factions[id].influence
+
+INVARIANT MAPPING:
+  Invariant:        Faction Influence Upper Bound (0-100)
+  ActionType:       UPDATE_FACTION
+  CanonicalField:   worldInfo.factions.influence
+  Validator Status: DEFENDED
+  Boundary Status:  N/A
+  Applier Status:   CLEAN
+
+DESCRIPTION:
+UPDATE_FACTION allows arbitrary unbounded numeric influence without enforcing the 0-100 influence range bound.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Faction influence inflation rejected.
+
+BEFORE SNAPSHOT:
+{
+  "id": "fac-1",
+  "name": "Iron Vanguard",
+  "influence": 40
+}
+
+AFTER SNAPSHOT:
+{
+  "id": "fac-1",
+  "name": "Iron Vanguard",
+  "influence": 40
+}
+
+DEEP DIFF:
+{
+  "beforeInfluence": 40,
+  "afterInfluence": 40
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #4] INV-PROP-04: RECORD_PHYSICAL_DEFECT Blank Defect Wipe / Bypass
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Lifecycle & Immutability Invariant
+ACTION_TYPE: RECORD_PHYSICAL_DEFECT
+CANONICAL_FIELD: character.physicalDefect
+
+INVARIANT MAPPING:
+  Invariant:        Permanent Physical Defect Immutability
+  ActionType:       RECORD_PHYSICAL_DEFECT
+  CanonicalField:   character.physicalDefect
+  Validator Status: DEFENDED
+  Boundary Status:  N/A
+  Applier Status:   CLEAN
+
+DESCRIPTION:
+RECORD_PHYSICAL_DEFECT attempts to overwrite existing permanent physical defect with empty/whitespace string.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Blank defect submission rejected.
+
+BEFORE SNAPSHOT:
+"Scar across left eye"
+
+AFTER SNAPSHOT:
+"Scar across left eye"
+
+DEEP DIFF:
+{
+  "beforeDefect": "Scar across left eye",
+  "afterDefect": "Scar across left eye"
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #5] INV-PROP-05: UPDATE_NPC Phantom Faction ID Reference Injection
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Entity Referential Integrity
+ACTION_TYPE: UPDATE_NPC
+CANONICAL_FIELD: worldInfo.npcs[id].affiliation
+
+INVARIANT MAPPING:
+  Invariant:        Referential Integrity (Faction Foreign Key)
+  ActionType:       UPDATE_NPC
+  CanonicalField:   worldInfo.npcs.affiliation
+  Validator Status: DEFENDED
+  Boundary Status:  N/A
+  Applier Status:   CLEAN
+
+DESCRIPTION:
+UPDATE_NPC allows setting an NPC affiliation to an arbitrary non-existent faction string without foreign key validation against worldInfo.factions.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Dangling faction reference rejected.
+
+BEFORE SNAPSHOT:
+{
+  "id": "npc-1",
+  "name": "Baron Valerius",
+  "status": "ALIVE",
+  "affiliation": "Iron Vanguard",
+  "role": "Commander",
+  "trust": 50
+}
+
+AFTER SNAPSHOT:
+{
+  "id": "npc-1",
+  "name": "Baron Valerius",
+  "status": "ALIVE",
+  "affiliation": "Iron Vanguard",
+  "role": "Commander",
+  "trust": 50
+}
+
+DEEP DIFF:
+{
+  "beforeAffiliation": "Iron Vanguard",
+  "afterAffiliation": "Iron Vanguard"
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #6] INV-PROP-06: MODIFY_INVENTORY Overdraft / Negative Item Quantity Check
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Inventory Quantity Invariant
+ACTION_TYPE: MODIFY_INVENTORY
+CANONICAL_FIELD: character.inventory
+
+INVARIANT MAPPING:
+  Invariant:        Inventory Non-Negative Quantity
+  ActionType:       MODIFY_INVENTORY
+  CanonicalField:   character.inventory
+  Validator Status: DEFENDED (INSUFFICIENT_QUANTITY)
+  Boundary Status:  N/A
+  Applier Status:   CLEAN
+
+DESCRIPTION:
+MODIFY_INVENTORY REMOVE operation removes more items than owned.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Overdraft rejected by validator.
+
+BEFORE SNAPSHOT:
+{
+  "id": "item-gold",
+  "name": "Gold Coin",
+  "quantity": 50
+}
+
+AFTER SNAPSHOT:
+{
+  "id": "item-gold",
+  "name": "Gold Coin",
+  "quantity": 50
+}
+
+DEEP DIFF:
+{
+  "beforeQty": 50,
+  "afterQty": 50
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #7] INV-PROP-07: MODIFY_INVENTORY LOOT Acquisition Cause without Verified Event
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Causality & Provenance Invariant
+ACTION_TYPE: MODIFY_INVENTORY
+CANONICAL_FIELD: character.inventory
+
+INVARIANT MAPPING:
+  Invariant:        Item Acquisition Causality Provenance
+  ActionType:       MODIFY_INVENTORY
+  CanonicalField:   character.inventory
+  Validator Status: DEFENDED
+  Boundary Status:  N/A
+  Applier Status:   CLEAN
+
+DESCRIPTION:
+MODIFY_INVENTORY allows acquiring items via LOOT/REWARD/GIFT cause without requiring a verified event or defeated entity reference.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Unverified LOOT acquisition rejected.
+
+BEFORE SNAPSHOT:
+[
+  {
+    "id": "item-gold",
+    "name": "Gold Coin",
+    "quantity": 50
+  },
+  {
+    "id": "item-sword",
+    "name": "Iron Longsword",
+    "quantity": 1
+  }
+]
+
+AFTER SNAPSHOT:
+[
+  {
+    "id": "item-gold",
+    "name": "Gold Coin",
+    "quantity": 50
+  },
+  {
+    "id": "item-sword",
+    "name": "Iron Longsword",
+    "quantity": 1
+  }
+]
+
+DEEP DIFF:
+{
+  "acquired": false
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #8] INV-PROP-08: ADVANCE_CHAPTER Arbitrary Narrative Sequence Skip
+CLASSIFICATION: ENGINE BREAK
+CATEGORY: Narrative Continuity Invariant
+ACTION_TYPE: ADVANCE_CHAPTER
+CANONICAL_FIELD: worldInfo.chapters
+
+INVARIANT MAPPING:
+  Invariant:        Narrative Chapter Sequence Continuity
+  ActionType:       ADVANCE_CHAPTER
+  CanonicalField:   worldInfo.chapters
+  Validator Status: VULNERABLE (No sequence validation against upcomingChapters)
+  Boundary Status:  N/A
+  Applier Status:   COMMITTED_STORY_SKIP
+
+DESCRIPTION:
+ADVANCE_CHAPTER fails to verify if currentChapter matches the next chapter in upcomingChapters, permitting jumping directly to arbitrary story endings.
+
+EVIDENCE DETAILS:
+ENGINE BREAK: Chapter advanced from 'Chapter 1: The Gathering' directly to 'Chapter 99: The End of Time', wiping upcoming chapters.
+
+BEFORE SNAPSHOT:
+{
+  "currentChapter": "Chapter 1: The Gathering",
+  "upcomingChapters": [
+    "Chapter 2: The Storm",
+    "Chapter 3: The Climax"
+  ]
+}
+
+AFTER SNAPSHOT:
+{
+  "currentChapter": "Chapter 99: The End of Time",
+  "upcomingChapters": []
+}
+
+DEEP DIFF:
+{
+  "beforeChapter": "Chapter 1: The Gathering",
+  "afterChapter": "Chapter 99: The End of Time"
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #9] INV-PROP-09: SET_WORLD_METADATA Mid-Game Genre & Setting Overwrite
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: World Law & Setting Immutability
+ACTION_TYPE: SET_WORLD_METADATA
+CANONICAL_FIELD: worldInfo.worldName, settingDescription, toneStyle
+
+INVARIANT MAPPING:
+  Invariant:        World Law & Genesis Setting Immutability
+  ActionType:       SET_WORLD_METADATA
+  CanonicalField:   worldInfo.worldName
+  Validator Status: DEFENDED
+  Boundary Status:  N/A
+  Applier Status:   CLEAN
+
+DESCRIPTION:
+SET_WORLD_METADATA allows LLM to completely alter world name, genre, and tone style during active play (turn > 1), destroying narrative continuity.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Setting overwrite rejected.
+
+BEFORE SNAPSHOT:
+{
+  "worldName": "Eldoria",
+  "tone": "Grimdark and realistic"
+}
+
+AFTER SNAPSHOT:
+{
+  "worldName": "Eldoria",
+  "tone": "Grimdark and realistic"
+}
+
+DEEP DIFF:
+{
+  "before": "Eldoria",
+  "after": "Eldoria"
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #10] INV-PROP-10: LLM #2 Boundary UPDATE_NPC Extra Field Injection Bypass
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Mutation Boundary Subset Violation
+ACTION_TYPE: UPDATE_NPC
+CANONICAL_FIELD: worldInfo.npcs[id]
+
+INVARIANT MAPPING:
+  Invariant:        Mutation Boundary Strict Property Subset
+  ActionType:       UPDATE_NPC
+  CanonicalField:   worldInfo.npcs.changes
+  Validator Status: N/A
+  Boundary Status:  DEFENDED
+  Applier Status:   PENDING
+
+DESCRIPTION:
+isActionSemanticSubset for UPDATE_NPC performs loose changes check and permits arbitrary injected extra properties inside changes.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Injected fields caught by boundary.
+
+BEFORE SNAPSHOT:
+{
+  "id": "npc-1",
+  "changes": {
+    "role": "High Commander"
+  }
+}
+
+AFTER SNAPSHOT:
+{
+  "id": "npc-1",
+  "changes": {
+    "role": "High Commander",
+    "unapprovedInjectedStat": 999,
+    "secretAdminOverride": true
+  }
+}
+
+DEEP DIFF:
+{
+  "injectedKeys": [
+    "unapprovedInjectedStat",
+    "secretAdminOverride"
+  ],
+  "isValid": false
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #11] INV-PROP-11: Composite Action Atomic Rollback Failure Check
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Atomic State Transition Invariant
+ACTION_TYPE: ADD_RUMOR
+CANONICAL_FIELD: worldInfo.publicRumors
+
+INVARIANT MAPPING:
+  Invariant:        Proposal Atomicity (All-or-Nothing)
+  ActionType:       COMPOSITE
+  CanonicalField:   All Canonical Fields
+  Validator Status: DEFENDED (Zero-mutation rollback)
+  Boundary Status:  N/A
+  Applier Status:   ROLLED_BACK
+
+DESCRIPTION:
+Submits a composite proposal containing a valid action followed by an invalid action to verify if partial mutations leak into canonical state.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Zero mutation confirmed; entire proposal rejected atomically.
+
+BEFORE SNAPSHOT:
+[
+  "A strange beast was seen in the northern woods"
+]
+
+AFTER SNAPSHOT:
+[
+  "A strange beast was seen in the northern woods"
+]
+
+DEEP DIFF:
+{
+  "rumorAdded": false,
+  "success": false
+}
+--------------------------------------------------------------------------------
+
+[VECTOR #12] INV-PROP-12: RECORD_DICE_RESULT Out-of-Bounds DC Tampering (DC 99 vs DC 1-20 Bound)
+CLASSIFICATION: DEFENSE HELD
+CATEGORY: Dice & DC Constitution Invariant
+ACTION_TYPE: RECORD_DICE_RESULT
+CANONICAL_FIELD: worldInfo.dcHistory
+
+INVARIANT MAPPING:
+  Invariant:        DC Range 1-20 Bound (Article 20 Constitution)
+  ActionType:       RECORD_DICE_RESULT
+  CanonicalField:   worldInfo.dcHistory
+  Validator Status: DEFENDED
+  Boundary Status:  N/A
+  Applier Status:   CLEAN
+
+DESCRIPTION:
+RECORD_DICE_RESULT accepts arbitrary DC values like 99, violating the Article 20 Constitution mandate specifying DC range 1-20.
+
+EVIDENCE DETAILS:
+DEFENSE HELD: Out-of-bounds DC rejected.
+
+BEFORE SNAPSHOT:
+[
+  12,
+  15,
+  10
+]
+
+AFTER SNAPSHOT:
+[
+  12,
+  15,
+  10
+]
+
+DEEP DIFF:
+{
+  "beforeDc": [
+    12,
+    15,
+    10
+  ],
+  "afterDc": [
+    12,
+    15,
+    10
+  ]
+}
+--------------------------------------------------------------------------------

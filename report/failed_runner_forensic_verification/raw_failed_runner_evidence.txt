@@ -1,0 +1,116 @@
+================================================================================
+VEIL — FAILED RUNNER RAW FORENSIC EXECUTION EVIDENCE
+Target Baseline: 4754fa5ac1419e3b1d3d6963b297d99b5776b060
+Execution Timestamp: 2026-08-29T08:48:34.939Z
+================================================================================
+
+--------------------------------------------------------------------------------
+[RUNNER ID: FAIL-01] scripts/confirmed_break_forensic_reattack.ts
+Command: npx tsx scripts/confirmed_break_forensic_reattack.ts
+Exit Code (Run 1): 1
+Exit Code (Run 2): 1
+Reproducibility: 100% IDENTICAL EXIT CODE
+--- STDOUT / STDERR (Run 1) ---
+================================================================================
+    TRPG 3.1 VEIL — CONFIRMED BREAK FORENSIC RE-ATTACK SUITE                   
+================================================================================
+
+>>> [PHASE 1] POSITIVE CONTROL CALIBRATION...
+
+[FATAL] Positive control failed! res: {
+  success: false,
+  stateVersion: 1,
+  eventId: 'evt-legit-control',
+  committedActionsCount: 0,
+  rejectedReasons: [
+    "[PROVENANCE_VIOLATION] Unbacked stat mutation for 'strength' is rejected without VerifiedClaim."
+  ],
+  conflictDetails: [
+    "[PROVENANCE_VIOLATION] Action #1: UPDATE_CHARACTER_STATS for stat 'strength' (15 -> 18) lacks verified claim for runtime source 'LLM'."
+  ],
+  newHistoricalRecords: [],
+  snapshot: {
+    stateVersion: 1,
+    turn: 1,
+    worldInfo: {
+      worldName: 'Murim Realm',
+      worldType: 'popular_genre',
+      settingDescription: '',
+      toneStyle: '원작 고유의 문체 충실 재현',
+      currentTime: [Object],
+      npcs: [Array],
+      factions: [Array],
+      publicRumors: [],
+      secretLore: [],
+      seeds: [Array],
+      chapters: [Object],
+      dcHistory: [],
+      unresolvedForeshadows: [],
+      cameraOffscreenEvents: [],
+      offscreenRecords: []
+    },
+    character: {
+      name: 'Protagonist',
+      gender: '',
+      age: '',
+      appearance: '',
+      goal: '',
+      originBackground: '',
+      backgroundType: 'preset',
+      flaw: '',
+      flawType: 'preset',
+      oath: '',
+      oathType: 'preset',
+      anchor: '',
+      anchorType: 'preset',
+      faction: '',
+      factionType: 'preset',
+      stats: [Object],
+      inventory: [Array],
+      secret: '',
+      physicalDefect: 'Scar across chest',
+      timeline: []
+    },
+    lastCommittedEventId: null,
+    lastCommittedAt: '2026-08-29T08:48:35.911Z'
+  }
+}
+
+
+--------------------------------------------------------------------------------
+[RUNNER ID: FAIL-02] scripts/adversarial_forensic_suite.ts
+Command: npx tsx scripts/adversarial_forensic_suite.ts
+Exit Code (Run 1): 0
+Exit Code (Run 2): 0
+Reproducibility: 100% IDENTICAL EXIT CODE
+--- STDOUT / STDERR (Run 1) ---
+Adversarial suite execution completed. Total tests: 10
+[CASE-01] PASS: VALIDATOR REJECTION AND COMPLETE STATE IMMUTABILITY
+[CASE-02] FAIL: ATOMIC DRAFT EXECUTION & PARTIAL COMMIT PREVENTION (VALIDATOR PASS -> DRAFT CRASH -> ROLLBACK)
+[CASE-03] FAIL: DUPLICATE REQUEST ID PROPOSAL REPLAY BLOCKED
+[CASE-04] FAIL: DUPLICATE EVENT ID PROPOSAL REPLAY BLOCKED
+[CASE-05] FAIL: MULTI-ACTION PROPOSAL SHARED EVENT ID SEMANTICS PRESERVED
+[CASE-06] PASS: HYDRATION PRESERVES VALID MULTI-ACTION SHARED EVENT ID HISTORY
+[CASE-07] PASS: FORGED PRIVILEGED SYSTEM SOURCE SUBMISSION BLOCKED
+[CASE-08] PASS: INVENTORY CAUSALITY: DUPLICATE VERIFIED EVENT ID REUSE BLOCKED
+[CASE-09] PASS: DEAD NPC RESURRECTION VIA WORLD OVERWRITE BLOCKED
+[CASE-10] PASS: CANONICAL SNAPSHOT DEEP-FREEZE IMMUTABILITY AGAINST DIRECT MUTATION
+All 10 tests passed: false
+
+
+--------------------------------------------------------------------------------
+[RUNNER ID: FAIL-03] scripts/adversarial_runtime_break_runner.ts
+Command: npx tsx scripts/adversarial_runtime_break_runner.ts
+Exit Code (Run 1): 0
+Exit Code (Run 2): 0
+Reproducibility: 100% IDENTICAL EXIT CODE
+--- STDOUT / STDERR (Run 1) ---
+
+Adversarial Runtime Break Runner Complete.
+Total Vectors Tested: 16
+Confirmed Breaks: 2
+Defenses Held: 13
+Harness Flaws Exposed: 1
+Raw evidence written to report/adversarial_runtime_break_raw_evidence.txt and idea/report/adversarial_runtime_break_raw_evidence.txt
+
+

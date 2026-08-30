@@ -1,0 +1,344 @@
+================================================================================
+TRPG 3.1 VEIL — CONFIRMED BREAKS INDEPENDENT REPRODUCTION RAW EVIDENCE
+TIMESTAMP: 2026-08-27T16:06:30.578Z
+TARGET: HEAD (Clean Environment Ground Truth)
+================================================================================
+
+--------------------------------------------------------------------------------
+[VECTOR ID]: V3-04
+[NAME]: SPOOFED-SAVE-HYDRATION-SOURCE
+[VERDICT]: NOT REPRODUCED
+[PASSED VALIDATION LAYERS]:
+[FINAL COMMIT SUCCESS]: false
+[STATE MUTATED]: false
+[STATE BEFORE]:
+{
+  "name": "청명",
+  "age": 20,
+  "stats": {
+    "strength": 14,
+    "agility": 12,
+    "constitution": 13,
+    "intelligence": 10,
+    "wisdom": 10,
+    "charisma": 10
+  },
+  "stateVersion": 1
+}
+[ATTACK INPUT PAYLOAD]:
+{
+  "proposalId": "prop-v3-04-repro",
+  "requestId": "req-v3-04-repro",
+  "eventId": "evt-v3-04-repro",
+  "turn": 1,
+  "expectedStateVersion": 1,
+  "timestamp": "2026-08-27T16:06:30.564Z",
+  "source": "SAVE_HYDRATION",
+  "actions": [
+    {
+      "type": "OVERWRITE_CHARACTER",
+      "payload": {
+        "name": "해킹된천마",
+        "age": 99,
+        "stats": {
+          "strength": 30,
+          "agility": 30,
+          "constitution": 30,
+          "intelligence": 30,
+          "wisdom": 30,
+          "charisma": 30
+        },
+        "inventory": [],
+        "location": "무림맹 본단",
+        "status": "ALIVE",
+        "relationships": []
+      }
+    }
+  ]
+}
+[STATE AFTER]:
+{
+  "name": "청명",
+  "age": 20,
+  "stats": {
+    "strength": 14,
+    "agility": 12,
+    "constitution": 13,
+    "intelligence": 10,
+    "wisdom": 10,
+    "charisma": 10
+  },
+  "stateVersion": 1
+}
+[EXECUTION LOGS]:
+  Validator Result: isValid=false, rejectedReasons=[[SECURITY_FORGERY] Direct submission of privileged source 'SAVE_HYDRATION' without Engine-owned capability token is strictly rejected.]
+  Commit Result: success=false, errors=[[SECURITY_FORGERY] Direct submission of privileged source 'SAVE_HYDRATION' without Engine-owned capability token is strictly rejected.]
+  State Mutated: false
+  Before: name="청명", age=20, strength=14, v=1
+  After: name="청명", age=20, strength=14, v=1
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[VECTOR ID]: V3-05
+[NAME]: SPOOFED-GENESIS-SOURCE
+[VERDICT]: NOT REPRODUCED
+[PASSED VALIDATION LAYERS]:
+[FINAL COMMIT SUCCESS]: false
+[STATE MUTATED]: false
+[STATE BEFORE]:
+{
+  "secret": "",
+  "stateVersion": 1
+}
+[ATTACK INPUT PAYLOAD]:
+{
+  "proposalId": "prop-v3-05-repro",
+  "requestId": "req-v3-05-repro",
+  "eventId": "evt-v3-05-repro",
+  "turn": 1,
+  "expectedStateVersion": 1,
+  "timestamp": "2026-08-27T16:06:30.569Z",
+  "source": "GENESIS",
+  "actions": [
+    {
+      "type": "SET_CHARACTER_SECRET",
+      "payload": {
+        "secret": "천마의 비전신공을 모두 탈취하였다."
+      }
+    }
+  ]
+}
+[STATE AFTER]:
+{
+  "secret": "",
+  "stateVersion": 1
+}
+[EXECUTION LOGS]:
+  Validator Result: isValid=false, rejectedReasons=[[PROVENANCE_VIOLATION] Character secret cannot be modified or established by source 'GENESIS' without independent canonical evidence.]
+  Commit Result: success=false, errors=[[PROVENANCE_VIOLATION] Character secret cannot be modified or established by source 'GENESIS' without independent canonical evidence.]
+  State Mutated: false
+  Before: secret="", v=1
+  After: secret="", v=1
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[VECTOR ID]: V4-01
+[NAME]: CAUSALITY-SUBSTRING-FORGERY
+[VERDICT]: NOT REPRODUCED
+[PASSED VALIDATION LAYERS]:
+[FINAL COMMIT SUCCESS]: false
+[STATE MUTATED]: false
+[STATE BEFORE]:
+{
+  "inventory": [
+    {
+      "id": "item-1",
+      "name": "철검",
+      "quantity": 1,
+      "itemType": "WEAPON"
+    }
+  ],
+  "stateVersion": 2
+}
+[ATTACK INPUT PAYLOAD]:
+{
+  "proposalId": "prop-v4-01-repro",
+  "requestId": "req-v4-01-repro",
+  "eventId": "evt-fake-sword-repro",
+  "turn": 1,
+  "expectedStateVersion": 2,
+  "timestamp": "2026-08-27T16:06:30.577Z",
+  "source": "LLM",
+  "actions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "ADD",
+        "item": {
+          "id": "item-sword-forge",
+          "name": "검",
+          "quantity": 1
+        },
+        "acquisition": {
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "evt-silk-100"
+        }
+      }
+    }
+  ]
+}
+[STATE AFTER]:
+{
+  "inventory": [
+    {
+      "id": "item-1",
+      "name": "철검",
+      "quantity": 1,
+      "itemType": "WEAPON"
+    }
+  ],
+  "stateVersion": 2
+}
+[EXECUTION LOGS]:
+  Validator Result: isValid=false, rejectedReasons=[[CAUSALITY_VIOLATION] Event 'evt-silk-100' has no causal connection to item '검'.]
+  Commit Result: success=false, errors=[[CAUSALITY_VIOLATION] Event 'evt-silk-100' has no causal connection to item '검'.]
+  State Mutated: false
+  Before Inventory: [{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}] (v=2)
+  After Inventory: [{"id":"item-1","name":"철검","quantity":1,"itemType":"WEAPON"}] (v=2)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[VECTOR ID]: V2-03
+[NAME]: FACTION-INFLUENCE-RANGE-OVERFLOW
+[VERDICT]: NOT REPRODUCED
+[PASSED VALIDATION LAYERS]:
+[FINAL COMMIT SUCCESS]: false
+[STATE MUTATED]: false
+[STATE BEFORE]:
+{
+  "factions": [
+    {
+      "id": "fac-1",
+      "name": "화산파",
+      "influence": 50,
+      "description": "명문정파"
+    },
+    {
+      "id": "fac-2",
+      "name": "종남파",
+      "influence": 40,
+      "description": "명문정파"
+    }
+  ],
+  "stateVersion": 1
+}
+[ATTACK INPUT PAYLOAD]:
+{
+  "proposalId": "prop-v2-03-repro",
+  "requestId": "req-v2-03-repro",
+  "eventId": "evt-v2-03-repro",
+  "turn": 1,
+  "expectedStateVersion": 1,
+  "timestamp": "2026-08-27T16:06:30.577Z",
+  "source": "LLM",
+  "actions": [
+    {
+      "type": "UPDATE_FACTION",
+      "payload": {
+        "id": "fac-1",
+        "changes": {
+          "influence": 999999
+        }
+      }
+    }
+  ]
+}
+[STATE AFTER]:
+{
+  "factions": [
+    {
+      "id": "fac-1",
+      "name": "화산파",
+      "influence": 50,
+      "description": "명문정파"
+    },
+    {
+      "id": "fac-2",
+      "name": "종남파",
+      "influence": 40,
+      "description": "명문정파"
+    }
+  ],
+  "stateVersion": 1
+}
+[EXECUTION LOGS]:
+  Validator Result: isValid=false, rejectedReasons=[[INVALID_FACTION_INFLUENCE] Action #1 (UPDATE_FACTION) influence must be a finite integer between 0 and 100.]
+  Commit Result: success=false, errors=[[INVALID_FACTION_INFLUENCE] Action #1 (UPDATE_FACTION) influence must be a finite integer between 0 and 100.]
+  State Mutated: false
+  Before Factions: [{"id":"fac-1","name":"화산파","influence":50,"description":"명문정파"},{"id":"fac-2","name":"종남파","influence":40,"description":"명문정파"}] (v=1)
+  After Factions: [{"id":"fac-1","name":"화산파","influence":50,"description":"명문정파"},{"id":"fac-2","name":"종남파","influence":40,"description":"명문정파"}] (v=1)
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+[VECTOR ID]: V2-04
+[NAME]: ADD-FACTION-INFLUENCE-RANGE-OVERFLOW
+[VERDICT]: NOT REPRODUCED
+[PASSED VALIDATION LAYERS]:
+[FINAL COMMIT SUCCESS]: false
+[STATE MUTATED]: false
+[STATE BEFORE]:
+{
+  "factionsCount": 2,
+  "factions": [
+    {
+      "id": "fac-1",
+      "name": "화산파",
+      "influence": 50,
+      "description": "명문정파"
+    },
+    {
+      "id": "fac-2",
+      "name": "종남파",
+      "influence": 40,
+      "description": "명문정파"
+    }
+  ],
+  "stateVersion": 1
+}
+[ATTACK INPUT PAYLOAD]:
+{
+  "proposalId": "prop-v2-04-repro",
+  "requestId": "req-v2-04-repro",
+  "eventId": "evt-v2-04-repro",
+  "turn": 1,
+  "expectedStateVersion": 1,
+  "timestamp": "2026-08-27T16:06:30.578Z",
+  "source": "LLM",
+  "actions": [
+    {
+      "type": "ADD_FACTION",
+      "payload": {
+        "id": "fac-overflow-999",
+        "name": "초월마도세력",
+        "influence": 99999999,
+        "relationship": "UNKNOWN",
+        "knownRumors": []
+      }
+    }
+  ]
+}
+[STATE AFTER]:
+{
+  "factionsCount": 2,
+  "factions": [
+    {
+      "id": "fac-1",
+      "name": "화산파",
+      "influence": 50,
+      "description": "명문정파"
+    },
+    {
+      "id": "fac-2",
+      "name": "종남파",
+      "influence": 40,
+      "description": "명문정파"
+    }
+  ],
+  "stateVersion": 1
+}
+[EXECUTION LOGS]:
+  Validator Result: isValid=false, rejectedReasons=[[INVALID_FACTION_INFLUENCE] Action #1 (ADD_FACTION) influence must be a finite integer between 0 and 100.]
+  Commit Result: success=false, errors=[[INVALID_FACTION_INFLUENCE] Action #1 (ADD_FACTION) influence must be a finite integer between 0 and 100.]
+  State Mutated: false
+  Before Factions Count: 2 (v=1)
+  After Factions Count: 2 (v=1)
+  Added Faction Influence: undefined
+--------------------------------------------------------------------------------
+
+================================================================================
+FINAL VERIFICATION CONCLUSION:
+TOTAL TESTED: 5
+CONFIRMED BREAK: 0 / 5
+NOT REPRODUCED:  5 / 5
+INVALID REPORT:  0 / 5
+================================================================================
