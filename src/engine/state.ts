@@ -71,21 +71,24 @@ export class SovereignEngine {
     initialCharacter?: Character,
     initialHistory?: ImmutableHistoricalRecord[],
     initialStateVersion: number = 1,
-    initialTurn: number = 1
+    initialTurn: number = 1,
+    genesisSnapshot?: CanonicalState
   ) {
     this.worldInfo = initialWorld ? deepClone(initialWorld) : createEmptyWorldInfo();
     this.character = initialCharacter ? deepClone(initialCharacter) : createEmptyCharacter();
     this.stateVersion = initialStateVersion;
     this.turn = initialTurn;
     this.lastCommittedAt = new Date().toISOString();
-    this.genesisSnapshot = deepFreeze({
-      stateVersion: this.stateVersion,
-      turn: this.turn,
-      worldInfo: deepClone(this.worldInfo),
-      character: deepClone(this.character),
-      lastCommittedEventId: this.lastCommittedEventId,
-      lastCommittedAt: this.lastCommittedAt
-    });
+    this.genesisSnapshot = genesisSnapshot
+      ? deepFreeze(deepClone(genesisSnapshot))
+      : deepFreeze({
+          stateVersion: this.stateVersion,
+          turn: this.turn,
+          worldInfo: deepClone(this.worldInfo),
+          character: deepClone(this.character),
+          lastCommittedEventId: this.lastCommittedEventId,
+          lastCommittedAt: this.lastCommittedAt
+        });
     this.historyManager = new HistoryManager(initialHistory || []);
     if (initialHistory) {
       for (const rec of initialHistory) {
@@ -120,6 +123,8 @@ export class SovereignEngine {
     if (!schemaCheck.isValid) {
       throw new Error(`[HYDRATION_SCHEMA_VIOLATION] Cannot hydrate invalid canonical snapshot: ${schemaCheck.errors.join('; ')}`);
     }
+
+    let verifiedGenesisAnchor: CanonicalState | undefined = undefined;
 
     if (history && history.length > 0) {
       // Step 1: Basic Temporal and Monotonicity Checks
@@ -230,6 +235,7 @@ export class SovereignEngine {
 
       // Check if provenance tracking is active (any record has previousStateHash)
       const hasProvenanceTracking = history.some(r => r.previousStateHash !== undefined);
+
       if (hasProvenanceTracking) {
         // Deterministic Replay Engine
         const firstGroup = proposalGroups[0];
@@ -253,6 +259,7 @@ export class SovereignEngine {
           replayTurn = genesisState.turn;
           replayLastEventId = genesisState.lastCommittedEventId;
           replayLastAt = genesisState.lastCommittedAt;
+          verifiedGenesisAnchor = deepClone(genesisState);
         } else {
           // Default empty Genesis
           const candidateEmptyGenesis: CanonicalState = {
@@ -271,6 +278,7 @@ export class SovereignEngine {
             replayTurn = 1;
             replayLastEventId = null;
             replayLastAt = candidateEmptyGenesis.lastCommittedAt;
+            verifiedGenesisAnchor = deepClone(candidateEmptyGenesis);
           } else {
             // If previousStateHash is defined but genesis anchor is not provided and doesn't match empty genesis
             throw new Error(
@@ -367,7 +375,8 @@ export class SovereignEngine {
       snapshot.character,
       history ? (history as ImmutableHistoricalRecord[]) : [],
       snapshot.stateVersion,
-      snapshot.turn
+      snapshot.turn,
+      verifiedGenesisAnchor || (genesisState ? deepClone(genesisState) : undefined)
     );
     engine.lastCommittedEventId = snapshot.lastCommittedEventId;
     engine.lastCommittedAt = snapshot.lastCommittedAt;

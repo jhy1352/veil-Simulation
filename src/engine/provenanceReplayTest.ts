@@ -28,7 +28,7 @@ function buildTestProposal(params: {
   eventId: string;
   turn: number;
   expectedStateVersion: number;
-  timestamp: string;
+  timestamp?: string;
   actions: TransitionAction[];
 }): StateTransitionProposal {
   const tree: MeaningNode = {
@@ -44,7 +44,7 @@ function buildTestProposal(params: {
     source: 'LLM',
     turn: params.turn,
     expectedStateVersion: params.expectedStateVersion,
-    timestamp: params.timestamp,
+    timestamp: params.timestamp || new Date().toISOString(),
     meaningTree: tree,
     actions: params.actions
   };
@@ -69,7 +69,6 @@ async function runSuite() {
       eventId: 'evt-t1-1',
       turn: 1,
       expectedStateVersion: 1,
-      timestamp: '2026-08-30T10:00:00.000Z',
       actions: [
         {
           type: 'ADD_NPC',
@@ -98,7 +97,6 @@ async function runSuite() {
       eventId: 'evt-t2-1',
       turn: 2,
       expectedStateVersion: 2,
-      timestamp: '2026-08-30T10:05:00.000Z',
       actions: [
         {
           type: 'ADVANCE_CHAPTER',
@@ -142,7 +140,6 @@ async function runSuite() {
       eventId: 'evt-t3-1',
       turn: 3,
       expectedStateVersion: 3,
-      timestamp: '2026-08-30T10:10:00.000Z',
       actions: [
         {
           type: 'ADD_RUMOR',
@@ -175,7 +172,6 @@ async function runSuite() {
       eventId: 'evt-sec-1',
       turn: 1,
       expectedStateVersion: 1,
-      timestamp: '2026-08-30T10:00:00.000Z',
       actions: [
         {
           type: 'ADD_RUMOR',
@@ -249,7 +245,6 @@ async function runSuite() {
       eventId: 'evt-hist-1',
       turn: 1,
       expectedStateVersion: 1,
-      timestamp: '2026-08-30T10:00:00.000Z',
       actions: [
         {
           type: 'ADD_RUMOR',
@@ -320,7 +315,6 @@ async function runSuite() {
       eventId: 'evt-gen-1',
       turn: 1,
       expectedStateVersion: 1,
-      timestamp: '2026-08-30T10:00:00.000Z',
       actions: [
         {
           type: 'ADD_RUMOR',
@@ -339,7 +333,7 @@ async function runSuite() {
       worldInfo: createEmptyWorldInfo(),
       character: { ...createEmptyCharacter(), name: '가짜 주인공' },
       lastCommittedEventId: null,
-      lastCommittedAt: '2026-08-30T10:00:00.000Z'
+      lastCommittedAt: new Date().toISOString()
     };
 
     let rejected = false;
@@ -349,6 +343,114 @@ async function runSuite() {
       rejected = e.message.includes('[HYDRATION_PROVENANCE_VIOLATION]');
     }
     assert(rejected, 'Mismatching genesis anchor hash is strictly rejected');
+  }
+
+  // TEST 5: Multi-generation Session Lifecycle & Genesis Anchor Immutability (Non-Drifting Anchor)
+  {
+    // Generation 0: Initial Creation
+    const initialWorld = createEmptyWorldInfo();
+    initialWorld.worldName = '창세의 땅';
+    const initialChar = createEmptyCharacter();
+    initialChar.name = '개척자';
+    initialChar.stats.strength = 15;
+
+    const engineGen0 = new SovereignEngine(initialWorld, initialChar);
+    const genesisAnchor = engineGen0.getGenesisSnapshot();
+    assert(genesisAnchor.stateVersion === 1, 'Gen0 Genesis anchor has stateVersion 1');
+    assert(genesisAnchor.character.name === '개척자', 'Gen0 Genesis anchor has initial character name');
+
+    // Turn 1 Action
+    const prop1 = buildTestProposal({
+      proposalId: 'prop-multi-1',
+      requestId: 'req-multi-1',
+      eventId: 'evt-multi-1',
+      turn: 1,
+      expectedStateVersion: 1,
+      actions: [
+        {
+          type: 'ADD_RUMOR',
+          payload: { rumor: '마을에 새로운 탐험가가 나타났다.' }
+        }
+      ]
+    });
+    const res1 = engineGen0.submitProposal(prop1);
+    assert(res1.success, 'Gen 0 Proposal 1 commits cleanly');
+
+    // Save Gen 0 -> Hydrate Gen 1
+    const snap1 = engineGen0.getSnapshot();
+    const hist1 = engineGen0.getHistory();
+    const savedGenesis1 = engineGen0.getGenesisSnapshot();
+
+    const engineGen1 = SovereignEngine.hydrate(snap1, hist1, undefined, undefined, savedGenesis1);
+    const hydratedGenesis1 = engineGen1.getGenesisSnapshot();
+
+    assert(hydratedGenesis1.stateVersion === 1, 'Gen1 preserved original Genesis stateVersion (1), not snapshot version (2)');
+    assert(hydratedGenesis1.worldInfo.publicRumors.length === 0, 'Gen1 Genesis anchor is NOT polluted with Gen1 rumors');
+
+    // Turn 2 Action on Gen 1: Add NPC
+    const prop2 = buildTestProposal({
+      proposalId: 'prop-multi-2',
+      requestId: 'req-multi-2',
+      eventId: 'evt-multi-2',
+      turn: 2,
+      expectedStateVersion: 2,
+      actions: [
+        {
+          type: 'ADD_NPC',
+          payload: {
+            id: 'npc-elder',
+            name: '촌장 엘론',
+            location: '마을 광장',
+            status: 'ALIVE',
+            innerThought: '마을을 지켜야 한다.',
+            npcClass: 'Elder'
+          }
+        }
+      ]
+    });
+    const res2 = engineGen1.submitProposal(prop2);
+    if (!res2.success) {
+      console.error('res2 rejectedReasons:', res2.rejectedReasons, 'conflictDetails:', res2.conflictDetails);
+    }
+    assert(res2.success, 'Gen 1 Proposal 2 commits cleanly');
+
+    // Save Gen 1 -> Hydrate Gen 2
+    const snap2 = engineGen1.getSnapshot();
+    const hist2 = engineGen1.getHistory();
+    const savedGenesis2 = engineGen1.getGenesisSnapshot();
+
+    assert(savedGenesis2.worldInfo.npcs.length === 0, 'Saved Genesis from Gen1 has 0 NPCs (true genesis)');
+
+    const engineGen2 = SovereignEngine.hydrate(snap2, hist2, undefined, undefined, savedGenesis2);
+    const hydratedGenesis2 = engineGen2.getGenesisSnapshot();
+
+    assert(hydratedGenesis2.worldInfo.npcs.length === 0, 'Gen2 engine Genesis anchor maintains 0 NPCs (true genesis)');
+    assert(engineGen2.getSnapshot().worldInfo.npcs.length === 1, 'Gen2 active snapshot reflects latest state (1 NPC)');
+
+    // Turn 3 Action on Gen 2
+    const prop3 = buildTestProposal({
+      proposalId: 'prop-multi-3',
+      requestId: 'req-multi-3',
+      eventId: 'evt-multi-3',
+      turn: 3,
+      expectedStateVersion: 3,
+      actions: [
+        {
+          type: 'ADD_RUMOR',
+          payload: { rumor: '원로의 전설' }
+        }
+      ]
+    });
+    engineGen2.submitProposal(prop3);
+
+    // Save Gen 2 -> Hydrate Gen 3
+    const snap3 = engineGen2.getSnapshot();
+    const hist3 = engineGen2.getHistory();
+    const savedGenesis3 = engineGen2.getGenesisSnapshot();
+
+    const engineGen3 = SovereignEngine.hydrate(snap3, hist3, undefined, undefined, savedGenesis3);
+    assert(engineGen3.getSnapshot().stateVersion === 4, 'Gen3 successfully hydrated after 3 full generations of evolution');
+    assert(engineGen3.getGenesisSnapshot().stateVersion === 1, 'Gen3 Genesis anchor is strictly anchored to true genesis (v=1)');
   }
 
   console.log('\n====================================================');
