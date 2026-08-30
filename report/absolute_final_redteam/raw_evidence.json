@@ -126,17 +126,17 @@
           "timeline": []
         },
         "lastCommittedEventId": "evt-a01-1",
-        "lastCommittedAt": "2026-08-30T13:24:48.159Z"
+        "lastCommittedAt": "2026-08-30T13:20:50.247Z"
       }
     },
     "executionEnvironment": {
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Hydration rejected with HYDRATION_PROVENANCE_VIOLATION due to replayed hash mismatch",
-    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_fb450e4fabfbfd6f) does not match snapshot hash (csh_d1f33260018c51c0). Snapshot or historical records have been tampered.",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_60dd9174d89a8114) does not match snapshot hash (csh_ea2c8ac34f2b80a3). Snapshot or historical records have been tampered.",
     "stateBefore": {
       "stateVersion": 2,
       "turn": 1,
@@ -252,7 +252,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a01-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.159Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.247Z"
     },
     "stateAfter": {
       "stateVersion": 2,
@@ -375,13 +375,13 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a01-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.159Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.247Z"
     },
     "historyBeforeCount": 1,
     "historyAfterCount": 1,
     "mutationDetected": false,
     "rejectionBoundary": "SovereignEngine.hydrate deterministic action replay & final state hash validation",
-    "errorStack": "Error: [HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_fb450e4fabfbfd6f) does not match snapshot hash (csh_d1f33260018c51c0). Snapshot or historical records have been tampered.\n    at Function.hydrate (/app/applet/src/engine/state.ts:344:17)\n    at runAllAttacks (/app/applet/report/absolute_final_redteam/runner/absolute_final_redteam_runner.ts:234:23)\n    at <anonymous> (/app/applet/report/absolute_final_redteam/runner/absolute_final_redteam_runner.ts:1892:1)\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)",
+    "errorStack": "Error: [HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_60dd9174d89a8114) does not match snapshot hash (csh_ea2c8ac34f2b80a3). Snapshot or historical records have been tampered.\n    at Function.hydrate (/app/applet/src/engine/state.ts:344:17)\n    at runAllAttacks (/app/applet/report/absolute_final_redteam/runner/absolute_final_redteam_runner.ts:234:23)\n    at <anonymous> (/app/applet/report/absolute_final_redteam/runner/absolute_final_redteam_runner.ts:1892:1)\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)",
     "pass": true
   },
   {
@@ -395,7 +395,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Deterministic engine initialization with exact requested stateVersion",
     "actual": "Hydrated with version 99",
@@ -512,7 +512,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.175Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.265Z"
     },
     "stateAfter": {
       "stateVersion": 99,
@@ -627,7 +627,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.175Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.265Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 0,
@@ -647,10 +647,10 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Hydration rejected with HYDRATION_INTEGRITY_VIOLATION due to turn regression",
-    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_e58499766c9aee16) does not match snapshot hash (csh_ac07c6177db32337). Snapshot or historical records have been tampered.",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_5b902cad875c664d) does not match snapshot hash (csh_ebe2e2a839daaa48). Snapshot or historical records have been tampered.",
     "stateBefore": {
       "stateVersion": 2,
       "turn": 2,
@@ -766,7 +766,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a03-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.176Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.266Z"
     },
     "stateAfter": {
       "stateVersion": 2,
@@ -883,7 +883,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a03-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.176Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.266Z"
     },
     "historyBeforeCount": 1,
     "historyAfterCount": 1,
@@ -902,10 +902,10 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Hydration rejected due to replayed action divergence",
-    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_1cf362a9e5a3ea49) does not match snapshot hash (csh_f11b132248de3d02). Snapshot or historical records have been tampered.",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_94d95671fa378411) does not match snapshot hash (csh_c99a51da5037b6ba). Snapshot or historical records have been tampered.",
     "stateBefore": {
       "stateVersion": 2,
       "turn": 1,
@@ -1021,7 +1021,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a04-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.177Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.268Z"
     },
     "stateAfter": {
       "stateVersion": 2,
@@ -1138,7 +1138,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a04-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.177Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.268Z"
     },
     "historyBeforeCount": 1,
     "historyAfterCount": 1,
@@ -1157,7 +1157,7 @@
         "requestId": "req-a05-1",
         "proposalId": "prop-a05-1",
         "turn": 1,
-        "timestamp": "2026-08-30T13:24:48.181Z",
+        "timestamp": "2026-08-30T13:20:50.273Z",
         "narrativeTime": {
           "year": 1,
           "season": "SPRING",
@@ -1168,14 +1168,14 @@
         "details": "{\"rumor\":\"Authentic Rumor\"}",
         "stateVersionAfterCommit": 2,
         "informationAccess": "RUMOR",
-        "previousStateHash": "csh_2d0964a608ec6106"
+        "previousStateHash": "csh_4382f6ad6efcd28d"
       }
     },
     "executionEnvironment": {
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Hydration rejected with HYDRATION_PROVENANCE_VIOLATION",
     "actual": "[HYDRATION_PROVENANCE_VIOLATION] Historical record 'rec-evt-a05-1-1' in proposal 'prop-a05-1' is missing canonicalAction payload for deterministic replay.",
@@ -1294,7 +1294,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a05-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.181Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.273Z"
     },
     "stateAfter": {
       "stateVersion": 2,
@@ -1411,7 +1411,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a05-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.181Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.273Z"
     },
     "historyBeforeCount": 1,
     "historyAfterCount": 1,
@@ -1430,10 +1430,10 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Hydration rejected due to provenance hash mismatch",
-    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Genesis anchor hash mismatch. Expected 'csh_ffffffffffffffff', got 'csh_fa6236a537e18205'.",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Genesis anchor hash mismatch. Expected 'csh_ffffffffffffffff', got 'csh_f9af422a84228a0a'.",
     "stateBefore": {
       "stateVersion": 2,
       "turn": 1,
@@ -1549,7 +1549,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a06-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.182Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.274Z"
     },
     "stateAfter": {
       "stateVersion": 2,
@@ -1666,7 +1666,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a06-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.182Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.274Z"
     },
     "historyBeforeCount": 1,
     "historyAfterCount": 1,
@@ -1679,17 +1679,17 @@
     "attackName": "Conflicting PreviousStateHash in Multi-Record Proposal Group",
     "category": "Hydration & Storage Sovereignty",
     "input": {
-      "record1Hash": "csh_db0a9f707ed3b7d0",
+      "record1Hash": "csh_48ae58b7693be797",
       "record2Hash": "csh_0000000000000000"
     },
     "executionEnvironment": {
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Hydration rejected with Conflicting previousStateHash error",
-    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Conflicting previousStateHash for proposal 'prop-a07-1' in record 'rec-evt-a07-1-2'. Expected 'csh_db0a9f707ed3b7d0', found 'csh_0000000000000000'.",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Conflicting previousStateHash for proposal 'prop-a07-1' in record 'rec-evt-a07-1-2'. Expected 'csh_48ae58b7693be797', found 'csh_0000000000000000'.",
     "stateBefore": {
       "stateVersion": 2,
       "turn": 1,
@@ -1806,7 +1806,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a07-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.183Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.275Z"
     },
     "stateAfter": {
       "stateVersion": 2,
@@ -1924,7 +1924,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a07-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.183Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.275Z"
     },
     "historyBeforeCount": 2,
     "historyAfterCount": 2,
@@ -1943,10 +1943,10 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Hydration rejected due to Genesis anchor hash mismatch with history turn 0 hash",
-    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Genesis anchor hash mismatch. Expected 'csh_6232df8f20d2f8ef', got 'csh_c375c7dec62ddebe'.",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Genesis anchor hash mismatch. Expected 'csh_3a4de9d44e050434', got 'csh_f26606e114ab66c1'.",
     "stateBefore": {
       "stateVersion": 2,
       "turn": 1,
@@ -2062,7 +2062,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a08-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.184Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.276Z"
     },
     "stateAfter": {
       "stateVersion": 2,
@@ -2179,7 +2179,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-a08-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.184Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.276Z"
     },
     "historyBeforeCount": 1,
     "historyAfterCount": 1,
@@ -2199,7 +2199,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Flawless deterministic replay and Genesis anchor preservation across 3 generations",
     "actual": "Final stateVersion=4, historyCount=3, genesisAnchorVersion=1",
@@ -2318,7 +2318,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-gen-1",
-      "lastCommittedAt": "2026-08-30T13:24:48.186Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.277Z"
     },
     "stateAfter": {
       "stateVersion": 4,
@@ -2437,7 +2437,7 @@
         "timeline": []
       },
       "lastCommittedEventId": "evt-gen-3",
-      "lastCommittedAt": "2026-08-30T13:24:48.188Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.279Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 3,
@@ -2462,7 +2462,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Hydration rejected with HYDRATION_SCHEMA_VIOLATION",
     "actual": "[HYDRATION_SCHEMA_VIOLATION] Cannot hydrate invalid canonical snapshot: [SCHEMA_VIOLATION] snapshot.worldInfo must be a non-null object.; [SCHEMA_VIOLATION] snapshot.character.name must be a string.; [SCHEMA_VIOLATION] snapshot.character.inventory must be an array.; [SCHEMA_VIOLATION] snapshot.character.stats must be an object.",
@@ -2487,7 +2487,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Sovereign Engine Commit Gate rejects illegal stat out of 1-30 boundary",
     "actual": "REJECTED: [INVALID_STAT_VALUE] Action #1: OVERWRITE_CHARACTER stat 'strength' must be a finite integer between 1 and 30. Received: 999",
@@ -2604,7 +2604,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.191Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.282Z"
     },
     "stateAfter": {
       "stateVersion": 1,
@@ -2719,7 +2719,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.191Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.282Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 0,
@@ -2738,7 +2738,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Sovereign Engine Commit Gate rejects unbacked inventory injection via OVERWRITE_CHARACTER",
     "actual": "REJECTED: [INVENTORY_OVERWRITE_PROHIBITED] Runtime inventory mutation via OVERWRITE_CHARACTER is prohibited.",
@@ -2855,7 +2855,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.192Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.283Z"
     },
     "stateAfter": {
       "stateVersion": 1,
@@ -2970,7 +2970,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.192Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.283Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 0,
@@ -2990,7 +2990,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Sovereign Engine rejects proposal with Concurrency conflict / Stale StateVersion",
     "actual": "REJECTED: [STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 2.",
@@ -3017,7 +3017,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejection with SECURITY_FORGERY / Internal Capability Check",
     "actual": "REJECTED: [SECURITY_FORGERY] Direct submission of privileged source 'SYSTEM' without Engine-owned capability token is strictly rejected.",
@@ -3134,7 +3134,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.193Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.284Z"
     },
     "stateAfter": {
       "stateVersion": 1,
@@ -3249,7 +3249,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.193Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.284Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 0,
@@ -3269,7 +3269,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with ACL_VIOLATION (LLM cannot record physical defects directly)",
     "actual": "REJECTED: [UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (RECORD_PHYSICAL_DEFECT) is unauthorized for source 'LLM'.",
@@ -3386,7 +3386,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.194Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.285Z"
     },
     "stateAfter": {
       "stateVersion": 1,
@@ -3501,7 +3501,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.194Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.285Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 0,
@@ -3521,7 +3521,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with ACL_VIOLATION (Dice authority belongs exclusively to Player/CSPRNG)",
     "actual": "REJECTED: [UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (RECORD_DICE_RESULT) is unauthorized for source 'LLM'.; [DICE_AUTHORITY_VIOLATION] LLM is not authorized to determine or record rollValue.",
@@ -3638,7 +3638,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.195Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.285Z"
     },
     "stateAfter": {
       "stateVersion": 1,
@@ -3753,7 +3753,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.195Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.285Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 0,
@@ -3780,7 +3780,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with CAUSALITY_VIOLATION (Missing acquisition cause)",
     "actual": "REJECTED: [CAUSALITY_VIOLATION] Unbacked inventory ADD of 'Magic Elixir' is rejected.",
@@ -3897,7 +3897,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.195Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.286Z"
     },
     "stateAfter": {
       "stateVersion": 1,
@@ -4012,7 +4012,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.195Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.286Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 0,
@@ -4077,7 +4077,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with CAUSALITY_VIOLATION due to aggregate cost deficit",
     "actual": "REJECTED: [CAUSALITY_VIOLATION] Insufficient cumulative cost resource 'Gold Coin' in character inventory.",
@@ -4194,7 +4194,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.196Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.286Z"
     },
     "stateAfter": {
       "stateVersion": 1,
@@ -4309,7 +4309,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.196Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.286Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 0,
@@ -4329,7 +4329,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with CAUSALITY_VIOLATION (Exact item entity match required)",
     "actual": "REJECTED: [CAUSALITY_VIOLATION] Event 'evt-event-apple' has no causal connection to item 'Golden Armor'.",
@@ -4357,7 +4357,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with DEFECT_IMMUTABILITY_VIOLATION (Permanent defect cannot be mutated)",
     "actual": "REJECTED: [PHYSICAL_DEFECT_IMMUTABILITY] Permanent physical defect is already established and cannot be overwritten.",
@@ -4386,7 +4386,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with DEAD_NPC_IMMUTABILITY_VIOLATION",
     "actual": "REJECTED: [DEAD_NPC_STATUS_PROTECTION] Cannot modify status of a deceased NPC.",
@@ -4414,7 +4414,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with FACTION_INFLUENCE_INVARIANT_VIOLATION (Total <= 100)",
     "actual": "REJECTED: [FACTION_INFLUENCE_EXCEEDED] Total cumulative faction influence cannot exceed 100.",
@@ -4479,7 +4479,7 @@
         "targetAttribute": "*",
         "verifiedValue": "DEAD",
         "source": "PLAYER",
-        "verifiedAt": "2026-08-30T13:24:48.201Z",
+        "verifiedAt": "2026-08-30T13:20:50.290Z",
         "provenanceHash": "csh_0000000000000000"
       },
       "targetAttribute": "status"
@@ -4488,7 +4488,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "hasMatchingVerifiedClaim returns false (Wildcard * cannot bind to specific attribute mutations)",
     "actual": "BINDING STRICTLY REJECTED",
@@ -4533,7 +4533,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with CAUSALITY_VIOLATION (Action cannot self-ground on simultaneous proposal action)",
     "actual": "REJECTED: [INVALID_ACTION] Action #1 (ADD_NARRATIVE_SEED) requires valid seed string 'id' and 'content'.; [CAUSALITY_VIOLATION] Event 'seed-instant-1' not found in canonical records.",
@@ -4650,7 +4650,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.201Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.291Z"
     },
     "stateAfter": {
       "stateVersion": 1,
@@ -4765,7 +4765,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.201Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.291Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 0,
@@ -4785,7 +4785,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with PROJECTION_INCONSISTENCY (Semantic representation and actions must project 1:1)",
     "actual": "REJECTED: [PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_MISMATCH] Proposal.actions differs from deterministic MeaningTree runtime projection.",
@@ -4902,7 +4902,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.202Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.291Z"
     },
     "stateAfter": {
       "stateVersion": 1,
@@ -5017,7 +5017,7 @@
         "timeline": []
       },
       "lastCommittedEventId": null,
-      "lastCommittedAt": "2026-08-30T13:24:48.202Z"
+      "lastCommittedAt": "2026-08-30T13:20:50.291Z"
     },
     "historyBeforeCount": 0,
     "historyAfterCount": 0,
@@ -5036,7 +5036,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Syntax recovery returns success: false without guessing missing semantic text",
     "actual": "success=false, error=Syntax recovery failed to produce valid JSON: Unexpected token '`', \"```json\n{\"\"... is not valid JSON",
@@ -5059,7 +5059,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Second proposal rejected with IDEMPOTENCY_VIOLATION (Article 17)",
     "actual": "REJECTED: [IDEMPOTENCY_VIOLATION] Request ID 'req-duplicate-unique-01' has already been processed.",
@@ -5087,7 +5087,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "Rejected with TURN_REGRESSION_CONFLICT",
     "actual": "REJECTED: [TURN_REGRESSION_CONFLICT] Proposal turn 4 cannot regress behind current sovereign turn 5.",
@@ -5116,7 +5116,7 @@
           "expectedStateVersion": 1,
           "source": "LLM",
           "turn": 1,
-          "timestamp": "2026-08-30T13:24:49.204Z",
+          "timestamp": "2026-08-30T13:20:51.297Z",
           "intentSummary": "Discovery of Ancient Relic",
           "meaningTree": {
             "atom": "INTENT",
@@ -5133,7 +5133,7 @@
                   "payload": {
                     "id": "off-golden-discovery-1",
                     "eventDescription": "A glowing Sunstone Amulet is discovered in the sanctuary ruins.",
-                    "timestamp": "2026-08-30T13:24:49.204Z"
+                    "timestamp": "2026-08-30T13:20:51.297Z"
                   }
                 }
               },
@@ -5156,7 +5156,7 @@
               "payload": {
                 "id": "off-golden-discovery-1",
                 "eventDescription": "A glowing Sunstone Amulet is discovered in the sanctuary ruins.",
-                "timestamp": "2026-08-30T13:24:49.204Z"
+                "timestamp": "2026-08-30T13:20:51.297Z"
               }
             },
             {
@@ -5174,7 +5174,7 @@
           "expectedStateVersion": 2,
           "source": "LLM",
           "turn": 2,
-          "timestamp": "2026-08-30T13:24:50.204Z",
+          "timestamp": "2026-08-30T13:20:52.297Z",
           "intentSummary": "Player picks up Sunstone Amulet",
           "meaningTree": {
             "atom": "ACTION",
@@ -5242,7 +5242,7 @@
           "expectedStateVersion": 3,
           "source": "LLM",
           "turn": 3,
-          "timestamp": "2026-08-30T13:24:51.204Z",
+          "timestamp": "2026-08-30T13:20:53.297Z",
           "intentSummary": "Resource exchange with apothecary",
           "meaningTree": {
             "atom": "INTENT",
@@ -5367,7 +5367,7 @@
       "nodeVersion": "v22.23.2",
       "platform": "linux",
       "arch": "x64",
-      "timestamp": "2026-08-30T13:24:48.155Z"
+      "timestamp": "2026-08-30T13:20:50.242Z"
     },
     "expected": "All 3 turns commit cleanly, inventory gold reduced from 100 to 50, amulet and potion added, provenance hash chain verified",
     "actual": "Final Gold=50, Final Version=4, Total History Records=5",

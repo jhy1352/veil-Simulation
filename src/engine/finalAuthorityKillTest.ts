@@ -5,7 +5,7 @@ import { StateTransitionProposal, TransitionAction, ExternalEvidence, UntrustedC
 import { createEmptyWorldInfo, createEmptyCharacter } from '../utils/factory';
 import { NpcRecord, FactionRecord, Character } from '../types';
 import { MeaningNode } from './language/types';
-import { actionToMeaningNode, adaptMeaningTreeToProposal } from './language/adapter';
+import { adaptMeaningTreeToProposal } from './language/adapter';
 
 export interface KillTestResult {
   testId: string;
