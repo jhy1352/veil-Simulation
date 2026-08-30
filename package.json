@@ -11,7 +11,8 @@
     "lint": "tsc --noEmit",
     "test:engine": "tsx src/engine/testRunner.ts",
     "test:language": "tsx src/engine/language/testSuite.ts",
-    "test:composition-runtime": "tsx src/engine/language/runtimeProjectionTest.ts"
+    "test:composition-runtime": "tsx src/engine/language/runtimeProjectionTest.ts",
+    "test:integration-proof": "tsx src/engine/language/runtimeIntegrationProofTest.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

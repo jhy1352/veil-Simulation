@@ -15,7 +15,7 @@ function action(type: string, id: string): MeaningNode {
 
 function root(composition: 'ORDERED' | 'UNORDERED', children: MeaningNode[]): MeaningNode {
   return {
-    atom: 'INTENT',
+    atom: 'CLAIM',
     scope: 'PROPOSAL',
     value: 'composition adversarial test',
     composition,
@@ -87,7 +87,13 @@ const D = action('ADD_NPC', 'D');
   const mismatchSubstitution = checkMeaningTreeProjectionConsistency(tree, [expected[0], projectMeaningTreeToRuntimeActions(root('ORDERED', [C])).actions[0]]);
   expect(!mismatchSubstitution.isConsistent, 'ORDERED[A,B] with actions[A,C] must be rejected.');
 
-  expect(() => assertMeaningTreeProjectionConsistency(tree, expected), 'assert gate must not throw for exact projection.');
+  let exactThrew = false;
+  try {
+    assertMeaningTreeProjectionConsistency(tree, expected);
+  } catch {
+    exactThrew = true;
+  }
+  expect(!exactThrew, 'assert gate must not throw for exact projection.');
   let threw = false;
   try {
     assertMeaningTreeProjectionConsistency(tree, [expected[1], expected[0]]);

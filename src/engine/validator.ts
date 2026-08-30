@@ -3,6 +3,7 @@ import { isEngineAuthorized } from './internalCapability';
 import { WorldInfo, Character, NarrativeTime } from '../types';
 import { deepClone, applyActionToDraftState } from './actionApplier';
 import { ImmigrationGate } from './immigrationGate';
+import { checkMeaningTreeProjectionConsistency } from './language/runtimeProjection';
 
 const ALLOWED_STAT_KEYS = new Set(['strength', 'agility', 'constitution', 'intelligence', 'wisdom', 'charisma']);
 const ALLOWED_VISIBILITY = new Set(['PUBLIC', 'FACTION_ONLY', 'PRIVATE', 'HIDDEN', 'RUMOR']);
@@ -364,6 +365,14 @@ export class EngineValidator {
     // 6. Empty Proposal Check: actions: [] must be explicitly rejected
     if (!proposal.actions || proposal.actions.length === 0) {
       rejectedReasons.push(`[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions.`);
+    }
+
+    // 6.5 MeaningTree Runtime Projection Consistency Check (Fail-Closed)
+    if (proposal.meaningTree) {
+      const consistency = checkMeaningTreeProjectionConsistency(proposal.meaningTree, proposal.actions);
+      if (!consistency.isConsistent) {
+        rejectedReasons.push(`[PROJECTION_INCONSISTENCY] ${consistency.reason}`);
+      }
     }
 
     // 7. Attached Verified Claims Validation (VEIL Immigration Gate)
