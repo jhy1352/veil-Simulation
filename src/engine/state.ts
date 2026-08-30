@@ -10,6 +10,27 @@ import { HistoryManager } from './history';
 import { WorldInfo, Character } from '../types';
 import { createEmptyCharacter, createEmptyWorldInfo } from '../utils/factory';
 import { deepClone, applyActionToDraftState } from './actionApplier';
+import { canonicalizeValue } from './language/canonicalizer';
+
+/**
+ * Deterministically computes the canonical state hash for state provenance.
+ */
+export function computeCanonicalStateHash(state: CanonicalState): string {
+  const canonical = canonicalizeValue(state);
+  const json = JSON.stringify(canonical);
+  let h1 = 0x811c9dc5;
+  let h2 = 0x84222325;
+  for (let i = 0; i < json.length; i++) {
+    const ch = json.charCodeAt(i);
+    h1 ^= ch;
+    h1 = Math.imul(h1, 0x01000193);
+    h2 ^= ch;
+    h2 = Math.imul(h2, 0x01000193);
+  }
+  const hex1 = (h1 >>> 0).toString(16).padStart(8, '0');
+  const hex2 = (h2 >>> 0).toString(16).padStart(8, '0');
+  return `csh_${hex1}${hex2}`;
+}
 
 /**
  * Deep freezes an object and all nested properties to guarantee absolute immutability.
@@ -107,6 +128,51 @@ export class SovereignEngine {
           throw new Error(
             `[HYDRATION_INTEGRITY_VIOLATION] History stateVersion regression at index ${i}: version ${curr.stateVersionAfterCommit} precedes version ${prev.stateVersionAfterCommit}.`
           );
+        }
+      }
+
+      // Step 2: Provenance & previousStateHash Validation
+      const PROVENANCE_HASH_REGEX = /^csh_[0-9a-f]{16}$/;
+      const proposalHashMap = new Map<string, { hash: string; version: number; turn: number }>();
+      const seenVersionHashMap = new Map<number, string>();
+
+      for (let i = 0; i < history.length; i++) {
+        const rec = history[i];
+        if (rec.previousStateHash !== undefined) {
+          if (typeof rec.previousStateHash !== 'string' || !PROVENANCE_HASH_REGEX.test(rec.previousStateHash)) {
+            throw new Error(
+              `[HYDRATION_PROVENANCE_VIOLATION] Record at index ${i} (${rec.recordId}) contains invalid or malformed previousStateHash: '${rec.previousStateHash}'.`
+            );
+          }
+
+          const existing = proposalHashMap.get(rec.proposalId);
+          if (existing) {
+            if (existing.hash !== rec.previousStateHash) {
+              throw new Error(
+                `[HYDRATION_PROVENANCE_VIOLATION] Conflicting previousStateHash for proposal '${rec.proposalId}' in record '${rec.recordId}'. Expected '${existing.hash}', found '${rec.previousStateHash}'.`
+              );
+            }
+            if (existing.version !== rec.stateVersionAfterCommit) {
+              throw new Error(
+                `[HYDRATION_PROVENANCE_VIOLATION] Conflicting stateVersionAfterCommit for proposal '${rec.proposalId}' in record '${rec.recordId}'. Expected '${existing.version}', found '${rec.stateVersionAfterCommit}'.`
+              );
+            }
+          } else {
+            proposalHashMap.set(rec.proposalId, {
+              hash: rec.previousStateHash,
+              version: rec.stateVersionAfterCommit,
+              turn: rec.turn
+            });
+
+            // Ensure distinct state versions have distinct previousStateHashes
+            const priorHashForVersion = seenVersionHashMap.get(rec.stateVersionAfterCommit);
+            if (priorHashForVersion && priorHashForVersion !== rec.previousStateHash) {
+              throw new Error(
+                `[HYDRATION_PROVENANCE_VIOLATION] State version ${rec.stateVersionAfterCommit} has conflicting previous state hashes.`
+              );
+            }
+            seenVersionHashMap.set(rec.stateVersionAfterCommit, rec.previousStateHash);
+          }
         }
       }
 
@@ -239,6 +305,7 @@ export class SovereignEngine {
     const draftCharacter: Character = deepClone(this.character);
     const newRecords: ImmutableHistoricalRecord[] = [];
     const targetStateVersion = this.stateVersion + 1;
+    const previousStateHash = computeCanonicalStateHash(currentSnapshot);
 
     try {
       for (const action of verdict.sanitizedActions) {
@@ -272,6 +339,7 @@ export class SovereignEngine {
           details: recordDetails,
           stateVersionAfterCommit: targetStateVersion,
           informationAccess: infoAccess,
+          previousStateHash: previousStateHash,
           originInputId: proposal.originInputId,
           category: action.category
         };
