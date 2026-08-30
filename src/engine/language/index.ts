@@ -10,3 +10,4 @@ export * from './serializer';
 export * from './recovery';
 export * from './adapter';
 export * from './diversity';
+export * from './runtimeProjection';
