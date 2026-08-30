@@ -21,6 +21,7 @@ import {
   isValidKnowledgeGraphRelation
 } from './index/index';
 import { runLanguageTestSuite } from './language/testSuite';
+import { runHydrationSovereigntyBypassTests } from './hydrationSovereigntyBypassTest';
 import { actionToMeaningNode } from './language/adapter';
 import { MeaningNode } from './language/types';
 
@@ -5244,6 +5245,14 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
     const res = runLanguageTestSuite();
     if (res.failed > 0) {
       throw new Error(`Engine Language Test Suite had ${res.failed} failures out of ${res.total} assertions.`);
+    }
+  });
+
+  record('TEST-HYDRATION-01', 'Hydration Sovereignty Fail-Closed & Replay Tampering Red Team Suite', () => {
+    const res = runHydrationSovereigntyBypassTests();
+    if (!res.allPassed) {
+      const fails = res.results.filter(r => !r.passed).map(r => `${r.name}: ${r.error}`).join('; ');
+      throw new Error(`Hydration Sovereignty Bypass Test Suite failed: ${fails}`);
     }
   });
 

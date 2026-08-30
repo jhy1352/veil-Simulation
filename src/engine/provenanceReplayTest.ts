@@ -403,7 +403,7 @@ async function runSuite() {
             location: '마을 광장',
             status: 'ALIVE',
             innerThought: '마을을 지켜야 한다.',
-            npcClass: 'Elder'
+            npcClass: 'Class A'
           }
         }
       ]

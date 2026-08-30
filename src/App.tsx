@@ -68,7 +68,8 @@ export default function App() {
     curChar: Character,
     curHistory: any[],
     curTurn: number,
-    curDiag?: any
+    curDiag?: any,
+    genesisSnapshot?: import('./engine/types').CanonicalState
   ): SovereignEngine => {
     if (!sovereignEngineRef.current) {
       // Sovereign hydration priority:
@@ -91,7 +92,10 @@ export default function App() {
           lastCommittedEventId: curDiag?.lastEventId || null,
           lastCommittedAt: new Date().toISOString()
         },
-        curHistory || []
+        curHistory || [],
+        undefined,
+        undefined,
+        genesisSnapshot
       );
     }
     return sovereignEngineRef.current;
@@ -106,7 +110,7 @@ export default function App() {
     }
   };
 
-  // 1. Storage Hydration on Mount
+  // 1. Storage Hydration on Mount (Strict Sovereign Verification Before UI Mutation)
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -119,18 +123,6 @@ export default function App() {
           const loadedHistory = (parsed.engineState?.historicalRecords as any) || [];
           const loadedDiag = parsed.engineState?.diagnostics;
 
-          setCharacter(loadedChar);
-          setWorldInfo(loadedWorld);
-          setMessages(parsed.messages || []);
-          setStoryTurnCount(loadedTurn);
-          setGameState(parsed.messages && parsed.messages.length > 0 ? 'playing' : 'creation');
-          if (parsed.engineState) {
-            setEngineState(parsed.engineState);
-          }
-          if (parsed.selectedModel) {
-            setSelectedModel(parsed.selectedModel);
-          }
-
           const resolvedVersion =
             typeof loadedDiag?.stateVersion === 'number' && loadedDiag.stateVersion >= 1
               ? loadedDiag.stateVersion
@@ -138,7 +130,8 @@ export default function App() {
               ? loadedTurn
               : 1;
 
-          sovereignEngineRef.current = SovereignEngine.hydrate(
+          // Sovereign Gate: MUST Hydrate & Verify BEFORE setting any UI state
+          const hydratedEngine = SovereignEngine.hydrate(
             {
               stateVersion: resolvedVersion,
               turn: loadedTurn,
@@ -152,10 +145,41 @@ export default function App() {
             undefined,
             parsed.genesisSnapshot
           );
+
+          // Succeeded: Authoritative engine is stored and UI state synchronized from verified snapshot
+          sovereignEngineRef.current = hydratedEngine;
+          const snap = hydratedEngine.getSnapshot();
+          setCharacter(snap.character);
+          setWorldInfo(snap.worldInfo);
+          setMessages(parsed.messages || []);
+          setStoryTurnCount(snap.turn);
+          setGameState(parsed.messages && parsed.messages.length > 0 ? 'playing' : 'creation');
+          if (parsed.engineState) {
+            setEngineState(parsed.engineState);
+          }
+          if (parsed.selectedModel) {
+            setSelectedModel(parsed.selectedModel);
+          }
         }
       }
-    } catch (e) {
-      console.warn('Failed to hydrate session from localStorage:', e);
+    } catch (e: any) {
+      console.warn('[SOVEREIGN_HYDRATION_FAILED] Failed to hydrate session from localStorage:', e);
+      // Strict Fail-Closed: Quarantined safe state & zero mutation of untrusted payload
+      localStorage.removeItem(STORAGE_KEY);
+      sovereignEngineRef.current = new SovereignEngine(
+        createEmptyWorldInfo(),
+        createEmptyCharacter(),
+        [],
+        1,
+        1
+      );
+      setCharacter(createEmptyCharacter());
+      setWorldInfo(createEmptyWorldInfo());
+      setMessages([]);
+      setStoryTurnCount(1);
+      setGameState('creation');
+      setEngineState(createEmptyEngineState());
+      setModelError(`[SOVEREIGN_HYDRATION_FAILED] 저장 데이터 무결성 검증 실패: ${e?.message || 'Replay 검증 거부'}`);
     }
   }, []);
 
@@ -183,8 +207,12 @@ export default function App() {
 
   // Partial Update Handlers routed through Sovereign Gate during active gameplay
   const handleUpdateCharacter = (partial: Partial<Character>) => {
-    const engine = sovereignEngineRef.current;
-    if (gameState === 'playing' && engine) {
+    if (gameState === 'playing') {
+      const engine = sovereignEngineRef.current;
+      if (!engine) {
+        console.error('[SOVEREIGN_VIOLATION] Direct character update blocked: Engine is not initialized in playing state.');
+        return;
+      }
       const snap = engine.getSnapshot();
       const nextChar = { ...snap.character, ...partial };
       const action: TransitionAction = {
@@ -207,13 +235,18 @@ export default function App() {
         setCharacter(res.snapshot.character);
       }
     } else {
+      // Creation mode: pre-game character building
       setCharacter(prev => ({ ...prev, ...partial }));
     }
   };
 
   const handleUpdateWorldInfo = (partial: Partial<WorldInfo>) => {
-    const engine = sovereignEngineRef.current;
-    if (gameState === 'playing' && engine) {
+    if (gameState === 'playing') {
+      const engine = sovereignEngineRef.current;
+      if (!engine) {
+        console.error('[SOVEREIGN_VIOLATION] Direct world info update blocked: Engine is not initialized in playing state.');
+        return;
+      }
       const snap = engine.getSnapshot();
       const nextWorld = { ...snap.worldInfo, ...partial };
       const proposal: StateTransitionProposal = {
@@ -237,6 +270,7 @@ export default function App() {
         setWorldInfo(res.snapshot.worldInfo);
       }
     } else {
+      // Creation mode: pre-game world building
       setWorldInfo(prev => ({ ...prev, ...partial }));
     }
   };
@@ -297,38 +331,52 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
     );
   };
 
-  // Load Session from Cloud or Code
+  // Load Session from Cloud or Code (Strict Sovereign Verification Before UI Mutation)
   const handleLoadSession = (loadedPayload: SessionPayload) => {
     if (loadedPayload.character && loadedPayload.worldInfo) {
-      const loadedWorld = deepMerge(createEmptyWorldInfo(), loadedPayload.worldInfo);
-      const loadedChar = deepMerge(createEmptyCharacter(), loadedPayload.character);
-      const loadedTurn = loadedPayload.storyTurnCount || 1;
-      const loadedHistory = (loadedPayload.engineState?.historicalRecords as any) || [];
-      const loadedDiag = loadedPayload.engineState?.diagnostics;
+      try {
+        const loadedWorld = deepMerge(createEmptyWorldInfo(), loadedPayload.worldInfo);
+        const loadedChar = deepMerge(createEmptyCharacter(), loadedPayload.character);
+        const loadedTurn = loadedPayload.storyTurnCount || 1;
+        const loadedHistory = (loadedPayload.engineState?.historicalRecords as any) || [];
+        const loadedDiag = loadedPayload.engineState?.diagnostics;
+        const resolvedVersion =
+          typeof loadedDiag?.stateVersion === 'number' && loadedDiag.stateVersion >= 1
+            ? loadedDiag.stateVersion
+            : loadedHistory.length ? loadedHistory.length + 1 : 1;
 
-      setCharacter(loadedChar);
-      setWorldInfo(loadedWorld);
-      setMessages(loadedPayload.messages || []);
-      setStoryTurnCount(loadedTurn);
-      setEngineState(loadedPayload.engineState || createEmptyEngineState());
-      setGameState('playing');
-      setWaitingForRoll(null);
-      setModelError(null);
+        // Sovereign Gate: MUST Hydrate & Verify BEFORE setting any UI state
+        const hydratedEngine = SovereignEngine.hydrate(
+          {
+            stateVersion: resolvedVersion,
+            turn: loadedTurn,
+            worldInfo: loadedWorld,
+            character: loadedChar,
+            lastCommittedEventId: loadedDiag?.lastEventId || null,
+            lastCommittedAt: loadedPayload.updatedAt || new Date().toISOString()
+          },
+          loadedHistory,
+          undefined,
+          undefined,
+          loadedPayload.genesisSnapshot
+        );
 
-      sovereignEngineRef.current = SovereignEngine.hydrate(
-        {
-          stateVersion: loadedDiag?.stateVersion || (loadedHistory.length ? loadedHistory.length + 1 : 1),
-          turn: loadedTurn,
-          worldInfo: loadedWorld,
-          character: loadedChar,
-          lastCommittedEventId: loadedDiag?.lastEventId || null,
-          lastCommittedAt: loadedPayload.updatedAt || new Date().toISOString()
-        },
-        loadedHistory,
-        undefined,
-        undefined,
-        loadedPayload.genesisSnapshot
-      );
+        // Succeeded: Authoritative engine is stored and UI state synchronized from verified snapshot
+        sovereignEngineRef.current = hydratedEngine;
+        const snap = hydratedEngine.getSnapshot();
+        setCharacter(snap.character);
+        setWorldInfo(snap.worldInfo);
+        setMessages(loadedPayload.messages || []);
+        setStoryTurnCount(snap.turn);
+        setEngineState(loadedPayload.engineState || createEmptyEngineState());
+        setGameState('playing');
+        setWaitingForRoll(null);
+        setModelError(null);
+      } catch (err: any) {
+        console.error('[SOVEREIGN_HYDRATION_ERROR] Failed to load session:', err);
+        setModelError(`[SOVEREIGN_HYDRATION_FAILED] 세션 불러오기 실패 (역사 무결성/Replay 거부): ${err?.message || '검증 실패'}`);
+        // Strict Fail-Closed: DO NOT change gameState to 'playing', DO NOT mutate character/world
+      }
     }
   };
 
