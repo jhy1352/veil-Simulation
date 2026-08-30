@@ -11,6 +11,7 @@ import { EngineValidator } from './src/engine/validator.ts';
 import { CanonicalState, StateTransitionProposal } from './src/engine/types.ts';
 import { recoverSyntaxAndParseJson } from './src/engine/language/recovery.ts';
 import { filterDiverseCandidates } from './src/engine/language/diversity.ts';
+import { runCandidateRecoveryGate } from './src/engine/language/candidateRecoveryGate.ts';
 
 const app = express();
 const PORT = 3000;
@@ -638,10 +639,10 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
     });
 
     const rawPhase1Response = response.text || '';
-    const candidates = parseCandidatesBlock(rawPhase1Response);
+    const rawCandidates = parseCandidatesBlock(rawPhase1Response);
 
     // VEIL Enforcement: Check if candidates block is present
-    if (!candidates) {
+    if (!rawCandidates) {
       // Non-mutation or missing candidates block: return response directly
       const outputCharCount = rawPhase1Response.length;
       const usageMetadata = (response as any).usageMetadata;
@@ -671,10 +672,51 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
       });
     }
 
+    // VEIL Candidate Recovery Gate: Quarantine corrupted candidates deterministically
+    const gateResult = runCandidateRecoveryGate<VeilCandidate>(rawCandidates);
+    if (gateResult.quarantinedCount > 0) {
+      console.warn(`[VEIL Candidate Recovery Gate] Quarantined ${gateResult.quarantinedCount} corrupted candidate(s) out of ${gateResult.totalInputCount}:`, gateResult.quarantinedCandidates);
+    }
+
+    const candidates = gateResult.passedCandidates;
+
+    // Fail-Closed: If 0 candidates passed gate, return non-mutation narrative safely
+    if (candidates.length === 0) {
+      console.warn('[VEIL Candidate Recovery Gate] All candidates quarantined. Failing closed to non-mutation.');
+      const outputCharCount = rawPhase1Response.length;
+      const usageMetadata = (response as any).usageMetadata;
+
+      return res.json({
+        success: true,
+        text: rawPhase1Response,
+        rawResponse: rawPhase1Response,
+        isFallbackNonMutation: true,
+        quarantinedCount: gateResult.quarantinedCount,
+        contextSnapshot: initialContextPrompt,
+        actualModelVersion: response.modelVersion,
+        requestedModel: targetModel,
+        serverTimings: {
+          t1_requestStart,
+          t2_contextAssemblyComplete,
+          t3_geminiRequestStart,
+          t4_geminiResponseReceived,
+          contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
+          geminiGenerationMs: t4_geminiResponseReceived - t3_geminiRequestStart,
+          inputCharCount,
+          outputCharCount,
+          tokenCount: usageMetadata ? {
+            promptTokens: usageMetadata.promptTokenCount,
+            candidatesTokens: usageMetadata.candidatesTokenCount,
+            totalTokens: usageMetadata.totalTokenCount
+          } : undefined
+        }
+      });
+    }
+
     // VEIL Constraint: 1 to 5 candidate packets (instructed strictly 5)
     if (candidates.length < 1 || candidates.length > 5) {
       return res.status(422).json({
-        error: `[VEIL_CANDIDATE_VIOLATION] LLM #1 generated ${candidates.length} candidates, but VEIL strictly requires between 1 and 5 candidates.`,
+        error: `[VEIL_CANDIDATE_VIOLATION] LLM #1 generated ${candidates.length} valid candidates, but VEIL strictly requires between 1 and 5 candidates.`,
         rawResponse: rawPhase1Response
       });
     }

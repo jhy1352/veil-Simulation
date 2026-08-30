@@ -555,6 +555,9 @@ export function buildSafeProposalFromCandidate(
   });
 
   if (candidate.rawMetadataBlock) {
+    if (!safeProposal.rawClaims) {
+      safeProposal.rawClaims = [];
+    }
     safeProposal.rawClaims.push(candidate.rawMetadataBlock);
   }
 

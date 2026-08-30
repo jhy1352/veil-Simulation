@@ -10,4 +10,5 @@ export * from './serializer';
 export * from './recovery';
 export * from './adapter';
 export * from './diversity';
+export * from './candidateRecoveryGate';
 export * from './runtimeProjection';

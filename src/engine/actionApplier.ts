@@ -134,6 +134,12 @@ export function applyActionToDraftState(action: TransitionAction, world: WorldIn
 
     case 'ADVANCE_CHAPTER': {
       const { currentChapter, upcomingChapters } = action.payload;
+      if (!world.chapters) {
+        world.chapters = {
+          currentChapter: (world as any).currentChapter || '1장',
+          upcomingChapters: Array.isArray((world as any).upcomingChapters) ? [...(world as any).upcomingChapters] : []
+        };
+      }
       world.chapters.currentChapter = currentChapter;
       if (upcomingChapters) {
         world.chapters.upcomingChapters = [...upcomingChapters];

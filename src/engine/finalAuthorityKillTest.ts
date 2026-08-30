@@ -4,6 +4,8 @@ import { EngineValidator } from './validator';
 import { StateTransitionProposal, TransitionAction, ExternalEvidence, UntrustedClaim, VerifiedClaim } from './types';
 import { createEmptyWorldInfo, createEmptyCharacter } from '../utils/factory';
 import { NpcRecord, FactionRecord, Character } from '../types';
+import { MeaningNode } from './language/types';
+import { actionToMeaningNode, adaptMeaningTreeToProposal } from './language/adapter';
 
 export interface KillTestResult {
   testId: string;
@@ -1018,7 +1020,17 @@ export function runFinalAuthorityKillTestSuite(): {
         throw new Error(`Gate admission failed: ${admitRes.rejectionReason}`);
       }
 
-      return {
+      const node: MeaningNode = {
+        atom: 'ACTION',
+        scope: 'PROPOSAL',
+        value: 'UPDATE_FACTION',
+        fields: {
+          actionType: 'UPDATE_FACTION',
+          payload: { id: 'faction-wudang', changes: { influence: 35 } }
+        }
+      };
+
+      const proposal = adaptMeaningTreeToProposal(node, {
         proposalId: 'prop-kill-20',
         requestId: 'req-kill-20',
         eventId: 'ev-kill-20',
@@ -1026,15 +1038,10 @@ export function runFinalAuthorityKillTestSuite(): {
         source: 'LLM',
         turn: 1,
         timestamp: new Date().toISOString(),
-        intentSummary: 'Legitimate faction update',
-        verifiedClaims: [admitRes.verifiedClaim],
-        actions: [
-          {
-            type: 'UPDATE_FACTION',
-            payload: { id: 'faction-wudang', changes: { influence: 35 } }
-          }
-        ]
-      };
+        intentSummary: 'Legitimate faction update'
+      });
+      proposal.verifiedClaims = [admitRes.verifiedClaim];
+      return proposal;
     },
     'COMMIT' // Expected to COMMIT cleanly
   );
@@ -1046,46 +1053,68 @@ export function runFinalAuthorityKillTestSuite(): {
     'LLM introduces new NPC, narrative seed, and offscreen event (Rule Authority)',
     'ADD_NPC + ADD_NARRATIVE_SEED + RECORD_OFFSCREEN_EVENT',
     createStandardTestEngine,
-    (engine) => ({
-      proposalId: 'prop-kill-21',
-      requestId: 'req-kill-21',
-      eventId: 'ev-kill-21',
-      expectedStateVersion: 1,
-      source: 'LLM',
-      turn: 1,
-      timestamp: new Date().toISOString(),
-      intentSummary: 'Introduce new world elements',
-      actions: [
-        {
-          type: 'ADD_NPC',
-          payload: {
-            id: 'npc-dan-mok',
-            name: '단목혜',
-            status: 'ALIVE',
-            impression: 'Mysterious',
-            role: 'Wanderer',
-            personality: 'Quiet',
-            affiliation: '무소속'
+    (engine) => {
+      const rootTree: MeaningNode = {
+        atom: 'INTENT',
+        scope: 'PROPOSAL',
+        children: [
+          {
+            atom: 'ACTION',
+            scope: 'PROPOSAL',
+            value: 'ADD_NPC',
+            fields: {
+              actionType: 'ADD_NPC',
+              payload: {
+                id: 'npc-dan-mok',
+                name: '단목혜',
+                status: 'ALIVE',
+                impression: 'Mysterious',
+                role: 'Wanderer',
+                personality: 'Quiet',
+                affiliation: '무소속'
+              }
+            }
+          },
+          {
+            atom: 'ACTION',
+            scope: 'PROPOSAL',
+            value: 'ADD_NARRATIVE_SEED',
+            fields: {
+              actionType: 'ADD_NARRATIVE_SEED',
+              payload: {
+                id: 'seed-ancient-scroll',
+                content: '장경각 지하에서 오래된 비급의 흔적이 발견되었다.',
+                status: 'active'
+              }
+            }
+          },
+          {
+            atom: 'ACTION',
+            scope: 'PROPOSAL',
+            value: 'RECORD_OFFSCREEN_EVENT',
+            fields: {
+              actionType: 'RECORD_OFFSCREEN_EVENT',
+              payload: {
+                eventId: 'off-black-wind',
+                eventDescription: '흑풍채가 하북 상단을 습격했다.',
+                narrativeTime: { year: 1, season: 'SPRING', month: 3, day: 15, timeOfDay: 'NIGHT' }
+              }
+            }
           }
-        },
-        {
-          type: 'ADD_NARRATIVE_SEED',
-          payload: {
-            id: 'seed-ancient-scroll',
-            content: '장경각 지하에서 오래된 비급의 흔적이 발견되었다.',
-            status: 'active'
-          }
-        },
-        {
-          type: 'RECORD_OFFSCREEN_EVENT',
-          payload: {
-            eventId: 'off-black-wind',
-            eventDescription: '흑풍채가 하북 상단을 습격했다.',
-            narrativeTime: { year: 1, season: 'SPRING', month: 3, day: 15, timeOfDay: 'NIGHT' }
-          }
-        }
-      ]
-    }),
+        ]
+      };
+
+      return adaptMeaningTreeToProposal(rootTree, {
+        proposalId: 'prop-kill-21',
+        requestId: 'req-kill-21',
+        eventId: 'ev-kill-21',
+        expectedStateVersion: 1,
+        source: 'LLM',
+        turn: 1,
+        timestamp: new Date().toISOString(),
+        intentSummary: 'Introduce new world elements'
+      });
+    },
     'COMMIT' // Expected to COMMIT cleanly
   );
 

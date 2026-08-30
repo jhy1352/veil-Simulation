@@ -13,6 +13,8 @@ import {
 } from './types';
 import { createEmptyWorldInfo, createEmptyCharacter } from '../utils/factory';
 import { NpcRecord, FactionRecord, Character, WorldInfo } from '../types';
+import { MeaningNode } from './language/types';
+import { adaptMeaningTreeToProposal } from './language/adapter';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -1107,20 +1109,31 @@ export function runFullExtinctionRedTeamSuite(): {
         [ev],
         snap
       );
+      const node: MeaningNode = {
+        atom: 'ACTION',
+        scope: 'PROPOSAL',
+        value: 'UPDATE_FACTION',
+        fields: {
+          actionType: 'UPDATE_FACTION',
+          payload: { id: 'faction-shaolin', changes: { influence: 35 } }
+        }
+      };
+
+      const proposal = adaptMeaningTreeToProposal(node, {
+        proposalId: 'prop-pos-01',
+        requestId: 'req-pos-01',
+        eventId: 'ev-pos-01',
+        expectedStateVersion: 1,
+        source: 'LLM',
+        turn: 1,
+        timestamp: new Date().toISOString(),
+        intentSummary: 'Legitimate faction update'
+      });
+      proposal.verifiedClaims = [admit.verifiedClaim!];
+
       return {
         engine,
-        proposal: {
-          proposalId: 'prop-pos-01',
-          requestId: 'req-pos-01',
-          eventId: 'ev-pos-01',
-          expectedStateVersion: 1,
-          source: 'LLM',
-          turn: 1,
-          timestamp: new Date().toISOString(),
-          intentSummary: 'Legitimate faction update',
-          verifiedClaims: [admit.verifiedClaim!],
-          actions: [{ type: 'UPDATE_FACTION', payload: { id: 'faction-shaolin', changes: { influence: 35 } } }]
-        }
+        proposal
       };
     }
   );
@@ -1133,20 +1146,16 @@ export function runFullExtinctionRedTeamSuite(): {
     true,
     () => {
       const engine = createStandardEngine();
-      return {
-        engine,
-        proposal: {
-          proposalId: 'prop-pos-02',
-          requestId: 'req-pos-02',
-          eventId: 'ev-pos-02',
-          expectedStateVersion: 1,
-          source: 'LLM',
-          turn: 1,
-          timestamp: new Date().toISOString(),
-          intentSummary: 'Introduce new world elements under creative freedom',
-          actions: [
-            {
-              type: 'ADD_NPC',
+      const rootTree: MeaningNode = {
+        atom: 'INTENT',
+        scope: 'PROPOSAL',
+        children: [
+          {
+            atom: 'ACTION',
+            scope: 'PROPOSAL',
+            value: 'ADD_NPC',
+            fields: {
+              actionType: 'ADD_NPC',
               payload: {
                 id: 'npc-nam-gung',
                 name: '남궁세가 가주',
@@ -1156,17 +1165,38 @@ export function runFullExtinctionRedTeamSuite(): {
                 affiliation: '남궁세가',
                 personality: 'Stern'
               }
-            },
-            {
-              type: 'ADD_NARRATIVE_SEED',
+            }
+          },
+          {
+            atom: 'ACTION',
+            scope: 'PROPOSAL',
+            value: 'ADD_NARRATIVE_SEED',
+            fields: {
+              actionType: 'ADD_NARRATIVE_SEED',
               payload: {
                 id: 'seed-nam-gung-crisis',
                 content: '남궁세가에 정체불명의 자객이 침입했다.',
                 status: 'active'
               }
             }
-          ]
-        }
+          }
+        ]
+      };
+
+      const proposal = adaptMeaningTreeToProposal(rootTree, {
+        proposalId: 'prop-pos-02',
+        requestId: 'req-pos-02',
+        eventId: 'ev-pos-02',
+        expectedStateVersion: 1,
+        source: 'LLM',
+        turn: 1,
+        timestamp: new Date().toISOString(),
+        intentSummary: 'Introduce new world elements under creative freedom'
+      });
+
+      return {
+        engine,
+        proposal
       };
     }
   );
@@ -1179,27 +1209,33 @@ export function runFullExtinctionRedTeamSuite(): {
     true,
     () => {
       const engine = createStandardEngine();
+      const node: MeaningNode = {
+        atom: 'ACTION',
+        scope: 'PROPOSAL',
+        value: 'MODIFY_INVENTORY',
+        fields: {
+          actionType: 'MODIFY_INVENTORY',
+          payload: {
+            operation: 'REMOVE',
+            item: { id: 'item-herb', name: '상처약', quantity: 1 }
+          }
+        }
+      };
+
+      const proposal = adaptMeaningTreeToProposal(node, {
+        proposalId: 'prop-pos-03',
+        requestId: 'req-pos-03',
+        eventId: 'ev-pos-03',
+        expectedStateVersion: 1,
+        source: 'LLM',
+        turn: 1,
+        timestamp: new Date().toISOString(),
+        intentSummary: 'Consume healing herb'
+      });
+
       return {
         engine,
-        proposal: {
-          proposalId: 'prop-pos-03',
-          requestId: 'req-pos-03',
-          eventId: 'ev-pos-03',
-          expectedStateVersion: 1,
-          source: 'LLM',
-          turn: 1,
-          timestamp: new Date().toISOString(),
-          intentSummary: 'Consume healing herb',
-          actions: [
-            {
-              type: 'MODIFY_INVENTORY',
-              payload: {
-                operation: 'REMOVE',
-                item: { id: 'item-herb', name: '상처약', quantity: 1 }
-              }
-            }
-          ]
-        }
+        proposal
       };
     }
   );
