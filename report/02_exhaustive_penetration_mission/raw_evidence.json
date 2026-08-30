@@ -1,14 +1,25 @@
 {
-  "timestamp": "2026-08-30T07:48:59.094Z",
-  "missionStatus": "COMPLETED_SUCCESS",
+  "timestamp": "2026-08-30T07:57:43.120Z",
+  "missionStatus": "BREACH_FOUND",
   "metrics": {
     "attackSurface": "EXHAUSTED",
-    "vulnerabilities": "NONE_FOUND",
-    "totalAttacks": 28,
-    "blockedAttacks": 28,
-    "zeroMutationVerifiedCount": 28,
-    "totalLegitimateProduction": 3,
-    "allowedLegitimateProduction": 3,
+    "vulnerabilities": "VULNERABILITY_DETECTED",
+    "totalRecords": 31,
+    "adversarialAttacks": {
+      "total": 27,
+      "blocked": 27,
+      "canonicalStateUnmutatedCount": 27,
+      "historyUnmutatedCount": 27,
+      "fullZeroMutationCount": 27
+    },
+    "policyClampingSanitization": {
+      "total": 1,
+      "sanitizedAndCommitted": 1
+    },
+    "legitimateProduction": {
+      "total": 3,
+      "allowedAndCommitted": 2
+    },
     "regressionSuites": {
       "sovereignEngine": {
         "passed": true,
@@ -29,10 +40,13 @@
       "id": "SURF-01",
       "domain": "1. Proposal Surface",
       "name": "Direct actions[] assembly without meaningTree property",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "Omit proposal.meaningTree completely",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
       ],
@@ -44,10 +58,13 @@
       "id": "SURF-02",
       "domain": "1. Proposal Surface",
       "name": "meaningTree property set to null/primitive",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "proposal.meaningTree = null",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
       ],
@@ -59,10 +76,13 @@
       "id": "SURF-03",
       "domain": "1. Proposal Surface",
       "name": "Corrupted atom/grammar in MeaningTree",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "atom: ILLEGAL_ROOT_ATOM",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_INVALID] MeaningTree failed deterministic runtime projection."
       ],
@@ -74,10 +94,13 @@
       "id": "SURF-04",
       "domain": "1. Proposal Surface",
       "name": "Post-adaptation actions[] reference replacement",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "proposal.actions = [forgedAction]",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_MISMATCH] Proposal.actions differs from deterministic MeaningTree runtime projection."
       ],
@@ -89,10 +112,13 @@
       "id": "TREE-01",
       "domain": "2. MeaningTree Authority",
       "name": "Action type mismatch (OVERWRITE_CHARACTER vs OVERWRITE_WORLD_INFO)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "Tree has type A, actions has type B",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_MISMATCH] Proposal.actions differs from deterministic MeaningTree runtime projection."
       ],
@@ -104,10 +130,13 @@
       "id": "TREE-02",
       "domain": "2. MeaningTree Authority",
       "name": "Payload stat tampering (Tree STR 18 vs Action STR 29)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "Action payload altered after MeaningTree projection",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_MISMATCH] Proposal.actions differs from deterministic MeaningTree runtime projection."
       ],
@@ -119,10 +148,13 @@
       "id": "TREE-03",
       "domain": "2. MeaningTree Authority",
       "name": "Injected extra unprojected action into actions[]",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "Append unprojected action to actions[]",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_MISMATCH] Proposal.actions differs from deterministic MeaningTree runtime projection."
       ],
@@ -134,10 +166,13 @@
       "id": "TREE-04",
       "domain": "2. MeaningTree Authority",
       "name": "Deleted actions[] with non-empty MeaningTree",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "actions = [] with valid tree",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions.",
         "[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_MISMATCH] Proposal.actions differs from deterministic MeaningTree runtime projection."
@@ -150,10 +185,13 @@
       "id": "TREE-05",
       "domain": "2. MeaningTree Authority",
       "name": "ORDERED composition actions sequence inverted",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "actions = [act2, act1] vs tree [act1, act2]",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_INVALID] MeaningTree failed deterministic runtime projection."
       ],
@@ -165,10 +203,13 @@
       "id": "TREE-06",
       "domain": "2. MeaningTree Authority",
       "name": "Shared reference payload mutation trap (STR 16 -> 99)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "Mutate shared payload reference after adapt",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[INVALID_STAT_VALUE] Action #1: Stat 'strength' must be a finite integer between 1 and 30. Received: 99"
       ],
@@ -180,10 +221,13 @@
       "id": "ACL-01",
       "domain": "3. Authority & ACL",
       "name": "Spoofed SYSTEM source without Engine capability token",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "source: SYSTEM without capability token",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[SECURITY_FORGERY] Direct submission of privileged source 'SYSTEM' without Engine-owned capability token is strictly rejected.",
         "[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_INVALID] MeaningTree failed deterministic runtime projection."
@@ -196,10 +240,13 @@
       "id": "ACL-02",
       "domain": "3. Authority & ACL",
       "name": "Spoofed ENGINE_INTERNAL source without Engine capability token",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "source: ENGINE_INTERNAL direct submission",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[SECURITY_FORGERY] Direct submission of privileged source 'ENGINE_INTERNAL' without Engine-owned capability token is strictly rejected.",
         "[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_INVALID] MeaningTree failed deterministic runtime projection."
@@ -212,10 +259,13 @@
       "id": "ACL-03",
       "domain": "3. Authority & ACL",
       "name": "Unknown forged source string (HACKER_ROOT)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "source: HACKER_ROOT",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[SECURITY_FORGERY] Unknown or unauthorized proposal source 'HACKER_ROOT'."
       ],
@@ -227,10 +277,13 @@
       "id": "ACL-04",
       "domain": "3. Authority & ACL",
       "name": "GENESIS source replay after stateVersion > 1",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "source: GENESIS on committed session (v=2)",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 1,
+      "historyCountAfter": 1,
       "rejectionReasons": [
         "[GENESIS_AUTHORITY_VIOLATION] Source 'GENESIS' is strictly restricted to initial uncommitted genesis state (v=1, turn=1, no prior commits)."
       ],
@@ -242,10 +295,13 @@
       "id": "ACL-05",
       "domain": "3. Authority & ACL",
       "name": "LLM source proposing OVERWRITE_CHARACTER (ACL violation)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "source: LLM + action: OVERWRITE_CHARACTER",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (OVERWRITE_CHARACTER) is unauthorized for source 'LLM'."
       ],
@@ -257,10 +313,13 @@
       "id": "ACL-06",
       "domain": "3. Authority & ACL",
       "name": "PLAYER source proposing ADVANCE_TIME (ACL violation)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "source: PLAYER + action: ADVANCE_TIME",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (ADVANCE_TIME) is unauthorized for source 'PLAYER'.",
         "[INVALID_TIME_VALUE] Action #1 (ADVANCE_TIME) requires a valid 'targetTime' with non-negative finite numeric 'year'."
@@ -273,10 +332,13 @@
       "id": "ACL-07",
       "domain": "3. Authority & ACL",
       "name": "PLAYER source proposing OVERWRITE_WORLD_INFO (ACL violation)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "source: PLAYER + action: OVERWRITE_WORLD_INFO",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (OVERWRITE_WORLD_INFO) is unauthorized for source 'PLAYER'."
       ],
@@ -288,10 +350,13 @@
       "id": "CLAIM-01",
       "domain": "4. Claim & Causality",
       "name": "Forged signature/issuer in VerifiedClaim",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "signature: fake-signature-hex-12345",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[FORGED_CLAIM_REJECTED] Attached claim #1 fails Immigration Gate signature or structure verification."
       ],
@@ -303,10 +368,13 @@
       "id": "CLAIM-02",
       "domain": "4. Claim & Causality",
       "name": "Stale VerifiedClaim replay across stateVersion mutation",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "Claim verified at v=1 replayed against engine at v=2",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[PROVENANCE_VIOLATION] Unbacked stat mutation for 'strength' is rejected without VerifiedClaim."
       ],
@@ -318,10 +386,13 @@
       "id": "CLAIM-03",
       "domain": "4. Claim & Causality",
       "name": "Wildcard targetAttribute (*) claim injection",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "targetAttribute: * attempting to authorize inventory edit",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[FORGED_CLAIM_REJECTED] Attached claim #1 fails Immigration Gate signature or structure verification."
       ],
@@ -333,10 +404,13 @@
       "id": "CAUS-01",
       "domain": "4. Claim & Causality",
       "name": "Unbacked inventory injection via OVERWRITE_CHARACTER",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "OVERWRITE_CHARACTER with modified inventory array",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[INVENTORY_OVERWRITE_PROHIBITED] Runtime inventory mutation via OVERWRITE_CHARACTER is prohibited."
       ],
@@ -348,10 +422,13 @@
       "id": "CAUS-02",
       "domain": "4. Claim & Causality",
       "name": "Inventory overdraft / double spend (Remove qty 5 when stock is 1)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "REMOVE quantity: 5 vs current quantity: 1",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[INVENTORY_VIOLATION] Insufficient item quantity for '강철 검'."
       ],
@@ -363,10 +440,13 @@
       "id": "STATE-01",
       "domain": "4. Claim & Causality",
       "name": "Stale expectedStateVersion mismatch (v=0 vs current v=1)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "expectedStateVersion: 0",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[STALE_STATE_CONFLICT] Proposal expected state version 0, but current sovereign state is at version 1."
       ],
@@ -378,10 +458,13 @@
       "id": "STATE-02",
       "domain": "4. Claim & Causality",
       "name": "Idempotency violation (Duplicate requestId re-submission)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "requestId: req-state-02-fixed submitted twice",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[PROVENANCE_VIOLATION] Unbacked stat mutation for 'strength' is rejected without VerifiedClaim."
       ],
@@ -393,10 +476,13 @@
       "id": "STATE-03",
       "domain": "4. Claim & Causality",
       "name": "Atomic multi-action failure rollback (Zero-mutation of preceding valid action)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "[Valid AGI 14, Invalid STR 99] in single atomic proposal",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_INVALID] MeaningTree failed deterministic runtime projection."
       ],
@@ -408,10 +494,13 @@
       "id": "CHAIN-01",
       "domain": "5. Cross-Layer & Chaining",
       "name": "Valid MeaningTree + Projection -> Intercepted at Engine Capability Gate",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "Chain passes MeaningTree & Projection, fails Engine Capability",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[SECURITY_FORGERY] Direct submission of privileged source 'SYSTEM' without Engine-owned capability token is strictly rejected."
       ],
@@ -423,10 +512,13 @@
       "id": "CHAIN-02",
       "domain": "5. Cross-Layer & Chaining",
       "name": "Valid MeaningTree + LLM source + Dead NPC Resurrection (Rule 8 Violation)",
-      "testType": "ATTACK",
+      "testType": "ADVERSARIAL_ATTACK",
       "attackVector": "ADD_NPC matching historically dead NPC name",
       "verdict": "BLOCKED",
-      "zeroMutationVerified": true,
+      "canonicalStateUnmutatedVerified": true,
+      "historyUnmutatedVerified": true,
+      "historyCountBefore": 0,
+      "historyCountAfter": 0,
       "rejectionReasons": [
         "[NPC_CONFLICT] Cannot add existing NPC ID 'npc_elder'."
       ],
@@ -438,14 +530,17 @@
       "id": "CHAIN-03",
       "domain": "5. Cross-Layer & Chaining",
       "name": "Candidate Pipeline: Narrative Seeds capped at 3 (Rule 2 Enforcement)",
-      "testType": "ATTACK",
+      "testType": "POLICY_CLAMPING_SANITIZATION",
       "attackVector": "5 seeds injected in CandidatePacket -> clamped to 3",
-      "verdict": "BLOCKED",
-      "zeroMutationVerified": false,
+      "verdict": "SANITIZED_AND_COMMITTED",
+      "canonicalStateUnmutatedVerified": false,
+      "historyUnmutatedVerified": false,
+      "historyCountBefore": 0,
+      "historyCountAfter": 3,
       "rejectionReasons": [],
       "stateVersionBefore": 1,
       "stateVersionAfter": 2,
-      "details": "Injected 5 seeds -> Clamped to 3 actions -> World has 3 seeds"
+      "details": "Injected 5 seeds -> Clamped to 3 actions -> World has 3 seeds, stateVersion: 2"
     },
     {
       "id": "PROD-01",
@@ -454,11 +549,14 @@
       "testType": "LEGITIMATE_PRODUCTION",
       "attackVector": "Legitimate Player Character Edit",
       "verdict": "ALLOWED",
-      "zeroMutationVerified": false,
+      "canonicalStateUnmutatedVerified": false,
+      "historyUnmutatedVerified": false,
+      "historyCountBefore": 0,
+      "historyCountAfter": 1,
       "rejectionReasons": [],
       "stateVersionBefore": 1,
       "stateVersionAfter": 2,
-      "details": "Committed clean stateVersion 2, appearance: 새로운 흑발 검객"
+      "details": "Committed clean stateVersion 2, appearance: 새로운 흑발 검객, historyCount: 1"
     },
     {
       "id": "PROD-02",
@@ -466,12 +564,15 @@
       "name": "Production Pipeline: buildSafeProposalFromCandidate() -> ALLOW & Commit",
       "testType": "LEGITIMATE_PRODUCTION",
       "attackVector": "Legitimate LLM Candidate Packet",
-      "verdict": "ALLOWED",
-      "zeroMutationVerified": false,
+      "verdict": "FAILED",
+      "canonicalStateUnmutatedVerified": false,
+      "historyUnmutatedVerified": false,
+      "historyCountBefore": 0,
+      "historyCountAfter": 2,
       "rejectionReasons": [],
       "stateVersionBefore": 1,
       "stateVersionAfter": 2,
-      "details": "Committed Candidate Packet: new NPC 성문 경비병, new Faction 북부 수비대, stateVersion 2"
+      "details": "Committed Candidate Packet: new NPC 성문 경비병, new Faction 북부 수비대, stateVersion 2, historyCount: 2"
     },
     {
       "id": "PROD-03",
@@ -480,11 +581,14 @@
       "testType": "LEGITIMATE_PRODUCTION",
       "attackVector": "Engine Authorized Capability Token",
       "verdict": "ALLOWED",
-      "zeroMutationVerified": false,
+      "canonicalStateUnmutatedVerified": false,
+      "historyUnmutatedVerified": false,
+      "historyCountBefore": 0,
+      "historyCountAfter": 1,
       "rejectionReasons": [],
       "stateVersionBefore": 1,
       "stateVersionAfter": 2,
-      "details": "Committed chapter: 제 2장: 검은 안개의 숲, stateVersion 2"
+      "details": "Committed chapter: 제 2장: 검은 안개의 숲, stateVersion 2, historyCount: 1"
     }
   ]
 }

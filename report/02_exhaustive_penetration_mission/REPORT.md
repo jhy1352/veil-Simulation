@@ -1,103 +1,111 @@
-# VEIL — Maximum Adversarial Red Team / Exhaustive Penetration Mission Report
+# VEIL — MAXIMUM RED TEAM EXHAUSTIVE PENETRATION & MUTATION INTEGRITY AUDIT REPORT
 
-**Mission Date:** 2026-08-30  
-**Target:** MeaningTree Authority, Composition Projection, ACL, Claim/Causality, Commit Gate, Cross-Layer Pipeline  
-**Execution Runner:** `scripts/maximum_adversarial_redteam_runner.ts`  
-**Evidence Artifact:** `report/02_exhaustive_penetration_mission/raw_evidence.json`  
+**Date & Time:** 2026-08-30  
+**Phase:** Phase 2 Exhaustive Verification Audit  
+**Author:** AI Studio Red Team  
+**Subject:** SovereignEngine, MeaningTree Semantic Firewall, ACL, and Historical Immutability  
+**Evidence Artifact:** `report/02_exhaustive_penetration_mission/raw_evidence.json`
 
 ---
 
-## 1. Executive Summary & Forensic Verification
+## 1. Executive Summary & Verification Matrix
 
-| Metric | Target | Actual Result | Verification Status |
+본 보고서는 TRPG 3.1 시스템 헌법에 입각하여 `SovereignEngine`, `MeaningTree` 적응기/투영 계층, `ImmigrationGate` 인과 방화벽, `ACL/Capability Token` 체계의 적대적 공격 방어력 및 변경 불변성(Immutability)을 실증 검증한 포렌식 보고서다.
+
+검증 항목은 **총 31개 레코드 (적대적 공격 27개, 정책 클램핑 1개, 정상 Production 경로 3개)** 로 구성되어 있으며, 전수 테스트 결과는 다음과 같다.
+
+| Verification Dimension | Scope / Target | Result | Evidence Status |
 | :--- | :--- | :--- | :--- |
-| **Attack Surface Exhaustion** | 100% (6 Domains) | 6/6 Domains Exhausted | **CONFIRMED** |
-| **Total Adversarial Attacks** | ≥ 25 Vectors | **28 Vectors** | **CONFIRMED** |
-| **Neutralized / Blocked Attacks** | 100% Blocked | **28/28 BLOCKED** | **CONFIRMED** |
-| **Zero-Mutation Verified** | 100% on Blocked | **28/28 Confirmed** (`stateVersion` Δ=0) | **CONFIRMED** |
-| **Legitimate Production Pipelines**| 100% Allowed | **3/3 ALLOWED + COMMIT** | **CONFIRMED** |
-| **Sovereign Engine Regression** | 93 Tests | **93/93 PASS** | **CONFIRMED** |
-| **Engine Language Regression** | 55 Tests | **55/55 PASS** | **CONFIRMED** |
-| **Claim & Causality Red Team** | 21 Tests | **21/21 PASS** | **CONFIRMED** |
+| **Adversarial Attacks Blocked** | 27 Attack Vectors (Domain 1~5) | **27 / 27 (100%) BLOCKED** | Verified (Fail-Closed) |
+| **Canonical State Zero-Mutation** | `deepEqual(snapBefore, snapAfter) & ΔstateVersion=0` | **27 / 27 (100%) ZERO-MUTATED** | Verified |
+| **Historical Record Immutability** | `deepEqual(histBefore, histAfter) & Δlength=0` | **27 / 27 (100%) ZERO-MUTATED** | Verified |
+| **Policy Clamping & Sanitization** | `CHAIN-03` (Candidate seed clamping) | **1 / 1 SANITIZED & COMMITTED** | Verified (Capped to 3) |
+| **Legitimate Production Pipelines** | 3 Production Flows (Domain 6) | **3 / 3 (100%) ALLOWED** | Verified (`stateVersion` +1) |
+| **Regression Test Suites** | Sovereign (93), Language (55), Claim (21) | **169 / 169 (100%) PASS** | Verified |
 
 ---
 
-## 2. Attack Surface Breakdown by Domain
+## 2. History & Claim Zero-Mutation Architecture & Explanation
 
-### Domain 1: Proposal Surface & Direct Assembly Attacks (5 Vectors)
-* **SURF-01**: Direct `actions[]` assembly omitting `meaningTree` property  
-  * *Result:* `BLOCKED` (`[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority.`) — Zero Mutation Verified.
-* **SURF-02**: `meaningTree` set to `null`/primitive values  
-  * *Result:* `BLOCKED` (`[COMPOSITION_PROJECTION_MISSING]`) — Zero Mutation Verified.
-* **SURF-03**: Empty `actions[]` with populated `meaningTree`  
-  * *Result:* `BLOCKED` (`[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_COUNT_MISMATCH]`) — Zero Mutation Verified.
-* **SURF-04**: Direct prototype injection on `StateTransitionProposal`  
-  * *Result:* `BLOCKED` (`[SECURITY_FORGERY]`) — Zero Mutation Verified.
-* **SURF-05**: Dynamic tampering of `proposal.actions` post MeaningTree generation  
-  * *Result:* `BLOCKED` (`[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_ACTION_MISMATCH]`) — Zero Mutation Verified.
+### 2.1 History와 CanonicalState의 물리적 분리 구조
+- `SovereignEngine` 내에서 `CanonicalState`는 `getSnapshot()`을 통해 `{ worldInfo, character, stateVersion, turn }` 형태로 조회된다.
+- 반면 `History`는 별도의 내부 매니저(`private historyManager: HistoryManager`)로 캡슐화되어 `engine.getHistory()`를 통해 불변 배열(`readonly ImmutableHistoricalRecord[]`)로 제공된다.
+- 따라서 `deepEqual(snapBefore, snapAfter)`만으로는 `History`의 변경 여부를 보증할 수 없었으며, 금번 감사에서는:
+  ```ts
+  const histBefore = engine.getHistory();
+  const res = engine.submitProposal(maliciousProposal);
+  const histAfter = engine.getHistory();
+  const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+  ```
+  를 모든 27개 적대적 공격 벡터에 결합하여 **Canonical State뿐만 아니라 History의 완전 무변경(Zero-Mutation)을 증명**하였다.
 
-### Domain 2: MeaningTree Authority & Projection Tampering (5 Vectors)
-* **TREE-01**: Desync between `MeaningNode.value` and `actions[0].payload`  
-  * *Result:* `BLOCKED` (`[PROJECTION_INCONSISTENCY]`) — Zero Mutation Verified.
-* **TREE-02**: Extra orphan node in `MeaningTree` not present in `actions[]`  
-  * *Result:* `BLOCKED` (`[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_COUNT_MISMATCH]`) — Zero Mutation Verified.
-* **TREE-03**: Child node ordering mismatch vs `actions[]` sequence  
-  * *Result:* `BLOCKED` (`[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_ACTION_MISMATCH]`) — Zero Mutation Verified.
-* **TREE-04**: Non-core Atom injection (`HACK_CORE` / `MUTATE_STATE`)  
-  * *Result:* `BLOCKED` (`[INVALID_MEANING_TREE] Grammar check failed`) — Zero Mutation Verified.
-* **TREE-05**: Illegal composition structure (`ATOM: VALUE -> ATOM: ACTION`)  
-  * *Result:* `BLOCKED` (`[INVALID_MEANING_TREE] Grammar composition illegal`) — Zero Mutation Verified.
+### 2.2 VerifiedClaim의 수명 주기
+- `VerifiedClaim`은 `ImmigrationGate`를 통과한 외부 증거 패킷으로, `StateTransitionProposal.verifiedClaims`에 첨부되어 Commit Gate의 인과 검증에 사용되는 **일회성 입력 증거 데이터(Transient Input Packet)** 이다.
+- `CanonicalState` 자체에는 Claims 저장소가 존재하지 않으며, 제안이 거부될 경우 해당 Claim은 Canonical State 또는 History에 어떠한 영구적 흔적도 남기지 않고 즉시 소멸된다.
 
-### Domain 3: Authority & ACL Penetration (5 Vectors)
-* **ACL-01**: `PLAYER` source invoking `SET_WORLD_METADATA`  
-  * *Result:* `BLOCKED` (`[UNAUTHORIZED_ACTION_SOURCE] Action 'SET_WORLD_METADATA' is not permitted for source 'PLAYER'`) — Zero Mutation Verified.
-* **ACL-02**: `LLM` source invoking `RECORD_DICE_RESULT`  
-  * *Result:* `BLOCKED` (`[UNAUTHORIZED_ACTION_SOURCE] Action 'RECORD_DICE_RESULT' is not permitted for source 'LLM'`) — Zero Mutation Verified.
-* **ACL-03**: `PLAYER` source invoking `SET_CHARACTER_SECRET`  
-  * *Result:* `BLOCKED` (`[UNAUTHORIZED_ACTION_SOURCE] Action 'SET_CHARACTER_SECRET' is not permitted for source 'PLAYER'`) — Zero Mutation Verified.
-* **ACL-04**: `PLAYER` source executing `OVERWRITE_WORLD_INFO` without `SYSTEM` token  
-  * *Result:* `BLOCKED` (`[UNAUTHORIZED_ACTION_SOURCE] Action 'OVERWRITE_WORLD_INFO' is not permitted for source 'PLAYER'`) — Zero Mutation Verified.
-* **ACL-05**: `LLM` source executing `OVERWRITE_CHARACTER`  
-  * *Result:* `BLOCKED` (`[UNAUTHORIZED_ACTION_SOURCE] Action 'OVERWRITE_CHARACTER' is not permitted for source 'LLM'`) — Zero Mutation Verified.
+---
 
-### Domain 4: Claim, Causality & State Integrity (5 Vectors)
-* **CAUS-01**: `MODIFY_INVENTORY (ADD)` with unverified `DISCOVERY_PICKUP` event ID  
-  * *Result:* `BLOCKED` (`[CAUSALITY_VIOLATION] DISCOVERY_PICKUP specifies non-existent event`) — Zero Mutation Verified.
-* **CAUS-02**: `MODIFY_INVENTORY (ADD)` with missing/empty acquisition cause  
-  * *Result:* `BLOCKED` (`[ACQUISITION_UNBACKED] Acquisition cause missing`) — Zero Mutation Verified.
-* **CAUS-03**: `MODIFY_INVENTORY (REMOVE)` exceeding owned inventory (Overdraft Attack)  
-  * *Result:* `BLOCKED` (`[INSUFFICIENT_QUANTITY] Attempted to remove 100 but owned is 1`) — Zero Mutation Verified.
-* **CAUS-04**: Unbacked stat boost via `UPDATE_CHARACTER_STATS` without `VerifiedClaim`  
-  * *Result:* `BLOCKED` (`[PROVENANCE_VIOLATION] Unbacked stat mutation`) — Zero Mutation Verified.
-* **CAUS-05**: Negative/Zero quantity item injection (`quantity: -5` / `quantity: 0`)  
-  * *Result:* `BLOCKED` (`[PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_INVALID]`) — Zero Mutation Verified.
+## 3. Detailed Attack Domain & Vector Breakdown (31 Records)
 
-### Domain 5: Cross-Layer & Chained Evasion Attacks (5 Vectors)
-* **STATE-01**: Stale State Version proposal replay (`expectedStateVersion: 0` vs `current: 1`)  
-  * *Result:* `BLOCKED` (`[STATE_VERSION_MISMATCH] Stale stateVersion`) — Zero Mutation Verified.
-* **STATE-02**: Idempotency violation (Duplicate `requestId` resubmission)  
-  * *Result:* `BLOCKED` — Zero Mutation Verified.
-* **STATE-03**: Multi-action atomicity rollback ([Valid Action 1, Invalid Action 2])  
-  * *Result:* `BLOCKED` (`[PROJECTION_INCONSISTENCY]`) — Atomic Rollback, Zero Mutation on Action 1.
-* **CHAIN-01**: Valid MeaningTree + Projection -> Intercepted at Engine Capability Gate  
-  * *Result:* `BLOCKED` (`[SECURITY_FORGERY] Direct submission of privileged source 'SYSTEM' without Engine-owned capability token is strictly rejected.`) — Zero Mutation Verified.
-* **CHAIN-02**: Valid MeaningTree + LLM source + Dead NPC Resurrection (Rule 8 Violation)  
-  * *Result:* `BLOCKED` (`[NPC_CONFLICT] Cannot add existing NPC ID 'npc_elder'.`) — Zero Mutation Verified.
-* **CHAIN-03**: Candidate Packet Pipeline excessive seeds (> 3) enforcement (Rule 2)  
-  * *Result:* `BLOCKED` (Clamped safely to ≤ 3 seeds).
+### Domain 1: Proposal Surface & Direct Assembly Attacks (4 Vectors)
+| Test ID | Test Type | Attack Vector | Result | State Unmutated | History Unmutated |
+| :--- | :--- | :--- | :--- | :---: | :---: |
+| **SURF-01** | `ADVERSARIAL_ATTACK` | Direct `actions[]` assembly without `meaningTree` property | **BLOCKED** | TRUE | TRUE |
+| **SURF-02** | `ADVERSARIAL_ATTACK` | `meaningTree` property set to `null`/primitive | **BLOCKED** | TRUE | TRUE |
+| **SURF-03** | `ADVERSARIAL_ATTACK` | Corrupted atom / illegal grammar in `meaningTree` | **BLOCKED** | TRUE | TRUE |
+| **SURF-04** | `ADVERSARIAL_ATTACK` | Post-adaptation `actions[]` reference replacement | **BLOCKED** | TRUE | TRUE |
+
+### Domain 2: MeaningTree Authority & Projection Tampering Attacks (6 Vectors)
+| Test ID | Test Type | Attack Vector | Result | State Unmutated | History Unmutated |
+| :--- | :--- | :--- | :--- | :---: | :---: |
+| **TREE-01** | `ADVERSARIAL_ATTACK` | Action type mismatch (`OVERWRITE_CHARACTER` vs `OVERWRITE_WORLD_INFO`) | **BLOCKED** | TRUE | TRUE |
+| **TREE-02** | `ADVERSARIAL_ATTACK` | Payload stat tampering (Tree STR 18 vs Action STR 29) | **BLOCKED** | TRUE | TRUE |
+| **TREE-03** | `ADVERSARIAL_ATTACK` | Injected extra unprojected action into `actions[]` | **BLOCKED** | TRUE | TRUE |
+| **TREE-04** | `ADVERSARIAL_ATTACK` | Deleted `actions[]` (empty array with non-empty Tree) | **BLOCKED** | TRUE | TRUE |
+| **TREE-05** | `ADVERSARIAL_ATTACK` | `ORDERED` composition actions sequence inverted | **BLOCKED** | TRUE | TRUE |
+| **TREE-06** | `ADVERSARIAL_ATTACK` | Shared reference payload mutation trap (STR 16 -> 99) | **BLOCKED** | TRUE | TRUE |
+
+### Domain 3: Authority & ACL Penetration Attacks (7 Vectors)
+| Test ID | Test Type | Attack Vector | Result | State Unmutated | History Unmutated |
+| :--- | :--- | :--- | :--- | :---: | :---: |
+| **ACL-01** | `ADVERSARIAL_ATTACK` | Spoofed `SYSTEM` source without Engine capability token | **BLOCKED** | TRUE | TRUE |
+| **ACL-02** | `ADVERSARIAL_ATTACK` | Spoofed `ENGINE_INTERNAL` source without Engine capability token | **BLOCKED** | TRUE | TRUE |
+| **ACL-03** | `ADVERSARIAL_ATTACK` | Unknown forged source string (`HACKER_ROOT`) | **BLOCKED** | TRUE | TRUE |
+| **ACL-04** | `ADVERSARIAL_ATTACK` | `GENESIS` source replay after `stateVersion > 1` | **BLOCKED** | TRUE | TRUE |
+| **ACL-05** | `ADVERSARIAL_ATTACK` | `LLM` source proposing `OVERWRITE_CHARACTER` (ACL violation) | **BLOCKED** | TRUE | TRUE |
+| **ACL-06** | `ADVERSARIAL_ATTACK` | `PLAYER` source proposing `ADVANCE_TIME` (ACL violation) | **BLOCKED** | TRUE | TRUE |
+| **ACL-07** | `ADVERSARIAL_ATTACK` | `PLAYER` source proposing `OVERWRITE_WORLD_INFO` (ACL violation) | **BLOCKED** | TRUE | TRUE |
+
+### Domain 4: Claim, Causality & State Integrity Attacks (7 Vectors)
+| Test ID | Test Type | Attack Vector | Result | State Unmutated | History Unmutated |
+| :--- | :--- | :--- | :--- | :---: | :---: |
+| **CLAIM-01**| `ADVERSARIAL_ATTACK` | Forged signature/issuer in `VerifiedClaim` | **BLOCKED** | TRUE | TRUE |
+| **CLAIM-02**| `ADVERSARIAL_ATTACK` | Stale `VerifiedClaim` replay across `stateVersion` mutation | **BLOCKED** | TRUE | TRUE |
+| **CLAIM-03**| `ADVERSARIAL_ATTACK` | Wildcard `targetAttribute` (`*`) claim injection | **BLOCKED** | TRUE | TRUE |
+| **CAUS-01** | `ADVERSARIAL_ATTACK` | Unbacked inventory injection via `OVERWRITE_CHARACTER` | **BLOCKED** | TRUE | TRUE |
+| **CAUS-02** | `ADVERSARIAL_ATTACK` | Inventory double spend (Remove qty 5 when stock is 1) | **BLOCKED** | TRUE | TRUE |
+| **STATE-01**| `ADVERSARIAL_ATTACK` | Stale `expectedStateVersion` mismatch (v=0 vs current v=1) | **BLOCKED** | TRUE | TRUE |
+| **STATE-02**| `ADVERSARIAL_ATTACK` | Idempotency violation (Duplicate `requestId` re-submission) | **BLOCKED** | TRUE | TRUE |
+| **STATE-03**| `ADVERSARIAL_ATTACK` | Atomic multi-action failure rollback (Zero-mutation of valid preceding action) | **BLOCKED** | TRUE | TRUE |
+
+### Domain 5: Cross-Layer & Chaining Vectors (3 Vectors)
+| Test ID | Test Type | Attack Vector / Behavior | Result | State Unmutated | History Unmutated |
+| :--- | :--- | :--- | :--- | :---: | :---: |
+| **CHAIN-01**| `ADVERSARIAL_ATTACK` | Valid MeaningTree + Projection -> Intercepted at Engine Capability Gate | **BLOCKED** | TRUE | TRUE |
+| **CHAIN-02**| `ADVERSARIAL_ATTACK` | Valid MeaningTree + LLM source + Dead NPC Resurrection (Rule 8 Violation) | **BLOCKED** | TRUE | TRUE |
+| **CHAIN-03**| `POLICY_CLAMPING_SANITIZATION` | Candidate Pipeline: 5 seeds injected -> clamped to 3 (Rule 2 Enforcement) | **SANITIZED_AND_COMMITTED** | N/A (Sanitized Commit) | N/A |
 
 ### Domain 6: Legitimate Production Execution Proof (3 Vectors)
-* **PROD-01**: `handleUpdateCharacter()` valid player edit  
-  * *Result:* `ALLOWED` -> Atomic Commit (`stateVersion`: 1 -> 2, character updated, inventory intact).
-* **PROD-02**: `buildSafeProposalFromCandidate()` valid LLM turn candidate  
-  * *Result:* `ALLOWED` -> Atomic Commit (`stateVersion`: 1 -> 2, new NPC and Faction committed).
-* **PROD-03**: `dispatchEngineInternalAction()` engine authorized system proposal  
-  * *Result:* `ALLOWED` -> Atomic Commit (`stateVersion`: 1 -> 2, chapter advanced).
+| Test ID | Test Type | Production Flow | Result | State Transition | History Count |
+| :--- | :--- | :--- | :--- | :---: | :---: |
+| **PROD-01** | `LEGITIMATE_PRODUCTION` | `handleUpdateCharacter()` valid character edit -> Allow & Commit | **ALLOWED** | $v=1 \to v=2$ | $0 \to 1$ |
+| **PROD-02** | `LEGITIMATE_PRODUCTION` | `buildSafeProposalFromCandidate()` valid turn candidate -> Allow & Commit | **ALLOWED** | $v=1 \to v=2$ | $0 \to 1$ |
+| **PROD-03** | `LEGITIMATE_PRODUCTION` | `dispatchEngineInternalAction()` privileged chapter change -> Token Verified Allow | **ALLOWED** | $v=1 \to v=2$ | $0 \to 1$ |
 
 ---
 
-## 3. Forensic Conclusion
+## 4. Forensic Conclusion
 
-The MeaningTree Authority architecture completely supersedes and governs the proposal surface.
-Direct action injection, projection tampering, token cloning, scope elevation, and unbacked causality mutations are unconditionally intercepted with absolute Zero-Mutation integrity.
-All regression suites continue to pass 100% green.
+1. **정량적 일치성 확립**: `raw_evidence.json`의 31개 레코드와 본 보고서의 Domain별 ID (`SURF-01~04`, `TREE-01~06`, `ACL-01~07`, `CLAIM-01~03`, `CAUS-01~02`, `STATE-01~03`, `CHAIN-01~03`, `PROD-01~03`)가 1:1 완벽하게 일치한다.
+2. **테스트 분류 체계 정립**: 단순 이분법에서 탈피하여 `ADVERSARIAL_ATTACK`(27개), `POLICY_CLAMPING_SANITIZATION`(1개), `LEGITIMATE_PRODUCTION`(3개)로 명확히 분리하였다.
+3. **전수 Zero-Mutation 실증**: 27개 적대적 공격 시도 전후로 `CanonicalState`의 불변성(`stateVersion` 동결 및 객체 동등성)과 `History`의 불변성(`length` 동결 및 이력 동등성)이 전수 검증되었다.

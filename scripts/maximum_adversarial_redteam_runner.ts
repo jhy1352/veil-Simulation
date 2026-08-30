@@ -13,14 +13,22 @@ import { runSovereignEngineTestSuite } from '../src/engine/testRunner';
 import { runLanguageTestSuite } from '../src/engine/language/testSuite';
 import { executeRedTeamCampaign } from '../src/engine/claimCausalityRedteamRunner';
 
+export type RedTeamTestType =
+  | 'ADVERSARIAL_ATTACK'
+  | 'POLICY_CLAMPING_SANITIZATION'
+  | 'LEGITIMATE_PRODUCTION';
+
 export interface RedTeamRecord {
   id: string;
   domain: string;
   name: string;
-  testType: 'ATTACK' | 'LEGITIMATE_PRODUCTION';
+  testType: RedTeamTestType;
   attackVector: string;
-  verdict: 'BLOCKED' | 'BREACHED' | 'ALLOWED' | 'FAILED';
-  zeroMutationVerified: boolean;
+  verdict: 'BLOCKED' | 'BREACHED' | 'SANITIZED_AND_COMMITTED' | 'ALLOWED' | 'FAILED';
+  canonicalStateUnmutatedVerified: boolean;
+  historyUnmutatedVerified: boolean;
+  historyCountBefore: number;
+  historyCountAfter: number;
   rejectionReasons: readonly string[];
   stateVersionBefore: number;
   stateVersionAfter: number;
@@ -69,7 +77,7 @@ async function runExhaustivePenetrationMission() {
   const records: RedTeamRecord[] = [];
 
   // ==========================================================================
-  // DOMAIN 1: PROPOSAL SURFACE & DIRECT ASSEMBLY ATTACKS
+  // DOMAIN 1: PROPOSAL SURFACE & DIRECT ASSEMBLY ATTACKS (4 Vectors)
   // ==========================================================================
   console.log('\n>>> DOMAIN 1: Proposal Surface & Direct Assembly Attacks <<<');
 
@@ -77,6 +85,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const proposal: StateTransitionProposal = {
       proposalId: 'prop-surf-01',
       requestId: 'req-surf-01',
@@ -95,15 +104,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'SURF-01',
       domain: '1. Proposal Surface',
       name: 'Direct actions[] assembly without meaningTree property',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'Omit proposal.meaningTree completely',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -115,6 +130,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const proposal: any = {
       proposalId: 'prop-surf-02',
       requestId: 'req-surf-02',
@@ -134,15 +150,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'SURF-02',
       domain: '1. Proposal Surface',
       name: 'meaningTree property set to null/primitive',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'proposal.meaningTree = null',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -154,6 +176,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const invalidTree: any = {
       atom: 'ILLEGAL_ROOT_ATOM',
       scope: 'PROPOSAL',
@@ -185,15 +208,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'SURF-03',
       domain: '1. Proposal Surface',
       name: 'Corrupted atom/grammar in MeaningTree',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'atom: ILLEGAL_ROOT_ATOM',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -205,6 +234,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const action: TransitionAction = {
       type: 'UPDATE_CHARACTER_STATS',
       payload: { strength: 16 }
@@ -229,15 +259,21 @@ async function runExhaustivePenetrationMission() {
     ];
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'SURF-04',
       domain: '1. Proposal Surface',
       name: 'Post-adaptation actions[] reference replacement',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'proposal.actions = [forgedAction]',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -246,7 +282,7 @@ async function runExhaustivePenetrationMission() {
   }
 
   // ==========================================================================
-  // DOMAIN 2: MEANING TREE AUTHORITY & PROJECTION INCONSISTENCY ATTACKS
+  // DOMAIN 2: MEANING TREE AUTHORITY & PROJECTION INCONSISTENCY ATTACKS (6 Vectors)
   // ==========================================================================
   console.log('\n>>> DOMAIN 2: MeaningTree Authority & Projection Tampering Attacks <<<');
 
@@ -254,6 +290,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const char = { ...snapBefore.character, age: 25 };
     const charAction: TransitionAction = { type: 'OVERWRITE_CHARACTER', payload: char };
     const tree = actionToMeaningNode(charAction, 'PROPOSAL');
@@ -271,15 +308,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'TREE-01',
       domain: '2. MeaningTree Authority',
       name: 'Action type mismatch (OVERWRITE_CHARACTER vs OVERWRITE_WORLD_INFO)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'Tree has type A, actions has type B',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -291,6 +334,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const charLegit = { ...snapBefore.character, stats: { ...snapBefore.character.stats, strength: 18 } };
     const charAction: TransitionAction = { type: 'OVERWRITE_CHARACTER', payload: charLegit };
     const tree = actionToMeaningNode(charAction, 'PROPOSAL');
@@ -309,15 +353,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'TREE-02',
       domain: '2. MeaningTree Authority',
       name: 'Payload stat tampering (Tree STR 18 vs Action STR 29)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'Action payload altered after MeaningTree projection',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -329,6 +379,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act1: TransitionAction = { type: 'UPDATE_CHARACTER_STATS', payload: { strength: 16 } };
     const tree = actionToMeaningNode(act1, 'PROPOSAL');
     const actInjected: TransitionAction = { type: 'RECORD_DICE_RESULT', payload: { roll: 20, targetDC: 10, isSuccess: true, reason: 'Injected' } };
@@ -346,15 +397,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'TREE-03',
       domain: '2. MeaningTree Authority',
       name: 'Injected extra unprojected action into actions[]',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'Append unprojected action to actions[]',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -366,6 +423,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act1: TransitionAction = { type: 'UPDATE_CHARACTER_STATS', payload: { strength: 16 } };
     const tree = actionToMeaningNode(act1, 'PROPOSAL');
     const proposal: StateTransitionProposal = {
@@ -382,15 +440,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'TREE-04',
       domain: '2. MeaningTree Authority',
       name: 'Deleted actions[] with non-empty MeaningTree',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'actions = [] with valid tree',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -402,6 +466,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act1: TransitionAction = { type: 'UPDATE_CHARACTER_STATS', payload: { strength: 16 } };
     const act2: TransitionAction = { type: 'RECORD_DICE_RESULT', payload: { roll: 15, targetDC: 12, isSuccess: true, reason: 'Check' } };
     const tree: MeaningNode = {
@@ -423,15 +488,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'TREE-05',
       domain: '2. MeaningTree Authority',
       name: 'ORDERED composition actions sequence inverted',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'actions = [act2, act1] vs tree [act1, act2]',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -443,6 +514,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const mutablePayload = { strength: 16 };
     const act: TransitionAction = { type: 'UPDATE_CHARACTER_STATS', payload: mutablePayload };
     const tree = actionToMeaningNode(act, 'PROPOSAL');
@@ -460,15 +532,21 @@ async function runExhaustivePenetrationMission() {
     mutablePayload.strength = 99;
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'TREE-06',
       domain: '2. MeaningTree Authority',
       name: 'Shared reference payload mutation trap (STR 16 -> 99)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'Mutate shared payload reference after adapt',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -477,7 +555,7 @@ async function runExhaustivePenetrationMission() {
   }
 
   // ==========================================================================
-  // DOMAIN 3: AUTHORITY & ACL PENETRATION ATTACKS
+  // DOMAIN 3: AUTHORITY & ACL PENETRATION ATTACKS (7 Vectors)
   // ==========================================================================
   console.log('\n>>> DOMAIN 3: Authority & ACL Penetration Attacks <<<');
 
@@ -485,6 +563,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = { type: 'OVERWRITE_WORLD_INFO', payload: snapBefore.worldInfo };
     const tree = actionToMeaningNode(act, 'SYSTEM');
     const proposal: StateTransitionProposal = {
@@ -501,15 +580,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'ACL-01',
       domain: '3. Authority & ACL',
       name: 'Spoofed SYSTEM source without Engine capability token',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'source: SYSTEM without capability token',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -521,6 +606,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = { type: 'OVERWRITE_CHARACTER', payload: snapBefore.character };
     const tree = actionToMeaningNode(act, 'SYSTEM');
     const proposal: StateTransitionProposal = {
@@ -537,15 +623,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'ACL-02',
       domain: '3. Authority & ACL',
       name: 'Spoofed ENGINE_INTERNAL source without Engine capability token',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'source: ENGINE_INTERNAL direct submission',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -557,6 +649,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = { type: 'UPDATE_CHARACTER_STATS', payload: { strength: 20 } };
     const tree = actionToMeaningNode(act, 'PROPOSAL');
     const proposal: any = {
@@ -573,15 +666,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'ACL-03',
       domain: '3. Authority & ACL',
       name: 'Unknown forged source string (HACKER_ROOT)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'source: HACKER_ROOT',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -592,7 +691,6 @@ async function runExhaustivePenetrationMission() {
   // [ACL-04] GENESIS source on active game (turn > 1 or prior commit)
   {
     const engine = createGenesisEngine();
-    // Advance engine version by 1 via valid update
     const snap0 = engine.getSnapshot();
     const validChar = { ...snap0.character, age: 25 };
     const act0: TransitionAction = { type: 'OVERWRITE_CHARACTER', payload: validChar };
@@ -610,6 +708,7 @@ async function runExhaustivePenetrationMission() {
     engine.submitProposal(p0);
 
     const snapBefore = engine.getSnapshot(); // now stateVersion === 2
+    const histBefore = engine.getHistory();
     const actGenesis: TransitionAction = { type: 'OVERWRITE_WORLD_INFO', payload: snapBefore.worldInfo };
     const treeGenesis = actionToMeaningNode(actGenesis, 'PROPOSAL');
     const proposal: StateTransitionProposal = {
@@ -626,15 +725,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'ACL-04',
       domain: '3. Authority & ACL',
       name: 'GENESIS source replay after stateVersion > 1',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'source: GENESIS on committed session (v=2)',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -646,6 +751,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = { type: 'OVERWRITE_CHARACTER', payload: snapBefore.character };
     const tree = actionToMeaningNode(act, 'PROPOSAL');
     const proposal = adaptMeaningTreeToProposal(tree, {
@@ -660,15 +766,21 @@ async function runExhaustivePenetrationMission() {
     });
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'ACL-05',
       domain: '3. Authority & ACL',
       name: 'LLM source proposing OVERWRITE_CHARACTER (ACL violation)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'source: LLM + action: OVERWRITE_CHARACTER',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -680,6 +792,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = { type: 'ADVANCE_TIME', payload: { minutes: 60 } };
     const tree = actionToMeaningNode(act, 'PROPOSAL');
     const proposal = adaptMeaningTreeToProposal(tree, {
@@ -694,15 +807,21 @@ async function runExhaustivePenetrationMission() {
     });
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'ACL-06',
       domain: '3. Authority & ACL',
       name: 'PLAYER source proposing ADVANCE_TIME (ACL violation)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'source: PLAYER + action: ADVANCE_TIME',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -714,6 +833,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = { type: 'OVERWRITE_WORLD_INFO', payload: snapBefore.worldInfo };
     const tree = actionToMeaningNode(act, 'PROPOSAL');
     const proposal = adaptMeaningTreeToProposal(tree, {
@@ -728,15 +848,21 @@ async function runExhaustivePenetrationMission() {
     });
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'ACL-07',
       domain: '3. Authority & ACL',
       name: 'PLAYER source proposing OVERWRITE_WORLD_INFO (ACL violation)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'source: PLAYER + action: OVERWRITE_WORLD_INFO',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -745,7 +871,7 @@ async function runExhaustivePenetrationMission() {
   }
 
   // ==========================================================================
-  // DOMAIN 4: CLAIM, CAUSALITY & STATE INTEGRITY ATTACKS
+  // DOMAIN 4: CLAIM, CAUSALITY & STATE INTEGRITY ATTACKS (8 Vectors)
   // ==========================================================================
   console.log('\n>>> DOMAIN 4: Claim, Causality & State Integrity Attacks <<<');
 
@@ -753,6 +879,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = {
       type: 'MODIFY_INVENTORY',
       payload: {
@@ -788,15 +915,21 @@ async function runExhaustivePenetrationMission() {
     ];
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'CLAIM-01',
       domain: '4. Claim & Causality',
       name: 'Forged signature/issuer in VerifiedClaim',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'signature: fake-signature-hex-12345',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -845,6 +978,7 @@ async function runExhaustivePenetrationMission() {
     engine.submitProposal(p0);
 
     const snapBefore = engine.getSnapshot(); // now stateVersion === 2
+    const histBefore = engine.getHistory();
     const actStale: TransitionAction = { type: 'UPDATE_CHARACTER_STATS', payload: { strength: 20 } };
     const treeStale = actionToMeaningNode(actStale, 'PROPOSAL');
     const proposal = adaptMeaningTreeToProposal(treeStale, {
@@ -861,15 +995,21 @@ async function runExhaustivePenetrationMission() {
 
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'CLAIM-02',
       domain: '4. Claim & Causality',
       name: 'Stale VerifiedClaim replay across stateVersion mutation',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'Claim verified at v=1 replayed against engine at v=2',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -881,6 +1021,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const wildcardClaim: any = Object.freeze({
       claimId: 'vclm-wildcard',
       status: 'VERIFIED',
@@ -915,15 +1056,21 @@ async function runExhaustivePenetrationMission() {
     proposal.verifiedClaims = [wildcardClaim];
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'CLAIM-03',
       domain: '4. Claim & Causality',
       name: 'Wildcard targetAttribute (*) claim injection',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'targetAttribute: * attempting to authorize inventory edit',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -935,6 +1082,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const charWithNewItem = {
       ...snapBefore.character,
       inventory: [...snapBefore.character.inventory, { id: 'item_god', name: '신화의 반지', quantity: 1, type: 'ACCESSORY' as const }]
@@ -953,15 +1101,21 @@ async function runExhaustivePenetrationMission() {
     });
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'CAUS-01',
       domain: '4. Claim & Causality',
       name: 'Unbacked inventory injection via OVERWRITE_CHARACTER',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'OVERWRITE_CHARACTER with modified inventory array',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -973,6 +1127,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = {
       type: 'MODIFY_INVENTORY',
       payload: {
@@ -993,15 +1148,21 @@ async function runExhaustivePenetrationMission() {
     });
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'CAUS-02',
       domain: '4. Claim & Causality',
       name: 'Inventory overdraft / double spend (Remove qty 5 when stock is 1)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'REMOVE quantity: 5 vs current quantity: 1',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -1013,6 +1174,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = { type: 'UPDATE_CHARACTER_STATS', payload: { strength: 16 } };
     const tree = actionToMeaningNode(act, 'PROPOSAL');
     const proposal = adaptMeaningTreeToProposal(tree, {
@@ -1027,15 +1189,21 @@ async function runExhaustivePenetrationMission() {
     });
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'STATE-01',
       domain: '4. Claim & Causality',
       name: 'Stale expectedStateVersion mismatch (v=0 vs current v=1)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'expectedStateVersion: 0',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -1059,9 +1227,10 @@ async function runExhaustivePenetrationMission() {
       timestamp: new Date().toISOString(),
       intentSummary: 'First commit'
     });
-    const res1 = engine.submitProposal(p1);
+    engine.submitProposal(p1);
 
     const snapBefore = engine.getSnapshot(); // v=2
+    const histBefore = engine.getHistory();
     const act2: TransitionAction = { type: 'UPDATE_CHARACTER_STATS', payload: { strength: 17 } };
     const tree2 = actionToMeaningNode(act2, 'PROPOSAL');
     const pDuplicate = adaptMeaningTreeToProposal(tree2, {
@@ -1076,15 +1245,21 @@ async function runExhaustivePenetrationMission() {
     });
     const res2 = engine.submitProposal(pDuplicate);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'STATE-02',
       domain: '4. Claim & Causality',
       name: 'Idempotency violation (Duplicate requestId re-submission)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'requestId: req-state-02-fixed submitted twice',
-      verdict: !res2.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res2.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res2.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -1096,6 +1271,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const actValid: TransitionAction = { type: 'UPDATE_CHARACTER_STATS', payload: { agility: 14 } };
     const actInvalid: TransitionAction = { type: 'UPDATE_CHARACTER_STATS', payload: { strength: 99 } }; // Bound violation!
     const tree: MeaningNode = {
@@ -1117,15 +1293,21 @@ async function runExhaustivePenetrationMission() {
     };
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'STATE-03',
       domain: '4. Claim & Causality',
       name: 'Atomic multi-action failure rollback (Zero-mutation of preceding valid action)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: '[Valid AGI 14, Invalid STR 99] in single atomic proposal',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -1134,7 +1316,7 @@ async function runExhaustivePenetrationMission() {
   }
 
   // ==========================================================================
-  // DOMAIN 5: CROSS-LAYER & CHAINED EVASION ATTACKS
+  // DOMAIN 5: CROSS-LAYER & CHAINED EVASION ATTACKS (3 Vectors: 2 Attacks + 1 Clamping Policy)
   // ==========================================================================
   console.log('\n>>> DOMAIN 5: Cross-Layer & Chained Evasion Attacks <<<');
 
@@ -1142,6 +1324,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = { type: 'SET_WORLD_METADATA', payload: { weather: '태풍' } };
     const tree = actionToMeaningNode(act, 'PROPOSAL');
     const proposal = adaptMeaningTreeToProposal(tree, {
@@ -1156,15 +1339,21 @@ async function runExhaustivePenetrationMission() {
     });
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'CHAIN-01',
       domain: '5. Cross-Layer & Chaining',
       name: 'Valid MeaningTree + Projection -> Intercepted at Engine Capability Gate',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'Chain passes MeaningTree & Projection, fails Engine Capability',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -1192,6 +1381,7 @@ async function runExhaustivePenetrationMission() {
     engine.submitProposal(pKill);
 
     const snapBefore = engine.getSnapshot(); // npc_elder is DEAD
+    const histBefore = engine.getHistory();
     const actResurrect: TransitionAction = { type: 'ADD_NPC', payload: { id: 'npc_elder', name: '마을 촌장', innerThought: '부활했다', npcClass: 'Class A' } };
     const treeResurrect = actionToMeaningNode(actResurrect, 'PROPOSAL');
     const pResurrect = adaptMeaningTreeToProposal(treeResurrect, {
@@ -1206,15 +1396,21 @@ async function runExhaustivePenetrationMission() {
     });
     const res = engine.submitProposal(pResurrect);
     const snapAfter = engine.getSnapshot();
-    const zeroMut = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const histAfter = engine.getHistory();
+    const stateUnmutated = deepEqual(snapBefore, snapAfter) && snapBefore.stateVersion === snapAfter.stateVersion;
+    const historyUnmutated = deepEqual(histBefore, histAfter) && histBefore.length === histAfter.length;
+
     records.push({
       id: 'CHAIN-02',
       domain: '5. Cross-Layer & Chaining',
       name: 'Valid MeaningTree + LLM source + Dead NPC Resurrection (Rule 8 Violation)',
-      testType: 'ATTACK',
+      testType: 'ADVERSARIAL_ATTACK',
       attackVector: 'ADD_NPC matching historically dead NPC name',
-      verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: zeroMut,
+      verdict: !res.success && stateUnmutated && historyUnmutated ? 'BLOCKED' : 'BREACHED',
+      canonicalStateUnmutatedVerified: stateUnmutated,
+      historyUnmutatedVerified: historyUnmutated,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: res.rejectedReasons || [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
@@ -1222,10 +1418,11 @@ async function runExhaustivePenetrationMission() {
     });
   }
 
-  // [CHAIN-03] Candidate Packet Pipeline: Excessive Seeds (> 3) Clamped / Defense Rule 2
+  // [CHAIN-03] Candidate Packet Pipeline: Excessive Seeds (> 3) Clamped / Defense Rule 2 (Policy Clamping / Sanitization)
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const candidate: CandidatePacket = {
       candidateId: 'cand-chain-03',
       seedChanges: [
@@ -1242,24 +1439,30 @@ async function runExhaustivePenetrationMission() {
     const isCapped = seedActions.length <= 3;
     const res = engine.submitProposal(safeProp);
     const snapAfter = engine.getSnapshot();
+    const histAfter = engine.getHistory();
     const seedsInWorld = (snapAfter.worldInfo.seeds || []).length;
+    const isSanitizedAndCommitted = isCapped && res.success && seedsInWorld <= 3 && snapAfter.stateVersion === snapBefore.stateVersion + 1;
+
     records.push({
       id: 'CHAIN-03',
       domain: '5. Cross-Layer & Chaining',
       name: 'Candidate Pipeline: Narrative Seeds capped at 3 (Rule 2 Enforcement)',
-      testType: 'ATTACK',
+      testType: 'POLICY_CLAMPING_SANITIZATION',
       attackVector: '5 seeds injected in CandidatePacket -> clamped to 3',
-      verdict: isCapped && res.success && seedsInWorld <= 3 ? 'BLOCKED' : 'BREACHED',
-      zeroMutationVerified: false,
+      verdict: isSanitizedAndCommitted ? 'SANITIZED_AND_COMMITTED' : 'FAILED',
+      canonicalStateUnmutatedVerified: false,
+      historyUnmutatedVerified: false,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
-      details: `Injected 5 seeds -> Clamped to ${seedActions.length} actions -> World has ${seedsInWorld} seeds`
+      details: `Injected 5 seeds -> Clamped to ${seedActions.length} actions -> World has ${seedsInWorld} seeds, stateVersion: ${snapAfter.stateVersion}`
     });
   }
 
   // ==========================================================================
-  // DOMAIN 6: LEGITIMATE PRODUCTION PATHS PROOF
+  // DOMAIN 6: LEGITIMATE PRODUCTION PATHS PROOF (3 Vectors)
   // ==========================================================================
   console.log('\n>>> DOMAIN 6: Legitimate Production Execution Proof <<<');
 
@@ -1267,6 +1470,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const nextChar = {
       ...snapBefore.character,
       appearance: '새로운 흑발 검객',
@@ -1290,12 +1494,14 @@ async function runExhaustivePenetrationMission() {
     });
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
+    const histAfter = engine.getHistory();
     const isPassed = res.success &&
       snapAfter.stateVersion === snapBefore.stateVersion + 1 &&
       snapAfter.character.appearance === '새로운 흑발 검객' &&
       snapAfter.character.goal === '진실을 밝혀낸다' &&
       snapAfter.character.age === 26 &&
-      snapAfter.character.stats.strength === snapBefore.character.stats.strength; // Unchanged stat preserved
+      snapAfter.character.stats.strength === snapBefore.character.stats.strength &&
+      histAfter.length === histBefore.length + 1;
 
     records.push({
       id: 'PROD-01',
@@ -1304,11 +1510,14 @@ async function runExhaustivePenetrationMission() {
       testType: 'LEGITIMATE_PRODUCTION',
       attackVector: 'Legitimate Player Character Edit',
       verdict: isPassed ? 'ALLOWED' : 'FAILED',
-      zeroMutationVerified: false,
+      canonicalStateUnmutatedVerified: false,
+      historyUnmutatedVerified: false,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
-      details: `Committed clean stateVersion ${snapAfter.stateVersion}, appearance: ${snapAfter.character.appearance}`
+      details: `Committed clean stateVersion ${snapAfter.stateVersion}, appearance: ${snapAfter.character.appearance}, historyCount: ${histAfter.length}`
     });
   }
 
@@ -1316,6 +1525,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const candidate: CandidatePacket = {
       candidateId: 'cand-prod-02',
       npcChanges: [
@@ -1339,10 +1549,12 @@ async function runExhaustivePenetrationMission() {
     const proposal = buildSafeProposalFromCandidate(snapBefore, candidate, snapBefore.turn, engine.getHistory());
     const res = engine.submitProposal(proposal);
     const snapAfter = engine.getSnapshot();
+    const histAfter = engine.getHistory();
     const isPassed = res.success &&
       snapAfter.stateVersion === snapBefore.stateVersion + 1 &&
       snapAfter.worldInfo.npcs.some(n => n.name === '성문 경비병') &&
-      snapAfter.worldInfo.factions.some(f => f.name === '북부 수비대');
+      snapAfter.worldInfo.factions.some(f => f.name === '북부 수비대') &&
+      histAfter.length === histBefore.length + 1;
 
     records.push({
       id: 'PROD-02',
@@ -1351,11 +1563,14 @@ async function runExhaustivePenetrationMission() {
       testType: 'LEGITIMATE_PRODUCTION',
       attackVector: 'Legitimate LLM Candidate Packet',
       verdict: isPassed ? 'ALLOWED' : 'FAILED',
-      zeroMutationVerified: false,
+      canonicalStateUnmutatedVerified: false,
+      historyUnmutatedVerified: false,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
-      details: `Committed Candidate Packet: new NPC 성문 경비병, new Faction 북부 수비대, stateVersion ${snapAfter.stateVersion}`
+      details: `Committed Candidate Packet: new NPC 성문 경비병, new Faction 북부 수비대, stateVersion ${snapAfter.stateVersion}, historyCount: ${histAfter.length}`
     });
   }
 
@@ -1363,6 +1578,7 @@ async function runExhaustivePenetrationMission() {
   {
     const engine = createGenesisEngine();
     const snapBefore = engine.getSnapshot();
+    const histBefore = engine.getHistory();
     const act: TransitionAction = {
       type: 'ADVANCE_CHAPTER',
       payload: {
@@ -1372,9 +1588,11 @@ async function runExhaustivePenetrationMission() {
     };
     const res = dispatchEngineInternalAction(engine, act, 'Internal Chapter Transition');
     const snapAfter = engine.getSnapshot();
+    const histAfter = engine.getHistory();
     const isPassed = res.success &&
       snapAfter.stateVersion === snapBefore.stateVersion + 1 &&
-      snapAfter.worldInfo.chapters.currentChapter === '제 2장: 검은 안개의 숲';
+      snapAfter.worldInfo.chapters.currentChapter === '제 2장: 검은 안개의 숲' &&
+      histAfter.length === histBefore.length + 1;
 
     records.push({
       id: 'PROD-03',
@@ -1383,53 +1601,72 @@ async function runExhaustivePenetrationMission() {
       testType: 'LEGITIMATE_PRODUCTION',
       attackVector: 'Engine Authorized Capability Token',
       verdict: isPassed ? 'ALLOWED' : 'FAILED',
-      zeroMutationVerified: false,
+      canonicalStateUnmutatedVerified: false,
+      historyUnmutatedVerified: false,
+      historyCountBefore: histBefore.length,
+      historyCountAfter: histAfter.length,
       rejectionReasons: [],
       stateVersionBefore: snapBefore.stateVersion,
       stateVersionAfter: snapAfter.stateVersion,
-      details: `Committed chapter: ${snapAfter.worldInfo.chapters.currentChapter}, stateVersion ${snapAfter.stateVersion}`
+      details: `Committed chapter: ${snapAfter.worldInfo.chapters.currentChapter}, stateVersion ${snapAfter.stateVersion}, historyCount: ${histAfter.length}`
     });
   }
 
   // ==========================================================================
-  // RESULTS DISPLAY & AGGREGATION
+  // CONSOLE SUMMARY & FORENSIC METRICS
   // ==========================================================================
   console.log('\n================================================================');
-  console.log('                 MISSION EXECUTION SUMMARY                      ');
+  console.log('                 PENETRATION MISSION FORENSIC SUMMARY           ');
   console.log('================================================================');
 
   for (const rec of records) {
     let label = '';
     let isOk = false;
-    if (rec.testType === 'ATTACK') {
-      isOk = rec.verdict === 'BLOCKED';
+    if (rec.testType === 'ADVERSARIAL_ATTACK') {
+      isOk = rec.verdict === 'BLOCKED' && rec.canonicalStateUnmutatedVerified && rec.historyUnmutatedVerified;
       label = isOk ? 'PASS - BLOCKED' : 'FAIL - BREACHED';
+    } else if (rec.testType === 'POLICY_CLAMPING_SANITIZATION') {
+      isOk = rec.verdict === 'SANITIZED_AND_COMMITTED';
+      label = isOk ? 'PASS - SANITIZED' : 'FAIL - UNSANITIZED';
     } else {
       isOk = rec.verdict === 'ALLOWED';
       label = isOk ? 'PASS - ALLOWED' : 'FAIL - FAILED';
     }
     console.log(`[${label}] ${rec.id} (${rec.domain}): ${rec.name}`);
-    console.log(`  Verdict: ${rec.verdict}, ZeroMut: ${rec.zeroMutationVerified}, Details: ${rec.details}`);
+    console.log(`  Type: ${rec.testType}, Verdict: ${rec.verdict}, StateUnmutated: ${rec.canonicalStateUnmutatedVerified}, HistoryUnmutated: ${rec.historyUnmutatedVerified}, Details: ${rec.details}`);
   }
 
-  const attacks = records.filter(r => r.testType === 'ATTACK');
+  const attacks = records.filter(r => r.testType === 'ADVERSARIAL_ATTACK');
   const attackTotal = attacks.length;
   const attackBlocked = attacks.filter(r => r.verdict === 'BLOCKED').length;
-  const zeroMutationProofCount = attacks.filter(r => r.zeroMutationVerified || r.id === 'CHAIN-03').length;
+  const canonicalStateUnmutatedCount = attacks.filter(r => r.canonicalStateUnmutatedVerified).length;
+  const historyUnmutatedCount = attacks.filter(r => r.historyUnmutatedVerified).length;
+  const fullZeroMutationCount = attacks.filter(r => r.canonicalStateUnmutatedVerified && r.historyUnmutatedVerified).length;
+
+  const clampings = records.filter(r => r.testType === 'POLICY_CLAMPING_SANITIZATION');
+  const clampingTotal = clampings.length;
+  const clampingSanitized = clampings.filter(r => r.verdict === 'SANITIZED_AND_COMMITTED').length;
 
   const prods = records.filter(r => r.testType === 'LEGITIMATE_PRODUCTION');
   const prodTotal = prods.length;
   const prodAllowed = prods.filter(r => r.verdict === 'ALLOWED').length;
 
-  const allPassed = attackBlocked === attackTotal && prodAllowed === prodTotal;
+  const allPassed =
+    attackBlocked === attackTotal &&
+    fullZeroMutationCount === attackTotal &&
+    clampingSanitized === clampingTotal &&
+    prodAllowed === prodTotal;
 
   console.log('================================================================');
-  console.log(`ATTACK SURFACE:        EXHAUSTED`);
-  console.log(`VULNERABILITIES:       ${allPassed ? 'NONE FOUND' : 'FOUND'}`);
-  console.log(`BLOCKED ATTACKS:       ${attackBlocked} / ${attackTotal}`);
-  console.log(`ZERO-MUTATION PROOF:   ${zeroMutationProofCount} / ${attackTotal}`);
-  console.log(`LEGITIMATE PRODUCTION: ${prodAllowed === prodTotal ? 'PASS' : 'FAIL'} (${prodAllowed}/${prodTotal})`);
-  console.log(`FINAL:                 ${allPassed ? 'PASS' : 'FAIL'}`);
+  console.log(`ATTACK SURFACE:               EXHAUSTED (6 Domains, 31 Records)`);
+  console.log(`VULNERABILITIES:              ${allPassed ? 'NONE FOUND' : 'FOUND'}`);
+  console.log(`ADVERSARIAL ATTACKS:          ${attackBlocked} / ${attackTotal} BLOCKED`);
+  console.log(`CANONICAL STATE UNMUTATED:    ${canonicalStateUnmutatedCount} / ${attackTotal} VERIFIED`);
+  console.log(`HISTORY UNMUTATED (IMMUTABLE):${historyUnmutatedCount} / ${attackTotal} VERIFIED`);
+  console.log(`FULL ZERO-MUTATION PROOF:     ${fullZeroMutationCount} / ${attackTotal} VERIFIED`);
+  console.log(`POLICY CLAMPING/SANITIZATION: ${clampingSanitized} / ${clampingTotal} SANITIZED & COMMITTED`);
+  console.log(`LEGITIMATE PRODUCTION:        ${prodAllowed} / ${prodTotal} ALLOWED & COMMITTED`);
+  console.log(`FINAL MISSION RESULT:         ${allPassed ? 'PASS' : 'FAIL'}`);
   console.log('================================================================');
 
   // ==========================================================================
@@ -1459,11 +1696,22 @@ async function runExhaustivePenetrationMission() {
     metrics: {
       attackSurface: 'EXHAUSTED',
       vulnerabilities: allPassed ? 'NONE_FOUND' : 'VULNERABILITY_DETECTED',
-      totalAttacks: attackTotal,
-      blockedAttacks: attackBlocked,
-      zeroMutationVerifiedCount: zeroMutationProofCount,
-      totalLegitimateProduction: prodTotal,
-      allowedLegitimateProduction: prodAllowed,
+      totalRecords: records.length,
+      adversarialAttacks: {
+        total: attackTotal,
+        blocked: attackBlocked,
+        canonicalStateUnmutatedCount,
+        historyUnmutatedCount,
+        fullZeroMutationCount
+      },
+      policyClampingSanitization: {
+        total: clampingTotal,
+        sanitizedAndCommitted: clampingSanitized
+      },
+      legitimateProduction: {
+        total: prodTotal,
+        allowedAndCommitted: prodAllowed
+      },
       regressionSuites: {
         sovereignEngine: { passed: sovResults.passed, count: sovResults.results.length },
         languageEngine: { passed: langPassed, count: langResults.total },
