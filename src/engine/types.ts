@@ -210,6 +210,7 @@ export interface ImmutableHistoricalRecord {
   readonly source: ProposalSource;
   readonly actionType: ActionType;
   readonly details: string;
+  readonly canonicalAction?: TransitionAction;
   readonly stateVersionAfterCommit: number;
   readonly informationAccess?: 'PUBLIC' | 'FACTION_ONLY' | 'PRIVATE' | 'HIDDEN' | 'RUMOR';
   readonly previousStateHash?: string;

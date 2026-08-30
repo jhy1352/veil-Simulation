@@ -443,4 +443,5 @@ export interface SessionPayload {
   engineState?: EngineState;
   canonicalSnapshot?: any;
   engineHistory?: any[];
+  genesisSnapshot?: any;
 }

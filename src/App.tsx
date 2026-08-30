@@ -147,7 +147,10 @@ export default function App() {
               lastCommittedEventId: loadedDiag?.lastEventId || null,
               lastCommittedAt: parsed.updatedAt || new Date().toISOString()
             },
-            loadedHistory
+            loadedHistory,
+            undefined,
+            undefined,
+            parsed.genesisSnapshot
           );
         }
       }
@@ -167,6 +170,7 @@ export default function App() {
           engineState,
           storyTurnCount,
           selectedModel,
+          genesisSnapshot: sovereignEngineRef.current ? sovereignEngineRef.current.getGenesisSnapshot() : undefined,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
         };
@@ -320,7 +324,10 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
           lastCommittedEventId: loadedDiag?.lastEventId || null,
           lastCommittedAt: loadedPayload.updatedAt || new Date().toISOString()
         },
-        loadedHistory
+        loadedHistory,
+        undefined,
+        undefined,
+        loadedPayload.genesisSnapshot
       );
     }
   };
