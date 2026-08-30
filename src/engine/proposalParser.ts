@@ -20,6 +20,7 @@ export interface ParsedGMResponse {
   rawClaims: string[];
   parseError?: string;
   hasProposal: boolean;
+  meaningTree?: MeaningNode;
 }
 
 function generateProposalId(prefix: string): string {
@@ -75,6 +76,7 @@ export function parseGMResponseAndProposal(rawResponse: string): ParsedGMRespons
   const rawClaims: string[] = [];
   let parseError: string | undefined = undefined;
   let hasProposal = false;
+  let parsedMeaningTree: MeaningNode | undefined = undefined;
 
   // 1. Extract and process ```proposal ... ``` or ```json ... ``` blocks
   const codeBlockRegex = /```(?:proposal|json|yaml|markdown|text)?\s*([\s\S]*?)```/g;
@@ -90,6 +92,9 @@ export function parseGMResponseAndProposal(rawResponse: string): ParsedGMRespons
         hasProposal = true;
         if (recoveryResult.intentSummary) {
           intentSummary = recoveryResult.intentSummary;
+        }
+        if (recoveryResult.meaningTree) {
+          parsedMeaningTree = recoveryResult.meaningTree;
         }
 
         // Add recovered & grammar-verified actions
@@ -151,18 +156,31 @@ export function parseGMResponseAndProposal(rawResponse: string): ParsedGMRespons
     untrustedActions,
     rawClaims,
     parseError,
-    hasProposal
+    hasProposal,
+    meaningTree: parsedMeaningTree
   };
 }
 
 /**
  * Builds a safe, fully enveloped StateTransitionProposal combining trusted client metadata and untrusted LLM actions.
+ * Enforces MeaningTree authority -> deterministic Runtime Projection -> actions[].
  */
 export function buildSafeProposal(
   envelope: SafeProposalEnvelope,
   parsedResult: ParsedGMResponse
 ): StateTransitionProposal {
-  return {
+  let rootMeaningNode = parsedResult.meaningTree;
+  if (!rootMeaningNode) {
+    const children = (parsedResult.untrustedActions || []).map(act => actionToMeaningNode(act, 'PROPOSAL'));
+    rootMeaningNode = {
+      atom: 'INTENT',
+      scope: 'PROPOSAL',
+      value: parsedResult.intentSummary || 'LLM Narrative Turn Actions',
+      children: children.length > 0 ? children : undefined
+    };
+  }
+
+  const proposal = adaptMeaningTreeToProposal(rootMeaningNode, {
     proposalId: `prop-${envelope.requestId}`,
     requestId: envelope.requestId,
     eventId: envelope.eventId,
@@ -171,9 +189,13 @@ export function buildSafeProposal(
     turn: envelope.turn,
     timestamp: envelope.timestamp || new Date().toISOString(),
     intentSummary: parsedResult.intentSummary || 'LLM Narrative Turn Actions',
-    actions: parsedResult.untrustedActions,
-    rawClaims: parsedResult.rawClaims
-  };
+  });
+
+  if (parsedResult.rawClaims && parsedResult.rawClaims.length > 0) {
+    proposal.rawClaims = [...(proposal.rawClaims || []), ...parsedResult.rawClaims];
+  }
+
+  return proposal;
 }
 
 /**

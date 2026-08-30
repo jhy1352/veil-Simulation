@@ -1161,7 +1161,11 @@ console.log(`Blocked Attacks: ${blockedCount}`);
 console.log(`Confirmed Breaches / Vulnerabilities: ${breachedCount}`);
 console.log('================================================================\n');
 
-// Write raw evidence to idea/report/
-const evidencePath = path.join(process.cwd(), 'idea', 'report', 'redteam_sovereign_adversarial_evidence.json');
+// Write raw evidence to report/
+const reportDir = path.join(process.cwd(), 'report');
+if (!fs.existsSync(reportDir)) {
+  fs.mkdirSync(reportDir, { recursive: true });
+}
+const evidencePath = path.join(reportDir, 'redteam_sovereign_adversarial_evidence.json');
 fs.writeFileSync(evidencePath, JSON.stringify(attackResults, null, 2), 'utf-8');
 console.log(`Raw attack evidence saved to: ${evidencePath}`);

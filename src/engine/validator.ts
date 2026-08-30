@@ -368,7 +368,9 @@ export class EngineValidator {
     }
 
     // 6.5 MeaningTree Runtime Projection Consistency Check (Fail-Closed)
-    if (proposal.meaningTree) {
+    if (!proposal.meaningTree) {
+      rejectedReasons.push(`[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority.`);
+    } else {
       const consistency = checkMeaningTreeProjectionConsistency(proposal.meaningTree, proposal.actions);
       if (!consistency.isConsistent) {
         rejectedReasons.push(`[PROJECTION_INCONSISTENCY] ${consistency.reason}`);

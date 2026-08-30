@@ -16,6 +16,7 @@ import { MeaningNode } from './types';
 import { validateMeaningTree } from './grammar';
 import { TransitionAction } from '../types';
 import { actionToMeaningNode, extractActionsAndClaimsFromMeaningTree, meaningNodeToAction } from './adapter';
+import { projectMeaningTreeToRuntimeActions } from './runtimeProjection';
 
 export interface RecoveryResult {
   success: boolean;
@@ -509,9 +510,9 @@ export function recoverAndParseProposalOrMeaningTree(rawInput: string): Proposal
   }
 
   const parsed = jsonRes.data;
-  const proposalActions: TransitionAction[] = [];
   const rawClaims: string[] = [];
   let intentSummary: string | undefined = typeof parsed.intentSummary === 'string' ? parsed.intentSummary : undefined;
+  const childrenNodes: MeaningNode[] = [];
 
   // Extract and adapt actions through Engine Language meaning nodes
   if (Array.isArray(parsed.actions)) {
@@ -523,12 +524,12 @@ export function recoverAndParseProposalOrMeaningTree(rawInput: string): Proposal
           const node = actionToMeaningNode(action);
           const grammarCheck = validateMeaningTree(node);
           if (grammarCheck.valid) {
-            proposalActions.push(action);
+            childrenNodes.push(node);
           } else {
             rawClaims.push(`[GRAMMAR_REJECTED_ACTION] ${action.type}: ${grammarCheck.errors.join('; ')}`);
           }
         } catch {
-          proposalActions.push(action);
+          // If conversion fails, do not add invalid node
         }
       }
     }
@@ -540,9 +541,19 @@ export function recoverAndParseProposalOrMeaningTree(rawInput: string): Proposal
     }
   }
 
+  const rootMeaningNode: MeaningNode = {
+    atom: 'INTENT',
+    scope: 'PROPOSAL',
+    value: intentSummary || 'Recovered Proposal Actions',
+    children: childrenNodes.length > 0 ? childrenNodes : undefined,
+  };
+
+  const projection = projectMeaningTreeToRuntimeActions(rootMeaningNode);
+
   return {
     success: true,
-    proposalActions,
+    meaningTree: rootMeaningNode,
+    proposalActions: [...projection.actions],
     rawClaims,
     intentSummary,
     recovered: jsonRes.recovered,

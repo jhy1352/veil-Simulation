@@ -21,6 +21,8 @@ import {
   isValidKnowledgeGraphRelation
 } from './index/index';
 import { runLanguageTestSuite } from './language/testSuite';
+import { actionToMeaningNode } from './language/adapter';
+import { MeaningNode } from './language/types';
 
 interface TestCaseResult {
   testId: string;
@@ -44,14 +46,33 @@ const mockNpc = (id: string, name: string, overrides: Partial<NpcRecord> = {}): 
 export function runSovereignEngineTestSuite(): { passed: boolean; results: TestCaseResult[] } {
   const results: TestCaseResult[] = [];
 
-  function record(testId: string, description: string, fn: () => void) {
-    try {
-      fn();
-      results.push({ testId, description, passed: true });
-    } catch (err: any) {
-      results.push({ testId, description, passed: false, error: err?.message || String(err) });
+  const originalSubmit = SovereignEngine.prototype.submitProposal;
+  SovereignEngine.prototype.submitProposal = function(proposal: StateTransitionProposal) {
+    if (!proposal.meaningTree && !(proposal as any).__testOmitMeaningTree) {
+      const children = (proposal.actions || []).map(act => actionToMeaningNode(act, 'PROPOSAL'));
+      const tree: MeaningNode = {
+        atom: 'INTENT',
+        scope: 'PROPOSAL',
+        value: proposal.intentSummary || 'Test Proposal Actions',
+        children: children.length > 0 ? children : undefined,
+      };
+      return originalSubmit.call(this, {
+        ...proposal,
+        meaningTree: tree,
+      });
     }
-  }
+    return originalSubmit.call(this, proposal);
+  };
+
+  try {
+    function record(testId: string, description: string, fn: () => void) {
+      try {
+        fn();
+        results.push({ testId, description, passed: true });
+      } catch (err: any) {
+        results.push({ testId, description, passed: false, error: err?.message || String(err) });
+      }
+    }
 
   // Test 1: Normal Commit
   record('TEST-01', 'Normal Commit: Valid proposal increments stateVersion and commits state atomically', () => {
@@ -5226,11 +5247,14 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
     }
   });
 
-  const passedCount = results.filter(r => r.passed).length;
-  return {
-    passed: passedCount === results.length,
-    results
-  };
+    const passedCount = results.filter(r => r.passed).length;
+    return {
+      passed: passedCount === results.length,
+      results
+    };
+  } finally {
+    SovereignEngine.prototype.submitProposal = originalSubmit;
+  }
 }
 
 if (import.meta.url.endsWith('testRunner.ts')) {

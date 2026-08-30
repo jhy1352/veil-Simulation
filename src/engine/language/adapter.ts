@@ -13,6 +13,7 @@ import {
 } from '../types';
 import { MeaningNode, Scope } from './types';
 import { assertValidMeaningTree } from './grammar';
+import { projectMeaningTreeToRuntimeActions } from './runtimeProjection';
 
 export interface MeaningTreeProposalOptions {
   proposalId?: string;
@@ -139,6 +140,7 @@ export function meaningNodeToAction(node: MeaningNode): TransitionAction | null 
 
 /**
  * Extracts all TransitionActions and Claims from a root MeaningTree recursively.
+ * Uses the single deterministic Runtime Projection for actions.
  */
 export function extractActionsAndClaimsFromMeaningTree(root: MeaningNode): {
   actions: TransitionAction[];
@@ -147,7 +149,7 @@ export function extractActionsAndClaimsFromMeaningTree(root: MeaningNode): {
 } {
   assertValidMeaningTree(root);
 
-  const actions: TransitionAction[] = [];
+  const projection = projectMeaningTreeToRuntimeActions(root);
   const rawClaims: string[] = [];
   let intentSummary: string | undefined;
 
@@ -166,13 +168,6 @@ export function extractActionsAndClaimsFromMeaningTree(root: MeaningNode): {
       }
     }
 
-    if (current.atom === 'ACTION') {
-      const action = meaningNodeToAction(current);
-      if (action) {
-        actions.push(action);
-      }
-    }
-
     if (current.children && Array.isArray(current.children)) {
       for (const child of current.children) {
         traverse(child);
@@ -182,7 +177,7 @@ export function extractActionsAndClaimsFromMeaningTree(root: MeaningNode): {
 
   traverse(root);
 
-  return { actions, rawClaims, intentSummary };
+  return { actions: [...projection.actions], rawClaims, intentSummary };
 }
 
 /**

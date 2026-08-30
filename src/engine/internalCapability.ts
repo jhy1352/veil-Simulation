@@ -14,6 +14,8 @@ import {
   ProposalSource
 } from './types';
 import type { SovereignEngine } from './state';
+import { actionToMeaningNode } from './language/adapter';
+import { MeaningNode } from './language/types';
 
 const engineAuthorizedProposals = new WeakSet<object>();
 
@@ -46,6 +48,13 @@ export function dispatchEngineInternalProposal(
   }
 ): CommitResult {
   const currentSnap = engine.getSnapshot();
+  const rootMeaningNode: MeaningNode = {
+    atom: 'INTENT',
+    scope: 'PROPOSAL',
+    value: params.intentSummary ?? 'Engine Internal Action',
+    children: params.actions.map(act => actionToMeaningNode(act, 'PROPOSAL'))
+  };
+
   const proposal: StateTransitionProposal = {
     proposalId: params.proposalId ?? `prop-int-${Date.now()}-${Math.floor(Math.random() * 100000)}`,
     requestId: params.requestId ?? `req-int-${Date.now()}-${Math.floor(Math.random() * 100000)}`,
@@ -57,7 +66,8 @@ export function dispatchEngineInternalProposal(
     intentSummary: params.intentSummary ?? 'Engine Internal Action',
     actions: params.actions,
     rawClaims: params.rawClaims,
-    originInputId: params.originInputId
+    originInputId: params.originInputId,
+    meaningTree: rootMeaningNode
   };
 
   // Authoritatively register this genuine internal proposal in the private WeakSet

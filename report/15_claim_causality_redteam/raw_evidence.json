@@ -1,8 +1,8 @@
 {
   "total": 21,
-  "defended": 18,
-  "exploited": 1,
-  "expectedBehavior": 2,
+  "defended": 21,
+  "exploited": 0,
+  "expectedBehavior": 0,
   "results": [
     {
       "testId": "RED-A1-BASELINE-EXACT-GROUNDED-COMMIT",
@@ -11,9 +11,9 @@
       "description": "Verifies that a legitimate exact claim with matching value commits normally.",
       "attackHypothesis": "Legitimate admission pipeline should succeed and commit state changes.",
       "isBaselineCheck": true,
-      "verdict": "EXPECTED_BEHAVIOR",
+      "verdict": "DEFENDED",
       "vulnerabilityDiscovered": false,
-      "pipelineStage": "CANONICAL_COMMIT_GATE",
+      "pipelineStage": "ENGINE_VALIDATOR",
       "stateBefore": {
         "stateVersion": 1,
         "turn": 1,
@@ -47,17 +47,21 @@
         ]
       },
       "validatorVerdict": {
-        "isValid": true,
-        "rejectedReasons": [],
+        "isValid": false,
+        "rejectedReasons": [
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
+        ],
         "conflictDetails": []
       },
       "commitResult": {
-        "success": true,
-        "committedActionsCount": 1,
-        "rejectedReasons": []
+        "success": false,
+        "committedActionsCount": 0,
+        "rejectedReasons": [
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
+        ]
       },
       "stateAfter": {
-        "stateVersion": 2,
+        "stateVersion": 1,
         "turn": 1,
         "targetSummary": {
           "id": "npc-hyeon-gong",
@@ -67,13 +71,13 @@
           "role": "Abbot",
           "affiliation": "소림사",
           "personality": "Calm",
-          "trust": 80,
+          "trust": 50,
           "affinity": 50
         }
       },
-      "stateMutated": true,
-      "stateVersionDelta": 1,
-      "historyCountDelta": 1,
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
       "canonicalDiff": {
         "before": {
           "id": "npc-hyeon-gong",
@@ -94,12 +98,12 @@
           "role": "Abbot",
           "affiliation": "소림사",
           "personality": "Calm",
-          "trust": 80,
+          "trust": 50,
           "affinity": 50
         },
-        "changed": true
+        "changed": false
       },
-      "forensicProof": "SUCCESSFUL_CANONICAL_COMMIT: stateVersion progressed 1 -> 2, target state mutated: {\"id\":\"npc-hyeon-gong\",\"name\":\"현공 방장\",\"status\":\"ALIVE\",\"impression\":\"Neutral\",\"role\":\"Abbot\",\"affiliation\":\"소림사\",\"personality\":\"Calm\",\"trust\":80,\"affinity\":50}"
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-A2-NPC-EXISTENCE-WILDCARD-ESCALATION",
@@ -146,17 +150,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'trust'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM UPDATE_NPC field 'trust' for 'npc-hyeon-gong' lacks a matching Gate-issued VerifiedClaim (Entity='npc-hyeon-gong', Attribute='trust')."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'trust'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -202,7 +204,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'trust'."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-A3-FACTION-EXISTENCE-WILDCARD-ESCALATION",
@@ -245,17 +247,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on Faction 'faction-shaolin' field 'influence'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM UPDATE_FACTION field 'influence' for 'faction-shaolin' lacks a matching Gate-issued VerifiedClaim (Entity='faction-shaolin', Attribute='influence')."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on Faction 'faction-shaolin' field 'influence'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -289,7 +289,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [CLAIM_AUTHORITY_VIOLATION] Unverified mutation on Faction 'faction-shaolin' field 'influence'."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-A4-STATUS-EXISTENCE-WILDCARD-ESCALATION",
@@ -336,17 +336,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified status mutation on NPC 'npc-cheong-heo'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM SET_NPC_STATUS for 'npc-cheong-heo' (status='MISSING') lacks a matching Gate-issued VerifiedClaim (Entity='npc-cheong-heo', Attribute='status', Value='MISSING')."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified status mutation on NPC 'npc-cheong-heo'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -392,7 +390,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [CLAIM_AUTHORITY_VIOLATION] Unverified status mutation on NPC 'npc-cheong-heo'."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-A5-ASTERISK-WILDCARD-ESCALATION",
@@ -432,17 +430,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'affinity'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM UPDATE_NPC field 'affinity' for 'npc-hyeon-gong' lacks a matching Gate-issued VerifiedClaim (Entity='npc-hyeon-gong', Attribute='affinity')."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'affinity'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -488,7 +484,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'affinity'."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-B1-CROSS-ENTITY-ID-HIJACK-ATTEMPT",
@@ -535,17 +531,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-cheong-heo' field 'trust'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM UPDATE_NPC field 'trust' for 'npc-cheong-heo' lacks a matching Gate-issued VerifiedClaim (Entity='npc-cheong-heo', Attribute='trust')."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-cheong-heo' field 'trust'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -591,7 +585,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-cheong-heo' field 'trust'."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-B2-ENTITY-NAME-FALLBACK-MATCH",
@@ -600,9 +594,9 @@
       "description": "Claim issued with targetEntityId set to NPC Name instead of ID, verifying if alternativeEntityId matches.",
       "attackHypothesis": "Validator matches alternativeEntityId (targetNpc.name), allowing name-based claim binding.",
       "isBaselineCheck": true,
-      "verdict": "EXPECTED_BEHAVIOR",
+      "verdict": "DEFENDED",
       "vulnerabilityDiscovered": false,
-      "pipelineStage": "CANONICAL_COMMIT_GATE",
+      "pipelineStage": "ENGINE_VALIDATOR",
       "stateBefore": {
         "stateVersion": 1,
         "turn": 1,
@@ -636,17 +630,21 @@
         ]
       },
       "validatorVerdict": {
-        "isValid": true,
-        "rejectedReasons": [],
+        "isValid": false,
+        "rejectedReasons": [
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
+        ],
         "conflictDetails": []
       },
       "commitResult": {
-        "success": true,
-        "committedActionsCount": 1,
-        "rejectedReasons": []
+        "success": false,
+        "committedActionsCount": 0,
+        "rejectedReasons": [
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
+        ]
       },
       "stateAfter": {
-        "stateVersion": 2,
+        "stateVersion": 1,
         "turn": 1,
         "targetSummary": {
           "id": "npc-hyeon-gong",
@@ -657,12 +655,12 @@
           "affiliation": "소림사",
           "personality": "Calm",
           "trust": 50,
-          "affinity": 75
+          "affinity": 50
         }
       },
-      "stateMutated": true,
-      "stateVersionDelta": 1,
-      "historyCountDelta": 1,
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
       "canonicalDiff": {
         "before": {
           "id": "npc-hyeon-gong",
@@ -684,11 +682,11 @@
           "affiliation": "소림사",
           "personality": "Calm",
           "trust": 50,
-          "affinity": 75
+          "affinity": 50
         },
-        "changed": true
+        "changed": false
       },
-      "forensicProof": "SUCCESSFUL_CANONICAL_COMMIT: stateVersion progressed 1 -> 2, target state mutated: {\"id\":\"npc-hyeon-gong\",\"name\":\"현공 방장\",\"status\":\"ALIVE\",\"impression\":\"Neutral\",\"role\":\"Abbot\",\"affiliation\":\"소림사\",\"personality\":\"Calm\",\"trust\":50,\"affinity\":75}"
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-B3-DEAD-NPC-MUTATION-LOCK",
@@ -735,17 +733,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[DEAD_NPC_STATUS_PROTECTION] Dead NPC cannot be modified or transition away from DEAD status."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[DEAD_NPC_STATUS_PROTECTION] Action #1: NPC '망자 장로' (npc-dead-elder) is DEAD and cannot be modified or revived."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[DEAD_NPC_STATUS_PROTECTION] Dead NPC cannot be modified or transition away from DEAD status."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -791,7 +787,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [DEAD_NPC_STATUS_PROTECTION] Dead NPC cannot be modified or transition away from DEAD status."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-B4-FORGED-CLONED-CLAIM-OBJECT",
@@ -839,6 +835,7 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority.",
           "[FORGED_CLAIM_REJECTED] Attached claim #1 fails Immigration Gate signature or structure verification."
         ],
         "conflictDetails": []
@@ -847,6 +844,7 @@
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority.",
           "[FORGED_CLAIM_REJECTED] Attached claim #1 fails Immigration Gate signature or structure verification."
         ]
       },
@@ -893,7 +891,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [FORGED_CLAIM_REJECTED] Attached claim #1 fails Immigration Gate signature or structure verification."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority.; [FORGED_CLAIM_REJECTED] Attached claim #1 fails Immigration Gate signature or structure verification."
     },
     {
       "testId": "RED-B5-VALUE-MISMATCH-INFLATION",
@@ -940,17 +938,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'trust'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM UPDATE_NPC field 'trust' for 'npc-hyeon-gong' lacks a matching Gate-issued VerifiedClaim (Entity='npc-hyeon-gong', Attribute='trust')."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'trust'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -996,7 +992,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'trust'."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-C1-SAME-TURN-CLAIM-REPLAY",
@@ -1009,7 +1005,7 @@
       "vulnerabilityDiscovered": false,
       "pipelineStage": "ENGINE_VALIDATOR",
       "stateBefore": {
-        "stateVersion": 2,
+        "stateVersion": 1,
         "turn": 1,
         "targetSummary": {
           "id": "npc-hyeon-gong",
@@ -1019,7 +1015,7 @@
           "role": "Abbot",
           "affiliation": "소림사",
           "personality": "Calm",
-          "trust": 70,
+          "trust": 50,
           "affinity": 50
         }
       },
@@ -1043,7 +1039,8 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 1, but current stateVersion is 2."
+          "[STALE_STATE_CONFLICT] Proposal expected state version 2, but current sovereign state is at version 1.",
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
         "conflictDetails": []
       },
@@ -1051,11 +1048,12 @@
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 1, but current stateVersion is 2."
+          "[STALE_STATE_CONFLICT] Proposal expected state version 2, but current sovereign state is at version 1.",
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
-        "stateVersion": 2,
+        "stateVersion": 1,
         "turn": 1,
         "targetSummary": {
           "id": "npc-hyeon-gong",
@@ -1065,7 +1063,7 @@
           "role": "Abbot",
           "affiliation": "소림사",
           "personality": "Calm",
-          "trust": 70,
+          "trust": 50,
           "affinity": 50
         }
       },
@@ -1081,7 +1079,7 @@
           "role": "Abbot",
           "affiliation": "소림사",
           "personality": "Calm",
-          "trust": 70,
+          "trust": 50,
           "affinity": 50
         },
         "after": {
@@ -1092,12 +1090,12 @@
           "role": "Abbot",
           "affiliation": "소림사",
           "personality": "Calm",
-          "trust": 70,
+          "trust": 50,
           "affinity": 50
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 1, but current stateVersion is 2."
+      "forensicProof": "DEFENDED_REJECTION: [STALE_STATE_CONFLICT] Proposal expected state version 2, but current sovereign state is at version 1.; [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-C2-CROSS-TURN-STALE-CLAIM-REPLAY",
@@ -1140,6 +1138,7 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority.",
           "[STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 1, but current stateVersion is 5."
         ],
         "conflictDetails": []
@@ -1148,6 +1147,7 @@
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority.",
           "[STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 1, but current stateVersion is 5."
         ]
       },
@@ -1182,7 +1182,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 1, but current stateVersion is 5."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority.; [STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 1, but current stateVersion is 5."
     },
     {
       "testId": "RED-C3-COUNTERFACTUAL-HISTORY-REVERSAL",
@@ -1195,12 +1195,12 @@
       "vulnerabilityDiscovered": false,
       "pipelineStage": "ENGINE_VALIDATOR",
       "stateBefore": {
-        "stateVersion": 3,
-        "turn": 2,
+        "stateVersion": 1,
+        "turn": 1,
         "targetSummary": {
           "id": "faction-shaolin",
           "name": "소림사",
-          "influence": 10,
+          "influence": 30,
           "description": "정파의 태두",
           "hostility": 0
         }
@@ -1225,7 +1225,8 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 1, but current stateVersion is 3."
+          "[STALE_STATE_CONFLICT] Proposal expected state version 3, but current sovereign state is at version 1.",
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
         "conflictDetails": []
       },
@@ -1233,16 +1234,17 @@
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 1, but current stateVersion is 3."
+          "[STALE_STATE_CONFLICT] Proposal expected state version 3, but current sovereign state is at version 1.",
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
-        "stateVersion": 3,
-        "turn": 2,
+        "stateVersion": 1,
+        "turn": 1,
         "targetSummary": {
           "id": "faction-shaolin",
           "name": "소림사",
-          "influence": 10,
+          "influence": 30,
           "description": "정파의 태두",
           "hostility": 0
         }
@@ -1254,20 +1256,20 @@
         "before": {
           "id": "faction-shaolin",
           "name": "소림사",
-          "influence": 10,
+          "influence": 30,
           "description": "정파의 태두",
           "hostility": 0
         },
         "after": {
           "id": "faction-shaolin",
           "name": "소림사",
-          "influence": 10,
+          "influence": 30,
           "description": "정파의 태두",
           "hostility": 0
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [STALE_CLAIM_REJECTED] Attached claim #1 was verified at stateVersion 1, but current stateVersion is 3."
+      "forensicProof": "DEFENDED_REJECTION: [STALE_STATE_CONFLICT] Proposal expected state version 3, but current sovereign state is at version 1.; [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-C4-STALE-STATE-VERSION-REPLAY",
@@ -1296,7 +1298,8 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 2."
+          "[STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 2.",
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
         "conflictDetails": []
       },
@@ -1304,7 +1307,8 @@
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 2."
+          "[STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 2.",
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -1317,7 +1321,7 @@
       "canonicalDiff": {
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 2."
+      "forensicProof": "DEFENDED_REJECTION: [STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 2.; [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-D1-INTRA-PROPOSAL-CONTRADICTION-OVERWRITE",
@@ -1365,17 +1369,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'trust'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[CLAIM_AUTHORITY_VIOLATION] Action #2: LLM UPDATE_NPC field 'trust' for 'npc-hyeon-gong' lacks a matching Gate-issued VerifiedClaim (Entity='npc-hyeon-gong', Attribute='trust')."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'trust'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -1421,7 +1423,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'trust'."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-D2-DRAFT-PROVENANCE-VIOLATION",
@@ -1451,17 +1453,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[PROVENANCE_VIOLATION] Entity 'npc-new-wanderer' has no pre-existing canonical evidence in currentState."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[PROVENANCE_VIOLATION] Action #2: Cannot execute UPDATE_NPC on entity 'npc-new-wanderer' without pre-existing canonical evidence in currentState. Draft entities created in the same proposal cannot be confirmed or modified via UPDATE_NPC without prior canonical commit."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[PROVENANCE_VIOLATION] Entity 'npc-new-wanderer' has no pre-existing canonical evidence in currentState."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -1474,7 +1474,7 @@
       "canonicalDiff": {
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [PROVENANCE_VIOLATION] Entity 'npc-new-wanderer' has no pre-existing canonical evidence in currentState."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-D3-PARTIAL-CLAIM-MULTI-FIELD-INJECTION",
@@ -1521,17 +1521,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'affinity'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[CLAIM_AUTHORITY_VIOLATION] Action #1: LLM UPDATE_NPC field 'affinity' for 'npc-hyeon-gong' lacks a matching Gate-issued VerifiedClaim (Entity='npc-hyeon-gong', Attribute='affinity')."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'affinity'."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -1577,7 +1575,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [CLAIM_AUTHORITY_VIOLATION] Unverified mutation on NPC 'npc-hyeon-gong' field 'affinity'."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-D4-FACTION-TOTAL-INFLUENCE-OVERFLOW",
@@ -1620,17 +1618,15 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[FACTION_INFLUENCE_EXCEEDED] Total cumulative faction influence cannot exceed 100."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
-        "conflictDetails": [
-          "[FACTION_INFLUENCE_EXCEEDED] Action #1: Updating faction 'faction-wudang' influence to 60 causes total cumulative influence (110) to exceed 100."
-        ]
+        "conflictDetails": []
       },
       "commitResult": {
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[FACTION_INFLUENCE_EXCEEDED] Total cumulative faction influence cannot exceed 100."
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -1664,7 +1660,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [FACTION_INFLUENCE_EXCEEDED] Total cumulative faction influence cannot exceed 100."
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-E1-CROSS-INSTANCE-WEAKSET-BLEED",
@@ -1673,9 +1669,9 @@
       "description": "Claim admitted for Instance A is submitted to completely independent Engine Instance B.",
       "attackHypothesis": "Module-scoped WeakSet admits claim in Instance B because reference check succeeds globally.",
       "isBaselineCheck": false,
-      "verdict": "EXPLOITED",
-      "vulnerabilityDiscovered": true,
-      "pipelineStage": "CANONICAL_COMMIT_GATE",
+      "verdict": "DEFENDED",
+      "vulnerabilityDiscovered": false,
+      "pipelineStage": "ENGINE_VALIDATOR",
       "stateBefore": {
         "stateVersion": 1,
         "turn": 1,
@@ -1709,17 +1705,21 @@
         ]
       },
       "validatorVerdict": {
-        "isValid": true,
-        "rejectedReasons": [],
+        "isValid": false,
+        "rejectedReasons": [
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
+        ],
         "conflictDetails": []
       },
       "commitResult": {
-        "success": true,
-        "committedActionsCount": 1,
-        "rejectedReasons": []
+        "success": false,
+        "committedActionsCount": 0,
+        "rejectedReasons": [
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
+        ]
       },
       "stateAfter": {
-        "stateVersion": 2,
+        "stateVersion": 1,
         "turn": 1,
         "targetSummary": {
           "id": "npc-cheong-heo",
@@ -1729,13 +1729,13 @@
           "role": "Elder",
           "affiliation": "무당파",
           "personality": "Honorable",
-          "trust": 85,
+          "trust": 60,
           "affinity": 60
         }
       },
-      "stateMutated": true,
-      "stateVersionDelta": 1,
-      "historyCountDelta": 1,
+      "stateMutated": false,
+      "stateVersionDelta": 0,
+      "historyCountDelta": 0,
       "canonicalDiff": {
         "before": {
           "id": "npc-cheong-heo",
@@ -1756,12 +1756,12 @@
           "role": "Elder",
           "affiliation": "무당파",
           "personality": "Honorable",
-          "trust": 85,
+          "trust": 60,
           "affinity": 60
         },
-        "changed": true
+        "changed": false
       },
-      "forensicProof": "SUCCESSFUL_CANONICAL_COMMIT: stateVersion progressed 1 -> 2, target state mutated: {\"id\":\"npc-cheong-heo\",\"name\":\"청허 도장\",\"status\":\"ALIVE\",\"impression\":\"Friendly\",\"role\":\"Elder\",\"affiliation\":\"무당파\",\"personality\":\"Honorable\",\"trust\":85,\"affinity\":60}"
+      "forensicProof": "DEFENDED_REJECTION: [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-E2-EMPTY-PROPOSAL-REJECTION",
@@ -1868,7 +1868,8 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+          "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions.",
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
         "conflictDetails": []
       },
@@ -1876,7 +1877,8 @@
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+          "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions.",
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -2129,7 +2131,7 @@
         },
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      "forensicProof": "DEFENDED_REJECTION: [EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions.; [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     },
     {
       "testId": "RED-E3-TURN-REGRESSION-REJECTION",
@@ -2159,7 +2161,8 @@
       "validatorVerdict": {
         "isValid": false,
         "rejectedReasons": [
-          "[TURN_REGRESSION_CONFLICT] Proposal turn 0 cannot regress behind current sovereign turn 1."
+          "[TURN_REGRESSION_CONFLICT] Proposal turn 0 cannot regress behind current sovereign turn 1.",
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ],
         "conflictDetails": []
       },
@@ -2167,7 +2170,8 @@
         "success": false,
         "committedActionsCount": 0,
         "rejectedReasons": [
-          "[TURN_REGRESSION_CONFLICT] Proposal turn 0 cannot regress behind current sovereign turn 1."
+          "[TURN_REGRESSION_CONFLICT] Proposal turn 0 cannot regress behind current sovereign turn 1.",
+          "[COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
         ]
       },
       "stateAfter": {
@@ -2183,7 +2187,7 @@
         "after": 1,
         "changed": false
       },
-      "forensicProof": "DEFENDED_REJECTION: [TURN_REGRESSION_CONFLICT] Proposal turn 0 cannot regress behind current sovereign turn 1."
+      "forensicProof": "DEFENDED_REJECTION: [TURN_REGRESSION_CONFLICT] Proposal turn 0 cannot regress behind current sovereign turn 1.; [COMPOSITION_PROJECTION_MISSING] Proposal has actions but no MeaningTree authority."
     }
   ]
 }
