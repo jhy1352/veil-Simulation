@@ -5,11 +5,15 @@ import { MeaningNode } from '../src/engine/language/types';
 import * as fs from 'fs';
 import * as path from 'path';
 
+type TestType = 'ATTACK' | 'LEGITIMATE_PRODUCTION' | 'MALICIOUS_PRODUCTION';
+type Verdict = 'BLOCKED' | 'BREACHED' | 'ALLOWED' | 'FAILED' | 'ERROR';
+
 interface AttackRecord {
   id: string;
   name: string;
+  testType: TestType;
   category: string;
-  verdict: 'BLOCKED' | 'BREACHED' | 'ERROR';
+  verdict: Verdict;
   reasons: string[];
   zeroMutationVerified: boolean;
   stateVersionBefore: number;
@@ -66,6 +70,7 @@ function testMissingTreeAttacks() {
     attackRecords.push({
       id: 'ATK-MISSING-01',
       name: 'Missing meaningTree undefined on PLAYER OVERWRITE_CHARACTER',
+      testType: 'ATTACK',
       category: 'Missing MeaningTree',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -103,6 +108,7 @@ function testMissingTreeAttacks() {
     attackRecords.push({
       id: 'ATK-MISSING-02',
       name: 'Invalid Grammar MeaningNode on OVERWRITE_CHARACTER',
+      testType: 'ATTACK',
       category: 'Missing MeaningTree',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -161,6 +167,7 @@ function testProjectionTamperingAttacks() {
     attackRecords.push({
       id: 'ATK-TAMPER-01',
       name: 'Action type mismatch (OVERWRITE_CHARACTER -> OVERWRITE_WORLD_INFO)',
+      testType: 'ATTACK',
       category: 'Projection Tampering',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -200,6 +207,7 @@ function testProjectionTamperingAttacks() {
     attackRecords.push({
       id: 'ATK-TAMPER-02',
       name: 'Payload stat value tampering (Tree STR 18 vs Action STR 29)',
+      testType: 'ATTACK',
       category: 'Projection Tampering',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -240,6 +248,7 @@ function testProjectionTamperingAttacks() {
     attackRecords.push({
       id: 'ATK-TAMPER-03',
       name: 'Injected extra action into actions array',
+      testType: 'ATTACK',
       category: 'Projection Tampering',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -271,6 +280,7 @@ function testProjectionTamperingAttacks() {
     attackRecords.push({
       id: 'ATK-TAMPER-04',
       name: 'Deleted actions (empty actions[] with non-empty MeaningTree)',
+      testType: 'ATTACK',
       category: 'Projection Tampering',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -311,6 +321,7 @@ function testProjectionTamperingAttacks() {
     attackRecords.push({
       id: 'ATK-TAMPER-05',
       name: 'ORDERED composition actions order reversed',
+      testType: 'ATTACK',
       category: 'Projection Tampering',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -355,6 +366,7 @@ function testProjectionTamperingAttacks() {
     attackRecords.push({
       id: 'ATK-TAMPER-06',
       name: 'Completely unrelated action injected (RECORD_DICE_RESULT)',
+      testType: 'ATTACK',
       category: 'Projection Tampering',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -401,6 +413,7 @@ function testLayerPenetrationAttacks() {
     attackRecords.push({
       id: 'ATK-LAYER-01',
       name: 'Authority Layer: LLM source proposing OVERWRITE_CHARACTER',
+      testType: 'ATTACK',
       category: 'Layer-Penetration',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -448,6 +461,7 @@ function testLayerPenetrationAttacks() {
     attackRecords.push({
       id: 'ATK-LAYER-02',
       name: 'Claim Layer: Wildcard claim injection (*)',
+      testType: 'ATTACK',
       category: 'Layer-Penetration',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -489,6 +503,7 @@ function testLayerPenetrationAttacks() {
     attackRecords.push({
       id: 'ATK-LAYER-03',
       name: 'Causality Layer: Unbacked inventory injection via OVERWRITE_CHARACTER',
+      testType: 'ATTACK',
       category: 'Layer-Penetration',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -527,6 +542,7 @@ function testLayerPenetrationAttacks() {
     attackRecords.push({
       id: 'ATK-LAYER-04',
       name: 'Mutation Layer: Stat bounds violation (STR 99 > 30)',
+      testType: 'ATTACK',
       category: 'Layer-Penetration',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -562,6 +578,7 @@ function testLayerPenetrationAttacks() {
     attackRecords.push({
       id: 'ATK-LAYER-05',
       name: 'State Integrity Layer: Stale expectedStateVersion mismatch',
+      testType: 'ATTACK',
       category: 'Layer-Penetration',
       verdict: !res.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: res.rejectedReasons,
@@ -621,8 +638,9 @@ function testProductionHandlerPipeline() {
     attackRecords.push({
       id: 'PROD-AUTH-01',
       name: 'Production Pipeline: Valid Character Update -> ALLOW & Commit',
+      testType: 'LEGITIMATE_PRODUCTION',
       category: 'Production Proof',
-      verdict: passed ? 'BLOCKED' : 'BREACHED', // BLOCKED means working correctly as expected
+      verdict: passed ? 'ALLOWED' : 'FAILED',
       reasons: [],
       zeroMutationVerified: false,
       stateVersionBefore: snap0.stateVersion,
@@ -641,6 +659,7 @@ function testProductionHandlerPipeline() {
     attackRecords.push({
       id: 'PROD-AUTH-02',
       name: 'Production Pipeline: Malicious Stat (AGI 99) via partial -> REJECTED & Zero Mutation',
+      testType: 'MALICIOUS_PRODUCTION',
       category: 'Production Proof',
       verdict: !updateResult.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: updateResult.rejectedReasons || [],
@@ -662,6 +681,7 @@ function testProductionHandlerPipeline() {
     attackRecords.push({
       id: 'PROD-AUTH-03',
       name: 'Production Pipeline: Unbacked Inventory injection via partial -> REJECTED & Zero Mutation',
+      testType: 'MALICIOUS_PRODUCTION',
       category: 'Production Proof',
       verdict: !updateResult.success && zeroMut ? 'BLOCKED' : 'BREACHED',
       reasons: updateResult.rejectedReasons || [],
@@ -678,15 +698,42 @@ testProductionHandlerPipeline();
 console.log('\n================================================================');
 console.log('                 RED TEAM EXECUTION RESULTS                     ');
 console.log('================================================================');
-let allPassed = true;
+
 for (const rec of attackRecords) {
-  const isOk = rec.verdict === 'BLOCKED';
-  if (!isOk) allPassed = false;
-  console.log(`[${isOk ? 'PASS - DEFENSE INTACT' : 'FAIL - BREACH DETECTED'}] ${rec.id} (${rec.category}): ${rec.name}`);
-  console.log(`  Verdict: ${rec.verdict}, ZeroMutation: ${rec.zeroMutationVerified}, Reasons: ${rec.details}`);
+  let isOk = false;
+  let label = '';
+  if (rec.testType === 'ATTACK') {
+    isOk = rec.verdict === 'BLOCKED' && rec.zeroMutationVerified;
+    label = isOk ? 'PASS - ATTACK BLOCKED' : 'FAIL - ATTACK BREACHED';
+  } else if (rec.testType === 'LEGITIMATE_PRODUCTION') {
+    isOk = rec.verdict === 'ALLOWED';
+    label = isOk ? 'PASS - LEGITIMATE ALLOWED' : 'FAIL - LEGITIMATE FAILED';
+  } else if (rec.testType === 'MALICIOUS_PRODUCTION') {
+    isOk = rec.verdict === 'BLOCKED' && rec.zeroMutationVerified;
+    label = isOk ? 'PASS - MALICIOUS BLOCKED' : 'FAIL - MALICIOUS BREACHED';
+  }
+  console.log(`[${label}] ${rec.id} (${rec.category}): ${rec.name}`);
+  console.log(`  Type: ${rec.testType}, Verdict: ${rec.verdict}, ZeroMutation: ${rec.zeroMutationVerified}, Details: ${rec.details}`);
 }
+
+const attackTotal = attackRecords.filter(r => r.testType === 'ATTACK').length;
+const attackBlocked = attackRecords.filter(r => r.testType === 'ATTACK' && r.verdict === 'BLOCKED' && r.zeroMutationVerified).length;
+
+const legitTotal = attackRecords.filter(r => r.testType === 'LEGITIMATE_PRODUCTION').length;
+const legitAllowed = attackRecords.filter(r => r.testType === 'LEGITIMATE_PRODUCTION' && r.verdict === 'ALLOWED').length;
+
+const malTotal = attackRecords.filter(r => r.testType === 'MALICIOUS_PRODUCTION').length;
+const malBlocked = attackRecords.filter(r => r.testType === 'MALICIOUS_PRODUCTION' && r.verdict === 'BLOCKED' && r.zeroMutationVerified).length;
+
+const allPassed = (attackBlocked === attackTotal) && (legitAllowed === legitTotal) && (malBlocked === malTotal);
+
 console.log('================================================================');
-console.log(`Final Attack Status: ${allPassed ? 'ALL DEFENSE BOUNDARIES INTACT (ZERO BREACH)' : 'BREACH DETECTED'}`);
+console.log('SUMMARY:');
+console.log(`  Attacks:               ${attackBlocked}/${attackTotal} BLOCKED`);
+console.log(`  Legitimate Production: ${legitAllowed}/${legitTotal} ALLOWED + COMMIT`);
+console.log(`  Malicious Production:  ${malBlocked}/${malTotal} BLOCKED + ZERO MUTATION`);
+console.log('================================================================');
+console.log(`Final Status: ${allPassed ? 'ALL DEFENSE BOUNDARIES INTACT' : 'DEFENSE FAILURE DETECTED'}`);
 console.log('================================================================');
 
 // Save raw evidence to report folder
@@ -695,5 +742,21 @@ if (!fs.existsSync(reportDir)) {
   fs.mkdirSync(reportDir, { recursive: true });
 }
 const reportPath = path.join(reportDir, 'raw_attack_evidence.json');
-fs.writeFileSync(reportPath, JSON.stringify({ timestamp: new Date().toISOString(), totalAttacks: attackRecords.length, allPassed, attackRecords }, null, 2));
+fs.writeFileSync(
+  reportPath,
+  JSON.stringify(
+    {
+      timestamp: new Date().toISOString(),
+      summary: {
+        attacks: { total: attackTotal, blocked: attackBlocked, breached: attackTotal - attackBlocked },
+        legitimateProduction: { total: legitTotal, allowed: legitAllowed, failed: legitTotal - legitAllowed },
+        maliciousProduction: { total: malTotal, blocked: malBlocked, breached: malTotal - malBlocked },
+        allPassed
+      },
+      records: attackRecords
+    },
+    null,
+    2
+  )
+);
 console.log(`Raw evidence written to: ${reportPath}`);

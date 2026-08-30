@@ -1,11 +1,28 @@
 {
-  "timestamp": "2026-08-30T07:31:44.335Z",
-  "totalAttacks": 16,
-  "allPassed": true,
-  "attackRecords": [
+  "timestamp": "2026-08-30T07:39:10.196Z",
+  "summary": {
+    "attacks": {
+      "total": 13,
+      "blocked": 13,
+      "breached": 0
+    },
+    "legitimateProduction": {
+      "total": 1,
+      "allowed": 1,
+      "failed": 0
+    },
+    "maliciousProduction": {
+      "total": 2,
+      "blocked": 2,
+      "breached": 0
+    },
+    "allPassed": true
+  },
+  "records": [
     {
       "id": "ATK-MISSING-01",
       "name": "Missing meaningTree undefined on PLAYER OVERWRITE_CHARACTER",
+      "testType": "ATTACK",
       "category": "Missing MeaningTree",
       "verdict": "BLOCKED",
       "reasons": [
@@ -19,6 +36,7 @@
     {
       "id": "ATK-MISSING-02",
       "name": "Invalid Grammar MeaningNode on OVERWRITE_CHARACTER",
+      "testType": "ATTACK",
       "category": "Missing MeaningTree",
       "verdict": "BLOCKED",
       "reasons": [
@@ -32,6 +50,7 @@
     {
       "id": "ATK-TAMPER-01",
       "name": "Action type mismatch (OVERWRITE_CHARACTER -> OVERWRITE_WORLD_INFO)",
+      "testType": "ATTACK",
       "category": "Projection Tampering",
       "verdict": "BLOCKED",
       "reasons": [
@@ -45,6 +64,7 @@
     {
       "id": "ATK-TAMPER-02",
       "name": "Payload stat value tampering (Tree STR 18 vs Action STR 29)",
+      "testType": "ATTACK",
       "category": "Projection Tampering",
       "verdict": "BLOCKED",
       "reasons": [
@@ -58,6 +78,7 @@
     {
       "id": "ATK-TAMPER-03",
       "name": "Injected extra action into actions array",
+      "testType": "ATTACK",
       "category": "Projection Tampering",
       "verdict": "BLOCKED",
       "reasons": [
@@ -71,6 +92,7 @@
     {
       "id": "ATK-TAMPER-04",
       "name": "Deleted actions (empty actions[] with non-empty MeaningTree)",
+      "testType": "ATTACK",
       "category": "Projection Tampering",
       "verdict": "BLOCKED",
       "reasons": [
@@ -85,6 +107,7 @@
     {
       "id": "ATK-TAMPER-05",
       "name": "ORDERED composition actions order reversed",
+      "testType": "ATTACK",
       "category": "Projection Tampering",
       "verdict": "BLOCKED",
       "reasons": [
@@ -98,6 +121,7 @@
     {
       "id": "ATK-TAMPER-06",
       "name": "Completely unrelated action injected (RECORD_DICE_RESULT)",
+      "testType": "ATTACK",
       "category": "Projection Tampering",
       "verdict": "BLOCKED",
       "reasons": [
@@ -111,6 +135,7 @@
     {
       "id": "ATK-LAYER-01",
       "name": "Authority Layer: LLM source proposing OVERWRITE_CHARACTER",
+      "testType": "ATTACK",
       "category": "Layer-Penetration",
       "verdict": "BLOCKED",
       "reasons": [
@@ -124,6 +149,7 @@
     {
       "id": "ATK-LAYER-02",
       "name": "Claim Layer: Wildcard claim injection (*)",
+      "testType": "ATTACK",
       "category": "Layer-Penetration",
       "verdict": "BLOCKED",
       "reasons": [
@@ -137,6 +163,7 @@
     {
       "id": "ATK-LAYER-03",
       "name": "Causality Layer: Unbacked inventory injection via OVERWRITE_CHARACTER",
+      "testType": "ATTACK",
       "category": "Layer-Penetration",
       "verdict": "BLOCKED",
       "reasons": [
@@ -150,6 +177,7 @@
     {
       "id": "ATK-LAYER-04",
       "name": "Mutation Layer: Stat bounds violation (STR 99 > 30)",
+      "testType": "ATTACK",
       "category": "Layer-Penetration",
       "verdict": "BLOCKED",
       "reasons": [
@@ -163,6 +191,7 @@
     {
       "id": "ATK-LAYER-05",
       "name": "State Integrity Layer: Stale expectedStateVersion mismatch",
+      "testType": "ATTACK",
       "category": "Layer-Penetration",
       "verdict": "BLOCKED",
       "reasons": [
@@ -176,8 +205,9 @@
     {
       "id": "PROD-AUTH-01",
       "name": "Production Pipeline: Valid Character Update -> ALLOW & Commit",
+      "testType": "LEGITIMATE_PRODUCTION",
       "category": "Production Proof",
-      "verdict": "BLOCKED",
+      "verdict": "ALLOWED",
       "reasons": [],
       "zeroMutationVerified": false,
       "stateVersionBefore": 1,
@@ -187,6 +217,7 @@
     {
       "id": "PROD-AUTH-02",
       "name": "Production Pipeline: Malicious Stat (AGI 99) via partial -> REJECTED & Zero Mutation",
+      "testType": "MALICIOUS_PRODUCTION",
       "category": "Production Proof",
       "verdict": "BLOCKED",
       "reasons": [
@@ -200,6 +231,7 @@
     {
       "id": "PROD-AUTH-03",
       "name": "Production Pipeline: Unbacked Inventory injection via partial -> REJECTED & Zero Mutation",
+      "testType": "MALICIOUS_PRODUCTION",
       "category": "Production Proof",
       "verdict": "BLOCKED",
       "reasons": [

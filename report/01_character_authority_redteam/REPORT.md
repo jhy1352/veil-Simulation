@@ -9,17 +9,22 @@
 
 ## 1. Executive Summary & Forensic Verdict
 
-본 보고서는 `handleUpdateCharacter()`의 `MeaningTree` Authority migration 작업에 대해 독립적인 파괴적 레드팀 공격 검증을 수행한 결과를 기록한다.
+본 보고서는 `handleUpdateCharacter()`의 `MeaningTree` Authority migration 작업에 대해 독립적인 파괴적 레드팀 공격 및 프로덕션 검증을 수행한 결과를 기록한다.
 
-총 **16개 세부 공격 벡터**(Missing MeaningTree, Projection Tampering, Layer-Penetration, Production Pipeline Proof)를 직접 인젝션 및 런타임 실행하였으며, 모든 공격 시도가 Sovereign Engine의 다층 방어선에 의해 차단(BLOCKED)되고 Zero-Mutation이 보장됨을 포렌식 증거로 확인하였다.
+총 **16개 세부 시나리오**(Direct Attacks 13건, Legitimate Production 1건, Malicious Production 2건)를 직접 인젝션 및 런타임 실행하였으며, 모든 공격 시도가 Sovereign Engine의 다층 방어선에 의해 차단(BLOCKED)되고 Zero-Mutation이 보장됨을 포렌식 증거로 확인하였다.
 
-| 검증 영역 | 총 시도 건수 | 차단(BLOCKED) / 정규 성공 | 돌파(BREACH) | 상태 무결성 (Zero-Mutation) |
-|---|---|---|---|---|
-| Missing MeaningTree Attack | 2 | 2 | 0 | 100% 보존 |
-| Projection Tampering Attack | 6 | 6 | 0 | 100% 보존 |
-| Layer-Penetration Attack | 5 | 5 | 0 | 100% 보존 |
-| Production Pipeline Live Proof | 3 | 3 | 0 | 100% 보존 (허용 동작 1건 버전 증가, 악의적 공격 2건 Zero-Mutation) |
-| **합계** | **16** | **16** | **0** | **결함 없음 (전 방어 경계 수호)** |
+```text
+Attacks:               13/13 BLOCKED
+Legitimate Production: 1/1 ALLOWED + COMMIT
+Malicious Production:  2/2 BLOCKED + ZERO MUTATION
+```
+
+| 범주 (Category) | 시나리오 수 | 결과 (Verdict) | 상태 무결성 (Zero-Mutation) |
+|---|---|---|---|
+| Direct Attacks (`ATTACK`) | 13 | 13/13 BLOCKED | 100% 보존 (Zero-Mutation) |
+| Legitimate Production (`LEGITIMATE_PRODUCTION`) | 1 | 1/1 ALLOWED + COMMIT | 정상 반영 (`stateVersion` 증가) |
+| Malicious Production (`MALICIOUS_PRODUCTION`) | 2 | 2/2 BLOCKED | 100% 보존 (Zero-Mutation) |
+| **합계** | **16** | **모든 방어 경계 수호** | **결함 없음 (무결성 검증 완료)** |
 
 ---
 
@@ -145,6 +150,9 @@ MeaningTree projection check를 통과하더라도 하위 방어벽이 무력화
 ---
 
 ## 9. Final Red Team Determination
-
-* **판정**: **DEFENSE FULLY INTACT (16/16 Attacks Neutralized / Zero Breach)**
+ 
+* **판정**: **ALL DEFENSE BOUNDARIES INTACT**
+  * `Attacks: 13/13 BLOCKED`
+  * `Legitimate Production: 1/1 ALLOWED + COMMIT`
+  * `Malicious Production: 2/2 BLOCKED + ZERO MUTATION`
 * **결론**: `handleUpdateCharacter()`의 `MeaningTree` 권위 이관은 엔진의 모든 보안 계층(Missing Tree Gate, Projection Consistency Check, Authority ACL, Claim Immigration Gate, Causality Firewall, Mutation Boundary, State Versioning)과 완벽하게 정합하며, 어떠한 우회 경로도 존재하지 않음을 확인하였다.
