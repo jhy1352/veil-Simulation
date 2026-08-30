@@ -739,7 +739,8 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
       const candidatePacket = extractCandidatesFromMetadata(
         c.rawMetadata || {},
         storyTurnCount,
-        worldInfo?.currentTime?.formattedTime || '1년차 봄 1일'
+        worldInfo?.currentTime?.formattedTime || '1년차 봄 1일',
+        c.candidateId
       );
       const proposal: StateTransitionProposal = buildSafeProposalFromCandidate(
         canonicalState,

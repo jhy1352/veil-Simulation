@@ -511,11 +511,12 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
       const hasAuthorizedMutation = Boolean(metaData && data?.selectedCandidateId && !data?.isFallbackNonMutation);
 
       if (hasAuthorizedMutation) {
-        // 1. Extract raw CandidatePacket from server-authorized metadata
+        // 1. Extract raw CandidatePacket from server-authorized metadata with canonical selectedCandidateId
         const candidate: CandidatePacket = extractCandidatesFromMetadata(
           metaData,
           storyTurnCount,
-          currentWorldInfo.currentTime.formattedTime
+          currentWorldInfo.currentTime.formattedTime,
+          data.selectedCandidateId
         );
 
         // 2. Build Safe Proposal via Sovereign Proposal Builder with 8 Narrative Defense Rules

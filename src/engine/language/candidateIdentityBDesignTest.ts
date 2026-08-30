@@ -257,12 +257,18 @@ export function runCandidateIdentityBDesignSuite(): BDesignTestReport {
     const gate = runCandidateRecoveryGate<VeilCandidate>(parsed);
     const candidates = gate.passedCandidates;
 
-    // Translation & PreAuth
+    // Translation & PreAuth with Canonical Candidate ID preservation
     const translated = candidates.map(c => {
-      const candidatePacket = extractCandidatesFromMetadata(c.rawMetadata, 1, '1년차 봄 1일');
+      const candidatePacket = extractCandidatesFromMetadata(c.rawMetadata, 1, '1년차 봄 1일', c.candidateId);
       const proposal = buildSafeProposalFromCandidate(canonicalState, candidatePacket, 1, []);
       return { candidate: c, candidatePacket, proposal, meaningTree: proposal.meaningTree! };
     });
+
+    // Invariant: candidatePacket.candidateId === String(c.candidateId)
+    assert(translated[0].candidatePacket.candidateId === '1', 'T5.0a: CandidatePacket 1 preserved ID "1"');
+    assert(translated[1].candidatePacket.candidateId === '2', 'T5.0b: CandidatePacket 2 preserved ID "2"');
+    assert(translated[0].proposal.originInputId === '1', 'T5.0c: Proposal 1 has originInputId "1"');
+    assert(translated[1].proposal.originInputId === '2', 'T5.0d: Proposal 2 has originInputId "2"');
 
     const preAuthResults: VeilCandidate[] = translated.map(tc => {
       const v = EngineValidator.validate(tc.proposal, canonicalState, new Set(), new Set(), []);
@@ -294,6 +300,91 @@ export function runCandidateIdentityBDesignSuite(): BDesignTestReport {
     const forgedCandidate = forgedId !== null ? (allowed.find(c => c.candidateId === forgedId) || null) : null;
 
     assert(forgedCandidate === null, 'T5.6: Forged/Old ID 200 is REJECTED (Fail-Closed to non-mutation)');
+  }
+
+  // ============================================================================
+  // Test 6: Full Lifecycle Identity Invariant Proof (Parser -> PreAuth -> LLM #2 -> Final Translation -> Proposal -> Commit)
+  // ============================================================================
+  {
+    console.log('Test 6: Full Candidate Identity Lifecycle Invariant Proof (#1~#5)');
+
+    const canonicalState: CanonicalState = {
+      stateVersion: 1,
+      turn: 1,
+      worldInfo: {
+        worldName: '테스트 세계',
+        settingDescription: '테스트 설정',
+        currentTime: { year: 1, month: 1, day: 1, timeOfDay: '아침', formattedTime: '1년차 봄 1일' },
+        seeds: [],
+        npcs: [],
+        factions: [],
+        offscreenRecords: []
+      } as any,
+      character: {
+        name: '주인공',
+        stats: { strength: 10, agility: 10, constitution: 10, intelligence: 10, wisdom: 10, charisma: 10 },
+        inventory: []
+      } as any,
+      lastCommittedEventId: null,
+      lastCommittedAt: new Date().toISOString()
+    };
+
+    const fiveCandidatesRaw = `
+[CANDIDATES_BLOCK]
+[
+  { "candidateId": 999, "label": "옵션 1", "narrativeSummary": "설명 1", "rawMetadata": { "statDeltas": [{ "stat": "strength", "delta": 1 }] } },
+  { "candidateId": 888, "label": "옵션 2", "narrativeSummary": "설명 2", "rawMetadata": { "statDeltas": [{ "stat": "agility", "delta": 1 }] } },
+  { "candidateId": 777, "label": "옵션 3", "narrativeSummary": "설명 3", "rawMetadata": { "statDeltas": [{ "stat": "intelligence", "delta": 1 }] } },
+  { "candidateId": 666, "label": "옵션 4", "narrativeSummary": "설명 4", "rawMetadata": { "statDeltas": [{ "stat": "wisdom", "delta": 1 }] } },
+  { "candidateId": 555, "label": "옵션 5", "narrativeSummary": "설명 5", "rawMetadata": { "statDeltas": [{ "stat": "charisma", "delta": 1 }] } }
+]
+[CANDIDATES_END]
+    `;
+
+    // 1. Parser Authority assigns sequential canonical IDs 1..5
+    const parsed = parseCandidatesBlock(fiveCandidatesRaw)!;
+    assert(parsed.length === 5, 'T6.1: Parser extracted 5 candidates');
+    parsed.forEach((c, idx) => {
+      assert(c.candidateId === idx + 1, `T6.2.${idx + 1}: Parser assigned canonical candidateId ${idx + 1}`);
+    });
+
+    // 2. Recovery Gate passes all 5 with zero mutation
+    const gate = runCandidateRecoveryGate<VeilCandidate>(parsed);
+    assert(gate.passedCount === 5, 'T6.3: Gate passed all 5 candidates');
+
+    // 3. PreAuth Translation retains exact canonical candidateId
+    const preAuthPackets = gate.passedCandidates.map(c =>
+      extractCandidatesFromMetadata(c.rawMetadata, 1, '1년차 봄 1일', c.candidateId)
+    );
+
+    preAuthPackets.forEach((pkt, idx) => {
+      assert(pkt.candidateId === String(idx + 1), `T6.4.${idx + 1}: PreAuth CandidatePacket has exact ID "${idx + 1}" (no new random ID)`);
+      assert(!pkt.candidateId.startsWith('cand-'), `T6.5.${idx + 1}: PreAuth CandidatePacket is NOT overwritten with random cand- ID`);
+    });
+
+    // 4. LLM #2 selects Candidate #4
+    const selectedCandidateId = 4;
+    const chosenCandidate = gate.passedCandidates.find(c => c.candidateId === selectedCandidateId)!;
+    assert(chosenCandidate.label === '옵션 4', 'T6.6: Chosen candidate is option 4');
+
+    // 5. Final Translation receives selectedCandidateId
+    const finalPacket = extractCandidatesFromMetadata(
+      chosenCandidate.rawMetadata,
+      1,
+      '1년차 봄 1일',
+      selectedCandidateId
+    );
+
+    assert(finalPacket.candidateId === '4', 'T6.7: Final CandidatePacket identity strictly matches selectedCandidateId "4"');
+    assert(finalPacket.statChanges.length === 1 && finalPacket.statChanges[0].stat === 'wisdom', 'T6.8: Final CandidatePacket payload zero mutation');
+
+    // 6. Proposal generation preserves originInputId = "4"
+    const proposal = buildSafeProposalFromCandidate(canonicalState, finalPacket, 1, []);
+    assert(proposal.originInputId === '4', 'T6.9: Proposal.originInputId is strictly "4"');
+
+    // 7. Backward compatibility: when canonicalCandidateId is omitted, fallback generates 'cand-' ID
+    const defaultPacket = extractCandidatesFromMetadata({}, 1);
+    assert(defaultPacket.candidateId.startsWith('cand-'), 'T6.10: Omitted canonicalCandidateId falls back to generated cand- ID');
   }
 
   console.log('\n================================================================');

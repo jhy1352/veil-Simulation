@@ -31,13 +31,21 @@ export function generateRecordId(prefix: string = 'rec'): string {
 /**
  * Parses raw metadata strings/fields into structured Candidate State changes.
  * This does NOT mutate the canonical state yet.
+ * 
+ * @param metaData Raw metadata object from LLM/Candidate
+ * @param storyTurnCount Current turn count
+ * @param currentNarrativeDate Optional formatted date string
+ * @param canonicalCandidateId Optional canonical candidate ID from Parser Authority (preserves 1..N lifecycle identity)
  */
 export function extractCandidatesFromMetadata(
   metaData: any,
   storyTurnCount: number,
-  currentNarrativeDate?: string
+  currentNarrativeDate?: string,
+  canonicalCandidateId?: string | number
 ): CandidatePacket {
-  const candidateId = generateRecordId('cand');
+  const candidateId = canonicalCandidateId !== undefined && canonicalCandidateId !== null
+    ? String(canonicalCandidateId)
+    : generateRecordId('cand');
   const timestamp = new Date().toISOString();
   const narrativeDate = currentNarrativeDate || `Turn ${storyTurnCount}`;
 
