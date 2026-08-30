@@ -101,18 +101,22 @@ export function runCandidateRecoveryGate<T = any>(rawCandidates: any): Candidate
     };
   }
 
-  const passedCandidates: T[] = [];
+  const structurallyValidCandidates: { index: number; candidate: T; candidateId: number }[] = [];
   const quarantinedCandidates: QuarantinedCandidateEntry[] = [];
 
+  // Pass 1: Structural Integrity Validation
   for (let i = 0; i < rawCandidates.length; i++) {
     const item = rawCandidates[i];
     const validation = validateCandidateStructure(item);
 
     if (validation.valid) {
-      // Zero-Mutation: Pass original candidate reference verbatim
-      passedCandidates.push(item as T);
+      structurallyValidCandidates.push({
+        index: i,
+        candidate: item as T,
+        candidateId: item.candidateId
+      });
     } else {
-      // Strict Quarantine: Record reasons without mutating other candidates
+      // Strict Quarantine: Record structural failure reasons
       quarantinedCandidates.push({
         index: i,
         candidate: item,
@@ -120,6 +124,32 @@ export function runCandidateRecoveryGate<T = any>(rawCandidates: any): Candidate
       });
     }
   }
+
+  // Pass 2: candidateId Uniqueness Validation
+  // Count frequencies of each candidateId among structurally valid candidates
+  const idCounts = new Map<number, number>();
+  for (const entry of structurallyValidCandidates) {
+    idCounts.set(entry.candidateId, (idCounts.get(entry.candidateId) || 0) + 1);
+  }
+
+  const passedCandidates: T[] = [];
+  for (const entry of structurallyValidCandidates) {
+    const count = idCounts.get(entry.candidateId) || 0;
+    if (count > 1) {
+      // Duplicate candidateId detected -> Quarantine all candidates sharing this duplicate ID
+      quarantinedCandidates.push({
+        index: entry.index,
+        candidate: entry.candidate,
+        reasons: [`Duplicate candidateId detected (${entry.candidateId} appears ${count} times). All instances quarantined.`]
+      });
+    } else {
+      // Zero-Mutation: Pass unique valid candidate reference verbatim
+      passedCandidates.push(entry.candidate);
+    }
+  }
+
+  // Sort quarantinedCandidates by original index for deterministic provenance
+  quarantinedCandidates.sort((a, b) => a.index - b.index);
 
   return {
     passedCandidates,

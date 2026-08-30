@@ -17,7 +17,7 @@ const app = express();
 const PORT = 3000;
 
 // VEIL Candidate Interface
-interface VeilCandidate {
+export interface VeilCandidate {
   candidateId: number;
   label: string;
   narrativeSummary: string;
@@ -26,16 +26,30 @@ interface VeilCandidate {
   preAuthReasons?: string[];
 }
 
-function parseCandidatesBlock(text: string): VeilCandidate[] | null {
+export function parseCandidatesBlock(text: string): VeilCandidate[] | null {
   const blockMatch = text.match(/\[CANDIDATES_BLOCK\]([\s\S]*?)\[CANDIDATES_END\]/i);
   if (!blockMatch) return null;
   const jsonStr = blockMatch[1].trim();
   const recovered = recoverSyntaxAndParseJson<any>(jsonStr);
   if (!recovered.success || !recovered.data) return null;
   const parsed = recovered.data;
-  if (Array.isArray(parsed)) return parsed;
-  if (parsed && Array.isArray(parsed.candidates)) return parsed.candidates;
-  return null;
+  let rawList: any[] | null = null;
+  if (Array.isArray(parsed)) rawList = parsed;
+  else if (parsed && Array.isArray(parsed.candidates)) rawList = parsed.candidates;
+  if (!rawList) return null;
+
+  // Parser Authority (B-Design): Assign canonical sequential candidateId (1..N, max 5) based on array order.
+  // LLM output candidateId is untrusted and ignored. Candidate payloads (label, narrativeSummary, rawMetadata) are preserved.
+  const candidateSlice = rawList.slice(0, 5);
+  return candidateSlice.map((item, idx) => {
+    if (typeof item === 'object' && item !== null && !Array.isArray(item)) {
+      return {
+        ...item,
+        candidateId: idx + 1
+      };
+    }
+    return item;
+  });
 }
 
 app.use(express.json({ limit: '10mb' }));
@@ -265,8 +279,8 @@ Candidates must NOT merely be rephrased prose, cosmetic wording differences, var
   - Cardinality: Output between 1 and 5 candidates. 5 is an absolute ceiling, NOT a quota. Output only the number of candidates that genuinely and causally exist.
   - Prohibition of Filler / Hallucinated Candidates: NEVER fabricate non-existent NPCs, unbacked items, fake events, or mutated world states solely to reach 5 candidates.
   - Distinction Principle: Candidates must represent genuinely distinct causal choices or tactical approaches. Variations solely in sentence structure, label wording, narrative summary prose, DC number, or emotional tone do NOT constitute distinct candidates.
+  - Candidate ID Ownership: Candidate IDs are NOT generated or owned by the LLM; the Engine/Parser assigns canonical sequential IDs (1 to N) strictly based on array order.
   - Output Contract Fields:
-    * "candidateId": integer from 1 to 5 (sequential).
     * "label": non-empty string.
     * "narrativeSummary": string.
     * "rawMetadata": non-null, non-array plain object containing standard metadata fields (factCheckSummary, foreshadowSeeds, cameraOffscreenEvents, currentChapter, upcomingChapters, statChanges, recommendedDC, dcReason, contextVerificationDeclaration, etc.).
@@ -1021,4 +1035,7 @@ async function startServer() {
   });
 }
 
-startServer();
+const isMain = process.argv[1] && (process.argv[1].endsWith('server.ts') || process.argv[1].endsWith('server.cjs') || process.argv[1].endsWith('server.js'));
+if (isMain) {
+  startServer();
+}

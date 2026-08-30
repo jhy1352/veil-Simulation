@@ -12,6 +12,7 @@
     "test:engine": "tsx src/engine/testRunner.ts",
     "test:language": "tsx src/engine/language/testSuite.ts",
     "test:candidate-gate": "tsx src/engine/language/runCandidateRecoveryGateSuite.ts",
+    "test:candidate-bdesign": "tsx src/engine/language/candidateIdentityBDesignTest.ts",
     "test:composition-runtime": "tsx src/engine/language/runtimeProjectionTest.ts",
     "test:integration-proof": "tsx src/engine/language/runtimeIntegrationProofTest.ts",
     "test:provenance": "tsx src/engine/provenanceReplayTest.ts"
