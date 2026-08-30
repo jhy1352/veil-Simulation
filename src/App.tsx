@@ -26,7 +26,8 @@ import {
 } from './utils/engineValidator';
 import { SovereignEngine } from './engine/state';
 import { buildSafeProposalFromCandidate } from './engine/proposalParser';
-import { StateTransitionProposal } from './engine/types';
+import { StateTransitionProposal, TransitionAction } from './engine/types';
+import { actionToMeaningNode, adaptMeaningTreeToProposal } from './engine/language';
 import { TurnLatencyProfiler } from './utils/latency';
 import { CreationPhase } from './components/CreationPhase';
 import { GameInterface } from './components/GameInterface';
@@ -182,7 +183,12 @@ export default function App() {
     if (gameState === 'playing' && engine) {
       const snap = engine.getSnapshot();
       const nextChar = { ...snap.character, ...partial };
-      const proposal: StateTransitionProposal = {
+      const action: TransitionAction = {
+        type: 'OVERWRITE_CHARACTER',
+        payload: nextChar
+      };
+      const meaningTree = actionToMeaningNode(action, 'PROPOSAL');
+      const proposal = adaptMeaningTreeToProposal(meaningTree, {
         proposalId: `prop-player-char-${Date.now()}`,
         requestId: `req-player-char-${Date.now()}`,
         eventId: `evt-player-char-${Date.now()}`,
@@ -190,14 +196,8 @@ export default function App() {
         source: 'PLAYER',
         turn: storyTurnCount,
         timestamp: new Date().toISOString(),
-        intentSummary: 'Player manual character edit',
-        actions: [
-          {
-            type: 'OVERWRITE_CHARACTER',
-            payload: nextChar
-          }
-        ]
-      };
+        intentSummary: 'Player manual character edit'
+      });
       const res = engine.submitProposal(proposal);
       if (res.success) {
         setCharacter(res.snapshot.character);

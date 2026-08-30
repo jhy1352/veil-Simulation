@@ -19,6 +19,7 @@
 import { SovereignEngine } from '../state';
 import { StateTransitionProposal, TransitionAction, CanonicalState } from '../types';
 import { MeaningNode } from './types';
+import { actionToMeaningNode, adaptMeaningTreeToProposal } from './adapter';
 import { 
   projectMeaningTreeToRuntimeActions, 
   checkMeaningTreeProjectionConsistency,
@@ -402,6 +403,35 @@ test('PROOF-9: Authority / Causality Firewall preserved when meaningTree is pres
   const result = engine.submitProposal(proposal);
   assertEqual(result.success, false, 'Unbacked inventory ADD proposal must be DENIED by Causality Firewall');
   assertStateUnchanged(beforeState, engine.getSnapshot(), 'PROOF-9 Causality Defense');
+});
+
+// 10. PROOF 10: App Character update through actionToMeaningNode -> adaptMeaningTreeToProposal -> ALLOW / Commit
+test('PROOF-10: App Character update via Engine Language adapter path -> ALLOW and Commit', () => {
+  const engine = new SovereignEngine();
+  const snap = engine.getSnapshot();
+  const nextChar = { ...snap.character, name: '길동', background: '명문가 자제' };
+
+  const action: TransitionAction = {
+    type: 'OVERWRITE_CHARACTER',
+    payload: nextChar
+  };
+  const meaningTree = actionToMeaningNode(action, 'PROPOSAL');
+  const proposal = adaptMeaningTreeToProposal(meaningTree, {
+    proposalId: 'prop-app-char-test',
+    requestId: 'req-app-char-test',
+    eventId: 'evt-app-char-test',
+    expectedStateVersion: snap.stateVersion,
+    source: 'PLAYER',
+    turn: 1,
+    timestamp: new Date().toISOString(),
+    intentSummary: 'Player manual character edit'
+  });
+
+  assertEqual(!!proposal.meaningTree, true, 'Proposal must have MeaningTree authority');
+  const result = engine.submitProposal(proposal);
+  assertEqual(result.success, true, 'App character update via MeaningTree adapter must succeed');
+  assertEqual(result.snapshot.character.name, '길동', 'Committed character name must match');
+  assertEqual(result.snapshot.stateVersion, snap.stateVersion + 1, 'StateVersion must increment');
 });
 
 console.log(`\n================================================================`);

@@ -83,6 +83,10 @@ export type SemanticValue =
 /**
  * 4.5 Composition Semantics
  * Explicitly distinguishes ordered sequences (A, B != B, A) from unordered sets (A, B == B, A).
+ *
+ * UNORDERED Semantics Specification:
+ * = 의미상 child 선언 순서 비의존 (Order-independent in semantics & equality)
+ * + Runtime에서는 deterministic canonical order로 linearize하여 실행 (Projected deterministically for execution)
  */
 export type CompositionType = 'ORDERED' | 'UNORDERED';
 
