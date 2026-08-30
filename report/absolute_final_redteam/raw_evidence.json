@@ -1,0 +1,5474 @@
+[
+  {
+    "attackId": "A-01",
+    "attackName": "Snapshot Inventory Injection Tampering via localStorage/Cloud Save",
+    "category": "Hydration & Storage Sovereignty",
+    "input": {
+      "tamperedItem": "Sword of Ruin",
+      "snapshot": {
+        "stateVersion": 2,
+        "turn": 1,
+        "worldInfo": {
+          "worldName": "Red Team Proving Grounds",
+          "worldType": "popular_genre",
+          "settingDescription": "A high-entropy hostile verification arena.",
+          "toneStyle": "Dark Gritty Cyber-Occult",
+          "currentTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "npcs": [
+            {
+              "id": "npc-guard-1",
+              "name": "Vigilant Sentinel",
+              "status": "ALIVE",
+              "affinity": 50,
+              "firstMetChapter": "Chapter 1",
+              "notes": "Guards the primary commit gate"
+            },
+            {
+              "id": "npc-fallen-1",
+              "name": "Fallen Archivist",
+              "status": "DEAD",
+              "affinity": 0,
+              "firstMetChapter": "Chapter 0",
+              "notes": "Perished in the previous epoch"
+            }
+          ],
+          "factions": [
+            {
+              "id": "fac-order-1",
+              "name": "The Iron Sovereign",
+              "description": "Defenders of the Canonical Gate",
+              "influence": 40,
+              "knownTerritories": [
+                "Central Bastion"
+              ]
+            },
+            {
+              "id": "fac-chaos-1",
+              "name": "Adversarial Collective",
+              "description": "Entropy seekers probing invariants",
+              "influence": 30,
+              "knownTerritories": [
+                "Outer Wastes"
+              ]
+            }
+          ],
+          "publicRumors": [
+            "A mysterious light shines above the spire."
+          ],
+          "secretLore": [],
+          "seeds": [
+            {
+              "id": "seed-01",
+              "topic": "The Ancient Key",
+              "triggerTurn": 1,
+              "isResolved": false
+            }
+          ],
+          "chapters": {
+            "currentChapter": "서막",
+            "upcomingChapters": []
+          },
+          "dcHistory": [],
+          "unresolvedForeshadows": [],
+          "cameraOffscreenEvents": [],
+          "offscreenRecords": []
+        },
+        "character": {
+          "name": "Inquisitor Vaelen",
+          "gender": "",
+          "age": 32,
+          "appearance": "",
+          "goal": "",
+          "originBackground": "",
+          "backgroundType": "preset",
+          "flaw": "",
+          "flawType": "preset",
+          "oath": "",
+          "oathType": "preset",
+          "anchor": "",
+          "anchorType": "preset",
+          "faction": "",
+          "factionType": "preset",
+          "stats": {
+            "strength": 14,
+            "agility": 16,
+            "constitution": 12,
+            "intelligence": 18,
+            "wisdom": 15,
+            "charisma": 10
+          },
+          "inventory": [
+            {
+              "id": "inv-gold-1",
+              "name": "Gold Coin",
+              "quantity": 100,
+              "isEquipped": false
+            },
+            {
+              "id": "inv-dagger-1",
+              "name": "Silver Dagger",
+              "quantity": 1,
+              "isEquipped": true
+            },
+            {
+              "id": "inv-excalibur-99",
+              "name": "Sword of Ruin",
+              "quantity": 1,
+              "isEquipped": true
+            }
+          ],
+          "secret": "",
+          "physicalDefect": "",
+          "timeline": []
+        },
+        "lastCommittedEventId": "evt-a01-1",
+        "lastCommittedAt": "2026-08-30T13:20:50.247Z"
+      }
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Hydration rejected with HYDRATION_PROVENANCE_VIOLATION due to replayed hash mismatch",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_60dd9174d89a8114) does not match snapshot hash (csh_ea2c8ac34f2b80a3). Snapshot or historical records have been tampered.",
+    "stateBefore": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "A mysterious light shines above the spire."
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a01-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.247Z"
+    },
+    "stateAfter": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "A mysterious light shines above the spire."
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          },
+          {
+            "id": "inv-excalibur-99",
+            "name": "Sword of Ruin",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a01-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.247Z"
+    },
+    "historyBeforeCount": 1,
+    "historyAfterCount": 1,
+    "mutationDetected": false,
+    "rejectionBoundary": "SovereignEngine.hydrate deterministic action replay & final state hash validation",
+    "errorStack": "Error: [HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_60dd9174d89a8114) does not match snapshot hash (csh_ea2c8ac34f2b80a3). Snapshot or historical records have been tampered.\n    at Function.hydrate (/app/applet/src/engine/state.ts:344:17)\n    at runAllAttacks (/app/applet/report/absolute_final_redteam/runner/absolute_final_redteam_runner.ts:234:23)\n    at <anonymous> (/app/applet/report/absolute_final_redteam/runner/absolute_final_redteam_runner.ts:1892:1)\n    at ModuleJob.run (node:internal/modules/esm/module_job:343:25)\n    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)\n    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)",
+    "pass": true
+  },
+  {
+    "attackId": "A-02",
+    "attackName": "Initial Snapshot StateVersion Boundary Verification",
+    "category": "Hydration & Storage Sovereignty",
+    "input": {
+      "tamperedStateVersion": 99
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Deterministic engine initialization with exact requested stateVersion",
+    "actual": "Hydrated with version 99",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.265Z"
+    },
+    "stateAfter": {
+      "stateVersion": 99,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.265Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "SovereignEngine.hydrate (Genesis state instantiation)",
+    "pass": true
+  },
+  {
+    "attackId": "A-03",
+    "attackName": "Snapshot Turn Regression against History Records",
+    "category": "Hydration & Storage Sovereignty",
+    "input": {
+      "regressedTurn": 1,
+      "historyTurn": 2
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Hydration rejected with HYDRATION_INTEGRITY_VIOLATION due to turn regression",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_5b902cad875c664d) does not match snapshot hash (csh_ebe2e2a839daaa48). Snapshot or historical records have been tampered.",
+    "stateBefore": {
+      "stateVersion": 2,
+      "turn": 2,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Rumor 2"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a03-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.266Z"
+    },
+    "stateAfter": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Rumor 2"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a03-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.266Z"
+    },
+    "historyBeforeCount": 1,
+    "historyAfterCount": 1,
+    "mutationDetected": false,
+    "rejectionBoundary": "SovereignEngine.hydrate Temporal and Monotonicity Gate",
+    "pass": true
+  },
+  {
+    "attackId": "A-04",
+    "attackName": "History CanonicalAction Payload Modification Attack",
+    "category": "Hydration & Storage Sovereignty",
+    "input": {
+      "tamperedHistoryActionPayload": "FORGED RUMOR TEXT"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Hydration rejected due to replayed action divergence",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Final replayed state hash (csh_94d95671fa378411) does not match snapshot hash (csh_c99a51da5037b6ba). Snapshot or historical records have been tampered.",
+    "stateBefore": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Authentic Rumor"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a04-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.268Z"
+    },
+    "stateAfter": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Authentic Rumor"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a04-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.268Z"
+    },
+    "historyBeforeCount": 1,
+    "historyAfterCount": 1,
+    "mutationDetected": false,
+    "rejectionBoundary": "SovereignEngine.hydrate Replay State Hash Comparison",
+    "pass": true
+  },
+  {
+    "attackId": "A-05",
+    "attackName": "Historical Record Missing CanonicalAction Payload",
+    "category": "Hydration & Storage Sovereignty",
+    "input": {
+      "strippedRecord": {
+        "recordId": "rec-evt-a05-1-1",
+        "eventId": "evt-a05-1",
+        "requestId": "req-a05-1",
+        "proposalId": "prop-a05-1",
+        "turn": 1,
+        "timestamp": "2026-08-30T13:20:50.273Z",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "source": "LLM",
+        "actionType": "ADD_RUMOR",
+        "details": "{\"rumor\":\"Authentic Rumor\"}",
+        "stateVersionAfterCommit": 2,
+        "informationAccess": "RUMOR",
+        "previousStateHash": "csh_4382f6ad6efcd28d"
+      }
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Hydration rejected with HYDRATION_PROVENANCE_VIOLATION",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Historical record 'rec-evt-a05-1-1' in proposal 'prop-a05-1' is missing canonicalAction payload for deterministic replay.",
+    "stateBefore": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Authentic Rumor"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a05-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.273Z"
+    },
+    "stateAfter": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Authentic Rumor"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a05-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.273Z"
+    },
+    "historyBeforeCount": 1,
+    "historyAfterCount": 1,
+    "mutationDetected": false,
+    "rejectionBoundary": "SovereignEngine.hydrate Mandatory Replay Action Payload Check",
+    "pass": true
+  },
+  {
+    "attackId": "A-06",
+    "attackName": "Forged PreviousStateHash Chain Poisoning Attack",
+    "category": "Hydration & Storage Sovereignty",
+    "input": {
+      "forgedHash": "csh_ffffffffffffffff"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Hydration rejected due to provenance hash mismatch",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Genesis anchor hash mismatch. Expected 'csh_ffffffffffffffff', got 'csh_f9af422a84228a0a'.",
+    "stateBefore": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Authentic Rumor"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a06-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.274Z"
+    },
+    "stateAfter": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Authentic Rumor"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a06-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.274Z"
+    },
+    "historyBeforeCount": 1,
+    "historyAfterCount": 1,
+    "mutationDetected": false,
+    "rejectionBoundary": "SovereignEngine.hydrate Genesis/Replay Hash Verification Gate",
+    "pass": true
+  },
+  {
+    "attackId": "A-07",
+    "attackName": "Conflicting PreviousStateHash in Multi-Record Proposal Group",
+    "category": "Hydration & Storage Sovereignty",
+    "input": {
+      "record1Hash": "csh_48ae58b7693be797",
+      "record2Hash": "csh_0000000000000000"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Hydration rejected with Conflicting previousStateHash error",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Conflicting previousStateHash for proposal 'prop-a07-1' in record 'rec-evt-a07-1-2'. Expected 'csh_48ae58b7693be797', found 'csh_0000000000000000'.",
+    "stateBefore": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Rumor A",
+          "Rumor B"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a07-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.275Z"
+    },
+    "stateAfter": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Rumor A",
+          "Rumor B"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a07-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.275Z"
+    },
+    "historyBeforeCount": 2,
+    "historyAfterCount": 2,
+    "mutationDetected": false,
+    "rejectionBoundary": "SovereignEngine.hydrate Proposal Group Consistency Validator",
+    "pass": true
+  },
+  {
+    "attackId": "A-08",
+    "attackName": "Genesis Anchor Spoofing & Character Name Substitution Attack",
+    "category": "Hydration & Storage Sovereignty",
+    "input": {
+      "fakeGenesisCharName": "Spoofed Imposter"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Hydration rejected due to Genesis anchor hash mismatch with history turn 0 hash",
+    "actual": "[HYDRATION_PROVENANCE_VIOLATION] Genesis anchor hash mismatch. Expected 'csh_3a4de9d44e050434', got 'csh_f26606e114ab66c1'.",
+    "stateBefore": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Rumor 1"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a08-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.276Z"
+    },
+    "stateAfter": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Rumor 1"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-a08-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.276Z"
+    },
+    "historyBeforeCount": 1,
+    "historyAfterCount": 1,
+    "mutationDetected": false,
+    "rejectionBoundary": "SovereignEngine.hydrate Genesis Anchor Hash Matcher",
+    "pass": true
+  },
+  {
+    "attackId": "A-09",
+    "attackName": "Multi-Generation Deep Session Hydration Chain (Gen 0 -> Gen 3)",
+    "category": "Hydration & Storage Sovereignty",
+    "input": {
+      "generations": 3,
+      "totalProposals": 3
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Flawless deterministic replay and Genesis anchor preservation across 3 generations",
+    "actual": "Final stateVersion=4, historyCount=3, genesisAnchorVersion=1",
+    "stateBefore": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Rumor Epoch 1"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-gen-1",
+      "lastCommittedAt": "2026-08-30T13:20:50.277Z"
+    },
+    "stateAfter": {
+      "stateVersion": 4,
+      "turn": 3,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [
+          "Rumor Epoch 1",
+          "Rumor Epoch 2",
+          "Rumor Epoch 3"
+        ],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": "evt-gen-3",
+      "lastCommittedAt": "2026-08-30T13:20:50.279Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 3,
+    "mutationDetected": true,
+    "rejectionBoundary": "N/A (Legitimate Evolution)",
+    "pass": true
+  },
+  {
+    "attackId": "A-10",
+    "attackName": "Prototype Pollution & Corrupted Schema Injection via Hydrate",
+    "category": "Hydration & Storage Sovereignty",
+    "input": {
+      "__proto__": {
+        "polluted": true
+      },
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": null,
+      "character": {}
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Hydration rejected with HYDRATION_SCHEMA_VIOLATION",
+    "actual": "[HYDRATION_SCHEMA_VIOLATION] Cannot hydrate invalid canonical snapshot: [SCHEMA_VIOLATION] snapshot.worldInfo must be a non-null object.; [SCHEMA_VIOLATION] snapshot.character.name must be a string.; [SCHEMA_VIOLATION] snapshot.character.inventory must be an array.; [SCHEMA_VIOLATION] snapshot.character.stats must be an object.",
+    "stateBefore": null,
+    "stateAfter": null,
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "SovereignEngine.hydrate Schema Validation (EngineValidator.validateSnapshotSchema)",
+    "pass": true
+  },
+  {
+    "attackId": "B-01",
+    "attackName": "UI Direct Character Stat Hack (STR: 999) in Active Playing State",
+    "category": "UI & State Desynchronization",
+    "input": {
+      "modifiedStat": {
+        "strength": 999
+      }
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Sovereign Engine Commit Gate rejects illegal stat out of 1-30 boundary",
+    "actual": "REJECTED: [INVALID_STAT_VALUE] Action #1: OVERWRITE_CHARACTER stat 'strength' must be a finite integer between 1 and 30. Received: 999",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.282Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.282Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Character Stat Boundary Check",
+    "pass": true
+  },
+  {
+    "attackId": "B-02",
+    "attackName": "UI Direct Item Injection via OVERWRITE_CHARACTER in Playing State",
+    "category": "UI & State Desynchronization",
+    "input": {
+      "injectedItem": "Infinity Blade"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Sovereign Engine Commit Gate rejects unbacked inventory injection via OVERWRITE_CHARACTER",
+    "actual": "REJECTED: [INVENTORY_OVERWRITE_PROHIBITED] Runtime inventory mutation via OVERWRITE_CHARACTER is prohibited.",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.283Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.283Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Article 9/16 Inventory Sovereignty & Overwrite Boundary",
+    "pass": true
+  },
+  {
+    "attackId": "B-03",
+    "attackName": "Stale StateVersion Concurrency Overwrite Attack",
+    "category": "UI & State Desynchronization",
+    "input": {
+      "expectedStateVersion": 1,
+      "currentStateVersion": 2
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Sovereign Engine rejects proposal with Concurrency conflict / Stale StateVersion",
+    "actual": "REJECTED: [STALE_STATE_CONFLICT] Proposal expected state version 1, but current sovereign state is at version 2.",
+    "stateBefore": {
+      "stateVersion": 2
+    },
+    "stateAfter": {
+      "stateVersion": 2
+    },
+    "historyBeforeCount": 1,
+    "historyAfterCount": 1,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> State Version Concurrency Gate",
+    "pass": true
+  },
+  {
+    "attackId": "C-01",
+    "attackName": "Untrusted Caller Direct Claim of Privileged SYSTEM Source",
+    "category": "Authority & Source Forgery",
+    "input": {
+      "source": "SYSTEM"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejection with SECURITY_FORGERY / Internal Capability Check",
+    "actual": "REJECTED: [SECURITY_FORGERY] Direct submission of privileged source 'SYSTEM' without Engine-owned capability token is strictly rejected.",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.284Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.284Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Security Trust Boundary 4-A / Internal Capability Check",
+    "pass": true
+  },
+  {
+    "attackId": "C-02",
+    "attackName": "LLM Proposal Attempting RECORD_PHYSICAL_DEFECT (ACL Breach)",
+    "category": "Authority & Source Forgery",
+    "input": {
+      "source": "LLM",
+      "action": "RECORD_PHYSICAL_DEFECT"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with ACL_VIOLATION (LLM cannot record physical defects directly)",
+    "actual": "REJECTED: [UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (RECORD_PHYSICAL_DEFECT) is unauthorized for source 'LLM'.",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.285Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.285Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> SOURCE_ACTION_ACL Check",
+    "pass": true
+  },
+  {
+    "attackId": "C-03",
+    "attackName": "LLM Proposal Attempting RECORD_DICE_RESULT (Dice Authority Breach)",
+    "category": "Authority & Source Forgery",
+    "input": {
+      "source": "LLM",
+      "action": "RECORD_DICE_RESULT"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with ACL_VIOLATION (Dice authority belongs exclusively to Player/CSPRNG)",
+    "actual": "REJECTED: [UNAUTHORIZED_ACTION_FOR_SOURCE] Action #1 (RECORD_DICE_RESULT) is unauthorized for source 'LLM'.; [DICE_AUTHORITY_VIOLATION] LLM is not authorized to determine or record rollValue.",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.285Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.285Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> SOURCE_ACTION_ACL & Dice Authority Gate",
+    "pass": true
+  },
+  {
+    "attackId": "D-01",
+    "attackName": "Unbacked Inventory ADD without Acquisition Cause",
+    "category": "Causality, Inventory & Economics",
+    "input": {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "operation": "ADD",
+        "item": {
+          "id": "inv-cheat-1",
+          "name": "Magic Elixir",
+          "quantity": 5
+        }
+      }
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with CAUSALITY_VIOLATION (Missing acquisition cause)",
+    "actual": "REJECTED: [CAUSALITY_VIOLATION] Unbacked inventory ADD of 'Magic Elixir' is rejected.",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.286Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.286Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Causality Firewall",
+    "pass": true
+  },
+  {
+    "attackId": "D-02",
+    "attackName": "Double-Spending Single REMOVE Action Across Multiple Item Exchanges",
+    "category": "Causality, Inventory & Economics",
+    "input": [
+      {
+        "type": "MODIFY_INVENTORY",
+        "payload": {
+          "operation": "REMOVE",
+          "item": {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100
+          }
+        }
+      },
+      {
+        "type": "MODIFY_INVENTORY",
+        "payload": {
+          "operation": "ADD",
+          "item": {
+            "id": "inv-armor-1",
+            "name": "Mithril Armor",
+            "quantity": 1
+          },
+          "acquisition": {
+            "cause": "RESOURCE_EXCHANGE",
+            "cost": {
+              "name": "Gold Coin",
+              "quantity": 100
+            }
+          }
+        }
+      },
+      {
+        "type": "MODIFY_INVENTORY",
+        "payload": {
+          "operation": "ADD",
+          "item": {
+            "id": "inv-helm-1",
+            "name": "Mithril Helm",
+            "quantity": 1
+          },
+          "acquisition": {
+            "cause": "RESOURCE_EXCHANGE",
+            "cost": {
+              "name": "Gold Coin",
+              "quantity": 100
+            }
+          }
+        }
+      }
+    ],
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with CAUSALITY_VIOLATION due to aggregate cost deficit",
+    "actual": "REJECTED: [CAUSALITY_VIOLATION] Insufficient cumulative cost resource 'Gold Coin' in character inventory.",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.286Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.286Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Virtual Draft Aggregate Balance Check",
+    "pass": true
+  },
+  {
+    "attackId": "D-03",
+    "attackName": "Token Overlap Substring Spoofing (\"Golden Apple\" -> \"Golden Armor\")",
+    "category": "Causality, Inventory & Economics",
+    "input": {
+      "verifiedEvent": "Golden Apple found",
+      "requestedItem": "Golden Armor"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with CAUSALITY_VIOLATION (Exact item entity match required)",
+    "actual": "REJECTED: [CAUSALITY_VIOLATION] Event 'evt-event-apple' has no causal connection to item 'Golden Armor'.",
+    "stateBefore": {
+      "inventoryCount": 2
+    },
+    "stateAfter": {
+      "inventoryCount": 2
+    },
+    "historyBeforeCount": 1,
+    "historyAfterCount": 1,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Trusted Event Entity Grounding Gate",
+    "pass": true
+  },
+  {
+    "attackId": "E-01",
+    "attackName": "Permanent Physical Defect Immutability Overwrite Attack",
+    "category": "Invariants & Entity State",
+    "input": {
+      "establishedDefect": "Missing Right Eye (Cursed Scar)",
+      "attemptedNewDefect": "Fully Restored Eye"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with DEFECT_IMMUTABILITY_VIOLATION (Permanent defect cannot be mutated)",
+    "actual": "REJECTED: [PHYSICAL_DEFECT_IMMUTABILITY] Permanent physical defect is already established and cannot be overwritten.",
+    "stateBefore": {
+      "defect": "Missing Right Eye (Cursed Scar)"
+    },
+    "stateAfter": {
+      "defect": "Missing Right Eye (Cursed Scar)"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Permanent Defect Immutability Gate",
+    "pass": true
+  },
+  {
+    "attackId": "E-02",
+    "attackName": "Dead NPC Affinity Mutation & Resuscitation Bypass Attack",
+    "category": "Invariants & Entity State",
+    "input": {
+      "npcId": "npc-fallen-1",
+      "requestedStatus": "ALIVE",
+      "requestedAffinity": 100
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with DEAD_NPC_IMMUTABILITY_VIOLATION",
+    "actual": "REJECTED: [DEAD_NPC_STATUS_PROTECTION] Cannot modify status of a deceased NPC.",
+    "stateBefore": {
+      "npcStatus": "DEAD"
+    },
+    "stateAfter": {
+      "npcStatus": "DEAD"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Dead NPC Immutability Gate",
+    "pass": true
+  },
+  {
+    "attackId": "E-03",
+    "attackName": "Cumulative Faction Influence Cap Invariant Attack (Total > 100)",
+    "category": "Invariants & Entity State",
+    "input": {
+      "currentTotal": 70,
+      "attemptedTotal": 120
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with FACTION_INFLUENCE_INVARIANT_VIOLATION (Total <= 100)",
+    "actual": "REJECTED: [FACTION_INFLUENCE_EXCEEDED] Total cumulative faction influence cannot exceed 100.",
+    "stateBefore": {
+      "factions": [
+        {
+          "id": "fac-order-1",
+          "name": "The Iron Sovereign",
+          "description": "Defenders of the Canonical Gate",
+          "influence": 40,
+          "knownTerritories": [
+            "Central Bastion"
+          ]
+        },
+        {
+          "id": "fac-chaos-1",
+          "name": "Adversarial Collective",
+          "description": "Entropy seekers probing invariants",
+          "influence": 30,
+          "knownTerritories": [
+            "Outer Wastes"
+          ]
+        }
+      ]
+    },
+    "stateAfter": {
+      "factions": [
+        {
+          "id": "fac-order-1",
+          "name": "The Iron Sovereign",
+          "description": "Defenders of the Canonical Gate",
+          "influence": 40,
+          "knownTerritories": [
+            "Central Bastion"
+          ]
+        },
+        {
+          "id": "fac-chaos-1",
+          "name": "Adversarial Collective",
+          "description": "Entropy seekers probing invariants",
+          "influence": 30,
+          "knownTerritories": [
+            "Outer Wastes"
+          ]
+        }
+      ]
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Faction Influence Invariant Gate",
+    "pass": true
+  },
+  {
+    "attackId": "F-01",
+    "attackName": "Wildcard Claim Attribute (\"*\") Binding Bypass",
+    "category": "Immigration Gate & Claims",
+    "input": {
+      "claim": {
+        "claimId": "claim-wildcard-1",
+        "targetEntityId": "npc-guard-1",
+        "targetAttribute": "*",
+        "verifiedValue": "DEAD",
+        "source": "PLAYER",
+        "verifiedAt": "2026-08-30T13:20:50.290Z",
+        "provenanceHash": "csh_0000000000000000"
+      },
+      "targetAttribute": "status"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "hasMatchingVerifiedClaim returns false (Wildcard * cannot bind to specific attribute mutations)",
+    "actual": "BINDING STRICTLY REJECTED",
+    "stateBefore": null,
+    "stateAfter": null,
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "validator.ts -> hasMatchingVerifiedClaim Wildcard Firewall",
+    "pass": true
+  },
+  {
+    "attackId": "F-02",
+    "attackName": "Intra-Proposal Self-Proof Grounding Attack",
+    "category": "Immigration Gate & Claims",
+    "input": [
+      {
+        "type": "ADD_NARRATIVE_SEED",
+        "payload": {
+          "id": "seed-instant-1",
+          "topic": "Instant Chest",
+          "triggerTurn": 1
+        }
+      },
+      {
+        "type": "MODIFY_INVENTORY",
+        "payload": {
+          "operation": "ADD",
+          "item": {
+            "id": "inv-ring-1",
+            "name": "Diamond Ring",
+            "quantity": 1
+          },
+          "acquisition": {
+            "cause": "DISCOVERY_PICKUP",
+            "verifiedEventId": "seed-instant-1"
+          }
+        }
+      }
+    ],
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with CAUSALITY_VIOLATION (Action cannot self-ground on simultaneous proposal action)",
+    "actual": "REJECTED: [INVALID_ACTION] Action #1 (ADD_NARRATIVE_SEED) requires valid seed string 'id' and 'content'.; [CAUSALITY_VIOLATION] Event 'seed-instant-1' not found in canonical records.",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.291Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.291Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Pre-existing Canonical Entity Provenance Gate",
+    "pass": true
+  },
+  {
+    "attackId": "G-01",
+    "attackName": "MeaningTree ↔ TransitionAction Mismatch Rejection",
+    "category": "MeaningTree & Language",
+    "input": {
+      "meaningTreeDeclared": "SET_WORLD_METADATA",
+      "actualAction": "ADD_RUMOR"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with PROJECTION_INCONSISTENCY (Semantic representation and actions must project 1:1)",
+    "actual": "REJECTED: [PROJECTION_INCONSISTENCY] [COMPOSITION_PROJECTION_MISMATCH] Proposal.actions differs from deterministic MeaningTree runtime projection.",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.291Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "Red Team Proving Grounds",
+        "worldType": "popular_genre",
+        "settingDescription": "A high-entropy hostile verification arena.",
+        "toneStyle": "Dark Gritty Cyber-Occult",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [
+          {
+            "id": "npc-guard-1",
+            "name": "Vigilant Sentinel",
+            "status": "ALIVE",
+            "affinity": 50,
+            "firstMetChapter": "Chapter 1",
+            "notes": "Guards the primary commit gate"
+          },
+          {
+            "id": "npc-fallen-1",
+            "name": "Fallen Archivist",
+            "status": "DEAD",
+            "affinity": 0,
+            "firstMetChapter": "Chapter 0",
+            "notes": "Perished in the previous epoch"
+          }
+        ],
+        "factions": [
+          {
+            "id": "fac-order-1",
+            "name": "The Iron Sovereign",
+            "description": "Defenders of the Canonical Gate",
+            "influence": 40,
+            "knownTerritories": [
+              "Central Bastion"
+            ]
+          },
+          {
+            "id": "fac-chaos-1",
+            "name": "Adversarial Collective",
+            "description": "Entropy seekers probing invariants",
+            "influence": 30,
+            "knownTerritories": [
+              "Outer Wastes"
+            ]
+          }
+        ],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [
+          {
+            "id": "seed-01",
+            "topic": "The Ancient Key",
+            "triggerTurn": 1,
+            "isResolved": false
+          }
+        ],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "Inquisitor Vaelen",
+        "gender": "",
+        "age": 32,
+        "appearance": "",
+        "goal": "",
+        "originBackground": "",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "stats": {
+          "strength": 14,
+          "agility": 16,
+          "constitution": 12,
+          "intelligence": 18,
+          "wisdom": 15,
+          "charisma": 10
+        },
+        "inventory": [
+          {
+            "id": "inv-gold-1",
+            "name": "Gold Coin",
+            "quantity": 100,
+            "isEquipped": false
+          },
+          {
+            "id": "inv-dagger-1",
+            "name": "Silver Dagger",
+            "quantity": 1,
+            "isEquipped": true
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-08-30T13:20:50.291Z"
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> checkMeaningTreeProjectionConsistency",
+    "pass": true
+  },
+  {
+    "attackId": "G-02",
+    "attackName": "Syntax Recovery Layer Fail-Closed on Truncated/Unbalanced Semantic Tokens",
+    "category": "MeaningTree & Language",
+    "input": {
+      "rawInput": "```json\n{\"root\": {\"composition\": \"ORDERED\", \"children\": [{\"atom\": \"ADD_RUMOR\", \"payload\": {\"rumor\": \"Unclosed string"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Syntax recovery returns success: false without guessing missing semantic text",
+    "actual": "success=false, error=Syntax recovery failed to produce valid JSON: Unexpected token '`', \"```json\n{\"\"... is not valid JSON",
+    "stateBefore": null,
+    "stateAfter": null,
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "recovery.ts -> Syntax Recovery Fail-Closed Gate",
+    "pass": true
+  },
+  {
+    "attackId": "H-01",
+    "attackName": "Duplicate RequestId Replay Attack (Idempotency Invariant)",
+    "category": "Concurrency & Idempotency",
+    "input": {
+      "replayedRequestId": "req-duplicate-unique-01"
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Second proposal rejected with IDEMPOTENCY_VIOLATION (Article 17)",
+    "actual": "REJECTED: [IDEMPOTENCY_VIOLATION] Request ID 'req-duplicate-unique-01' has already been processed.",
+    "stateBefore": {
+      "stateVersion": 1
+    },
+    "stateAfter": {
+      "stateVersion": 2
+    },
+    "historyBeforeCount": 1,
+    "historyAfterCount": 1,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Idempotency Set Check",
+    "pass": true
+  },
+  {
+    "attackId": "H-02",
+    "attackName": "Proposal Turn Regression Attack (Turn 4 < Current Turn 5)",
+    "category": "Concurrency & Idempotency",
+    "input": {
+      "currentTurn": 5,
+      "proposalTurn": 4
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "Rejected with TURN_REGRESSION_CONFLICT",
+    "actual": "REJECTED: [TURN_REGRESSION_CONFLICT] Proposal turn 4 cannot regress behind current sovereign turn 5.",
+    "stateBefore": {
+      "turn": 5
+    },
+    "stateAfter": {
+      "turn": 5
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 0,
+    "mutationDetected": false,
+    "rejectionBoundary": "EngineValidator.validate -> Article 32 Temporal Integrity Gate",
+    "pass": true
+  },
+  {
+    "attackId": "I-01",
+    "attackName": "Complete Golden Path: Genesis -> Save -> Hydrate -> Turns 1-3 -> Re-Hydrates",
+    "category": "End-to-End Golden Path Runtime",
+    "input": {
+      "turnSequence": [
+        {
+          "proposalId": "prop-golden-1",
+          "requestId": "req-golden-1",
+          "eventId": "evt-golden-discovery-1",
+          "expectedStateVersion": 1,
+          "source": "LLM",
+          "turn": 1,
+          "timestamp": "2026-08-30T13:20:51.297Z",
+          "intentSummary": "Discovery of Ancient Relic",
+          "meaningTree": {
+            "atom": "INTENT",
+            "scope": "PROPOSAL",
+            "composition": "ORDERED",
+            "value": "Discovery of Ancient Relic",
+            "children": [
+              {
+                "atom": "ACTION",
+                "scope": "PROPOSAL",
+                "value": "RECORD_OFFSCREEN_EVENT",
+                "fields": {
+                  "actionType": "RECORD_OFFSCREEN_EVENT",
+                  "payload": {
+                    "id": "off-golden-discovery-1",
+                    "eventDescription": "A glowing Sunstone Amulet is discovered in the sanctuary ruins.",
+                    "timestamp": "2026-08-30T13:20:51.297Z"
+                  }
+                }
+              },
+              {
+                "atom": "ACTION",
+                "scope": "PROPOSAL",
+                "value": "ADD_RUMOR",
+                "fields": {
+                  "actionType": "ADD_RUMOR",
+                  "payload": {
+                    "rumor": "Pilgrims speak of an ancient artifact uncovered in the ruins."
+                  }
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "RECORD_OFFSCREEN_EVENT",
+              "payload": {
+                "id": "off-golden-discovery-1",
+                "eventDescription": "A glowing Sunstone Amulet is discovered in the sanctuary ruins.",
+                "timestamp": "2026-08-30T13:20:51.297Z"
+              }
+            },
+            {
+              "type": "ADD_RUMOR",
+              "payload": {
+                "rumor": "Pilgrims speak of an ancient artifact uncovered in the ruins."
+              }
+            }
+          ]
+        },
+        {
+          "proposalId": "prop-golden-2",
+          "requestId": "req-golden-2",
+          "eventId": "evt-golden-acquire-2",
+          "expectedStateVersion": 2,
+          "source": "LLM",
+          "turn": 2,
+          "timestamp": "2026-08-30T13:20:52.297Z",
+          "intentSummary": "Player picks up Sunstone Amulet",
+          "meaningTree": {
+            "atom": "ACTION",
+            "scope": "PROPOSAL",
+            "value": "MODIFY_INVENTORY",
+            "fields": {
+              "actionType": "MODIFY_INVENTORY",
+              "payload": {
+                "operation": "ADD",
+                "item": {
+                  "id": "inv-amulet-1",
+                  "name": "Sunstone Amulet",
+                  "quantity": 1,
+                  "isEquipped": true
+                },
+                "acquisition": {
+                  "cause": "DISCOVERY_PICKUP",
+                  "verifiedEventId": "evt-golden-discovery-1"
+                }
+              }
+            },
+            "children": [
+              {
+                "atom": "ENTITY",
+                "scope": "PROPOSAL",
+                "id": "inv-amulet-1",
+                "value": "Sunstone Amulet",
+                "fields": {
+                  "quantity": 1
+                }
+              },
+              {
+                "atom": "CAUSE",
+                "scope": "PROPOSAL",
+                "value": "DISCOVERY_PICKUP",
+                "fields": {
+                  "verifiedEventId": "evt-golden-discovery-1"
+                }
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "MODIFY_INVENTORY",
+              "payload": {
+                "operation": "ADD",
+                "item": {
+                  "id": "inv-amulet-1",
+                  "name": "Sunstone Amulet",
+                  "quantity": 1,
+                  "isEquipped": true
+                },
+                "acquisition": {
+                  "cause": "DISCOVERY_PICKUP",
+                  "verifiedEventId": "evt-golden-discovery-1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "proposalId": "prop-golden-3",
+          "requestId": "req-golden-3",
+          "eventId": "evt-golden-exchange-3",
+          "expectedStateVersion": 3,
+          "source": "LLM",
+          "turn": 3,
+          "timestamp": "2026-08-30T13:20:53.297Z",
+          "intentSummary": "Resource exchange with apothecary",
+          "meaningTree": {
+            "atom": "INTENT",
+            "scope": "PROPOSAL",
+            "composition": "ORDERED",
+            "value": "Resource exchange with apothecary",
+            "children": [
+              {
+                "atom": "ACTION",
+                "scope": "PROPOSAL",
+                "value": "MODIFY_INVENTORY",
+                "fields": {
+                  "actionType": "MODIFY_INVENTORY",
+                  "payload": {
+                    "operation": "REMOVE",
+                    "item": {
+                      "id": "inv-gold-1",
+                      "name": "Gold Coin",
+                      "quantity": 50
+                    }
+                  }
+                },
+                "children": [
+                  {
+                    "atom": "ENTITY",
+                    "scope": "PROPOSAL",
+                    "id": "inv-gold-1",
+                    "value": "Gold Coin",
+                    "fields": {
+                      "quantity": 50
+                    }
+                  }
+                ]
+              },
+              {
+                "atom": "ACTION",
+                "scope": "PROPOSAL",
+                "value": "MODIFY_INVENTORY",
+                "fields": {
+                  "actionType": "MODIFY_INVENTORY",
+                  "payload": {
+                    "operation": "ADD",
+                    "item": {
+                      "id": "inv-potion-1",
+                      "name": "Healing Potion",
+                      "quantity": 2
+                    },
+                    "acquisition": {
+                      "cause": "RESOURCE_EXCHANGE",
+                      "cost": {
+                        "name": "Gold Coin",
+                        "quantity": 50
+                      }
+                    }
+                  }
+                },
+                "children": [
+                  {
+                    "atom": "ENTITY",
+                    "scope": "PROPOSAL",
+                    "id": "inv-potion-1",
+                    "value": "Healing Potion",
+                    "fields": {
+                      "quantity": 2
+                    }
+                  },
+                  {
+                    "atom": "CAUSE",
+                    "scope": "PROPOSAL",
+                    "value": "RESOURCE_EXCHANGE",
+                    "fields": {},
+                    "children": [
+                      {
+                        "atom": "VALUE",
+                        "scope": "PROPOSAL",
+                        "value": 50,
+                        "fields": {
+                          "costName": "Gold Coin"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          "actions": [
+            {
+              "type": "MODIFY_INVENTORY",
+              "payload": {
+                "operation": "REMOVE",
+                "item": {
+                  "id": "inv-gold-1",
+                  "name": "Gold Coin",
+                  "quantity": 50
+                }
+              }
+            },
+            {
+              "type": "MODIFY_INVENTORY",
+              "payload": {
+                "operation": "ADD",
+                "item": {
+                  "id": "inv-potion-1",
+                  "name": "Healing Potion",
+                  "quantity": 2
+                },
+                "acquisition": {
+                  "cause": "RESOURCE_EXCHANGE",
+                  "cost": {
+                    "name": "Gold Coin",
+                    "quantity": 50
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "executionEnvironment": {
+      "nodeVersion": "v22.23.2",
+      "platform": "linux",
+      "arch": "x64",
+      "timestamp": "2026-08-30T13:20:50.242Z"
+    },
+    "expected": "All 3 turns commit cleanly, inventory gold reduced from 100 to 50, amulet and potion added, provenance hash chain verified",
+    "actual": "Final Gold=50, Final Version=4, Total History Records=5",
+    "stateBefore": {
+      "name": "Inquisitor Vaelen",
+      "gender": "",
+      "age": 32,
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 16,
+        "constitution": 12,
+        "intelligence": 18,
+        "wisdom": 15,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "inv-gold-1",
+          "name": "Gold Coin",
+          "quantity": 100,
+          "isEquipped": false
+        },
+        {
+          "id": "inv-dagger-1",
+          "name": "Silver Dagger",
+          "quantity": 1,
+          "isEquipped": true
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "",
+      "timeline": []
+    },
+    "stateAfter": {
+      "name": "Inquisitor Vaelen",
+      "gender": "",
+      "age": 32,
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 14,
+        "agility": 16,
+        "constitution": 12,
+        "intelligence": 18,
+        "wisdom": 15,
+        "charisma": 10
+      },
+      "inventory": [
+        {
+          "id": "inv-gold-1",
+          "name": "Gold Coin",
+          "quantity": 50,
+          "isEquipped": false
+        },
+        {
+          "id": "inv-dagger-1",
+          "name": "Silver Dagger",
+          "quantity": 1,
+          "isEquipped": true
+        },
+        {
+          "id": "inv-amulet-1",
+          "name": "Sunstone Amulet",
+          "quantity": 1
+        },
+        {
+          "id": "inv-potion-1",
+          "name": "Healing Potion",
+          "quantity": 2
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "",
+      "timeline": []
+    },
+    "historyBeforeCount": 0,
+    "historyAfterCount": 4,
+    "mutationDetected": true,
+    "rejectionBoundary": "N/A (Golden Path Success)",
+    "pass": true
+  }
+]
