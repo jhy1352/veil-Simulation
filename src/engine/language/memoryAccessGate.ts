@@ -5,8 +5,8 @@
  * canonical/historical retrieval subsystem.
  *
  * The LLM never receives direct access to History, indices, or the
- * Knowledge Graph. Natural-language requests must be normalized by the
- * caller into this constrained query shape before retrieval occurs.
+ * Knowledge Graph. Access scope is supplied by an engine-owned policy,
+ * never by the LLM request itself.
  */
 
 import { CanonicalState } from '../types';
@@ -23,32 +23,44 @@ export interface MemoryAccessQuery {
   readonly includeHistory?: boolean;
 }
 
+export interface MemoryAccessPolicy {
+  /** Engine-owned visibility scope. The LLM cannot supply or widen this. */
+  readonly allowedVisibility: readonly ('PUBLIC' | 'FACTION_ONLY' | 'PRIVATE' | 'HIDDEN' | 'RUMOR')[];
+  readonly maxResults?: number;
+}
+
 export interface MemoryAccessResult {
   readonly results: readonly RetrievalResult[];
   readonly granted: boolean;
   readonly reason?: string;
 }
 
-const MAX_MEMORY_RESULTS = 20;
+const DEFAULT_MAX_MEMORY_RESULTS = 20;
+const DEFAULT_POLICY: MemoryAccessPolicy = {
+  allowedVisibility: ['PUBLIC', 'RUMOR'],
+  maxResults: DEFAULT_MAX_MEMORY_RESULTS
+};
 
-function normalizeQuery(query: MemoryAccessQuery): RetrievalQuery {
+function normalizeQuery(query: MemoryAccessQuery, policy: MemoryAccessPolicy): RetrievalQuery {
   const queryText = typeof query.queryText === 'string' ? query.queryText.trim() : undefined;
   const entityId = typeof query.entityId === 'string' ? query.entityId.trim() : undefined;
-  const limit = Number.isInteger(query.limit) && (query.limit as number) > 0
-    ? Math.min(query.limit as number, MAX_MEMORY_RESULTS)
-    : MAX_MEMORY_RESULTS;
+  const requestedLimit = Number.isInteger(query.limit) && (query.limit as number) > 0
+    ? query.limit as number
+    : DEFAULT_MAX_MEMORY_RESULTS;
+  const policyLimit = Number.isInteger(policy.maxResults) && (policy.maxResults as number) > 0
+    ? policy.maxResults as number
+    : DEFAULT_MAX_MEMORY_RESULTS;
 
   return {
     queryText,
     entityId: entityId || undefined,
     category: query.category,
     actionType: query.actionType,
-    limit,
+    limit: Math.min(requestedLimit, policyLimit),
     includeCanon: query.includeCanon !== false,
     includeHistory: query.includeHistory !== false,
-    // Visibility is intentionally NOT supplied by the LLM.
-    // Access policy belongs to the Recovery boundary.
-    visibilityFilter: ['PUBLIC', 'RUMOR']
+    // Critical boundary: visibility comes exclusively from engine policy.
+    visibilityFilter: [...policy.allowedVisibility]
   };
 }
 
@@ -60,17 +72,19 @@ export function readWorldMemory(
   query: MemoryAccessQuery,
   canonIndex: CanonIndex,
   historicalIndex: HistoricalIndex,
-  currentSnapshot: CanonicalState
+  currentSnapshot: CanonicalState,
+  policy: MemoryAccessPolicy = DEFAULT_POLICY
 ): MemoryAccessResult {
   if (!query || typeof query !== 'object') {
     return { granted: false, results: [], reason: 'Invalid memory query.' };
   }
 
-  const normalized = normalizeQuery(query);
+  if (!policy || !Array.isArray(policy.allowedVisibility) || policy.allowedVisibility.length === 0) {
+    return { granted: false, results: [], reason: 'No engine-owned memory access scope is available.' };
+  }
+
+  const normalized = normalizeQuery(query, policy);
   const results = retrieveFromIndices(normalized, canonIndex, historicalIndex, currentSnapshot);
 
-  return {
-    granted: true,
-    results
-  };
+  return { granted: true, results };
 }
