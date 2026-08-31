@@ -1,0 +1,1 @@
+export const DEFAULT_MEMORY_ACCESS_VISIBILITY = ['PUBLIC', 'RUMOR'] as const;
