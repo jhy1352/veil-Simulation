@@ -409,7 +409,9 @@ export function buildSafeProposalFromCandidate(
       actions.push({
         type: 'RECORD_OFFSCREEN_EVENT',
         payload: {
+          id: generateProposalId('offscreen'),
           eventDescription: trimmedEvent,
+          timestamp: new Date().toISOString(),
           visibility:
             off.informationAccess === 'PUBLIC'
               ? 'PUBLIC'
