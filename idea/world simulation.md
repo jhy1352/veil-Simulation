@@ -16,7 +16,9 @@
 
 
 
-현재 구조
+FORENSIC BASELINE — 현재 코드 기준
+
+
 Canonical State
 Entity Identity
 History
