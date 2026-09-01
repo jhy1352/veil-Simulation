@@ -1,6 +1,6 @@
 import { CandidatePacket, EntityReferenceBundle } from '../../types';
 import { CanonicalState, ImmutableHistoricalRecord } from '../types';
-import { buildKnowledgeGraph, UniversalEntity } from './knowledgeGraph';
+import { buildKnowledgeGraph, UniversalEntity, UniversalKnowledgeGraph } from './knowledgeGraph';
 
 export type EntityIdentityStatus = 'EXACT' | 'RECOVERED' | 'NOVEL' | 'AMBIGUOUS' | 'CONFLICT';
 
@@ -33,24 +33,28 @@ function isCurrentInventoryItem(state: CanonicalState, entityId: string): boolea
 /**
  * Deterministic inventory identity resolver.
  * The LLM supplied ID is a claim; CanonicalState and historical evidence remain authoritative.
+ *
+ * A prebuilt request-scoped graph may be supplied so multiple candidates do not rebuild
+ * the same read-only Knowledge Graph repeatedly.
  */
 export function resolveInventoryItemIdentity(
   currentState: CanonicalState,
   historicalRecords: readonly ImmutableHistoricalRecord[] = [],
   name: string,
-  reference: EntityReferenceBundle
+  reference: EntityReferenceBundle,
+  graph?: UniversalKnowledgeGraph
 ): EntityIdentityResolution {
   const normalizedName = normalizeIdentityText(name);
   if (!normalizedName || reference.entityType !== 'ITEM') {
     return { status: 'CONFLICT', candidates: [], normalizedName, reason: 'Inventory identity bundle is structurally invalid.' };
   }
 
-  const graph = buildKnowledgeGraph(currentState, historicalRecords);
-  const allItems = Array.from(graph.entities.values()).filter(e => e.entityType === 'ITEM');
+  const resolvedGraph = graph || buildKnowledgeGraph(currentState, historicalRecords);
+  const allItems = Array.from(resolvedGraph.entities.values()).filter(e => e.entityType === 'ITEM');
   const nameMatches = allItems.filter(e => normalizeIdentityText(e.name) === normalizedName);
 
   if (reference.claimedEntityId) {
-    const claimed = graph.entities.get(reference.claimedEntityId);
+    const claimed = resolvedGraph.entities.get(reference.claimedEntityId);
     if (!claimed || claimed.entityType !== 'ITEM') {
       return {
         status: 'CONFLICT',
@@ -124,9 +128,10 @@ export function resolveInventoryItemIdentity(
 export function resolveCandidateInventoryIdentity(
   currentState: CanonicalState,
   historicalRecords: readonly ImmutableHistoricalRecord[] = [],
-  inventoryCandidate: NonNullable<CandidatePacket['inventoryChanges']>[number]
+  inventoryCandidate: NonNullable<CandidatePacket['inventoryChanges']>[number],
+  graph?: UniversalKnowledgeGraph
 ): EntityIdentityResolution {
-  return resolveInventoryItemIdentity(currentState, historicalRecords, inventoryCandidate.name, inventoryCandidate.entityReference);
+  return resolveInventoryItemIdentity(currentState, historicalRecords, inventoryCandidate.name, inventoryCandidate.entityReference, graph);
 }
 
 export function getResolvedCurrentInventoryItem(
