@@ -136,6 +136,7 @@ export interface InventoryItem {
 }
 
 export type Item = InventoryItem;
+export type CanonicalEntityReferenceType = 'CHARACTER' | 'NPC' | 'FACTION' | 'ITEM' | 'NARRATIVE_SEED';
 
 export interface Character {
   name: string;
