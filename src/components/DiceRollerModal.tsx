@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { rollCryptoDie, evaluateCheck, RollCheckResult } from '../utils/dice';
 import { StatType, CharacterStats } from '../types';
+import { soundEngine } from '../utils/audio';
 import { Dices, Sparkles, AlertCircle, ShieldAlert, CheckCircle2, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -36,12 +37,18 @@ export function DiceRollerModal({
 
   const handleRoll = () => {
     setIsRolling(true);
+    soundEngine.playDiceRoll();
     // Simulate dice tumbling
     setTimeout(() => {
       const raw = rollCryptoDie(20);
       const evaluated = evaluateCheck(raw, totalModifier, targetDC);
       setLastResult(evaluated);
       setIsRolling(false);
+      if (evaluated.isSuccess) {
+        soundEngine.playSuccessSound();
+      } else {
+        soundEngine.playFailureSound();
+      }
     }, 450);
   };
 
