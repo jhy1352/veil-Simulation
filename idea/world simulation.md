@@ -12,7 +12,8 @@
 10. 확인된 결함
 11. 아직 판정 보류인 위험
 12. 월드 시뮬레이션 구현 시 지켜야 할 불변식
-13. 아직 구현하지 않은 미래 설계
+-World Memory Access Rule: LLM의 역사·세계 메모리 열람은 Recovery Gate 권위경계 내부에서만 수행한다. LLM은 직접 History/Index를 검색하거나 원본 Canonical 데이터를 읽지 않는다. Recovery Gate의 부속 Historical Index/Translation Layer가 요청된 정보만 검수·Engine Language로 변환하여 LLM에 projection한다.
+14. 아직 구현하지 않은 미래 설계
 
 
 
