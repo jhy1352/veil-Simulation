@@ -228,7 +228,7 @@ export interface GMMetaData {
 // Canonical Entity Identity Evidence Boundary
 // ----------------------------------------------------
 
-export type CanonicalEntityReferenceType = 'ITEM';
+export type CanonicalEntityReferenceType = 'CHARACTER' | 'NPC' | 'FACTION' | 'ITEM' | 'NARRATIVE_SEED';
 
 export interface EntityReferenceEvidence {
   sourceNpcId?: string;
