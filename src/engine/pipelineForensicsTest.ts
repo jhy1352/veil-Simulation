@@ -26,7 +26,7 @@ interface PipelineForensicRecord {
     t1_t2_context_assembly: { status: string; kgEntitiesCount: number; roadmapAttached: boolean };
     t3_t4_candidate_generation: { status: string; candidateCount: number; recoveryGateStatus: string; quarantinedCount: number };
     t5_translation_diversity: { status: string; diverseCount: number };
-    t6_pre_auth_gate: { status: string; allowedCount: number; rejectedCount: number; reasons: string[] };
+    t6_pre_auth_gate: { status: string; allowedCount: number; rejectedCount: number; reasons: readonly string[] };
     t7_sovereign_commit_gate: { status: string; committedActionsCount: number; stateVersionBefore: number; stateVersionAfter: number; zeroMutationVerified: boolean };
   };
   canonicalStateSnapshot: {
@@ -54,9 +54,9 @@ export async function runPipelineForensicAudit() {
   initialWorld.settingDescription = '마법과 강철이 공존하는 대륙';
   initialWorld.currentTime = {
     year: 1,
-    season: '봄',
+    season: 'SPRING',
     day: 1,
-    timeOfDay: '아침',
+    timeOfDay: 'MORNING',
     formattedTime: '1년차 봄 1일 아침'
   };
 
@@ -344,7 +344,7 @@ export async function runPipelineForensicAudit() {
         },
         {
           type: 'UPDATE_CHARACTER_STATS',
-          payload: { stats: { strength: 999, agility: 999 } }
+          payload: { strength: 999, agility: 999 } as any
         }
       ],
       rawClaims: [],

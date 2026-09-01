@@ -191,10 +191,8 @@
         {
           "type": "UPDATE_CHARACTER_STATS",
           "payload": {
-            "stats": {
-              "strength": 999,
-              "agility": 999
-            }
+            "strength": 999,
+            "agility": 999
           }
         }
       ]
@@ -227,7 +225,8 @@
         "reasons": [
           "[PROVENANCE_VIOLATION] Canonical world metadata cannot be altered by source 'PLAYER' without independent canonical evidence.",
           "[PROVENANCE_VIOLATION] Character secret cannot be modified or established by source 'PLAYER' without independent canonical evidence.",
-          "[INVALID_STAT_KEY] Action #3: Unknown or unauthorized stat key 'stats'. Allowed keys: strength, agility, constitution, intelligence, wisdom, charisma"
+          "[INVALID_STAT_VALUE] Action #3: Stat 'strength' must be a finite integer between 1 and 30. Received: 999",
+          "[INVALID_STAT_VALUE] Action #3: Stat 'agility' must be a finite integer between 1 and 30. Received: 999"
         ]
       },
       "t7_sovereign_commit_gate": {
@@ -267,7 +266,7 @@
           "expectedStateVersion": 2,
           "source": "LLM",
           "turn": 2,
-          "timestamp": "2026-09-01T08:32:08.875Z",
+          "timestamp": "2026-09-01T08:33:38.827Z",
           "intentSummary": "Discovered library rumor",
           "actions": [
             {
@@ -303,7 +302,7 @@
           "expectedStateVersion": 2,
           "source": "LLM",
           "turn": 2,
-          "timestamp": "2026-09-01T08:32:08.876Z",
+          "timestamp": "2026-09-01T08:33:38.828Z",
           "intentSummary": "Stale update attack",
           "actions": [
             {
