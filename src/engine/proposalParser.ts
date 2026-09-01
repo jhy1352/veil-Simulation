@@ -4,6 +4,7 @@ import { recoverAndParseProposalOrMeaningTree, recoverSyntaxAndParseJson } from 
 import { actionToMeaningNode, adaptMeaningTreeToProposal } from './language/adapter';
 import { MeaningNode } from './language/types';
 import { resolveCandidateInventoryIdentity } from './index/entityIdentityResolver';
+import { buildKnowledgeGraph, UniversalKnowledgeGraph } from './index/knowledgeGraph';
 
 export interface SafeProposalEnvelope {
   requestId: string;
@@ -226,6 +227,7 @@ export function buildSafeProposalFromCandidate(
   const immutableHistoricalRecords = (historicalRecords || []).filter(
     (rec): rec is ImmutableHistoricalRecord => 'actionType' in rec && typeof (rec as any).actionType === 'string'
   );
+  const inventoryIdentityGraph: UniversalKnowledgeGraph = buildKnowledgeGraph(currentSnapshot, immutableHistoricalRecords);
 
   // Helper to check if an NPC is historically dead
   const isNpcHistoricallyDead = (name: string): boolean => {
@@ -489,7 +491,7 @@ export function buildSafeProposalFromCandidate(
       if (!inv.name || typeof inv.name !== 'string' || !inv.name.trim()) {
         continue;
       }
-      const resolution = resolveCandidateInventoryIdentity(currentSnapshot, immutableHistoricalRecords, inv);
+      const resolution = resolveCandidateInventoryIdentity(currentSnapshot, immutableHistoricalRecords, inv, inventoryIdentityGraph);
       if (resolution.status === 'AMBIGUOUS' || resolution.status === 'CONFLICT') {
         continue;
       }
