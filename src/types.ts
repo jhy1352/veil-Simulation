@@ -7,6 +7,8 @@ export type GameState = 'creation' | 'playing' | 'gameover';
 
 export type Language = 'ko' | 'en' | 'ja' | 'zh';
 
+export type PlayMode = 'TRPG' | 'Narrative';
+
 export type GeminiModelType = 'gemini-3.7-flash' | 'gemini-3.6-flash' | 'gemini-2.5-flash';
 
 export type FontSizeLevel = 'sm' | 'base' | 'lg' | 'xl';
@@ -94,6 +96,7 @@ export interface WorldInfo {
   worldType: WorldType;
   settingDescription: string;
   toneStyle?: string;
+  playMode?: PlayMode;
   currentTime?: NarrativeTime;
   npcs: NpcRecord[];
   factions: FactionRecord[];
@@ -116,6 +119,10 @@ export interface CharacterStats {
   intelligence: number;
   wisdom: number;
   charisma: number;
+  vitality?: number;
+  intellect?: number;
+  insight?: number;
+  willpower?: number;
 }
 
 export interface InventoryItem {
@@ -132,10 +139,13 @@ export type Item = InventoryItem;
 
 export interface Character {
   name: string;
+  title?: string;
   gender: string;
   age: string | number;
   appearance: string;
   goal: string;
+  currentGoal?: string;
+  biography?: string;
   originBackground: string;
   backgroundType: 'preset' | 'custom' | 'tabula_rasa';
   flaw: string;
@@ -150,6 +160,8 @@ export interface Character {
   inventory: InventoryItem[];
   secret?: string;
   physicalDefect?: string;
+  disabilities?: string[];
+  overcameFlaws?: string[];
   timeline?: string[];
   metaElements?: {
     background: string;
