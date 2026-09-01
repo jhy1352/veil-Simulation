@@ -17,6 +17,13 @@ export function createEmptyCharacter(): Character {
     anchorType: 'preset',
     faction: '',
     factionType: 'preset',
+    metaElements: {
+      background: '',
+      flaw: '',
+      oath: '',
+      anchor: '',
+      faction: ''
+    },
     stats: {
       strength: 10,
       agility: 10,
