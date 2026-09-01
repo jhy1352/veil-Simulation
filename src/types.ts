@@ -214,7 +214,7 @@ export interface GMMetaData {
   currentChapter?: string;
   upcomingChapters?: string[];
   statChanges?: string;
-  inventoryChanges?: (string | { name: string; quantity: number; action?: 'add' | 'remove'; operation?: 'ADD' | 'REMOVE' })[];
+  inventoryChanges?: (string | { name: string; quantity: number; action?: 'add' | 'remove'; operation?: 'ADD' | 'REMOVE'; entityReference?: EntityReferenceBundle })[];
   recommendedDC?: number;
   dcReason?: string;
   contextVerificationDeclaration?: string;
@@ -222,6 +222,32 @@ export interface GMMetaData {
   newFactions?: Partial<FactionRecord>[];
   resolvedSeeds?: { content: string; resolutionSummary?: string }[];
   statDeltas?: { stat: StatType; delta: number }[];
+}
+
+// ----------------------------------------------------
+// Canonical Entity Identity Evidence Boundary
+// ----------------------------------------------------
+
+export type CanonicalEntityReferenceType = 'ITEM';
+
+export interface EntityReferenceEvidence {
+  sourceNpcId?: string;
+  context?: string;
+  verifiedEventId?: string;
+  cause?: string;
+  cost?: { name?: string; id?: string; quantity: number };
+}
+
+/**
+ * LLM-provided identity claim plus independent identity evidence.
+ * claimedEntityId is a claim only; Engine/Resolver remains authoritative.
+ */
+export interface EntityReferenceBundle {
+  entityType: CanonicalEntityReferenceType;
+  claimedEntityId?: string;
+  evidence: EntityReferenceEvidence;
+  /** Engine-only transient field. Never accepted as an authority from LLM output. */
+  resolvedEntityId?: string;
 }
 
 // ----------------------------------------------------
@@ -309,6 +335,7 @@ export interface CandidatePacket {
     name: string;
     quantity: number;
     action: 'add' | 'remove';
+    entityReference: EntityReferenceBundle;
     acquisition?: {
       cause?: string;
       cost?: { name?: string; id?: string; quantity: number };
