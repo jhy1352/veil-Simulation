@@ -133,10 +133,35 @@ export interface InventoryItem {
   itemType?: string;
   category?: string;
   rarity?: string;
+  entityReference?: EntityReferenceBundle;
 }
 
 export type Item = InventoryItem;
 export type CanonicalEntityReferenceType = 'CHARACTER' | 'NPC' | 'FACTION' | 'ITEM' | 'NARRATIVE_SEED';
+
+// ----------------------------------------------------
+// Canonical Entity Identity Evidence Boundary
+// ----------------------------------------------------
+
+export interface EntityReferenceEvidence {
+  sourceNpcId?: string;
+  context?: string;
+  verifiedEventId?: string;
+  cause?: string;
+  cost?: { name?: string; id?: string; quantity: number };
+}
+
+/**
+ * LLM-provided identity claim plus independent identity evidence.
+ * claimedEntityId is a claim only; Engine/Resolver remains authoritative.
+ */
+export interface EntityReferenceBundle {
+  entityType: CanonicalEntityReferenceType;
+  claimedEntityId?: string;
+  evidence: EntityReferenceEvidence;
+  /** Engine-only transient field. Never accepted as an authority from LLM output. */
+  resolvedEntityId?: string;
+}
 
 export interface Character {
   name: string;
@@ -215,7 +240,7 @@ export interface GMMetaData {
   currentChapter?: string;
   upcomingChapters?: string[];
   statChanges?: string;
-  inventoryChanges?: (string | { name: string; quantity: number; action?: 'add' | 'remove'; operation?: 'ADD' | 'REMOVE' })[];
+  inventoryChanges?: (string | { name: string; quantity: number; action?: 'add' | 'remove'; operation?: 'ADD' | 'REMOVE'; entityReference?: EntityReferenceBundle })[];
   recommendedDC?: number;
   dcReason?: string;
   contextVerificationDeclaration?: string;
@@ -310,6 +335,7 @@ export interface CandidatePacket {
     name: string;
     quantity: number;
     action: 'add' | 'remove';
+    entityReference?: EntityReferenceBundle;
     acquisition?: {
       cause?: string;
       cost?: { name?: string; id?: string; quantity: number };

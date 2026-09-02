@@ -3,6 +3,7 @@ import { CandidatePacket, HistoricalRecord, NpcRecord, NarrativeSeed, StatType, 
 import { recoverAndParseProposalOrMeaningTree, recoverSyntaxAndParseJson } from './language/recovery';
 import { actionToMeaningNode, adaptMeaningTreeToProposal } from './language/adapter';
 import { MeaningNode } from './language/types';
+import { buildInventoryIdentityGraph, resolveCandidateInventoryIdentity } from './index/entityIdentityResolver';
 
 export interface SafeProposalEnvelope {
   requestId: string;
@@ -198,6 +199,29 @@ export function buildSafeProposal(
   return proposal;
 }
 
+function toImmutableRecords(
+  records?: readonly (ImmutableHistoricalRecord | HistoricalRecord)[]
+): ImmutableHistoricalRecord[] {
+  if (!records || records.length === 0) return [];
+  return records.map((r, idx) => {
+    if ('actionType' in r && typeof (r as any).actionType === 'string') {
+      return r as ImmutableHistoricalRecord;
+    }
+    const hr = r as HistoricalRecord;
+    return {
+      recordId: hr.recordId || `rec-${idx}`,
+      eventId: hr.recordId || `evt-${idx}`,
+      proposalId: `prop-${idx}`,
+      turn: hr.turn || 0,
+      timestamp: hr.createdAt || new Date().toISOString(),
+      source: (hr.source === 'USER_INPUT' ? 'PLAYER' : hr.source === 'AI_GM_METADATA' ? 'LLM' : 'ENGINE_INTERNAL') as ProposalSource,
+      actionType: hr.recordType as ActionType,
+      details: JSON.stringify(hr.payload || {}),
+      stateVersionAfterCommit: 1
+    };
+  });
+}
+
 /**
  * Transforms an untrusted CandidatePacket into a strictly safe, validated StateTransitionProposal
  * ready for evaluation and atomic commit by SovereignEngine.
@@ -222,6 +246,8 @@ export function buildSafeProposalFromCandidate(
   const eventId = generateProposalId('evt');
   const requestId = generateProposalId('req');
   const proposalId = `prop-${requestId}`;
+  const immutableHistory = toImmutableRecords(historicalRecords);
+  const identityGraph = buildInventoryIdentityGraph(currentSnapshot, immutableHistory);
 
   // Helper to check if an NPC is historically dead
   const isNpcHistoricallyDead = (name: string): boolean => {
@@ -481,7 +507,7 @@ export function buildSafeProposalFromCandidate(
     }
   }
 
-  // 7. Inventory Changes
+  // 7. Inventory Changes with Entity Identity Continuity
   if (Array.isArray(candidate.inventoryChanges)) {
     for (const inv of candidate.inventoryChanges) {
       if (!inv.name || typeof inv.name !== 'string' || !inv.name.trim()) {
@@ -491,13 +517,40 @@ export function buildSafeProposalFromCandidate(
       const cause = (inv as any).cause || (inv as any).acquisition?.cause;
       const cost = (inv as any).cost || (inv as any).acquisition?.cost;
       const verifiedEventId = (inv as any).verifiedEventId || (inv as any).acquisition?.verifiedEventId;
+
+      // Resolve Identity against Sovereign Engine Indices
+      const resolution = resolveCandidateInventoryIdentity(
+        currentSnapshot,
+        immutableHistory,
+        inv,
+        identityGraph
+      );
+
+      // Identity Authority Chain: AMBIGUOUS and CONFLICT block canonical mutation
+      if (resolution.status === 'AMBIGUOUS' || resolution.status === 'CONFLICT') {
+        continue;
+      }
+
+      // Canonical ID determination:
+      // - EXACT / RECOVERED: uses the confirmed canonical ID
+      // - NOVEL: Engine generates a new ID (LLM never dictates ID)
+      const canonicalId = (resolution.status === 'EXACT' || resolution.status === 'RECOVERED')
+        ? resolution.canonicalId!
+        : generateProposalId('item');
+
       actions.push({
         type: 'MODIFY_INVENTORY',
         payload: {
           item: {
-            id: generateProposalId('item'),
+            id: canonicalId,
             name: inv.name.trim(),
-            quantity: Math.max(1, inv.quantity || 1)
+            quantity: Math.max(1, inv.quantity || 1),
+            ...(inv.entityReference ? {
+              entityReference: {
+                ...inv.entityReference,
+                resolvedEntityId: canonicalId
+              }
+            } : {})
           },
           operation: isRemove ? 'REMOVE' : 'ADD',
           ...(!isRemove && cause ? {

@@ -540,7 +540,15 @@ export function runCandidateRecoveryGateTests(): TestReport {
         currentChapter: '1장',
         upcomingChapters: ['2장', '3장', '4장'],
         inventoryChanges: [
-          { name: '가상의 보검', quantity: 1, action: 'add' }
+          {
+            name: '가상의 보검',
+            quantity: 1,
+            action: 'add',
+            entityReference: {
+              entityType: 'ITEM',
+              evidence: { cause: 'UNBACKED_ACQUISITION' }
+            }
+          }
         ]
       }
     };

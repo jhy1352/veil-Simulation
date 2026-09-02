@@ -11,46 +11,13 @@ import { EngineValidator } from './src/engine/validator.ts';
 import { CanonicalState, StateTransitionProposal } from './src/engine/types.ts';
 import { recoverSyntaxAndParseJson } from './src/engine/language/recovery.ts';
 import { filterDiverseCandidates } from './src/engine/language/diversity.ts';
-import { runCandidateRecoveryGate } from './src/engine/language/candidateRecoveryGate.ts';
+import { runCandidateRecoveryGate, parseCandidatesBlock, VeilCandidate } from './src/engine/language/candidateRecoveryGate.ts';
 
 const app = express();
 const PORT = 3000;
 
-// VEIL Candidate Interface
-export interface VeilCandidate {
-  candidateId: number;
-  label: string;
-  narrativeSummary: string;
-  rawMetadata: any;
-  preAuthStatus?: 'ALLOW' | 'REJECT';
-  preAuthReasons?: string[];
-}
-
-export function parseCandidatesBlock(text: string): VeilCandidate[] | null {
-  const blockMatch = text.match(/\[CANDIDATES_BLOCK\]([\s\S]*?)\[CANDIDATES_END\]/i);
-  if (!blockMatch) return null;
-  const jsonStr = blockMatch[1].trim();
-  const recovered = recoverSyntaxAndParseJson<any>(jsonStr);
-  if (!recovered.success || !recovered.data) return null;
-  const parsed = recovered.data;
-  let rawList: any[] | null = null;
-  if (Array.isArray(parsed)) rawList = parsed;
-  else if (parsed && Array.isArray(parsed.candidates)) rawList = parsed.candidates;
-  if (!rawList) return null;
-
-  // Parser Authority (B-Design): Assign canonical sequential candidateId (1..N, max 5) based on array order.
-  // LLM output candidateId is untrusted and ignored. Candidate payloads (label, narrativeSummary, rawMetadata) are preserved.
-  const candidateSlice = rawList.slice(0, 5);
-  return candidateSlice.map((item, idx) => {
-    if (typeof item === 'object' && item !== null && !Array.isArray(item)) {
-      return {
-        ...item,
-        candidateId: idx + 1
-      };
-    }
-    return item;
-  });
-}
+export type { VeilCandidate };
+export { parseCandidatesBlock };
 
 app.use(express.json({ limit: '10mb' }));
 
@@ -1036,7 +1003,4 @@ async function startServer() {
   });
 }
 
-const isMain = process.argv[1] && (process.argv[1].endsWith('server.ts') || process.argv[1].endsWith('server.cjs') || process.argv[1].endsWith('server.js'));
-if (isMain) {
-  startServer();
-}
+startServer();

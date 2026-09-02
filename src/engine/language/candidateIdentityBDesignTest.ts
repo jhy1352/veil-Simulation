@@ -13,8 +13,7 @@
  *    - Selection tampering strictly fails-closed to non-mutation.
  */
 
-import { parseCandidatesBlock, VeilCandidate } from '../../../server.ts';
-import { runCandidateRecoveryGate } from './candidateRecoveryGate.ts';
+import { parseCandidatesBlock, VeilCandidate, runCandidateRecoveryGate } from './candidateRecoveryGate.ts';
 import { extractCandidatesFromMetadata } from '../../utils/engineValidator.ts';
 import { buildSafeProposalFromCandidate } from '../proposalParser.ts';
 import { filterDiverseCandidates } from './diversity.ts';

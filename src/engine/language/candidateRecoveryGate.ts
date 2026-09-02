@@ -16,6 +16,43 @@
  *    - rawMetadata: non-null, non-array object
  */
 
+import { recoverSyntaxAndParseJson } from './recovery.ts';
+
+export interface VeilCandidate {
+  candidateId: number;
+  label: string;
+  narrativeSummary: string;
+  rawMetadata: any;
+  preAuthStatus?: 'ALLOW' | 'REJECT';
+  preAuthReasons?: string[];
+}
+
+export function parseCandidatesBlock(text: string): VeilCandidate[] | null {
+  const blockMatch = text.match(/\[CANDIDATES_BLOCK\]([\s\S]*?)\[CANDIDATES_END\]/i);
+  if (!blockMatch) return null;
+  const jsonStr = blockMatch[1].trim();
+  const recovered = recoverSyntaxAndParseJson<any>(jsonStr);
+  if (!recovered.success || !recovered.data) return null;
+  const parsed = recovered.data;
+  let rawList: any[] | null = null;
+  if (Array.isArray(parsed)) rawList = parsed;
+  else if (parsed && Array.isArray(parsed.candidates)) rawList = parsed.candidates;
+  if (!rawList) return null;
+
+  // Parser Authority (B-Design): Assign canonical sequential candidateId (1..N, max 5) based on array order.
+  // LLM output candidateId is untrusted and ignored. Candidate payloads (label, narrativeSummary, rawMetadata) are preserved.
+  const candidateSlice = rawList.slice(0, 5);
+  return candidateSlice.map((item, idx) => {
+    if (typeof item === 'object' && item !== null && !Array.isArray(item)) {
+      return {
+        ...item,
+        candidateId: idx + 1
+      };
+    }
+    return item;
+  });
+}
+
 export interface CandidateValidationResult {
   valid: boolean;
   reasons: string[];
@@ -33,6 +70,10 @@ export interface CandidateRecoveryGateResult<T = any> {
   totalInputCount: number;
   passedCount: number;
   quarantinedCount: number;
+}
+
+function isNonEmptyString(value: unknown): value is string {
+  return typeof value === 'string' && value.trim().length > 0;
 }
 
 /**
@@ -71,6 +112,44 @@ export function validateCandidateStructure(candidate: any): CandidateValidationR
   // 5. rawMetadata must be a non-null, non-array object
   if (typeof candidate.rawMetadata !== 'object' || candidate.rawMetadata === null || Array.isArray(candidate.rawMetadata)) {
     reasons.push(`rawMetadata must be a non-null, non-array object (got ${candidate.rawMetadata === null ? 'null' : Array.isArray(candidate.rawMetadata) ? 'array' : typeof candidate.rawMetadata})`);
+  } else if (Array.isArray(candidate.rawMetadata.inventoryChanges)) {
+    // Canonical inventory mutation/reference is an identity-sensitive operation.
+    // Every entry must carry a complete reference bundle before it can leave this gate.
+    for (let i = 0; i < candidate.rawMetadata.inventoryChanges.length; i++) {
+      const inv = candidate.rawMetadata.inventoryChanges[i];
+      if (typeof inv !== 'object' || inv === null || Array.isArray(inv)) {
+        reasons.push(`inventoryChanges[${i}] must be a non-null object carrying entityReference`);
+        continue;
+      }
+      if (!isNonEmptyString(inv.name)) {
+        reasons.push(`inventoryChanges[${i}].name must be a non-empty string`);
+      }
+      const ref = inv.entityReference;
+      if (typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
+        reasons.push(`inventoryChanges[${i}] missing required entityReference bundle`);
+        continue;
+      }
+      if (ref.entityType !== 'ITEM') {
+        reasons.push(`inventoryChanges[${i}].entityReference.entityType must be ITEM`);
+      }
+      if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+        reasons.push(`inventoryChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
+      }
+      const evidence = ref.evidence;
+      if (typeof evidence !== 'object' || evidence === null || Array.isArray(evidence)) {
+        reasons.push(`inventoryChanges[${i}].entityReference.evidence must be a non-null object`);
+      } else {
+        const hasEvidence = [evidence.sourceNpcId, evidence.context, evidence.verifiedEventId, evidence.cause]
+          .some(isNonEmptyString) || (evidence.cost && typeof evidence.cost === 'object');
+        if (!hasEvidence) {
+          reasons.push(`inventoryChanges[${i}].entityReference.evidence must contain at least one identity/acquisition evidence field`);
+        }
+      }
+      // LLM is never allowed to pre-populate an engine resolution.
+      if (ref.resolvedEntityId !== undefined) {
+        reasons.push(`inventoryChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+      }
+    }
   }
 
   return {

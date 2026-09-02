@@ -154,6 +154,7 @@ export function extractCandidatesFromMetadata(
           name: String(inv.name).trim(),
           quantity: typeof inv.quantity === 'number' && !isNaN(inv.quantity) ? Math.max(1, inv.quantity) : 1,
           action: inv.action === 'remove' || inv.operation === 'REMOVE' ? 'remove' : 'add',
+          entityReference: inv.entityReference,
           ...(cause ? {
             cause,
             verifiedEventId: typeof verifiedEventId === 'string' && verifiedEventId.trim() ? verifiedEventId.trim() : undefined,
@@ -326,6 +327,7 @@ export function validateEngineCandidate(
         name: inv.name.trim(),
         quantity: typeof inv.quantity === 'number' && !isNaN(inv.quantity) ? Math.max(1, inv.quantity) : 1,
         action: inv.action === 'remove' ? 'remove' : 'add',
+        entityReference: inv.entityReference,
         acquisition: inv.acquisition,
         cause: inv.cause,
         cost: inv.cost
