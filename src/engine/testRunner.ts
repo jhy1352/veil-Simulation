@@ -2744,18 +2744,52 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
     }
 
     // 2. Candidate with recommendedDC does not emit RECORD_DICE_RESULT in proposalParser
+    const genesisProposal: StateTransitionProposal = {
+      proposalId: 'prop-genesis',
+      requestId: 'req-genesis',
+      eventId: 'evt-genesis-climb',
+      expectedStateVersion: 1,
+      source: 'GENESIS',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      intentSummary: '암벽 등반의 단서 발견',
+      actions: [
+        {
+          type: 'ADVANCE_CHAPTER',
+          description: '암벽 등반의 단서 발견',
+          payload: {
+            currentChapter: '1장: 서막',
+            upcomingChapters: ['2장', '3장']
+          }
+        }
+      ]
+    };
+    engine.submitProposal(genesisProposal);
+
     const snapshot = engine.getSnapshot();
     const candidate: CandidatePacket = {
       candidateId: 'cand-test-45',
-      turn: 1,
+      turn: 2,
       recommendedDC: 18,
-      narrativeDate: 'Turn 1',
+      narrativeDate: 'Turn 2',
       timestamp: new Date().toISOString(),
       seedChanges: [
-        { content: '암벽 등반의 단서', status: 'active', action: 'create' }
+        {
+          content: '암벽 등반의 단서',
+          status: 'active',
+          action: 'create',
+          entityReference: {
+            entityType: 'NARRATIVE_SEED',
+            evidence: {
+              verifiedEventId: 'evt-genesis-climb',
+              cause: 'CLIMB_DISCOVERY',
+              context: '암벽 등반 중 새로운 단서 발견'
+            }
+          }
+        }
       ]
     };
-    const safeProposal = buildSafeProposalFromCandidate(snapshot, candidate, 1);
+    const safeProposal = buildSafeProposalFromCandidate(snapshot, candidate, 2, engine.getHistory());
     const hasDiceAction = safeProposal.actions.some(a => a.type === 'RECORD_DICE_RESULT');
     if (hasDiceAction) throw new Error('buildSafeProposalFromCandidate emitted RECORD_DICE_RESULT action!');
 
@@ -2775,7 +2809,7 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
       eventId: 'evt-dice-player',
       expectedStateVersion: parsedRes.stateVersion,
       source: 'PLAYER',
-      turn: 2,
+      turn: 3,
       timestamp: new Date().toISOString(),
       intentSummary: 'Player resolves climb check with d20',
       actions: [

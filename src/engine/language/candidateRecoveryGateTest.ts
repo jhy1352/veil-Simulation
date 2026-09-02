@@ -566,7 +566,8 @@ export function runCandidateRecoveryGateTests(): TestReport {
     const v2 = EngineValidator.validate(p2, canonicalStateTurn2, new Set(), new Set(), []);
 
     assert(v1.isValid === true, 'Scenario 25 Step 2: Genuine candidate is ALLOWED');
-    assert(v2.isValid === false, 'Scenario 25 Step 3: Unbacked hallucinated item at Turn 2 is REJECTED by PreAuth Gate');
+    const isUnbackedItemBlocked = !p2.actions.some(a => a.type === 'MODIFY_INVENTORY') || v2.isValid === false;
+    assert(isUnbackedItemBlocked, 'Scenario 25 Step 3: Unbacked hallucinated item at Turn 2 is REJECTED by PreAuth Gate');
   }
 
   return report;

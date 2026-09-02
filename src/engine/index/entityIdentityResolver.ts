@@ -55,55 +55,233 @@ const VALID_NOVELTY_CAUSES = new Set([
   'GIFT_REWARD',
   'GIFT',
   'REWARD',
+  'DUNGEON_REWARD',
   'LOOT',
   'PURCHASE',
   'CRAFTING',
   'ENCOUNTER',
   'FIRST_ENCOUNTER',
+  'MET_DURING_STORY',
+  'ENCOUNTERED_NEW_FACTION',
+  'DISCOVERED_NARRATIVE_SEED',
   'EAVESDROP',
   'CREATION',
+  'EXPLORATION',
   'GENESIS_STARTER',
   'SYSTEM_INITIALIZATION'
 ]);
 
 /**
+ * Resolves an authoritative event from historical records, offscreen records, or seeds.
+ */
+function findAuthoritativeEvent(
+  eventId: string,
+  currentState?: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = []
+): { found: boolean; eventText?: string; isActive?: boolean; record?: ImmutableHistoricalRecord } {
+  const cleanId = eventId.trim();
+  if (!cleanId) return { found: false };
+
+  // 1. Seeds
+  const seed = currentState?.worldInfo?.seeds?.find(s => s.id === cleanId);
+  if (seed) {
+    return {
+      found: true,
+      eventText: seed.content,
+      isActive: seed.status === 'active' || seed.status === 'dormant'
+    };
+  }
+
+  // 2. Offscreen Records
+  const offscreen = currentState?.worldInfo?.offscreenRecords?.find(o => o.id === cleanId);
+  if (offscreen) {
+    return {
+      found: true,
+      eventText: offscreen.eventDescription,
+      isActive: true
+    };
+  }
+
+  // 3. Camera Offscreen Events
+  const camera = currentState?.worldInfo?.cameraOffscreenEvents?.find(c => c === cleanId);
+  if (camera) {
+    return {
+      found: true,
+      eventText: camera,
+      isActive: true
+    };
+  }
+
+  // 4. Historical Records
+  const hist = historicalRecords.find(r => r.eventId === cleanId || r.recordId === cleanId);
+  if (hist) {
+    return {
+      found: true,
+      eventText: hist.details,
+      isActive: true,
+      record: hist
+    };
+  }
+
+  // 5. Last committed event ID fallback
+  if (currentState?.lastCommittedEventId === cleanId) {
+    return {
+      found: true,
+      eventText: undefined,
+      isActive: true
+    };
+  }
+
+  return { found: false };
+}
+
+/**
+ * Validates that the authoritative event specifically mentions or identifies the candidate entity.
+ */
+function checkCandidateSpecificity(
+  candidateName: string,
+  eventText?: string,
+  histRecord?: ImmutableHistoricalRecord
+): boolean {
+  const cleanName = normalizeIdentityText(candidateName);
+  if (!cleanName) return false;
+
+  // 1. Check in eventText
+  if (eventText) {
+    const normEvent = normalizeIdentityText(eventText);
+    if (normEvent.includes(cleanName)) {
+      return true;
+    }
+
+    // Tokenized matching with Korean particle handling
+    const KOREAN_PARTICLES = ['', '을', '를', '이', '가', '의', '과', '와', '으로', '로', '도', '에서', '에게', '이다', '입니다', '뿐', '만'];
+    const eventWords = normEvent.split(/[\s,.\-?!;:()\[\]{}"'`~]+/).filter(Boolean);
+    const tokenMatch = eventWords.some(w => {
+      if (w === cleanName) return true;
+      if (w.startsWith(cleanName)) {
+        const suffix = w.slice(cleanName.length);
+        return KOREAN_PARTICLES.includes(suffix);
+      }
+      return false;
+    });
+    if (tokenMatch) return true;
+  }
+
+  // 2. Check in historical record canonicalAction
+  if (histRecord?.canonicalAction) {
+    const actionStr = JSON.stringify(histRecord.canonicalAction).toLowerCase();
+    if (actionStr.includes(cleanName)) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+const CREATION_ACQUISITION_KEYWORDS = [
+  '획득', '얻', '줍', '주웠', '발견', '받', '수여', '하사', '제작', '만듦', '만들',
+  '구입', '구매', '샀', '전수', '건네', '주었', '주어', '보상', '노획', '탈취', '전리품',
+  '창조', '생성', '생겨', '조우', '만남', '만나', '접함', '접견', '대면', '등장', '합류', '결성', '창설', '동행', '편입', '영구',
+  '격퇴', '처치', '토벌', '소탕', '클리어', '탐색', '수색', '비경', '복선', '소문',
+  'acquire', 'obtain', 'find', 'discover', 'receive', 'gift', 'reward', 'loot',
+  'craft', 'create', 'buy', 'purchase', 'encounter', 'meet', 'defeat', 'drop', 'grant', 'give', 'armory', 'companion', 'welcome', 'starter'
+];
+
+/**
+ * Validates that the authoritative event and evidence actually prove the creation or acquisition
+ * of the candidate entity (rather than a merely incidental or unrelated event).
+ */
+function checkCreationOrAcquisitionProof(
+  evidence: NonNullable<EntityReferenceBundle['evidence']>,
+  eventText?: string,
+  histRecord?: ImmutableHistoricalRecord
+): boolean {
+  // 1. Cause validation: if cause is present, check against approved causes or valid novelty root
+  if (evidence.cause) {
+    if (!VALID_NOVELTY_CAUSES.has(evidence.cause)) {
+      const causeUpper = evidence.cause.toUpperCase();
+      const hasNoveltyRoot = [
+        'REWARD', 'GIFT', 'DISCOVER', 'LOOT', 'ACQUIRE', 'CREATE', 'ENCOUNTER', 'MEET', 'BUY', 'CRAFT', 'SPAWN', 'STORY', 'FACTION', 'SEED', 'GENESIS', 'STARTER', 'COMPANION'
+      ].some(root => causeUpper.includes(root));
+      if (!hasNoveltyRoot) {
+        return false;
+      }
+    }
+  }
+
+  // 2. Event text proof: Check for acquisition/creation/discovery context
+  let hasProofInText = false;
+  if (eventText) {
+    const normEvent = normalizeIdentityText(eventText);
+    hasProofInText = CREATION_ACQUISITION_KEYWORDS.some(kw => normEvent.includes(kw));
+  }
+
+  // 3. Historical record action proof:
+  let hasProofInAction = false;
+  if (histRecord) {
+    if (
+      histRecord.actionType === 'MODIFY_INVENTORY' ||
+      histRecord.actionType === 'ADD_NPC' ||
+      histRecord.actionType === 'ADD_FACTION' ||
+      histRecord.actionType === 'ADD_NARRATIVE_SEED' ||
+      histRecord.actionType === 'OVERWRITE_CHARACTER'
+    ) {
+      hasProofInAction = true;
+    }
+  }
+
+  // 4. Evidence context proof:
+  let hasProofInContext = false;
+  if (isNonEmptyString(evidence.context)) {
+    const normCtx = normalizeIdentityText(evidence.context);
+    hasProofInContext = CREATION_ACQUISITION_KEYWORDS.some(kw => normCtx.includes(kw));
+  }
+
+  // Strict Rule: At least one authoritative proof mechanism (event text, record action, or backed context) must verify creation/acquisition
+  return hasProofInText || hasProofInAction || hasProofInContext;
+}
+
+/**
  * Validates whether the provided reference bundle contains positive novelty/acquisition evidence
  * grounded in Canonical State and History to justify classifying an unknown entity as NOVEL.
  * 
- * Strict Invariants & Authority Rules:
- * 1. LLM string claims ("cause", "context", "cost") alone can NEVER authorize NOVEL status.
- * 2. "verifiedEventId" is accepted ONLY if it resolves to an actual authoritative HistoricalRecord,
- *    OffscreenRecord, or lastCommittedEventId.
- * 3. "sourceNpcId" is accepted ONLY if the NPC exists canonically AND the acquisition/creation fact
- *    is confirmed by authoritative history/event evidence.
- * 4. "cause/context/cost" are strictly secondary/supporting evidence and must be anchored to an authoritative event.
- * 5. Index miss ≠ NOVEL. Unverified unknown entities strictly fail-closed to AMBIGUOUS.
+ * Strict "NOVEL Gate" Hierarchy:
+ * 1. Authoritative Event -> Event must exist in Canonical State or History, and must be active.
+ *    (sourceNpcId alone is NOT authoritative evidence)
+ * 2. Candidate Specificity -> The authoritative event must specifically ground the candidate entity.
+ * 3. Creation/Acquisition Proof -> The event/evidence must prove the actual creation, acquisition,
+ *    discovery, or generation of this specific candidate.
+ * 4. Fail-Closed: If any step fails, return false (resulting in AMBIGUOUS, never NOVEL).
  */
 export function hasPositiveNoveltyEvidence(
   reference?: EntityReferenceBundle,
   currentState?: CanonicalState,
   historicalRecords: readonly ImmutableHistoricalRecord[] = [],
-  graph?: UniversalKnowledgeGraph
+  graph?: UniversalKnowledgeGraph,
+  candidateName?: string,
+  entityType?: CanonicalEntityReferenceType
 ): boolean {
   if (!reference || !reference.evidence) return false;
   const ev = reference.evidence;
 
-  let hasAuthoritativeAnchor = false;
-
-  // 1. Authoritative Event Check: verifiedEventId must actually exist in authoritative records
-  if (isNonEmptyString(ev.verifiedEventId)) {
-    const verifiedInHistory = historicalRecords.some(r => r.eventId === ev.verifiedEventId);
-    const verifiedInOffscreen = (currentState?.worldInfo?.offscreenRecords || []).some(o => o.id === ev.verifiedEventId);
-    const verifiedInLastCommit = currentState?.lastCommittedEventId === ev.verifiedEventId;
-    if (verifiedInHistory || verifiedInOffscreen || verifiedInLastCommit) {
-      hasAuthoritativeAnchor = true;
-    } else {
-      // Explicitly claimed event ID does not exist in authoritative history -> reject immediately
-      return false;
-    }
+  // Fail-Closed: candidateName is required to verify specificity
+  if (!candidateName || !candidateName.trim()) {
+    return false;
   }
 
-  // 2. Authoritative Source NPC Check: canonical NPC must exist AND acquisition/creation fact must be authoritatively verified
+  // Step 1: Authoritative Event Requirement
+  // Rule: verifiedEventId must be present and non-empty.
+  // sourceNpcId alone is NOT authoritative evidence.
+  if (!isNonEmptyString(ev.verifiedEventId)) {
+    return false;
+  }
+
+  const authEvent = findAuthoritativeEvent(ev.verifiedEventId, currentState, historicalRecords);
+  if (!authEvent.found || authEvent.isActive === false) {
+    return false;
+  }
+
+  // If sourceNpcId is also claimed, verify that the NPC exists canonically or in graph
   if (isNonEmptyString(ev.sourceNpcId)) {
     const inCanonicalNpcs = (currentState?.worldInfo?.npcs || []).some(n => n.id === ev.sourceNpcId);
     let npcExists = inCanonicalNpcs;
@@ -117,43 +295,27 @@ export function hasPositiveNoveltyEvidence(
         if (entity && entity.entityType === 'NPC') npcExists = true;
       }
     }
-
     if (!npcExists) {
-      // Non-existent NPC claimed as source -> reject
-      return false;
-    }
-
-    // Check if the acquisition/creation fact involving this sourceNpcId is confirmed in authoritative history
-    const npcInHistory = historicalRecords.some(r =>
-      containsEvidence(r.details, ev.sourceNpcId!) ||
-      (r.canonicalAction && JSON.stringify(r.canonicalAction).includes(ev.sourceNpcId!))
-    );
-    const npcInOffscreen = (currentState?.worldInfo?.offscreenRecords || []).some(o =>
-      o.involvedNpcIds?.includes(ev.sourceNpcId!) || containsEvidence(o.eventDescription, ev.sourceNpcId!)
-    );
-
-    if (npcInHistory || npcInOffscreen || hasAuthoritativeAnchor) {
-      hasAuthoritativeAnchor = true;
-    } else {
-      // Canonical NPC exists, but there is no authoritative historical record confirming acquisition/creation
-      return false;
+      return false; // Non-existent NPC claimed
     }
   }
 
-  // Absolute Rule: If no authoritative anchor (verifiedEventId or verified sourceNpcId) exists,
-  // LLM strings ("cause", "context", "cost") alone CANNOT authorize NOVEL.
-  if (!hasAuthoritativeAnchor) {
+  // Step 2: Candidate Specificity
+  // The authoritative event MUST specifically ground the candidate entity name
+  const isSpecific = checkCandidateSpecificity(candidateName, authEvent.eventText, authEvent.record);
+  if (!isSpecific) {
     return false;
   }
 
-  // Supporting/auxiliary evidence check: cause, context, or cost connected to the authoritative event,
-  // or the authoritative event itself.
-  const hasAuxiliaryEvidence =
-    isNonEmptyString(ev.cause) ||
-    (isNonEmptyString(ev.context) && ev.context.trim().length >= 3) ||
-    (ev.cost && typeof ev.cost === 'object' && (isNonEmptyString(ev.cost.name) || isNonEmptyString(ev.cost.id) || (typeof ev.cost.quantity === 'number' && ev.cost.quantity > 0)));
+  // Step 3: Creation / Acquisition Proof
+  // The event and evidence must prove the creation, acquisition, or discovery of the entity
+  const isCreationProven = checkCreationOrAcquisitionProof(ev, authEvent.eventText, authEvent.record);
+  if (!isCreationProven) {
+    return false;
+  }
 
-  return hasAuthoritativeAnchor && (hasAuxiliaryEvidence || isNonEmptyString(ev.verifiedEventId));
+  // All gates passed authoritatively -> NOVEL is justified
+  return true;
 }
 
 /**
@@ -291,12 +453,12 @@ export function resolveEntityIdentity(
 
   // Case 4: No matching entity in graph (Index Miss)
   // Strict Invariant: Index miss ≠ NOVEL. Positive novelty/acquisition evidence is required.
-  if (hasPositiveNoveltyEvidence(reference, currentState, historicalRecords, resolvedGraph)) {
+  if (hasPositiveNoveltyEvidence(reference, currentState, historicalRecords, resolvedGraph, name, entityType)) {
     return {
       status: 'NOVEL',
       candidates: [],
       normalizedName,
-      reason: `No existing canonical or historical ${entityType} identity matches '${name}', but positive acquisition/novelty evidence was verified. New ID may be allocated by Engine authority.`
+      reason: `No existing canonical or historical ${entityType} identity matches '${name}', but positive acquisition/creation evidence was verified authoritatively. New ID may be allocated by Engine authority.`
     };
   }
 
@@ -305,7 +467,7 @@ export function resolveEntityIdentity(
     status: 'AMBIGUOUS',
     candidates: [],
     normalizedName,
-    reason: `Index miss: No existing ${entityType} matches '${name}', and positive novelty/acquisition evidence is absent or ungrounded. Mutation is prohibited.`
+    reason: `Index miss: No existing ${entityType} matches '${name}', and positive novelty/acquisition evidence is absent, ungrounded, or unrelated to this candidate. Mutation is prohibited.`
   };
 }
 

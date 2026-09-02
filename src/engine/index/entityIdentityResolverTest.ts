@@ -124,6 +124,160 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
       actionType: 'UPDATE_NPC',
       details: 'Spoke with npc-abbot and discovered hidden armory',
       stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-armory',
+      eventId: 'evt-armory',
+      proposalId: 'prop-armory',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'MODIFY_INVENTORY',
+      details: 'Spoke with npc-abbot and discovered hidden armory containing 청룡언월도',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-npc-wudang',
+      eventId: 'evt-npc-wudang',
+      proposalId: 'prop-npc-wudang',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'ADD_NPC',
+      details: 'Met and encountered 무당파 장문인 장삼봉 in the valley',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-fac-wudang',
+      eventId: 'evt-fac-wudang',
+      proposalId: 'prop-fac-wudang',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'ADD_FACTION',
+      details: 'Discovered and encountered new faction 무당파 in Hubei province',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-seed-shadow',
+      eventId: 'evt-seed-shadow',
+      proposalId: 'prop-seed-shadow',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'ADD_NARRATIVE_SEED',
+      details: 'Explored cave and discovered mysterious clue of 동굴 속의 흑영',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-bomb-shop',
+      eventId: 'evt-bomb-shop',
+      proposalId: 'prop-bomb-shop',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'MODIFY_INVENTORY',
+      details: 'Visited blacksmith shop and acquired 벽력탄',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-huashan-npc',
+      eventId: 'evt-huashan-npc',
+      proposalId: 'prop-huashan-npc',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'ADD_NPC',
+      details: 'Visited Huashan mountain and met 화산파 장문인',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-huashan-fac',
+      eventId: 'evt-huashan-fac',
+      proposalId: 'prop-huashan-fac',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'ADD_FACTION',
+      details: 'Formally discovered and encountered faction 화산파',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-seed-eof',
+      eventId: 'evt-seed-eof',
+      proposalId: 'prop-seed-eof',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'ADD_NARRATIVE_SEED',
+      details: 'Discovered narrative clue regarding 새로운 비급의 행방',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-item-yongcheon',
+      eventId: 'evt-item-yongcheon',
+      proposalId: 'prop-item-yongcheon',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'MODIFY_INVENTORY',
+      details: 'Excavated and discovered ancient sword 용천검',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-npc-diancang',
+      eventId: 'evt-npc-diancang',
+      proposalId: 'prop-npc-diancang',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'ADD_NPC',
+      details: 'Encountered and met visiting diplomat 점창파사절',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-fac-diancang',
+      eventId: 'evt-fac-diancang',
+      proposalId: 'prop-fac-diancang',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'ADD_FACTION',
+      details: 'Formally established diplomatic contact with faction 점창파',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-seed-key',
+      eventId: 'evt-seed-key',
+      proposalId: 'prop-seed-key',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'ADD_NARRATIVE_SEED',
+      details: 'Discovered stone tablet clue regarding 비경의 열쇠에 관한 단서',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-char-lee',
+      eventId: 'evt-char-lee',
+      proposalId: 'prop-char-lee',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'OVERWRITE_CHARACTER',
+      details: 'Welcomed permanent story companion 동행자이설화',
+      stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-abbot-beads',
+      eventId: 'evt-abbot-beads',
+      proposalId: 'prop-abbot-beads',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'MODIFY_INVENTORY',
+      details: 'Abbot npc-abbot bestowed and gifted 방장의염주 in the secret chamber',
+      stateVersionAfterCommit: 1
     }
   ];
 
@@ -297,7 +451,8 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     assert(!invAction, 'Test E3: Index miss without evidence is blocked from mutating state');
   }
 
-  // Test F: Legitimate Novel Entity with Positive Authoritative Evidence -> NOVEL
+  // Test F: Strict NOVEL Gate Testing
+  // Test F-1: Legitimate Novel Entity with Positive Authoritative Evidence -> NOVEL
   {
     const resolution = resolveInventoryItemIdentity(state, history, '청룡언월도', {
       entityType: 'ITEM',
@@ -305,7 +460,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
         cause: 'DUNGEON_REWARD',
         context: '비경을 탐색하고 획득함',
         sourceNpcId: 'npc-abbot',
-        verifiedEventId: 'evt-2'
+        verifiedEventId: 'evt-armory'
       }
     });
     assert(resolution.status === 'NOVEL', 'Test F1: NOVEL status granted when positive evidence exists');
@@ -326,7 +481,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
               cause: 'DUNGEON_REWARD',
               context: '비경을 탐색하고 획득함',
               sourceNpcId: 'npc-abbot',
-              verifiedEventId: 'evt-2'
+              verifiedEventId: 'evt-armory'
             }
           }
         }
@@ -337,6 +492,47 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     assert(!!invAction, 'Test F3: Engine allocates new canonical ID and produces proposal');
     assert(typeof invAction?.payload?.item?.id === 'string' && invAction.payload.item.id.startsWith('item-'), 'Test F4: Engine generated item ID prefix');
     assert(invAction?.payload?.item?.entityReference?.resolvedEntityId === invAction?.payload?.item?.id, 'Test F5: Engine transient resolvedEntityId populated');
+  }
+
+  // Test F-2: False Positive Prevention - Event exists, but does NOT mention candidate entity -> AMBIGUOUS
+  {
+    const resolution = resolveInventoryItemIdentity(state, history, '청룡언월도', {
+      entityType: 'ITEM',
+      evidence: {
+        cause: 'DUNGEON_REWARD',
+        context: '비경을 탐색하고 획득함',
+        sourceNpcId: 'npc-abbot',
+        verifiedEventId: 'evt-2' // 'Spoke with npc-abbot and discovered hidden armory' (does NOT mention 청룡언월도)
+      }
+    });
+    assert(resolution.status === 'AMBIGUOUS', 'Test F-FP1: Unrelated event existence alone MUST NOT authorize NOVEL (fails closed to AMBIGUOUS)');
+  }
+
+  // Test F-3: False Positive Prevention - sourceNpcId alone without verifiedEventId -> AMBIGUOUS
+  {
+    const resolution = resolveInventoryItemIdentity(state, history, '천상비검', {
+      entityType: 'ITEM',
+      evidence: {
+        cause: 'GIFT',
+        context: '방장에게서 직접 선물받음',
+        sourceNpcId: 'npc-abbot'
+        // verifiedEventId omitted
+      }
+    });
+    assert(resolution.status === 'AMBIGUOUS', 'Test F-FP2: sourceNpcId alone without authoritative verifiedEventId MUST NOT authorize NOVEL');
+  }
+
+  // Test F-4: False Positive Prevention - Non-existent verifiedEventId -> AMBIGUOUS
+  {
+    const resolution = resolveInventoryItemIdentity(state, history, '천상비검', {
+      entityType: 'ITEM',
+      evidence: {
+        cause: 'DUNGEON_REWARD',
+        context: '비경에서 획득',
+        verifiedEventId: 'evt-non-existent-999'
+      }
+    });
+    assert(resolution.status === 'AMBIGUOUS', 'Test F-FP3: Non-existent verifiedEventId MUST NOT authorize NOVEL');
   }
 
   // Test Gate: Candidate Recovery Gate Validation
@@ -428,17 +624,28 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     assert(res2.status === 'RECOVERED', 'NPC Test 2: Recovered by alias');
     assert(res2.canonicalId === 'npc-abbot', 'NPC Test 2: Matches canonical ID npc-abbot');
 
-    // Test NPC-3: Novel NPC with Valid Historical Event Evidence
+    // Test NPC-3: Novel NPC with Valid Specific Historical Event Evidence -> NOVEL
     const res3 = resolveNpcIdentity(state, history, '장삼봉', {
       entityType: 'NPC',
       evidence: {
         cause: 'MET_DURING_STORY',
-        verifiedEventId: 'evt-1',
-        context: '무당파 장문인을 만남'
+        verifiedEventId: 'evt-npc-wudang',
+        context: '무당파 장문인 장삼봉을 만남'
       }
     });
     assert(res3.status === 'NOVEL', 'NPC Test 3: Novel status with valid verifiedEventId');
     assert(res3.canonicalId === undefined, 'NPC Test 3: Resolver does not issue ID');
+
+    // Test NPC-3-FP: False Positive Prevention - Unrelated event existence alone MUST NOT authorize NOVEL
+    const res3FP = resolveNpcIdentity(state, history, '장삼봉', {
+      entityType: 'NPC',
+      evidence: {
+        cause: 'MET_DURING_STORY',
+        verifiedEventId: 'evt-1', // 'Acquired item-iron-sword during training' (unrelated to 장삼봉)
+        context: '무당파 장문인을 만남'
+      }
+    });
+    assert(res3FP.status === 'AMBIGUOUS', 'NPC Test 3-FP: Unrelated event existence alone rejected as AMBIGUOUS');
 
     // Test NPC-4: Index Miss without Evidence -> AMBIGUOUS
     const res4 = resolveNpcIdentity(state, history, '괴한', {
@@ -484,10 +691,21 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
       evidence: {
         cause: 'ENCOUNTERED_NEW_FACTION',
         context: '호북성에서 무당파를 접함',
-        verifiedEventId: 'evt-1'
+        verifiedEventId: 'evt-fac-wudang'
       }
     });
     assert(res3.status === 'NOVEL', 'Faction Test 3: Novel faction with cause');
+
+    // Test FAC-3-FP: False Positive Prevention - Unrelated event alone MUST NOT authorize NOVEL
+    const res3FP = resolveFactionIdentity(state, history, '무당파', {
+      entityType: 'FACTION',
+      evidence: {
+        cause: 'ENCOUNTERED_NEW_FACTION',
+        context: '호북성에서 무당파를 접함',
+        verifiedEventId: 'evt-1' // 'Acquired item-iron-sword during training' (unrelated to 무당파)
+      }
+    });
+    assert(res3FP.status === 'AMBIGUOUS', 'Faction Test 3-FP: Unrelated event existence alone rejected as AMBIGUOUS');
 
     // Test FAC-4: Index Miss without Cause -> AMBIGUOUS
     const res4 = resolveFactionIdentity(state, history, '비밀결사', {
@@ -522,10 +740,21 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
       evidence: {
         cause: 'DISCOVERED_FORESHADOW',
         context: '동굴 탐험 중 기이한 그림자를 봄',
-        verifiedEventId: 'evt-1'
+        verifiedEventId: 'evt-seed-shadow'
       }
     });
     assert(res2.status === 'NOVEL', 'Seed Test 2: Novel seed with cause');
+
+    // Test SEED-2-FP: False Positive Prevention - Unrelated event alone MUST NOT authorize NOVEL
+    const res2FP = resolveNarrativeSeedIdentity(stateWithSeed, history, '동굴 속의 흑영', {
+      entityType: 'NARRATIVE_SEED',
+      evidence: {
+        cause: 'DISCOVERED_FORESHADOW',
+        context: '동굴 탐험 중 기이한 그림자를 봄',
+        verifiedEventId: 'evt-1' // 'Acquired item-iron-sword during training' (unrelated to 동굴 속의 흑영)
+      }
+    });
+    assert(res2FP.status === 'AMBIGUOUS', 'Seed Test 2-FP: Unrelated event existence alone rejected as AMBIGUOUS');
 
     // Test SEED-3: Index Miss without Evidence -> AMBIGUOUS
     const res3 = resolveNarrativeSeedIdentity(stateWithSeed, history, '알 수 없는 소문', {
@@ -641,7 +870,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
             evidence: {
               cause: 'PURCHASE',
               context: '대장간에서 구매',
-              verifiedEventId: 'evt-1'
+              verifiedEventId: 'evt-bomb-shop'
             }
           }
         }
@@ -666,7 +895,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
             evidence: {
               cause: 'FIRST_ENCOUNTER',
               context: '화산파 본산 방문',
-              verifiedEventId: 'evt-1'
+              verifiedEventId: 'evt-huashan-npc'
             }
           }
         }
@@ -681,22 +910,22 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
             evidence: {
               cause: 'ENCOUNTER',
               context: '새로운 문파 접촉',
-              verifiedEventId: 'evt-1'
+              verifiedEventId: 'evt-huashan-fac'
             }
           }
         }
       ],
       seedChanges: [
         {
-          content: '화산파와 소림사의 은밀한 밀약',
+          content: '새로운 비급의 행방',
           status: 'active',
           action: 'create',
           entityReference: {
             entityType: 'NARRATIVE_SEED',
             evidence: {
-              cause: 'EAVESDROP',
-              context: '밀담을 엿들음',
-              verifiedEventId: 'evt-1'
+              cause: 'DISCOVERY',
+              context: '비급의 행방에 관한 단서 발견',
+              verifiedEventId: 'evt-seed-eof'
             }
           }
         }
@@ -747,7 +976,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     const huashanFaction = updatedState.worldInfo.factions.find(f => f.name === '화산파');
     assert(!!huashanFaction && huashanFaction.id.startsWith('fac-'), 'EOF Test 9: Novel Faction added with Engine-issued ID');
 
-    const newSeed = updatedState.worldInfo.seeds.find(s => s.content.includes('화산파와 소림사의 은밀한 밀약'));
+    const newSeed = updatedState.worldInfo.seeds.find(s => s.content.includes('새로운 비급의 행방'));
     assert(!!newSeed && newSeed.id.startsWith('seed-'), 'EOF Test 10: Novel Seed added with Engine-issued ID');
 
     // Step 5: Historical Record Verification
@@ -882,7 +1111,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     const itemPos = resolveInventoryItemIdentity(state, history, '용천검', {
       entityType: 'ITEM',
       evidence: {
-        verifiedEventId: 'evt-1',
+        verifiedEventId: 'evt-item-yongcheon',
         cause: 'DISCOVERY_PICKUP',
         context: '수련장에서 정식 발굴'
       }
@@ -894,7 +1123,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     const npcPos = resolveNpcIdentity(state, history, '점창파사절', {
       entityType: 'NPC',
       evidence: {
-        verifiedEventId: 'evt-1',
+        verifiedEventId: 'evt-npc-diancang',
         cause: 'FIRST_ENCOUNTER',
         context: '수련 중 찾아온 사절'
       }
@@ -906,7 +1135,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     const facPos = resolveFactionIdentity(state, history, '점창파', {
       entityType: 'FACTION',
       evidence: {
-        verifiedEventId: 'evt-1',
+        verifiedEventId: 'evt-fac-diancang',
         cause: 'ENCOUNTER',
         context: '사절 방문을 통한 공식 외교 접촉'
       }
@@ -918,7 +1147,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     const seedPos = resolveNarrativeSeedIdentity(state, history, '비경의 열쇠에 관한 단서', {
       entityType: 'NARRATIVE_SEED',
       evidence: {
-        verifiedEventId: 'evt-1',
+        verifiedEventId: 'evt-seed-key',
         cause: 'DISCOVERY',
         context: '수련장 비석에 새겨진 단서'
       }
@@ -930,7 +1159,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     const charPos = resolveCharacterIdentity(state, history, '동행자이설화', {
       entityType: 'CHARACTER',
       evidence: {
-        verifiedEventId: 'evt-1',
+        verifiedEventId: 'evt-char-lee',
         cause: 'GENESIS_STARTER',
         context: '세계에 공식 편입된 영구 동행자'
       }
@@ -943,7 +1172,7 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
       entityType: 'ITEM',
       evidence: {
         sourceNpcId: 'npc-abbot',
-        verifiedEventId: 'evt-2',
+        verifiedEventId: 'evt-abbot-beads',
         cause: 'GIFT_REWARD',
         context: '방장이 비밀 보물창고에서 하사한 염주'
       }
