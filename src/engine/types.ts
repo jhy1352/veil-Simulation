@@ -103,6 +103,7 @@ export interface AcquisitionEventPayload {
   readonly cause: AcquisitionCause;
   readonly cost?: AcquisitionCost;
   readonly verifiedEventId?: string;
+  readonly sourceNpcId?: string;
 }
 
 export type ActionType =
@@ -165,6 +166,7 @@ export interface ActionPayloadMap {
         quantity: number;
       };
       verifiedEventId?: string;
+      sourceNpcId?: string;
     };
   };
   SET_CHARACTER_SECRET: { secret: string };
