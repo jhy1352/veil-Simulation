@@ -112,42 +112,123 @@ export function validateCandidateStructure(candidate: any): CandidateValidationR
   // 5. rawMetadata must be a non-null, non-array object
   if (typeof candidate.rawMetadata !== 'object' || candidate.rawMetadata === null || Array.isArray(candidate.rawMetadata)) {
     reasons.push(`rawMetadata must be a non-null, non-array object (got ${candidate.rawMetadata === null ? 'null' : Array.isArray(candidate.rawMetadata) ? 'array' : typeof candidate.rawMetadata})`);
-  } else if (Array.isArray(candidate.rawMetadata.inventoryChanges)) {
-    // Canonical inventory mutation/reference is an identity-sensitive operation.
-    // Every entry must carry a complete reference bundle before it can leave this gate.
-    for (let i = 0; i < candidate.rawMetadata.inventoryChanges.length; i++) {
-      const inv = candidate.rawMetadata.inventoryChanges[i];
-      if (typeof inv !== 'object' || inv === null || Array.isArray(inv)) {
-        reasons.push(`inventoryChanges[${i}] must be a non-null object carrying entityReference`);
-        continue;
-      }
-      if (!isNonEmptyString(inv.name)) {
-        reasons.push(`inventoryChanges[${i}].name must be a non-empty string`);
-      }
-      const ref = inv.entityReference;
-      if (typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
-        reasons.push(`inventoryChanges[${i}] missing required entityReference bundle`);
-        continue;
-      }
-      if (ref.entityType !== 'ITEM') {
-        reasons.push(`inventoryChanges[${i}].entityReference.entityType must be ITEM`);
-      }
-      if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
-        reasons.push(`inventoryChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
-      }
-      const evidence = ref.evidence;
-      if (typeof evidence !== 'object' || evidence === null || Array.isArray(evidence)) {
-        reasons.push(`inventoryChanges[${i}].entityReference.evidence must be a non-null object`);
-      } else {
-        const hasEvidence = [evidence.sourceNpcId, evidence.context, evidence.verifiedEventId, evidence.cause]
-          .some(isNonEmptyString) || (evidence.cost && typeof evidence.cost === 'object');
-        if (!hasEvidence) {
-          reasons.push(`inventoryChanges[${i}].entityReference.evidence must contain at least one identity/acquisition evidence field`);
+  } else {
+    // 5-1. ITEM / inventoryChanges
+    if (Array.isArray(candidate.rawMetadata.inventoryChanges)) {
+      for (let i = 0; i < candidate.rawMetadata.inventoryChanges.length; i++) {
+        const inv = candidate.rawMetadata.inventoryChanges[i];
+        if (typeof inv !== 'object' || inv === null || Array.isArray(inv)) {
+          reasons.push(`inventoryChanges[${i}] must be a non-null object carrying entityReference`);
+          continue;
+        }
+        if (!isNonEmptyString(inv.name)) {
+          reasons.push(`inventoryChanges[${i}].name must be a non-empty string`);
+        }
+        const ref = inv.entityReference;
+        if (typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
+          reasons.push(`inventoryChanges[${i}] missing required entityReference bundle`);
+          continue;
+        }
+        if (ref.entityType !== 'ITEM') {
+          reasons.push(`inventoryChanges[${i}].entityReference.entityType must be ITEM`);
+        }
+        if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+          reasons.push(`inventoryChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
+        }
+        const evidence = ref.evidence;
+        if (typeof evidence !== 'object' || evidence === null || Array.isArray(evidence)) {
+          reasons.push(`inventoryChanges[${i}].entityReference.evidence must be a non-null object`);
+        } else {
+          const hasEvidence = [evidence.sourceNpcId, evidence.context, evidence.verifiedEventId, evidence.cause]
+            .some(isNonEmptyString) || (evidence.cost && typeof evidence.cost === 'object');
+          if (!hasEvidence) {
+            reasons.push(`inventoryChanges[${i}].entityReference.evidence must contain at least one identity/acquisition evidence field`);
+          }
+        }
+        // LLM is never allowed to pre-populate an engine resolution.
+        if (ref.resolvedEntityId !== undefined) {
+          reasons.push(`inventoryChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
         }
       }
-      // LLM is never allowed to pre-populate an engine resolution.
-      if (ref.resolvedEntityId !== undefined) {
-        reasons.push(`inventoryChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+    }
+
+    // 5-2. NPC / npcChanges
+    if (Array.isArray(candidate.rawMetadata.npcChanges)) {
+      for (let i = 0; i < candidate.rawMetadata.npcChanges.length; i++) {
+        const npc = candidate.rawMetadata.npcChanges[i];
+        if (typeof npc === 'object' && npc !== null && !Array.isArray(npc)) {
+          const ref = npc.entityReference;
+          if (ref && typeof ref === 'object' && !Array.isArray(ref)) {
+            if (ref.entityType && ref.entityType !== 'NPC') {
+              reasons.push(`npcChanges[${i}].entityReference.entityType must be NPC`);
+            }
+            if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+              reasons.push(`npcChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
+            }
+            if (ref.resolvedEntityId !== undefined) {
+              reasons.push(`npcChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+            }
+          }
+        }
+      }
+    }
+
+    // 5-3. FACTION / factionChanges
+    if (Array.isArray(candidate.rawMetadata.factionChanges)) {
+      for (let i = 0; i < candidate.rawMetadata.factionChanges.length; i++) {
+        const fac = candidate.rawMetadata.factionChanges[i];
+        if (typeof fac === 'object' && fac !== null && !Array.isArray(fac)) {
+          const ref = fac.entityReference;
+          if (ref && typeof ref === 'object' && !Array.isArray(ref)) {
+            if (ref.entityType && ref.entityType !== 'FACTION') {
+              reasons.push(`factionChanges[${i}].entityReference.entityType must be FACTION`);
+            }
+            if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+              reasons.push(`factionChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
+            }
+            if (ref.resolvedEntityId !== undefined) {
+              reasons.push(`factionChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+            }
+          }
+        }
+      }
+    }
+
+    // 5-4. NARRATIVE_SEED / seedChanges
+    if (Array.isArray(candidate.rawMetadata.seedChanges)) {
+      for (let i = 0; i < candidate.rawMetadata.seedChanges.length; i++) {
+        const seed = candidate.rawMetadata.seedChanges[i];
+        if (typeof seed === 'object' && seed !== null && !Array.isArray(seed)) {
+          const ref = seed.entityReference;
+          if (ref && typeof ref === 'object' && !Array.isArray(ref)) {
+            if (ref.entityType && ref.entityType !== 'NARRATIVE_SEED') {
+              reasons.push(`seedChanges[${i}].entityReference.entityType must be NARRATIVE_SEED`);
+            }
+            if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+              reasons.push(`seedChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
+            }
+            if (ref.resolvedEntityId !== undefined) {
+              reasons.push(`seedChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+            }
+          }
+        }
+      }
+    }
+
+    // 5-5. CHARACTER / characterChanges
+    if (candidate.rawMetadata.characterChanges && typeof candidate.rawMetadata.characterChanges === 'object' && !Array.isArray(candidate.rawMetadata.characterChanges)) {
+      const char = candidate.rawMetadata.characterChanges;
+      const ref = char.entityReference;
+      if (ref && typeof ref === 'object' && !Array.isArray(ref)) {
+        if (ref.entityType && ref.entityType !== 'CHARACTER') {
+          reasons.push(`characterChanges.entityReference.entityType must be CHARACTER`);
+        }
+        if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+          reasons.push(`characterChanges.entityReference.claimedEntityId must be a non-empty string when provided`);
+        }
+        if (ref.resolvedEntityId !== undefined) {
+          reasons.push(`characterChanges.entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+        }
       }
     }
   }

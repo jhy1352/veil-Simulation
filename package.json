@@ -15,7 +15,8 @@
     "test:candidate-bdesign": "tsx src/engine/language/candidateIdentityBDesignTest.ts",
     "test:composition-runtime": "tsx src/engine/language/runtimeProjectionTest.ts",
     "test:integration-proof": "tsx src/engine/language/runtimeIntegrationProofTest.ts",
-    "test:provenance": "tsx src/engine/provenanceReplayTest.ts"
+    "test:provenance": "tsx src/engine/provenanceReplayTest.ts",
+    "test:identity-continuity": "tsx src/engine/index/entityIdentityResolverTest.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

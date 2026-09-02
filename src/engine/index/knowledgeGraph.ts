@@ -46,6 +46,7 @@ export interface UniversalEntity {
   readonly entityId: string;
   readonly entityType: UniversalEntityType;
   readonly name: string;
+  readonly aliases?: readonly string[];
   readonly categoryHint?: string;
   readonly provenance: EntityProvenance;
   readonly isStaleRelativeToCanonical: boolean;
@@ -219,10 +220,12 @@ export function buildKnowledgeGraph(
       for (const npc of canonicalState.worldInfo.npcs) {
         if (npc && typeof npc.id === 'string' && npc.id.trim()) {
           const isDead = npc.status === 'DEAD';
+          const aliases = (npc.alias && npc.alias.trim()) ? [npc.alias.trim()] : undefined;
           entityMap.set(npc.id, {
             entityId: npc.id,
             entityType: 'NPC',
             name: npc.name || npc.id,
+            aliases,
             categoryHint: npc.npcClass || 'NPC',
             provenance: {
               originSource: 'INITIAL_CANON',
@@ -285,7 +288,7 @@ export function buildKnowledgeGraph(
           entityMap.set(seed.id, {
             entityId: seed.id,
             entityType: 'NARRATIVE_SEED',
-            name: seed.content ? seed.content.slice(0, 30) : seed.id,
+            name: seed.content ? seed.content.trim() : seed.id,
             categoryHint: `Status: ${seed.status || 'active'}`,
             provenance: {
               originSource: 'INITIAL_CANON',
@@ -394,6 +397,52 @@ export function buildKnowledgeGraph(
                 },
                 isStaleRelativeToCanonical: true,
                 staleReason: `NPC (${npcId}) was recorded historically but is missing in Canonical State.`
+              });
+            }
+          }
+
+          // Historical Faction
+          if (rec.actionType === 'ADD_FACTION' && parsed.id && typeof parsed.id === 'string') {
+            const facId = parsed.id.trim();
+            if (!entityMap.has(facId)) {
+              entityMap.set(facId, {
+                entityId: facId,
+                entityType: 'FACTION',
+                name: parsed.name || facId,
+                categoryHint: 'Historical Faction',
+                provenance: {
+                  originSource: 'HISTORICAL',
+                  sourceRecordId: rec.recordId,
+                  sourceEventId: rec.eventId,
+                  stateVersion: rec.stateVersionAfterCommit,
+                  narrativeTime: rec.narrativeTime,
+                  actionType: rec.actionType
+                },
+                isStaleRelativeToCanonical: true,
+                staleReason: `Faction (${facId}) was recorded historically but is missing in Canonical State.`
+              });
+            }
+          }
+
+          // Historical Narrative Seed
+          if (rec.actionType === 'ADD_NARRATIVE_SEED' && parsed.id && typeof parsed.id === 'string') {
+            const seedId = parsed.id.trim();
+            if (!entityMap.has(seedId)) {
+              entityMap.set(seedId, {
+                entityId: seedId,
+                entityType: 'NARRATIVE_SEED',
+                name: parsed.content ? parsed.content.trim() : seedId,
+                categoryHint: 'Historical Narrative Seed',
+                provenance: {
+                  originSource: 'HISTORICAL',
+                  sourceRecordId: rec.recordId,
+                  sourceEventId: rec.eventId,
+                  stateVersion: rec.stateVersionAfterCommit,
+                  narrativeTime: rec.narrativeTime,
+                  actionType: rec.actionType
+                },
+                isStaleRelativeToCanonical: true,
+                staleReason: `Narrative seed (${seedId}) was recorded historically.`
               });
             }
           }

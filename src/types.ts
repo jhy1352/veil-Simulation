@@ -15,7 +15,7 @@ export type FontSizeLevel = 'sm' | 'base' | 'lg' | 'xl';
 
 export type WorldType = 'original_ip' | 'popular_genre' | 'custom_world';
 
-export type NpcClass = 'Class A' | 'Class B' | 'Class C';
+export type NpcClass = 'Class A' | 'Class B' | 'Class C' | 'MAJOR_NAMED' | 'MINOR_NAMED' | 'EXTRA' | string;
 
 export const DEFAULT_NPC_CLASS: NpcClass = 'Class C';
 export const DEFAULT_CHAPTER_NAME = '서막';
@@ -64,6 +64,7 @@ export interface NpcRecord {
   trust?: number;
   affinity?: number;
   personality?: string;
+  entityReference?: EntityReferenceBundle;
 }
 
 export interface FactionRecord {
@@ -77,6 +78,7 @@ export interface FactionRecord {
   relationshipToProtagonist?: string;
   impression?: string;
   hostility?: number | string;
+  entityReference?: EntityReferenceBundle;
 }
 
 export interface NarrativeSeed {
@@ -84,6 +86,7 @@ export interface NarrativeSeed {
   content: string;
   status: 'active' | 'resolved' | 'dormant';
   turnCreated?: number;
+  entityReference?: EntityReferenceBundle;
 }
 
 export interface ChapterInfo {
@@ -314,18 +317,21 @@ export interface CandidatePacket {
     values?: string;
     affiliation?: string;
     informationAccess?: InformationAccessBoundary;
+    entityReference?: EntityReferenceBundle;
   }[];
   factionChanges?: {
     name: string;
     description?: string;
     attitudeTowardsPlayer?: string;
     informationAccess?: InformationAccessBoundary;
+    entityReference?: EntityReferenceBundle;
   }[];
   seedChanges?: {
     content: string;
     status: 'active' | 'resolved' | 'dormant';
     action: 'create' | 'resolve' | 'dormant';
     resolutionSummary?: string;
+    entityReference?: EntityReferenceBundle;
   }[];
   offscreenEvents?: {
     event: string;
@@ -351,6 +357,13 @@ export interface CandidatePacket {
     stat: StatType;
     delta: number;
   }[];
+  characterChanges?: {
+    name?: string;
+    alias?: string;
+    background?: string;
+    martialArts?: string;
+    entityReference?: EntityReferenceBundle;
+  };
   chapterChanges?: {
     currentChapter?: string;
     upcomingChapters?: string[];

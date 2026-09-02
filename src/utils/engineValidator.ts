@@ -191,6 +191,18 @@ export function extractCandidatesFromMetadata(
     });
   }
 
+  // 8. Character Changes if provided in metadata
+  let characterChanges: CandidatePacket['characterChanges'] = undefined;
+  if (metaData?.characterChanges && typeof metaData.characterChanges === 'object') {
+    characterChanges = {
+      name: metaData.characterChanges.name ? String(metaData.characterChanges.name).trim() : undefined,
+      alias: metaData.characterChanges.alias ? String(metaData.characterChanges.alias).trim() : undefined,
+      background: metaData.characterChanges.background ? String(metaData.characterChanges.background).trim() : undefined,
+      martialArts: metaData.characterChanges.martialArts ? String(metaData.characterChanges.martialArts).trim() : undefined,
+      entityReference: metaData.characterChanges.entityReference
+    };
+  }
+
   return {
     candidateId,
     turn: storyTurnCount,
@@ -203,6 +215,7 @@ export function extractCandidatesFromMetadata(
     chapterChanges,
     inventoryChanges,
     statChanges,
+    characterChanges,
     recommendedDC,
     rawMetadataBlock: metaData ? JSON.stringify(metaData) : undefined
   };

@@ -1,9 +1,10 @@
-import { TransitionAction, StateTransitionProposal, ProposalSource, ActionType, CanonicalState, ImmutableHistoricalRecord } from './types';
+import { TransitionAction, StateTransitionProposal, ProposalSource, ActionType, CanonicalState, ImmutableHistoricalRecord, VerifiedClaim, ExternalEvidence, UntrustedClaim } from './types';
 import { CandidatePacket, HistoricalRecord, NpcRecord, NarrativeSeed, StatType, DEFAULT_NPC_CLASS, DEFAULT_CHAPTER_NAME } from '../types';
 import { recoverAndParseProposalOrMeaningTree, recoverSyntaxAndParseJson } from './language/recovery';
 import { actionToMeaningNode, adaptMeaningTreeToProposal } from './language/adapter';
 import { MeaningNode } from './language/types';
-import { buildInventoryIdentityGraph, resolveCandidateInventoryIdentity } from './index/entityIdentityResolver';
+import { ImmigrationGate } from './immigrationGate';
+import { buildInventoryIdentityGraph, resolveCandidateInventoryIdentity, resolveNpcIdentity, resolveFactionIdentity, resolveNarrativeSeedIdentity, resolveCharacterIdentity } from './index/entityIdentityResolver';
 
 export interface SafeProposalEnvelope {
   requestId: string;
@@ -243,6 +244,7 @@ export function buildSafeProposalFromCandidate(
   historicalRecords?: readonly (ImmutableHistoricalRecord | HistoricalRecord)[]
 ): StateTransitionProposal {
   const actions: TransitionAction[] = [];
+  const verifiedClaims: VerifiedClaim[] = [];
   const eventId = generateProposalId('evt');
   const requestId = generateProposalId('req');
   const proposalId = `prop-${requestId}`;
@@ -281,7 +283,7 @@ export function buildSafeProposalFromCandidate(
     return false;
   };
 
-  // 1. NPC Changes (Rule 1 & Rule 8)
+  // 1. NPC Changes (Rule 1 & Rule 8 & Universal Identity Continuity)
   if (Array.isArray(candidate.npcChanges)) {
     for (const npcCand of candidate.npcChanges) {
       if (!npcCand.name || typeof npcCand.name !== 'string' || !npcCand.name.trim()) {
@@ -294,51 +296,117 @@ export function buildSafeProposalFromCandidate(
         continue; // Block resurrection/re-registration of deceased NPC
       }
 
-      const existingNpc = currentSnapshot.worldInfo.npcs.find(
-        n => n.name === npcName || n.id === npcName
+      // Resolve NPC Identity against Sovereign Engine Indices
+      const resolution = resolveNpcIdentity(
+        currentSnapshot,
+        immutableHistory,
+        npcName,
+        npcCand.entityReference,
+        identityGraph
       );
 
-      // Rule 1: 미인지 NPC 메타지식 차단
-      const isMet = npcCand.metInStory ?? (existingNpc ? existingNpc.metInStory : false);
-      const safeInnerThought = isMet
-        ? (npcCand.innerThought?.trim() || (existingNpc ? existingNpc.innerThought : '미상'))
-        : '[미인지 상태]';
+      // Identity Authority Chain: AMBIGUOUS and CONFLICT block canonical mutation
+      if (resolution.status === 'AMBIGUOUS' || resolution.status === 'CONFLICT') {
+        continue;
+      }
 
-      if (existingNpc) {
+      if (resolution.status === 'EXACT' || resolution.status === 'RECOVERED') {
+        const canonicalNpcId = resolution.canonicalId!;
+        const existingNpc = currentSnapshot.worldInfo.npcs.find(n => n.id === canonicalNpcId);
+
+        // Rule 1: 미인지 NPC 메타지식 차단
+        const isMet = npcCand.metInStory ?? (existingNpc ? existingNpc.metInStory : false);
+        const safeInnerThought = isMet
+          ? (npcCand.innerThought?.trim() || (existingNpc ? existingNpc.innerThought : '미상'))
+          : '[미인지 상태]';
+
         if (npcCand.isDead) {
           actions.push({
             type: 'SET_NPC_STATUS',
             payload: {
-              id: existingNpc.id,
+              id: canonicalNpcId,
               status: 'DEAD',
               reason: 'LLM Candidate Turn Report'
             }
           });
+          const evId = `ev-gate-${canonicalNpcId}-status-${storyTurnCount}`;
+          const evidence: ExternalEvidence = {
+            evidenceId: evId,
+            entityId: canonicalNpcId,
+            attribute: 'status',
+            value: 'DEAD',
+            source: 'RECOVERY_GATE_CANDIDATE',
+            turn: currentSnapshot.turn,
+            timestamp: new Date().toISOString()
+          };
+          const claimCandidate: UntrustedClaim = {
+            targetEntityId: canonicalNpcId,
+            targetAttribute: 'status',
+            claimedValue: 'DEAD',
+            claimedEvidenceIds: [evId]
+          };
+          const admission = ImmigrationGate.admit(claimCandidate, [evidence], currentSnapshot, immutableHistory);
+          if (admission.admitted && admission.verifiedClaim) {
+            verifiedClaims.push(admission.verifiedClaim);
+          }
         } else {
+          const changes: any = {
+            ...(npcCand.alias !== undefined && { alias: npcCand.alias.trim() }),
+            ...(npcCand.npcClass !== undefined && { npcClass: npcCand.npcClass }),
+            innerThought: safeInnerThought,
+            ...(isMet !== undefined && { metInStory: isMet }),
+            ...(npcCand.origin !== undefined && { origin: npcCand.origin.trim() }),
+            ...(npcCand.background !== undefined && { background: npcCand.background.trim() }),
+            ...(npcCand.martialArts !== undefined && { martialArts: npcCand.martialArts.trim() }),
+            ...(npcCand.values !== undefined && { values: npcCand.values.trim() }),
+            ...(npcCand.affiliation !== undefined && { affiliation: npcCand.affiliation.trim() })
+          };
+
           actions.push({
             type: 'UPDATE_NPC',
             payload: {
-              id: existingNpc.id,
-              changes: {
-                ...(npcCand.alias !== undefined && { alias: npcCand.alias.trim() }),
-                ...(npcCand.npcClass !== undefined && { npcClass: npcCand.npcClass }),
-                innerThought: safeInnerThought,
-                ...(isMet !== undefined && { metInStory: isMet }),
-                ...(npcCand.origin !== undefined && { origin: npcCand.origin.trim() }),
-                ...(npcCand.background !== undefined && { background: npcCand.background.trim() }),
-                ...(npcCand.martialArts !== undefined && { martialArts: npcCand.martialArts.trim() }),
-                ...(npcCand.values !== undefined && { values: npcCand.values.trim() }),
-                ...(npcCand.affiliation !== undefined && { affiliation: npcCand.affiliation.trim() })
-              }
+              id: canonicalNpcId,
+              changes
             }
           });
+
+          for (const [attrKey, attrVal] of Object.entries(changes)) {
+            if (attrVal !== undefined) {
+              const evId = `ev-gate-${canonicalNpcId}-${attrKey}-${storyTurnCount}`;
+              const evidence: ExternalEvidence = {
+                evidenceId: evId,
+                entityId: canonicalNpcId,
+                attribute: attrKey,
+                value: attrVal,
+                source: 'RECOVERY_GATE_CANDIDATE',
+                turn: currentSnapshot.turn,
+                timestamp: new Date().toISOString()
+              };
+              const claimCandidate: UntrustedClaim = {
+                targetEntityId: canonicalNpcId,
+                targetAttribute: attrKey,
+                claimedValue: attrVal,
+                claimedEvidenceIds: [evId]
+              };
+              const admission = ImmigrationGate.admit(claimCandidate, [evidence], currentSnapshot, immutableHistory);
+              if (admission.admitted && admission.verifiedClaim) {
+                verifiedClaims.push(admission.verifiedClaim);
+              }
+            }
+          }
         }
-      } else {
-        // New NPC Registration
+      } else if (resolution.status === 'NOVEL') {
+        // Verified New NPC Registration (Engine issues ID)
+        const newNpcId = generateProposalId('npc');
+        const isMet = npcCand.metInStory ?? false;
+        const safeInnerThought = isMet
+          ? (npcCand.innerThought?.trim() || '미상')
+          : '[미인지 상태]';
+
         actions.push({
           type: 'ADD_NPC',
           payload: {
-            id: generateProposalId('npc'),
+            id: newNpcId,
             name: npcName,
             alias: npcCand.alias?.trim() || '',
             npcClass: npcCand.npcClass || DEFAULT_NPC_CLASS,
@@ -350,14 +418,20 @@ export function buildSafeProposalFromCandidate(
             background: npcCand.background?.trim() || '',
             martialArts: npcCand.martialArts?.trim() || '',
             values: npcCand.values?.trim() || '',
-            affiliation: npcCand.affiliation?.trim() || ''
+            affiliation: npcCand.affiliation?.trim() || '',
+            ...(npcCand.entityReference ? {
+              entityReference: {
+                ...npcCand.entityReference,
+                resolvedEntityId: newNpcId
+              }
+            } : {})
           }
         });
       }
     }
   }
 
-  // 2. Narrative Seeds (Rule 2, Rule 3, Rule 4)
+  // 2. Narrative Seeds (Rule 2, Rule 3, Rule 4 & Universal Identity Continuity)
   if (Array.isArray(candidate.seedChanges)) {
     const currentActiveSeeds = currentSnapshot.worldInfo.seeds.filter(s => s.status === 'active');
     let availableSlots = Math.max(0, 3 - currentActiveSeeds.length);
@@ -371,46 +445,74 @@ export function buildSafeProposalFromCandidate(
       }
       const trimmedContent = seed.content.trim();
 
+      const resolution = resolveNarrativeSeedIdentity(
+        currentSnapshot,
+        immutableHistory,
+        trimmedContent,
+        seed.entityReference,
+        identityGraph
+      );
+
+      // Identity Authority Chain: AMBIGUOUS and CONFLICT block canonical mutation
+      if (resolution.status === 'AMBIGUOUS' || resolution.status === 'CONFLICT') {
+        continue;
+      }
+
       // Rule 4: RESOLVE_NARRATIVE_SEED
       if (seed.status === 'resolved' || seed.action === 'resolve') {
-        const matchingSeed = currentSnapshot.worldInfo.seeds.find(
-          s => s.content.trim() === trimmedContent || s.id === trimmedContent
-        );
-        if (matchingSeed && matchingSeed.status === 'active') {
-          const resolutionInfo = (seed as any).resolutionSummary;
-          if (typeof resolutionInfo === 'string' && resolutionInfo.trim()) {
-            actions.push({
-              type: 'RESOLVE_NARRATIVE_SEED',
-              payload: {
-                id: matchingSeed.id,
-                resolutionSummary: resolutionInfo.trim()
-              }
-            });
+        if (resolution.status === 'EXACT' || resolution.status === 'RECOVERED') {
+          const canonicalSeedId = resolution.canonicalId!;
+          const matchingSeed = currentSnapshot.worldInfo.seeds.find(s => s.id === canonicalSeedId);
+          if (matchingSeed && matchingSeed.status === 'active') {
+            const resolutionInfo = (seed as any).resolutionSummary;
+            if (typeof resolutionInfo === 'string' && resolutionInfo.trim()) {
+              actions.push({
+                type: 'RESOLVE_NARRATIVE_SEED',
+                payload: {
+                  id: canonicalSeedId,
+                  resolutionSummary: resolutionInfo.trim()
+                }
+              });
+            }
           }
         }
       } else {
         // Active Narrative Seed
-        // Rule 2: Max 3 active seeds limit
-        if (availableSlots <= 0) {
-          continue;
-        }
-        // Rule 3: Deduplication
-        if (seenSeedContents.has(trimmedContent)) {
+        if (resolution.status === 'EXACT' || resolution.status === 'RECOVERED') {
+          // Already exists in canon or history, skip duplicate
           continue;
         }
 
-        seenSeedContents.add(trimmedContent);
-        availableSlots--;
-
-        actions.push({
-          type: 'ADD_NARRATIVE_SEED',
-          payload: {
-            id: generateProposalId('seed'),
-            content: trimmedContent,
-            status: 'active',
-            turnCreated: storyTurnCount
+        if (resolution.status === 'NOVEL') {
+          // Rule 2: Max 3 active seeds limit
+          if (availableSlots <= 0) {
+            continue;
           }
-        });
+          // Rule 3: Deduplication
+          if (seenSeedContents.has(trimmedContent)) {
+            continue;
+          }
+
+          seenSeedContents.add(trimmedContent);
+          availableSlots--;
+
+          const newSeedId = generateProposalId('seed');
+          actions.push({
+            type: 'ADD_NARRATIVE_SEED',
+            payload: {
+              id: newSeedId,
+              content: trimmedContent,
+              status: 'active',
+              turnCreated: storyTurnCount,
+              ...(seed.entityReference ? {
+                entityReference: {
+                  ...seed.entityReference,
+                  resolvedEntityId: newSeedId
+                }
+              } : {})
+            }
+          });
+        }
       }
     }
   }
@@ -473,34 +575,55 @@ export function buildSafeProposalFromCandidate(
     });
   }
 
-  // 6. Factions
+  // 6. Factions (Universal Identity Continuity)
   if (Array.isArray(candidate.factionChanges)) {
     for (const fac of candidate.factionChanges) {
       if (!fac.name || typeof fac.name !== 'string' || !fac.name.trim()) {
         continue;
       }
       const facName = fac.name.trim();
-      const existingFac = currentSnapshot.worldInfo.factions.find(f => f.name === facName || f.id === facName);
 
-      if (existingFac) {
+      // Resolve Faction Identity against Sovereign Engine Indices
+      const resolution = resolveFactionIdentity(
+        currentSnapshot,
+        immutableHistory,
+        facName,
+        fac.entityReference,
+        identityGraph
+      );
+
+      // Identity Authority Chain: AMBIGUOUS and CONFLICT block canonical mutation
+      if (resolution.status === 'AMBIGUOUS' || resolution.status === 'CONFLICT') {
+        continue;
+      }
+
+      if (resolution.status === 'EXACT' || resolution.status === 'RECOVERED') {
+        const canonicalFacId = resolution.canonicalId!;
         actions.push({
           type: 'UPDATE_FACTION',
           payload: {
-            id: existingFac.id,
+            id: canonicalFacId,
             changes: {
               ...(fac.description !== undefined && { description: fac.description.trim() }),
               ...(fac.attitudeTowardsPlayer !== undefined && { attitudeTowardsPlayer: fac.attitudeTowardsPlayer.trim() })
             }
           }
         });
-      } else {
+      } else if (resolution.status === 'NOVEL') {
+        const newFacId = generateProposalId('fac');
         actions.push({
           type: 'ADD_FACTION',
           payload: {
-            id: generateProposalId('fac'),
+            id: newFacId,
             name: facName,
             description: fac.description?.trim() || '',
-            attitudeTowardsPlayer: fac.attitudeTowardsPlayer?.trim()
+            attitudeTowardsPlayer: fac.attitudeTowardsPlayer?.trim(),
+            ...(fac.entityReference ? {
+              entityReference: {
+                ...fac.entityReference,
+                resolvedEntityId: newFacId
+              }
+            } : {})
           }
         });
       }
@@ -514,9 +637,10 @@ export function buildSafeProposalFromCandidate(
         continue;
       }
       const isRemove = inv.action === 'remove';
-      const cause = (inv as any).cause || (inv as any).acquisition?.cause;
-      const cost = (inv as any).cost || (inv as any).acquisition?.cost;
-      const verifiedEventId = (inv as any).verifiedEventId || (inv as any).acquisition?.verifiedEventId;
+      const ev = inv.entityReference?.evidence;
+      const cause = (inv as any).cause || (inv as any).acquisition?.cause || ev?.cause;
+      const cost = (inv as any).cost || (inv as any).acquisition?.cost || ev?.cost;
+      const verifiedEventId = (inv as any).verifiedEventId || (inv as any).acquisition?.verifiedEventId || ev?.verifiedEventId;
 
       // Resolve Identity against Sovereign Engine Indices
       const resolution = resolveCandidateInventoryIdentity(
@@ -538,6 +662,33 @@ export function buildSafeProposalFromCandidate(
         ? resolution.canonicalId!
         : generateProposalId('item');
 
+      let normalizedCause = cause;
+      let effectiveCost = cost && typeof cost === 'object' ? {
+        id: typeof cost.id === 'string' ? cost.id : undefined,
+        name: typeof cost.name === 'string' ? cost.name : undefined,
+        quantity: typeof cost.quantity === 'number' ? Math.max(1, cost.quantity) : 1
+      } : undefined;
+
+      if (!isRemove && cause) {
+        if (cause === 'PURCHASE' || cause === 'BUY' || cause === 'EXCHANGE' || cause === 'TRADE' || effectiveCost) {
+          normalizedCause = 'RESOURCE_EXCHANGE';
+          if (!effectiveCost) {
+            const removedItem = candidate.inventoryChanges?.find(i => i.action === 'remove' && i.name);
+            if (removedItem) {
+              effectiveCost = {
+                id: generateProposalId('item'),
+                name: removedItem.name.trim(),
+                quantity: Math.max(1, removedItem.quantity || 1)
+              };
+            }
+          }
+        } else if (cause === 'DISCOVERY' || cause === 'PICKUP' || cause === 'FIND') {
+          normalizedCause = 'DISCOVERY_PICKUP';
+        } else if (cause === 'GIFT' || cause === 'GIFT_REWARD') {
+          normalizedCause = 'GIFT_REWARD';
+        }
+      }
+
       actions.push({
         type: 'MODIFY_INVENTORY',
         payload: {
@@ -553,14 +704,10 @@ export function buildSafeProposalFromCandidate(
             } : {})
           },
           operation: isRemove ? 'REMOVE' : 'ADD',
-          ...(!isRemove && cause ? {
+          ...(!isRemove && normalizedCause ? {
             acquisition: {
-              cause: cause,
-              cost: cost && typeof cost === 'object' ? {
-                id: typeof cost.id === 'string' ? cost.id : undefined,
-                name: typeof cost.name === 'string' ? cost.name : undefined,
-                quantity: typeof cost.quantity === 'number' ? Math.max(1, cost.quantity) : 1
-              } : undefined,
+              cause: normalizedCause,
+              cost: effectiveCost,
               verifiedEventId: typeof verifiedEventId === 'string' && verifiedEventId.trim() ? verifiedEventId.trim() : undefined
             }
           } : {})
@@ -569,8 +716,27 @@ export function buildSafeProposalFromCandidate(
     }
   }
 
-  // 8. Stat Changes (Rule: delta clamp -10~+10, final stat clamp 1~30)
-  if (Array.isArray(candidate.statChanges) && candidate.statChanges.length > 0) {
+  // 8. Character Identity Continuity & Stat Changes (Universal Entity #5: CHARACTER)
+  let isCharacterMutationBlocked = false;
+
+  if (candidate.characterChanges) {
+    const charName = candidate.characterChanges.name?.trim() || currentSnapshot.character.name;
+    const charResolution = resolveCharacterIdentity(
+      currentSnapshot,
+      immutableHistory,
+      charName,
+      candidate.characterChanges.entityReference,
+      identityGraph
+    );
+
+    // Identity Authority Chain: AMBIGUOUS and CONFLICT block character mutation
+    if (charResolution.status === 'AMBIGUOUS' || charResolution.status === 'CONFLICT') {
+      isCharacterMutationBlocked = true;
+    }
+  }
+
+  // Stat Changes (Rule: delta clamp -10~+10, final stat clamp 1~30)
+  if (!isCharacterMutationBlocked && Array.isArray(candidate.statChanges) && candidate.statChanges.length > 0) {
     const statsObj: Partial<Record<StatType, number>> = {};
     for (const sc of candidate.statChanges) {
       if (sc.stat && typeof sc.delta === 'number' && !isNaN(sc.delta)) {
@@ -614,6 +780,10 @@ export function buildSafeProposalFromCandidate(
       safeProposal.rawClaims = [];
     }
     safeProposal.rawClaims.push(candidate.rawMetadataBlock);
+  }
+
+  if (verifiedClaims.length > 0) {
+    safeProposal.verifiedClaims = verifiedClaims;
   }
 
   return safeProposal;

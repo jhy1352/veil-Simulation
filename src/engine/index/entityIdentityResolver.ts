@@ -48,20 +48,82 @@ function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
 
+const VALID_NOVELTY_CAUSES = new Set([
+  'RESOURCE_EXCHANGE',
+  'DISCOVERY_PICKUP',
+  'DISCOVERY',
+  'GIFT_REWARD',
+  'GIFT',
+  'REWARD',
+  'LOOT',
+  'PURCHASE',
+  'CRAFTING',
+  'ENCOUNTER',
+  'FIRST_ENCOUNTER',
+  'EAVESDROP',
+  'CREATION',
+  'GENESIS_STARTER',
+  'SYSTEM_INITIALIZATION'
+]);
+
 /**
  * Validates whether the provided reference bundle contains positive novelty/acquisition evidence
- * to justify classifying an unknown entity as NOVEL rather than an unresolvable index miss.
+ * grounded in Canonical State and History to justify classifying an unknown entity as NOVEL.
+ * 
+ * Strict Invariant:
+ * "verifiedEventId" and "sourceNpcId" are not trusted as raw strings; they MUST resolve
+ * against actual CanonicalState or ImmutableHistoricalRecord indices.
  */
-export function hasPositiveNoveltyEvidence(reference?: EntityReferenceBundle): boolean {
+export function hasPositiveNoveltyEvidence(
+  reference?: EntityReferenceBundle,
+  currentState?: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = [],
+  graph?: UniversalKnowledgeGraph
+): boolean {
   if (!reference || !reference.evidence) return false;
   const ev = reference.evidence;
-  if (isNonEmptyString(ev.cause)) return true;
-  if (isNonEmptyString(ev.sourceNpcId)) return true;
-  if (isNonEmptyString(ev.verifiedEventId)) return true;
-  if (isNonEmptyString(ev.context)) return true;
+
+  // 1. Verified Event ID: if claimed, it MUST actually exist in historical records, offscreen records, or lastCommittedEventId
+  if (isNonEmptyString(ev.verifiedEventId)) {
+    const verifiedInHistory = historicalRecords.some(r => r.eventId === ev.verifiedEventId);
+    const verifiedInOffscreen = (currentState?.worldInfo?.offscreenRecords || []).some(o => o.id === ev.verifiedEventId);
+    const verifiedInLastCommit = currentState?.lastCommittedEventId === ev.verifiedEventId;
+    if (!verifiedInHistory && !verifiedInOffscreen && !verifiedInLastCommit) {
+      return false;
+    }
+    return true;
+  }
+
+  // 2. Source NPC ID: if claimed, it MUST actually exist in canonical NPCs or Knowledge Graph
+  if (isNonEmptyString(ev.sourceNpcId)) {
+    const inCanonicalNpcs = (currentState?.worldInfo?.npcs || []).some(n => n.id === ev.sourceNpcId);
+    if (inCanonicalNpcs) return true;
+    if (graph) {
+      const entity = graph.entities.get(ev.sourceNpcId);
+      if (entity && entity.entityType === 'NPC') return true;
+    } else if (currentState) {
+      const tempGraph = buildKnowledgeGraph(currentState, historicalRecords);
+      const entity = tempGraph.entities.get(ev.sourceNpcId);
+      if (entity && entity.entityType === 'NPC') return true;
+    }
+    return false;
+  }
+
+  // 3. Positive Acquisition/Creation Cause
+  if (isNonEmptyString(ev.cause)) {
+    return true;
+  }
+
+  // 4. Concrete Cost transaction
   if (ev.cost && typeof ev.cost === 'object' && (isNonEmptyString(ev.cost.name) || isNonEmptyString(ev.cost.id) || (typeof ev.cost.quantity === 'number' && ev.cost.quantity > 0))) {
     return true;
   }
+
+  // 5. Causal Context description
+  if (isNonEmptyString(ev.context) && ev.context.trim().length >= 3) {
+    return true;
+  }
+
   return false;
 }
 
@@ -99,7 +161,15 @@ export function resolveEntityIdentity(
 
   const resolvedGraph = graph || buildKnowledgeGraph(currentState, historicalRecords);
   const matchingTypeEntities = Array.from(resolvedGraph.entities.values()).filter(e => e.entityType === entityType);
-  const nameMatches = matchingTypeEntities.filter(e => normalizeIdentityText(e.name) === normalizedName);
+  const nameMatches = matchingTypeEntities.filter(e => {
+    if (normalizeIdentityText(e.name) === normalizedName || normalizeIdentityText(e.entityId) === normalizedName) {
+      return true;
+    }
+    if (e.aliases && e.aliases.some(a => normalizeIdentityText(a) === normalizedName)) {
+      return true;
+    }
+    return false;
+  });
 
   // Case 1: LLM provided a claimedEntityId
   if (reference?.claimedEntityId && isNonEmptyString(reference.claimedEntityId)) {
@@ -115,7 +185,10 @@ export function resolveEntityIdentity(
       };
     }
 
-    if (normalizeIdentityText(claimedEntity.name) !== normalizedName) {
+    const claimedEntityNormName = normalizeIdentityText(claimedEntity.name);
+    const claimedEntityNormId = normalizeIdentityText(claimedEntity.entityId);
+    const claimedEntityAliasMatches = claimedEntity.aliases && claimedEntity.aliases.some(a => normalizeIdentityText(a) === normalizedName);
+    if (claimedEntityNormName !== normalizedName && claimedEntityNormId !== normalizedName && !claimedEntityAliasMatches) {
       return {
         status: 'CONFLICT',
         candidates: [{ entityId: claimedEntity.entityId, entity: claimedEntity, matchBasis: ['CLAIMED_ID'] }],
@@ -189,7 +262,7 @@ export function resolveEntityIdentity(
 
   // Case 4: No matching entity in graph (Index Miss)
   // Strict Invariant: Index miss ≠ NOVEL. Positive novelty/acquisition evidence is required.
-  if (hasPositiveNoveltyEvidence(reference)) {
+  if (hasPositiveNoveltyEvidence(reference, currentState, historicalRecords, resolvedGraph)) {
     return {
       status: 'NOVEL',
       candidates: [],
@@ -203,8 +276,96 @@ export function resolveEntityIdentity(
     status: 'AMBIGUOUS',
     candidates: [],
     normalizedName,
-    reason: `Index miss: No existing ${entityType} matches '${name}', and positive novelty/acquisition evidence is absent. Mutation is prohibited.`
+    reason: `Index miss: No existing ${entityType} matches '${name}', and positive novelty/acquisition evidence is absent or ungrounded. Mutation is prohibited.`
   };
+}
+
+/**
+ * Deterministic NPC identity resolver.
+ */
+export function resolveNpcIdentity(
+  currentState: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = [],
+  name: string,
+  reference?: EntityReferenceBundle,
+  graph?: UniversalKnowledgeGraph
+): EntityIdentityResolution {
+  if (reference && reference.entityType !== 'NPC') {
+    return {
+      status: 'CONFLICT',
+      candidates: [],
+      normalizedName: normalizeIdentityText(name),
+      reason: `Expected entityType 'NPC' for NPC resolution, got '${reference.entityType}'.`
+    };
+  }
+
+  return resolveEntityIdentity(currentState, historicalRecords, 'NPC', name, reference, graph);
+}
+
+/**
+ * Deterministic Faction identity resolver.
+ */
+export function resolveFactionIdentity(
+  currentState: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = [],
+  name: string,
+  reference?: EntityReferenceBundle,
+  graph?: UniversalKnowledgeGraph
+): EntityIdentityResolution {
+  if (reference && reference.entityType !== 'FACTION') {
+    return {
+      status: 'CONFLICT',
+      candidates: [],
+      normalizedName: normalizeIdentityText(name),
+      reason: `Expected entityType 'FACTION' for Faction resolution, got '${reference.entityType}'.`
+    };
+  }
+
+  return resolveEntityIdentity(currentState, historicalRecords, 'FACTION', name, reference, graph);
+}
+
+/**
+ * Deterministic Narrative Seed identity resolver.
+ */
+export function resolveNarrativeSeedIdentity(
+  currentState: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = [],
+  contentOrId: string,
+  reference?: EntityReferenceBundle,
+  graph?: UniversalKnowledgeGraph
+): EntityIdentityResolution {
+  if (reference && reference.entityType !== 'NARRATIVE_SEED') {
+    return {
+      status: 'CONFLICT',
+      candidates: [],
+      normalizedName: normalizeIdentityText(contentOrId),
+      reason: `Expected entityType 'NARRATIVE_SEED' for Narrative Seed resolution, got '${reference.entityType}'.`
+    };
+  }
+
+  return resolveEntityIdentity(currentState, historicalRecords, 'NARRATIVE_SEED', contentOrId, reference, graph);
+}
+
+/**
+ * Deterministic Character identity resolver.
+ */
+export function resolveCharacterIdentity(
+  currentState: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = [],
+  name: string,
+  reference?: EntityReferenceBundle,
+  graph?: UniversalKnowledgeGraph
+): EntityIdentityResolution {
+  if (reference && reference.entityType !== 'CHARACTER') {
+    return {
+      status: 'CONFLICT',
+      candidates: [],
+      normalizedName: normalizeIdentityText(name),
+      reason: `Expected entityType 'CHARACTER' for Character resolution, got '${reference.entityType}'.`
+    };
+  }
+
+  return resolveEntityIdentity(currentState, historicalRecords, 'CHARACTER', name, reference, graph);
 }
 
 /**
