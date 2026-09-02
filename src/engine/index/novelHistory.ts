@@ -33,6 +33,10 @@ export interface NovelHistoryRecord {
   readonly sourceEventIds: readonly string[];
   readonly relatedSeedIds: readonly string[];
   readonly protagonistRelationActive: boolean;
+  /** Engine verified whether this entity was an active causal actor in canonical state change */
+  readonly engineVerifiedActiveActor?: boolean;
+  /** Flag indicating whether this record has only been passively mentioned in prose */
+  readonly isPassiveMentionOnly?: boolean;
 }
 
 export interface NovelHistoryObservation {
@@ -387,7 +391,9 @@ export function observeNovelHistory(
       lifecycle: 'NOVEL',
       sourceEventIds: observation.eventId ? [observation.eventId] : [],
       relatedSeedIds: engineSeedId ? [engineSeedId] : [],
-      protagonistRelationActive: engineProtagonistRelation
+      protagonistRelationActive: engineProtagonistRelation,
+      engineVerifiedActiveActor: observation.engineVerifiedActiveActor === true,
+      isPassiveMentionOnly: observation.isPassiveMentionOnly !== false
     };
     return [...existing, novel];
   }
@@ -414,7 +420,9 @@ export function observeNovelHistory(
     lifecycle: targetLifecycle,
     sourceEventIds,
     relatedSeedIds,
-    protagonistRelationActive: engineProtagonistRelation || current.protagonistRelationActive
+    protagonistRelationActive: engineProtagonistRelation || current.protagonistRelationActive,
+    engineVerifiedActiveActor: observation.engineVerifiedActiveActor === true || current.engineVerifiedActiveActor === true,
+    isPassiveMentionOnly: observation.isPassiveMentionOnly !== false && current.isPassiveMentionOnly !== false
   };
 
   return existing.map((record, i) => (i === index ? next : record));
@@ -443,7 +451,9 @@ export function promoteNovelRecordToCanon(
         ...record,
         lifecycle: 'CANON_LINKED' as NovelHistoryLifecycle,
         canonicalId,
-        linkedCanonicalAtTurn: turn
+        linkedCanonicalAtTurn: turn,
+        engineVerifiedActiveActor: true,
+        isPassiveMentionOnly: false
       };
     }
     return record;
@@ -482,6 +492,154 @@ export interface CandidateObservationResult {
  * - Active Canon and Inactive Canon are protected and NEVER recorded as NOVEL.
  * - LLM candidate lifecycle signals are blocked.
  */
+/**
+ * Helper to determine if a novel entity is an Engine-verified Active Actor / Primary Cause
+ * in a canonical state change for this turn.
+ *
+ * Strict Constitutional Invariants:
+ * 1. Target of a canonical action alone does NOT confer Active Actor status.
+ * 2. Mere presence of ADD_NPC, MODIFY_INVENTORY, ADD_FACTION, ADD_NARRATIVE_SEED without causal evidence fails closed to false.
+ * 3. LLM-claimed signals (claimedEntityId, resolvedEntityId, relatedSeedId, isRelevantToProtagonist, isManagementRelevant) are strictly unprivileged.
+ * 4. Requires independent Engine causal evidence (sourceNpcId, verifiedEventId, acquisition with valid cause/cost/evidence).
+ */
+function isEntityEngineVerifiedActiveActor(
+  item: { name: string; entityType: CanonicalEntityReferenceType },
+  norm: string,
+  candidate: CandidatePacket,
+  proposal: StateTransitionProposal,
+  canonicalState: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = []
+): boolean {
+  if (item.entityType === 'NPC') {
+    const matchingNpcAction = proposal.actions.find(
+      a => a.type === 'ADD_NPC' && normalizeNovelIdentity((a.payload as any)?.name) === norm
+    );
+    const npcCanonicalId = matchingNpcAction && 'payload' in matchingNpcAction ? (matchingNpcAction.payload as any)?.id : undefined;
+
+    // 1. Check proposal inventory actions for acquisition citing this NPC
+    for (const action of proposal.actions) {
+      if (action.type === 'MODIFY_INVENTORY' && (action.payload as any)?.acquisition) {
+        const acq = (action.payload as any).acquisition;
+        if (acq.sourceNpcId && (
+          normalizeNovelIdentity(acq.sourceNpcId) === norm ||
+          (npcCanonicalId && acq.sourceNpcId === npcCanonicalId)
+        )) {
+          return true;
+        }
+        if (acq.verifiedEventId) {
+          const candInv = candidate.inventoryChanges?.find(ci => {
+            const ev = ci.entityReference?.evidence;
+            return (
+              (ev?.sourceNpcId && (normalizeNovelIdentity(ev.sourceNpcId) === norm || ev.sourceNpcId === npcCanonicalId)) ||
+              (ev?.context && typeof ev.context === 'string' && (ev.context.includes(item.name) || ev.context.includes(norm))) ||
+              (ci.acquisition?.context && typeof ci.acquisition.context === 'string' && (ci.acquisition.context.includes(item.name) || ci.acquisition.context.includes(norm)))
+            );
+          });
+          if (candInv) return true;
+        }
+      }
+    }
+
+    // 2. Check candidate inventory changes for causal evidence referencing this NPC
+    if (Array.isArray(candidate.inventoryChanges)) {
+      for (const inv of candidate.inventoryChanges) {
+        const ev = inv.entityReference?.evidence;
+        const acq = inv.acquisition;
+        const sourceNpc = ev?.sourceNpcId || acq?.sourceNpcId;
+        if (sourceNpc && (normalizeNovelIdentity(sourceNpc) === norm || (npcCanonicalId && sourceNpc === npcCanonicalId))) {
+          return true;
+        }
+        if (acq?.cause && (acq.context || ev?.context)) {
+          const ctx = String(acq.context || ev?.context);
+          if ((ctx.includes(item.name) || ctx.includes(norm)) && (acq.cause === 'GIFT_REWARD' || acq.cause === 'RESOURCE_EXCHANGE')) {
+            return true;
+          }
+        }
+      }
+    }
+
+    // 3. Check proposal verified claims
+    if (proposal.verifiedClaims && proposal.verifiedClaims.length > 0) {
+      for (const vc of proposal.verifiedClaims) {
+        if (npcCanonicalId && vc.targetEntityId === npcCanonicalId && vc.evidenceIds && vc.evidenceIds.length > 0) {
+          return true;
+        }
+      }
+    }
+
+    // Fail-closed: bare ADD_NPC(name) has no causal evidence
+    return false;
+  }
+
+  if (item.entityType === 'ITEM') {
+    const invAction = proposal.actions.find(
+      a => a.type === 'MODIFY_INVENTORY' && (a.payload as any)?.item && normalizeNovelIdentity((a.payload as any).item.name) === norm
+    );
+    if (!invAction || !('payload' in invAction)) {
+      return false;
+    }
+
+    const acq = (invAction.payload as any).acquisition;
+    // Bare MODIFY_INVENTORY without acquisition evidence fails-closed
+    if (!acq) {
+      return false;
+    }
+
+    if (typeof acq.verifiedEventId === 'string' && acq.verifiedEventId.trim().length > 0) {
+      return true;
+    }
+    if (typeof acq.sourceNpcId === 'string' && acq.sourceNpcId.trim().length > 0) {
+      return true;
+    }
+    if (acq.cost && typeof acq.cost === 'object') {
+      return true;
+    }
+
+    // Check candidate evidence for this item
+    const candInv = candidate.inventoryChanges?.find(
+      ci => ci.name && normalizeNovelIdentity(ci.name) === norm
+    );
+    if (candInv) {
+      const ev = candInv.entityReference?.evidence;
+      if (ev?.verifiedEventId || ev?.sourceNpcId || ev?.cost) {
+        return true;
+      }
+      if (candInv.acquisition?.cause && (candInv.acquisition.verifiedEventId || candInv.acquisition.cost || candInv.acquisition.sourceNpcId)) {
+        return true;
+      }
+      if (candInv.acquisition?.cause === 'GIFT_REWARD' && candInv.acquisition?.context) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  if (item.entityType === 'FACTION') {
+    const facAction = proposal.actions.find(
+      a => a.type === 'ADD_FACTION' && normalizeNovelIdentity((a.payload as any)?.name) === norm
+    );
+    const facId = facAction && 'payload' in facAction ? (facAction.payload as any)?.id : undefined;
+    if (proposal.verifiedClaims && proposal.verifiedClaims.length > 0 && facId) {
+      return proposal.verifiedClaims.some(vc => vc.targetEntityId === facId && vc.evidenceIds && vc.evidenceIds.length > 0);
+    }
+    return false;
+  }
+
+  if (item.entityType === 'NARRATIVE_SEED') {
+    const seedAction = proposal.actions.find(
+      a => a.type === 'ADD_NARRATIVE_SEED' && normalizeNovelIdentity((a.payload as any)?.content) === norm
+    );
+    const seedId = seedAction && 'payload' in seedAction ? (seedAction.payload as any)?.id : undefined;
+    if (proposal.verifiedClaims && proposal.verifiedClaims.length > 0 && seedId) {
+      return proposal.verifiedClaims.some(vc => vc.targetEntityId === seedId && vc.evidenceIds && vc.evidenceIds.length > 0);
+    }
+    return false;
+  }
+
+  return false;
+}
+
 export function observeCandidateNovelHistory(
   existingRecords: readonly NovelHistoryRecord[],
   candidate: CandidatePacket,
@@ -493,27 +651,27 @@ export function observeCandidateNovelHistory(
   let records: NovelHistoryRecord[] = [...existingRecords];
   let promotedCount = 0;
 
-  // 1. Collect Canonical Action actors/targets created in this turn's proposal
-  const canonicalChangeActors = new Map<string, { entityType: CanonicalEntityReferenceType; canonicalId: string }>();
+  // 1. Collect Canonical IDs created in this turn's proposal (for linking if verified active actor promotes)
+  const canonicalEntityIds = new Map<string, { entityType: CanonicalEntityReferenceType; canonicalId: string }>();
 
   for (const action of proposal.actions) {
     if (action.type === 'ADD_NPC' && action.payload?.name) {
-      canonicalChangeActors.set(normalizeNovelIdentity(action.payload.name), {
+      canonicalEntityIds.set(normalizeNovelIdentity(action.payload.name), {
         entityType: 'NPC',
         canonicalId: action.payload.id
       });
     } else if (action.type === 'MODIFY_INVENTORY' && action.payload?.item?.name) {
-      canonicalChangeActors.set(normalizeNovelIdentity(action.payload.item.name), {
+      canonicalEntityIds.set(normalizeNovelIdentity(action.payload.item.name), {
         entityType: 'ITEM',
         canonicalId: action.payload.item.id
       });
     } else if (action.type === 'ADD_FACTION' && action.payload?.name) {
-      canonicalChangeActors.set(normalizeNovelIdentity(action.payload.name), {
+      canonicalEntityIds.set(normalizeNovelIdentity(action.payload.name), {
         entityType: 'FACTION',
         canonicalId: action.payload.id
       });
     } else if (action.type === 'ADD_NARRATIVE_SEED' && action.payload?.content) {
-      canonicalChangeActors.set(normalizeNovelIdentity(action.payload.content), {
+      canonicalEntityIds.set(normalizeNovelIdentity(action.payload.content), {
         entityType: 'NARRATIVE_SEED',
         canonicalId: action.payload.id
       });
@@ -563,8 +721,17 @@ export function observeCandidateNovelHistory(
       continue;
     }
 
-    const changeActor = canonicalChangeActors.get(norm);
-    const isActor = !!changeActor;
+    // Determine if entity is an Engine-verified Active Actor (fails-closed if no causal evidence)
+    const isActor = isEntityEngineVerifiedActiveActor(
+      item,
+      norm,
+      candidate,
+      proposal,
+      canonicalState,
+      historicalRecords
+    );
+
+    const canonicalInfo = canonicalEntityIds.get(norm);
 
     const observation: NovelHistoryObservation = {
       novelId: `nov-${item.entityType.toLowerCase()}-${norm.replace(/\s+/g, '-')}`,
@@ -585,12 +752,12 @@ export function observeCandidateNovelHistory(
       isPassiveMentionOnly: !isActor
     });
 
-    if (decision.promote && changeActor) {
+    if (decision.promote && canonicalInfo) {
       records = promoteNovelRecordToCanon(
         records,
         observation.novelId,
         item.entityType,
-        changeActor.canonicalId,
+        canonicalInfo.canonicalId,
         storyTurnCount
       );
       promotedCount++;

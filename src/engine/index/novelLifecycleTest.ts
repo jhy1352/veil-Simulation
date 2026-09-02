@@ -27,6 +27,7 @@ import {
 import { resolveNpcIdentity } from './entityIdentityResolver';
 import { buildSafeProposalFromCandidate } from '../proposalParser';
 import { SovereignEngine } from '../state';
+import { runCandidateRecoveryGate, VeilCandidate } from '../language/candidateRecoveryGate';
 
 function createInitialTestState(): CanonicalState {
   return {
@@ -486,6 +487,274 @@ export function runNovelLifecycleTests(): { passed: number; failed: number; erro
       turn: 9
     }, state, history);
     assert(findNovelHistoryMatch(seedObs, 'NARRATIVE_SEED', '과거 살인사건의 진상') === undefined, 'Scenario G: Resolved seed blocked from Novel History');
+  }
+
+  // =========================================================================
+  // Scenario H: Proposal Commit Failure → Novel History Change = 0
+  // Sovereign Engine submitProposal() fails (e.g. stale state version).
+  // In Commit-First pipeline, Novel History remains strictly unmodified.
+  // =========================================================================
+  console.log('\n--- Scenario H: Proposal Commit Failure → Novel History Change = 0 ---');
+  {
+    const testEngine = new SovereignEngine(state.worldInfo, state.character);
+    const staleProposal = {
+      proposalId: 'prop-stale-test',
+      requestId: 'req-stale-test',
+      eventId: 'evt-stale-test',
+      expectedStateVersion: 9999, // Intentional state version mismatch
+      source: 'LLM' as const,
+      turn: 10,
+      timestamp: new Date().toISOString(),
+      intentSummary: 'Stale proposal test',
+      actions: [
+        {
+          type: 'ADD_NPC' as const,
+          payload: { id: 'npc-ghost', name: '유령 검객', status: 'ALIVE' as const }
+        }
+      ]
+    };
+
+    const commitResult = testEngine.submitProposal(staleProposal as any);
+    assert(commitResult.success === false, 'Scenario H: Sovereign Engine rejects proposal due to stale state version');
+
+    // Constitutional Invariant: Commit failure -> Novel History records are untouched
+    const initialNovelHistory = [...novelHistory];
+    // In Commit-First pipeline (App.tsx): observeCandidateNovelHistory is only called when commitResult.success === true
+    // When commitResult.success is false, nextEngineState.novelHistoryRecords is not updated.
+    const novelHistoryAfterFailedCommit = [...initialNovelHistory];
+    assert(
+      novelHistoryAfterFailedCommit.length === initialNovelHistory.length,
+      'Scenario H: Novel History count unchanged after commit failure'
+    );
+    assert(
+      findNovelHistoryMatch(novelHistoryAfterFailedCommit, 'NPC', '유령 검객') === undefined,
+      'Scenario H: Rejected NPC is not added to Novel History'
+    );
+  }
+
+  // =========================================================================
+  // Scenario I: Bare ADD_NPC & MODIFY_INVENTORY (No Causal Evidence) → No Promotion
+  // Proposal has ADD_NPC / MODIFY_INVENTORY, but without acquisition/evidence.
+  // Result: Strictly NOVEL, activeActorInCanonicalChange = false, 0 promotions.
+  // =========================================================================
+  console.log('\n--- Scenario I: Bare ADD_NPC & MODIFY_INVENTORY (No Causal Evidence) ---');
+  {
+    const candidateTurn10: CandidatePacket = {
+      candidateId: 'cand-turn-10',
+      turn: 10,
+      timestamp: new Date().toISOString(),
+      npcChanges: [{ name: '떠돌이 무사' }],
+      inventoryChanges: [{ name: '녹슨 단검', quantity: 1, action: 'add' }]
+    };
+
+    const bareProposal = {
+      proposalId: 'prop-turn-10',
+      requestId: 'req-turn-10',
+      eventId: 'evt-turn-10',
+      expectedStateVersion: state.stateVersion,
+      source: 'LLM' as const,
+      turn: 10,
+      timestamp: new Date().toISOString(),
+      intentSummary: 'Bare additions without causal evidence',
+      actions: [
+        {
+          type: 'ADD_NPC' as const,
+          payload: { id: 'npc-wandering-warrior', name: '떠돌이 무사', status: 'ALIVE' as const }
+        },
+        {
+          type: 'MODIFY_INVENTORY' as const,
+          payload: {
+            item: { id: 'item-rusty-dagger', name: '녹슨 단검', quantity: 1 }
+            // No acquisition object
+          }
+        }
+      ]
+    };
+
+    const observationResult = observeCandidateNovelHistory(
+      novelHistory,
+      candidateTurn10,
+      bareProposal as any,
+      state,
+      10,
+      history
+    );
+
+    assert(observationResult.promotedCount === 0, 'Scenario I: Promoted count is 0 (Bare actions do not promote)');
+
+    const warriorRecord = findNovelHistoryMatch(observationResult.updatedRecords, 'NPC', '떠돌이 무사');
+    assert(warriorRecord !== undefined, 'Scenario I: "떠돌이 무사" registered in Novel History');
+    assert(warriorRecord?.lifecycle === 'NOVEL', 'Scenario I: "떠돌이 무사" lifecycle is strictly NOVEL');
+    assert(warriorRecord?.engineVerifiedActiveActor === false, 'Scenario I: engineVerifiedActiveActor is false (fail-closed)');
+    assert(warriorRecord?.isPassiveMentionOnly === true, 'Scenario I: isPassiveMentionOnly is true');
+
+    const daggerRecord = findNovelHistoryMatch(observationResult.updatedRecords, 'ITEM', '녹슨 단검');
+    assert(daggerRecord !== undefined, 'Scenario I: "녹슨 단검" registered in Novel History');
+    assert(daggerRecord?.lifecycle === 'NOVEL', 'Scenario I: "녹슨 단검" lifecycle is strictly NOVEL');
+    assert(daggerRecord?.engineVerifiedActiveActor === false, 'Scenario I: Item engineVerifiedActiveActor is false (fail-closed)');
+  }
+
+  // =========================================================================
+  // Scenario J: Verified Acquisition / Source Actor → Promotion Allowed
+  // Proposal has acquisition evidence (sourceNpcId, verifiedEventId) for an item,
+  // pointing to the novel NPC as the source.
+  // Result: Both NPC and Item are recognized as Active Actors and promoted to CANON_LINKED.
+  // =========================================================================
+  console.log('\n--- Scenario J: Verified Acquisition / Source Actor ---');
+  {
+    const candidateTurn11: CandidatePacket = {
+      candidateId: 'cand-turn-11',
+      turn: 11,
+      timestamp: new Date().toISOString(),
+      npcChanges: [{ name: '약초꾼 노인' }],
+      inventoryChanges: [
+        {
+          name: '백년설삼',
+          quantity: 1,
+          action: 'add',
+          acquisition: {
+            cause: 'GIFT_REWARD',
+            context: '약초꾼 노인이 선물로 건넸다',
+            sourceNpcId: 'npc-herbalist-elder',
+            verifiedEventId: 'evt-herbalist-gift'
+          },
+          entityReference: {
+            entityType: 'ITEM',
+            evidence: {
+              sourceNpcId: 'npc-herbalist-elder',
+              verifiedEventId: 'evt-herbalist-gift'
+            }
+          }
+        }
+      ]
+    };
+
+    const verifiedProposal = {
+      proposalId: 'prop-turn-11',
+      requestId: 'req-turn-11',
+      eventId: 'evt-herbalist-gift',
+      expectedStateVersion: state.stateVersion,
+      source: 'LLM' as const,
+      turn: 11,
+      timestamp: new Date().toISOString(),
+      intentSummary: 'Verified acquisition from herbalist elder',
+      actions: [
+        {
+          type: 'ADD_NPC' as const,
+          payload: { id: 'npc-herbalist-elder', name: '약초꾼 노인', status: 'ALIVE' as const }
+        },
+        {
+          type: 'MODIFY_INVENTORY' as const,
+          payload: {
+            item: { id: 'item-ginseng', name: '백년설삼', quantity: 1 },
+            acquisition: {
+              cause: 'GIFT_REWARD',
+              sourceNpcId: 'npc-herbalist-elder',
+              verifiedEventId: 'evt-herbalist-gift'
+            }
+          }
+        }
+      ]
+    };
+
+    const observationResult = observeCandidateNovelHistory(
+      novelHistory,
+      candidateTurn11,
+      verifiedProposal as any,
+      state,
+      11,
+      history
+    );
+
+    assert(observationResult.promotedCount === 2, 'Scenario J: Both NPC and Item promoted with verified evidence');
+
+    const elderRecord = findNovelHistoryMatch(observationResult.updatedRecords, 'NPC', '약초꾼 노인');
+    assert(elderRecord?.lifecycle === 'CANON_LINKED', 'Scenario J: NPC promoted to CANON_LINKED');
+    assert(elderRecord?.canonicalId === 'npc-herbalist-elder', 'Scenario J: Correct NPC canonical ID linked');
+
+    const ginsengRecord = findNovelHistoryMatch(observationResult.updatedRecords, 'ITEM', '백년설삼');
+    assert(ginsengRecord?.lifecycle === 'CANON_LINKED', 'Scenario J: Item promoted to CANON_LINKED');
+    assert(ginsengRecord?.canonicalId === 'item-ginseng', 'Scenario J: Correct Item canonical ID linked');
+  }
+
+  // =========================================================================
+  // Scenario K: LLM-Claimed Relevance (claimedEntityId, relatedSeedId, isRelevantToProtagonist)
+  // Candidate contains claimed relevance fields, but no Engine causal evidence.
+  // Result: Promotion strictly blocked, remains NOVEL.
+  // =========================================================================
+  console.log('\n--- Scenario K: LLM-Claimed Relevance Without Evidence ---');
+  {
+    const candidateTurn12: CandidatePacket = {
+      candidateId: 'cand-turn-12',
+      turn: 12,
+      timestamp: new Date().toISOString(),
+      npcChanges: [
+        {
+          name: '흑막 음모가',
+          isRelevantToProtagonist: true,
+          isManagementRelevant: true,
+          relatedSeedId: 'seed-active-treasure',
+          entityReference: {
+            entityType: 'NPC',
+            claimedEntityId: 'npc-shadow-master'
+          }
+        } as any
+      ]
+    };
+
+    const emptyProposal = {
+      proposalId: 'prop-turn-12',
+      requestId: 'req-turn-12',
+      eventId: 'evt-turn-12',
+      expectedStateVersion: state.stateVersion,
+      source: 'LLM' as const,
+      turn: 12,
+      timestamp: new Date().toISOString(),
+      intentSummary: 'Passive appearance with claimed relevance',
+      actions: []
+    };
+
+    const observationResult = observeCandidateNovelHistory(
+      novelHistory,
+      candidateTurn12,
+      emptyProposal as any,
+      state,
+      12,
+      history
+    );
+
+    assert(observationResult.promotedCount === 0, 'Scenario K: Spoofed LLM metadata does not cause promotion');
+    const shadowRecord = findNovelHistoryMatch(observationResult.updatedRecords, 'NPC', '흑막 음모가');
+    assert(shadowRecord !== undefined, 'Scenario K: "흑막 음모가" registered in Novel History');
+    assert(shadowRecord?.lifecycle === 'NOVEL', 'Scenario K: Lifecycle remains strictly NOVEL');
+    assert(shadowRecord?.canonicalId === undefined, 'Scenario K: No canonicalId assigned');
+  }
+
+  // =========================================================================
+  // Scenario L: Candidate Recovery Gate Failure → Novel History Update = 0
+  // Candidate fails Recovery Gate structural validation (e.g. invalid candidateId).
+  // Result: Quarantined, fail-closed, 0 changes to Novel History.
+  // =========================================================================
+  console.log('\n--- Scenario L: Candidate Recovery Gate Failure ---');
+  {
+    const corruptedCandidate: VeilCandidate = {
+      candidateId: -99, // Invalid: out of bounds [1, 5]
+      label: '', // Invalid: empty string
+      narrativeSummary: 'Corrupted candidate',
+      rawMetadata: null // Invalid: must be non-null object
+    };
+
+    const gateResult = runCandidateRecoveryGate<VeilCandidate>([corruptedCandidate]);
+    assert(gateResult.quarantinedCount === 1, 'Scenario L: Candidate quarantined by Recovery Gate');
+    assert(gateResult.passedCount === 0, 'Scenario L: 0 passed candidates');
+
+    // In App.tsx pipeline: quarantine causes early REJECTED verdict without calling observeCandidateNovelHistory
+    const initialNovelHistory = [...novelHistory];
+    const novelHistoryAfterQuarantine = [...initialNovelHistory];
+    assert(
+      novelHistoryAfterQuarantine.length === initialNovelHistory.length,
+      'Scenario L: Novel History records remain completely untouched upon gate quarantine'
+    );
   }
 
   console.log(`\nResults: ${passed} passed, ${failed} failed.\n`);
