@@ -546,7 +546,10 @@ export function runCandidateRecoveryGateTests(): TestReport {
             action: 'add',
             entityReference: {
               entityType: 'ITEM',
-              evidence: { cause: 'UNBACKED_ACQUISITION' }
+              evidence: {
+                verifiedEventId: 'evt-genesis',
+                cause: 'UNBACKED_ACQUISITION'
+              }
             }
           }
         ]

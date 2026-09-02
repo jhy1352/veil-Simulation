@@ -113,6 +113,17 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
       actionType: 'MODIFY_INVENTORY',
       details: 'Acquired item-iron-sword during training',
       stateVersionAfterCommit: 1
+    },
+    {
+      recordId: 'rec-2',
+      eventId: 'evt-2',
+      proposalId: 'prop-2',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'UPDATE_NPC',
+      details: 'Spoke with npc-abbot and discovered hidden armory',
+      stateVersionAfterCommit: 1
     }
   ];
 
@@ -286,14 +297,15 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     assert(!invAction, 'Test E3: Index miss without evidence is blocked from mutating state');
   }
 
-  // Test F: Legitimate Novel Entity with Positive Acquisition Evidence -> NOVEL
+  // Test F: Legitimate Novel Entity with Positive Authoritative Evidence -> NOVEL
   {
     const resolution = resolveInventoryItemIdentity(state, history, '청룡언월도', {
       entityType: 'ITEM',
       evidence: {
         cause: 'DUNGEON_REWARD',
         context: '비경을 탐색하고 획득함',
-        sourceNpcId: 'npc-abbot'
+        sourceNpcId: 'npc-abbot',
+        verifiedEventId: 'evt-2'
       }
     });
     assert(resolution.status === 'NOVEL', 'Test F1: NOVEL status granted when positive evidence exists');
@@ -312,7 +324,9 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
             entityType: 'ITEM',
             evidence: {
               cause: 'DUNGEON_REWARD',
-              context: '비경을 탐색하고 획득함'
+              context: '비경을 탐색하고 획득함',
+              sourceNpcId: 'npc-abbot',
+              verifiedEventId: 'evt-2'
             }
           }
         }
@@ -464,12 +478,13 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     assert(res2.status === 'RECOVERED', 'Faction Test 2: Recovered without claimed ID');
     assert(res2.canonicalId === 'fac-shaolin', 'Faction Test 2: Matches fac-shaolin');
 
-    // Test FAC-3: Novel Faction with Cause
+    // Test FAC-3: Novel Faction with Authoritative Event Evidence
     const res3 = resolveFactionIdentity(state, history, '무당파', {
       entityType: 'FACTION',
       evidence: {
         cause: 'ENCOUNTERED_NEW_FACTION',
-        context: '호북성에서 무당파를 접함'
+        context: '호북성에서 무당파를 접함',
+        verifiedEventId: 'evt-1'
       }
     });
     assert(res3.status === 'NOVEL', 'Faction Test 3: Novel faction with cause');
@@ -501,12 +516,13 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     assert(res1.status === 'EXACT', 'Seed Test 1: Exact match');
     assert(res1.canonicalId === 'seed-stolen-manual', 'Seed Test 1: Matches seed-stolen-manual');
 
-    // Test SEED-2: Novel Seed with Valid Evidence
+    // Test SEED-2: Novel Seed with Valid Authoritative Event Evidence
     const res2 = resolveNarrativeSeedIdentity(stateWithSeed, history, '동굴 속의 흑영', {
       entityType: 'NARRATIVE_SEED',
       evidence: {
         cause: 'DISCOVERED_FORESHADOW',
-        context: '동굴 탐험 중 기이한 그림자를 봄'
+        context: '동굴 탐험 중 기이한 그림자를 봄',
+        verifiedEventId: 'evt-1'
       }
     });
     assert(res2.status === 'NOVEL', 'Seed Test 2: Novel seed with cause');
@@ -624,7 +640,8 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
             entityType: 'ITEM',
             evidence: {
               cause: 'PURCHASE',
-              context: '대장간에서 구매'
+              context: '대장간에서 구매',
+              verifiedEventId: 'evt-1'
             }
           }
         }
@@ -648,7 +665,8 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
             entityType: 'NPC',
             evidence: {
               cause: 'FIRST_ENCOUNTER',
-              context: '화산파 본산 방문'
+              context: '화산파 본산 방문',
+              verifiedEventId: 'evt-1'
             }
           }
         }
@@ -662,7 +680,8 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
             entityType: 'FACTION',
             evidence: {
               cause: 'ENCOUNTER',
-              context: '새로운 문파 접촉'
+              context: '새로운 문파 접촉',
+              verifiedEventId: 'evt-1'
             }
           }
         }
@@ -676,7 +695,8 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
             entityType: 'NARRATIVE_SEED',
             evidence: {
               cause: 'EAVESDROP',
-              context: '밀담을 엿들음'
+              context: '밀담을 엿들음',
+              verifiedEventId: 'evt-1'
             }
           }
         }
@@ -767,6 +787,168 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
       evidence: { context: '해킹 시도' }
     });
     assert(spoofedFaction.status === 'CONFLICT', 'Red Team 3: Spoofed claimedEntityId on canonical entity triggers CONFLICT');
+  }
+
+  // ==========================================
+  // Test Suite: 5-Entity Spoofed Cause/Context/Cost Adversarial Rejection Tests
+  // Strict Invariant: LLM string claims ("cause", "context", "cost") alone can NEVER authorize NOVEL.
+  // ==========================================
+  console.log('\n--- Adversarial Attack Tests: 5-Entity Spoofed Cause/Context/Cost Rejection ---');
+  {
+    // 1. ITEM: Unindexed item with only cause, context, and cost
+    const itemAttack = resolveInventoryItemIdentity(state, history, '천하무쌍보도', {
+      entityType: 'ITEM',
+      evidence: {
+        cause: 'RESOURCE_EXCHANGE',
+        context: '노점상에서 큰 돈을 주고 구입함',
+        cost: { name: '은화', quantity: 100 }
+      }
+    });
+    assert(itemAttack.status === 'AMBIGUOUS', '5-Entity Attack ITEM: cause/context/cost alone rejected as AMBIGUOUS');
+    assert(itemAttack.canonicalId === undefined, '5-Entity Attack ITEM: No canonical ID issued');
+
+    // 2. NPC: Unindexed NPC with only cause and context
+    const npcAttack = resolveNpcIdentity(state, history, '의문의도인', {
+      entityType: 'NPC',
+      evidence: {
+        cause: 'FIRST_ENCOUNTER',
+        context: '산길에서 우연히 마주침'
+      }
+    });
+    assert(npcAttack.status === 'AMBIGUOUS', '5-Entity Attack NPC: cause/context alone rejected as AMBIGUOUS');
+    assert(npcAttack.canonicalId === undefined, '5-Entity Attack NPC: No canonical ID issued');
+
+    // 3. FACTION: Unindexed Faction with only cause and context
+    const facAttack = resolveFactionIdentity(state, history, '흑룡방', {
+      entityType: 'FACTION',
+      evidence: {
+        cause: 'ENCOUNTER',
+        context: '소문으로 들은 새로운 암흑 문파'
+      }
+    });
+    assert(facAttack.status === 'AMBIGUOUS', '5-Entity Attack FACTION: cause/context alone rejected as AMBIGUOUS');
+    assert(facAttack.canonicalId === undefined, '5-Entity Attack FACTION: No canonical ID issued');
+
+    // 4. NARRATIVE_SEED: Unindexed Seed with only cause and context
+    const seedAttack = resolveNarrativeSeedIdentity(state, history, '천하대란의 조짐', {
+      entityType: 'NARRATIVE_SEED',
+      evidence: {
+        cause: 'DISCOVERY',
+        context: '객잔에서 귓속말로 들음'
+      }
+    });
+    assert(seedAttack.status === 'AMBIGUOUS', '5-Entity Attack SEED: cause/context alone rejected as AMBIGUOUS');
+    assert(seedAttack.canonicalId === undefined, '5-Entity Attack SEED: No canonical ID issued');
+
+    // 5. CHARACTER: Unindexed Character with only cause and context
+    const charAttack = resolveCharacterIdentity(state, history, '가짜주인공', {
+      entityType: 'CHARACTER',
+      evidence: {
+        cause: 'GENESIS_STARTER',
+        context: '새로운 주인공 설정'
+      }
+    });
+    assert(charAttack.status === 'AMBIGUOUS', '5-Entity Attack CHARACTER: cause/context alone rejected as AMBIGUOUS');
+    assert(charAttack.canonicalId === undefined, '5-Entity Attack CHARACTER: No canonical ID issued');
+
+    // Attack 6: Canonical NPC source claimed without authoritative historical acquisition proof
+    // Create an NPC that exists canonically in state, but has NO historical record of giving/creating this item
+    const stateWithNewNpc = createMockState();
+    stateWithNewNpc.worldInfo.npcs.push({
+      id: 'npc-stranger',
+      name: '이름없는행인',
+      npcClass: 'COMMON',
+      status: 'ALIVE',
+      metInStory: false
+    });
+    const unprovenNpcSource = resolveInventoryItemIdentity(stateWithNewNpc, history, '행인의보검', {
+      entityType: 'ITEM',
+      evidence: {
+        sourceNpcId: 'npc-stranger',
+        cause: 'GIFT_REWARD',
+        context: '행인에게 하사받음'
+      }
+    });
+    assert(unprovenNpcSource.status === 'AMBIGUOUS', 'Adversarial sourceNpcId: Canonical NPC without historical evidence rejected as AMBIGUOUS');
+  }
+
+  // ==========================================
+  // Test Suite: 5-Entity Authoritative Positive Novelty Tests
+  // Verified Event ID or Canonical Event Evidence MUST exist in history
+  // ==========================================
+  console.log('\n--- Positive Authoritative Verification Tests: 5-Entity Authoritative Novelty ---');
+  {
+    // 1. ITEM: Verified Authoritative Event Anchor -> NOVEL
+    const itemPos = resolveInventoryItemIdentity(state, history, '용천검', {
+      entityType: 'ITEM',
+      evidence: {
+        verifiedEventId: 'evt-1',
+        cause: 'DISCOVERY_PICKUP',
+        context: '수련장에서 정식 발굴'
+      }
+    });
+    assert(itemPos.status === 'NOVEL', '5-Entity Positive ITEM: Authoritative event grants NOVEL');
+    assert(itemPos.canonicalId === undefined, '5-Entity Positive ITEM: Resolver does not issue ID');
+
+    // 2. NPC: Verified Authoritative Event Anchor -> NOVEL
+    const npcPos = resolveNpcIdentity(state, history, '점창파사절', {
+      entityType: 'NPC',
+      evidence: {
+        verifiedEventId: 'evt-1',
+        cause: 'FIRST_ENCOUNTER',
+        context: '수련 중 찾아온 사절'
+      }
+    });
+    assert(npcPos.status === 'NOVEL', '5-Entity Positive NPC: Authoritative event grants NOVEL');
+    assert(npcPos.canonicalId === undefined, '5-Entity Positive NPC: Resolver does not issue ID');
+
+    // 3. FACTION: Verified Authoritative Event Anchor -> NOVEL
+    const facPos = resolveFactionIdentity(state, history, '점창파', {
+      entityType: 'FACTION',
+      evidence: {
+        verifiedEventId: 'evt-1',
+        cause: 'ENCOUNTER',
+        context: '사절 방문을 통한 공식 외교 접촉'
+      }
+    });
+    assert(facPos.status === 'NOVEL', '5-Entity Positive FACTION: Authoritative event grants NOVEL');
+    assert(facPos.canonicalId === undefined, '5-Entity Positive FACTION: Resolver does not issue ID');
+
+    // 4. NARRATIVE_SEED: Verified Authoritative Event Anchor -> NOVEL
+    const seedPos = resolveNarrativeSeedIdentity(state, history, '비경의 열쇠에 관한 단서', {
+      entityType: 'NARRATIVE_SEED',
+      evidence: {
+        verifiedEventId: 'evt-1',
+        cause: 'DISCOVERY',
+        context: '수련장 비석에 새겨진 단서'
+      }
+    });
+    assert(seedPos.status === 'NOVEL', '5-Entity Positive SEED: Authoritative event grants NOVEL');
+    assert(seedPos.canonicalId === undefined, '5-Entity Positive SEED: Resolver does not issue ID');
+
+    // 5. CHARACTER: Verified Authoritative Event Anchor -> NOVEL
+    const charPos = resolveCharacterIdentity(state, history, '동행자이설화', {
+      entityType: 'CHARACTER',
+      evidence: {
+        verifiedEventId: 'evt-1',
+        cause: 'GENESIS_STARTER',
+        context: '세계에 공식 편입된 영구 동행자'
+      }
+    });
+    assert(charPos.status === 'NOVEL', '5-Entity Positive CHARACTER: Authoritative event grants NOVEL');
+    assert(charPos.canonicalId === undefined, '5-Entity Positive CHARACTER: Resolver does not issue ID');
+
+    // 6. Canonical sourceNpcId with authoritative history event verification
+    const provenNpcSource = resolveInventoryItemIdentity(state, history, '방장의염주', {
+      entityType: 'ITEM',
+      evidence: {
+        sourceNpcId: 'npc-abbot',
+        verifiedEventId: 'evt-2',
+        cause: 'GIFT_REWARD',
+        context: '방장이 비밀 보물창고에서 하사한 염주'
+      }
+    });
+    assert(provenNpcSource.status === 'NOVEL', 'Positive sourceNpcId: Canonical NPC with verified historical event grants NOVEL');
   }
 
   console.log(`\nResults: ${passed} passed, ${failed} failed.\n`);

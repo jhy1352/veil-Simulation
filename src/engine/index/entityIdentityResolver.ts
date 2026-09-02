@@ -70,9 +70,14 @@ const VALID_NOVELTY_CAUSES = new Set([
  * Validates whether the provided reference bundle contains positive novelty/acquisition evidence
  * grounded in Canonical State and History to justify classifying an unknown entity as NOVEL.
  * 
- * Strict Invariant:
- * "verifiedEventId" and "sourceNpcId" are not trusted as raw strings; they MUST resolve
- * against actual CanonicalState or ImmutableHistoricalRecord indices.
+ * Strict Invariants & Authority Rules:
+ * 1. LLM string claims ("cause", "context", "cost") alone can NEVER authorize NOVEL status.
+ * 2. "verifiedEventId" is accepted ONLY if it resolves to an actual authoritative HistoricalRecord,
+ *    OffscreenRecord, or lastCommittedEventId.
+ * 3. "sourceNpcId" is accepted ONLY if the NPC exists canonically AND the acquisition/creation fact
+ *    is confirmed by authoritative history/event evidence.
+ * 4. "cause/context/cost" are strictly secondary/supporting evidence and must be anchored to an authoritative event.
+ * 5. Index miss ≠ NOVEL. Unverified unknown entities strictly fail-closed to AMBIGUOUS.
  */
 export function hasPositiveNoveltyEvidence(
   reference?: EntityReferenceBundle,
@@ -83,48 +88,72 @@ export function hasPositiveNoveltyEvidence(
   if (!reference || !reference.evidence) return false;
   const ev = reference.evidence;
 
-  // 1. Verified Event ID: if claimed, it MUST actually exist in historical records, offscreen records, or lastCommittedEventId
+  let hasAuthoritativeAnchor = false;
+
+  // 1. Authoritative Event Check: verifiedEventId must actually exist in authoritative records
   if (isNonEmptyString(ev.verifiedEventId)) {
     const verifiedInHistory = historicalRecords.some(r => r.eventId === ev.verifiedEventId);
     const verifiedInOffscreen = (currentState?.worldInfo?.offscreenRecords || []).some(o => o.id === ev.verifiedEventId);
     const verifiedInLastCommit = currentState?.lastCommittedEventId === ev.verifiedEventId;
-    if (!verifiedInHistory && !verifiedInOffscreen && !verifiedInLastCommit) {
+    if (verifiedInHistory || verifiedInOffscreen || verifiedInLastCommit) {
+      hasAuthoritativeAnchor = true;
+    } else {
+      // Explicitly claimed event ID does not exist in authoritative history -> reject immediately
       return false;
     }
-    return true;
   }
 
-  // 2. Source NPC ID: if claimed, it MUST actually exist in canonical NPCs or Knowledge Graph
+  // 2. Authoritative Source NPC Check: canonical NPC must exist AND acquisition/creation fact must be authoritatively verified
   if (isNonEmptyString(ev.sourceNpcId)) {
     const inCanonicalNpcs = (currentState?.worldInfo?.npcs || []).some(n => n.id === ev.sourceNpcId);
-    if (inCanonicalNpcs) return true;
-    if (graph) {
-      const entity = graph.entities.get(ev.sourceNpcId);
-      if (entity && entity.entityType === 'NPC') return true;
-    } else if (currentState) {
-      const tempGraph = buildKnowledgeGraph(currentState, historicalRecords);
-      const entity = tempGraph.entities.get(ev.sourceNpcId);
-      if (entity && entity.entityType === 'NPC') return true;
+    let npcExists = inCanonicalNpcs;
+    if (!npcExists) {
+      if (graph) {
+        const entity = graph.entities.get(ev.sourceNpcId);
+        if (entity && entity.entityType === 'NPC') npcExists = true;
+      } else if (currentState) {
+        const tempGraph = buildKnowledgeGraph(currentState, historicalRecords);
+        const entity = tempGraph.entities.get(ev.sourceNpcId);
+        if (entity && entity.entityType === 'NPC') npcExists = true;
+      }
     }
+
+    if (!npcExists) {
+      // Non-existent NPC claimed as source -> reject
+      return false;
+    }
+
+    // Check if the acquisition/creation fact involving this sourceNpcId is confirmed in authoritative history
+    const npcInHistory = historicalRecords.some(r =>
+      containsEvidence(r.details, ev.sourceNpcId!) ||
+      (r.canonicalAction && JSON.stringify(r.canonicalAction).includes(ev.sourceNpcId!))
+    );
+    const npcInOffscreen = (currentState?.worldInfo?.offscreenRecords || []).some(o =>
+      o.involvedNpcIds?.includes(ev.sourceNpcId!) || containsEvidence(o.eventDescription, ev.sourceNpcId!)
+    );
+
+    if (npcInHistory || npcInOffscreen || hasAuthoritativeAnchor) {
+      hasAuthoritativeAnchor = true;
+    } else {
+      // Canonical NPC exists, but there is no authoritative historical record confirming acquisition/creation
+      return false;
+    }
+  }
+
+  // Absolute Rule: If no authoritative anchor (verifiedEventId or verified sourceNpcId) exists,
+  // LLM strings ("cause", "context", "cost") alone CANNOT authorize NOVEL.
+  if (!hasAuthoritativeAnchor) {
     return false;
   }
 
-  // 3. Positive Acquisition/Creation Cause
-  if (isNonEmptyString(ev.cause)) {
-    return true;
-  }
+  // Supporting/auxiliary evidence check: cause, context, or cost connected to the authoritative event,
+  // or the authoritative event itself.
+  const hasAuxiliaryEvidence =
+    isNonEmptyString(ev.cause) ||
+    (isNonEmptyString(ev.context) && ev.context.trim().length >= 3) ||
+    (ev.cost && typeof ev.cost === 'object' && (isNonEmptyString(ev.cost.name) || isNonEmptyString(ev.cost.id) || (typeof ev.cost.quantity === 'number' && ev.cost.quantity > 0)));
 
-  // 4. Concrete Cost transaction
-  if (ev.cost && typeof ev.cost === 'object' && (isNonEmptyString(ev.cost.name) || isNonEmptyString(ev.cost.id) || (typeof ev.cost.quantity === 'number' && ev.cost.quantity > 0))) {
-    return true;
-  }
-
-  // 5. Causal Context description
-  if (isNonEmptyString(ev.context) && ev.context.trim().length >= 3) {
-    return true;
-  }
-
-  return false;
+  return hasAuthoritativeAnchor && (hasAuxiliaryEvidence || isNonEmptyString(ev.verifiedEventId));
 }
 
 /**
