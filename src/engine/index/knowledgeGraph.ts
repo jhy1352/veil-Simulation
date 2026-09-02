@@ -51,6 +51,7 @@ export interface UniversalEntity {
   readonly provenance: EntityProvenance;
   readonly isStaleRelativeToCanonical: boolean;
   readonly staleReason?: string;
+  readonly canonLifecycle?: 'ACTIVE_CANON' | 'INACTIVE_CANON';
 }
 
 /**
@@ -211,7 +212,8 @@ export function buildKnowledgeGraph(
           worldInfoField: 'character',
           stateVersion: 1
         },
-        isStaleRelativeToCanonical: false
+        isStaleRelativeToCanonical: false,
+        canonLifecycle: 'ACTIVE_CANON'
       });
     }
 
@@ -233,7 +235,8 @@ export function buildKnowledgeGraph(
               stateVersion: 1
             },
             isStaleRelativeToCanonical: isDead,
-            staleReason: isDead ? `NPC '${npc.name}' (${npc.id}) is currently DEAD in Canonical State.` : undefined
+            staleReason: isDead ? `NPC '${npc.name}' (${npc.id}) is currently DEAD in Canonical State.` : undefined,
+            canonLifecycle: isDead ? 'INACTIVE_CANON' : 'ACTIVE_CANON'
           });
         }
       }
@@ -253,7 +256,8 @@ export function buildKnowledgeGraph(
               worldInfoField: 'factions',
               stateVersion: 1
             },
-            isStaleRelativeToCanonical: false
+            isStaleRelativeToCanonical: false,
+            canonLifecycle: 'ACTIVE_CANON'
           });
         }
       }
@@ -263,6 +267,7 @@ export function buildKnowledgeGraph(
     if (Array.isArray(canonicalState.character?.inventory)) {
       for (const item of canonicalState.character.inventory) {
         if (item && typeof item.id === 'string' && item.id.trim()) {
+          const isDepleted = (item.quantity ?? 1) <= 0;
           entityMap.set(item.id, {
             entityId: item.id,
             entityType: 'ITEM',
@@ -273,8 +278,9 @@ export function buildKnowledgeGraph(
               worldInfoField: 'inventory',
               stateVersion: 1
             },
-            isStaleRelativeToCanonical: (item.quantity ?? 1) <= 0,
-            staleReason: (item.quantity ?? 1) <= 0 ? `Item quantity is 0 in Canonical Inventory.` : undefined
+            isStaleRelativeToCanonical: isDepleted,
+            staleReason: isDepleted ? `Item quantity is 0 in Canonical Inventory.` : undefined,
+            canonLifecycle: isDepleted ? 'INACTIVE_CANON' : 'ACTIVE_CANON'
           });
         }
       }
@@ -296,7 +302,8 @@ export function buildKnowledgeGraph(
               stateVersion: 1
             },
             isStaleRelativeToCanonical: isResolved,
-            staleReason: isResolved ? `Narrative seed is ${seed.status}.` : undefined
+            staleReason: isResolved ? `Narrative seed is ${seed.status}.` : undefined,
+            canonLifecycle: isResolved ? 'INACTIVE_CANON' : 'ACTIVE_CANON'
           });
         }
       }
@@ -316,7 +323,8 @@ export function buildKnowledgeGraph(
               worldInfoField: 'offscreenRecords',
               stateVersion: 1
             },
-            isStaleRelativeToCanonical: false
+            isStaleRelativeToCanonical: false,
+            canonLifecycle: 'ACTIVE_CANON'
           });
 
           // ONLY structural location field from offscreenRecords[].location
@@ -333,7 +341,8 @@ export function buildKnowledgeGraph(
                   worldInfoField: 'offscreenRecords.location',
                   stateVersion: 1
                 },
-                isStaleRelativeToCanonical: false
+                isStaleRelativeToCanonical: false,
+                canonLifecycle: 'ACTIVE_CANON'
               });
             }
           }
@@ -348,130 +357,143 @@ export function buildKnowledgeGraph(
   for (const rec of records) {
     if (!rec || !rec.recordId) continue;
 
-    // Check if record details contains Item or NPC not in current canonical state
+    const actionPayload: any = rec.canonicalAction?.payload;
+    let parsed: any = null;
+
     if (rec.details) {
       try {
         const jsonMatch = rec.details.match(/\{.*\}/);
         if (jsonMatch) {
-          const parsed = JSON.parse(jsonMatch[0]);
-
-          // Historical Item
-          if (parsed.item && typeof parsed.item.id === 'string' && parsed.item.id.trim()) {
-            const itemId = parsed.item.id.trim();
-            if (!entityMap.has(itemId)) {
-              entityMap.set(itemId, {
-                entityId: itemId,
-                entityType: 'ITEM',
-                name: parsed.item.name || itemId,
-                categoryHint: 'Historical Item',
-                provenance: {
-                  originSource: 'HISTORICAL',
-                  sourceRecordId: rec.recordId,
-                  sourceEventId: rec.eventId,
-                  stateVersion: rec.stateVersionAfterCommit,
-                  narrativeTime: rec.narrativeTime,
-                  actionType: rec.actionType
-                },
-                isStaleRelativeToCanonical: true,
-                staleReason: `Item (${itemId}) is not in current Canonical Inventory.`
-              });
-            }
-          }
-
-          // Historical NPC
-          if (rec.actionType === 'ADD_NPC' && parsed.id && typeof parsed.id === 'string') {
-            const npcId = parsed.id.trim();
-            if (!entityMap.has(npcId)) {
-              entityMap.set(npcId, {
-                entityId: npcId,
-                entityType: 'NPC',
-                name: parsed.name || npcId,
-                categoryHint: parsed.npcClass || 'Historical NPC',
-                provenance: {
-                  originSource: 'HISTORICAL',
-                  sourceRecordId: rec.recordId,
-                  sourceEventId: rec.eventId,
-                  stateVersion: rec.stateVersionAfterCommit,
-                  narrativeTime: rec.narrativeTime,
-                  actionType: rec.actionType
-                },
-                isStaleRelativeToCanonical: true,
-                staleReason: `NPC (${npcId}) was recorded historically but is missing in Canonical State.`
-              });
-            }
-          }
-
-          // Historical Faction
-          if (rec.actionType === 'ADD_FACTION' && parsed.id && typeof parsed.id === 'string') {
-            const facId = parsed.id.trim();
-            if (!entityMap.has(facId)) {
-              entityMap.set(facId, {
-                entityId: facId,
-                entityType: 'FACTION',
-                name: parsed.name || facId,
-                categoryHint: 'Historical Faction',
-                provenance: {
-                  originSource: 'HISTORICAL',
-                  sourceRecordId: rec.recordId,
-                  sourceEventId: rec.eventId,
-                  stateVersion: rec.stateVersionAfterCommit,
-                  narrativeTime: rec.narrativeTime,
-                  actionType: rec.actionType
-                },
-                isStaleRelativeToCanonical: true,
-                staleReason: `Faction (${facId}) was recorded historically but is missing in Canonical State.`
-              });
-            }
-          }
-
-          // Historical Narrative Seed
-          if (rec.actionType === 'ADD_NARRATIVE_SEED' && parsed.id && typeof parsed.id === 'string') {
-            const seedId = parsed.id.trim();
-            if (!entityMap.has(seedId)) {
-              entityMap.set(seedId, {
-                entityId: seedId,
-                entityType: 'NARRATIVE_SEED',
-                name: parsed.content ? parsed.content.trim() : seedId,
-                categoryHint: 'Historical Narrative Seed',
-                provenance: {
-                  originSource: 'HISTORICAL',
-                  sourceRecordId: rec.recordId,
-                  sourceEventId: rec.eventId,
-                  stateVersion: rec.stateVersionAfterCommit,
-                  narrativeTime: rec.narrativeTime,
-                  actionType: rec.actionType
-                },
-                isStaleRelativeToCanonical: true,
-                staleReason: `Narrative seed (${seedId}) was recorded historically.`
-              });
-            }
-          }
-
-          // Historical Location from RECORD_OFFSCREEN_EVENT
-          if (rec.actionType === 'RECORD_OFFSCREEN_EVENT' && parsed.location && typeof parsed.location === 'string') {
-            const locName = parsed.location.trim();
-            const locId = `loc-${locName.toLowerCase().replace(/\s+/g, '-')}`;
-            if (!entityMap.has(locId)) {
-              entityMap.set(locId, {
-                entityId: locId,
-                entityType: 'LOCATION',
-                name: locName,
-                categoryHint: 'Historical Location',
-                provenance: {
-                  originSource: 'HISTORICAL',
-                  sourceRecordId: rec.recordId,
-                  sourceEventId: rec.eventId,
-                  stateVersion: rec.stateVersionAfterCommit,
-                  narrativeTime: rec.narrativeTime,
-                  actionType: rec.actionType
-                },
-                isStaleRelativeToCanonical: false
-              });
-            }
-          }
+          parsed = JSON.parse(jsonMatch[0]);
         }
       } catch {
         // Ignore unparseable historical details
+      }
+    }
+
+    // Historical Item from details JSON or canonicalAction
+    const itemData = parsed?.item || (rec.actionType === 'MODIFY_INVENTORY' ? actionPayload?.item : undefined);
+    if (itemData && typeof itemData.id === 'string' && itemData.id.trim()) {
+      const itemId = itemData.id.trim();
+      if (!entityMap.has(itemId)) {
+        entityMap.set(itemId, {
+          entityId: itemId,
+          entityType: 'ITEM',
+          name: itemData.name || itemId,
+          categoryHint: 'Historical Item',
+          provenance: {
+            originSource: 'HISTORICAL',
+            sourceRecordId: rec.recordId,
+            sourceEventId: rec.eventId,
+            stateVersion: rec.stateVersionAfterCommit,
+            narrativeTime: rec.narrativeTime,
+            actionType: rec.actionType
+          },
+          isStaleRelativeToCanonical: true,
+          staleReason: `Item (${itemId}) is not in current Canonical Inventory.`,
+          canonLifecycle: 'INACTIVE_CANON'
+        });
+      }
+    }
+
+    // Historical NPC from details JSON or canonicalAction
+    const npcId = (rec.actionType === 'ADD_NPC' && typeof (parsed?.id || actionPayload?.id) === 'string')
+      ? (parsed?.id || actionPayload?.id).trim()
+      : undefined;
+    if (npcId && !entityMap.has(npcId)) {
+      const npcName = parsed?.name || actionPayload?.name || npcId;
+      entityMap.set(npcId, {
+        entityId: npcId,
+        entityType: 'NPC',
+        name: npcName,
+        categoryHint: parsed?.npcClass || actionPayload?.npcClass || 'Historical NPC',
+        provenance: {
+          originSource: 'HISTORICAL',
+          sourceRecordId: rec.recordId,
+          sourceEventId: rec.eventId,
+          stateVersion: rec.stateVersionAfterCommit,
+          narrativeTime: rec.narrativeTime,
+          actionType: rec.actionType
+        },
+        isStaleRelativeToCanonical: true,
+        staleReason: `NPC (${npcId}) was recorded historically but is missing in Canonical State.`,
+        canonLifecycle: 'INACTIVE_CANON'
+      });
+    }
+
+    // Historical Faction from details JSON or canonicalAction
+    const facId = (rec.actionType === 'ADD_FACTION' && typeof (parsed?.id || actionPayload?.id) === 'string')
+      ? (parsed?.id || actionPayload?.id).trim()
+      : undefined;
+    if (facId && !entityMap.has(facId)) {
+      const facName = parsed?.name || actionPayload?.name || facId;
+      entityMap.set(facId, {
+        entityId: facId,
+        entityType: 'FACTION',
+        name: facName,
+        categoryHint: 'Historical Faction',
+        provenance: {
+          originSource: 'HISTORICAL',
+          sourceRecordId: rec.recordId,
+          sourceEventId: rec.eventId,
+          stateVersion: rec.stateVersionAfterCommit,
+          narrativeTime: rec.narrativeTime,
+          actionType: rec.actionType
+        },
+        isStaleRelativeToCanonical: true,
+        staleReason: `Faction (${facId}) was recorded historically but is missing in Canonical State.`,
+        canonLifecycle: 'INACTIVE_CANON'
+      });
+    }
+
+    // Historical Narrative Seed from details JSON or canonicalAction
+    const seedId = (rec.actionType === 'ADD_NARRATIVE_SEED' && typeof (parsed?.id || actionPayload?.id) === 'string')
+      ? (parsed?.id || actionPayload?.id).trim()
+      : undefined;
+    if (seedId && !entityMap.has(seedId)) {
+      const seedContent = parsed?.content || actionPayload?.content || seedId;
+      entityMap.set(seedId, {
+        entityId: seedId,
+        entityType: 'NARRATIVE_SEED',
+        name: seedContent.trim(),
+        categoryHint: 'Historical Narrative Seed',
+        provenance: {
+          originSource: 'HISTORICAL',
+          sourceRecordId: rec.recordId,
+          sourceEventId: rec.eventId,
+          stateVersion: rec.stateVersionAfterCommit,
+          narrativeTime: rec.narrativeTime,
+          actionType: rec.actionType
+        },
+        isStaleRelativeToCanonical: true,
+        staleReason: `Narrative seed (${seedId}) was recorded historically.`,
+        canonLifecycle: 'INACTIVE_CANON'
+      });
+    }
+
+    // Historical Location from RECORD_OFFSCREEN_EVENT
+    const locName = (rec.actionType === 'RECORD_OFFSCREEN_EVENT' && typeof (parsed?.location || actionPayload?.location) === 'string')
+      ? (parsed?.location || actionPayload?.location).trim()
+      : undefined;
+    if (locName) {
+      const locId = `loc-${locName.toLowerCase().replace(/\s+/g, '-')}`;
+      if (!entityMap.has(locId)) {
+        entityMap.set(locId, {
+          entityId: locId,
+          entityType: 'LOCATION',
+          name: locName,
+          categoryHint: 'Historical Location',
+          provenance: {
+            originSource: 'HISTORICAL',
+            sourceRecordId: rec.recordId,
+            sourceEventId: rec.eventId,
+            stateVersion: rec.stateVersionAfterCommit,
+            narrativeTime: rec.narrativeTime,
+            actionType: rec.actionType
+          },
+          isStaleRelativeToCanonical: false,
+          canonLifecycle: 'ACTIVE_CANON'
+        });
       }
     }
   }

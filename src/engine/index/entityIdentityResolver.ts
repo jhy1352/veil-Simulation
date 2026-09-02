@@ -15,6 +15,7 @@
 import { CandidatePacket, EntityReferenceBundle, CanonicalEntityReferenceType } from '../../types';
 import { CanonicalState, ImmutableHistoricalRecord } from '../types';
 import { buildKnowledgeGraph, UniversalEntity, UniversalKnowledgeGraph } from './knowledgeGraph';
+import { isInactiveCanon } from './novelHistory';
 
 export type EntityIdentityStatus = 'EXACT' | 'RECOVERED' | 'NOVEL' | 'AMBIGUOUS' | 'CONFLICT';
 
@@ -266,6 +267,12 @@ export function hasPositiveNoveltyEvidence(
 
   // Fail-Closed: candidateName is required to verify specificity
   if (!candidateName || !candidateName.trim()) {
+    return false;
+  }
+
+  // Sovereign Invariant: Inactive Canon (dead NPC, 0-qty item, resolved seed, past historical entity)
+  // MUST NEVER be classified as NOVEL under any circumstances.
+  if (entityType && isInactiveCanon(candidateName, entityType, currentState, historicalRecords)) {
     return false;
   }
 

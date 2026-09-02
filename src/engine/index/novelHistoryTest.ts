@@ -27,6 +27,7 @@ export function runNovelHistoryBoundaryTests(): { passed: number; failed: number
 
   run('NOVEL does not auto-promote', () => {
     const decision = evaluateCanonPromotion({
+      activeActorInCanonicalChange: false,
       deeplyRelatedToSeed: false,
       closelyRelatedToProtagonist: false
     });
@@ -35,6 +36,7 @@ export function runNovelHistoryBoundaryTests(): { passed: number; failed: number
 
   run('deep Seed relation promotes', () => {
     const decision = evaluateCanonPromotion({
+      activeActorInCanonicalChange: false,
       deeplyRelatedToSeed: true,
       closelyRelatedToProtagonist: false
     });
@@ -43,6 +45,7 @@ export function runNovelHistoryBoundaryTests(): { passed: number; failed: number
 
   run('close protagonist relation promotes', () => {
     const decision = evaluateCanonPromotion({
+      activeActorInCanonicalChange: false,
       deeplyRelatedToSeed: false,
       closelyRelatedToProtagonist: true
     });

@@ -26,6 +26,7 @@ import {
 } from './utils/engineValidator';
 import { SovereignEngine } from './engine/state';
 import { buildSafeProposalFromCandidate } from './engine/proposalParser';
+import { observeCandidateNovelHistory } from './engine/index/novelHistory';
 import { StateTransitionProposal, TransitionAction } from './engine/types';
 import { actionToMeaningNode, adaptMeaningTreeToProposal } from './engine/language';
 import { TurnLatencyProfiler } from './utils/latency';
@@ -527,6 +528,19 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
           storyTurnCount,
           engine.getHistory()
         );
+
+        // 2.5 Runtime Pipeline Connector for Novel History (Section 5-1)
+        // LLM -> Candidate -> Recovery Gate -> Engine-derived observation -> Novel History
+        const currentNovelRecords = (nextEngineState as any).novelHistoryRecords || [];
+        const observationResult = observeCandidateNovelHistory(
+          currentNovelRecords,
+          candidate,
+          proposal,
+          snapshot,
+          storyTurnCount,
+          engine.getHistory()
+        );
+        (nextEngineState as any).novelHistoryRecords = observationResult.updatedRecords;
 
         // 3. Submit Proposal to Sovereign Engine Commit Gate (Atomic Validation & Commit)
         const commitResult = engine.submitProposal(proposal);
