@@ -17,6 +17,7 @@
     "test:integration-proof": "tsx src/engine/language/runtimeIntegrationProofTest.ts",
     "test:provenance": "tsx src/engine/provenanceReplayTest.ts",
     "test:identity-continuity": "tsx src/engine/index/entityIdentityResolverTest.ts",
+    "test:inventory-cost-quantity": "tsx src/engine/index/inventoryCostQuantityBoundaryTest.ts",
     "test:novel-lifecycle": "tsx src/engine/index/novelLifecycleTest.ts",
     "test:passport": "tsx src/engine/index/passportTest.ts"
   },
