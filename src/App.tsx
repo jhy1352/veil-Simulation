@@ -25,7 +25,7 @@ import {
   extractCandidatesFromMetadata
 } from './utils/engineValidator';
 import { SovereignEngine } from './engine/state';
-import { buildSafeProposalFromCandidate } from './engine/proposalParser';
+import { buildSafeProposalFromCandidate, generateProposalId } from './engine/proposalParser';
 import { observeCandidateNovelHistory } from './engine/index/novelHistory';
 import { projectPassports } from './engine/index/passport';
 import { runCandidateRecoveryGate, VeilCandidate } from './engine/language/candidateRecoveryGate';
@@ -231,9 +231,9 @@ export default function App() {
       };
       const meaningTree = actionToMeaningNode(action, 'PROPOSAL');
       const proposal = adaptMeaningTreeToProposal(meaningTree, {
-        proposalId: `prop-player-char-${Date.now()}`,
-        requestId: `req-player-char-${Date.now()}`,
-        eventId: `evt-player-char-${Date.now()}`,
+        proposalId: generateProposalId('prop-player-char'),
+        requestId: generateProposalId('req-player-char'),
+        eventId: generateProposalId('evt-player-char'),
         expectedStateVersion: snap.stateVersion,
         source: 'PLAYER',
         turn: storyTurnCount,
@@ -243,6 +243,20 @@ export default function App() {
       const res = engine.submitProposal(proposal);
       if (res.success) {
         setCharacter(res.snapshot.character);
+        setEngineState(prev => {
+          const novelRecs = prev.novelHistoryRecords || [];
+          const derivedPassports = projectPassports(
+            res.snapshot,
+            engine.getHistory(),
+            novelRecs
+          );
+          return {
+            ...prev,
+            passports: derivedPassports,
+            historicalRecords: engine.getHistory() as any,
+            diagnostics: engine.getDiagnostics()
+          };
+        });
       }
     } else {
       // Creation mode: pre-game character building
@@ -260,9 +274,9 @@ export default function App() {
       const snap = engine.getSnapshot();
       const nextWorld = { ...snap.worldInfo, ...partial };
       const proposal: StateTransitionProposal = {
-        proposalId: `prop-player-world-${Date.now()}`,
-        requestId: `req-player-world-${Date.now()}`,
-        eventId: `evt-player-world-${Date.now()}`,
+        proposalId: generateProposalId('prop-player-world'),
+        requestId: generateProposalId('req-player-world'),
+        eventId: generateProposalId('evt-player-world'),
         expectedStateVersion: snap.stateVersion,
         source: 'PLAYER',
         turn: storyTurnCount,
@@ -278,6 +292,20 @@ export default function App() {
       const res = engine.submitProposal(proposal);
       if (res.success) {
         setWorldInfo(res.snapshot.worldInfo);
+        setEngineState(prev => {
+          const novelRecs = prev.novelHistoryRecords || [];
+          const derivedPassports = projectPassports(
+            res.snapshot,
+            engine.getHistory(),
+            novelRecs
+          );
+          return {
+            ...prev,
+            passports: derivedPassports,
+            historicalRecords: engine.getHistory() as any,
+            diagnostics: engine.getDiagnostics()
+          };
+        });
       }
     } else {
       // Creation mode: pre-game world building

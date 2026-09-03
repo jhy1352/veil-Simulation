@@ -44,8 +44,8 @@ export interface EntityIdentityResolution {
   readonly reason: string;
 }
 
-function containsEvidence(text: string, value?: string): boolean {
-  return !!value && text.includes(value);
+function containsEvidence(text?: string, value?: string): boolean {
+  return typeof text === 'string' && !!value && text.includes(value);
 }
 
 function isCurrentInventoryItem(state: CanonicalState, entityId: string): boolean {

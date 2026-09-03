@@ -1,10 +1,18 @@
 import { TransitionAction, StateTransitionProposal, ProposalSource, ActionType, CanonicalState, ImmutableHistoricalRecord, VerifiedClaim, ExternalEvidence, UntrustedClaim } from './types';
-import { CandidatePacket, HistoricalRecord, NpcRecord, NarrativeSeed, StatType, DEFAULT_NPC_CLASS, DEFAULT_CHAPTER_NAME } from '../types';
+import { CandidatePacket, HistoricalRecord, NpcRecord, NarrativeSeed, StatType, DEFAULT_NPC_CLASS, DEFAULT_CHAPTER_NAME, EntityReferenceBundle } from '../types';
 import { recoverAndParseProposalOrMeaningTree, recoverSyntaxAndParseJson } from './language/recovery';
 import { actionToMeaningNode, adaptMeaningTreeToProposal } from './language/adapter';
 import { MeaningNode } from './language/types';
 import { ImmigrationGate } from './immigrationGate';
-import { buildInventoryIdentityGraph, resolveCandidateInventoryIdentity, resolveNpcIdentity, resolveFactionIdentity, resolveNarrativeSeedIdentity, resolveCharacterIdentity } from './index/entityIdentityResolver';
+import {
+  buildInventoryIdentityGraph,
+  resolveCandidateInventoryIdentity,
+  resolveInventoryItemIdentity,
+  resolveNpcIdentity,
+  resolveFactionIdentity,
+  resolveNarrativeSeedIdentity,
+  resolveCharacterIdentity
+} from './index/entityIdentityResolver';
 
 export interface SafeProposalEnvelope {
   requestId: string;
@@ -25,7 +33,7 @@ export interface ParsedGMResponse {
   meaningTree?: MeaningNode;
 }
 
-function generateProposalId(prefix: string): string {
+export function generateProposalId(prefix: string): string {
   if (typeof window !== 'undefined' && window.crypto && window.crypto.getRandomValues) {
     const arr = new Uint32Array(2);
     window.crypto.getRandomValues(arr);
@@ -663,25 +671,84 @@ export function buildSafeProposalFromCandidate(
         : generateProposalId('item');
 
       let normalizedCause = cause;
-      let effectiveCost = cost && typeof cost === 'object' ? {
-        id: typeof cost.id === 'string' ? cost.id : undefined,
-        name: typeof cost.name === 'string' ? cost.name : undefined,
-        quantity: typeof cost.quantity === 'number' ? Math.max(1, cost.quantity) : 1
-      } : undefined;
+      let effectiveCost: { id: string; name: string; quantity: number } | undefined = undefined;
 
-      if (!isRemove && cause) {
-        if (cause === 'PURCHASE' || cause === 'BUY' || cause === 'EXCHANGE' || cause === 'TRADE' || effectiveCost) {
+      if (!isRemove) {
+        const hasCostObject = cost && typeof cost === 'object';
+        const isExchangeCause = cause === 'RESOURCE_EXCHANGE' || cause === 'PURCHASE' || cause === 'BUY' || cause === 'EXCHANGE' || cause === 'TRADE';
+
+        if (isExchangeCause || hasCostObject) {
           normalizedCause = 'RESOURCE_EXCHANGE';
-          if (!effectiveCost) {
-            const removedItem = candidate.inventoryChanges?.find(i => i.action === 'remove' && i.name);
+
+          let costName: string | undefined = undefined;
+          let costQuantity = 1;
+          let costRef: EntityReferenceBundle | undefined = undefined;
+
+          if (hasCostObject) {
+            if (typeof cost.name === 'string' && cost.name.trim()) {
+              costName = cost.name.trim();
+            } else if (typeof cost.id === 'string' && cost.id.trim()) {
+              const entity = identityGraph.entities.get(cost.id.trim());
+              if (entity && entity.entityType === 'ITEM') {
+                costName = entity.name;
+              }
+            }
+            costQuantity = typeof cost.quantity === 'number' ? Math.max(1, cost.quantity) : 1;
+            costRef = (cost as any).entityReference || (typeof (cost as any).id === 'string' && (cost as any).id.trim() ? {
+              entityType: 'ITEM' as const,
+              claimedEntityId: (cost as any).id.trim(),
+              evidence: {}
+            } : undefined);
+          } else {
+            const removedItem = candidate.inventoryChanges?.find(i =>
+              (i.action === 'remove' || (i.action as string) === 'DROP' || (i.action as string) === 'CONSUME') && (i.name || (i as any).id)
+            );
             if (removedItem) {
-              effectiveCost = {
-                id: generateProposalId('item'),
-                name: removedItem.name.trim(),
-                quantity: Math.max(1, removedItem.quantity || 1)
-              };
+              if (typeof removedItem.name === 'string' && removedItem.name.trim()) {
+                costName = removedItem.name.trim();
+              } else if (typeof (removedItem as any).id === 'string' && (removedItem as any).id.trim()) {
+                const entity = identityGraph.entities.get((removedItem as any).id.trim());
+                if (entity && entity.entityType === 'ITEM') {
+                  costName = entity.name;
+                }
+              }
+              costQuantity = Math.max(1, removedItem.quantity || 1);
+              costRef = removedItem.entityReference || (typeof (removedItem as any).id === 'string' && (removedItem as any).id.trim() ? {
+                entityType: 'ITEM' as const,
+                claimedEntityId: (removedItem as any).id.trim(),
+                evidence: {}
+              } : undefined);
             }
           }
+
+          // Strict Fail-Closed: If cost item is missing or cannot be identified, reject mutation
+          if (!costName) {
+            continue;
+          }
+
+          // Resolve Cost Item Identity strictly against Sovereign Engine Indices
+          const costResolution = resolveInventoryItemIdentity(
+            currentSnapshot,
+            immutableHistory,
+            costName,
+            costRef,
+            identityGraph
+          );
+
+          // EXACT and RECOVERED only; AMBIGUOUS, CONFLICT, or lack of canonicalId fails closed
+          if (
+            (costResolution.status !== 'EXACT' && costResolution.status !== 'RECOVERED') ||
+            !costResolution.canonicalId
+          ) {
+            continue;
+          }
+
+          // Confirmed Canonical ID from Engine Authority (NEVER LLM-claimed fake ID or generated novel ID)
+          effectiveCost = {
+            id: costResolution.canonicalId,
+            name: costName,
+            quantity: costQuantity
+          };
         } else if (cause === 'DISCOVERY' || cause === 'PICKUP' || cause === 'FIND') {
           normalizedCause = 'DISCOVERY_PICKUP';
         } else if (cause === 'GIFT' || cause === 'GIFT_REWARD') {

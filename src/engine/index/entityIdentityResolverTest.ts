@@ -1180,6 +1180,221 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     assert(provenNpcSource.status === 'NOVEL', 'Positive sourceNpcId: Canonical NPC with verified historical event grants NOVEL');
   }
 
+  // ==========================================
+  // Test Suite: Inventory Cost ID Regression Tests
+  // Verifies that effectiveCost in proposalParser:
+  // - Resolves existing canonical ID for exact / recovered cost items
+  // - Strictly fails-closed (blocks action) on fake ID, ambiguous name, or nonexistent cost item
+  // - Never records LLM fake IDs in provenance
+  // - Never uses generateProposalId('item') for cost ID
+  // ==========================================
+  console.log('\n--- Inventory Cost ID Regression Tests ---');
+  {
+    const stateForCost = createMockState();
+    const historyForCost: ImmutableHistoricalRecord[] = [
+      {
+        recordId: 'rec-cost-base',
+        eventId: 'evt-cost-anchor',
+        proposalId: 'prop-cost-base',
+        turn: 1,
+        timestamp: new Date().toISOString(),
+        source: 'ENGINE_INTERNAL',
+        actionType: 'MODIFY_INVENTORY',
+        details: 'Visited blacksmith shop and acquired 벽력탄',
+        stateVersionAfterCommit: 1
+      }
+    ];
+
+    // 1. Exact Canonical ID match: Cost ID matches existing canonical item 'item-iron-sword'
+    const exactCostCandidate: CandidatePacket = {
+      candidateId: 'cand-cost-exact',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      inventoryChanges: [
+        {
+          name: '벽력탄',
+          action: 'add',
+          quantity: 1,
+          cause: 'RESOURCE_EXCHANGE',
+          cost: {
+            id: 'item-iron-sword',
+            name: '철검',
+            quantity: 1
+          },
+          entityReference: {
+            entityType: 'ITEM',
+            evidence: {
+              cause: 'RESOURCE_EXCHANGE',
+              verifiedEventId: 'evt-cost-anchor',
+              context: '철검을 대가로 벽력탄을 구입함'
+            }
+          }
+        },
+        {
+          name: '철검',
+          action: 'remove',
+          quantity: 1,
+          entityReference: {
+            entityType: 'ITEM',
+            claimedEntityId: 'item-iron-sword',
+            evidence: {}
+          }
+        }
+      ]
+    };
+    const exactProp = buildSafeProposalFromCandidate(stateForCost, exactCostCandidate, 1, historyForCost);
+    const exactAdd = exactProp.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!!exactAdd, 'Cost Regression 1: Exact canonical cost item produces valid ADD action');
+    assert((exactAdd?.payload as any)?.acquisition?.cost?.id === 'item-iron-sword', 'Cost Regression 1: Exact cost confirms canonical ID item-iron-sword, NOT a generated ID');
+    assert((exactAdd?.payload as any)?.item?.id !== 'item-iron-sword' && (exactAdd?.payload as any)?.item?.id?.startsWith('item-'), 'Cost Regression 1: Acquired item retains NOVEL ID generation');
+
+    // 2. Recovered Canonical ID: Candidate omits cost.id, Identity Resolver recovers 'item-iron-sword'
+    const recoveredCostCandidate: CandidatePacket = {
+      candidateId: 'cand-cost-recovered',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      inventoryChanges: [
+        {
+          name: '벽력탄',
+          action: 'add',
+          quantity: 1,
+          cause: 'RESOURCE_EXCHANGE',
+          cost: {
+            name: '철검',
+            quantity: 1
+          },
+          entityReference: {
+            entityType: 'ITEM',
+            evidence: {
+              cause: 'RESOURCE_EXCHANGE',
+              verifiedEventId: 'evt-cost-anchor',
+              context: '철검을 대가로 벽력탄을 구입함'
+            }
+          }
+        },
+        {
+          name: '철검',
+          action: 'remove',
+          quantity: 1
+        }
+      ]
+    };
+    const recProp = buildSafeProposalFromCandidate(stateForCost, recoveredCostCandidate, 1, historyForCost);
+    const recAdd = recProp.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!!recAdd, 'Cost Regression 2: Recovered cost item produces valid ADD action');
+    assert((recAdd?.payload as any)?.acquisition?.cost?.id === 'item-iron-sword', 'Cost Regression 2: Recovered cost resolves canonical ID item-iron-sword from Engine indices');
+
+    // 3. Fake / Spoofed Cost ID: LLM claims an ungrounded fake ID 'fake-sword-999' -> CONFLICT -> fail-closed
+    const fakeCostCandidate: CandidatePacket = {
+      candidateId: 'cand-cost-fake',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      inventoryChanges: [
+        {
+          name: '벽력탄',
+          action: 'add',
+          quantity: 1,
+          cause: 'RESOURCE_EXCHANGE',
+          cost: {
+            id: 'fake-sword-999',
+            name: '철검',
+            quantity: 1
+          },
+          entityReference: {
+            entityType: 'ITEM',
+            evidence: {
+              cause: 'RESOURCE_EXCHANGE',
+              verifiedEventId: 'evt-cost-anchor',
+              context: '철검을 대가로 벽력탄을 구입함'
+            }
+          }
+        },
+        {
+          name: '철검',
+          action: 'remove',
+          quantity: 1
+        }
+      ]
+    };
+    const fakeProp = buildSafeProposalFromCandidate(stateForCost, fakeCostCandidate, 1, historyForCost);
+    const fakeAdd = fakeProp.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!fakeAdd, 'Cost Regression 3: Fake/spoofed cost ID strictly fails closed (no ADD action produced)');
+
+    // 4. Ambiguous Cost Item: Multiple items match the name in state -> AMBIGUOUS -> fail-closed
+    const stateWithAmbiguous = createMockState();
+    stateWithAmbiguous.character.inventory.push({
+      id: 'item-iron-sword-second',
+      name: '철검',
+      quantity: 1,
+      description: '또 다른 철검'
+    });
+    const ambiguousProp = buildSafeProposalFromCandidate(stateWithAmbiguous, recoveredCostCandidate, 1, historyForCost);
+    const ambAdd = ambiguousProp.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!ambAdd, 'Cost Regression 4: Ambiguous cost item strictly fails closed (no ADD action produced)');
+
+    // 5. Non-existent Cost Item: Player does not possess the claimed cost item -> fail-closed
+    const nonexistentCostCandidate: CandidatePacket = {
+      candidateId: 'cand-cost-nonexistent',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      inventoryChanges: [
+        {
+          name: '벽력탄',
+          action: 'add',
+          quantity: 1,
+          cause: 'RESOURCE_EXCHANGE',
+          cost: {
+            name: '전설의용린',
+            quantity: 1
+          },
+          entityReference: {
+            entityType: 'ITEM',
+            evidence: {
+              cause: 'RESOURCE_EXCHANGE',
+              verifiedEventId: 'evt-cost-anchor',
+              context: '용린을 대가로 벽력탄을 구입함'
+            }
+          }
+        }
+      ]
+    };
+    const nonProp = buildSafeProposalFromCandidate(stateForCost, nonexistentCostCandidate, 1, historyForCost);
+    const nonAdd = nonProp.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!nonAdd, 'Cost Regression 5: Non-existent cost item strictly fails closed (no ADD action produced)');
+
+    // 6. Cost inferred from companion removedItem without explicit cost object
+    const companionCostCandidate: CandidatePacket = {
+      candidateId: 'cand-cost-companion',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      inventoryChanges: [
+        {
+          name: '벽력탄',
+          action: 'add',
+          quantity: 1,
+          cause: 'PURCHASE',
+          entityReference: {
+            entityType: 'ITEM',
+            evidence: {
+              cause: 'RESOURCE_EXCHANGE',
+              verifiedEventId: 'evt-cost-anchor',
+              context: '철검을 대가로 벽력탄을 구입함'
+            }
+          }
+        },
+        {
+          name: '철검',
+          action: 'remove',
+          quantity: 1
+        }
+      ]
+    };
+    const companionProp = buildSafeProposalFromCandidate(stateForCost, companionCostCandidate, 1, historyForCost);
+    const companionAdd = companionProp.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!!companionAdd, 'Cost Regression 6: Companion removed item infers cost successfully');
+    assert((companionAdd?.payload as any)?.acquisition?.cost?.id === 'item-iron-sword', 'Cost Regression 6: Inferred cost resolves canonical ID item-iron-sword without generateProposalId');
+  }
+
   console.log(`\nResults: ${passed} passed, ${failed} failed.\n`);
   return { passed, failed, errors };
 }
