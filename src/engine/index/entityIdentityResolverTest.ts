@@ -1395,6 +1395,197 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     assert((companionAdd?.payload as any)?.acquisition?.cost?.id === 'item-iron-sword', 'Cost Regression 6: Inferred cost resolves canonical ID item-iron-sword without generateProposalId');
   }
 
+  // ==========================================
+  // Test Suite: Inventory Cost Ownership / Availability Gate Tests
+  // Verifies the 9 mandatory ownership and availability regression cases:
+  // 1. 보유 1 / 비용 1 -> PASS
+  // 2. 보유 3 / 비용 2 -> PASS
+  // 3. 보유 1 / 비용 2 -> FAIL (fail-closed)
+  // 4. 보유 0 + History에 과거 존재 -> FAIL (fail-closed)
+  // 5. 과거 존재했지만 현재 삭제됨 -> FAIL (fail-closed)
+  // 6. 동일 이름 AMBIGUOUS -> FAIL (fail-closed)
+  // 7. fake ID -> FAIL (fail-closed)
+  // 8. Cost ID 없이 정상 이름만 존재 -> Identity 복구 후 현재 보유량 검사
+  // 9. 신규 획득 Item NOVEL ID 생성 -> 기존 동작 유지
+  // ==========================================
+  console.log('\n--- Inventory Cost Ownership / Availability Gate Tests ---');
+  {
+    const historyWithSword: ImmutableHistoricalRecord[] = [
+      {
+        recordId: 'rec-sword-hist',
+        eventId: 'evt-cost-anchor',
+        proposalId: 'prop-cost-base',
+        turn: 1,
+        timestamp: new Date().toISOString(),
+        source: 'ENGINE_INTERNAL',
+        actionType: 'MODIFY_INVENTORY',
+        details: 'Visited blacksmith shop and acquired 벽력탄 with canonical 철검',
+        stateVersionAfterCommit: 1
+      }
+    ];
+
+    const createCandidateWithCost = (costObj: { id?: string; name: string; quantity: number }): CandidatePacket => ({
+      candidateId: 'cand-cost-test',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      inventoryChanges: [
+        {
+          name: '벽력탄',
+          action: 'add',
+          quantity: 1,
+          cause: 'RESOURCE_EXCHANGE',
+          cost: costObj,
+          entityReference: {
+            entityType: 'ITEM',
+            evidence: {
+              cause: 'RESOURCE_EXCHANGE',
+              verifiedEventId: 'evt-cost-anchor',
+              context: '비용 지불 거래'
+            }
+          }
+        }
+      ]
+    });
+
+    // 1. 보유 1 / 비용 1 -> PASS
+    const stateOwned1 = createMockState();
+    stateOwned1.character.inventory = [
+      { id: 'item-iron-sword', name: '철검', quantity: 1, description: '보유 수량 1' }
+    ];
+    const prop1 = buildSafeProposalFromCandidate(
+      stateOwned1,
+      createCandidateWithCost({ id: 'item-iron-sword', name: '철검', quantity: 1 }),
+      1,
+      historyWithSword
+    );
+    const addAction1 = prop1.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!!addAction1, 'Ownership Gate 1: 보유 1 / 비용 1 -> PASS (거래 승인)');
+    assert((addAction1?.payload as any)?.acquisition?.cost?.id === 'item-iron-sword', 'Ownership Gate 1: Canonical cost ID confirmed');
+    assert((addAction1?.payload as any)?.acquisition?.cost?.quantity === 1, 'Ownership Gate 1: Cost quantity matches 1');
+
+    // 2. 보유 3 / 비용 2 -> PASS
+    const stateOwned3 = createMockState();
+    stateOwned3.character.inventory = [
+      { id: 'item-iron-sword', name: '철검', quantity: 3, description: '보유 수량 3' }
+    ];
+    const prop2 = buildSafeProposalFromCandidate(
+      stateOwned3,
+      createCandidateWithCost({ name: '철검', quantity: 2 }),
+      1,
+      historyWithSword
+    );
+    const addAction2 = prop2.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!!addAction2, 'Ownership Gate 2: 보유 3 / 비용 2 -> PASS (거래 승인)');
+    assert((addAction2?.payload as any)?.acquisition?.cost?.id === 'item-iron-sword', 'Ownership Gate 2: Canonical cost ID confirmed');
+    assert((addAction2?.payload as any)?.acquisition?.cost?.quantity === 2, 'Ownership Gate 2: Cost quantity matches 2');
+
+    // 3. 보유 1 / 비용 2 -> FAIL
+    const stateOwned1Cost2 = createMockState();
+    stateOwned1Cost2.character.inventory = [
+      { id: 'item-iron-sword', name: '철검', quantity: 1, description: '보유 수량 1' }
+    ];
+    const prop3 = buildSafeProposalFromCandidate(
+      stateOwned1Cost2,
+      createCandidateWithCost({ name: '철검', quantity: 2 }),
+      1,
+      historyWithSword
+    );
+    const addAction3 = prop3.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!addAction3, 'Ownership Gate 3: 보유 1 / 비용 2 -> FAIL (수량 부족 차단)');
+
+    // 4. 보유 0 + History에 과거 존재 -> FAIL
+    const stateOwned0 = createMockState();
+    stateOwned0.character.inventory = [
+      { id: 'item-iron-sword', name: '철검', quantity: 0, description: '보유 수량 0' }
+    ];
+    const prop4 = buildSafeProposalFromCandidate(
+      stateOwned0,
+      createCandidateWithCost({ name: '철검', quantity: 1 }),
+      1,
+      historyWithSword
+    );
+    const addAction4 = prop4.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!addAction4, 'Ownership Gate 4: 보유 0 + History 과거 존재 -> FAIL (수량 0 사용 차단)');
+
+    // 5. 과거 존재했지만 현재 삭제됨 (인벤토리에 없음) -> FAIL
+    const stateDeleted = createMockState();
+    stateDeleted.character.inventory = []; // 완전히 제거됨
+    const prop5 = buildSafeProposalFromCandidate(
+      stateDeleted,
+      createCandidateWithCost({ name: '철검', quantity: 1 }),
+      1,
+      historyWithSword
+    );
+    const addAction5 = prop5.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!addAction5, 'Ownership Gate 5: 과거 존재했지만 현재 삭제됨 -> FAIL (미보유 차단)');
+
+    // 6. 동일 이름 AMBIGUOUS -> FAIL
+    const stateAmbiguous = createMockState();
+    stateAmbiguous.character.inventory = [
+      { id: 'item-iron-sword-1', name: '철검', quantity: 1, description: '철검 1' },
+      { id: 'item-iron-sword-2', name: '철검', quantity: 1, description: '철검 2' }
+    ];
+    const prop6 = buildSafeProposalFromCandidate(
+      stateAmbiguous,
+      createCandidateWithCost({ name: '철검', quantity: 1 }),
+      1,
+      historyWithSword
+    );
+    const addAction6 = prop6.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!addAction6, 'Ownership Gate 6: 동일 이름 AMBIGUOUS -> FAIL (모호성 차단)');
+
+    // 7. fake ID -> FAIL
+    const stateFake = createMockState();
+    stateFake.character.inventory = [
+      { id: 'item-iron-sword', name: '철검', quantity: 1, description: '정상 철검' }
+    ];
+    const prop7 = buildSafeProposalFromCandidate(
+      stateFake,
+      createCandidateWithCost({ id: 'fake-sword-999', name: '철검', quantity: 1 }),
+      1,
+      historyWithSword
+    );
+    const addAction7 = prop7.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!addAction7, 'Ownership Gate 7: fake ID -> FAIL (미승인 가짜 ID 차단)');
+
+    // 8. Cost ID 없이 정상 이름만 존재 -> Identity 복구 후 현재 보유량 검사
+    // 8a: 보유량 1 >= 비용 1 -> Identity 복구 후 승인
+    const stateRecoveredPass = createMockState();
+    stateRecoveredPass.character.inventory = [
+      { id: 'item-iron-sword', name: '철검', quantity: 1, description: '정상 철검' }
+    ];
+    const prop8a = buildSafeProposalFromCandidate(
+      stateRecoveredPass,
+      createCandidateWithCost({ name: '철검', quantity: 1 }), // ID 없음
+      1,
+      historyWithSword
+    );
+    const addAction8a = prop8a.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!!addAction8a, 'Ownership Gate 8a: Cost ID 생략 시 이름으로 Identity 복구 후 보유량 충족 시 PASS');
+    assert((addAction8a?.payload as any)?.acquisition?.cost?.id === 'item-iron-sword', 'Ownership Gate 8a: Resolved to canonical ID');
+
+    // 8b: 보유량 0 < 비용 1 -> Identity 복구되었으나 보유량 부족으로 FAIL
+    const stateRecoveredFail = createMockState();
+    stateRecoveredFail.character.inventory = [
+      { id: 'item-iron-sword', name: '철검', quantity: 0, description: '수량 0 철검' }
+    ];
+    const prop8b = buildSafeProposalFromCandidate(
+      stateRecoveredFail,
+      createCandidateWithCost({ name: '철검', quantity: 1 }), // ID 없음
+      1,
+      historyWithSword
+    );
+    const addAction8b = prop8b.actions.find(a => a.type === 'MODIFY_INVENTORY' && a.payload?.operation === 'ADD');
+    assert(!addAction8b, 'Ownership Gate 8b: Cost ID 생략 시 Identity 복구되었으나 보유량 0으로 FAIL');
+
+    // 9. 신규 획득 Item NOVEL ID 생성 -> 기존 동작 유지
+    assert(
+      (addAction1?.payload as any)?.item?.id !== 'item-iron-sword' &&
+      (addAction1?.payload as any)?.item?.id?.startsWith('item-'),
+      'Ownership Gate 9: 신규 획득 Item NOVEL ID 생성 -> 기존 동작 유지'
+    );
+  }
+
   console.log(`\nResults: ${passed} passed, ${failed} failed.\n`);
   return { passed, failed, errors };
 }

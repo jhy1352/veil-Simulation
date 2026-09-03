@@ -743,6 +743,21 @@ export function buildSafeProposalFromCandidate(
             continue;
           }
 
+          // Inventory Cost Ownership/Availability Gate:
+          // Look up confirmed canonicalId in current character.inventory
+          // Must exist in current inventory, quantity > 0, and current quantity >= costQuantity
+          const currentCostItem = currentSnapshot.character.inventory.find(
+            item => item.id === costResolution.canonicalId
+          );
+          if (
+            !currentCostItem ||
+            typeof currentCostItem.quantity !== 'number' ||
+            currentCostItem.quantity <= 0 ||
+            currentCostItem.quantity < costQuantity
+          ) {
+            continue;
+          }
+
           // Confirmed Canonical ID from Engine Authority (NEVER LLM-claimed fake ID or generated novel ID)
           effectiveCost = {
             id: costResolution.canonicalId,
