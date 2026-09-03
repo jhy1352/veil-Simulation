@@ -693,7 +693,11 @@ export function buildSafeProposalFromCandidate(
                 costName = entity.name;
               }
             }
-            costQuantity = typeof cost.quantity === 'number' ? Math.max(1, cost.quantity) : 1;
+            const rawCostQuantity = typeof cost.quantity === 'number' ? cost.quantity : 1;
+            if (!Number.isFinite(rawCostQuantity) || !Number.isInteger(rawCostQuantity) || rawCostQuantity <= 0) {
+              continue;
+            }
+            costQuantity = rawCostQuantity;
             costRef = (cost as any).entityReference || (typeof (cost as any).id === 'string' && (cost as any).id.trim() ? {
               entityType: 'ITEM' as const,
               claimedEntityId: (cost as any).id.trim(),
