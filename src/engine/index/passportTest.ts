@@ -555,6 +555,62 @@ async function runTests() {
     assert(orderValid, 'All CANON passports precede NOVEL passports deterministically');
   }
 
+  // --- Test Suite 8: Demoted Entity Passport Projection ---
+  console.log('\n--- Test Suite 8: Demoted Entity Passport Projection ---');
+  {
+    const world = createTestWorld();
+    const char = createTestCharacter();
+    const state = createTestState(world, char, 2, 'evt-fraud-committed');
+
+    const historyRecordFraud: ImmutableHistoricalRecord = {
+      recordId: 'rec-fraud-1',
+      proposalId: 'prop-fraud-1',
+      turn: 2,
+      timestamp: new Date().toISOString(),
+      source: 'ENGINE_INTERNAL',
+      actionType: 'RECORD_OFFSCREEN_EVENT',
+      details: '사기극 탄로 및 강등 확정',
+      stateVersionAfterCommit: 2,
+      eventId: 'evt-fraud-committed'
+    };
+
+    const demotedNovelRecord: any = {
+      novelId: 'nov-npc-demoted-fraud',
+      normalizedName: '사기꾼 도사',
+      displayName: '사기꾼 도사',
+      entityType: 'NPC',
+      lifecycle: 'DEMOTED_NOVEL',
+      firstSeenTurn: 1,
+      lastSeenTurn: 2,
+      lastRelevantTurn: 2,
+      seenCount: 2,
+      sourceEventIds: ['evt-genesis', 'evt-fraud-committed'],
+      canonicalId: 'npc-impostor-canon',
+      demotedAtTurn: 2,
+      demotedFromCanonicalId: 'npc-impostor-canon',
+      demotionReason: 'AUTHORITATIVE_CAUSAL_INVALIDATION',
+      transitionHistory: Object.freeze([
+        { fromDomain: 'NOVEL', toDomain: 'NOVEL', version: 1, turn: 1 },
+        { fromDomain: 'NOVEL', toDomain: 'CANON', version: 2, turn: 1, predecessorId: 'nov-npc-demoted-fraud' },
+        { fromDomain: 'CANON', toDomain: 'NOVEL', version: 3, turn: 2, predecessorId: 'npc-impostor-canon', reason: 'AUTHORITATIVE_CAUSAL_INVALIDATION' }
+      ])
+    };
+
+    const passportState = projectPassports(state, [historyRecordFraud], [demotedNovelRecord]);
+
+    const demotedPassport = passportState.passports.find(p => p.entityId === 'nov-npc-demoted-fraud');
+    assert(Boolean(demotedPassport), 'Demoted entity passport exists in projected passports');
+    assert(demotedPassport?.historyDomain === 'NOVEL', 'Demoted entity has historyDomain NOVEL');
+    assert(demotedPassport?.status === 'ACTIVE', 'Demoted entity has status ACTIVE in NOVEL domain');
+    assert(demotedPassport?.passportVersion === 3, 'Demoted entity has passportVersion 3');
+    assert(demotedPassport?.predecessorPassportId === 'npc-impostor-canon', 'Demoted entity links to previous canon entity ID');
+
+    // Verify stamps include the record from evt-fraud-committed
+    const demotionStamp = demotedPassport?.stamps.find(s => s.eventId === 'evt-fraud-committed');
+    assert(Boolean(demotionStamp), 'Demoted entity passport contains historical stamp for demotion event');
+    assert(demotionStamp?.recordId === 'rec-fraud-1', 'Demotion stamp matches recordId rec-fraud-1');
+  }
+
   console.log(`\n========================================`);
   console.log(`Results: ${passed} passed, ${failed} failed.`);
   console.log(`========================================\n`);

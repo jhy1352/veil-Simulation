@@ -27,6 +27,8 @@ import {
   NovelHistoryRecord,
   observeNovelHistory,
   evaluateCanonPromotion,
+  evaluateCanonDemotion,
+  demoteCanonRecordToNovel,
   observeCandidateNovelHistory,
   isInactiveCanon,
   isActiveCanon,
@@ -1057,6 +1059,221 @@ export function runNovelLifecycleTests(): { passed: number; failed: number; erro
     assert(oar !== undefined, 'Case 15: "명품 노" found in Novel History');
     assert(oar?.lifecycle === 'CANON_LINKED', 'Case 15: "명품 노" promoted to CANON_LINKED');
     assert(oar?.canonicalId === 'item-oar-related', 'Case 15: Canonical ID assigned to oar');
+  }
+
+  // --- [Case 16] Inactive Canon Statuses (DEAD, CONSUMED, etc.) Are Not Demotion ---
+  console.log('\n--- [Case 16] Inactive Canon Statuses Are Not Demotion ---');
+  {
+    const deadDecision = evaluateCanonDemotion({
+      targetCanonicalId: 'npc-fallen',
+      entityType: 'NPC',
+      rawStatus: 'DEAD'
+    });
+    assert(!deadDecision.demote, 'Case 16: DEAD status does not trigger demotion');
+    assert(deadDecision.reason === 'CANON_INACTIVE_STATUS_NOT_DEMOTION', 'Case 16: Reason is CANON_INACTIVE_STATUS_NOT_DEMOTION');
+
+    const consumedDecision = evaluateCanonDemotion({
+      targetCanonicalId: 'item-potion',
+      entityType: 'ITEM',
+      rawStatus: 'CONSUMED'
+    });
+    assert(!consumedDecision.demote, 'Case 16: CONSUMED status does not trigger demotion');
+
+    const resolvedDecision = evaluateCanonDemotion({
+      targetCanonicalId: 'seed-mystery',
+      entityType: 'NARRATIVE_SEED',
+      rawStatus: 'RESOLVED'
+    });
+    assert(!resolvedDecision.demote, 'Case 16: RESOLVED seed does not trigger demotion');
+
+    const inactiveDecision = evaluateCanonDemotion({
+      targetCanonicalId: 'npc-elder',
+      entityType: 'NPC',
+      inactivityTurnsPassed: 10
+    });
+    assert(!inactiveDecision.demote, 'Case 16: Pure inactivity does not trigger demotion');
+    assert(inactiveDecision.reason === 'INACTIVITY_ONLY_NOT_DEMOTION', 'Case 16: Reason is INACTIVITY_ONLY_NOT_DEMOTION');
+  }
+
+  // --- [Case 17] Unverified LLM Claims and Fake Evidence Rejection ---
+  console.log('\n--- [Case 17] Unverified LLM Claims and Fake Evidence Rejection ---');
+  {
+    const llmClaimDecision = evaluateCanonDemotion({
+      targetCanonicalId: 'npc-chulsoo',
+      entityType: 'NPC',
+      llmClaimedDemotion: true
+    });
+    assert(!llmClaimDecision.demote, 'Case 17: Pure LLM claim is rejected');
+    assert(llmClaimDecision.reason === 'LLM_CLAIM_REJECTED', 'Case 17: Reason is LLM_CLAIM_REJECTED');
+
+    const fakeEventDecision = evaluateCanonDemotion({
+      targetCanonicalId: 'npc-chulsoo',
+      entityType: 'NPC',
+      verifiedInvalidationEventId: 'evt-completely-fake-999'
+    });
+    assert(!fakeEventDecision.demote, 'Case 17: Fake invalidation event is rejected');
+    assert(fakeEventDecision.reason === 'FAKE_OR_UNVERIFIED_EVENT', 'Case 17: Reason is FAKE_OR_UNVERIFIED_EVENT');
+  }
+
+  // --- [Case 18] Real But Unrelated Authoritative Event Invalidation Rejection ---
+  console.log('\n--- [Case 18] Real But Unrelated Event Invalidation Rejection ---');
+  {
+    const init = createInitialTestState();
+    const engine = new SovereignEngine(init.worldInfo, init.character);
+    const turn = 2;
+    const fireEventId = 'evt-unrelated-fire-event';
+    const fireRes = dispatchEngineInternalProposal(engine, {
+      proposalId: 'prop-fire-event',
+      requestId: 'req-fire-event',
+      eventId: fireEventId,
+      turn,
+      intentSummary: '화재 사건 기록',
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: fireEventId,
+            eventDescription: '도심 창고에 화재가 발생하여 화산파의 물자가 전소됨',
+            location: '도심 창고',
+            involvedNpcIds: ['fac-huashan']
+          }
+        }
+      ]
+    });
+    assert(fireRes.success === true, 'Case 18: Fire event commit succeeded on engine');
+
+    const snap = engine.getSnapshot();
+    const hist = engine.getHistory();
+
+    const unrelatedDecision = evaluateCanonDemotion(
+      {
+        targetCanonicalId: 'npc-chulsoo',
+        targetName: '철수',
+        entityType: 'NPC',
+        verifiedInvalidationEventId: fireEventId
+      },
+      snap,
+      hist
+    );
+
+    assert(!unrelatedDecision.demote, 'Case 18: Unrelated authoritative event is rejected for demotion');
+    assert(unrelatedDecision.reason === 'UNRELATED_EVENT', 'Case 18: Reason is UNRELATED_EVENT');
+  }
+
+  // --- [Case 19] Authoritative Causal Invalidation & Demotion Lineage Tracking ---
+  console.log('\n--- [Case 19] Authoritative Causal Invalidation & Demotion Lineage Tracking ---');
+  {
+    const init = createInitialTestState();
+    const engine = new SovereignEngine(init.worldInfo, init.character);
+    const turn = 2;
+    const fraudEventId = 'evt-identity-fraud-unmasked';
+    const fraudRes = dispatchEngineInternalProposal(engine, {
+      proposalId: 'prop-fraud-event',
+      requestId: 'req-fraud-event',
+      eventId: fraudEventId,
+      turn,
+      intentSummary: '신원 사기 사건 확정',
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: fraudEventId,
+            eventDescription: '철수의 신원 사기극이 탄로남',
+            location: '관아',
+            involvedNpcIds: ['npc-chulsoo']
+          }
+        }
+      ]
+    });
+    assert(fraudRes.success === true, 'Case 19: Fraud event commit succeeded on engine');
+
+    const snap = engine.getSnapshot();
+    const hist = engine.getHistory();
+
+    const demoteDecision = evaluateCanonDemotion(
+      {
+        targetCanonicalId: 'npc-chulsoo',
+        targetName: '철수',
+        entityType: 'NPC',
+        verifiedInvalidationEventId: fraudEventId
+      },
+      snap,
+      hist
+    );
+
+    assert(demoteDecision.demote, 'Case 19: Authoritative invalidation succeeds');
+    assert(demoteDecision.reason === 'AUTHORITATIVE_CAUSAL_INVALIDATION', 'Case 19: Reason is AUTHORITATIVE_CAUSAL_INVALIDATION');
+
+    // Demote record in Novel History
+    const existingRecords: NovelHistoryRecord[] = [
+      {
+        novelId: 'nov-npc-chulsoo',
+        entityType: 'NPC',
+        normalizedName: '철수',
+        displayName: '철수',
+        firstSeenTurn: 1,
+        lastSeenTurn: 1,
+        lastRelevantTurn: 1,
+        seenCount: 1,
+        lifecycle: 'CANON_LINKED',
+        canonicalId: 'npc-chulsoo',
+        linkedCanonicalAtTurn: 1,
+        sourceEventIds: ['evt-init'],
+        relatedSeedIds: [],
+        protagonistRelationActive: false,
+        engineVerifiedActiveActor: true,
+        isPassiveMentionOnly: false,
+        transitionHistory: Object.freeze([
+          { fromDomain: 'NOVEL', toDomain: 'NOVEL', version: 1, turn: 1 },
+          { fromDomain: 'NOVEL', toDomain: 'CANON', version: 2, turn: 1, predecessorId: 'nov-npc-chulsoo' }
+        ])
+      }
+    ];
+
+    const demoteRes = demoteCanonRecordToNovel(
+      existingRecords,
+      'npc-chulsoo',
+      'NPC',
+      '철수',
+      turn,
+      demoteDecision.reason,
+      demoteDecision.validatedEventId
+    );
+
+    const demoted = demoteRes.novelRecord;
+    assert(demoted.lifecycle === 'DEMOTED_NOVEL', 'Case 19: Lifecycle transitions to DEMOTED_NOVEL');
+    assert(demoted.demotedAtTurn === turn, 'Case 19: demotedAtTurn is correctly recorded');
+    assert(demoted.demotedFromCanonicalId === 'npc-chulsoo', 'Case 19: demotedFromCanonicalId is preserved');
+    assert(demoted.transitionHistory !== undefined, 'Case 19: transitionHistory is present');
+    assert(demoted.transitionHistory!.length === 3, 'Case 19: transitionHistory has 3 entries');
+    const lastTransition = demoted.transitionHistory![demoted.transitionHistory!.length - 1];
+    assert(lastTransition.fromDomain === 'CANON', 'Case 19: Last transition fromDomain is CANON');
+    assert(lastTransition.toDomain === 'NOVEL', 'Case 19: Last transition toDomain is NOVEL');
+    assert(lastTransition.version === 3, 'Case 19: Version incremented to 3');
+    assert(lastTransition.predecessorId === 'npc-chulsoo', 'Case 19: predecessorId is npc-chulsoo');
+  }
+
+  // --- [Case 20] Genesis Canon Demotion (Not previously in Novel History) ---
+  console.log('\n--- [Case 20] Genesis Canon Demotion ---');
+  {
+    const demoteRes = demoteCanonRecordToNovel(
+      [],
+      'npc-ancient-legend',
+      'NPC',
+      '고대 전설의 영웅',
+      5,
+      'REVOCATION_OF_MYTH',
+      'evt-myth-revoked'
+    );
+
+    const record = demoteRes.novelRecord;
+    assert(record.lifecycle === 'DEMOTED_NOVEL', 'Case 20: Genesis canon demoted to DEMOTED_NOVEL');
+    assert(record.demotedFromCanonicalId === 'npc-ancient-legend', 'Case 20: demotedFromCanonicalId preserved');
+    assert(record.transitionHistory !== undefined, 'Case 20: transitionHistory created');
+    assert(record.transitionHistory!.length === 2, 'Case 20: transitionHistory has 2 entries');
+    assert(record.transitionHistory![0].fromDomain === 'CANON', 'Case 20: Initial entry fromDomain is CANON');
+    assert(record.transitionHistory![1].fromDomain === 'CANON' && record.transitionHistory![1].toDomain === 'NOVEL', 'Case 20: Second entry is CANON -> NOVEL');
+    assert(record.transitionHistory![1].version === 2, 'Case 20: Version is 2');
   }
 
   console.log(`\nResults: ${passed} passed, ${failed} failed.\n`);

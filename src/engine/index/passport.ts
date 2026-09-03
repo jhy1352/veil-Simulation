@@ -265,8 +265,9 @@ export function projectPassports(
     }
   }
 
-  // 3. Map Novel predecessors by canonicalId for Canon promotion tracking
+  // 3. Map Novel predecessors and demotions for lineage tracking
   const novelPredecessorByCanonicalId = new Map<string, NovelHistoryRecord>();
+  const demotedNovelByCanonicalId = new Map<string, NovelHistoryRecord>();
   for (const novel of novelHistoryRecords) {
     if (novel?.canonicalId && novel.lifecycle === 'CANON_LINKED') {
       novelPredecessorByCanonicalId.set(novel.canonicalId, novel);
@@ -274,6 +275,17 @@ export function projectPassports(
       if (!canonDescriptors.has(novel.canonicalId)) {
         addDescriptor(canonDescriptors, {
           entityId: novel.canonicalId,
+          entityType: novel.entityType,
+          domain: 'CANON'
+        });
+      }
+    }
+    if (novel?.demotedFromCanonicalId && novel.lifecycle === 'DEMOTED_NOVEL') {
+      demotedNovelByCanonicalId.set(novel.demotedFromCanonicalId, novel);
+      // Ensure demoted Canon entity descriptor is registered so its historical passport is preserved
+      if (!canonDescriptors.has(novel.demotedFromCanonicalId)) {
+        addDescriptor(canonDescriptors, {
+          entityId: novel.demotedFromCanonicalId,
           entityType: novel.entityType,
           domain: 'CANON'
         });
@@ -293,7 +305,8 @@ export function projectPassports(
     const passportVersion = hasPredecessor ? 2 : 1;
     const predecessorPassportId = novelPredecessor ? novelPredecessor.novelId : undefined;
 
-    const isActive = isCanonicalEntityActive(descriptor, canonicalState);
+    const isDemoted = demotedNovelByCanonicalId.has(descriptor.entityId);
+    const isActive = !isDemoted && isCanonicalEntityActive(descriptor, canonicalState);
     const status: PassportStatus = isActive ? 'ACTIVE' : 'RETIRED';
 
     passports.push(Object.freeze({
@@ -330,17 +343,27 @@ export function projectPassports(
     // - NOVEL: Active candidate -> ACTIVE
     // - INACTIVE_NOVEL: Demoted by inactivity policy -> RETIRED
     // - CANON_LINKED: Promoted to Canon (superseded by Canon passport) -> RETIRED
+    // - DEMOTED_NOVEL: Authoritatively demoted to Novel domain -> ACTIVE
     let status: PassportStatus = 'ACTIVE';
     if (novel.lifecycle === 'CANON_LINKED' || novel.lifecycle === 'INACTIVE_NOVEL') {
       status = 'RETIRED';
+    } else if (novel.lifecycle === 'DEMOTED_NOVEL') {
+      status = 'ACTIVE';
     }
+
+    const hasCanonPredecessor = Boolean(novel.demotedFromCanonicalId);
+    const predecessorPassportId = novel.demotedFromCanonicalId || undefined;
+    const latestVersion = novel.transitionHistory && novel.transitionHistory.length > 0
+      ? novel.transitionHistory[novel.transitionHistory.length - 1]?.version
+      : undefined;
+    const passportVersion = latestVersion ?? (hasCanonPredecessor ? 2 : 1);
 
     passports.push(Object.freeze({
       entityId: novel.novelId,
       historyDomain: 'NOVEL',
-      passportVersion: 1,
+      passportVersion,
       status,
-      predecessorPassportId: undefined,
+      predecessorPassportId,
       stamps: Object.freeze(stamps)
     }));
   }

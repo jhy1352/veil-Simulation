@@ -23,7 +23,16 @@ import {
  * 5. Passive mentions in narrative prose remain strictly NOVEL.
  */
 
-export type NovelHistoryLifecycle = 'NOVEL' | 'INACTIVE_NOVEL' | 'CANON_LINKED';
+export type NovelHistoryLifecycle = 'NOVEL' | 'INACTIVE_NOVEL' | 'CANON_LINKED' | 'DEMOTED_NOVEL';
+
+export interface DomainTransitionStep {
+  readonly fromDomain: 'NOVEL' | 'CANON';
+  readonly toDomain: 'NOVEL' | 'CANON';
+  readonly version: number;
+  readonly turn: number;
+  readonly predecessorId?: string;
+  readonly reason?: string;
+}
 
 export interface NovelHistoryRecord {
   readonly novelId: string;
@@ -44,6 +53,12 @@ export interface NovelHistoryRecord {
   readonly engineVerifiedActiveActor?: boolean;
   /** Flag indicating whether this record has only been passively mentioned in prose */
   readonly isPassiveMentionOnly?: boolean;
+
+  /** Demotion and lineage continuity tracking */
+  readonly demotedAtTurn?: number;
+  readonly demotedFromCanonicalId?: string;
+  readonly demotionReason?: string;
+  readonly transitionHistory?: readonly DomainTransitionStep[];
 }
 
 export interface NovelHistoryObservation {
@@ -106,6 +121,40 @@ export interface CanonPromotionDecision {
     | 'PROTAGONIST_CLOSE_RELATION'
     | 'PASSIVE_MENTION_BLOCKED'
     | 'NO_CANON_PROMOTION_SIGNAL';
+}
+
+export interface CanonDemotionSignals {
+  readonly targetCanonicalId: string;
+  readonly entityType: CanonicalEntityReferenceType;
+  readonly targetName?: string;
+  /** Raw status string (e.g. from SET_NPC_STATUS, RESOLVE_NARRATIVE_SEED) to verify non-demotion of inactive canon */
+  readonly rawStatus?: string;
+  /** Authoritative invalidation claim from Engine */
+  readonly invalidationClaim?: {
+    readonly claimType: string;
+    readonly evidenceIds: readonly string[];
+    readonly reason?: string;
+  };
+  /** Verified invalidation event ID */
+  readonly verifiedInvalidationEventId?: string;
+  /** Inactivity turns passed (used to verify inactivity alone does not cause demotion) */
+  readonly inactivityTurnsPassed?: number;
+  /** LLM claimed demotion flag (untrusted) */
+  readonly llmClaimedDemotion?: boolean;
+}
+
+export interface CanonDemotionDecision {
+  readonly demote: boolean;
+  readonly reason:
+    | 'AUTHORITATIVE_CAUSAL_INVALIDATION'
+    | 'CANON_INACTIVE_STATUS_NOT_DEMOTION'
+    | 'INACTIVITY_ONLY_NOT_DEMOTION'
+    | 'LLM_CLAIM_REJECTED'
+    | 'NO_INVALIDATION_SIGNAL'
+    | 'FAKE_OR_UNVERIFIED_EVENT'
+    | 'UNRELATED_EVENT'
+    | 'INSUFFICIENT_EVIDENCE';
+  readonly validatedEventId?: string;
 }
 
 /** Normalizes the identity key used by Novel History. */
@@ -330,6 +379,97 @@ export function evaluateCanonPromotion(
 }
 
 /**
+ * Pure decision gate for evaluating Canon Demotion.
+ *
+ * Constitution Rules:
+ * 1. "DEAD", "CONSUMED", "RESOLVED", "DORMANT", "ARCHIVED", inactivity MUST NOT be interpreted as Demotion.
+ * 2. Inactivity or absence of appearance is NOT Demotion.
+ * 3. LLM demotion claims are untrusted and rejected.
+ * 4. Demotion requires authoritative evidence and verified causal invalidation.
+ * 5. Fails closed if any verification step fails.
+ */
+export function evaluateCanonDemotion(
+  signals: CanonDemotionSignals,
+  canonicalState?: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = []
+): CanonDemotionDecision {
+  // Defense 1: Reject standard inactive statuses (DEAD, CONSUMED, RESOLVED, DORMANT, ARCHIVED, MISSING, INACTIVE)
+  if (signals.rawStatus) {
+    const s = signals.rawStatus.toUpperCase();
+    if (
+      s === 'DEAD' ||
+      s === 'CONSUMED' ||
+      s === 'RESOLVED' ||
+      s === 'DORMANT' ||
+      s === 'ARCHIVED' ||
+      s === 'MISSING' ||
+      s === 'INACTIVE'
+    ) {
+      return { demote: false, reason: 'CANON_INACTIVE_STATUS_NOT_DEMOTION' };
+    }
+  }
+
+  // Defense 2: Reject inactivity-only signals
+  if (typeof signals.inactivityTurnsPassed === 'number' && signals.inactivityTurnsPassed > 0) {
+    if (!signals.verifiedInvalidationEventId && !signals.invalidationClaim) {
+      return { demote: false, reason: 'INACTIVITY_ONLY_NOT_DEMOTION' };
+    }
+  }
+
+  // Defense 3: Reject standalone LLM claims
+  if (signals.llmClaimedDemotion && !signals.verifiedInvalidationEventId && !signals.invalidationClaim) {
+    return { demote: false, reason: 'LLM_CLAIM_REJECTED' };
+  }
+
+  // Defense 4: Must have an authoritative invalidation claim or event ID
+  const eventId = signals.verifiedInvalidationEventId || signals.invalidationClaim?.evidenceIds?.[0];
+  if (!eventId || typeof eventId !== 'string' || !eventId.trim()) {
+    return { demote: false, reason: 'NO_INVALIDATION_SIGNAL' };
+  }
+
+  // If invalidationClaim exists, verify claimType
+  if (signals.invalidationClaim) {
+    const ct = signals.invalidationClaim.claimType;
+    const VALID_INVALIDATION_CLAIM_TYPES = new Set([
+      'CANON_IDENTITY_INVALIDATION',
+      'CANON_REVOCATION',
+      'IDENTITY_FABRICATION_DISCOVERY',
+      'CANON_DEMOTION'
+    ]);
+    if (!VALID_INVALIDATION_CLAIM_TYPES.has(ct)) {
+      return { demote: false, reason: 'NO_INVALIDATION_SIGNAL' };
+    }
+  }
+
+  // Defense 5: Authoritative Event verification (fail-closed if event doesn't exist or is inactive)
+  const authEv = findAuthoritativeEvent(eventId, canonicalState, historicalRecords);
+  if (!authEv.found || authEv.isActive === false) {
+    return { demote: false, reason: 'FAKE_OR_UNVERIFIED_EVENT' };
+  }
+
+  // Defense 6: Causal Invalidation verification
+  // The event must specifically be causally related to the entity being invalidated
+  const targetName = signals.targetName || signals.targetCanonicalId;
+  const isCausallyRelated = isAuthoritativeEventCausallyRelated(
+    eventId,
+    { name: targetName, id: signals.targetCanonicalId, entityType: signals.entityType },
+    undefined,
+    canonicalState,
+    historicalRecords
+  );
+
+  if (!isCausallyRelated) {
+    return { demote: false, reason: 'UNRELATED_EVENT' };
+  }
+
+  return {
+    demote: true,
+    reason: 'AUTHORITATIVE_CAUSAL_INVALIDATION',
+    validatedEventId: eventId
+  };
+}
+
+/**
  * Checks if a novel entity is inactive based on management relevance.
  */
 export function isNovelHistoryInactive(
@@ -355,6 +495,7 @@ export function classifyNovelHistoryLifecycle(
   policy: NovelHistoryPolicy = DEFAULT_NOVEL_HISTORY_POLICY
 ): NovelHistoryLifecycle {
   if (record.lifecycle === 'CANON_LINKED') return 'CANON_LINKED';
+  if (record.lifecycle === 'DEMOTED_NOVEL') return 'DEMOTED_NOVEL';
   if (isNovelHistoryInactive(record, currentTurn, policy)) return 'INACTIVE_NOVEL';
   return 'NOVEL';
 }
@@ -366,7 +507,7 @@ export function classifyNovelHistoryLifecycle(
  * 1. If an entity is already an Active Canon or Inactive Canon, it is BLOCKED from entering Novel History as NOVEL.
  * 2. LLM-derived fields (`relatedSeedId`, `isRelevantToProtagonist`, `isManagementRelevant`) are completely ignored.
  *    Only Engine-derived signals (`engineVerified*`) can alter lifecycle.
- * 3. Existing CANON_LINKED records are NEVER demoted to NOVEL by subsequent observations.
+ * 3. Existing CANON_LINKED and DEMOTED_NOVEL records are NEVER demoted to NOVEL by subsequent passive observations.
  */
 export function observeNovelHistory(
   existing: readonly NovelHistoryRecord[],
@@ -429,9 +570,10 @@ export function observeNovelHistory(
 
   const current = existing[index];
 
-  // Preserve CANON_LINKED status permanently: never demote
-  const targetLifecycle: NovelHistoryLifecycle =
-    current.lifecycle === 'CANON_LINKED' ? 'CANON_LINKED' : 'NOVEL';
+  // Preserve CANON_LINKED and DEMOTED_NOVEL status permanently against passive observations
+  let targetLifecycle: NovelHistoryLifecycle = 'NOVEL';
+  if (current.lifecycle === 'CANON_LINKED') targetLifecycle = 'CANON_LINKED';
+  else if (current.lifecycle === 'DEMOTED_NOVEL') targetLifecycle = 'DEMOTED_NOVEL';
 
   const sourceEventIds = observation.eventId && !current.sourceEventIds.includes(observation.eventId)
     ? [...current.sourceEventIds, observation.eventId]
@@ -459,7 +601,7 @@ export function observeNovelHistory(
 
 /**
  * Promotes a Novel History record to CANON_LINKED with its assigned Canonical ID.
- * Permanent transition; cannot be overwritten or demoted.
+ * Permanent transition; records full lineage versioning (+1).
  */
 export function promoteNovelRecordToCanon(
   existing: readonly NovelHistoryRecord[],
@@ -476,17 +618,140 @@ export function promoteNovelRecordToCanon(
       record.entityType === entityType &&
       (record.novelId === novelIdOrName || record.normalizedName === normalized)
     ) {
+      const prevHistory = record.transitionHistory || [
+        { fromDomain: 'NOVEL', toDomain: 'NOVEL', version: 1, turn: record.firstSeenTurn }
+      ];
+      const latestVersion = prevHistory[prevHistory.length - 1]?.version ?? 1;
+      const nextVersion = latestVersion + 1;
+
+      const nextHistory = [
+        ...prevHistory,
+        {
+          fromDomain: 'NOVEL' as const,
+          toDomain: 'CANON' as const,
+          version: nextVersion,
+          turn,
+          predecessorId: record.novelId
+        }
+      ];
+
       return {
         ...record,
         lifecycle: 'CANON_LINKED' as NovelHistoryLifecycle,
         canonicalId,
         linkedCanonicalAtTurn: turn,
         engineVerifiedActiveActor: true,
-        isPassiveMentionOnly: false
+        isPassiveMentionOnly: false,
+        transitionHistory: Object.freeze(nextHistory)
       };
     }
     return record;
   });
+}
+
+/**
+ * Demotes a Canon entity back to NOVEL domain in Novel History upon Engine-verified invalidation.
+ *
+ * Invariants:
+ * - The original Canon identity and history are NEVER deleted.
+ * - NovelHistoryRecord is either updated or created with lifecycle 'DEMOTED_NOVEL'.
+ * - Domain transition lineage is recorded and version increments (+1).
+ */
+export function demoteCanonRecordToNovel(
+  existing: readonly NovelHistoryRecord[],
+  canonicalId: string,
+  entityType: CanonicalEntityReferenceType,
+  name: string,
+  turn: number,
+  reason: string,
+  validatedEventId?: string
+): { updatedRecords: readonly NovelHistoryRecord[]; novelRecord: NovelHistoryRecord } {
+  const norm = normalizeNovelIdentity(name || canonicalId);
+  const normalizedCanonId = canonicalId.trim();
+
+  const index = existing.findIndex(
+    r => (r.canonicalId && r.canonicalId === normalizedCanonId) ||
+         (r.entityType === entityType && r.normalizedName === norm)
+  );
+
+  if (index >= 0) {
+    const current = existing[index];
+    const prevHistory = current.transitionHistory || [
+      { fromDomain: 'NOVEL', toDomain: 'NOVEL', version: 1, turn: current.firstSeenTurn },
+      { fromDomain: 'NOVEL', toDomain: 'CANON', version: 2, turn: current.linkedCanonicalAtTurn || turn, predecessorId: current.novelId }
+    ];
+    const latestVersion = prevHistory[prevHistory.length - 1]?.version ?? 2;
+    const nextVersion = latestVersion + 1;
+
+    const nextHistory = [
+      ...prevHistory,
+      {
+        fromDomain: 'CANON' as const,
+        toDomain: 'NOVEL' as const,
+        version: nextVersion,
+        turn,
+        predecessorId: normalizedCanonId,
+        reason
+      }
+    ];
+
+    const sourceEventIds = validatedEventId && !current.sourceEventIds.includes(validatedEventId)
+      ? [...current.sourceEventIds, validatedEventId]
+      : [...current.sourceEventIds];
+
+    const updated: NovelHistoryRecord = {
+      ...current,
+      lifecycle: 'DEMOTED_NOVEL',
+      lastSeenTurn: Math.max(current.lastSeenTurn, turn),
+      lastRelevantTurn: Math.max(current.lastRelevantTurn, turn),
+      demotedAtTurn: turn,
+      demotedFromCanonicalId: normalizedCanonId,
+      demotionReason: reason,
+      sourceEventIds,
+      transitionHistory: Object.freeze(nextHistory)
+    };
+
+    const newRecords = existing.map((r, i) => (i === index ? updated : r));
+    return { updatedRecords: Object.freeze(newRecords), novelRecord: updated };
+  } else {
+    // Entity was Genesis Canon (not previously tracked in Novel History)
+    const novelId = `nov-${entityType.toLowerCase()}-${norm.replace(/\s+/g, '-') || normalizedCanonId}`;
+    const transitionHistory = [
+      { fromDomain: 'CANON' as const, toDomain: 'CANON' as const, version: 1, turn: 1 },
+      {
+        fromDomain: 'CANON' as const,
+        toDomain: 'NOVEL' as const,
+        version: 2,
+        turn,
+        predecessorId: normalizedCanonId,
+        reason
+      }
+    ];
+
+    const newRecord: NovelHistoryRecord = {
+      novelId,
+      entityType,
+      normalizedName: norm,
+      displayName: name.trim() || normalizedCanonId,
+      firstSeenTurn: turn,
+      lastSeenTurn: turn,
+      lastRelevantTurn: turn,
+      seenCount: 1,
+      lifecycle: 'DEMOTED_NOVEL',
+      canonicalId: normalizedCanonId,
+      demotedAtTurn: turn,
+      demotedFromCanonicalId: normalizedCanonId,
+      demotionReason: reason,
+      sourceEventIds: validatedEventId ? [validatedEventId] : [],
+      relatedSeedIds: [],
+      protagonistRelationActive: false,
+      engineVerifiedActiveActor: false,
+      isPassiveMentionOnly: false,
+      transitionHistory: Object.freeze(transitionHistory)
+    };
+
+    return { updatedRecords: Object.freeze([...existing, newRecord]), novelRecord: newRecord };
+  }
 }
 
 /**
@@ -505,6 +770,7 @@ export function findNovelHistoryMatch(
 export interface CandidateObservationResult {
   readonly updatedRecords: readonly NovelHistoryRecord[];
   readonly promotedCount: number;
+  readonly demotedCount?: number;
 }
 
 /**
@@ -934,9 +1200,43 @@ export function observeCandidateNovelHistory(
     }
   }
 
+  // 5. Invalidation / Demotion processing
+  // If proposal has verifiedClaims regarding invalidation/revocation/demotion,
+  // evaluateCanonDemotion and demoteCanonRecordToNovel.
+  let demotedCount = 0;
+  if (Array.isArray(proposal.verifiedClaims)) {
+    for (const vc of proposal.verifiedClaims) {
+      const decision = evaluateCanonDemotion(
+        {
+          targetCanonicalId: vc.targetEntityId,
+          entityType: (vc as any).entityType || 'NPC',
+          invalidationClaim: vc,
+          verifiedInvalidationEventId: vc.evidenceIds?.[0]
+        },
+        canonicalState,
+        historicalRecords
+      );
+
+      if (decision.demote) {
+        const res = demoteCanonRecordToNovel(
+          records,
+          vc.targetEntityId,
+          (vc as any).entityType || 'NPC',
+          (vc as any).name || vc.targetEntityId,
+          storyTurnCount,
+          decision.reason,
+          decision.validatedEventId
+        );
+        records = [...res.updatedRecords];
+        demotedCount++;
+      }
+    }
+  }
+
   return {
     updatedRecords: Object.freeze(records),
-    promotedCount
+    promotedCount,
+    demotedCount
   };
 }
 

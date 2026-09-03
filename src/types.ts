@@ -468,6 +468,8 @@ export interface EngineState {
   diagnostics?: import('./engine/types').EngineDiagnostics;
   lastContextSnapshot?: string;
   lastRawResponse?: string;
+  novelHistoryRecords?: readonly import('./engine/index/novelHistory').NovelHistoryRecord[];
+  passports?: import('./engine/index/passport').PassportState;
 }
 
 export interface ParsedMetadata {
