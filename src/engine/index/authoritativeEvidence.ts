@@ -8,8 +8,8 @@
  * 3. Authoritative verification checks whether an event/action actually exists and has causal validity.
  */
 
-import { CanonicalState, ImmutableHistoricalRecord } from '../types';
-import { EntityReferenceBundle } from '../../types';
+import { CanonicalState, ImmutableHistoricalRecord, StateTransitionProposal } from '../types';
+import { EntityReferenceBundle, CanonicalEntityReferenceType } from '../../types';
 
 export function normalizeIdentityText(value: string): string {
   if (!value || typeof value !== 'string') return '';
@@ -213,3 +213,132 @@ export function checkCreationOrAcquisitionProof(
   // Strict Rule: At least one authoritative proof mechanism (event text, record action, or backed context) must verify creation/acquisition
   return hasProofInText || hasProofInAction || hasProofInContext;
 }
+
+/**
+ * Checks if an authoritative event is causally related to a candidate entity and its mutation.
+ *
+ * Strict Invariants:
+ * 1. An event is causally related if it is the current proposal's event (proposal.eventId)
+ *    AND the proposal explicitly contains an action defining/modifying this entity or mutation.
+ * 2. An external/historical authoritative event (seed, offscreen, camera, historical record)
+ *    must specifically identify or mention the candidate entity (name/id), or the related mutation
+ *    item/source NPC, proving that the event is the true historical origin/cause of the action.
+ * 3. An event that exists but lacks any reference to the candidate entity/mutation is strictly
+ *    unrelated (returns false).
+ */
+export function isAuthoritativeEventCausallyRelated(
+  eventId: string,
+  entity: { name: string; id?: string; entityType?: CanonicalEntityReferenceType },
+  mutationDetails?: {
+    itemName?: string;
+    itemId?: string;
+    sourceNpcId?: string;
+    sourceNpcName?: string;
+  },
+  currentState?: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = [],
+  currentProposal?: StateTransitionProposal
+): boolean {
+  const cleanEventId = eventId ? eventId.trim() : '';
+  if (!cleanEventId) return false;
+
+  // 1. Current Proposal Event Check:
+  // If the eventId is the current proposal's event, the proposal must contain the canonical action
+  // for this entity or mutation.
+  if (currentProposal && currentProposal.eventId === cleanEventId) {
+    const normEntityName = normalizeIdentityText(entity.name);
+
+    if (entity.entityType === 'NPC') {
+      const hasNpcAction = currentProposal.actions.some(a => {
+        if (a.type === 'ADD_NPC' || a.type === 'UPDATE_NPC') {
+          const pName = normalizeIdentityText((a.payload as any)?.name);
+          const pId = (a.payload as any)?.id;
+          return (normEntityName && pName === normEntityName) || (Boolean(entity.id) && pId === entity.id);
+        }
+        if (a.type === 'MODIFY_INVENTORY' && (a.payload as any)?.acquisition?.sourceNpcId) {
+          const sNpc = (a.payload as any).acquisition.sourceNpcId;
+          return (normEntityName && normalizeIdentityText(sNpc) === normEntityName) || (Boolean(entity.id) && sNpc === entity.id);
+        }
+        return false;
+      });
+      if (hasNpcAction) return true;
+    }
+
+    if (entity.entityType === 'ITEM') {
+      const hasItemAction = currentProposal.actions.some(a => {
+        if (a.type === 'MODIFY_INVENTORY' && (a.payload as any)?.item) {
+          const iName = normalizeIdentityText((a.payload as any).item.name);
+          const iId = (a.payload as any).item.id;
+          return (normEntityName && iName === normEntityName) || (Boolean(entity.id) && iId === entity.id);
+        }
+        return false;
+      });
+      if (hasItemAction) return true;
+    }
+  }
+
+  // 2. Seeds Check
+  const seed = currentState?.worldInfo?.seeds?.find(s => s.id === cleanEventId);
+  if (seed && seed.content) {
+    if (checkCandidateSpecificity(entity.name, seed.content)) return true;
+    if (entity.id && seed.content.includes(entity.id)) return true;
+    if (mutationDetails?.itemName && checkCandidateSpecificity(mutationDetails.itemName, seed.content)) return true;
+    if (mutationDetails?.sourceNpcName && checkCandidateSpecificity(mutationDetails.sourceNpcName, seed.content)) return true;
+    if (mutationDetails?.sourceNpcId && seed.content.includes(mutationDetails.sourceNpcId)) return true;
+  }
+
+  // 3. Offscreen Records Check
+  const offscreen = currentState?.worldInfo?.offscreenRecords?.find(o => o.id === cleanEventId);
+  if (offscreen) {
+    const offText = `${offscreen.eventDescription || ''} ${offscreen.location || ''} ${JSON.stringify(offscreen.involvedNpcIds || [])}`;
+    if (checkCandidateSpecificity(entity.name, offText)) return true;
+    if (entity.id && offText.includes(entity.id)) return true;
+    if (mutationDetails?.itemName && checkCandidateSpecificity(mutationDetails.itemName, offText)) return true;
+    if (mutationDetails?.sourceNpcName && checkCandidateSpecificity(mutationDetails.sourceNpcName, offText)) return true;
+    if (mutationDetails?.sourceNpcId && offText.includes(mutationDetails.sourceNpcId)) return true;
+  }
+
+  // 4. Camera Offscreen Events Check
+  const camera = currentState?.worldInfo?.cameraOffscreenEvents?.find(c => c === cleanEventId);
+  if (camera) {
+    if (checkCandidateSpecificity(entity.name, camera)) return true;
+    if (entity.id && camera.includes(entity.id)) return true;
+    if (mutationDetails?.itemName && checkCandidateSpecificity(mutationDetails.itemName, camera)) return true;
+  }
+
+  // 5. Historical Records Check (all records matching this eventId)
+  const matchingRecords = historicalRecords.filter(r => r.eventId === cleanEventId || r.recordId === cleanEventId);
+  for (const rec of matchingRecords) {
+    // Check in record details
+    if (rec.details) {
+      if (checkCandidateSpecificity(entity.name, rec.details, rec)) return true;
+      if (entity.id && rec.details.includes(entity.id)) return true;
+      if (mutationDetails?.itemName && checkCandidateSpecificity(mutationDetails.itemName, rec.details, rec)) return true;
+      if (mutationDetails?.itemId && rec.details.includes(mutationDetails.itemId)) return true;
+      if (mutationDetails?.sourceNpcName && checkCandidateSpecificity(mutationDetails.sourceNpcName, rec.details, rec)) return true;
+      if (mutationDetails?.sourceNpcId && rec.details.includes(mutationDetails.sourceNpcId)) return true;
+    }
+
+    // Check in canonicalAction
+    if (rec.canonicalAction) {
+      const actionJson = JSON.stringify(rec.canonicalAction);
+      const cleanJson = actionJson.toLowerCase();
+      const normEntity = normalizeIdentityText(entity.name);
+      if (normEntity && cleanJson.includes(normEntity)) return true;
+      if (entity.id && actionJson.includes(entity.id)) return true;
+      if (mutationDetails?.itemName) {
+        const normItem = normalizeIdentityText(mutationDetails.itemName);
+        if (normItem && cleanJson.includes(normItem)) return true;
+      }
+      if (mutationDetails?.itemId && actionJson.includes(mutationDetails.itemId)) return true;
+      if (mutationDetails?.sourceNpcName) {
+        const normSrc = normalizeIdentityText(mutationDetails.sourceNpcName);
+        if (normSrc && cleanJson.includes(normSrc)) return true;
+      }
+      if (mutationDetails?.sourceNpcId && actionJson.includes(mutationDetails.sourceNpcId)) return true;
+    }
+  }
+
+  return false;
+}
+

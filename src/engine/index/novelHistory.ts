@@ -2,6 +2,7 @@ import type { CanonicalEntityReferenceType, CandidatePacket } from '../../types'
 import type { CanonicalState, ImmutableHistoricalRecord, StateTransitionProposal } from '../types';
 import {
   findAuthoritativeEvent,
+  isAuthoritativeEventCausallyRelated,
   VALID_NOVELTY_CAUSES,
   CREATION_ACQUISITION_KEYWORDS,
   isNonEmptyString
@@ -570,17 +571,31 @@ function isEntityEngineVerifiedActiveActor(
           }
 
           // Authoritative Event verification:
-          // If verifiedEventId is provided, it MUST exist in authoritative events
+          // If verifiedEventId is provided, it MUST exist in authoritative events AND be causally related
           if (isNonEmptyString(acq.verifiedEventId)) {
             const authEv = findAuthoritativeEvent(acq.verifiedEventId, canonicalState, historicalRecords);
             if (!authEv.found || authEv.isActive === false) {
               continue; // Fake/unverified event ID, ignore
             }
+            const isRelated = isAuthoritativeEventCausallyRelated(
+              acq.verifiedEventId,
+              { name: item.name, id: npcCanonicalId, entityType: 'NPC' },
+              {
+                itemName: itemPayload?.name,
+                itemId: itemPayload?.id,
+                sourceNpcId: acq.sourceNpcId,
+                sourceNpcName: item.name
+              },
+              canonicalState,
+              historicalRecords,
+              proposal
+            );
+            if (!isRelated) {
+              continue; // Authoritative event exists but is unrelated to this NPC or mutation, reject
+            }
             return true;
-          }
-
-          // If no verifiedEventId, verify proposal.eventId and valid novelty cause
-          if (proposal.eventId) {
+          } else if (proposal.eventId) {
+            // If no verifiedEventId was claimed, verify proposal.eventId and valid novelty cause
             const propEv = findAuthoritativeEvent(proposal.eventId, canonicalState, historicalRecords);
             if (propEv.found && propEv.isActive !== false) {
               if (acq.cause && VALID_NOVELTY_CAUSES.has(acq.cause)) {
@@ -599,11 +614,19 @@ function isEntityEngineVerifiedActiveActor(
           (npcCanonicalId && vc.targetEntityId === npcCanonicalId) ||
           (vc.targetEntityId && normalizeNovelIdentity(vc.targetEntityId) === norm)
         ) {
-          // Evidence IDs must actually exist in authoritative events / historical records!
+          // Evidence IDs must actually exist in authoritative events / historical records AND be causally related!
           if (Array.isArray(vc.evidenceIds) && vc.evidenceIds.length > 0) {
             const hasRealEvidence = vc.evidenceIds.some(evId => {
               const auth = findAuthoritativeEvent(evId, canonicalState, historicalRecords);
-              return auth.found && auth.isActive !== false;
+              if (!auth.found || auth.isActive === false) return false;
+              return isAuthoritativeEventCausallyRelated(
+                evId,
+                { name: item.name, id: npcCanonicalId, entityType: 'NPC' },
+                undefined,
+                canonicalState,
+                historicalRecords,
+                proposal
+              );
             });
             if (hasRealEvidence) {
               return true;
@@ -653,11 +676,26 @@ function isEntityEngineVerifiedActiveActor(
       }
     }
 
-    // Verify verifiedEventId if present: MUST exist in authoritative events
+    // Verify verifiedEventId if present: MUST exist in authoritative events AND be causally related
     if (isNonEmptyString(acq.verifiedEventId)) {
       const authEv = findAuthoritativeEvent(acq.verifiedEventId, canonicalState, historicalRecords);
       if (!authEv.found || authEv.isActive === false) {
         return false; // Fake verifiedEventId fails closed!
+      }
+      const isRelated = isAuthoritativeEventCausallyRelated(
+        acq.verifiedEventId,
+        { name: item.name, id: itemData?.id, entityType: 'ITEM' },
+        {
+          itemName: item.name,
+          itemId: itemData?.id,
+          sourceNpcId: acq.sourceNpcId
+        },
+        canonicalState,
+        historicalRecords,
+        proposal
+      );
+      if (!isRelated) {
+        return false; // Authoritative event is unrelated to this Item/mutation, fail closed!
       }
       return true;
     }

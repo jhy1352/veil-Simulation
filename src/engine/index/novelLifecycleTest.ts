@@ -21,7 +21,7 @@
  * 13. Candidate Recovery Gate failure -> Quarantined, fail-closed
  */
 
-import { CanonicalState, ImmutableHistoricalRecord, TransitionAction, AcquisitionCause } from '../types';
+import { CanonicalState, ImmutableHistoricalRecord, TransitionAction, AcquisitionCause, StateTransitionProposal } from '../types';
 import { CandidatePacket } from '../../types';
 import {
   NovelHistoryRecord,
@@ -802,6 +802,261 @@ export function runNovelLifecycleTests(): { passed: number; failed: number; erro
 
     const initialCount = novelHistory.length;
     assert(novelHistory.length === initialCount, 'Case 13: Novel History records remain untouched');
+  }
+
+  // =========================================================================
+  // Requirement 14: Real Authoritative Event + Matching sourceNpcId + Real Inventory Commit,
+  // BUT Event is Unrelated to NPC/Mutation -> Active Actor=false / Canon Promotion=false
+  // =========================================================================
+  console.log('\n--- [Case 14] Real But Unrelated Authoritative Event -> Rejection ---');
+  {
+    // 1. Establish a real authoritative event in canonical history/worldInfo:
+    // "마을 외곽 곡물 창고 화재 발생 및 전소" (evt-warehouse-fire)
+    const turnA = engine.getSnapshot().turn + 1;
+    const fireEventId = `evt-warehouse-fire-turn-${turnA}`;
+    const fireRes = dispatchEngineInternalProposal(engine, {
+      proposalId: `prop-fire-turn-${turnA}`,
+      requestId: `req-fire-turn-${turnA}`,
+      eventId: fireEventId,
+      turn: turnA,
+      intentSummary: '마을 곡물 창고에 화재 발생',
+      actions: [
+        {
+          type: 'ADD_NARRATIVE_SEED',
+          payload: {
+            id: fireEventId,
+            content: '마을 외곽 곡물 창고가 원인 미상의 화재로 전소됨',
+            status: 'active'
+          }
+        }
+      ]
+    });
+    assert(fireRes.success === true, 'Case 14: Real authoritative warehouse fire event committed');
+
+    // 2. Propose a new Novel NPC "우연히 마주친 낚시꾼" giving "낡은 낚싯대"
+    // Claims verifiedEventId = fireEventId (real event, but UNRELATED!)
+    // sourceNpcId matches 'npc-fisherman-unrelated'
+    // inventory mutation is real and committed!
+    const turnB = engine.getSnapshot().turn + 1;
+    const fishermanActions: TransitionAction[] = [
+      {
+        type: 'ADD_NPC',
+        payload: {
+          id: 'npc-fisherman-unrelated',
+          name: '우연히 마주친 낚시꾼',
+          status: 'ALIVE',
+          metInStory: true
+        }
+      },
+      {
+        type: 'MODIFY_INVENTORY',
+        payload: {
+          operation: 'ADD',
+          item: { id: 'item-fishing-rod-unrelated', name: '낡은 낚싯대', quantity: 1 },
+          acquisition: {
+            cause: 'GIFT_REWARD' as AcquisitionCause,
+            sourceNpcId: 'npc-fisherman-unrelated',
+            verifiedEventId: fireEventId // REAL authoritative event, but UNRELATED!
+          }
+        }
+      }
+    ];
+
+    const fishermanRes = dispatchEngineInternalProposal(engine, {
+      proposalId: `prop-fisherman-turn-${turnB}`,
+      requestId: `req-fisherman-turn-${turnB}`,
+      eventId: `evt-turn-${turnB}-fisherman-action`,
+      turn: turnB,
+      intentSummary: '낚시꾼에게서 낚싯대를 얻음',
+      actions: fishermanActions
+    });
+    assert(fishermanRes.success === true, 'Case 14: Real inventory commit succeeded on engine');
+
+    const committedStateTurnB = engine.getSnapshot();
+    const committedHistoryTurnB = engine.getHistory();
+
+    const fishermanProposal: StateTransitionProposal = {
+      proposalId: `prop-fisherman-turn-${turnB}`,
+      requestId: `req-fisherman-turn-${turnB}`,
+      eventId: `evt-turn-${turnB}-fisherman-action`,
+      expectedStateVersion: committedStateTurnB.stateVersion - 1,
+      source: 'ENGINE_INTERNAL' as const,
+      turn: turnB,
+      timestamp: new Date().toISOString(),
+      intentSummary: '낚시꾼에게서 낚싯대를 얻음',
+      actions: fishermanActions
+    };
+
+    const candidateTurnB: CandidatePacket = {
+      candidateId: `cand-turn-${turnB}`,
+      turn: turnB,
+      timestamp: new Date().toISOString(),
+      npcChanges: [
+        { name: '우연히 마주친 낚시꾼', innerThought: '물고기가 잘 잡히지 않는군' }
+      ],
+      inventoryChanges: [
+        {
+          name: '낡은 낚싯대',
+          quantity: 1,
+          action: 'add',
+          acquisition: {
+            cause: 'GIFT_REWARD',
+            sourceNpcId: 'npc-fisherman-unrelated',
+            verifiedEventId: fireEventId
+          }
+        }
+      ]
+    };
+
+    const obs = observeCandidateNovelHistory(
+      novelHistory,
+      candidateTurnB,
+      fishermanProposal,
+      committedStateTurnB,
+      turnB,
+      committedHistoryTurnB
+    );
+
+    novelHistory = [...obs.updatedRecords];
+
+    // Verification: Active Actor = false, Promoted Count = 0
+    assert(obs.promotedCount === 0, 'Case 14: Promoted count is strictly 0 for unrelated authoritative event');
+
+    const fisherman = findNovelHistoryMatch(novelHistory, 'NPC', '우연히 마주친 낚시꾼');
+    assert(fisherman !== undefined, 'Case 14: "우연히 마주친 낚시꾼" recorded in Novel History');
+    assert(fisherman?.lifecycle === 'NOVEL', 'Case 14: "우연히 마주친 낚시꾼" stays strictly NOVEL');
+    assert(fisherman?.canonicalId === undefined, 'Case 14: No canonicalId assigned to unrelated event actor');
+
+    const rod = findNovelHistoryMatch(novelHistory, 'ITEM', '낡은 낚싯대');
+    assert(rod !== undefined, 'Case 14: "낡은 낚싯대" recorded in Novel History');
+    assert(rod?.lifecycle === 'NOVEL', 'Case 14: "낡은 낚싯대" stays strictly NOVEL');
+    assert(rod?.canonicalId === undefined, 'Case 14: No canonicalId assigned to item with unrelated event');
+  }
+
+  // =========================================================================
+  // Requirement 15: Real Related Authoritative Event + Mutation -> Canon Promotion
+  // Authoritative event specifically identifies the entity and mutation cause.
+  // =========================================================================
+  console.log('\n--- [Case 15] Real Related Authoritative Event -> Canon Promotion ---');
+  {
+    // 1. Establish a real authoritative event that specifically references the boatman and oar:
+    const turnC = engine.getSnapshot().turn + 1;
+    const boatmanEventId = `evt-boatman-rescue-turn-${turnC}`;
+    const promiseRes = dispatchEngineInternalProposal(engine, {
+      proposalId: `prop-boatman-promise-turn-${turnC}`,
+      requestId: `req-boatman-promise-turn-${turnC}`,
+      eventId: boatmanEventId,
+      turn: turnC,
+      intentSummary: '강가에서 조난당한 뱃사공을 구출함',
+      actions: [
+        {
+          type: 'ADD_NARRATIVE_SEED',
+          payload: {
+            id: boatmanEventId,
+            content: '강가에서 물에 빠진 강가의 뱃사공을 구해주자, 고마움의 보답으로 명품 노를 선물하기로 약속함',
+            status: 'active'
+          }
+        }
+      ]
+    });
+    assert(promiseRes.success === true, 'Case 15: Real related boatman rescue event committed');
+
+    // 2. Propose novel NPC "강가의 뱃사공" and novel item "명품 노"
+    // verifiedEventId references boatmanEventId which specifically mentions 뱃사공 and 명품 노!
+    const turnD = engine.getSnapshot().turn + 1;
+    const boatmanActions: TransitionAction[] = [
+      {
+        type: 'ADD_NPC',
+        payload: {
+          id: 'npc-boatman-related',
+          name: '강가의 뱃사공',
+          status: 'ALIVE',
+          metInStory: true
+        }
+      },
+      {
+        type: 'MODIFY_INVENTORY',
+        payload: {
+          operation: 'ADD',
+          item: { id: 'item-oar-related', name: '명품 노', quantity: 1 },
+          acquisition: {
+            cause: 'GIFT_REWARD' as AcquisitionCause,
+            sourceNpcId: 'npc-boatman-related',
+            verifiedEventId: boatmanEventId // Real AND RELATED authoritative event!
+          }
+        }
+      }
+    ];
+
+    const giftRes = dispatchEngineInternalProposal(engine, {
+      proposalId: `prop-boatman-gift-turn-${turnD}`,
+      requestId: `req-boatman-gift-turn-${turnD}`,
+      eventId: `evt-turn-${turnD}-boatman-gift`,
+      turn: turnD,
+      intentSummary: '뱃사공에게서 명품 노를 선물받음',
+      actions: boatmanActions
+    });
+    assert(giftRes.success === true, 'Case 15: Real related gift proposal committed on engine');
+
+    const committedStateTurnD = engine.getSnapshot();
+    const committedHistoryTurnD = engine.getHistory();
+
+    const boatmanGiftProposal: StateTransitionProposal = {
+      proposalId: `prop-boatman-gift-turn-${turnD}`,
+      requestId: `req-boatman-gift-turn-${turnD}`,
+      eventId: `evt-turn-${turnD}-boatman-gift`,
+      expectedStateVersion: committedStateTurnD.stateVersion - 1,
+      source: 'ENGINE_INTERNAL' as const,
+      turn: turnD,
+      timestamp: new Date().toISOString(),
+      intentSummary: '뱃사공에게서 명품 노를 선물받음',
+      actions: boatmanActions
+    };
+
+    const candidateTurnD: CandidatePacket = {
+      candidateId: `cand-turn-${turnD}`,
+      turn: turnD,
+      timestamp: new Date().toISOString(),
+      npcChanges: [
+        { name: '강가의 뱃사공', innerThought: '목숨을 구해준 은혜는 잊지 않겠소' }
+      ],
+      inventoryChanges: [
+        {
+          name: '명품 노',
+          quantity: 1,
+          action: 'add',
+          acquisition: {
+            cause: 'GIFT_REWARD',
+            sourceNpcId: 'npc-boatman-related',
+            verifiedEventId: boatmanEventId
+          }
+        }
+      ]
+    };
+
+    const obs = observeCandidateNovelHistory(
+      novelHistory,
+      candidateTurnD,
+      boatmanGiftProposal,
+      committedStateTurnD,
+      turnD,
+      committedHistoryTurnD
+    );
+
+    novelHistory = [...obs.updatedRecords];
+
+    // Verification: Active Actor = true, Promoted Count >= 2
+    assert(obs.promotedCount >= 2, 'Case 15: Both NPC and Item promoted for related authoritative event');
+
+    const boatman = findNovelHistoryMatch(novelHistory, 'NPC', '강가의 뱃사공');
+    assert(boatman !== undefined, 'Case 15: "강가의 뱃사공" found in Novel History');
+    assert(boatman?.lifecycle === 'CANON_LINKED', 'Case 15: "강가의 뱃사공" promoted to CANON_LINKED');
+    assert(boatman?.canonicalId === 'npc-boatman-related', 'Case 15: Canonical ID assigned to boatman');
+
+    const oar = findNovelHistoryMatch(novelHistory, 'ITEM', '명품 노');
+    assert(oar !== undefined, 'Case 15: "명품 노" found in Novel History');
+    assert(oar?.lifecycle === 'CANON_LINKED', 'Case 15: "명품 노" promoted to CANON_LINKED');
+    assert(oar?.canonicalId === 'item-oar-related', 'Case 15: Canonical ID assigned to oar');
   }
 
   console.log(`\nResults: ${passed} passed, ${failed} failed.\n`);
