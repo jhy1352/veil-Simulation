@@ -181,18 +181,12 @@ function recordsForSegment(
   const ordered = [...records].sort((a, b) => a.turn - b.turn || a.recordId.localeCompare(b.recordId));
 
   for (const record of ordered) {
-    if (record.turn > startExclusiveTurn && record.turn <= endInclusiveTurn) {
-      appendUniqueRecords(segment, [record], seen);
-    }
+    if (record.turn > startExclusiveTurn && record.turn <= endInclusiveTurn) appendUniqueRecords(segment, [record], seen);
   }
 
-  // Event references are evidence pointers only. If an event falls outside the
-  // transition window, it is not copied into this Passport delta.
   for (const eventId of eventIds || []) {
     for (const record of recordsByEventId.get(eventId) || []) {
-      if (record.turn > startExclusiveTurn && record.turn <= endInclusiveTurn) {
-        appendUniqueRecords(segment, [record], seen);
-      }
+      if (record.turn > startExclusiveTurn && record.turn <= endInclusiveTurn) appendUniqueRecords(segment, [record], seen);
     }
   }
 
@@ -200,9 +194,8 @@ function recordsForSegment(
 }
 
 /**
- * Builds the Passport projection from authoritative History and NovelHistory.
- * NovelHistory transitionHistory defines the domain boundaries; History supplies
- * only the immutable record references belonging to each continuity segment.
+ * Builds Passport from authoritative History plus NovelHistory transition boundaries.
+ * History remains the event store; Passport contains only record references.
  */
 export function projectPassports(
   canonicalState: CanonicalState,
@@ -210,9 +203,7 @@ export function projectPassports(
   novelHistoryRecords: readonly NovelHistoryRecord[] = []
 ): PassportState {
   const canonDescriptors = new Map<string, EntityDescriptor>();
-  for (const descriptor of currentCanonicalDescriptors(canonicalState.character, canonicalState.worldInfo)) {
-    addDescriptor(canonDescriptors, descriptor);
-  }
+  for (const descriptor of currentCanonicalDescriptors(canonicalState.character, canonicalState.worldInfo)) addDescriptor(canonDescriptors, descriptor);
 
   const recordsByEntity = new Map<string, ImmutableHistoricalRecord[]>();
   const recordsByEventId = new Map<string, ImmutableHistoricalRecord[]>();
@@ -230,7 +221,6 @@ export function projectPassports(
     }
   }
 
-  const lineageNovelIds = new Set<string>();
   const lineageCanonIds = new Set<string>();
   const passports: EntityPassport[] = [];
 
@@ -238,11 +228,16 @@ export function projectPassports(
     if (!novel?.novelId) continue;
 
     const transitions = [...(novel.transitionHistory || [])].sort((a, b) => a.version - b.version);
-    const hasLineage = transitions.some(step => step.version > 1);
-    if (!hasLineage && !novel.canonicalId && !novel.demotedFromCanonicalId) {
-      // Pure Novel baseline: no Canon identity has been established.
-      const stamps = recordsForSegment(historicalRecords, -Infinity, novel.lastSeenTurn, novel.sourceEventIds, recordsByEventId)
-        .map((record, index) => makeStamp(record, index));
+    const effectiveTransitions = transitions.filter(step => step.version > 1);
+
+    if (effectiveTransitions.length === 0 && !novel.canonicalId && !novel.demotedFromCanonicalId) {
+      const stamps = recordsForSegment(
+        historicalRecords,
+        -Infinity,
+        novel.lastSeenTurn,
+        novel.sourceEventIds,
+        recordsByEventId
+      ).map((record, index) => makeStamp(record, index));
       passports.push(Object.freeze({
         passportId: makePassportId(novel.novelId, 'NOVEL', 1),
         entityId: novel.novelId,
@@ -251,11 +246,9 @@ export function projectPassports(
         status: novel.lifecycle === 'INACTIVE_NOVEL' ? 'RETIRED' : 'ACTIVE',
         stamps: Object.freeze(stamps)
       }));
-      lineageNovelIds.add(novel.novelId);
       continue;
     }
 
-    lineageNovelIds.add(novel.novelId);
     if (novel.canonicalId) {
       lineageCanonIds.add(novel.canonicalId);
       addDescriptor(canonDescriptors, { entityId: novel.canonicalId, entityType: novel.entityType, domain: 'CANON' });
@@ -265,37 +258,37 @@ export function projectPassports(
       addDescriptor(canonDescriptors, { entityId: novel.demotedFromCanonicalId, entityType: novel.entityType, domain: 'CANON' });
     }
 
-    const effectiveTransitions = transitions.filter(step => step.version > 1);
-    let predecessorPassportId: string | undefined;
-    let previousTurn = -Infinity;
+    const firstTransitionTurn = effectiveTransitions[0]?.turn;
+    const initialEndTurn = typeof firstTransitionTurn === 'number' ? firstTransitionTurn - 1 : novel.lastSeenTurn;
+    const initialRecords = recordsForSegment(historicalRecords, -Infinity, initialEndTurn, novel.sourceEventIds, recordsByEventId);
+    let predecessorPassportId = makePassportId(novel.novelId, 'NOVEL', 1);
 
-    // The first node is always the original Novel identity segment.
-    const firstTurn = effectiveTransitions.length > 0 ? effectiveTransitions[0].turn : novel.lastSeenTurn;
-    const initialRecords = recordsForSegment(historicalRecords, previousTurn, firstTurn, novel.sourceEventIds, recordsByEventId);
-    const initialPassportId = makePassportId(novel.novelId, 'NOVEL', 1);
     passports.push(Object.freeze({
-      passportId: initialPassportId,
+      passportId: predecessorPassportId,
       entityId: novel.novelId,
       historyDomain: 'NOVEL',
       passportVersion: 1,
       status: 'RETIRED',
       stamps: Object.freeze(initialRecords.map((record, index) => makeStamp(record, index)))
     }));
-    predecessorPassportId = initialPassportId;
-    previousTurn = firstTurn;
 
+    let previousTurn = initialEndTurn;
     for (let i = 0; i < effectiveTransitions.length; i++) {
       const step = effectiveTransitions[i];
       const nextStep = effectiveTransitions[i + 1];
-      const segmentEnd = nextStep ? nextStep.turn : Math.max(step.turn, novel.lastSeenTurn);
+      const segmentEnd = nextStep ? nextStep.turn - 1 : novel.lastSeenTurn;
       const domain = step.toDomain;
       const entityId = domain === 'CANON'
         ? novel.canonicalId || novel.demotedFromCanonicalId || novel.novelId
         : novel.novelId;
-      const stamps = recordsForSegment(historicalRecords, previousTurn, segmentEnd, novel.sourceEventIds, recordsByEventId)
-        .map((record, index) => makeStamp(record, index));
+      const stamps = recordsForSegment(
+        historicalRecords,
+        previousTurn,
+        segmentEnd,
+        novel.sourceEventIds,
+        recordsByEventId
+      ).map((record, index) => makeStamp(record, index));
       const passportId = makePassportId(entityId, domain, step.version);
-
       const isFinal = i === effectiveTransitions.length - 1;
       const isActive = isFinal && (
         domain === 'CANON'
@@ -318,7 +311,7 @@ export function projectPassports(
     }
   }
 
-  // Entities with no Novel lifecycle still receive a single Canon baseline Passport.
+  // Entities without a Novel transition lineage receive one Canon baseline Passport.
   for (const descriptor of canonDescriptors.values()) {
     if (lineageCanonIds.has(descriptor.entityId)) continue;
     const sourceRecords = [...(recordsByEntity.get(descriptor.entityId) || [])]
