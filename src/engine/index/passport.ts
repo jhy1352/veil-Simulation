@@ -10,6 +10,7 @@ import type { NovelHistoryRecord } from './novelHistory';
  * - CanonicalState remains the current-world authority.
  * - Passport never authorizes or mutates a state transition.
  * - Passport stamps reference existing historical records; they do not copy history.
+ * - Each Passport is an immutable lineage node; continuity is expressed by predecessorPassportId.
  */
 export type PassportHistoryDomain = 'CANON' | 'NOVEL';
 export type PassportStatus = 'ACTIVE' | 'RETIRED';
@@ -21,6 +22,7 @@ export interface PassportStamp {
 }
 
 export interface EntityPassport {
+  readonly passportId: string;
   readonly entityId: string;
   readonly historyDomain: PassportHistoryDomain;
   readonly passportVersion: number;
@@ -43,6 +45,14 @@ interface EntityDescriptor {
  * Stable synthetic identity for the player character, whose Character model has no id field.
  */
 export const CHARACTER_PASSPORT_ID = 'character:protagonist';
+
+function makePassportId(
+  entityId: string,
+  domain: PassportHistoryDomain,
+  version: number
+): string {
+  return `passport:${domain.toLowerCase()}:${entityId}:v${version}`;
+}
 
 function makeStamp(record: ImmutableHistoricalRecord, index: number): PassportStamp {
   return Object.freeze({
@@ -187,11 +197,7 @@ function currentCanonicalDescriptors(
 
 /**
  * Determines whether a Canon entity is currently active in CanonicalState.
- * Non-active entities are classified as RETIRED:
- * - Dead NPCs (status === 'DEAD')
- * - Consumed / 0-quantity or removed Items
- * - Resolved, dormant, or archived Narrative Seeds
- * - Past historical entities no longer present in CanonicalState
+ * This is only a read-only projection of already authoritative current state.
  */
 function isCanonicalEntityActive(
   descriptor: EntityDescriptor,
@@ -225,13 +231,26 @@ function isCanonicalEntityActive(
   }
 }
 
+function appendUniqueRecords(
+  target: ImmutableHistoricalRecord[],
+  records: readonly ImmutableHistoricalRecord[],
+  seen: Set<string>
+): void {
+  for (const record of records) {
+    if (!seen.has(record.recordId)) {
+      seen.add(record.recordId);
+      target.push(record);
+    }
+  }
+}
+
 /**
  * Builds the Passport projection from authoritative history and
  * the currently authoritative CanonicalState.
  *
- * NovelHistory is used only to identify Novel-domain entities. It does not become
- * a second source of historical truth: its sourceEventIds are resolved against the
- * immutable historical ledger before stamps are emitted.
+ * Passport nodes are reconstructed deterministically from NovelHistory transition
+ * boundaries. Each node owns only the History references introduced since its
+ * predecessor; the immutable ledger remains the actual history store.
  */
 export function projectPassports(
   canonicalState: CanonicalState,
@@ -240,17 +259,14 @@ export function projectPassports(
 ): PassportState {
   const canonDescriptors = new Map<string, EntityDescriptor>();
 
-  // 1. Current Canon entities (including inactive/dead, which will receive RETIRED status)
   for (const descriptor of currentCanonicalDescriptors(canonicalState.character, canonicalState.worldInfo)) {
     addDescriptor(canonDescriptors, descriptor);
   }
 
-  // 2. Historical records: extract entity references from authoritative actions
   const recordsByEntity = new Map<string, ImmutableHistoricalRecord[]>();
   const recordsByEventId = new Map<string, ImmutableHistoricalRecord[]>();
 
   for (const record of historicalRecords) {
-    // Index by eventId for Novel sourceEventId resolution
     if (record.eventId) {
       const eventList = recordsByEventId.get(record.eventId) || [];
       eventList.push(record);
@@ -265,113 +281,156 @@ export function projectPassports(
     }
   }
 
-  // 3. Map Novel predecessors and demotions for lineage tracking
-  const novelPredecessorByCanonicalId = new Map<string, NovelHistoryRecord>();
-  const demotedNovelByCanonicalId = new Map<string, NovelHistoryRecord>();
+  const novelById = new Map<string, NovelHistoryRecord>();
+  const canonIdsWithNovelLineage = new Set<string>();
+  const demotionNovelByCanonId = new Map<string, NovelHistoryRecord>();
+
   for (const novel of novelHistoryRecords) {
-    if (novel?.canonicalId && novel.lifecycle === 'CANON_LINKED') {
-      novelPredecessorByCanonicalId.set(novel.canonicalId, novel);
-      // Ensure promoted Canon entity descriptor is registered
-      if (!canonDescriptors.has(novel.canonicalId)) {
-        addDescriptor(canonDescriptors, {
-          entityId: novel.canonicalId,
-          entityType: novel.entityType,
-          domain: 'CANON'
-        });
-      }
+    if (!novel?.novelId) continue;
+    novelById.set(novel.novelId, novel);
+
+    if (novel.canonicalId) {
+      canonIdsWithNovelLineage.add(novel.canonicalId);
+      addDescriptor(canonDescriptors, {
+        entityId: novel.canonicalId,
+        entityType: novel.entityType,
+        domain: 'CANON'
+      });
     }
-    if (novel?.demotedFromCanonicalId && novel.lifecycle === 'DEMOTED_NOVEL') {
-      demotedNovelByCanonicalId.set(novel.demotedFromCanonicalId, novel);
-      // Ensure demoted Canon entity descriptor is registered so its historical passport is preserved
-      if (!canonDescriptors.has(novel.demotedFromCanonicalId)) {
-        addDescriptor(canonDescriptors, {
-          entityId: novel.demotedFromCanonicalId,
-          entityType: novel.entityType,
-          domain: 'CANON'
-        });
-      }
+
+    if (novel.demotedFromCanonicalId) {
+      demotionNovelByCanonId.set(novel.demotedFromCanonicalId, novel);
+      addDescriptor(canonDescriptors, {
+        entityId: novel.demotedFromCanonicalId,
+        entityType: novel.entityType,
+        domain: 'CANON'
+      });
     }
   }
 
   const passports: EntityPassport[] = [];
 
-  // 4. Project CANON Passports
+  // Canon nodes are rebuilt from the NovelHistory transition chain for that entity.
+  // Entities without a Novel transition get a single v1 Canon node.
   for (const descriptor of canonDescriptors.values()) {
     const sourceRecords = recordsByEntity.get(descriptor.entityId) || [];
-    const stamps = sourceRecords.map((record, index) => makeStamp(record, index));
+    const sortedRecords = [...sourceRecords].sort((a, b) => {
+      if (a.turn !== b.turn) return a.turn - b.turn;
+      return a.recordId.localeCompare(b.recordId);
+    });
 
-    const novelPredecessor = novelPredecessorByCanonicalId.get(descriptor.entityId);
-    const hasPredecessor = Boolean(novelPredecessor);
-    const passportVersion = hasPredecessor ? 2 : 1;
-    const predecessorPassportId = novelPredecessor ? novelPredecessor.novelId : undefined;
+    const relatedNovelRecords = novelHistoryRecords
+      .filter(novel => novel?.canonicalId === descriptor.entityId || novel?.demotedFromCanonicalId === descriptor.entityId)
+      .sort((a, b) => {
+        const av = a.transitionHistory?.[a.transitionHistory.length - 1]?.version ?? 0;
+        const bv = b.transitionHistory?.[b.transitionHistory.length - 1]?.version ?? 0;
+        if (av !== bv) return av - bv;
+        return a.novelId.localeCompare(b.novelId);
+      });
 
-    const isDemoted = demotedNovelByCanonicalId.has(descriptor.entityId);
-    const isActive = !isDemoted && isCanonicalEntityActive(descriptor, canonicalState);
-    const status: PassportStatus = isActive ? 'ACTIVE' : 'RETIRED';
+    const transitionPoints = relatedNovelRecords.length > 0
+      ? relatedNovelRecords
+      : [undefined];
 
-    passports.push(Object.freeze({
-      entityId: descriptor.entityId,
-      historyDomain: 'CANON',
-      passportVersion,
-      status,
-      predecessorPassportId,
-      stamps: Object.freeze(stamps)
-    }));
+    let predecessorPassportId: string | undefined;
+    let previousHistoryBoundary = -1;
+    let version = 1;
+
+    for (const transition of transitionPoints) {
+      const transitionVersion = transition?.transitionHistory?.[transition.transitionHistory.length - 1]?.version;
+      if (typeof transitionVersion === 'number' && transitionVersion > version) {
+        version = transitionVersion;
+      }
+
+      const isDemotionNode = transition?.demotedFromCanonicalId === descriptor.entityId;
+      const nodeRecords: ImmutableHistoricalRecord[] = [];
+      const seen = new Set<string>();
+
+      if (transition?.sourceEventIds?.length) {
+        for (const eventId of transition.sourceEventIds) {
+          appendUniqueRecords(nodeRecords, recordsByEventId.get(eventId) || [], seen);
+        }
+      }
+
+      const boundary = sortedRecords.length - 1;
+      const deltaRecords = sortedRecords.filter((record, index) => index > previousHistoryBoundary && index <= boundary);
+      appendUniqueRecords(nodeRecords, deltaRecords, seen);
+      previousHistoryBoundary = boundary;
+
+      const stamps = nodeRecords.map((record, index) => makeStamp(record, index));
+      const passportId = makePassportId(descriptor.entityId, 'CANON', version);
+      const active = isDemotionNode
+        ? false
+        : transition
+          ? transition.lifecycle === 'CANON_LINKED' && isCanonicalEntityActive(descriptor, canonicalState)
+          : isCanonicalEntityActive(descriptor, canonicalState);
+
+      passports.push(Object.freeze({
+        passportId,
+        entityId: descriptor.entityId,
+        historyDomain: 'CANON',
+        passportVersion: version,
+        status: active ? 'ACTIVE' : 'RETIRED',
+        predecessorPassportId,
+        stamps: Object.freeze(stamps)
+      }));
+
+      predecessorPassportId = passportId;
+      version += 1;
+    }
+
+    // No transition means one baseline node. A transition chain above may have already
+    // produced all lineage nodes, so do not add a duplicate baseline.
+    if (relatedNovelRecords.length === 0 && !canonIdsWithNovelLineage.has(descriptor.entityId)) {
+      // The descriptor has already been emitted by the [undefined] transition point.
+    }
   }
 
-  // 5. Project NOVEL Passports
+  // Novel nodes correspond one-to-one with NovelHistory records and preserve each
+  // transition as an immutable lineage segment. A Novel node that is CANON_LINKED
+  // is retired; DEMOTED_NOVEL becomes the active Novel successor of its Canon node.
   for (const novel of novelHistoryRecords) {
     if (!novel?.novelId) continue;
 
-    // Resolve stamps strictly against immutable historical records using sourceEventIds
     const novelRecords: ImmutableHistoricalRecord[] = [];
     const seenRecordIds = new Set<string>();
-
     for (const eventId of novel.sourceEventIds || []) {
-      const matching = recordsByEventId.get(eventId) || [];
-      for (const rec of matching) {
-        if (!seenRecordIds.has(rec.recordId)) {
-          seenRecordIds.add(rec.recordId);
-          novelRecords.push(rec);
-        }
-      }
+      appendUniqueRecords(novelRecords, recordsByEventId.get(eventId) || [], seenRecordIds);
     }
 
-    const stamps = novelRecords.map((record, index) => makeStamp(record, index));
+    const transitionVersion = novel.transitionHistory?.[novel.transitionHistory.length - 1]?.version;
+    const passportVersion = typeof transitionVersion === 'number' && transitionVersion > 0
+      ? transitionVersion
+      : 1;
+    const passportId = makePassportId(novel.novelId, 'NOVEL', passportVersion);
 
-    // Novel lifecycle mapping:
-    // - NOVEL: Active candidate -> ACTIVE
-    // - INACTIVE_NOVEL: Demoted by inactivity policy -> RETIRED
-    // - CANON_LINKED: Promoted to Canon (superseded by Canon passport) -> RETIRED
-    // - DEMOTED_NOVEL: Authoritatively demoted to Novel domain -> ACTIVE
-    let status: PassportStatus = 'ACTIVE';
-    if (novel.lifecycle === 'CANON_LINKED' || novel.lifecycle === 'INACTIVE_NOVEL') {
-      status = 'RETIRED';
-    } else if (novel.lifecycle === 'DEMOTED_NOVEL') {
-      status = 'ACTIVE';
-    }
-
-    const hasCanonPredecessor = Boolean(novel.demotedFromCanonicalId);
-    const predecessorPassportId = novel.demotedFromCanonicalId || undefined;
-    const latestVersion = novel.transitionHistory && novel.transitionHistory.length > 0
-      ? novel.transitionHistory[novel.transitionHistory.length - 1]?.version
+    const predecessorPassportId = novel.demotedFromCanonicalId
+      ? makePassportId(novel.demotedFromCanonicalId, 'CANON', Math.max(1, passportVersion - 1))
       : undefined;
-    const passportVersion = latestVersion ?? (hasCanonPredecessor ? 2 : 1);
+
+    const status: PassportStatus =
+      novel.lifecycle === 'CANON_LINKED' || novel.lifecycle === 'INACTIVE_NOVEL'
+        ? 'RETIRED'
+        : 'ACTIVE';
 
     passports.push(Object.freeze({
+      passportId,
       entityId: novel.novelId,
       historyDomain: 'NOVEL',
       passportVersion,
       status,
       predecessorPassportId,
-      stamps: Object.freeze(stamps)
+      stamps: Object.freeze(novelRecords.map((record, index) => makeStamp(record, index)))
     }));
   }
 
-  // Deterministic sorting: CANON domain first, then NOVEL; alphabetical by entityId
+  // The lineage itself is authoritative; deterministic output ordering is only for
+  // stable serialization/tests and never changes the predecessor relationships.
   passports.sort((a, b) => {
+    if (a.entityId !== b.entityId) return a.entityId.localeCompare(b.entityId);
+    if (a.passportVersion !== b.passportVersion) return a.passportVersion - b.passportVersion;
     if (a.historyDomain !== b.historyDomain) return a.historyDomain === 'CANON' ? -1 : 1;
-    return a.entityId.localeCompare(b.entityId);
+    return a.passportId.localeCompare(b.passportId);
   });
 
   return Object.freeze({ passports: Object.freeze(passports) });
