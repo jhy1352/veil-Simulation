@@ -65,9 +65,17 @@ function addDescriptor(map: Map<string, EntityDescriptor>, descriptor: EntityDes
  */
 function extractCanonicalEntityDescriptors(record: ImmutableHistoricalRecord): EntityDescriptor[] {
   const action = record.canonicalAction;
-  if (!action) return [];
+  let payload: any = action?.payload;
 
-  const payload: any = action.payload;
+  if (!payload && record.details) {
+    try {
+      const jsonMatch = record.details.match(/\{.*\}/);
+      if (jsonMatch) payload = JSON.parse(jsonMatch[0]);
+    } catch {
+      // ignore malformed details
+    }
+  }
+
   const descriptors = new Map<string, EntityDescriptor>();
 
   const add = (entityId: unknown, entityType: CanonicalEntityReferenceType) => {
@@ -81,33 +89,39 @@ function extractCanonicalEntityDescriptors(record: ImmutableHistoricalRecord): E
 
   switch (record.actionType) {
     case 'ADD_NPC':
-      add(payload?.id, 'NPC');
-      break;
     case 'UPDATE_NPC':
     case 'SET_NPC_STATUS':
       add(payload?.id, 'NPC');
       break;
     case 'ADD_FACTION':
-      add(payload?.id, 'FACTION');
-      break;
     case 'UPDATE_FACTION':
       add(payload?.id, 'FACTION');
       break;
     case 'ADD_NARRATIVE_SEED':
-      add(payload?.id, 'NARRATIVE_SEED');
-      break;
     case 'RESOLVE_NARRATIVE_SEED':
       add(payload?.id, 'NARRATIVE_SEED');
       break;
     case 'UPDATE_CHARACTER_STATS':
     case 'SET_CHARACTER_SECRET':
     case 'RECORD_PHYSICAL_DEFECT':
+    case 'RECORD_DICE_RESULT':
+      add(CHARACTER_PASSPORT_ID, 'CHARACTER');
+      break;
     case 'OVERWRITE_CHARACTER':
       add(CHARACTER_PASSPORT_ID, 'CHARACTER');
+      for (const item of Array.isArray(payload?.inventory) ? payload.inventory : []) {
+        add(item?.id, 'ITEM');
+      }
       break;
     case 'MODIFY_INVENTORY':
       add(CHARACTER_PASSPORT_ID, 'CHARACTER');
       add(payload?.item?.id, 'ITEM');
+      if (payload?.acquisition?.sourceNpcId) {
+        add(payload.acquisition.sourceNpcId, 'NPC');
+      }
+      if (payload?.acquisition?.cost?.id) {
+        add(payload.acquisition.cost.id, 'ITEM');
+      }
       break;
     case 'RECORD_OFFSCREEN_EVENT':
       add(payload?.factionId, 'FACTION');
@@ -148,18 +162,22 @@ function currentCanonicalDescriptors(
   }
 
   for (const npc of worldInfo?.npcs || []) {
-    if (npc?.id) descriptors.push({ entityId: npc.id, entityType: 'NPC', domain: 'CANON' });
+    if (npc?.id) {
+      descriptors.push({ entityId: npc.id, entityType: 'NPC', domain: 'CANON' });
+    }
   }
   for (const faction of worldInfo?.factions || []) {
-    if (faction?.id) descriptors.push({ entityId: faction.id, entityType: 'FACTION', domain: 'CANON' });
+    if (faction?.id) {
+      descriptors.push({ entityId: faction.id, entityType: 'FACTION', domain: 'CANON' });
+    }
   }
   for (const item of character?.inventory || []) {
-    if (item?.id && (item.quantity ?? 0) > 0) {
+    if (item?.id) {
       descriptors.push({ entityId: item.id, entityType: 'ITEM', domain: 'CANON' });
     }
   }
   for (const seed of worldInfo?.seeds || []) {
-    if (seed?.id && seed.status !== 'resolved' && seed.status !== 'dormant') {
+    if (seed?.id) {
       descriptors.push({ entityId: seed.id, entityType: 'NARRATIVE_SEED', domain: 'CANON' });
     }
   }
@@ -168,7 +186,47 @@ function currentCanonicalDescriptors(
 }
 
 /**
- * Builds the first-generation Passport projection from authoritative history and
+ * Determines whether a Canon entity is currently active in CanonicalState.
+ * Non-active entities are classified as RETIRED:
+ * - Dead NPCs (status === 'DEAD')
+ * - Consumed / 0-quantity or removed Items
+ * - Resolved, dormant, or archived Narrative Seeds
+ * - Past historical entities no longer present in CanonicalState
+ */
+function isCanonicalEntityActive(
+  descriptor: EntityDescriptor,
+  canonicalState: CanonicalState
+): boolean {
+  if (descriptor.domain !== 'CANON') return false;
+
+  switch (descriptor.entityType) {
+    case 'CHARACTER':
+      return Boolean(canonicalState.character?.name);
+    case 'NPC':
+      return (canonicalState.worldInfo?.npcs || []).some(
+        npc => npc?.id === descriptor.entityId && npc.status !== 'DEAD'
+      );
+    case 'FACTION':
+      return (canonicalState.worldInfo?.factions || []).some(
+        fac => fac?.id === descriptor.entityId
+      );
+    case 'ITEM':
+      return (canonicalState.character?.inventory || []).some(
+        item => item?.id === descriptor.entityId && (item.quantity ?? 0) > 0
+      );
+    case 'NARRATIVE_SEED':
+      return (canonicalState.worldInfo?.seeds || []).some(seed => {
+        if (seed?.id !== descriptor.entityId) return false;
+        const s = (seed.status as string) || '';
+        return s !== 'resolved' && s !== 'RESOLVED' && s !== 'dormant' && s !== 'ARCHIVED';
+      });
+    default:
+      return false;
+  }
+}
+
+/**
+ * Builds the Passport projection from authoritative history and
  * the currently authoritative CanonicalState.
  *
  * NovelHistory is used only to identify Novel-domain entities. It does not become
@@ -180,48 +238,114 @@ export function projectPassports(
   historicalRecords: readonly ImmutableHistoricalRecord[] = [],
   novelHistoryRecords: readonly NovelHistoryRecord[] = []
 ): PassportState {
-  const descriptors = new Map<string, EntityDescriptor>();
+  const canonDescriptors = new Map<string, EntityDescriptor>();
 
-  // Current Canon entities always receive an active Canon passport.
+  // 1. Current Canon entities (including inactive/dead, which will receive RETIRED status)
   for (const descriptor of currentCanonicalDescriptors(canonicalState.character, canonicalState.worldInfo)) {
-    addDescriptor(descriptors, descriptor);
+    addDescriptor(canonDescriptors, descriptor);
   }
 
-  // Novel entities receive a Novel passport unless they are already linked to Canon.
-  for (const novel of novelHistoryRecords) {
-    if (!novel?.novelId || novel.lifecycle === 'CANON_LINKED') continue;
-    addDescriptor(descriptors, {
-      entityId: novel.novelId,
-      entityType: novel.entityType,
-      domain: 'NOVEL'
-    });
-  }
-
+  // 2. Historical records: extract entity references from authoritative actions
   const recordsByEntity = new Map<string, ImmutableHistoricalRecord[]>();
+  const recordsByEventId = new Map<string, ImmutableHistoricalRecord[]>();
+
   for (const record of historicalRecords) {
+    // Index by eventId for Novel sourceEventId resolution
+    if (record.eventId) {
+      const eventList = recordsByEventId.get(record.eventId) || [];
+      eventList.push(record);
+      recordsByEventId.set(record.eventId, eventList);
+    }
+
     for (const descriptor of extractCanonicalEntityDescriptors(record)) {
       const list = recordsByEntity.get(descriptor.entityId) || [];
       list.push(record);
       recordsByEntity.set(descriptor.entityId, list);
-      addDescriptor(descriptors, descriptor);
+      addDescriptor(canonDescriptors, descriptor);
+    }
+  }
+
+  // 3. Map Novel predecessors by canonicalId for Canon promotion tracking
+  const novelPredecessorByCanonicalId = new Map<string, NovelHistoryRecord>();
+  for (const novel of novelHistoryRecords) {
+    if (novel?.canonicalId && novel.lifecycle === 'CANON_LINKED') {
+      novelPredecessorByCanonicalId.set(novel.canonicalId, novel);
+      // Ensure promoted Canon entity descriptor is registered
+      if (!canonDescriptors.has(novel.canonicalId)) {
+        addDescriptor(canonDescriptors, {
+          entityId: novel.canonicalId,
+          entityType: novel.entityType,
+          domain: 'CANON'
+        });
+      }
     }
   }
 
   const passports: EntityPassport[] = [];
 
-  for (const descriptor of descriptors.values()) {
+  // 4. Project CANON Passports
+  for (const descriptor of canonDescriptors.values()) {
     const sourceRecords = recordsByEntity.get(descriptor.entityId) || [];
     const stamps = sourceRecords.map((record, index) => makeStamp(record, index));
 
+    const novelPredecessor = novelPredecessorByCanonicalId.get(descriptor.entityId);
+    const hasPredecessor = Boolean(novelPredecessor);
+    const passportVersion = hasPredecessor ? 2 : 1;
+    const predecessorPassportId = novelPredecessor ? novelPredecessor.novelId : undefined;
+
+    const isActive = isCanonicalEntityActive(descriptor, canonicalState);
+    const status: PassportStatus = isActive ? 'ACTIVE' : 'RETIRED';
+
     passports.push(Object.freeze({
       entityId: descriptor.entityId,
-      historyDomain: descriptor.domain,
-      passportVersion: 1,
-      status: 'ACTIVE',
+      historyDomain: 'CANON',
+      passportVersion,
+      status,
+      predecessorPassportId,
       stamps: Object.freeze(stamps)
     }));
   }
 
+  // 5. Project NOVEL Passports
+  for (const novel of novelHistoryRecords) {
+    if (!novel?.novelId) continue;
+
+    // Resolve stamps strictly against immutable historical records using sourceEventIds
+    const novelRecords: ImmutableHistoricalRecord[] = [];
+    const seenRecordIds = new Set<string>();
+
+    for (const eventId of novel.sourceEventIds || []) {
+      const matching = recordsByEventId.get(eventId) || [];
+      for (const rec of matching) {
+        if (!seenRecordIds.has(rec.recordId)) {
+          seenRecordIds.add(rec.recordId);
+          novelRecords.push(rec);
+        }
+      }
+    }
+
+    const stamps = novelRecords.map((record, index) => makeStamp(record, index));
+
+    // Novel lifecycle mapping:
+    // - NOVEL: Active candidate -> ACTIVE
+    // - INACTIVE_NOVEL: Demoted by inactivity policy -> RETIRED
+    // - CANON_LINKED: Promoted to Canon (superseded by Canon passport) -> RETIRED
+    let status: PassportStatus = 'ACTIVE';
+    if (novel.lifecycle === 'CANON_LINKED' || novel.lifecycle === 'INACTIVE_NOVEL') {
+      status = 'RETIRED';
+    }
+
+    passports.push(Object.freeze({
+      entityId: novel.novelId,
+      historyDomain: 'NOVEL',
+      passportVersion: 1,
+      status,
+      predecessorPassportId: undefined,
+      stamps: Object.freeze(stamps)
+    }));
+  }
+
+  // Deterministic sorting: CANON domain first, then NOVEL; alphabetical by entityId
   passports.sort((a, b) => {
     if (a.historyDomain !== b.historyDomain) return a.historyDomain === 'CANON' ? -1 : 1;
     return a.entityId.localeCompare(b.entityId);

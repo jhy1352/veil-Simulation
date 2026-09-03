@@ -1,0 +1,105 @@
+=== Running VEIL Identity Passport Test Suite ===
+
+--- Test Suite 1: Genesis & Canon Entity Baseline ---
+  ✓ Character has synthetic passport character:protagonist
+  ✓ Character passport is CANON domain
+  ✓ Character passport version is 1
+  ✓ Character passport status is ACTIVE
+  ✓ Living NPC has passport
+  ✓ Living NPC passport status is ACTIVE
+  ✓ Living NPC is CANON domain
+  ✓ Faction has passport
+  ✓ Faction passport status is ACTIVE
+  ✓ Item with quantity > 0 has passport
+  ✓ Item with quantity > 0 is ACTIVE
+  ✓ Active narrative seed has passport
+  ✓ Active narrative seed is ACTIVE
+
+--- Test Suite 2: Over-eager ACTIVE Correction ---
+  ✓ Dead NPC is indexed in Canon passports
+  ✓ Dead NPC status is strictly RETIRED (not over-eager ACTIVE)
+  ✓ Zero-quantity item is indexed in Canon passports
+  ✓ Zero-quantity item is strictly RETIRED
+  ✓ Resolved narrative seed is indexed in Canon passports
+  ✓ Resolved narrative seed is strictly RETIRED
+
+--- Test Suite 3: OVERWRITE_CHARACTER and Reference Extraction ---
+  ✓ Inventory item from OVERWRITE_CHARACTER receives passport
+  ✓ OVERWRITE_CHARACTER inventory item is CANON domain
+  ✓ OVERWRITE_CHARACTER inventory item is ACTIVE in state
+  ✓ Inventory item receives historical stamp from OVERWRITE_CHARACTER
+  ✓ Stamp references exact history recordId
+  ✓ Second inventory item from OVERWRITE_CHARACTER receives passport
+  ✓ Second item receives historical stamp
+
+--- Test Suite 4: MODIFY_INVENTORY Reference Extraction ---
+  ✓ Modified inventory item has passport
+  ✓ Hat receives stamp from MODIFY_INVENTORY
+  ✓ Source NPC referenced in acquisition receives passport
+  ✓ Source NPC receives stamp
+  ✓ NPC not in current WorldInfo is RETIRED
+  ✓ Cost item referenced in acquisition receives passport
+  ✓ Cost item receives stamp
+  ✓ Spent cost item not in current inventory is RETIRED
+
+--- Test Suite 5: Novel <-> Canon Promotion & Lineage Tracking ---
+  ✓ Novel entity has passport in phase 1
+  ✓ Novel passport domain is NOVEL
+  ✓ Novel passport initial version is 1
+  ✓ Novel passport status is ACTIVE
+  ✓ Novel passport has no predecessor
+  ✓ Novel passport receives stamp resolved against sourceEventId
+  ✓ Stamp references exact history recordId
+  ✓ Novel passport still exists after promotion (forensic continuity)
+  ✓ Novel passport domain remains NOVEL
+  ✓ Novel passport status is RETIRED upon promotion to Canon
+  ✓ Novel passport version remains 1
+  ✓ Promoted Canon entity receives Canon passport
+  ✓ Promoted passport domain is CANON
+  ✓ Promoted Canon passport increments version to 2
+  ✓ Canon passport links to novel predecessor ID
+  ✓ Promoted Canon passport status is ACTIVE
+  ✓ Promoted Canon passport receives canonical action stamp
+  ✓ Canonical stamp matches ADD_NPC recordId
+  ✓ INACTIVE_NOVEL entity receives passport
+  ✓ INACTIVE_NOVEL passport is strictly RETIRED
+
+--- Test Suite 6: SovereignEngine Post-EOF Commit Integration ---
+  ✓ Genesis passports projected from engine
+  ✓ Commit gate rejects stale proposal
+  ✓ Ghost NPC is NOT projected in passports when commit fails
+  ✓ Engine successfully commits valid proposal
+  ✓ Hermit NPC passport created post-EOF commit
+  ✓ Hermit NPC is ACTIVE
+  ✓ Hermit NPC receives stamp from committed proposal
+  ✓ Secret Book passport created post-EOF commit
+  ✓ Secret Book is ACTIVE
+  ✓ Secret Book receives stamp from committed proposal
+
+--- Test Suite 7: Deterministic Ordering & Immutability ---
+  ✓ PassportState is frozen
+  ✓ passports array is frozen
+  ✓ Passport character:protagonist is frozen
+  ✓ Passport character:protagonist stamps are frozen
+  ✓ Passport fac-shaolin is frozen
+  ✓ Passport fac-shaolin stamps are frozen
+  ✓ Passport item-broken-dagger is frozen
+  ✓ Passport item-broken-dagger stamps are frozen
+  ✓ Passport item-iron-sword is frozen
+  ✓ Passport item-iron-sword stamps are frozen
+  ✓ Passport npc-abbot is frozen
+  ✓ Passport npc-abbot stamps are frozen
+  ✓ Passport npc-fallen is frozen
+  ✓ Passport npc-fallen stamps are frozen
+  ✓ Passport seed-active is frozen
+  ✓ Passport seed-active stamps are frozen
+  ✓ Passport seed-resolved is frozen
+  ✓ Passport seed-resolved stamps are frozen
+  ✓ Passport novel:npc:가객 is frozen
+  ✓ Passport novel:npc:가객 stamps are frozen
+  ✓ All CANON passports precede NOVEL passports deterministically
+
+========================================
+Results: 85 passed, 0 failed.
+========================================
+
