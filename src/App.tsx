@@ -27,6 +27,7 @@ import {
 import { SovereignEngine } from './engine/state';
 import { buildSafeProposalFromCandidate } from './engine/proposalParser';
 import { observeCandidateNovelHistory } from './engine/index/novelHistory';
+import { projectPassports } from './engine/index/passport';
 import { runCandidateRecoveryGate, VeilCandidate } from './engine/language/candidateRecoveryGate';
 import { StateTransitionProposal, TransitionAction } from './engine/types';
 import { actionToMeaningNode, adaptMeaningTreeToProposal } from './engine/language';
@@ -157,7 +158,14 @@ export default function App() {
           setStoryTurnCount(snap.turn);
           setGameState(parsed.messages && parsed.messages.length > 0 ? 'playing' : 'creation');
           if (parsed.engineState) {
-            setEngineState(parsed.engineState);
+            const snap = hydratedEngine.getSnapshot();
+            const hist = hydratedEngine.getHistory();
+            const novelRecs = parsed.engineState.novelHistoryRecords || [];
+            const derivedPassports = projectPassports(snap, hist, novelRecs);
+            setEngineState({
+              ...parsed.engineState,
+              passports: derivedPassports
+            });
           }
           if (parsed.selectedModel) {
             setSelectedModel(parsed.selectedModel);
@@ -287,13 +295,25 @@ export default function App() {
     setStoryTurnCount(1);
 
     // Initialize Sovereign Engine with genesis state
-    sovereignEngineRef.current = new SovereignEngine(
+    const genesisEngine = new SovereignEngine(
       worldInfo,
       character,
       [],
       1,
       1
     );
+    sovereignEngineRef.current = genesisEngine;
+
+    // Baseline Identity Passport Projection for Genesis State
+    const initialPassports = projectPassports(
+      genesisEngine.getSnapshot(),
+      [],
+      []
+    );
+    setEngineState(prev => ({
+      ...prev,
+      passports: initialPassports
+    }));
 
     // Initial opening prompt to GM
     const initialPrompt = `[서사 개막 선언]
@@ -366,11 +386,18 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
         // Succeeded: Authoritative engine is stored and UI state synchronized from verified snapshot
         sovereignEngineRef.current = hydratedEngine;
         const snap = hydratedEngine.getSnapshot();
+        const hist = hydratedEngine.getHistory();
+        const novelRecs = loadedPayload.engineState?.novelHistoryRecords || [];
+        const derivedPassports = projectPassports(snap, hist, novelRecs);
+
         setCharacter(snap.character);
         setWorldInfo(snap.worldInfo);
         setMessages(loadedPayload.messages || []);
         setStoryTurnCount(snap.turn);
-        setEngineState(loadedPayload.engineState || createEmptyEngineState());
+        setEngineState({
+          ...(loadedPayload.engineState || createEmptyEngineState()),
+          passports: derivedPassports
+        });
         setGameState('playing');
         setWaitingForRoll(null);
         setModelError(null);
@@ -591,6 +618,14 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
               engine.getHistory()
             );
             (nextEngineState as any).novelHistoryRecords = observationResult.updatedRecords;
+
+            // 6. Identity Passport Projection: Deterministic derived-state from Authoritative State + History + NovelHistory
+            const derivedPassports = projectPassports(
+              commitResult.snapshot,
+              engine.getHistory(),
+              observationResult.updatedRecords
+            );
+            nextEngineState.passports = derivedPassports;
 
             turnVerdict = 'PASSED';
             turnCommittedIds = commitResult.newHistoricalRecords.map(r => r.recordId);

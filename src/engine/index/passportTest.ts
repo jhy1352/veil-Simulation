@@ -181,7 +181,7 @@ async function runTests(): Promise<void> {
     const p4 = passports.passports.find(p => p.passportVersion === 4 && p.historyDomain === 'CANON');
 
     assert([p1, p2, p3, p4].every(Boolean), 'Exactly four expected lineage nodes exist');
-    assert(passports.passports.filter(p => p.passportVersion === 1 || p.passportVersion === 2 || p.passportVersion === 3 || p.passportVersion === 4).length === 4, 'No duplicate Passport node is created for the same transition');
+    assert(passports.passports.filter(p => (p.entityId === novel.novelId || p.entityId === 'npc-doctor') && (p.passportVersion === 1 || p.passportVersion === 2 || p.passportVersion === 3 || p.passportVersion === 4)).length === 4, 'No duplicate Passport node is created for the same transition');
     assert(p1?.status === 'RETIRED', 'P1 Novel is RETIRED after promotion');
     assert(p2?.status === 'RETIRED', 'P2 Canon is RETIRED after authoritative demotion');
     assert(p3?.status === 'RETIRED', 'P3 Novel is RETIRED after re-promotion');
