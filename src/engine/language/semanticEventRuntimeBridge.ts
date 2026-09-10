@@ -9,6 +9,12 @@
  *
  * Authority order:
  * SemanticEvent -> bridge eligibility -> existing Sovereign Validator -> Commit
+ *
+ * SECURITY NOTE
+ * ------------
+ * `SemanticEvent.provenance` is LLM/frontend-controlled metadata and MUST NOT
+ * become `verifiedEventId` directly. A trusted engine-side resolver must convert
+ * an untrusted provenance reference into a currently valid verified event ID.
  */
 
 import type { TransitionAction } from '../types';
@@ -38,6 +44,11 @@ export interface SemanticRuntimeBridgeContext {
     category?: string;
     rarity?: string;
   } | undefined;
+  /**
+   * Resolve untrusted frontend provenance into a currently valid engine-owned
+   * verified event ID. Returning undefined MUST fail closed.
+   */
+  readonly resolveVerifiedEventId?: (event: SemanticEvent) => string | undefined;
 }
 
 function findRole(event: SemanticEvent, role: SemanticEventRole['role']): SemanticEventRole | undefined {
@@ -91,6 +102,19 @@ function mapInventoryAcquisition(
     };
   }
 
+  const verifiedEventId = context.resolveVerifiedEventId?.(event);
+  if (!verifiedEventId || !verifiedEventId.trim()) {
+    return {
+      status: 'UNSUPPORTED',
+      actions: [],
+      errors: [
+        event.provenance
+          ? 'SemanticEvent provenance is untrusted and could not be resolved by the Sovereign authority layer.'
+          : 'SemanticEvent has no trusted verified-event resolution; narrative inventory acquisition is blocked.',
+      ],
+    };
+  }
+
   const acquisitionCause = event.action.toUpperCase() === 'PICKUP' ? 'DISCOVERY_PICKUP' : 'GIFT';
   const sourceNpc = findRole(event, 'SUBJECT');
   const sourceNpcId = sourceNpc ? context.resolveCanonicalEntityId?.(sourceNpc) : undefined;
@@ -102,9 +126,9 @@ function mapInventoryAcquisition(
       operation: 'ADD',
       acquisition: {
         cause: acquisitionCause,
-        verifiedEventId: event.provenance,
+        verifiedEventId,
         sourceNpcId,
-        causalSource: event.provenance ? 'EXISTING_EVENT' : 'NOVEL_EVENT',
+        causalSource: 'EXISTING_EVENT',
       },
     },
     description: `${event.action}: ${object.entityName}`,
