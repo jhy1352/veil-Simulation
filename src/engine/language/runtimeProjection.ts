@@ -8,13 +8,19 @@
  *   child ordering already defined by canonicalizeMeaningTree().
  * - Nested/mixed composition is evaluated recursively at every node.
  * - Proposal.actions is never treated as authoritative over MeaningTree.
+ * - Compiler-produced SemanticEvents are projected through this same sovereign
+ *   projection path; there is no parallel semantic action authority.
  */
 
 import { TransitionAction } from '../types';
-import { MeaningNode } from './types';
+import { MeaningNode, SemanticEvent } from './types';
 import { assertValidMeaningTree } from './grammar';
 import { canonicalizeMeaningTree, canonicalizeValue } from './canonicalizer';
 import { meaningNodeToAction } from './adapter';
+import {
+  semanticEventToRuntimeActions,
+  SemanticRuntimeBridgeContext,
+} from './semanticEventRuntimeBridge';
 
 export interface PlayerIdentityContext {
   /** Canonical entityId for the protagonist/player (e.g. character.id) */
@@ -27,6 +33,14 @@ export interface PlayerIdentityContext {
   readonly knownNpcIds?: readonly string[];
   /** Canonical names for known NPCs */
   readonly knownNpcNames?: readonly string[];
+}
+
+/**
+ * Engine-supplied context for the single authoritative MeaningTree projection.
+ * SemanticEvents are matched to compiled ACTION nodes by eventId.
+ */
+export interface RuntimeProjectionContext extends PlayerIdentityContext, SemanticRuntimeBridgeContext {
+  readonly semanticEvents?: readonly SemanticEvent[];
 }
 
 export interface RuntimeProjectionResult {
@@ -91,10 +105,43 @@ function hasBlockingExecutionDependency(node: MeaningNode): boolean {
   );
 }
 
+function isCompiledSemanticAction(node: MeaningNode): boolean {
+  return node.atom === 'ACTION' &&
+    typeof node.fields?.eventId === 'string' &&
+    node.fields.eventId.trim().length > 0 &&
+    !node.fields?.actionType;
+}
+
+function findSemanticEvent(node: MeaningNode, context?: RuntimeProjectionContext): SemanticEvent | undefined {
+  const eventId = node.fields?.eventId;
+  if (typeof eventId !== 'string' || !eventId.trim()) return undefined;
+  return context?.semanticEvents?.find(event => event.eventId === eventId);
+}
+
+function projectCompiledSemanticAction(
+  node: MeaningNode,
+  context: RuntimeProjectionContext | undefined,
+  actions: TransitionAction[],
+): void {
+  const event = findSemanticEvent(node, context);
+  if (!event) {
+    throw new Error(`[SEMANTIC_RUNTIME_PROJECTION_MISSING] No SemanticEvent supplied for ACTION eventId '${String(node.fields?.eventId)}'.`);
+  }
+
+  const result = semanticEventToRuntimeActions(event, context);
+  if (result.status !== 'MAPPABLE') {
+    throw new Error(
+      `[SEMANTIC_RUNTIME_PROJECTION_${result.status}] ${result.errors.join('; ')}`
+    );
+  }
+
+  actions.push(...result.actions);
+}
+
 function projectNode(
   node: MeaningNode,
   actions: TransitionAction[],
-  context?: PlayerIdentityContext,
+  context?: RuntimeProjectionContext,
   isNonExecutableContext = false
 ): void {
   const isCompoundWrapper = node.atom === 'ACTION' && node.value === 'COMPOUND_EVENT_SEQUENCE';
@@ -129,8 +176,12 @@ function projectNode(
     hasBlockingDependency;
 
   if (node.atom === 'ACTION' && !isCompoundWrapper && !currentNonExecutable) {
-    const action = meaningNodeToAction(node, context);
-    if (action) actions.push(action);
+    if (isCompiledSemanticAction(node)) {
+      projectCompiledSemanticAction(node, context, actions);
+    } else {
+      const action = meaningNodeToAction(node, context);
+      if (action) actions.push(action);
+    }
   }
 
   for (const child of canonicalizeChildrenForRuntime(node)) {
@@ -140,11 +191,11 @@ function projectNode(
 
 /**
  * Projects a validated MeaningTree into the exact action sequence Runtime must use.
- * The result is deterministic for a given semantic tree.
+ * The result is deterministic for a given semantic tree plus engine-supplied context.
  */
 export function projectMeaningTreeToRuntimeActions(
   root: MeaningNode,
-  context?: PlayerIdentityContext
+  context?: RuntimeProjectionContext
 ): RuntimeProjectionResult {
   assertValidMeaningTree(root);
   const actions: TransitionAction[] = [];
@@ -185,7 +236,7 @@ export interface ProjectionConsistencyResult {
 export function checkMeaningTreeProjectionConsistency(
   meaningTree: MeaningNode | undefined,
   actualActions: readonly TransitionAction[],
-  context?: PlayerIdentityContext
+  context?: RuntimeProjectionContext
 ): ProjectionConsistencyResult {
   if (!meaningTree) {
     return Object.freeze({
@@ -222,7 +273,7 @@ export function checkMeaningTreeProjectionConsistency(
 export function assertMeaningTreeProjectionConsistency(
   meaningTree: MeaningNode | undefined,
   actualActions: readonly TransitionAction[],
-  context?: PlayerIdentityContext
+  context?: RuntimeProjectionContext
 ): void {
   const result = checkMeaningTreeProjectionConsistency(meaningTree, actualActions, context);
   if (!result.isConsistent) {
