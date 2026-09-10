@@ -34,7 +34,8 @@
     "test:redteam-campaign": "tsx src/engine/advancedRedTeamPenetrationSuite.ts",
     "test:redteam-mission": "tsx scripts/final_redteam_penetration_mission_runner.ts",
     "test:semantic-candidate-contract": "tsx src/engine/language/semanticCandidateContractTest.ts",
-    "test:semantic-bridge-security": "tsx src/engine/language/semanticEventRuntimeBridgeSecurityTest.ts"
+    "test:semantic-bridge-security": "tsx src/engine/language/semanticEventRuntimeBridgeSecurityTest.ts",
+    "test:semantic-runtime-projection": "tsx src/engine/language/semanticRuntimeProjectionTest.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
