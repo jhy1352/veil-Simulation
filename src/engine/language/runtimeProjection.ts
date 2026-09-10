@@ -16,7 +16,7 @@ import { TransitionAction } from '../types';
 import { MeaningNode, SemanticEvent } from './types';
 import { assertValidMeaningTree } from './grammar';
 import { canonicalizeMeaningTree, canonicalizeValue } from './canonicalizer';
-import { meaningNodeToAction } from './adapter';
+import { meaningNodeToAction } from './runtimeActionAdapter';
 import {
   semanticEventToRuntimeActions,
   SemanticRuntimeBridgeContext,
