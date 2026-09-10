@@ -6,7 +6,7 @@ import { createServer as createViteServer } from 'vite';
 import { buildKnowledgeGraph, UniversalKnowledgeGraph, UniversalEntity } from './src/engine/index/knowledgeGraph.ts';
 import { DEFAULT_CHAPTER_NAME, DEFAULT_NPC_CLASS } from './src/types.ts';
 import { extractCandidatesFromMetadata } from './src/utils/engineValidator.ts';
-import { buildSafeProposalFromCandidate } from './src/engine/proposalParser.ts';
+import { buildSafeProposalFromCandidate, generateProposalId } from './src/engine/proposalParser.ts';
 import { EngineValidator } from './src/engine/validator.ts';
 import { CanonicalState, StateTransitionProposal } from './src/engine/types.ts';
 import { recoverSyntaxAndParseJson } from './src/engine/language/recovery.ts';
@@ -187,85 +187,105 @@ You write with the literary mastery, depth, psychological realism, and atmospher
 
 Before each narrative response, you MUST output the Candidate Proposals Block containing up to 5 genuinely distinct candidates (1 to 5 candidates, where 5 is a CEILING, NOT a quota).
 If the current narrative situation causally supports fewer than 5 genuinely distinct outcomes (e.g. 2, 3, or 4), output ONLY that number of candidates. You are STRICTLY PROHIBITED from fabricating hallucinated filler candidates, arbitrary NPCs, unbacked items, fake events, or altered world states merely to fill a quota of 5.
-Candidates must NOT merely be rephrased prose, cosmetic wording differences, varying difficulty grades, or different emotional intensities, but genuinely distinct causal/tactical branches:
+Candidates must NOT merely be rephrased prose, cosmetic wording differences, or varying emotional intensities, but genuinely distinct causal/tactical branches:
 
+The output block must be wrapped precisely as follows:
 [CANDIDATES_BLOCK]
-[
-  {
-    "candidateId": 1,
-    "label": "후보 1 요약 라벨",
-    "narrativeSummary": "이 후보에 따른 서사 전개 요약",
-    "rawMetadata": {
-      "factCheckSummary": "1) [외부 검색...]: 검증 완료",
-      "foreshadowSeeds": ["복선 1"],
-      "cameraOffscreenEvents": ["정세 변동 1"],
-      "currentChapter": "1장...",
-      "upcomingChapters": ["2장...", "3장...", "4장..."],
-      "statChanges": "체력 변동 없음",
-      "recommendedDC": 10,
-      "dcReason": "판정 사유",
-      "contextVerificationDeclaration": "정사 맥락 일치"
-    }
-  },
-  {
-    "candidateId": 2,
-    "label": "후보 2 요약 라벨",
-    "narrativeSummary": "이 후보에 따른 서사 전개 요약",
-    "rawMetadata": {
-      "factCheckSummary": "1) [외부 검색...]: 검증 완료",
-      "foreshadowSeeds": ["복선 2"],
-      "cameraOffscreenEvents": ["정세 변동 2"],
-      "currentChapter": "1장...",
-      "upcomingChapters": ["2장...", "3장...", "4장..."],
-      "statChanges": "체력 변동 없음",
-      "recommendedDC": 12,
-      "dcReason": "판정 사유",
-      "contextVerificationDeclaration": "정사 맥락 일치"
-    }
-  },
-  {
-    "candidateId": 3,
-    "label": "후보 3 요약 라벨",
-    "narrativeSummary": "이 후보에 따른 서사 전개 요약",
-    "rawMetadata": {
-      "factCheckSummary": "1) [외부 검색...]: 검증 완료",
-      "foreshadowSeeds": ["복선 3"],
-      "cameraOffscreenEvents": ["정세 변동 3"],
-      "currentChapter": "1장...",
-      "upcomingChapters": ["2장...", "3장...", "4장..."],
-      "statChanges": "체력 변동 없음",
-      "recommendedDC": 14,
-      "dcReason": "판정 사유",
-      "contextVerificationDeclaration": "정사 맥락 일치"
-    }
-  }
-]
+<A JSON array of candidate objects conforming strictly to the CandidateOutput schema defined below>
 [CANDIDATES_END]
+
+### Normative CandidateOutput Schema (Pure Type & Constraint Definitions - NO EXAMPLES):
+
+type CandidateOutput = {
+  label: string; // Concise, distinct title/label for the candidate option
+  narrativeSummary: string; // Detailed narrative summary of the branch's developments
+  rawMetadata: {
+    foreshadowSeeds?: string[]; // Array of newly created seed content strings
+    resolvedSeeds?: {
+      content: string; // The exact content of the active seed being resolved
+      resolutionSummary: string; // Causal explanation and narrative summary of the resolution
+    }[];
+    cameraOffscreenEvents?: string[]; // Independent events occurring offscreen in the wider world
+    newNpcs?: {
+      name: string; // The canonical name of the NPC
+      alias?: string; // Optional alias
+      npcClass?: "Class A" | "Class B" | "Class S"; // Defaults to "Class A"
+      innerThought?: string; // Psychological state or hidden thoughts (Only visible if metInStory is true, otherwise forces "[미인지 상태]")
+      metInStory?: boolean; // Whether the player meets the NPC in this branch
+      origin?: string; // NPC's region or background of origin
+      affiliation?: string; // NPC's organizational or faction affiliation
+    }[];
+    newFactions?: {
+      name: string; // Canonical name of the faction
+      description: string; // General description
+      attitudeTowardsPlayer?: string; // Current attitude/relationship towards the protagonist
+    }[];
+    inventoryChanges?: {
+      name: string; // Canonical name of the item
+      quantity: number; // Positive integer change quantity
+      action: "add" | "remove"; // Operations on inventory
+      cause: "DISCOVERY_PICKUP" | "GIFT_REWARD" | "LOOT" | "RESOURCE_EXCHANGE" | "GENESIS_STARTER";
+      verifiedEventId: string; // Crucial eventId/claim reference backing the acquisition
+    }[];
+    statDeltas?: {
+      stat: string; // Character stat name
+      delta: number; // Integer delta (negative/positive)
+    }[];
+    characterChanges?: {
+      alias?: string; // protagonist profile alias update
+    };
+    chapterChanges?: {
+      currentChapter?: string; // Current chapter advancement label
+      upcomingChapters?: string[]; // Next roadmap chapter predictions (max 3)
+    };
+  };
+};
+
+* Code and Prompt Example Ban Directive (코드·프롬프트 예시 금지 원칙 - Mandatory Operative Norm):
+  - Do NOT include nonessential JSON payloads or sample payloads containing mock data in the operating System Prompt.
+  - Do NOT include any actual descriptive data examples containing mock NPC/faction/item names, placeholder values, or simulated runtime states.
+  - Describe all output contracts, payload schemas, allowed/prohibited fields, state transitions, and constraints using pure normative definitions, types, and mathematical rules instead of examples.
+  - Never leave examples that could lead the LLM to copy placeholder values or revert to obsolete contracts.
+  - Separation of Fixtures: Test and forensic fixtures must be strictly decoupled from the runtime Master System Instruction. No simulated mock data is allowed to reside within the live system instruction.
 
 * Candidate Proposals Rules & Generation Constitution (Mandatory):
   - Cardinality: Output between 1 and 5 candidates. 5 is an absolute ceiling, NOT a quota. Output only the number of candidates that genuinely and causally exist.
   - Prohibition of Filler / Hallucinated Candidates: NEVER fabricate non-existent NPCs, unbacked items, fake events, or mutated world states solely to reach 5 candidates.
-  - Distinction Principle: Candidates must represent genuinely distinct causal choices or tactical approaches. Variations solely in sentence structure, label wording, narrative summary prose, DC number, or emotional tone do NOT constitute distinct candidates.
-  - Candidate ID Ownership: Candidate IDs are NOT generated or owned by the LLM; the Engine/Parser assigns canonical sequential IDs (1 to N) strictly based on array order.
-  - Output Contract Fields:
-    * "label": non-empty string.
-    * "narrativeSummary": string.
-    * "rawMetadata": non-null, non-array plain object containing standard metadata fields (factCheckSummary, foreshadowSeeds, cameraOffscreenEvents, currentChapter, upcomingChapters, statChanges, recommendedDC, dcReason, contextVerificationDeclaration, etc.).
-    * Do NOT invent new semantic rating fields (e.g. semanticDifference, diversityScore, intentScore) or new Engine Language semantics. Existing Translation/MeaningTree/Diversity layers remain the sole semantic authority.
+  - Distinction Principle: Candidates must represent genuinely distinct causal choices or tactical approaches. Variations solely in sentence structure, label wording, narrative summary prose, or emotional tone do NOT constitute distinct candidates. Do NOT create separate candidates purely for minor wording, tone, or numeric DC adjustments.
+  - Candidate ID Ownership: Candidate IDs are NOT generated or owned by the LLM. Do NOT include any "candidateId" field in your output JSON array. The Engine/Parser assigns canonical sequential IDs (1 to N) strictly based on array order.
+  - No Self-assigned Entities: "resolvedEntityId" must NOT be generated or included by the LLM.
+  - No Canonical State Mutation without Cause: If there is no canonical state mutation in this turn, do not propose any mutation changes within rawMetadata (leave those arrays empty or omit those fields).
+  - Allowed Output Contract Fields inside "rawMetadata":
+    * "foreshadowSeeds": Array of strings representing newly created foreshadowing seeds.
+    * "resolvedSeeds": Array of objects { content: string, resolutionSummary?: string } representing resolved seeds.
+    * "cameraOffscreenEvents": Array of strings representing independent events occurring off-screen in the wider world.
+    * "newNpcs": Array of objects representing newly encountered or updated NPCs.
+    * "newFactions": Array of objects representing newly introduced factions.
+    * "inventoryChanges": Array of objects representing character inventory changes (Must use this field; "inventoryModifications" is STRICTLY PROHIBITED).
+    * "statDeltas": Array of objects { stat: string, delta: number } representing stat changes.
+    * "characterChanges": Object representing updates to the protagonist's profile.
+    * "chapterChanges": Object { currentChapter?: string, upcomingChapters?: string[] } representing current chapter update or upcoming chapter roadmaps.
+  - STRICTLY FORBIDDEN Fields (NEVER include in output):
+    * "inventoryModifications" (STRICTLY PROHIBITED - use "inventoryChanges" instead)
+    * "statChanges" (STRICTLY PROHIBITED - use "statDeltas" instead)
+    * "resolvedEntityId" (STRICTLY PROHIBITED - Engine-exclusive field)
+    * "candidateId" (STRICTLY PROHIBITED - Parser/Engine assigns this based on order; do not output it)
+    * "currentChapter" at top of rawMetadata (STRICTLY PROHIBITED - put inside "chapterChanges")
+    * "upcomingChapters" at top of rawMetadata (STRICTLY PROHIBITED - put inside "chapterChanges")
+    * "recommendedDC" (STRICTLY PROHIBITED)
+    * "dcReason" (STRICTLY PROHIBITED)
+    * "factCheckSummary" (STRICTLY PROHIBITED)
+    * "contextVerificationDeclaration" (STRICTLY PROHIBITED)
+  - No Mandatory Roadmaps inside Candidates: The previous requirement to always force-generate exactly 3 upcoming chapters in every single Candidate is completely removed. Do NOT force a roadmap upon candidate generation.
 
+### Planned Narrative Roadmap & Dynamic Re-planning Rules (서사 로드맵 및 동적 재계획 규칙):
 
-### Planned Narrative Roadmap Generation Contract & Dynamic Re-planning Rules:
-1. **정확히 3개 미래 챕터 계획 (Generation Contract)**:
-   - 4번 메타데이터 항목에서 현재 챕터 외에 직후 이어질 가능성이 높은 **예정 챕터 정확히 3개(1, 2, 3)**를 항상 구상하여 출력하십시오.
-   - 출력 포맷: \`현재: <현재 챕터> | 예정: 1) <직후 예정 1> | 2) <예정 2> | 3) <예정 3>\`
-   - JSON 액션 \`ADVANCE_CHAPTER\`를 발행할 때도 \`{ currentChapter: string, upcomingChapters: [string, string, string] }\`에 정확히 3개 챕터 문자열 배열을 포함하십시오.
-
-2. **Roadmap의 본질적 성격 (Non-Canonical Hypothesis)**:
+1. **Roadmap의 본질적 성격 (Non-Canonical Hypothesis)**:
    - **의미**: LLM의 현재 서사적 예상 가설, 단기 서사 방향성 가이드라인, 쪽대본/무계획적 즉흥 진행을 방지하기 위한 관측 가능한 비정사적 계획.
    - **절대 금지된 오인**: 확정된 미래, Canonical Fact, 필연적 사건, 플레이어 행동의 허용 목록(Whitelist), 엔진이 강제하는 진행 순서, 강제 퀘스트 라인.
    - 예정 챕터에 기록된 가설적 전개 내용은 실제로 게임 내 사건으로 해결되어 엔진에 커밋되기 전까지 세계 상태나 캐릭터의 자산·능력·관계에 어떠한 영향도 주지 않습니다.
 
-3. **PLAYER AGENCY & CANONICAL HISTORY RESOLUTION RULE**:
+2. **PLAYER AGENCY & CANONICAL HISTORY RESOLUTION RULE**:
    - **"Canonical History constrains what is true, not what the player must do."**
    - **"Canon constrains truth, not player agency. Roadmap constrains neither."**
    - Planned Narrative Roadmap can NEVER override established Canonical History.
@@ -277,23 +297,23 @@ Candidates must NOT merely be rephrased prose, cosmetic wording differences, var
      * *Unoccurred Historical Event*: If player intervenes before/during an event, allow action -> calculate causal consequence -> update Canonical State -> re-evaluate roadmap.
      * *Preserving Canon*: Canonical event exists -> Preserve established truth -> Determine if player can causally interact -> Resolve interaction causally. Do NOT force player to passively view scripted canon events.
 
-4. **기존 Roadmap 강제 금지 (Anti-Railroading Directive)**:
+3. **기존 Roadmap 강제 금지 (Anti-Railroading Directive)**:
    - 플레이어가 roadmap을 따르도록 유도하기 위해 억지로 사건을 발생시키는 행위 금지.
    - 플레이어의 행동을 기존 예정 챕터에 맞게 왜곡·변형하는 행위 금지.
    - 기존 roadmap에 등장하기로 예정된 NPC를 부자연스럽게 마주치게 하는 행위 금지.
    - 플레이어가 선택하지 않은 목적지나 사건을 강제로 발생시키는 행위 금지.
    - "예정된 챕터이므로 반드시 발생해야 한다"는 논리 사용 금지.
-   - 기존 roadmap을 지키기 위해 Canonical State의 사실이나 물리 법칙을 왜곡하는 행위 금지.
+   - 기존 roadmap을 지키기 위해 Canonical State of the 사실이나 물리 법칙을 왜곡하는 행위 금지.
    - **"Roadmap continuity must never override player agency or canonical world state."**
 
-5. **Dynamic Re-planning 5단계 절차**:
+4. **Dynamic Re-planning 5단계 절차**:
    - **STEP 1 (참고)**: 기존 roadmap은 현재 상황을 이해하기 위한 참고 자료로만 대조합니다.
    - **STEP 2 (해결)**: 플레이어가 실제로 선언한 행동을 기존 roadmap과 완전히 독립적으로 먼저 해결합니다.
    - **STEP 3 (반영)**: NPC, 세력, 위치, 인벤토리, 시간, 정보 지식 등 실제 발생한 결과를 기준으로 현재 세계 상태(Canonical State)를 갱신합니다.
    - **STEP 4 (폐기)**: 기존 roadmap이 더 이상 현재 세계의 흐름과 맞지 않는다면 미련 없이 폐기합니다. 이미 무효화된 과거 roadmap 요소를 기계적으로 재사용하지 마십시오.
-   - **STEP 5 (재계획)**: 새로운 Canonical State와 실제 플레이어 행동을 기준으로 직후 미래 3개 챕터를 새롭게 다시 계획합니다.
+   - **STEP 5 (재계획)**: 새로운 Canonical State와 실제 플레이어 행동을 기준으로 직후 미래 챕터를 새롭게 다시 계획합니다.
 
-6. **컨텍스트 최상위 7계층 권한 매트릭스 (Supreme Authority Hierarchy)**:
+5. **컨텍스트 최상위 7계층 권한 매트릭스 (Supreme Authority Hierarchy)**:
    - **1위**: ESTABLISHED CANONICAL FACTS / CANONICAL WORLD STATE (세계 법칙 및 검증된 객관적 사실)
    - **2위**: ESTABLISHED CANONICAL HISTORY / TIMELINE (확정된 역사적 정사 연표 및 인과 기록)
    - **3위**: PLAYER'S LATEST EXPLICIT ACTION (플레이어의 최신 명시적 행동 선언)
@@ -303,15 +323,15 @@ Candidates must NOT merely be rephrased prose, cosmetic wording differences, var
    - **7위**: PREVIOUS PLANNED NARRATIVE ROADMAP (이전 계획된 서사 로드맵 — 최하위 비정사적 가설)
    *(Note: Higher Authority defines what is true when information conflicts; Higher Authority ≠ Automatic Action Rejection)*
 
-7. **Canon / Player Action 6대 충돌 해결 매트릭스 (Conflict Resolution Cases)**:
+6. **Canon / Player Action 6대 충돌 해결 매트릭스 (Conflict Resolution Cases)**:
    - **Case 1 (단순 경로 변경)**: 정사와 직접 충돌하지 않는 자유 행동 -> Player Action 전면 허용.
    - **Case 2 (정사 사건 개입)**: 플레이어가 역사적 사건에 개입 가능한 위치/조건 -> 행동 허용 -> 인과 계산 -> 결과 반영 -> 필요시 Canonical State 갱신.
    - **Case 3 (확정 사실 소급 변경 시도)**: 이미 확정된 역사적 사실의 임의 덮어쓰기 선언 -> 단순 선언에 의한 소급 변경 금지 -> 확정된 정사 제약 조건 하에서 허용되는 유효한 인과적 상호작용으로 해석.
    - **Case 4 (LLM Memory vs WorldPack Canon)**: LLM 기억과 WorldPack 정사 충돌 -> WorldPack Canon 절대 우선.
-   - **Case 5 (Planned Roadmap vs Player Action)**: 로드맵과 플레이어 행동 충돌 -> Player Action 우선 -> 실제 결과 반영 -> 기존 로드맵 재평가 및 무효화 요소 폐기 -> 신규 3챕터 로드맵 생성.
+   - **Case 5 (Planned Roadmap vs Player Action)**: 로드맵과 플레이어 행동 충돌 -> Player Action 우선 -> 실제 결과 반영 -> 기존 로드맵 재평가 및 무효화 요소 폐기 -> 신규 챕터 로드맵 생성.
    - **Case 6 (Planned Roadmap vs Canonical History)**: 로드맵과 정사 역사 충돌 -> Canonical History 절대 우선 -> 기존 로드맵 수정/폐기.
 
-8. **Dynamic Re-planning 적극 판별 기준**:
+7. **Dynamic Re-planning 적극 판별 기준**:
    - 플레이어의 독자적 행동 선택, 새로운 인과적 사건 발생, 정세 및 관계의 상태 전이, 복선의 방향 전환 등으로 인해 기존 계획의 전제 조건이 변경되거나 무효화되었을 때 즉시 전면 재계획을 수행하십시오.
 
 * Rules for the JSON Proposal Block:
@@ -341,11 +361,10 @@ Candidates must NOT merely be rephrased prose, cosmetic wording differences, var
   - 플레이어가 소지한 아이템은 위 [TRPG Campaign Context]에 기재된 Canonical Inventory가 유일한 진실입니다.
   - 서사(Narrative)에서 새로운 아이템을 획득하거나 자원을 교환한 경우 반드시 정당한 인과(acquisition.cause: 'RESOURCE_EXCHANGE', 'DISCOVERY_PICKUP', 'GIFT_REWARD', 'LOOT', 'GENESIS_STARTER')를 포함한 'MODIFY_INVENTORY ADD' 액션을 제안하십시오.
   - **DISCOVERY_PICKUP / GIFT_REWARD / LOOT 획득 시**:
-    * 반드시 활성 복선/사건 ID(seed ID 또는 event ID)를 \`verifiedEventId\`로 지정해야 합니다:
-      예: \`acquisition: { cause: 'DISCOVERY_PICKUP', verifiedEventId: 'seed-...' }\`
-    * 만약 현재 턴에서 새로 발견된 단서/물품이라면, 같은 제안(Proposal)에 \`ADD_NARRATIVE_SEED: { id: 'seed-...', ... }\`를 추가하고 그 \`id\`를 \`verifiedEventId\`로 연결하십시오.
+    * 반드시 활성 복선/사건 ID(seed ID 또는 event ID)를 \`verifiedEventId\`로 지정해야 합니다.
+    * 만약 현재 턴에서 새로 발견된 단서/물품이라면, 같은 제안(Proposal)에 \`ADD_NARRATIVE_SEED\`를 추가하고 그 \`id\`를 \`verifiedEventId\`로 연결하십시오.
   - **RESOURCE_EXCHANGE (상점 구매 / 자원 교환) 시**:
-    * 기존 소지품 소모(예: 은화 차감)를 위한 'MODIFY_INVENTORY REMOVE'와 새 아이템 획득 'MODIFY_INVENTORY ADD'를 반드시 원자적으로 함께 제안하십시오 (예: \`acquisition: { cause: 'RESOURCE_EXCHANGE', cost: { name: '은화', quantity: 1 } }\`).
+    * 기존 소지품 소모를 위한 'MODIFY_INVENTORY REMOVE'와 새 아이템 획득 'MODIFY_INVENTORY ADD'를 반드시 원자적으로 함께 제안하여 acquisition 객체의 cause 및 cost 정보를 통해 인과관계를 완성하십시오.
   - **아이템 사용 / 양도 / 소모 시**:
     * 플레이어가 소지품을 사용하거나 NPC에게 양도/투척/파괴할 때는 'MODIFY_INVENTORY REMOVE' 액션을 제안하십시오.
   - 단순 환경 객체 목격이나 미획득 물체는 Inventory에 추가하지 마십시오. Canonical State에 없는 아이템을 과거부터 소지하고 있었다고 서술하는 것은 진실성 위반(소급적 무단 생성)이며 거부됩니다. Narrative에서 발생하는 모든 소유권 변동은 원인과 대가가 명확해야 하며 엔진의 인과율 검증을 통과해야 합니다.
@@ -393,6 +412,7 @@ app.post('/api/chat', async (req, res) => {
   try {
     const { messages = [], character, worldInfo, customPrompt, userPrompt, storyTurnCount = 1, selectedModel = 'gemini-3.7-flash' } = req.body;
     const effectiveUserPrompt = (userPrompt || customPrompt || '').trim();
+    const playerInputId = generateProposalId('input');
 
     const t1_requestStart = Date.now();
     const ai = getGeminiClient();
@@ -452,11 +472,8 @@ app.post('/api/chat', async (req, res) => {
     let upcomingSummary = '';
     if (upcomingChapters.length > 0) {
       upcomingSummary = upcomingChapters.map((ch, idx) => `  ${idx + 1}. ${ch}`).join('\n');
-      if (upcomingChapters.length < 3) {
-        upcomingSummary += `\n  (직후 미래 3개 챕터 완성을 위해 부족한 ${3 - upcomingChapters.length}개 챕터는 현재 세계 상태를 바탕으로 직접 창작하십시오)`;
-      }
     } else {
-      upcomingSummary = '  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 직후 이어질 비정사적 미래 3개 챕터를 직접 창작하여 출력하십시오)';
+      upcomingSummary = '  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)';
     }
 
     const roadmapContext = `\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]
@@ -466,7 +483,7 @@ ${upcomingSummary}
 ※ 권한 및 행동 우선순위:
 1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)
 ※ Dynamic Re-planning 수칙:
-위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 3개 챕터를 자유롭게 재계획하십시오.`;
+위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.`;
 
     // Active Seeds & Obtainable Events Context
     const activeSeeds = Array.isArray(worldInfo?.seeds)
@@ -713,7 +730,8 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
         canonicalState,
         candidatePacket,
         storyTurnCount,
-        historicalRecords
+        historicalRecords,
+        playerInputId
       );
       return {
         candidate: c,
@@ -789,6 +807,10 @@ STRICT INVARIANTS:
         text: rawFallbackResponse,
         rawResponse: rawFallbackResponse,
         isFallbackNonMutation: true,
+        selectedCandidateId: null,
+        authorizedCandidate: null,
+        authorizedCandidatePacket: null,
+        authorizedProposal: null,
         preAuthSummary: {
           total: candidates.length,
           allowed: 0,
@@ -816,16 +838,19 @@ STRICT INVARIANTS:
     }
 
     // Phase 2: LLM #2 Narrative Synthesizer (Choice restricted strictly to ALLOW candidates)
-    const phase2Prompt = `[SOVEREIGN VEIL PIPELINE - PHASE 2 NARRATIVE SYNTHESIZER]
-The Sovereign Engine Pre-Authorization Gate has validated candidate proposals.
-The allowed candidates are:
+    const phase2Prompt = `[SOVEREIGN VEIL PIPELINE - PHASE 2 NARRATIVE SYNTHESIZER & INTENT FIDELITY JUDGE]
+ORIGINAL PLAYER INPUT (PROVENANCE & FIDELITY REFERENCE ONLY - NOT CANONICAL WORLD TRUTH):
+${effectiveUserPrompt ? `"${effectiveUserPrompt}"` : '(No explicit player prompt — scene continuation)'}
+
+PRE-AUTHORIZED ALLOW CANDIDATES (ONLY THESE MAY BE SELECTED):
 ${allowedCandidates.map(c => `[Candidate ${c.candidateId}] "${c.label}"\nSummary: ${c.narrativeSummary}`).join('\n\n')}
 
 INSTRUCTIONS:
-1. Select the single most contextually appropriate candidate from the ALLOWED list above.
-2. Output a single JSON line specifying the selected candidate ID: {"selectedCandidateId": <number>}
-3. Output the full narrative text for this turn describing the selected turn sequence.
-4. Do NOT introduce new state changes outside the selected candidate.`;
+1. Compare the Original Player Input above with each of the ALLOW candidates.
+2. Select the single candidate from the ALLOWED list that is most faithful to the player's intended action declaration and request.
+3. Output a single JSON line specifying the selected candidate ID: {"selectedCandidateId": <number>}
+4. Output the full narrative text for this turn describing the selected turn sequence.
+5. Do NOT introduce new state changes outside the selected candidate.`;
 
     const phase2Contents = [
       ...contents,
@@ -847,13 +872,23 @@ INSTRUCTIONS:
     const selectMatch = rawPhase2Response.match(/\{"selectedCandidateId"\s*:\s*(\d+)\}/i);
     const selectedId = selectMatch ? parseInt(selectMatch[1], 10) : null;
     const selectedCandidate = selectedId !== null ? (allowedCandidates.find(c => c.candidateId === selectedId) || null) : null;
+    const selectedTranslated = selectedCandidate
+      ? candidatesToValidate.find(tc => tc.candidate.candidateId === selectedCandidate.candidateId) || null
+      : null;
 
     let finalResponseText = '';
     let authorizedCandidateId: number | null = null;
+    let authorizedCandidate: VeilCandidate | null = null;
+    let authorizedCandidatePacket: any | null = null;
+    let authorizedProposal: StateTransitionProposal | null = null;
 
-    if (selectedCandidate) {
-      // Authorized Candidate exact match: issue approved candidate raw metadata
+    if (selectedCandidate && selectedTranslated) {
+      // Authorized Candidate exact match: issue approved candidate raw metadata and authorized proposal
       authorizedCandidateId = selectedCandidate.candidateId;
+      authorizedCandidate = selectedTranslated.candidate;
+      authorizedCandidatePacket = selectedTranslated.candidatePacket;
+      authorizedProposal = selectedTranslated.proposal;
+
       const metaJson = JSON.stringify(selectedCandidate.rawMetadata, null, 2);
       const finalNarrative = rawPhase2Response.replace(/\{"selectedCandidateId"\s*:\s*\d+\}/i, '').trim();
       finalResponseText = `\`\`\`markdown\n${selectedCandidate.rawMetadata?.factCheckSummary || '1) [검증]: 완료'}\n\`\`\`\n\`\`\`json\n${metaJson}\n\`\`\`\n\n${finalNarrative}`;
@@ -872,6 +907,10 @@ INSTRUCTIONS:
       text: finalResponseText,
       rawResponse: finalResponseText,
       selectedCandidateId: authorizedCandidateId,
+      authorizedCandidate,
+      authorizedCandidatePacket,
+      authorizedProposal,
+      originInputId: authorizedCandidateId ? playerInputId : undefined,
       isFallbackNonMutation: !selectedCandidate,
       preAuthSummary: {
         total: candidates.length,

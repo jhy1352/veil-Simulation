@@ -1,0 +1,55 @@
+{
+  "rawCandidatesBlock": [
+    {
+      "label": "한기의 근원지 도달 (지하 빙실 발견)",
+      "narrativeSummary": "검끝이 가리키는 한기의 흐름을 따라 전진한 끝에, 암벽이 양옆으로 갈라지며 거대한 얼음 결정들이 벽면을 뒤덮고 있는 지하 빙실(氷室)의 입구에 도달합니다. 비고 내부의 온도 저하 원인이 밝혀집니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "지하 빙실에 안치된 의문의 빙관"
+        ]
+      },
+      "candidateId": 1
+    },
+    {
+      "label": "습격의 징후 (냉기 속의 그림자)",
+      "narrativeSummary": "냉기가 뿜어져 나오는 틈새 너머에서, 단순한 바람 소리라 하기에는 지나치게 인공적인 서늘한 마찰음이 들려옵니다. 냉기 장막 너머로 무언가 생명력을 가진 존재 혹은 기관 인형이 움직이고 있음을 직감합니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "비고를 배회하는 고대 기관수"
+        ]
+      },
+      "candidateId": 2
+    },
+    {
+      "label": "진법의 활성화 (냉기 장막의 왜곡)",
+      "narrativeSummary": "검끝을 냉기의 흐름에 갖다 대는 순간, 차가운 공기가 소용돌이치며 사방의 기류가 급변합니다. 바닥의 돌판과 동조한 냉기 장막이 왜곡되면서 백연화의 시야를 가로막고 사방의 공간을 왜곡하기 시작합니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "공간을 단절시키는 한빙진의 발동"
+        ]
+      },
+      "candidateId": 3
+    }
+  ],
+  "totalParsedCount": 1,
+  "preAuthResults": [
+    {
+      "candidateId": 1,
+      "label": "한기의 근원지 도달 (지하 빙실 발견)",
+      "narrativeSummary": "검끝이 가리키는 한기의 흐름을 따라 전진한 끝에, 암벽이 양옆으로 갈라지며 거대한 얼음 결정들이 벽면을 뒤덮고 있는 지하 빙실(氷室)의 입구에 도달합니다. 비고 내부의 온도 저하 원인이 밝혀집니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "지하 빙실에 안치된 의문의 빙관"
+        ]
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    }
+  ],
+  "allowedIds": [],
+  "rejectedIds": [
+    1
+  ]
+}

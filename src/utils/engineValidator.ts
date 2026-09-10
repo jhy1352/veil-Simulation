@@ -55,7 +55,7 @@ export function extractCandidatesFromMetadata(
   const offscreenEvents: CandidatePacket['offscreenEvents'] = [];
   const inventoryChanges: CandidatePacket['inventoryChanges'] = [];
   const statChanges: CandidatePacket['statChanges'] = [];
-  let recommendedDC: number | undefined = metaData?.recommendedDC;
+  const recommendedDC: number | undefined = undefined; // Prohibited from external metadata
 
   // 1. Seeds (Creation and Resolution)
   if (metaData?.foreshadowSeeds && Array.isArray(metaData.foreshadowSeeds)) {
@@ -78,7 +78,8 @@ export function extractCandidatesFromMetadata(
           content: String(res.content).trim(),
           status: 'resolved',
           action: 'resolve',
-          resolutionSummary: res.resolutionSummary ? String(res.resolutionSummary).trim() : undefined
+          resolutionSummary: res.resolutionSummary ? String(res.resolutionSummary).trim() : undefined,
+          entityReference: res.entityReference
         });
       }
     });
@@ -114,7 +115,8 @@ export function extractCandidatesFromMetadata(
           martialArts: npc.martialArts?.trim(),
           values: npc.values?.trim(),
           affiliation: npc.affiliation?.trim(),
-          informationAccess: npc.metInStory ? 'PROTAGONIST_KNOWN' : 'UNKNOWN'
+          informationAccess: npc.metInStory ? 'PROTAGONIST_KNOWN' : 'UNKNOWN',
+          entityReference: npc.entityReference
         });
       }
     });
@@ -128,52 +130,52 @@ export function extractCandidatesFromMetadata(
           name: fac.name.trim(),
           description: fac.description || '',
           attitudeTowardsPlayer: fac.attitudeTowardsPlayer,
-          informationAccess: 'PUBLIC'
+          informationAccess: 'PUBLIC',
+          entityReference: fac.entityReference
         });
       }
     });
   }
 
-  // 5. Chapter Roadmap Changes
+  // 5. Chapter Roadmap Changes (Strict Nested Contract Only — No Legacy Top-Level Fallback)
   let chapterChanges: { currentChapter?: string; upcomingChapters?: string[] } | undefined = undefined;
-  if (metaData?.currentChapter || (metaData?.upcomingChapters && metaData.upcomingChapters.length > 0)) {
-    chapterChanges = {
-      currentChapter: metaData.currentChapter,
-      upcomingChapters: metaData.upcomingChapters ? [...metaData.upcomingChapters] : undefined
-    };
+  if (metaData?.chapterChanges && typeof metaData.chapterChanges === 'object' && !Array.isArray(metaData.chapterChanges)) {
+    const cur = typeof metaData.chapterChanges.currentChapter === 'string' ? metaData.chapterChanges.currentChapter.trim() : undefined;
+    const up = Array.isArray(metaData.chapterChanges.upcomingChapters)
+      ? metaData.chapterChanges.upcomingChapters.map((c: any) => typeof c === 'string' ? c.trim() : '').filter(Boolean)
+      : undefined;
+    if (cur || (up && up.length > 0)) {
+      chapterChanges = {
+        ...(cur ? { currentChapter: cur } : {}),
+        ...(up && up.length > 0 ? { upcomingChapters: up } : {})
+      };
+    }
   }
 
   // 6. Inventory Changes if provided in metadata
   if (metaData?.inventoryChanges && Array.isArray(metaData.inventoryChanges)) {
     metaData.inventoryChanges.forEach((inv: any) => {
       if (typeof inv === 'object' && inv !== null && inv.name) {
-        const cause = inv.cause || inv.acquisition?.cause;
-        const cost = inv.cost || inv.acquisition?.cost;
-        const verifiedEventId = inv.verifiedEventId || inv.acquisition?.verifiedEventId;
+        const cause = inv.cause || inv.acquisition?.cause || inv.entityReference?.evidence?.cause;
+        const cost = inv.cost || inv.acquisition?.cost || inv.entityReference?.evidence?.cost;
+        const verifiedEventId = inv.verifiedEventId || inv.acquisition?.verifiedEventId || inv.entityReference?.evidence?.verifiedEventId;
         inventoryChanges.push({
           name: String(inv.name).trim(),
           quantity: typeof inv.quantity === 'number' && !isNaN(inv.quantity) ? Math.max(1, inv.quantity) : 1,
           action: inv.action === 'remove' || inv.operation === 'REMOVE' ? 'remove' : 'add',
           entityReference: inv.entityReference,
-          ...(cause ? {
+          cause,
+          cost,
+          verifiedEventId,
+          acquisition: (cause || verifiedEventId || cost) ? {
             cause,
-            verifiedEventId: typeof verifiedEventId === 'string' && verifiedEventId.trim() ? verifiedEventId.trim() : undefined,
-            acquisition: {
-              cause,
-              cost: cost && typeof cost === 'object' ? {
-                id: typeof cost.id === 'string' ? cost.id : undefined,
-                name: typeof cost.name === 'string' ? cost.name : undefined,
-                quantity: typeof cost.quantity === 'number' ? Math.max(1, cost.quantity) : 1
-              } : undefined,
-              verifiedEventId: typeof verifiedEventId === 'string' && verifiedEventId.trim() ? verifiedEventId.trim() : undefined
-            }
-          } : (verifiedEventId ? {
-            verifiedEventId: typeof verifiedEventId === 'string' && verifiedEventId.trim() ? verifiedEventId.trim() : undefined,
-            acquisition: {
-              cause: 'DISCOVERY_PICKUP',
-              verifiedEventId: typeof verifiedEventId === 'string' && verifiedEventId.trim() ? verifiedEventId.trim() : undefined
-            }
-          } : {}))
+            cost: cost && typeof cost === 'object' ? {
+              id: typeof cost.id === 'string' ? cost.id : undefined,
+              name: typeof cost.name === 'string' ? cost.name : undefined,
+              quantity: typeof cost.quantity === 'number' ? Math.max(1, cost.quantity) : 1
+            } : undefined,
+            verifiedEventId: typeof verifiedEventId === 'string' && verifiedEventId.trim() ? verifiedEventId.trim() : undefined
+          } : undefined
         });
       }
     });
@@ -193,7 +195,7 @@ export function extractCandidatesFromMetadata(
 
   // 8. Character Changes if provided in metadata
   let characterChanges: CandidatePacket['characterChanges'] = undefined;
-  if (metaData?.characterChanges && typeof metaData.characterChanges === 'object') {
+  if (metaData?.characterChanges && typeof metaData.characterChanges === 'object' && !Array.isArray(metaData.characterChanges)) {
     characterChanges = {
       name: metaData.characterChanges.name ? String(metaData.characterChanges.name).trim() : undefined,
       alias: metaData.characterChanges.alias ? String(metaData.characterChanges.alias).trim() : undefined,

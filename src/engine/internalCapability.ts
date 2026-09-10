@@ -27,6 +27,10 @@ export function isEngineAuthorized(proposal: object): boolean {
   return engineAuthorizedProposals.has(proposal);
 }
 
+export function authorizeEngineProposal(proposal: object): void {
+  engineAuthorizedProposals.add(proposal);
+}
+
 /**
  * Authoritatively manufactures and dispatches an engine-internal SYSTEM or ENGINE_INTERNAL proposal.
  * This function is strictly private to the engine core and is NOT exposed on SovereignEngine instances.

@@ -1,13 +1,3 @@
-/**
- * @file src/engine/index/authoritativeEvidence.ts
- * @description Single Source of Truth for Authoritative Event and Causal Evidence Verification.
- *
- * Grounded in Sovereign Engine Constitution:
- * 1. World reality is determined strictly by validated Canonical State and Historical Records.
- * 2. LLM / Proposal metadata (strings like verifiedEventId, sourceNpcId) are claims, NOT authorities.
- * 3. Authoritative verification checks whether an event/action actually exists and has causal validity.
- */
-
 import { CanonicalState, ImmutableHistoricalRecord, StateTransitionProposal } from '../types';
 import { EntityReferenceBundle, CanonicalEntityReferenceType } from '../../types';
 
@@ -21,41 +11,13 @@ export function isNonEmptyString(value: unknown): value is string {
 }
 
 export const VALID_NOVELTY_CAUSES = new Set([
-  'RESOURCE_EXCHANGE',
-  'DISCOVERY_PICKUP',
-  'DISCOVERY',
-  'GIFT_REWARD',
-  'GIFT',
-  'REWARD',
-  'DUNGEON_REWARD',
-  'LOOT',
-  'PURCHASE',
-  'CRAFTING',
-  'ENCOUNTER',
-  'FIRST_ENCOUNTER',
-  'MET_DURING_STORY',
-  'ENCOUNTERED_NEW_FACTION',
-  'DISCOVERED_NARRATIVE_SEED',
-  'EAVESDROP',
-  'CREATION',
-  'EXPLORATION',
-  'GENESIS_STARTER',
-  'SYSTEM_INITIALIZATION'
+  'RESOURCE_EXCHANGE','DISCOVERY_PICKUP','DISCOVERY','GIFT_REWARD','GIFT','REWARD','DUNGEON_REWARD','LOOT','PURCHASE','CRAFTING','ENCOUNTER','FIRST_ENCOUNTER','MET_DURING_STORY','ENCOUNTERED_NEW_FACTION','DISCOVERED_NARRATIVE_SEED','EAVESDROP','CREATION','EXPLORATION','GENESIS_STARTER','SYSTEM_INITIALIZATION'
 ]);
 
 export const CREATION_ACQUISITION_KEYWORDS = [
-  '획득', '얻', '줍', '주웠', '발견', '받', '수여', '하사', '제작', '만듦', '만들',
-  '구입', '구매', '샀', '전수', '건네', '주었', '주어', '보상', '노획', '탈취', '전리품',
-  '창조', '생성', '생겨', '조우', '만남', '만나', '접함', '접견', '대면', '등장', '합류', '결성', '창설', '동행', '편입', '영구',
-  '격퇴', '처치', '토벌', '소탕', '클리어', '탐색', '수색', '비경', '복선', '소문',
-  'acquire', 'obtain', 'find', 'discover', 'receive', 'gift', 'reward', 'loot',
-  'craft', 'create', 'buy', 'purchase', 'encounter', 'meet', 'defeat', 'drop', 'grant', 'give', 'armory', 'companion', 'welcome', 'starter'
+  '획득','얻','줍','주웠','발견','받','수여','하사','제작','만듦','만들','구입','구매','샀','전수','건네','주었','주어','보상','노획','탈취','전리품','창조','생성','생겨','조우','만남','만나','접함','접견','대면','등장','합류','결성','창설','동행','편입','영구','격퇴','처치','토벌','소탕','클리어','탐색','수색','비경','복선','소문','acquire','obtain','find','discover','receive','gift','reward','loot','craft','create','buy','purchase','encounter','meet','defeat','drop','grant','give','armory','companion','welcome','starter'
 ];
 
-/**
- * Resolves an authoritative event from historical records, offscreen records, seeds, or lastCommittedEventId.
- * Never trusts ungrounded strings.
- */
 export function findAuthoritativeEvent(
   eventId: string,
   currentState?: CanonicalState,
@@ -64,195 +26,432 @@ export function findAuthoritativeEvent(
   const cleanId = eventId ? eventId.trim() : '';
   if (!cleanId) return { found: false };
 
-  // 1. Seeds
   const seed = currentState?.worldInfo?.seeds?.find(s => s.id === cleanId);
-  if (seed) {
-    return {
-      found: true,
-      eventText: seed.content,
-      isActive: seed.status === 'active' || seed.status === 'dormant'
-    };
-  }
+  if (seed) return { found: true, eventText: seed.content, isActive: seed.status === 'active' || seed.status === 'dormant' };
 
-  // 2. Offscreen Records
   const offscreen = currentState?.worldInfo?.offscreenRecords?.find(o => o.id === cleanId);
-  if (offscreen) {
-    return {
-      found: true,
-      eventText: offscreen.eventDescription,
-      isActive: true
-    };
-  }
+  if (offscreen) return { found: true, eventText: offscreen.eventDescription, isActive: true };
 
-  // 3. Camera Offscreen Events
   const camera = currentState?.worldInfo?.cameraOffscreenEvents?.find(c => c === cleanId);
-  if (camera) {
-    return {
-      found: true,
-      eventText: camera,
-      isActive: true
-    };
-  }
+  if (camera) return { found: true, eventText: camera, isActive: true };
 
-  // 4. Historical Records
   const hist = historicalRecords.find(r => r.eventId === cleanId || r.recordId === cleanId);
-  if (hist) {
-    return {
-      found: true,
-      eventText: hist.details,
-      isActive: true,
-      record: hist
-    };
-  }
+  if (hist) return { found: true, eventText: hist.details, isActive: true, record: hist };
 
-  // 5. Last committed event ID fallback
-  if (currentState?.lastCommittedEventId === cleanId) {
-    return {
-      found: true,
-      eventText: undefined,
-      isActive: true
-    };
-  }
-
+  if (currentState?.lastCommittedEventId === cleanId) return { found: true, eventText: undefined, isActive: true };
   return { found: false };
 }
 
-/**
- * Validates that the authoritative event specifically mentions or identifies the candidate entity.
- */
-export function checkCandidateSpecificity(
-  candidateName: string,
-  eventText?: string,
-  histRecord?: ImmutableHistoricalRecord
-): boolean {
+export function checkCandidateSpecificity(candidateName: string, eventText?: string, histRecord?: ImmutableHistoricalRecord): boolean {
   const cleanName = normalizeIdentityText(candidateName);
   if (!cleanName) return false;
-
-  // 1. Check in eventText
   if (eventText) {
     const normEvent = normalizeIdentityText(eventText);
-    if (normEvent.includes(cleanName)) {
-      return true;
-    }
-
-    // Tokenized matching with Korean particle handling
-    const KOREAN_PARTICLES = ['', '을', '를', '이', '가', '의', '과', '와', '으로', '로', '도', '에서', '에게', '이다', '입니다', '뿐', '만'];
+    if (normEvent.includes(cleanName)) return true;
+    const KOREAN_PARTICLES = ['', '을','를','이','가','의','과','와','으로','로','도','에서','에게','이다','입니다','뿐','만'];
     const eventWords = normEvent.split(/[\s,.\-?!;:()\[\]{}"'`~]+/).filter(Boolean);
-    const tokenMatch = eventWords.some(w => {
-      if (w === cleanName) return true;
-      if (w.startsWith(cleanName)) {
-        const suffix = w.slice(cleanName.length);
-        return KOREAN_PARTICLES.includes(suffix);
-      }
-      return false;
-    });
-    if (tokenMatch) return true;
+    if (eventWords.some(w => w === cleanName || (w.startsWith(cleanName) && KOREAN_PARTICLES.includes(w.slice(cleanName.length))))) return true;
   }
-
-  // 2. Check in historical record canonicalAction
   if (histRecord?.canonicalAction) {
     const actionStr = JSON.stringify(histRecord.canonicalAction).toLowerCase();
-    if (actionStr.includes(cleanName)) {
-      return true;
-    }
+    if (actionStr.includes(cleanName)) return true;
   }
-
   return false;
 }
 
-/**
- * Validates that the authoritative event and evidence actually prove the creation or acquisition
- * of the candidate entity (rather than a merely incidental or unrelated event).
- */
+function isHistoryCreationOrAcquisitionRecord(record: ImmutableHistoricalRecord): boolean {
+  if (
+    record.actionType === 'ADD_NPC' ||
+    record.actionType === 'ADD_FACTION' ||
+    record.actionType === 'ADD_NARRATIVE_SEED' ||
+    record.actionType === 'RECORD_OFFSCREEN_EVENT'
+  ) return true;
+  if (record.actionType === 'MODIFY_INVENTORY') {
+    const operation = (record.canonicalAction as any)?.payload?.operation;
+    return operation === 'ADD';
+  }
+  return false;
+}
+
 export function checkCreationOrAcquisitionProof(
   evidence: NonNullable<EntityReferenceBundle['evidence']>,
   eventText?: string,
   histRecord?: ImmutableHistoricalRecord
 ): boolean {
-  // 1. Cause validation: if cause is present, check against approved causes or valid novelty root
   if (evidence.cause) {
     if (!VALID_NOVELTY_CAUSES.has(evidence.cause)) {
       const causeUpper = evidence.cause.toUpperCase();
-      const hasNoveltyRoot = [
-        'REWARD', 'GIFT', 'DISCOVER', 'LOOT', 'ACQUIRE', 'CREATE', 'ENCOUNTER', 'MEET', 'BUY', 'CRAFT', 'SPAWN', 'STORY', 'FACTION', 'SEED', 'GENESIS', 'STARTER', 'COMPANION'
-      ].some(root => causeUpper.includes(root));
-      if (!hasNoveltyRoot) {
-        return false;
-      }
+      const hasNoveltyRoot = ['REWARD','GIFT','DISCOVER','LOOT','ACQUIRE','CREATE','ENCOUNTER','MEET','BUY','CRAFT','SPAWN','STORY','FACTION','SEED','GENESIS','STARTER','COMPANION'].some(root => causeUpper.includes(root));
+      if (!hasNoveltyRoot) return false;
     }
   }
 
-  // 2. Event text proof: Check for acquisition/creation/discovery context
   let hasProofInText = false;
   if (eventText) {
     const normEvent = normalizeIdentityText(eventText);
     hasProofInText = CREATION_ACQUISITION_KEYWORDS.some(kw => normEvent.includes(kw));
   }
 
-  // 3. Historical record action proof:
   let hasProofInAction = false;
-  if (histRecord) {
-    if (
-      histRecord.actionType === 'MODIFY_INVENTORY' ||
-      histRecord.actionType === 'ADD_NPC' ||
-      histRecord.actionType === 'ADD_FACTION' ||
-      histRecord.actionType === 'ADD_NARRATIVE_SEED' ||
-      histRecord.actionType === 'OVERWRITE_CHARACTER'
-    ) {
-      hasProofInAction = true;
-    }
+  if (histRecord && isHistoryCreationOrAcquisitionRecord(histRecord)) {
+    hasProofInAction = true;
   }
 
-  // 4. Evidence context proof:
   let hasProofInContext = false;
   if (isNonEmptyString(evidence.context)) {
     const normCtx = normalizeIdentityText(evidence.context);
     hasProofInContext = CREATION_ACQUISITION_KEYWORDS.some(kw => normCtx.includes(kw));
   }
 
-  // Strict Rule: At least one authoritative proof mechanism (event text, record action, or backed context) must verify creation/acquisition
   return hasProofInText || hasProofInAction || hasProofInContext;
 }
 
-/**
- * Checks if an authoritative event is causally related to a candidate entity and its mutation.
- *
- * Strict Invariants:
- * 1. An event is causally related if it is the current proposal's event (proposal.eventId)
- *    AND the proposal explicitly contains an action defining/modifying this entity or mutation.
- * 2. An external/historical authoritative event (seed, offscreen, camera, historical record)
- *    must specifically identify or mention the candidate entity (name/id), or the related mutation
- *    item/source NPC, proving that the event is the true historical origin/cause of the action.
- * 3. An event that exists but lacks any reference to the candidate entity/mutation is strictly
- *    unrelated (returns false).
- */
+export const CANONICAL_INVALIDATION_CAUSES: ReadonlySet<string> = new Set([
+  'CANON_IDENTITY_INVALIDATION',
+  'IDENTITY_INVALIDATION',
+  'IDENTITY_FABRICATION',
+  'IMPERSONATION',
+  'FORGERY_DISCOVERED',
+  'CANON_REVOCATION',
+  'CANON_DEMOTION',
+  'FORGERY_CONFISCATED',
+  'INVALIDATION',
+  'REVOCATION'
+]);
+
+export const INVALID_ENTITY_ROLES: ReadonlySet<string> = new Set([
+  'IMPOSTOR',
+  'FAKE',
+  'FABRICATED',
+  'UNMASKED_IMPOSTOR'
+]);
+
+export const INVALID_ENTITY_IDS: ReadonlySet<string> = new Set([
+  'INVALID',
+  'DEMOTED_NOVEL',
+  'IMPOSTOR',
+  'FABRICATED'
+]);
+
+export interface CurrentCausalAuthorityResolution {
+  readonly hasAuthority: boolean;
+  readonly found: boolean;
+  readonly eventText?: string;
+  readonly isInactive?: boolean;
+  readonly isInvalidated?: boolean;
+  readonly rejectionReason?: string;
+  readonly conflictDetail?: string;
+}
+
+export function resolveCurrentCausalAuthority(
+  eventId: string,
+  currentState?: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = [],
+  context?: {
+    operation?: string;
+    acquisitionCause?: string;
+    targetItemName?: string;
+    targetItemId?: string;
+    sourceNpcId?: string;
+  }
+): CurrentCausalAuthorityResolution {
+  const cleanId = eventId ? eventId.trim() : '';
+  if (!cleanId) {
+    return {
+      hasAuthority: false,
+      found: false,
+      rejectionReason: 'MISSING_EVENT_ID',
+      conflictDetail: 'verifiedEventId is missing or empty.'
+    };
+  }
+
+  // 1. Provenance existence check in CanonicalState and Immutable History
+  const matchingSeed = currentState?.worldInfo?.seeds?.find(s => s.id === cleanId);
+  const matchingOff = currentState?.worldInfo?.offscreenRecords?.find(o => o.id === cleanId);
+  const matchingCam = currentState?.worldInfo?.cameraOffscreenEvents?.find(c => c === cleanId);
+  const matchingHist = historicalRecords.find(r => r.eventId === cleanId || r.recordId === cleanId);
+  const isLastCommitted = currentState?.lastCommittedEventId === cleanId;
+
+  const found = Boolean(matchingSeed || matchingOff || matchingCam || matchingHist || isLastCommitted);
+  if (!found) {
+    return {
+      hasAuthority: false,
+      found: false,
+      rejectionReason: 'EVENT_NOT_FOUND',
+      conflictDetail: `Event '${cleanId}' does not exist in canonical world state, seeds, offscreen records, or history.`
+    };
+  }
+
+  const eventText = matchingSeed?.content || matchingOff?.eventDescription || matchingCam || matchingHist?.details;
+
+  // 2. Authoritative Invalidation / Continuity Checks
+
+  // A. Narrative Seed Status check
+  if (matchingSeed) {
+    if (matchingSeed.status === 'resolved') {
+      return {
+        hasAuthority: false,
+        found: true,
+        eventText,
+        isInactive: true,
+        rejectionReason: 'SEED_RESOLVED',
+        conflictDetail: `Narrative seed '${cleanId}' has status 'resolved' and is no longer an active obtainable context.`
+      };
+    }
+  }
+
+  // B. Explicit Canonical Invalidation / Revocation in History
+  for (const rec of historicalRecords) {
+    if (rec.actionType === 'RESOLVE_NARRATIVE_SEED') {
+      const payload = (rec.canonicalAction as any)?.payload;
+      if (payload && payload.id === cleanId) {
+        return {
+          hasAuthority: false,
+          found: true,
+          eventText,
+          isInactive: true,
+          rejectionReason: 'SEED_RESOLVED_IN_HISTORY',
+          conflictDetail: `Seed '${cleanId}' was canonically resolved in history (Record: ${rec.recordId || rec.eventId}).`
+        };
+      }
+    }
+
+    const action = rec.canonicalAction;
+    if (action) {
+      const payload = (action as any).payload;
+      if (payload) {
+        const payloadEventId = payload.verifiedEventId || payload.declaredEventId || payload.targetEventId || payload.id;
+        const payloadCause = payload.cause || payload.invalidationCause || payload.acquisition?.cause;
+        if (payloadEventId === cleanId && payloadCause && CANONICAL_INVALIDATION_CAUSES.has(String(payloadCause).trim().toUpperCase())) {
+          return {
+            hasAuthority: false,
+            found: true,
+            eventText,
+            isInvalidated: true,
+            rejectionReason: 'EVENT_REVOKED_IN_HISTORY',
+            conflictDetail: `Event '${cleanId}' was canonically revoked or invalidated in history with cause '${payloadCause}'.`
+          };
+        }
+
+        // Check nested entityReference in changes
+        const refEvidence = payload.changes?.entityReference?.evidence;
+        if (refEvidence) {
+          const evId = refEvidence.verifiedEventId || refEvidence.declaredEventId;
+          const evCause = refEvidence.cause;
+          if (evId === cleanId && evCause && CANONICAL_INVALIDATION_CAUSES.has(String(evCause).trim().toUpperCase())) {
+            return {
+              hasAuthority: false,
+              found: true,
+              eventText,
+              isInvalidated: true,
+              rejectionReason: 'EVENT_REVOKED_IN_HISTORY',
+              conflictDetail: `Event '${cleanId}' was canonically revoked or invalidated in history with cause '${evCause}'.`
+            };
+          }
+        }
+      }
+    }
+
+    if (rec.details && rec.details.includes(cleanId)) {
+      for (const cause of CANONICAL_INVALIDATION_CAUSES) {
+        if (rec.details.includes(cause)) {
+          return {
+            hasAuthority: false,
+            found: true,
+            eventText,
+            isInvalidated: true,
+            rejectionReason: 'EVENT_INVALIDATED_IN_DETAILS',
+            conflictDetail: `Event '${cleanId}' was canonically recorded with invalidation cause '${cause}'.`
+          };
+        }
+      }
+    }
+  }
+
+  // C. Entity Continuity Invalidation (Involved NPC dead or unmasked as impostor/fabricated)
+  const candidateNpcIds = new Set<string>();
+  if (matchingOff?.involvedNpcIds && Array.isArray(matchingOff.involvedNpcIds)) {
+    for (const id of matchingOff.involvedNpcIds) {
+      if (id && typeof id === 'string') candidateNpcIds.add(id.trim());
+    }
+  }
+  if (context?.sourceNpcId) {
+    candidateNpcIds.add(context.sourceNpcId.trim());
+  }
+
+  const isGiftOrActiveInteraction = context?.acquisitionCause ? 
+    ['GIFT_REWARD', 'GIFT', 'REWARD', 'PAYMENT', 'TRADE'].includes(String(context.acquisitionCause).trim().toUpperCase()) : 
+    Boolean(context?.sourceNpcId);
+
+  if (currentState?.worldInfo?.npcs) {
+    for (const npc of currentState.worldInfo.npcs) {
+      if (!npc.id) continue;
+      if (candidateNpcIds.has(npc.id)) {
+        if (npc.status === 'DEAD' && isGiftOrActiveInteraction) {
+          return {
+            hasAuthority: false,
+            found: true,
+            eventText,
+            isInvalidated: true,
+            rejectionReason: 'SOURCE_NPC_DEAD',
+            conflictDetail: `Involved NPC '${npc.name || npc.id}' is DEAD in canonical state. Past promises or actions from this entity have lost current causal authority for gift/interaction.`
+          };
+        }
+
+        const roleUpper = npc.role ? npc.role.trim().toUpperCase() : '';
+        const resId = npc.entityReference?.resolvedEntityId ? npc.entityReference.resolvedEntityId.trim().toUpperCase() : '';
+        const causeUpper = npc.entityReference?.evidence?.cause ? npc.entityReference.evidence.cause.trim().toUpperCase() : '';
+
+        if (INVALID_ENTITY_ROLES.has(roleUpper) || INVALID_ENTITY_IDS.has(resId) || CANONICAL_INVALIDATION_CAUSES.has(causeUpper)) {
+          return {
+            hasAuthority: false,
+            found: true,
+            eventText,
+            isInvalidated: true,
+            rejectionReason: 'SOURCE_NPC_INVALIDATED',
+            conflictDetail: `Involved NPC '${npc.name || npc.id}' has been canonically invalidated or unmasked as an impostor (${roleUpper || resId || causeUpper}).`
+          };
+        }
+      } else if (eventText && npc.name && eventText.includes(npc.name)) {
+        if (npc.status === 'DEAD' && isGiftOrActiveInteraction) {
+          return {
+            hasAuthority: false,
+            found: true,
+            eventText,
+            isInvalidated: true,
+            rejectionReason: 'SOURCE_NPC_DEAD',
+            conflictDetail: `Named NPC '${npc.name}' in event '${cleanId}' is DEAD in canonical state. Past causal promises have lost authority for gift/interaction.`
+          };
+        }
+        const roleUpper = npc.role ? npc.role.trim().toUpperCase() : '';
+        if (INVALID_ENTITY_ROLES.has(roleUpper)) {
+          return {
+            hasAuthority: false,
+            found: true,
+            eventText,
+            isInvalidated: true,
+            rejectionReason: 'SOURCE_NPC_INVALIDATED',
+            conflictDetail: `Named NPC '${npc.name}' in event '${cleanId}' has been canonically invalidated (${roleUpper}).`
+          };
+        }
+      }
+    }
+  }
+
+  // D. Offscreen Record Status and Causal Contract check
+  if (matchingOff) {
+    const offStatus = (matchingOff as any).status ? String((matchingOff as any).status).trim().toUpperCase() : '';
+    if (offStatus === 'RESOLVED') {
+      return {
+        hasAuthority: false,
+        found: true,
+        eventText,
+        isInactive: true,
+        rejectionReason: 'OFFSCREEN_RESOLVED',
+        conflictDetail: `Offscreen record '${cleanId}' has status 'RESOLVED' and is no longer an active context.`
+      };
+    }
+    if (offStatus === 'INVALIDATED' || offStatus === 'REVOKED' || offStatus === 'SUPERSEDED') {
+      return {
+        hasAuthority: false,
+        found: true,
+        eventText,
+        isInvalidated: true,
+        rejectionReason: `OFFSCREEN_${offStatus}`,
+        conflictDetail: `Offscreen record '${cleanId}' has explicit status '${offStatus}' and has lost causal authority.`
+      };
+    }
+
+    // Causal contract check: Past isolated offscreen events without sourceNpcId cannot confer open deferred GIFT_REWARD minting
+    if (context?.operation === 'ADD') {
+      const cause = context.acquisitionCause ? String(context.acquisitionCause).trim().toUpperCase() : '';
+      if (cause === 'GIFT_REWARD' || cause === 'GIFT' || cause === 'REWARD') {
+        if (eventText) {
+          const normText = normalizeIdentityText(eventText);
+          const isDiscoveryOnly = normText.includes('발견') && !normText.includes('선물') && !normText.includes('주었') && !normText.includes('주어') && !normText.includes('제공') && !normText.includes('하사') && !normText.includes('건네');
+          const isExplicitlyNegated = normText.includes('주지는 않았다') || normText.includes('주지 않았다');
+          if (isDiscoveryOnly || isExplicitlyNegated) {
+            return {
+              hasAuthority: false,
+              found: true,
+              eventText,
+              isInvalidated: true,
+              rejectionReason: 'SEMANTIC_ACTION_MISMATCH',
+              conflictDetail: `Event '${cleanId}' is a discovery/non-transfer occurrence ('${eventText}'). It cannot provide causal authority for GIFT_REWARD acquisition.`
+            };
+          }
+        }
+
+        const hasSourceNpc = Boolean(context?.sourceNpcId && context.sourceNpcId.trim());
+        if (!hasSourceNpc) {
+          return {
+            hasAuthority: false,
+            found: true,
+            eventText,
+            isInvalidated: true,
+            rejectionReason: 'OFFSCREEN_EVENT_NOT_ACTIVE_SEED',
+            conflictDetail: `Offscreen record '${cleanId}' is a historical offscreen occurrence without a specific source NPC. Deferred GIFT_REWARD mutations cannot be minted from past offscreen events without an active NPC interaction.`
+          };
+        }
+      }
+    }
+  }
+
+  // E. Target Item Invalidation check
+  if (context?.targetItemName || context?.targetItemId) {
+    const targetName = context.targetItemName ? normalizeIdentityText(context.targetItemName) : '';
+    const targetId = context.targetItemId ? context.targetItemId.trim() : '';
+
+    for (const rec of historicalRecords) {
+      if (rec.actionType === 'MODIFY_INVENTORY') {
+        const payload = (rec.canonicalAction as any)?.payload;
+        const itemName = payload?.item?.name ? normalizeIdentityText(payload.item.name) : '';
+        const itemId = payload?.item?.id ? payload.item.id.trim() : '';
+        const cause = payload?.acquisition?.cause ? String(payload.acquisition.cause).trim().toUpperCase() : '';
+        const refCause = payload?.item?.entityReference?.evidence?.cause ? String(payload.item.entityReference.evidence.cause).trim().toUpperCase() : '';
+
+        if ((targetName && itemName === targetName) || (targetId && itemId === targetId)) {
+          if (cause === 'FORGERY_CONFISCATED' || refCause === 'FORGERY_CONFISCATED' || CANONICAL_INVALIDATION_CAUSES.has(cause) || CANONICAL_INVALIDATION_CAUSES.has(refCause)) {
+            return {
+              hasAuthority: false,
+              found: true,
+              eventText,
+              isInvalidated: true,
+              rejectionReason: 'TARGET_ITEM_CONFISCATED_AS_FORGERY',
+              conflictDetail: `Item '${context.targetItemName || context.targetItemId}' was canonically confiscated or invalidated as forgery in history.`
+            };
+          }
+        }
+      }
+    }
+  }
+
+  // Authoritative validity holds (no arbitrary expiration by time/stateVersion)
+  return {
+    hasAuthority: true,
+    found: true,
+    eventText,
+    isInactive: false,
+    isInvalidated: false
+  };
+}
+
 export function isAuthoritativeEventCausallyRelated(
   eventId: string,
   entity: { name: string; id?: string; entityType?: CanonicalEntityReferenceType },
-  mutationDetails?: {
-    itemName?: string;
-    itemId?: string;
-    sourceNpcId?: string;
-    sourceNpcName?: string;
-  },
+  mutationDetails?: { itemName?: string; itemId?: string; sourceNpcId?: string; sourceNpcName?: string },
   currentState?: CanonicalState,
   historicalRecords: readonly ImmutableHistoricalRecord[] = [],
   currentProposal?: StateTransitionProposal
 ): boolean {
   const cleanEventId = eventId ? eventId.trim() : '';
   if (!cleanEventId) return false;
-
-  // 1. Current Proposal Event Check:
-  // If the eventId is the current proposal's event, the proposal must contain the canonical action
-  // for this entity or mutation.
   if (currentProposal && currentProposal.eventId === cleanEventId) {
     const normEntityName = normalizeIdentityText(entity.name);
-
     if (entity.entityType === 'NPC') {
       const hasNpcAction = currentProposal.actions.some(a => {
         if (a.type === 'ADD_NPC' || a.type === 'UPDATE_NPC') {
-          const pName = normalizeIdentityText((a.payload as any)?.name);
-          const pId = (a.payload as any)?.id;
+          const pName = normalizeIdentityText((a.payload as any)?.name); const pId = (a.payload as any)?.id;
           return (normEntityName && pName === normEntityName) || (Boolean(entity.id) && pId === entity.id);
         }
         if (a.type === 'MODIFY_INVENTORY' && (a.payload as any)?.acquisition?.sourceNpcId) {
@@ -263,12 +462,10 @@ export function isAuthoritativeEventCausallyRelated(
       });
       if (hasNpcAction) return true;
     }
-
     if (entity.entityType === 'ITEM') {
       const hasItemAction = currentProposal.actions.some(a => {
         if (a.type === 'MODIFY_INVENTORY' && (a.payload as any)?.item) {
-          const iName = normalizeIdentityText((a.payload as any).item.name);
-          const iId = (a.payload as any).item.id;
+          const iName = normalizeIdentityText((a.payload as any).item.name); const iId = (a.payload as any).item.id;
           return (normEntityName && iName === normEntityName) || (Boolean(entity.id) && iId === entity.id);
         }
         return false;
@@ -277,7 +474,6 @@ export function isAuthoritativeEventCausallyRelated(
     }
   }
 
-  // 2. Seeds Check
   const seed = currentState?.worldInfo?.seeds?.find(s => s.id === cleanEventId);
   if (seed && seed.content) {
     if (checkCandidateSpecificity(entity.name, seed.content)) return true;
@@ -286,8 +482,6 @@ export function isAuthoritativeEventCausallyRelated(
     if (mutationDetails?.sourceNpcName && checkCandidateSpecificity(mutationDetails.sourceNpcName, seed.content)) return true;
     if (mutationDetails?.sourceNpcId && seed.content.includes(mutationDetails.sourceNpcId)) return true;
   }
-
-  // 3. Offscreen Records Check
   const offscreen = currentState?.worldInfo?.offscreenRecords?.find(o => o.id === cleanEventId);
   if (offscreen) {
     const offText = `${offscreen.eventDescription || ''} ${offscreen.location || ''} ${JSON.stringify(offscreen.involvedNpcIds || [])}`;
@@ -297,19 +491,16 @@ export function isAuthoritativeEventCausallyRelated(
     if (mutationDetails?.sourceNpcName && checkCandidateSpecificity(mutationDetails.sourceNpcName, offText)) return true;
     if (mutationDetails?.sourceNpcId && offText.includes(mutationDetails.sourceNpcId)) return true;
   }
-
-  // 4. Camera Offscreen Events Check
   const camera = currentState?.worldInfo?.cameraOffscreenEvents?.find(c => c === cleanEventId);
   if (camera) {
     if (checkCandidateSpecificity(entity.name, camera)) return true;
     if (entity.id && camera.includes(entity.id)) return true;
     if (mutationDetails?.itemName && checkCandidateSpecificity(mutationDetails.itemName, camera)) return true;
+    if (mutationDetails?.sourceNpcName && checkCandidateSpecificity(mutationDetails.sourceNpcName, camera)) return true;
   }
-
-  // 5. Historical Records Check (all records matching this eventId)
   const matchingRecords = historicalRecords.filter(r => r.eventId === cleanEventId || r.recordId === cleanEventId);
   for (const rec of matchingRecords) {
-    // Check in record details
+    if (!isHistoryCreationOrAcquisitionRecord(rec)) continue;
     if (rec.details) {
       if (checkCandidateSpecificity(entity.name, rec.details, rec)) return true;
       if (entity.id && rec.details.includes(entity.id)) return true;
@@ -318,27 +509,15 @@ export function isAuthoritativeEventCausallyRelated(
       if (mutationDetails?.sourceNpcName && checkCandidateSpecificity(mutationDetails.sourceNpcName, rec.details, rec)) return true;
       if (mutationDetails?.sourceNpcId && rec.details.includes(mutationDetails.sourceNpcId)) return true;
     }
-
-    // Check in canonicalAction
     if (rec.canonicalAction) {
-      const actionJson = JSON.stringify(rec.canonicalAction);
-      const cleanJson = actionJson.toLowerCase();
-      const normEntity = normalizeIdentityText(entity.name);
+      const actionJson = JSON.stringify(rec.canonicalAction); const cleanJson = actionJson.toLowerCase(); const normEntity = normalizeIdentityText(entity.name);
       if (normEntity && cleanJson.includes(normEntity)) return true;
       if (entity.id && actionJson.includes(entity.id)) return true;
-      if (mutationDetails?.itemName) {
-        const normItem = normalizeIdentityText(mutationDetails.itemName);
-        if (normItem && cleanJson.includes(normItem)) return true;
-      }
+      if (mutationDetails?.itemName && cleanJson.includes(normalizeIdentityText(mutationDetails.itemName))) return true;
       if (mutationDetails?.itemId && actionJson.includes(mutationDetails.itemId)) return true;
-      if (mutationDetails?.sourceNpcName) {
-        const normSrc = normalizeIdentityText(mutationDetails.sourceNpcName);
-        if (normSrc && cleanJson.includes(normSrc)) return true;
-      }
+      if (mutationDetails?.sourceNpcName && cleanJson.includes(normalizeIdentityText(mutationDetails.sourceNpcName))) return true;
       if (mutationDetails?.sourceNpcId && actionJson.includes(mutationDetails.sourceNpcId)) return true;
     }
   }
-
   return false;
 }
-

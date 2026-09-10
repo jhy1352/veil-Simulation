@@ -1,0 +1,10 @@
+{
+  "playerInput": "구결이 끝나자 미세하게 떨리며 진동하는 돌문을 밀어젖히고 넓은 공동(空洞) 안으로 발을 내딛는다.",
+  "storyTurnCount": 5,
+  "timestamp": "2026-09-10T02:38:44.743Z",
+  "sessionConfig": {
+    "worldPreset": "화산비고",
+    "characterName": "백연화",
+    "model": "gemini-3.5-flash"
+  }
+}

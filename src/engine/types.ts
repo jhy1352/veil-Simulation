@@ -1,4 +1,4 @@
-import { Character, WorldInfo, NpcRecord, FactionRecord, NarrativeSeed, ChapterInfo, InventoryItem, CharacterStats, NarrativeTime, OffscreenEventRecord, ActionIntentCategory } from '../types';
+import { Character, WorldInfo, NpcRecord, FactionRecord, NarrativeSeed, ChapterInfo, InventoryItem, CharacterStats, NarrativeTime, OffscreenEventRecord, ActionIntentCategory, CanonicalEntityReferenceType } from '../types';
 import type { MeaningNode } from './language/types';
 
 export type { ActionIntentCategory } from '../types';
@@ -6,6 +6,21 @@ export type { ActionIntentCategory } from '../types';
 declare module './proposalParser' {
   interface SafeProposalEnvelope {
     originInputId?: string;
+  }
+}
+
+export interface IdentityInvalidationDeclaration {
+  readonly targetCanonicalId: string;
+  readonly entityType: CanonicalEntityReferenceType;
+  readonly targetName?: string;
+  readonly declaredEventId?: string;
+  readonly reason?: string;
+  readonly claimType?: string;
+}
+
+declare module '../types' {
+  interface CandidatePacket {
+    identityInvalidationDeclarations?: readonly IdentityInvalidationDeclaration[];
   }
 }
 
@@ -93,6 +108,8 @@ export type AcquisitionCause =
   | 'REWARD'
   | 'GIFT';
 
+export type AcquisitionCausalSource = 'EXISTING_EVENT' | 'NOVEL_EVENT';
+
 export interface AcquisitionCost {
   readonly id?: string;
   readonly name?: string;
@@ -104,6 +121,32 @@ export interface AcquisitionEventPayload {
   readonly cost?: AcquisitionCost;
   readonly verifiedEventId?: string;
   readonly sourceNpcId?: string;
+  readonly causalSource?: AcquisitionCausalSource;
+}
+
+export type NpcInformationState = 'MATCH' | 'DISTORTED';
+
+export type InformationAcquisitionMethod =
+  | 'OBSERVATION'
+  | 'INVESTIGATION'
+  | 'TESTIMONY'
+  | 'RECORD'
+  | 'TRANSFER'
+  | 'RELATIONSHIP'
+  | 'ABILITY';
+
+/**
+ * Compact evidence carried by an existing canonical action and preserved in History.
+ * UNKNOWN is implicit: absence of positive evidence means no projection entry.
+ */
+export interface NpcInformationTrace {
+  readonly factId: string;
+  readonly elementIds: readonly string[];
+  readonly recipientNpcId: string;
+  readonly sourceNpcId?: string;
+  readonly acquisition: InformationAcquisitionMethod;
+  readonly state?: NpcInformationState;
+  readonly understoodText?: string;
 }
 
 export type ActionType =
@@ -132,7 +175,7 @@ export interface ActionPayloadMap {
   ADVANCE_TIME: { targetTime?: NarrativeTime; reason?: string; year?: number; season?: string; month?: number; day?: number; timeOfDay?: string };
   ADD_RUMOR: { rumor: string; sourceContext?: string };
   ADD_NPC: NpcRecord;
-  UPDATE_NPC: { id: string; changes: Partial<NpcRecord> };
+  UPDATE_NPC: { id: string; changes: Partial<NpcRecord>; information?: NpcInformationTrace | readonly NpcInformationTrace[] };
   SET_NPC_STATUS: { id: string; status: 'ALIVE' | 'DEAD' | 'MISSING' | 'UNMET' | 'MET'; reason?: string };
   ADD_FACTION: FactionRecord;
   UPDATE_FACTION: { id: string; changes: Partial<FactionRecord> };
@@ -148,6 +191,7 @@ export interface ActionPayloadMap {
     narrativeTime?: NarrativeTime;
     timestamp?: string;
     visibility?: 'PUBLIC' | 'FACTION_ONLY' | 'PRIVATE' | 'HIDDEN' | 'RUMOR';
+    information?: NpcInformationTrace | readonly NpcInformationTrace[];
   };
   UPDATE_CHARACTER_STATS: Partial<CharacterStats> & {
     verifiedEventId?: string;
@@ -167,6 +211,7 @@ export interface ActionPayloadMap {
       };
       verifiedEventId?: string;
       sourceNpcId?: string;
+      causalSource?: AcquisitionCausalSource;
     };
   };
   SET_CHARACTER_SECRET: { secret: string };
@@ -199,6 +244,7 @@ export interface StateTransitionProposal {
   verifiedClaims?: readonly VerifiedClaim[];
   originInputId?: string;
   meaningTree?: MeaningNode;
+  identityInvalidationDeclarations?: readonly IdentityInvalidationDeclaration[];
 }
 
 export interface ImmutableHistoricalRecord {

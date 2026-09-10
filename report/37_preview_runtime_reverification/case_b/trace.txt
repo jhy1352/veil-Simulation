@@ -1,0 +1,5 @@
+=== START SCENARIO Case_B: Item Reception / Contract Action (Preview Problem Input) ===
+[STAGE 1: PLAYER INPUT] "조경 선생에게 동부 광산 투자 계약서를 받아서 소지품에 넣는다." (Turn 2)
+[STAGE 2: LLM PROMPT GENERATED] Prompt Size: 448 chars
+[STAGE 3: CALLING LLM API] Model: gemini-2.5-flash
+[STAGE 3: LLM CALL FAILED] Error after retries: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}

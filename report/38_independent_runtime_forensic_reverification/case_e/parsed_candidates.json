@@ -1,0 +1,38 @@
+[
+  {
+    "candidateId": 1,
+    "label": "어둠의 퇴각과 조경 선생의 무거운 자백",
+    "narrativeSummary": "사당에서 대치하던 흑의인 목영은 서원의 순찰 소리에 가볍게 몸을 날려 사라집니다. 위험에서 벗어난 소진호는 사당 밑에서 발견한 '신비한 옥패'를 품에 쥐고 장서각으로 돌아가 조경 선생에게 옥패를 제시하며, 목영과의 관계와 가문의 비사에 대해 매섭게 추궁합니다. 조경 선생은 마침내 깊은 한숨을 쉬며 숨겨진 진실의 실타래를 풀기 시작합니다.",
+    "rawMetadata": {
+      "factCheckSummary": "1) [신비한 옥패 획득]: 플레이어 선언에 따라 인벤토리 추가 반영. 2) [목영과의 대치 해소]: 서원 내부라는 공간적 제약을 활용해 대치 상황을 자연스럽게 해소.",
+      "foreshadowSeeds": [
+        "seed-shadow-guard-identity",
+        "seed-so-family-fall"
+      ],
+      "cameraOffscreenEvents": [
+        "숭양서원 수호 세력의 야간 순찰"
+      ],
+      "currentChapter": "제1장: 서원의 은밀한 흔적",
+      "upcomingChapters": [
+        "제2장: 심야의 서고",
+        "제3장: 음모의 배후"
+      ],
+      "statChanges": "인벤토리 추가: 신비한 옥패 (item-mysterious-jade)",
+      "inventoryAction": {
+        "action": "MODIFY_INVENTORY",
+        "type": "ADD",
+        "item": {
+          "itemId": "item-mysterious-jade",
+          "name": "신비한 옥패",
+          "type": "ITEM",
+          "description": "소씨 가문의 문양이 새겨진 청색 옥패. 장서각 뒤편 사당에서 발견되었으며 기묘한 기운을 품고 있다."
+        },
+        "acquisition": {
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "event-acquire-jade-and-confront"
+        }
+      },
+      "contextVerificationDeclaration": "정사 맥락 일치"
+    }
+  }
+]

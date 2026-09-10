@@ -55,6 +55,10 @@ async function runSuite() {
   {
     const initialWorld = createEmptyWorldInfo();
     initialWorld.worldName = '판타지아 대륙';
+    initialWorld.seeds = [
+      { id: 'seed-blacksmith', content: '시작 마을에서 대장장이 톨린을 발견했다.', status: 'active', category: 'EVENT' },
+      { id: 'seed-elder', content: '마을 광장에서 촌장 엘론을 만났다.', status: 'active', category: 'EVENT' }
+    ];
     const initialChar = createEmptyCharacter();
     initialChar.name = '모험가 아린';
     initialChar.stats = { strength: 14, agility: 12, constitution: 10, intelligence: 10, wisdom: 8, charisma: 10 };
@@ -78,7 +82,15 @@ async function runSuite() {
             location: '시작 마을',
             status: 'ALIVE',
             innerThought: '성실한 장인이다.',
-            npcClass: 'Class A'
+            npcClass: 'Class A',
+            entityReference: {
+              entityType: 'NPC',
+              evidence: {
+                verifiedEventId: 'seed-blacksmith',
+                cause: 'MET_DURING_STORY',
+                context: '시작 마을에서 대장장이 톨린을 만났다.'
+              }
+            }
           }
         }
       ]
@@ -350,6 +362,9 @@ async function runSuite() {
     // Generation 0: Initial Creation
     const initialWorld = createEmptyWorldInfo();
     initialWorld.worldName = '창세의 땅';
+    initialWorld.seeds = [
+      { id: 'seed-elder', content: '마을 광장에서 촌장 엘론을 발견했다.', status: 'active', category: 'EVENT' }
+    ];
     const initialChar = createEmptyCharacter();
     initialChar.name = '개척자';
     initialChar.stats.strength = 15;
@@ -403,7 +418,15 @@ async function runSuite() {
             location: '마을 광장',
             status: 'ALIVE',
             innerThought: '마을을 지켜야 한다.',
-            npcClass: 'Class A'
+            npcClass: 'Class A',
+            entityReference: {
+              entityType: 'NPC',
+              evidence: {
+                verifiedEventId: 'seed-elder',
+                cause: 'MET_DURING_STORY',
+                context: '마을 광장에서 촌장 엘론을 만났다.'
+              }
+            }
           }
         }
       ]

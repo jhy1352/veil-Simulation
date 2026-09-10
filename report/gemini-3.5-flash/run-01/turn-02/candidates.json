@@ -1,0 +1,55 @@
+{
+  "rawCandidatesBlock": [
+    {
+      "label": "진기 공명과 고대 화산파의 흔적 (내력 공명)",
+      "narrativeSummary": "돌판의 기괴한 조각상에 진기를 주입하자, 화산파 고유의 도가 기운과 기이하게 공명하며 붉은 이끼 사이로 숨겨진 검로(劍路)의 흔적이 드러납니다. 그러나 동시에 이질적인 음한(陰寒)한 기운이 연화의 단전을 향해 역류해 들어옵니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "돌판에 깃든 음풍(陰風)의 마도적 기원"
+        ]
+      },
+      "candidateId": 1
+    },
+    {
+      "label": "진법의 역류와 붕괴 위험 (진법 발동)",
+      "narrativeSummary": "미미한 진기를 불어넣자마자, 돌판 아래에 잠들어 있던 기문둔갑의 진법이 자극을 받아 요동치기 시작합니다. 사방의 암벽이 삐걱거리며 흙먼지가 떨어져 내리고, 천장이 무너질 듯한 압박감이 어둠 속에서 연화를 덮쳐옵니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "비고의 붕괴를 예고하는 낙석과 진동"
+        ]
+      },
+      "candidateId": 2
+    },
+    {
+      "label": "기괴한 형상의 주술적 실체 (환각의 발현)",
+      "narrativeSummary": "문양을 살피기 위해 내력을 눈가에 집중하는 순간, 조각상의 괴상한 얼굴이 살아 움직이는 듯한 기괴한 환각이 연화의 시야를 흐려놓습니다. 폐소공포로 흐트러진 심성이 환각과 결합하여 극심한 정신적 고통을 유발합니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "어둠 속에서 속삭이는 비고의 원혼들"
+        ]
+      },
+      "candidateId": 3
+    }
+  ],
+  "totalParsedCount": 1,
+  "preAuthResults": [
+    {
+      "candidateId": 1,
+      "label": "진기 공명과 고대 화산파의 흔적 (내력 공명)",
+      "narrativeSummary": "돌판의 기괴한 조각상에 진기를 주입하자, 화산파 고유의 도가 기운과 기이하게 공명하며 붉은 이끼 사이로 숨겨진 검로(劍路)의 흔적이 드러납니다. 그러나 동시에 이질적인 음한(陰寒)한 기운이 연화의 단전을 향해 역류해 들어옵니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "돌판에 깃든 음풍(陰風)의 마도적 기원"
+        ]
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    }
+  ],
+  "allowedIds": [],
+  "rejectedIds": [
+    1
+  ]
+}

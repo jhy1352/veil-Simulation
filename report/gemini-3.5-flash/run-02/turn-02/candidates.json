@@ -1,0 +1,57 @@
+{
+  "rawCandidatesBlock": [
+    {
+      "label": "진기 역류와 이형(異形)의 반발",
+      "narrativeSummary": "돌판에 새겨진 기괴한 문양에 자하진기를 주입하는 순간, 불길하고 탁한 기운이 연화의 순정한 내력을 집어삼킬 듯 역류합니다. 이형의 기운을 다스려 내상을 입지 않고 돌판의 비밀을 알아내기 위해서는 정교한 심법 조율이 필요합니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "비고에 스며든 이질적인 마도의 흔적"
+        ],
+        "statDeltas": []
+      },
+      "candidateId": 1
+    },
+    {
+      "label": "기문진법의 미세한 동조",
+      "narrativeSummary": "진기를 주입하자 돌판 아래 묻혀 있던 도가(道家) 계열의 술법 회로가 반응합니다. 기괴한 문양은 외형과 달리 화산파의 무공 흐름과 맞물리는 기문둔갑의 열쇠임이 밝혀지며, 비고 내부의 지도가 머릿속에 파편적으로 스쳐 지나갑니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "비고를 설계한 선대 고인의 안배"
+        ]
+      },
+      "candidateId": 2
+    },
+    {
+      "label": "석판 아래 작동하는 기계 장치",
+      "narrativeSummary": "진기가 문양의 굴곡을 타고 흐르자, 바닥 전체가 미세하게 가라앉으며 기계식 톱니바퀴가 맞물려 돌아가는 소리가 발밑에서 울려 퍼집니다. 기이한 조각상은 단순한 상징이 아니라 특정 무게나 내력의 압력을 감지하는 정교한 무게추 장치였습니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "비고 하부의 거대한 기관 장치"
+        ]
+      },
+      "candidateId": 3
+    }
+  ],
+  "totalParsedCount": 1,
+  "preAuthResults": [
+    {
+      "candidateId": 1,
+      "label": "진기 역류와 이형(異形)의 반발",
+      "narrativeSummary": "돌판에 새겨진 기괴한 문양에 자하진기를 주입하는 순간, 불길하고 탁한 기운이 연화의 순정한 내력을 집어삼킬 듯 역류합니다. 이형의 기운을 다스려 내상을 입지 않고 돌판의 비밀을 알아내기 위해서는 정교한 심법 조율이 필요합니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "비고에 스며든 이질적인 마도의 흔적"
+        ],
+        "statDeltas": []
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    }
+  ],
+  "allowedIds": [],
+  "rejectedIds": [
+    1
+  ]
+}

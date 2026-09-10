@@ -1182,6 +1182,23 @@ export function runNovelLifecycleTests(): { passed: number; failed: number; erro
             location: '관아',
             involvedNpcIds: ['npc-chulsoo']
           }
+        },
+        {
+          type: 'UPDATE_NPC',
+          payload: {
+            id: 'npc-chulsoo',
+            changes: {
+              entityReference: {
+                entityType: 'NPC',
+                claimedEntityId: 'npc-chulsoo',
+                resolvedEntityId: 'INVALID',
+                evidence: {
+                  verifiedEventId: fraudEventId,
+                  cause: 'CANON_IDENTITY_INVALIDATION'
+                }
+              }
+            }
+          }
         }
       ]
     });
@@ -1274,6 +1291,559 @@ export function runNovelLifecycleTests(): { passed: number; failed: number; erro
     assert(record.transitionHistory![0].fromDomain === 'CANON', 'Case 20: Initial entry fromDomain is CANON');
     assert(record.transitionHistory![1].fromDomain === 'CANON' && record.transitionHistory![1].toDomain === 'NOVEL', 'Case 20: Second entry is CANON -> NOVEL');
     assert(record.transitionHistory![1].version === 2, 'Case 20: Version is 2');
+  }
+
+  // --- [Case 21] Candidate Declaration to Canon Demotion Pipeline & Semantic Verification ---
+  console.log('\n--- [Case 21] Candidate Declaration to Canon Demotion Pipeline ---');
+  {
+    // 21.1: 실제 identity invalidation → PASS
+    const init21 = createInitialTestState();
+    const engine21 = new SovereignEngine(init21.worldInfo, init21.character);
+    const turn21 = 5;
+
+    // Commit an authoritative offscreen event with canonical semantic mutation
+    const fraudEvId = 'evt-chulsoo-fraud-committed-21';
+    const fraudEventRes = dispatchEngineInternalProposal(engine21, {
+      requestId: 'req-fraud-21',
+      eventId: fraudEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: fraudEvId,
+            eventDescription: '철수의 신원 사기극이 탄로남',
+            location: '도심',
+            involvedNpcIds: ['npc-chulsoo'],
+            visibility: 'PUBLIC'
+          }
+        },
+        {
+          type: 'UPDATE_NPC',
+          payload: {
+            id: 'npc-chulsoo',
+            changes: {
+              entityReference: {
+                entityType: 'NPC',
+                claimedEntityId: 'npc-chulsoo',
+                resolvedEntityId: 'INVALID',
+                evidence: {
+                  verifiedEventId: fraudEvId,
+                  cause: 'CANON_IDENTITY_INVALIDATION'
+                }
+              }
+            }
+          }
+        }
+      ]
+    });
+    assert(fraudEventRes.success, 'Case 21.1: Fraud event successfully committed to Sovereign Engine');
+
+    const state21 = engine21.getSnapshot();
+    const history21 = engine21.getHistory();
+
+    const candidate21: CandidatePacket = {
+      candidateId: 'cand-21-1',
+      turn: turn21,
+      timestamp: new Date().toISOString(),
+      identityInvalidationDeclarations: [
+        {
+          targetCanonicalId: 'npc-chulsoo',
+          entityType: 'NPC',
+          targetName: '철수',
+          declaredEventId: fraudEvId,
+          reason: '신원 사기극 탄로'
+        }
+      ]
+    };
+
+    // Parse candidate into proposal
+    const proposal21 = buildSafeProposalFromCandidate(
+      candidate21,
+      {
+        requestId: 'req-candidate-21',
+        eventId: fraudEvId,
+        expectedStateVersion: state21.stateVersion,
+        turn: turn21,
+        source: 'LLM'
+      },
+      state21,
+      history21
+    );
+
+    assert(proposal21.identityInvalidationDeclarations !== undefined, 'Case 21.1: Proposal includes untrusted declarations');
+    assert(proposal21.identityInvalidationDeclarations!.length === 1, 'Case 21.1: Exactly 1 declaration attached');
+    assert(proposal21.actions.length === 0, 'Case 21.1: Untrusted declaration was NOT promoted to canonical actions');
+    assert(!proposal21.verifiedClaims || proposal21.verifiedClaims.length === 0, 'Case 21.1: Untrusted declaration was NOT converted to verifiedClaims');
+
+    const obs21 = observeCandidateNovelHistory(
+      [],
+      candidate21,
+      proposal21,
+      state21,
+      turn21,
+      history21
+    );
+
+    assert(obs21.demotedCount === 1, 'Case 21.1: Successfully demoted 1 Canon entity on committed invalidation');
+    const demotedChulsoo = obs21.updatedRecords.find(r => r.canonicalId === 'npc-chulsoo' || r.demotedFromCanonicalId === 'npc-chulsoo');
+    assert(demotedChulsoo !== undefined, 'Case 21.1: Demoted record found in updated records');
+    assert(demotedChulsoo?.lifecycle === 'DEMOTED_NOVEL', 'Case 21.1: Lifecycle is DEMOTED_NOVEL');
+    assert(demotedChulsoo?.demotedFromCanonicalId === 'npc-chulsoo', 'Case 21.1: demotedFromCanonicalId preserved');
+    assert(demotedChulsoo?.sourceEventIds.includes(fraudEvId), 'Case 21.1: sourceEventIds includes fraudEvId');
+
+    // Duplicate demotion prevention check
+    const duplicateObs = observeCandidateNovelHistory(
+      obs21.updatedRecords,
+      candidate21,
+      proposal21,
+      state21,
+      turn21,
+      history21
+    );
+    assert(duplicateObs.demotedCount === 0, 'Case 21.1: Duplicate demotion for same event is prevented');
+
+    // 21.2: 다른 인물의 사칭 → REJECT (Other entity invalidation must not demote target)
+    const otherFraudEvId = 'evt-other-entity-fraud-21-2';
+    const otherFraudRes = dispatchEngineInternalProposal(engine21, {
+      requestId: 'req-other-fraud-21-2',
+      eventId: otherFraudEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'ADD_NPC',
+          payload: {
+            id: 'npc-younghee',
+            name: '영희',
+            alias: '화산파 영희',
+            affiliation: '화산파',
+            status: 'ALIVE',
+            metInStory: true,
+            entityReference: {
+              entityType: 'NPC',
+              claimedEntityId: 'npc-younghee',
+              resolvedEntityId: 'INVALID',
+              evidence: {
+                verifiedEventId: otherFraudEvId,
+                cause: 'CANON_IDENTITY_INVALIDATION'
+              }
+            }
+          }
+        },
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: otherFraudEvId,
+            eventDescription: '영희의 신원 위조 판명',
+            location: '관아',
+            involvedNpcIds: ['npc-younghee'],
+            visibility: 'PUBLIC'
+          }
+        }
+      ]
+    });
+    assert(otherFraudRes.success, 'Case 21.2: Other entity fraud event successfully committed');
+
+    const otherEntityDecision = evaluateCanonDemotion(
+      {
+        targetCanonicalId: 'npc-chulsoo',
+        entityType: 'NPC',
+        targetName: '철수',
+        verifiedInvalidationEventId: otherFraudEvId
+      },
+      engine21.getSnapshot(),
+      engine21.getHistory()
+    );
+    assert(!otherEntityDecision.demote, 'Case 21.2: Other entity invalidation must not demote target entity');
+    assert(otherEntityDecision.reason === 'UNRELATED_EVENT', 'Case 21.2: Reason is UNRELATED_EVENT');
+
+    // 21.3: 사칭/사기극 단어만 존재 (텍스트만 있고 실제 canonical mutation 없음) → REJECT
+    const wordOnlyEvId = 'evt-word-only-fraud-21-3';
+    dispatchEngineInternalProposal(engine21, {
+      requestId: 'req-word-only-21-3',
+      eventId: wordOnlyEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: wordOnlyEvId,
+            eventDescription: '철수의 신원 사기극과 사칭 소문이 관아에 파다함',
+            location: '관아',
+            involvedNpcIds: ['npc-chulsoo'],
+            visibility: 'PUBLIC'
+          }
+        }
+      ]
+    });
+
+    const wordOnlyDecision = evaluateCanonDemotion(
+      {
+        targetCanonicalId: 'npc-chulsoo',
+        entityType: 'NPC',
+        targetName: '철수',
+        verifiedInvalidationEventId: wordOnlyEvId
+      },
+      engine21.getSnapshot(),
+      engine21.getHistory()
+    );
+    assert(!wordOnlyDecision.demote, 'Case 21.3: Keyword-only event without canonical mutation must not demote');
+    assert(wordOnlyDecision.reason === 'NON_IDENTITY_INVALIDATION_EVENT', 'Case 21.3: Reason is NON_IDENTITY_INVALIDATION_EVENT');
+
+    // 21.4: 죽음/실종/이동/전투/이름 변경 → REJECT
+    // 21.4.a: 죽음 (Death)
+    const deathEvId = 'evt-death-21-4a';
+    dispatchEngineInternalProposal(engine21, {
+      requestId: 'req-death-21-4a',
+      eventId: deathEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: deathEvId,
+            eventDescription: '철수가 전투 중 전사함',
+            location: '전장',
+            involvedNpcIds: ['npc-chulsoo']
+          }
+        },
+        {
+          type: 'UPDATE_NPC',
+          payload: {
+            id: 'npc-chulsoo',
+            changes: { status: 'DEAD' }
+          }
+        }
+      ]
+    });
+    const deathDecision = evaluateCanonDemotion(
+      { targetCanonicalId: 'npc-chulsoo', entityType: 'NPC', targetName: '철수', verifiedInvalidationEventId: deathEvId },
+      engine21.getSnapshot(),
+      engine21.getHistory()
+    );
+    assert(!deathDecision.demote, 'Case 21.4.a: Death must not trigger demotion');
+
+    // 21.4.b: 실종 (Missing)
+    const missingEvId = 'evt-missing-21-4b';
+    dispatchEngineInternalProposal(engine21, {
+      requestId: 'req-missing-21-4b',
+      eventId: missingEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'UPDATE_NPC',
+          payload: {
+            id: 'npc-chulsoo',
+            changes: { status: 'MISSING' }
+          }
+        }
+      ]
+    });
+    const missingDecision = evaluateCanonDemotion(
+      { targetCanonicalId: 'npc-chulsoo', entityType: 'NPC', targetName: '철수', verifiedInvalidationEventId: missingEvId },
+      engine21.getSnapshot(),
+      engine21.getHistory()
+    );
+    assert(!missingDecision.demote, 'Case 21.4.b: Missing must not trigger demotion');
+
+    // 21.4.c: 이동 (Movement)
+    const moveEvId = 'evt-chulsoo-move-21-4c';
+    dispatchEngineInternalProposal(engine21, {
+      requestId: 'req-move-21-4c',
+      eventId: moveEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: moveEvId,
+            eventDescription: '철수가 한양에서 낙양으로 이동함',
+            location: '낙양',
+            involvedNpcIds: ['npc-chulsoo']
+          }
+        },
+        {
+          type: 'UPDATE_NPC',
+          payload: {
+            id: 'npc-chulsoo',
+            changes: { location: '낙양' }
+          }
+        }
+      ]
+    });
+    const moveDecision = evaluateCanonDemotion(
+      { targetCanonicalId: 'npc-chulsoo', entityType: 'NPC', targetName: '철수', verifiedInvalidationEventId: moveEvId },
+      engine21.getSnapshot(),
+      engine21.getHistory()
+    );
+    assert(!moveDecision.demote, 'Case 21.4.c: Movement must not trigger demotion');
+
+    // 21.4.d: 전투 / 피해 (Combat / Damage)
+    const combatEvId = 'evt-combat-21-4d';
+    dispatchEngineInternalProposal(engine21, {
+      requestId: 'req-combat-21-4d',
+      eventId: combatEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: combatEvId,
+            eventDescription: '철수가 자객의 습격을 받아 부상을 입음',
+            location: '도심',
+            involvedNpcIds: ['npc-chulsoo']
+          }
+        },
+        {
+          type: 'RECORD_PHYSICAL_DEFECT',
+          payload: {
+            defect: '검에 베인 흉터'
+          }
+        }
+      ]
+    });
+    const combatDecision = evaluateCanonDemotion(
+      { targetCanonicalId: 'npc-chulsoo', entityType: 'NPC', targetName: '철수', verifiedInvalidationEventId: combatEvId },
+      engine21.getSnapshot(),
+      engine21.getHistory()
+    );
+    assert(!combatDecision.demote, 'Case 21.4.d: Combat/damage must not trigger demotion');
+
+    // 21.4.e: 이름 변경 (Name Change)
+    const renameEvId = 'evt-rename-21-4e';
+    dispatchEngineInternalProposal(engine21, {
+      requestId: 'req-rename-21-4e',
+      eventId: renameEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'UPDATE_NPC',
+          payload: {
+            id: 'npc-chulsoo',
+            changes: { name: '김철수' }
+          }
+        }
+      ]
+    });
+    const renameDecision = evaluateCanonDemotion(
+      { targetCanonicalId: 'npc-chulsoo', entityType: 'NPC', targetName: '철수', verifiedInvalidationEventId: renameEvId },
+      engine21.getSnapshot(),
+      engine21.getHistory()
+    );
+    assert(!renameDecision.demote, 'Case 21.4.e: Name change must not trigger demotion');
+
+    // 21.5: LLM claim만 존재 → REJECT
+    const pureLlmDecision = evaluateCanonDemotion(
+      {
+        targetCanonicalId: 'npc-chulsoo',
+        entityType: 'NPC',
+        targetName: '철수',
+        llmClaimedDemotion: true
+      },
+      engine21.getSnapshot(),
+      engine21.getHistory()
+    );
+    assert(!pureLlmDecision.demote, 'Case 21.5: Pure LLM claim demote is false');
+    assert(pureLlmDecision.reason === 'LLM_CLAIM_REJECTED', 'Case 21.5: Reason is LLM_CLAIM_REJECTED');
+
+    // 21.6: fake/uncommitted event → REJECT
+    const fakeEvId = 'evt-uncommitted-fraud-999';
+    const fakeEvDecision = evaluateCanonDemotion(
+      {
+        targetCanonicalId: 'npc-chulsoo',
+        entityType: 'NPC',
+        targetName: '철수',
+        verifiedInvalidationEventId: fakeEvId
+      },
+      engine21.getSnapshot(),
+      engine21.getHistory()
+    );
+    assert(!fakeEvDecision.demote, 'Case 21.6: Uncommitted event demote is false');
+    assert(fakeEvDecision.reason === 'FAKE_OR_UNVERIFIED_EVENT', 'Case 21.6: Reason is FAKE_OR_UNVERIFIED_EVENT');
+
+    // 21.7: unrelated committed event → REJECT
+    const unrelatedEvId = 'evt-unrelated-market-21-7';
+    dispatchEngineInternalProposal(engine21, {
+      requestId: 'req-unrelated-21-7',
+      eventId: unrelatedEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: unrelatedEvId,
+            eventDescription: '선착장 물품 하역 작업 완료',
+            location: '선착장',
+            involvedNpcIds: ['npc-merchant']
+          }
+        }
+      ]
+    });
+    const unrelatedDecision = evaluateCanonDemotion(
+      {
+        targetCanonicalId: 'npc-chulsoo',
+        entityType: 'NPC',
+        targetName: '철수',
+        verifiedInvalidationEventId: unrelatedEvId
+      },
+      engine21.getSnapshot(),
+      engine21.getHistory()
+    );
+    assert(!unrelatedDecision.demote, 'Case 21.7: Unrelated event demote is false');
+    assert(unrelatedDecision.reason === 'UNRELATED_EVENT', 'Case 21.7: Reason is UNRELATED_EVENT');
+
+    // 21.8: 코드에 등록되지 않은 표현으로 동일한 canonical semantic event → PASS
+    const init21_8 = createInitialTestState();
+    const engine21_8 = new SovereignEngine(init21_8.worldInfo, init21_8.character);
+    const unregisteredEvId = 'evt-unregistered-words-21-8';
+    const unregisteredRes = dispatchEngineInternalProposal(engine21_8, {
+      requestId: 'req-unregistered-21-8',
+      eventId: unregisteredEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: unregisteredEvId,
+            // Completely unregistered phrasing with NO keywords (no 사칭, no 신원 사기, no 사기극, no 위조, no 가짜)
+            eventDescription: '관아 비서관이 문서고의 족보를 확인한 결과 해당 인물의 혈통 기록이 전무함을 최종 의결함',
+            location: '관아 문서고',
+            involvedNpcIds: ['npc-chulsoo']
+          }
+        },
+        {
+          type: 'UPDATE_NPC',
+          payload: {
+            id: 'npc-chulsoo',
+            changes: {
+              entityReference: {
+                entityType: 'NPC',
+                claimedEntityId: 'npc-chulsoo',
+                resolvedEntityId: 'INVALID',
+                evidence: {
+                  verifiedEventId: unregisteredEvId,
+                  cause: 'CANON_IDENTITY_INVALIDATION'
+                }
+              }
+            }
+          }
+        }
+      ]
+    });
+    assert(unregisteredRes.success, 'Case 21.8: Unregistered phrased canonical event committed');
+
+    const unregisteredDecision = evaluateCanonDemotion(
+      {
+        targetCanonicalId: 'npc-chulsoo',
+        entityType: 'NPC',
+        targetName: '철수',
+        verifiedInvalidationEventId: unregisteredEvId
+      },
+      engine21_8.getSnapshot(),
+      engine21_8.getHistory()
+    );
+    assert(unregisteredDecision.demote, 'Case 21.8: Canonical semantic invalidation succeeds even without registered keywords');
+    assert(unregisteredDecision.reason === 'AUTHORITATIVE_CAUSAL_INVALIDATION', 'Case 21.8: Reason is AUTHORITATIVE_CAUSAL_INVALIDATION');
+
+    const candidateUnregistered: CandidatePacket = {
+      candidateId: 'cand-unregistered-21',
+      turn: turn21,
+      timestamp: new Date().toISOString(),
+      identityInvalidationDeclarations: [
+        {
+          targetCanonicalId: 'npc-chulsoo',
+          entityType: 'NPC',
+          targetName: '철수',
+          declaredEventId: unregisteredEvId,
+          reason: '족보상 혈통 기록 전무'
+        }
+      ]
+    };
+    const proposalUnregistered = buildSafeProposalFromCandidate(
+      candidateUnregistered,
+      {
+        requestId: 'req-candidate-unreg-21',
+        eventId: unregisteredEvId,
+        expectedStateVersion: engine21_8.getSnapshot().stateVersion,
+        turn: turn21,
+        source: 'LLM'
+      },
+      engine21_8.getSnapshot(),
+      engine21_8.getHistory()
+    );
+
+    const obsUnregistered = observeCandidateNovelHistory(
+      [],
+      candidateUnregistered,
+      proposalUnregistered,
+      engine21_8.getSnapshot(),
+      turn21,
+      engine21_8.getHistory()
+    );
+    assert(obsUnregistered.demotedCount === 1, 'Case 21.8: observeCandidateNovelHistory succeeds with unregistered wording');
+
+    // 21.9: 정상적인 entity resolution 변경은 Identity Invalidation이 아님
+    const init21_9 = createInitialTestState();
+    const engine21_9 = new SovereignEngine(init21_9.worldInfo, init21_9.character);
+    const normalResEvId = 'evt-normal-resolution-21-9';
+    const normalRes = dispatchEngineInternalProposal(engine21_9, {
+      requestId: 'req-normal-res-21-9',
+      eventId: normalResEvId,
+      source: 'ENGINE_INTERNAL',
+      turn: turn21,
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: normalResEvId,
+            eventDescription: '철수의 신원 대조 및 정상 인물 식별 완료',
+            location: '화산파 본당',
+            involvedNpcIds: ['npc-chulsoo'],
+            visibility: 'PUBLIC'
+          }
+        },
+        {
+          type: 'UPDATE_NPC',
+          payload: {
+            id: 'npc-chulsoo',
+            changes: {
+              entityReference: {
+                entityType: 'NPC',
+                claimedEntityId: 'npc-chulsoo',
+                resolvedEntityId: 'npc-other-entity',
+                evidence: {
+                  verifiedEventId: normalResEvId,
+                  cause: 'NORMAL_ENTITY_RESOLUTION'
+                }
+              }
+            }
+          }
+        }
+      ]
+    });
+    assert(normalRes.success, 'Case 21.9: Normal entity resolution event successfully committed');
+
+    const normalDecision = evaluateCanonDemotion(
+      {
+        targetCanonicalId: 'npc-chulsoo',
+        entityType: 'NPC',
+        targetName: '철수',
+        verifiedInvalidationEventId: normalResEvId
+      },
+      engine21_9.getSnapshot(),
+      engine21_9.getHistory()
+    );
+    assert(normalDecision.demote === false, 'Case 21.9: Normal entity resolution MUST NOT trigger identity invalidation demotion');
   }
 
   console.log(`\nResults: ${passed} passed, ${failed} failed.\n`);

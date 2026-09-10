@@ -1,0 +1,10 @@
+{
+  "playerInput": "사방의 암벽을 손으로 만지며 나가는 통로나 장치를 조심스럽게 탐색한다.",
+  "storyTurnCount": 1,
+  "timestamp": "2026-09-10T02:36:58.973Z",
+  "sessionConfig": {
+    "worldPreset": "화산비고",
+    "characterName": "백연화",
+    "model": "gemini-3.5-flash"
+  }
+}

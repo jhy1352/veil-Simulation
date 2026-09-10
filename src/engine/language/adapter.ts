@@ -108,9 +108,37 @@ export function actionToMeaningNode(action: TransitionAction, scope: Scope = 'PR
 }
 
 /**
+ * Classifies entity role for identity matching
+ */
+export function classifyEntityRole(
+  roleObj: { role?: string; entityId?: string; entityName?: string; entityType?: string; status?: string },
+  context?: any
+): 'PLAYER' | 'NPC' | 'ENVIRONMENT' | 'UNKNOWN' {
+  if (roleObj.status && roleObj.status !== 'RESOLVED') {
+    return 'UNKNOWN';
+  }
+  if (roleObj.entityType === 'PLAYER') return 'PLAYER';
+  if (roleObj.entityType === 'NPC') return 'NPC';
+  if (context) {
+    const protId = context.protagonistId || context.characterId;
+    const protName = context.protagonistName || context.characterName;
+    const aliases = context.protagonistAliases || context.aliases || [];
+    const npcs = context.npcs || [];
+    const npcIds = context.knownNpcIds || [];
+    const npcNames = context.knownNpcNames || [];
+
+    if (roleObj.entityId && protId === roleObj.entityId) return 'PLAYER';
+    if (roleObj.entityName && (protName === roleObj.entityName || aliases.includes(roleObj.entityName))) return 'PLAYER';
+    if (roleObj.entityId && (npcs.some((n: any) => n.id === roleObj.entityId) || npcIds.includes(roleObj.entityId))) return 'NPC';
+    if (roleObj.entityName && (npcs.some((n: any) => n.name === roleObj.entityName) || npcNames.includes(roleObj.entityName))) return 'NPC';
+  }
+  return 'UNKNOWN';
+}
+
+/**
  * Converts a validated MeaningNode into a standard VEIL TransitionAction if applicable.
  */
-export function meaningNodeToAction(node: MeaningNode): TransitionAction | null {
+export function meaningNodeToAction(node: MeaningNode, _context?: any): TransitionAction | null {
   assertValidMeaningTree(node);
 
   if (node.atom === 'ACTION') {
@@ -142,14 +170,14 @@ export function meaningNodeToAction(node: MeaningNode): TransitionAction | null 
  * Extracts all TransitionActions and Claims from a root MeaningTree recursively.
  * Uses the single deterministic Runtime Projection for actions.
  */
-export function extractActionsAndClaimsFromMeaningTree(root: MeaningNode): {
+export function extractActionsAndClaimsFromMeaningTree(root: MeaningNode, context?: any): {
   actions: TransitionAction[];
   rawClaims: string[];
   intentSummary?: string;
 } {
   assertValidMeaningTree(root);
 
-  const projection = projectMeaningTreeToRuntimeActions(root);
+  const projection = projectMeaningTreeToRuntimeActions(root, context);
   const rawClaims: string[] = [];
   let intentSummary: string | undefined;
 

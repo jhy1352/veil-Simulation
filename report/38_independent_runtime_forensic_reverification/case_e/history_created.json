@@ -1,0 +1,61 @@
+[
+  {
+    "recordId": "rec-evt-mtpvd136-pvdv6a-1",
+    "eventId": "evt-mtpvd136-pvdv6a",
+    "requestId": "req-mtpvd136-o208s5",
+    "proposalId": "prop-req-mtpvd136-o208s5",
+    "turn": 5,
+    "timestamp": "2026-09-06T13:50:28.290Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "RECORD_OFFSCREEN_EVENT",
+    "details": "{\"id\":\"offscreen-mtpvd137-lr30yl\",\"eventDescription\":\"숭양서원 수호 세력의 야간 순찰\",\"timestamp\":\"2026-09-06T13:50:28.291Z\",\"visibility\":\"FACTION_ONLY\"}",
+    "canonicalAction": {
+      "type": "RECORD_OFFSCREEN_EVENT",
+      "payload": {
+        "id": "offscreen-mtpvd137-lr30yl",
+        "eventDescription": "숭양서원 수호 세력의 야간 순찰",
+        "timestamp": "2026-09-06T13:50:28.291Z",
+        "visibility": "FACTION_ONLY"
+      }
+    },
+    "stateVersionAfterCommit": 6,
+    "informationAccess": "FACTION_ONLY",
+    "previousStateHash": "csh_74cfacc64ddd12e6",
+    "originInputId": "act-Case_E-5"
+  },
+  {
+    "recordId": "rec-evt-mtpvd136-pvdv6a-2",
+    "eventId": "evt-mtpvd136-pvdv6a",
+    "requestId": "req-mtpvd136-o208s5",
+    "proposalId": "prop-req-mtpvd136-o208s5",
+    "turn": 5,
+    "timestamp": "2026-09-06T13:50:28.290Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "ADVANCE_CHAPTER",
+    "details": "{\"currentChapter\":\"제1장: 서원의 은밀한 흔적\",\"upcomingChapters\":[\"제2장: 심야의 서고\",\"제3장: 음모의 배후\"]}",
+    "canonicalAction": {
+      "type": "ADVANCE_CHAPTER",
+      "payload": {
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 심야의 서고",
+          "제3장: 음모의 배후"
+        ]
+      }
+    },
+    "stateVersionAfterCommit": 6,
+    "informationAccess": "PUBLIC",
+    "previousStateHash": "csh_74cfacc64ddd12e6",
+    "originInputId": "act-Case_E-5"
+  }
+]

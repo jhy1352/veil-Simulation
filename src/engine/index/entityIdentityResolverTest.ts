@@ -20,6 +20,7 @@ import { buildSafeProposalFromCandidate } from '../proposalParser';
 import { validateCandidateStructure, runCandidateRecoveryGate } from '../language/candidateRecoveryGate';
 import { SovereignEngine } from '../state';
 import { EngineValidator } from '../validator';
+import { ImmigrationGate } from '../immigrationGate';
 
 function createMockState(): CanonicalState {
   return {
@@ -933,17 +934,66 @@ export function runEntityIdentityTests(): { passed: number; failed: number; erro
     };
 
     // Step 1: Candidate Recovery Gate
+    const validRawMetadata = {
+      inventoryChanges: validCandidatePacket.inventoryChanges,
+      newNpcs: validCandidatePacket.npcChanges,
+      newFactions: validCandidatePacket.factionChanges,
+      foreshadowSeeds: ['새로운 비급의 행방']
+    };
     const gateResult = runCandidateRecoveryGate([{
       candidateId: 1,
       label: 'EOF Step Option',
       narrativeSummary: 'Full transition test',
-      rawMetadata: validCandidatePacket
+      rawMetadata: validRawMetadata
     }]);
     assert(gateResult.passedCount === 1, 'EOF Test 1: Candidate passes Recovery Gate');
 
     // Step 2: Proposal Construction & Identity Resolution
     const proposal = buildSafeProposalFromCandidate(state, validCandidatePacket, 1, history);
     assert(proposal.actions.length >= 5, 'EOF Test 2: Proposal contains all validated actions');
+
+    const claimInnerThought = ImmigrationGate.admit(
+      {
+        rawText: '수련 대화',
+        targetEntityId: 'npc-abbot',
+        targetAttribute: 'innerThought',
+        claimedValue: '젊은 검객의 자질이 뛰어나구나.',
+        claimedEvidenceIds: ['evt-abbot-thought']
+      },
+      [{
+        evidenceId: 'evt-abbot-thought',
+        entityId: 'npc-abbot',
+        attribute: 'innerThought',
+        value: '젊은 검객의 자질이 뛰어나구나.',
+        content: '수련 대화에서 방장 스님이 감탄함'
+      }],
+      state
+    );
+    const claimMetInStory = ImmigrationGate.admit(
+      {
+        rawText: '수련 대화',
+        targetEntityId: 'npc-abbot',
+        targetAttribute: 'metInStory',
+        claimedValue: true,
+        claimedEvidenceIds: ['evt-abbot-thought']
+      },
+      [{
+        evidenceId: 'evt-abbot-thought',
+        entityId: 'npc-abbot',
+        attribute: 'metInStory',
+        value: true,
+        content: '수련 대화에서 방장 스님이 감탄함'
+      }],
+      state
+    );
+    const newClaims = [...(proposal.verifiedClaims || [])];
+    if (claimInnerThought.verifiedClaim) {
+      newClaims.push(claimInnerThought.verifiedClaim);
+    }
+    if (claimMetInStory.verifiedClaim) {
+      newClaims.push(claimMetInStory.verifiedClaim);
+    }
+    (proposal as any).verifiedClaims = newClaims;
 
     // Step 3: Sovereign Engine Validation
     const validationVerdict = EngineValidator.validate(proposal, state, new Set(), new Set(), history);

@@ -1,0 +1,69 @@
+NPC Information Candidate Adapter — RAW STATIC EVIDENCE
+Repository: jhy1352/veil-Simulation
+Branch: work/identity-continuity
+
+[1] Implementation commit
+c0060842a265901aeb9162f6a389efea50286117
+Message: Connect NPC information candidates through existing admission gate
+
+Diff summary:
+@@ -4,6 +4,7 @@
++import { adaptNpcInformationCandidateToAction } from './index/npcInformationCandidateAdapter';
+@@ -397,13 +398,29 @@
+- actions.push({ type: 'UPDATE_NPC', payload: { id: canonicalNpcId, changes } });
++ const updateAction: TransitionAction = {
++   type: 'UPDATE_NPC',
++   payload: { id: canonicalNpcId, changes }
++ };
++
++ const adaptedInformation = npcCand.information
++   ? adaptNpcInformationCandidateToAction(
++       currentSnapshot,
++       immutableHistory,
++       updateAction,
++       canonicalNpcId,
++       npcCand.information
++     )
++   : { action: updateAction, admitted: [], rejected: [] };
++
++ actions.push(adaptedInformation.action);
+
+[2] Current adapter source
+src/engine/index/npcInformationCandidateAdapter.ts
+- Calls admitNpcInformationCandidate(snapshot, candidateNpcId, information, history).
+- If no information is admitted, returns the original action unchanged.
+- If information is admitted, attaches only admitted traces to the existing action.
+- Does not create a new ActionType or mutate CanonicalState.
+
+[3] Current admission gate source
+src/engine/index/npcInformationCandidateGate.ts
+- Validates factId and elementIds.
+- Validates recipient identity and canonical NPC existence.
+- Validates source NPC identity when supplied.
+- Rejects self-transfer.
+- Requires understoodText for DISTORTED information.
+- Requires sourceNpcId for TESTIMONY / TRANSFER / RELATIONSHIP.
+- For those NPC-to-NPC acquisition methods, projects source NPC knowledge from immutable History and rejects elements not historically possessed by the source.
+
+[4] Current CandidatePacket contract
+src/types.ts
+- npcChanges[].information exists.
+- information supports one trace or an array of traces.
+- Trace contains factId, elementIds, recipientNpcId, optional sourceNpcId, acquisition, optional state and understoodText.
+
+[5] Test fixture correction discovered during static audit
+src/engine/index/npcInformationCandidateAdapterTest.ts
+The original fixture passed an empty History while expecting a TRANSFER from npc-a to npc-b to be admitted.
+The current Gate requires npc-a to have historically acquired F001:E1,E3 first.
+The fixture was therefore updated to include an UPDATE_NPC historical record whose canonicalAction payload records npc-a acquiring F001:E1,E3 by OBSERVATION.
+
+[6] Execution limitation
+No authentic terminal output is included here.
+This session has no repository execution terminal/runtime available, so producing fabricated npm/tsx output would violate raw-evidence integrity.
+The commands intended for the external terminal are:
+
+npm run lint
+npx tsx src/engine/index/npcInformationCandidateGateTest.ts
+npx tsx src/engine/index/npcInformationCandidateAdapterTest.ts
+
+These commands remain execution-pending until run in a real repository terminal.

@@ -1,0 +1,5 @@
+=== START SCENARIO Case_A: NPC Normal Interaction / Dialogue ===
+[STAGE 1: PLAYER INPUT] "장서각에서 조경 선생에게 인사하고 장서각의 유래에 대해 물어본다." (Turn 1)
+[STAGE 2: LLM PROMPT GENERATED] Prompt Size: 449 chars
+[STAGE 3: CALLING LLM API] Model: gemini-2.5-flash
+[STAGE 3: LLM CALL FAILED] Error after retries: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}

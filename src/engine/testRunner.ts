@@ -86,7 +86,7 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
       requestId: 'req-001',
       eventId: 'evt-001',
       expectedStateVersion: 1,
-      source: 'LLM',
+      source: 'SYSTEM',
       turn: 1,
       timestamp: new Date().toISOString(),
       intentSummary: 'Add new NPC and chapter update',
@@ -105,7 +105,7 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
       ]
     };
 
-    const res = engine.submitProposal(proposal);
+    const res = dispatchEngineInternalProposal(engine, proposal);
     if (!res.success) throw new Error(`Commit failed: ${res.rejectedReasons.join(', ')}`);
     if (res.stateVersion !== 2) throw new Error(`Expected stateVersion 2, got ${res.stateVersion}`);
     if (res.snapshot.worldInfo.npcs.length !== 1) throw new Error('NPC was not added to canonical state');
@@ -230,7 +230,16 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
 
   // Test 5: CandidatePacket -> StateTransitionProposal
   record('TEST-05', 'Proposal Builder: CandidatePacket converts accurately to StateTransitionProposal', () => {
-    const engine = new SovereignEngine();
+    const initialWorld = createEmptyWorldInfo();
+    initialWorld.offscreenRecords = [
+      {
+        id: 'evt-moyong-encounter',
+        eventDescription: '강남에서 모용세가 장로 벽안풍과 조우하고 새로운 세력 모용세가를 발견함',
+        location: '강남',
+        turn: 1
+      }
+    ];
+    const engine = new SovereignEngine(initialWorld);
     const snapshot = engine.getSnapshot();
     const candidate: CandidatePacket = {
       candidateId: 'cand-test-05',
@@ -244,14 +253,30 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
           npcClass: 'Class B',
           innerThought: '비급의 행방을 쫓고 있다.',
           metInStory: true,
-          isDead: false
+          isDead: false,
+          entityReference: {
+            entityType: 'NPC',
+            evidence: {
+              cause: 'MET_DURING_STORY',
+              verifiedEventId: 'evt-moyong-encounter',
+              context: '강남에서 모용세가 장로 벽안풍과 조우함'
+            }
+          }
         }
       ],
       factionChanges: [
         {
           name: '모용세가',
           description: '강남의 명문 세가',
-          attitudeTowardsPlayer: '호의적'
+          attitudeTowardsPlayer: '호의적',
+          entityReference: {
+            entityType: 'FACTION',
+            evidence: {
+              cause: 'ENCOUNTERED_NEW_FACTION',
+              verifiedEventId: 'evt-moyong-encounter',
+              context: '강남에서 새로운 세력 모용세가를 발견함'
+            }
+          }
         }
       ],
       chapterChanges: {
@@ -280,7 +305,7 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
     const engine = new SovereignEngine();
     const initialSnap = engine.getSnapshot();
 
-    // Add 2 active seeds first
+    // Add 2 active seeds and 1 discovery offscreen event first
     const setupProposal: StateTransitionProposal = {
       proposalId: 'prop-seed-setup',
       requestId: 'req-seed-setup',
@@ -298,6 +323,15 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
         {
           type: 'ADD_NARRATIVE_SEED',
           payload: { id: 'seed-2', content: '동굴 속의 숨겨진 비급', status: 'active', turnCreated: 1 }
+        },
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: 'evt-seed-discovery',
+            eventDescription: '소림사의 비밀 전승과 마교 교주의 밀령에 관한 새로운 복선이 발견됨',
+            timestamp: new Date().toISOString(),
+            visibility: 'PUBLIC'
+          }
         }
       ]
     };
@@ -321,19 +355,45 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
           content: '화산파 장문인의 밀서',
           status: 'resolved',
           action: 'resolve',
-          resolutionSummary: '밀서의 암호를 해독하여 진실을 파악함'
+          resolutionSummary: '밀서의 암호를 해독하여 진실을 파악함',
+          entityReference: {
+            entityType: 'NARRATIVE_SEED',
+            claimedEntityId: 'seed-1',
+            evidence: { context: '해결' }
+          }
         } as any,
         {
           content: '동굴 속의 숨겨진 비급', // Duplicate of existing active seed
-          status: 'active'
+          status: 'active',
+          entityReference: {
+            entityType: 'NARRATIVE_SEED',
+            claimedEntityId: 'seed-2',
+            evidence: { context: '기존 복선' }
+          }
         },
         {
           content: '소림사의 비밀 전승',
-          status: 'active'
+          status: 'active',
+          entityReference: {
+            entityType: 'NARRATIVE_SEED',
+            evidence: {
+              cause: 'DISCOVERED_NARRATIVE_SEED',
+              verifiedEventId: 'evt-seed-discovery',
+              context: '소림사의 비밀 전승에 관한 단서를 발견함'
+            }
+          }
         },
         {
           content: '마교 교주의 밀령',
-          status: 'active'
+          status: 'active',
+          entityReference: {
+            entityType: 'NARRATIVE_SEED',
+            evidence: {
+              cause: 'DISCOVERED_NARRATIVE_SEED',
+              verifiedEventId: 'evt-seed-discovery',
+              context: '마교 교주의 밀령에 관한 단서를 발견함'
+            }
+          }
         }
       ]
     };
@@ -552,18 +612,18 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
         turn: 1,
         timestamp: new Date().toISOString(),
         details: 'Added NPC',
-        stateVersionAfterCommit: 2
+        stateVersionAfterCommit: 1
       },
       {
         recordId: 'rec-2',
-        eventId: 'evt-last',
+        eventId: 'evt-1',
         proposalId: 'prop-1',
         actionType: 'ADVANCE_CHAPTER',
         source: 'LLM',
         turn: 1,
         timestamp: new Date().toISOString(),
         details: 'Advanced Chapter',
-        stateVersionAfterCommit: 3
+        stateVersionAfterCommit: 1
       }
     ];
 
@@ -574,7 +634,7 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
         turn: 5,
         worldInfo: loadedWorld,
         character: loadedChar,
-        lastCommittedEventId: 'evt-last',
+        lastCommittedEventId: 'evt-1',
         lastCommittedAt: new Date().toISOString()
       },
       mockHistory
@@ -599,7 +659,7 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
         turn: 12,
         worldInfo: loadedWorld,
         character: loadedChar,
-        lastCommittedEventId: null,
+        lastCommittedEventId: 'evt-1',
         lastCommittedAt: new Date().toISOString()
       },
       mockHistory
@@ -650,7 +710,7 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
       requestId: 'req-npc-death',
       eventId: 'evt-npc-death',
       expectedStateVersion: initialSnap.stateVersion,
-      source: 'LLM',
+      source: 'SYSTEM',
       turn: 1,
       timestamp: new Date().toISOString(),
       intentSummary: 'Add NPC and transition to DEAD',
@@ -678,7 +738,7 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
       ]
     };
 
-    const setupRes = engine.submitProposal(setupProposal);
+    const setupRes = dispatchEngineInternalProposal(engine, setupProposal);
     if (!setupRes.success) throw new Error(`Setup proposal failed: ${setupRes.rejectedReasons.join('; ')}`);
 
     const deadSnap = engine.getSnapshot();
@@ -1305,7 +1365,16 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
 
   // TEST-I: New Creation Permissiveness
   record('TEST-I', 'New Creation: LLM-proposed new NPCs, narrative seeds, and offscreen events commit seamlessly', () => {
-    const engine = new SovereignEngine();
+    const initialWorld = createEmptyWorldInfo();
+    initialWorld.offscreenRecords = [
+      {
+        id: 'evt-cyber-op',
+        eventDescription: '해킹 작전 중 블랙캣과 조우하고 양자 컴퓨터의 오작동 복선을 발견함',
+        location: '사이버펑크 구역',
+        turn: 1
+      }
+    ];
+    const engine = new SovereignEngine(initialWorld);
     const candidate: CandidatePacket = {
       candidateId: 'cand-new-creation',
       turn: 1,
@@ -1315,14 +1384,30 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
           name: '블랙캣',
           innerThought: '누구도 믿지 않는다.',
           npcClass: 'Class A',
-          metInStory: true
+          metInStory: true,
+          entityReference: {
+            entityType: 'NPC',
+            evidence: {
+              cause: 'MET_DURING_STORY',
+              verifiedEventId: 'evt-cyber-op',
+              context: '해킹 작전 중 블랙캣과 조우함'
+            }
+          }
         }
       ],
       seedChanges: [
         {
           content: '양자 컴퓨터의 오작동',
           status: 'active',
-          action: 'create'
+          action: 'create',
+          entityReference: {
+            entityType: 'NARRATIVE_SEED',
+            evidence: {
+              cause: 'DISCOVERED_NARRATIVE_SEED',
+              verifiedEventId: 'evt-cyber-op',
+              context: '양자 컴퓨터의 오작동 복선을 발견함'
+            }
+          }
         }
       ],
       chapterChanges: {
@@ -2544,13 +2629,13 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
   // Test 42: Dead NPC State Modification Defense
   record('TEST-42', 'Dead NPC State Modification Defense: DEAD NPC cannot be modified via UPDATE_NPC', () => {
     const engine = new SovereignEngine();
-    // 1. Add NPC and kill them
+    // 1. Setup: Add NPC and kill them via trusted system path
     const p1: StateTransitionProposal = {
       proposalId: 'prop-dead-01',
       requestId: 'req-dead-01',
       eventId: 'evt-dead-01',
       expectedStateVersion: 1,
-      source: 'LLM',
+      source: 'SYSTEM',
       turn: 1,
       timestamp: new Date().toISOString(),
       intentSummary: 'Add and kill NPC',
@@ -2561,7 +2646,7 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
         }
       ]
     };
-    const res1 = engine.submitProposal(p1);
+    const res1 = dispatchEngineInternalProposal(engine, p1);
     if (!res1.success) throw new Error(`Add dead NPC failed: ${res1.rejectedReasons.join(', ')}`);
 
     // 2. Attempt to update inner thought or status
@@ -4487,11 +4572,33 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
   // TEST-A2-6: LLM Creative Freedom: New creation (ADD_NPC, REGISTER_FACTION, ADD_NARRATIVE_SEED, RECORD_OFFSCREEN_EVENT) commits cleanly
   record('TEST-A2-6', 'LLM Creative Freedom: New NPCs, Factions, Narrative Seeds, and Offscreen Events commit cleanly without restriction', () => {
     const engine = new SovereignEngine();
+    // 1. Authoritative world context event providing provenance for novel encounters
+    dispatchEngineInternalProposal(engine, {
+      proposalId: 'prop-a2-context',
+      requestId: 'req-a2-context',
+      eventId: 'evt-a2-context',
+      expectedStateVersion: 1,
+      source: 'SYSTEM',
+      turn: 1,
+      timestamp: new Date().toISOString(),
+      intentSummary: 'Initialize world context',
+      actions: [
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: 'evt-a2-context',
+            eventDescription: '운하 인근에서 백의검객이 목격되고 청룡방의 활동이 감지됨',
+            visibility: 'PUBLIC'
+          }
+        }
+      ]
+    });
+
     const proposal: StateTransitionProposal = {
       proposalId: 'prop-a2-creative-freedom',
       requestId: 'req-a2-6',
       eventId: 'evt-a2-6',
-      expectedStateVersion: 1,
+      expectedStateVersion: 2,
       source: 'LLM',
       turn: 1,
       timestamp: new Date().toISOString(),
@@ -4506,7 +4613,15 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
             innerThought: '강호를 유람 중이다',
             npcClass: 'Class C',
             status: 'ALIVE',
-            impression: '과묵한 방랑 무사'
+            impression: '과묵한 방랑 무사',
+            entityReference: {
+              entityType: 'NPC',
+              evidence: {
+                cause: 'MET_DURING_STORY',
+                verifiedEventId: 'evt-a2-context',
+                context: '운하 인근에서 백의검객을 조우함'
+              }
+            }
           }
         },
         {
@@ -5288,6 +5403,238 @@ export function runSovereignEngineTestSuite(): { passed: boolean; results: TestC
       const fails = res.results.filter(r => !r.passed).map(r => `${r.name}: ${r.error}`).join('; ');
       throw new Error(`Hydration Sovereignty Bypass Test Suite failed: ${fails}`);
     }
+  });
+
+  record('TEST-SOURCE-NPC-PROVENANCE', 'Article 5/8/16: sourceNpcId Structural Provenance & Anti-Spoofing Gate (Red-Team Cases A-F)', () => {
+    const engine = new SovereignEngine();
+
+    // 0. Setup initial world with NPC, Faction, Narrative Seed, and Offscreen Event
+    const seedEventId = 'seed-ancient-dagger-find';
+    const offscreenEventId = 'evt-merchant-gift';
+    const merchantId = 'npc-legit-merchant';
+    const unrelatedNpcId = 'npc-innkeeper-unrelated';
+    const factionId = 'fac-shadow-guild';
+    const seedIdAsNpc = 'seed-ancient-dagger-find';
+
+    dispatchEngineInternalProposal(engine, {
+      proposalId: 'prop-setup-provenance-world',
+      requestId: 'req-setup-provenance-world',
+      eventId: 'evt-setup-provenance-world',
+      turn: 1,
+      intentSummary: 'Setup NPCs, Factions, and Seeds for Provenance Testing',
+      actions: [
+        {
+          type: 'ADD_NPC',
+          payload: {
+            id: merchantId,
+            name: '상인 카일',
+            status: 'ALIVE',
+            metInStory: true
+          }
+        },
+        {
+          type: 'ADD_NPC',
+          payload: {
+            id: unrelatedNpcId,
+            name: '여관주인 보리스',
+            status: 'ALIVE',
+            metInStory: true
+          }
+        },
+        {
+          type: 'ADD_FACTION',
+          payload: {
+            id: factionId,
+            name: '그림자 길드',
+            influence: 20
+          }
+        },
+        {
+          type: 'ADD_NARRATIVE_SEED',
+          payload: {
+            id: seedEventId,
+            content: '고대 유적에서 신비한 고대 단검을 발견할 수 있는 실마리',
+            status: 'active'
+          }
+        },
+        {
+          type: 'RECORD_OFFSCREEN_EVENT',
+          payload: {
+            id: offscreenEventId,
+            eventDescription: '상인 카일이 여행자에게 신비한 고대 단검을 선물로 건네는 모습이 목격됨',
+            involvedNpcIds: [merchantId],
+            visibility: 'PUBLIC',
+            timestamp: '2026-09-01T00:00:00.000Z'
+          }
+        }
+      ]
+    });
+
+    const baseSnap = engine.getSnapshot();
+
+    // Case A: Non-existent sourceNpcId + valid verifiedEventId -> REJECT
+    const resA = engine.submitProposal({
+      proposalId: 'prop-case-a-fake-npc',
+      requestId: 'req-case-a-fake-npc',
+      eventId: 'evt-case-a-fake-npc',
+      expectedStateVersion: baseSnap.stateVersion,
+      source: 'LLM',
+      turn: 2,
+      timestamp: new Date().toISOString(),
+      intentSummary: 'Fake NPC source',
+      actions: [
+        {
+          type: 'MODIFY_INVENTORY',
+          payload: {
+            operation: 'ADD',
+            item: { id: 'item-case-a', name: '고대 단검', quantity: 1 },
+            acquisition: {
+              cause: 'GIFT_REWARD',
+              sourceNpcId: 'npc-completely-fake-id',
+              verifiedEventId: offscreenEventId
+            }
+          }
+        }
+      ]
+    });
+    if (resA.success) throw new Error('Case A: Non-existent sourceNpcId should have been rejected');
+    if (!resA.rejectedReasons.some(r => r.includes('PROVENANCE_VIOLATION'))) {
+      throw new Error(`Case A: Expected PROVENANCE_VIOLATION, got: ${resA.rejectedReasons.join('; ')}`);
+    }
+
+    // Case B: Existing NPC but no structural connection to verified event -> REJECT
+    const resB = engine.submitProposal({
+      proposalId: 'prop-case-b-unrelated-npc',
+      requestId: 'req-case-b-unrelated-npc',
+      eventId: 'evt-case-b-unrelated-npc',
+      expectedStateVersion: baseSnap.stateVersion,
+      source: 'LLM',
+      turn: 2,
+      timestamp: new Date().toISOString(),
+      intentSummary: 'Existing NPC but structurally unconnected to event',
+      actions: [
+        {
+          type: 'MODIFY_INVENTORY',
+          payload: {
+            operation: 'ADD',
+            item: { id: 'item-case-b', name: '고대 단검', quantity: 1 },
+            acquisition: {
+              cause: 'GIFT_REWARD',
+              sourceNpcId: unrelatedNpcId,
+              verifiedEventId: offscreenEventId // Offscreen event only involves merchantId, NOT unrelatedNpcId
+            }
+          }
+        }
+      ]
+    });
+    if (resB.success) throw new Error('Case B: Structurally unconnected NPC should have been rejected');
+    if (!resB.rejectedReasons.some(r => r.includes('PROVENANCE_VIOLATION'))) {
+      throw new Error(`Case B: Expected PROVENANCE_VIOLATION, got: ${resB.rejectedReasons.join('; ')}`);
+    }
+
+    // Case C: Faction ID used as sourceNpcId -> REJECT
+    const resC = engine.submitProposal({
+      proposalId: 'prop-case-c-faction-spoof',
+      requestId: 'req-case-c-faction-spoof',
+      eventId: 'evt-case-c-faction-spoof',
+      expectedStateVersion: baseSnap.stateVersion,
+      source: 'LLM',
+      turn: 2,
+      timestamp: new Date().toISOString(),
+      intentSummary: 'Faction ID spoofed as sourceNpcId',
+      actions: [
+        {
+          type: 'MODIFY_INVENTORY',
+          payload: {
+            operation: 'ADD',
+            item: { id: 'item-case-c', name: '고대 단검', quantity: 1 },
+            acquisition: {
+              cause: 'GIFT_REWARD',
+              sourceNpcId: factionId,
+              verifiedEventId: offscreenEventId
+            }
+          }
+        }
+      ]
+    });
+    if (resC.success) throw new Error('Case C: Faction ID as sourceNpcId should have been rejected');
+    if (!resC.rejectedReasons.some(r => r.includes('PROVENANCE_VIOLATION'))) {
+      throw new Error(`Case C: Expected PROVENANCE_VIOLATION, got: ${resC.rejectedReasons.join('; ')}`);
+    }
+
+    // Case D: Narrative Seed ID used as sourceNpcId -> REJECT
+    const resD = engine.submitProposal({
+      proposalId: 'prop-case-d-seed-spoof',
+      requestId: 'req-case-d-seed-spoof',
+      eventId: 'evt-case-d-seed-spoof',
+      expectedStateVersion: baseSnap.stateVersion,
+      source: 'LLM',
+      turn: 2,
+      timestamp: new Date().toISOString(),
+      intentSummary: 'Seed ID spoofed as sourceNpcId',
+      actions: [
+        {
+          type: 'MODIFY_INVENTORY',
+          payload: {
+            operation: 'ADD',
+            item: { id: 'item-case-d', name: '고대 단검', quantity: 1 },
+            acquisition: {
+              cause: 'GIFT_REWARD',
+              sourceNpcId: seedIdAsNpc,
+              verifiedEventId: seedEventId
+            }
+          }
+        }
+      ]
+    });
+    if (resD.success) throw new Error('Case D: Seed ID as sourceNpcId should have been rejected');
+    if (!resD.rejectedReasons.some(r => r.includes('PROVENANCE_VIOLATION'))) {
+      throw new Error(`Case D: Expected PROVENANCE_VIOLATION, got: ${resD.rejectedReasons.join('; ')}`);
+    }
+
+    // Case E: Normal NPC + valid structured connection -> PASS
+    const resE = engine.submitProposal({
+      proposalId: 'prop-case-e-valid-merchant',
+      requestId: 'req-case-e-valid-merchant',
+      eventId: 'evt-case-e-valid-merchant',
+      expectedStateVersion: baseSnap.stateVersion,
+      source: 'LLM',
+      turn: 2,
+      timestamp: new Date().toISOString(),
+      intentSummary: 'Valid Gift from merchant',
+      actions: [
+        {
+          type: 'MODIFY_INVENTORY',
+          payload: {
+            operation: 'ADD',
+            item: { id: 'item-case-e', name: '고대 단검', quantity: 1 },
+            acquisition: {
+              cause: 'GIFT_REWARD',
+              sourceNpcId: merchantId,
+              verifiedEventId: offscreenEventId
+            }
+          }
+        }
+      ]
+    });
+    if (!resE.success) throw new Error(`Case E: Valid merchant gift failed: ${resE.rejectedReasons.join('; ')}`);
+    const snapAfterE = engine.getSnapshot();
+    const dagger = snapAfterE.character.inventory.find(i => i.id === 'item-case-e');
+    if (!dagger || dagger.quantity !== 1) throw new Error('Case E: Inventory item was not committed');
+
+    // Case F: Persistence check after Save/Hydrate
+    const snapshotToSave = engine.getSnapshot();
+    const historyToSave = engine.getHistory();
+    const genesisSnap = engine.getGenesisSnapshot();
+    const hydratedEngine = SovereignEngine.hydrate(snapshotToSave, historyToSave, undefined, undefined, genesisSnap);
+    const hydratedSnap = hydratedEngine.getSnapshot();
+    const hydratedDagger = hydratedSnap.character.inventory.find(i => i.id === 'item-case-e');
+    if (!hydratedDagger || hydratedDagger.quantity !== 1) {
+      throw new Error('Case F: Hydrated inventory missing item');
+    }
+    const hydratedHistory = hydratedEngine.getHistory();
+    const invRecords = hydratedHistory.filter(r => r.actionType === 'MODIFY_INVENTORY');
+    if (invRecords.length === 0) throw new Error('Case F: Hydrated history missing inventory record');
   });
 
     const passedCount = results.filter(r => r.passed).length;

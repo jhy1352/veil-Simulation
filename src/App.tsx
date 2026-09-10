@@ -21,14 +21,10 @@ import {
   deepMerge
 } from './utils/factory';
 import { parseGMResponseMetaData } from './utils/parser';
-import {
-  extractCandidatesFromMetadata
-} from './utils/engineValidator';
 import { SovereignEngine } from './engine/state';
-import { buildSafeProposalFromCandidate, generateProposalId } from './engine/proposalParser';
+import { generateProposalId } from './engine/proposalParser';
 import { observeCandidateNovelHistory } from './engine/index/novelHistory';
 import { projectPassports } from './engine/index/passport';
-import { runCandidateRecoveryGate, VeilCandidate } from './engine/language/candidateRecoveryGate';
 import { StateTransitionProposal, TransitionAction } from './engine/types';
 import { actionToMeaningNode, adaptMeaningTreeToProposal } from './engine/language';
 import { TurnLatencyProfiler } from './utils/latency';
@@ -565,31 +561,120 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
       let turnCommittedIds: string[] = [];
 
       // Check if server explicitly issued and authorized a candidate state mutation
-      const hasAuthorizedMutation = Boolean(metaData && data?.selectedCandidateId && !data?.isFallbackNonMutation);
+      const authorizedProposal: StateTransitionProposal | null = data?.authorizedProposal || null;
+      const authorizedCandidatePacket: CandidatePacket | null = data?.authorizedCandidatePacket || null;
 
-      if (hasAuthorizedMutation) {
-        // 1. Candidate Recovery Gate Validation
-        const rawCandidate: VeilCandidate = {
-          candidateId: typeof data.selectedCandidateId === 'number'
-            ? data.selectedCandidateId
-            : (parseInt(String(data.selectedCandidateId), 10) || 1),
-          label: (metaData as any)?.label || 'Selected Candidate',
-          narrativeSummary: (metaData as any)?.narrativeSummary || cleanText || '',
-          rawMetadata: metaData
-        };
+      const hasAuthorizedMutation = Boolean(
+        authorizedProposal &&
+        Array.isArray(authorizedProposal.actions) &&
+        authorizedProposal.actions.length > 0 &&
+        !data?.isFallbackNonMutation
+      );
 
-        const gateResult = runCandidateRecoveryGate<VeilCandidate>([rawCandidate]);
-        if (gateResult.quarantinedCount > 0 || gateResult.passedCount === 0) {
-          // Recovery Gate Failed: Quarantined, fail-closed without proposal, commit, or novel history changes
+      if (hasAuthorizedMutation && authorizedProposal) {
+        // Direct Sovereign Commit Gate invocation using Server-PreAuthorized Proposal (Proposal A)
+        const commitResult = engine.submitProposal(authorizedProposal);
+
+        if (commitResult.success) {
+          currentWorldInfo = commitResult.snapshot.worldInfo;
+          currentCharacter = commitResult.snapshot.character;
+
+          // Commit-First Novel History Observation & Promotion: ONLY on successful commit
+          const currentNovelRecords = (nextEngineState as any).novelHistoryRecords || [];
+          const candidateForObservation: CandidatePacket = authorizedCandidatePacket || ({
+            candidateId: String(data?.selectedCandidateId || 1),
+            turn: currentWorldInfo.dcHistory?.length || 1,
+            timestamp: new Date().toISOString(),
+            narrativeSummary: cleanText || '',
+            npcChanges: [],
+            inventoryChanges: [],
+            secretChanges: [],
+            statChanges: {},
+            currentTimeChange: undefined,
+            factCheckSummary: '',
+            physicalDefect: undefined
+          } as unknown as CandidatePacket);
+
+          const observationResult = observeCandidateNovelHistory(
+            currentNovelRecords,
+            candidateForObservation,
+            authorizedProposal,
+            commitResult.snapshot,
+            storyTurnCount,
+            engine.getHistory()
+          );
+          (nextEngineState as any).novelHistoryRecords = observationResult.updatedRecords;
+
+          // Identity Passport Projection: Deterministic derived-state from Authoritative State + History + NovelHistory
+          const derivedPassports = projectPassports(
+            commitResult.snapshot,
+            engine.getHistory(),
+            observationResult.updatedRecords
+          );
+          nextEngineState.passports = derivedPassports;
+
+          turnVerdict = 'PASSED';
+          turnCommittedIds = commitResult.newHistoricalRecords.map(r => r.recordId);
+
+          const diagnosticLog: ValidationDiagnosticLog = {
+            logId: `log-${Date.now()}`,
+            turn: storyTurnCount,
+            timestamp: new Date().toISOString(),
+            outcome: 'PASSED',
+            details: `Turn ${storyTurnCount} authorized proposal committed cleanly (${commitResult.committedActionsCount} actions, StateVersion: ${commitResult.stateVersion}).`,
+            rejectedReasons: []
+          };
+
+          nextEngineState.historicalRecords = engine.getHistory() as any;
+          nextEngineState.diagnostics = engine.getDiagnostics();
+          if (authorizedCandidatePacket) {
+            nextEngineState.pendingCandidates.push(authorizedCandidatePacket);
+          }
+          nextEngineState.validationLogs.push(diagnosticLog);
+
+          traceSteps.push({
+            step: 'T6_VALIDATED',
+            status: 'OK',
+            timestamp: Date.now(),
+            details: 'Authorized proposal passed all Sovereign Engine commit gate rules'
+          });
+
+          traceSteps.push({
+            step: 'T7_COMMITTED',
+            status: 'OK',
+            timestamp: Date.now(),
+            details: `Committed ${commitResult.committedActionsCount} actions into canonical state (StateVersion: ${commitResult.stateVersion})`
+          });
+
+          setWorldInfo(commitResult.snapshot.worldInfo);
+          setCharacter(commitResult.snapshot.character);
+
+          // Commit-First UI: Reveal narrative only after successful Sovereign Engine commit
+          const assistantMessage: StoryMessage = {
+            id: `msg-${Date.now()}-assistant`,
+            role: 'assistant',
+            content: cleanText,
+            cleanText: cleanText || rawOutputText,
+            metaData: metaData || undefined,
+            rawMetaBlock: rawMetaBlock || undefined,
+            rawResponse: rawOutputText,
+            contextSnapshot: contextSnapshot || undefined,
+            turn: storyTurnCount,
+            timestamp: new Date().toISOString()
+          };
+          setMessages(prev => [...prev, assistantMessage]);
+          setStoryTurnCount(prev => prev + 1);
+        } else {
+          // Safe No-Commit: Canonical State and Novel History remain unmodified & Narrative is isolated
           turnVerdict = 'REJECTED';
-          turnRejections = gateResult.quarantinedCandidates.flatMap(q => q.reasons);
+          turnRejections = [...commitResult.rejectedReasons, ...commitResult.conflictDetails];
 
           const diagnosticLog: ValidationDiagnosticLog = {
             logId: `log-${Date.now()}`,
             turn: storyTurnCount,
             timestamp: new Date().toISOString(),
             outcome: 'REJECTED',
-            details: `Turn ${storyTurnCount} candidate quarantined by Recovery Gate: ${turnRejections.join('; ')}`,
+            details: `Turn ${storyTurnCount} proposal rejected by Sovereign Gate: ${commitResult.rejectedReasons.join('; ')}`,
             rejectedReasons: turnRejections
           };
 
@@ -599,143 +684,17 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
             step: 'T6_VALIDATED',
             status: 'REJECTED',
             timestamp: Date.now(),
-            details: `Candidate Recovery Gate quarantined candidate: ${turnRejections.join('; ')}`
+            details: `Sovereign Commit Gate rejected: ${commitResult.rejectedReasons.join('; ')}`
           });
 
           traceSteps.push({
             step: 'T7_COMMITTED',
             status: 'REJECTED',
             timestamp: Date.now(),
-            details: 'Canonical state and Novel History protected without mutation (Recovery Gate Quarantine)'
+            details: 'Canonical state and Novel History protected without mutation (Atomic safe no-commit)'
           });
 
-          setModelError(`[VEIL Recovery Gate Quarantine] ${turnRejections.join('; ')}`);
-        } else {
-          // 2. Extract CandidatePacket
-          const candidate: CandidatePacket = extractCandidatesFromMetadata(
-            metaData,
-            storyTurnCount,
-            currentWorldInfo.currentTime.formattedTime,
-            data.selectedCandidateId
-          );
-
-          // 3. Build Safe Proposal via Sovereign Proposal Builder with 8 Narrative Defense Rules
-          const snapshot = engine.getSnapshot();
-          const proposal = buildSafeProposalFromCandidate(
-            snapshot,
-            candidate,
-            storyTurnCount,
-            engine.getHistory()
-          );
-
-          // 4. Submit Proposal to Sovereign Engine Commit Gate (Atomic Validation & Commit)
-          const commitResult = engine.submitProposal(proposal);
-
-          if (commitResult.success) {
-            currentWorldInfo = commitResult.snapshot.worldInfo;
-            currentCharacter = commitResult.snapshot.character;
-
-            // 5. Commit-First Novel History Observation & Promotion: ONLY on successful commit
-            const currentNovelRecords = (nextEngineState as any).novelHistoryRecords || [];
-            const observationResult = observeCandidateNovelHistory(
-              currentNovelRecords,
-              candidate,
-              proposal,
-              commitResult.snapshot,
-              storyTurnCount,
-              engine.getHistory()
-            );
-            (nextEngineState as any).novelHistoryRecords = observationResult.updatedRecords;
-
-            // 6. Identity Passport Projection: Deterministic derived-state from Authoritative State + History + NovelHistory
-            const derivedPassports = projectPassports(
-              commitResult.snapshot,
-              engine.getHistory(),
-              observationResult.updatedRecords
-            );
-            nextEngineState.passports = derivedPassports;
-
-            turnVerdict = 'PASSED';
-            turnCommittedIds = commitResult.newHistoricalRecords.map(r => r.recordId);
-
-            const diagnosticLog: ValidationDiagnosticLog = {
-              logId: `log-${Date.now()}`,
-              turn: storyTurnCount,
-              timestamp: new Date().toISOString(),
-              outcome: 'PASSED',
-              details: `Turn ${storyTurnCount} candidate packet committed cleanly (${commitResult.committedActionsCount} actions, StateVersion: ${commitResult.stateVersion}).`,
-              rejectedReasons: []
-            };
-
-            nextEngineState.historicalRecords = engine.getHistory() as any;
-            nextEngineState.diagnostics = engine.getDiagnostics();
-            nextEngineState.pendingCandidates.push(candidate);
-            nextEngineState.validationLogs.push(diagnosticLog);
-
-            traceSteps.push({
-              step: 'T6_VALIDATED',
-              status: 'OK',
-              timestamp: Date.now(),
-              details: 'Proposal passed all Sovereign Engine commit gate rules'
-            });
-
-            traceSteps.push({
-              step: 'T7_COMMITTED',
-              status: 'OK',
-              timestamp: Date.now(),
-              details: `Committed ${commitResult.committedActionsCount} actions into canonical state (StateVersion: ${commitResult.stateVersion})`
-            });
-
-            setWorldInfo(commitResult.snapshot.worldInfo);
-            setCharacter(commitResult.snapshot.character);
-
-            // Commit-First UI: Reveal narrative only after successful Sovereign Engine commit
-            const assistantMessage: StoryMessage = {
-              id: `msg-${Date.now()}-assistant`,
-              role: 'assistant',
-              content: rawOutputText,
-              cleanText: cleanText || rawOutputText,
-              metaData: metaData || undefined,
-              rawMetaBlock: rawMetaBlock || undefined,
-              rawResponse: rawOutputText,
-              contextSnapshot: contextSnapshot || undefined,
-              turn: storyTurnCount,
-              timestamp: new Date().toISOString()
-            };
-            setMessages(prev => [...prev, assistantMessage]);
-            setStoryTurnCount(prev => prev + 1);
-          } else {
-            // Safe No-Commit: Canonical State and Novel History remain unmodified & Narrative is isolated
-            turnVerdict = 'REJECTED';
-            turnRejections = [...commitResult.rejectedReasons, ...commitResult.conflictDetails];
-
-            const diagnosticLog: ValidationDiagnosticLog = {
-              logId: `log-${Date.now()}`,
-              turn: storyTurnCount,
-              timestamp: new Date().toISOString(),
-              outcome: 'REJECTED',
-              details: `Turn ${storyTurnCount} proposal rejected by Sovereign Gate: ${commitResult.rejectedReasons.join('; ')}`,
-              rejectedReasons: turnRejections
-            };
-
-            nextEngineState.validationLogs.push(diagnosticLog);
-
-            traceSteps.push({
-              step: 'T6_VALIDATED',
-              status: 'REJECTED',
-              timestamp: Date.now(),
-              details: `Sovereign Commit Gate rejected: ${commitResult.rejectedReasons.join('; ')}`
-            });
-
-            traceSteps.push({
-              step: 'T7_COMMITTED',
-              status: 'REJECTED',
-              timestamp: Date.now(),
-              details: 'Canonical state and Novel History protected without mutation (Atomic safe no-commit)'
-            });
-
-            setModelError(`[VEIL_COMMIT_BLOCKED] 제안된 변이가 5.7 Commit Gate에서 거부되었습니다: ${commitResult.rejectedReasons.join('; ')}`);
-          }
+          setModelError(`[VEIL_COMMIT_BLOCKED] 제안된 변이가 5.7 Commit Gate에서 거부되었습니다: ${commitResult.rejectedReasons.join('; ')}`);
         }
       } else {
         traceSteps.push({
@@ -755,7 +714,7 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
         const assistantMessage: StoryMessage = {
           id: `msg-${Date.now()}-assistant`,
           role: 'assistant',
-          content: rawOutputText,
+          content: cleanText,
           cleanText: cleanText || rawOutputText,
           metaData: undefined,
           rawMetaBlock: rawMetaBlock || undefined,

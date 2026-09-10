@@ -52,15 +52,12 @@ export function runCandidateRecoveryGateTests(): TestReport {
     label,
     narrativeSummary: `Summary for candidate ${id}`,
     rawMetadata: {
-      factCheckSummary: `Fact check for ${id}`,
       foreshadowSeeds: [`Seed ${id}`],
       cameraOffscreenEvents: [`Event ${id}`],
-      currentChapter: '1장 시작',
-      upcomingChapters: ['2장', '3장', '4장'],
-      statChanges: '체력 변동 없음',
-      recommendedDC: 10 + id,
-      dcReason: '판정 사유',
-      contextVerificationDeclaration: '정사 맥락 일치'
+      chapterChanges: {
+        currentChapter: '1장 시작',
+        upcomingChapters: ['2장', '3장', '4장']
+      }
     }
   });
 
@@ -254,8 +251,11 @@ export function runCandidateRecoveryGateTests(): TestReport {
       label: 'Special Label with Extra   Spaces',
       narrativeSummary: 'Summary text',
       rawMetadata: {
-        customField: 'preserved_as_is',
-        nestedArray: [1, 2, { inner: true }]
+        foreshadowSeeds: ['Seed Special'],
+        chapterChanges: {
+          currentChapter: '1장 특별',
+          upcomingChapters: ['2장', '3장']
+        }
       },
       extraEngineFlag: 'do_not_strip'
     };
@@ -266,8 +266,8 @@ export function runCandidateRecoveryGateTests(): TestReport {
     assert(passed === originalCandidate, 'Scenario 16: Reference equality preserved (Zero Mutation)');
     assert(
       passed.extraEngineFlag === 'do_not_strip' &&
-      passed.rawMetadata.customField === 'preserved_as_is',
-      'Scenario 16: All arbitrary valid custom fields completely preserved'
+      passed.rawMetadata.foreshadowSeeds[0] === 'Seed Special',
+      'Scenario 16: All valid fields and root extra properties completely preserved'
     );
   }
 
@@ -436,14 +436,15 @@ export function runCandidateRecoveryGateTests(): TestReport {
   // Scenario 24: Surface-only variations (Different prose/label, identical semantic structure) -> Diversity Gate filters to unique
   {
     const baseMetadata = {
-      factCheckSummary: '검증 완료',
-      currentChapter: '1장',
-      upcomingChapters: ['2장', '3장', '4장']
+      chapterChanges: {
+        currentChapter: '1장',
+        upcomingChapters: ['2장', '3장', '4장']
+      }
     };
     const surfaceVariations = [
       { candidateId: 1, label: '조심스럽게 숲으로 이동', narrativeSummary: '숲으로 걸어간다', rawMetadata: { ...baseMetadata } },
       { candidateId: 2, label: '신중하게 수풀 사이로 진입', narrativeSummary: '완전히 다른 수사적 표현', rawMetadata: { ...baseMetadata } },
-      { candidateId: 3, label: '완전히 다른 행동: 2장 개막', narrativeSummary: '2장으로 전개된다', rawMetadata: { ...baseMetadata, currentChapter: '2장', upcomingChapters: ['3장', '4장', '5장'] } }
+      { candidateId: 3, label: '완전히 다른 행동: 2장 개막', narrativeSummary: '2장으로 전개된다', rawMetadata: { chapterChanges: { currentChapter: '2장', upcomingChapters: ['3장', '4장', '5장'] } } }
     ];
     const gateRes = runCandidateRecoveryGate<any>(surfaceVariations);
     assert(gateRes.passedCount === 3, 'Scenario 24 Step 1: All 3 pass structural gate');
@@ -536,9 +537,10 @@ export function runCandidateRecoveryGateTests(): TestReport {
       label: '허위 필러 후보: 가상의 보검 획득',
       narrativeSummary: '근거 없이 보검을 획득함',
       rawMetadata: {
-        factCheckSummary: '검증 완료',
-        currentChapter: '1장',
-        upcomingChapters: ['2장', '3장', '4장'],
+        chapterChanges: {
+          currentChapter: '1장',
+          upcomingChapters: ['2장', '3장', '4장']
+        },
         inventoryChanges: [
           {
             name: '가상의 보검',
@@ -568,6 +570,143 @@ export function runCandidateRecoveryGateTests(): TestReport {
     assert(v1.isValid === true, 'Scenario 25 Step 2: Genuine candidate is ALLOWED');
     const isUnbackedItemBlocked = !p2.actions.some(a => a.type === 'MODIFY_INVENTORY') || v2.isValid === false;
     assert(isUnbackedItemBlocked, 'Scenario 25 Step 3: Unbacked hallucinated item at Turn 2 is REJECTED by PreAuth Gate');
+  }
+
+  // Scenario 26: UNKNOWN_FIELD Firewall — inventoryModifications strictly quarantined
+  {
+    const cand = {
+      candidateId: 1,
+      label: '구식 필드 침투 시도',
+      narrativeSummary: 'inventoryModifications 사용 시도',
+      rawMetadata: {
+        inventoryModifications: [{ name: '철검', quantity: 1 }]
+      }
+    };
+    const res = runCandidateRecoveryGate([cand]);
+    assert(
+      res.passedCount === 0 && res.quarantinedCount === 1,
+      'Scenario 26: rawMetadata.inventoryModifications strictly quarantined'
+    );
+    assert(
+      res.quarantinedCandidates[0].reasons.some(r => r.includes('inventoryModifications') && r.includes('UNKNOWN_FIELD')),
+      'Scenario 26: Quarantine reason explicitly states UNKNOWN_FIELD violation for inventoryModifications'
+    );
+  }
+
+  // Scenario 27: UNKNOWN_FIELD Firewall — statChanges strictly quarantined
+  {
+    const cand = {
+      candidateId: 1,
+      label: '구식 statChanges 침투 시도',
+      narrativeSummary: 'statChanges 사용 시도',
+      rawMetadata: {
+        statChanges: '힘 +1'
+      }
+    };
+    const res = runCandidateRecoveryGate([cand]);
+    assert(
+      res.passedCount === 0 && res.quarantinedCount === 1,
+      'Scenario 27: rawMetadata.statChanges strictly quarantined as UNKNOWN_FIELD'
+    );
+  }
+
+  // Scenario 28: UNKNOWN_FIELD Firewall — Top-level currentChapter / upcomingChapters strictly quarantined
+  {
+    const cand = {
+      candidateId: 1,
+      label: '최상위 챕터 필드 침투 시도',
+      narrativeSummary: '최상위 currentChapter 사용',
+      rawMetadata: {
+        currentChapter: '1장 시작'
+      }
+    };
+    const res = runCandidateRecoveryGate([cand]);
+    assert(
+      res.passedCount === 0 && res.quarantinedCount === 1,
+      'Scenario 28: Top-level currentChapter in rawMetadata strictly quarantined'
+    );
+    assert(
+      res.quarantinedCandidates[0].reasons.some(r => r.includes('currentChapter') && r.includes('UNKNOWN_FIELD')),
+      'Scenario 28: Explicit UNKNOWN_FIELD quarantine reason for top-level currentChapter'
+    );
+  }
+
+  // Scenario 29: UNKNOWN_FIELD Firewall — recommendedDC / dcReason strictly quarantined
+  {
+    const cand = {
+      candidateId: 1,
+      label: '주사위 난이도 주입 시도',
+      narrativeSummary: 'recommendedDC 사용',
+      rawMetadata: {
+        recommendedDC: 12,
+        dcReason: '임의 난이도'
+      }
+    };
+    const res = runCandidateRecoveryGate([cand]);
+    assert(
+      res.passedCount === 0 && res.quarantinedCount === 1,
+      'Scenario 29: rawMetadata.recommendedDC / dcReason strictly quarantined'
+    );
+  }
+
+  // Scenario 30: UNKNOWN_FIELD Firewall — factCheckSummary / contextVerificationDeclaration strictly quarantined
+  {
+    const cand = {
+      candidateId: 1,
+      label: '서술 검증 요약 주입 시도',
+      narrativeSummary: 'factCheckSummary 사용',
+      rawMetadata: {
+        factCheckSummary: '위조 검증',
+        contextVerificationDeclaration: '위조 선언'
+      }
+    };
+    const res = runCandidateRecoveryGate([cand]);
+    assert(
+      res.passedCount === 0 && res.quarantinedCount === 1,
+      'Scenario 30: factCheckSummary / contextVerificationDeclaration strictly quarantined'
+    );
+  }
+
+  // Scenario 31: Engine-owned resolvedEntityId in candidate root strictly rejected
+  {
+    const cand = {
+      candidateId: 1,
+      label: '엔진 ID 위조 시도',
+      narrativeSummary: 'candidate.resolvedEntityId 포함',
+      resolvedEntityId: 'engine-spoofed-id',
+      rawMetadata: {}
+    };
+    const res = runCandidateRecoveryGate([cand]);
+    assert(
+      res.passedCount === 0 && res.quarantinedCount === 1,
+      'Scenario 31: candidate.resolvedEntityId strictly rejected and quarantined'
+    );
+    assert(
+      res.quarantinedCandidates[0].reasons.some(r => r.includes('resolvedEntityId') && r.includes('engine-owned')),
+      'Scenario 31: Reason clearly identifies prohibited engine-owned resolvedEntityId'
+    );
+  }
+
+  // Scenario 32: Nested resolvedEntityId inside newNpcs strictly rejected
+  {
+    const cand = {
+      candidateId: 1,
+      label: 'NPC 엔진 ID 위조 시도',
+      narrativeSummary: 'newNpcs[0].resolvedEntityId 포함',
+      rawMetadata: {
+        newNpcs: [
+          {
+            name: '위조 NPC',
+            resolvedEntityId: 'engine-npc-spoof'
+          }
+        ]
+      }
+    };
+    const res = runCandidateRecoveryGate([cand]);
+    assert(
+      res.passedCount === 0 && res.quarantinedCount === 1,
+      'Scenario 32: newNpcs[0].resolvedEntityId strictly rejected and quarantined'
+    );
   }
 
   return report;

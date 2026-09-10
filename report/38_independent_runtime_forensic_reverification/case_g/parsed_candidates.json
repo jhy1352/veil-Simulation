@@ -1,0 +1,26 @@
+[
+  {
+    "candidateId": 1,
+    "label": "사당 지하 석실의 봉인 해제와 숨겨진 비밀 통로의 개방",
+    "narrativeSummary": "조경 선생의 은밀한 지침에 따라 소진호는 다시 사당으로 향합니다. 제단 밑 깊숙한 곳에 숨겨진 석판의 홈에 신비한 옥패를 끼워 넣자, 고대의 기관이 작동하며 지하 서고로 통하는 비밀 통로가 열립니다.",
+    "rawMetadata": {
+      "factCheckSummary": "1) [비밀 통로 진입]: 장서각 뒤편 사당 지하 설정에 부합. 2) [옥패의 기능]: 소씨 가문의 옥패가 열쇠 역할을 하는 기믹 검증 완료.",
+      "foreshadowSeeds": [
+        "seed-underground-traps",
+        "seed-hidden-ancestor-record"
+      ],
+      "cameraOffscreenEvents": [
+        "묵영이 어둠 속에서 소진호의 행보를 주시함"
+      ],
+      "currentChapter": "제1장: 서원의 은밀한 흔적",
+      "upcomingChapters": [
+        "제2장: 심야의 서고",
+        "제3장: 은밀한 대결"
+      ],
+      "statChanges": "체력 변동 없음",
+      "recommendedDC": 14,
+      "dcReason": "오랜 세월 잠겨 있던 고대 기관을 소음 없이 부드럽게 작동시키기 위한 민첩(Dexterity) 또는 지능(Intelligence) 판정",
+      "contextVerificationDeclaration": "정사 맥락 일치"
+    }
+  }
+]

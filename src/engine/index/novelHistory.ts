@@ -1,5 +1,5 @@
 import type { CanonicalEntityReferenceType, CandidatePacket } from '../../types';
-import type { CanonicalState, ImmutableHistoricalRecord, StateTransitionProposal } from '../types';
+import type { CanonicalState, ImmutableHistoricalRecord, StateTransitionProposal, IdentityInvalidationDeclaration } from '../types';
 import {
   findAuthoritativeEvent,
   isAuthoritativeEventCausallyRelated,
@@ -153,6 +153,7 @@ export interface CanonDemotionDecision {
     | 'NO_INVALIDATION_SIGNAL'
     | 'FAKE_OR_UNVERIFIED_EVENT'
     | 'UNRELATED_EVENT'
+    | 'NON_IDENTITY_INVALIDATION_EVENT'
     | 'INSUFFICIENT_EVIDENCE';
   readonly validatedEventId?: string;
 }
@@ -379,6 +380,166 @@ export function evaluateCanonPromotion(
 }
 
 /**
+ * Deterministic Semantic Verification for Identity Invalidation.
+ *
+ * TRPG 3.1 Sovereign Constitution Directives:
+ * 1. Must judge ONLY committed Canonical Events in Sovereign Engine.
+ * 2. eventId -> authoritative event -> target canonical entity -> causal relation -> actual canonical semantic mutation.
+ * 3. Natural language text, claimType, reason, LLM declarations are auxiliary only, NEVER authority.
+ * 4. Regex/keyword matching on natural language is strictly FORBIDDEN.
+ * 5. Death, missing, inactivity, movement, combat, damage, name change, or casual fraud mentions MUST NOT demote.
+ * 6. Another entity's invalidation MUST NOT be misattributed to the target canonical entity.
+ * 7. Uncommitted/fake/unrelated events are rejected.
+ * 8. Only events where the target canonical entity's identity is canonically mutated/invalidated qualify for demotion.
+ */
+export function isEventDeterministicIdentityInvalidation(
+  eventId: string,
+  targetEntity: { name?: string; id?: string; entityType?: CanonicalEntityReferenceType },
+  authEv: { found: boolean; eventText?: string; isActive?: boolean; record?: ImmutableHistoricalRecord },
+  canonicalState?: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = []
+): boolean {
+  const cleanId = eventId ? eventId.trim() : '';
+  if (!cleanId) return false;
+
+  const targetId = targetEntity.id ? targetEntity.id.trim() : '';
+  if (!targetId) return false;
+
+  if (!authEv.found || authEv.isActive === false) return false;
+
+  // 1. Gather all historical records matching this event
+  const matchingRecords: ImmutableHistoricalRecord[] = [];
+  if (authEv.record && (authEv.record.eventId === cleanId || authEv.record.recordId === cleanId)) {
+    matchingRecords.push(authEv.record);
+  }
+  for (const rec of historicalRecords) {
+    if ((rec.eventId === cleanId || rec.recordId === cleanId) && !matchingRecords.includes(rec)) {
+      matchingRecords.push(rec);
+    }
+  }
+
+  // Authoritative canonical invalidation causes in evidence
+  const CANONICAL_INVALIDATION_CAUSES: ReadonlySet<string> = new Set([
+    'CANON_IDENTITY_INVALIDATION',
+    'IDENTITY_INVALIDATION',
+    'IDENTITY_FABRICATION',
+    'IMPERSONATION',
+    'FORGERY_DISCOVERED',
+    'CANON_REVOCATION',
+    'CANON_DEMOTION'
+  ]);
+
+  const INVALID_RESOLVED_IDS: ReadonlySet<string> = new Set([
+    'INVALID',
+    'DEMOTED_NOVEL',
+    'IMPOSTOR',
+    'FABRICATED'
+  ]);
+
+  const INVALID_ROLES: ReadonlySet<string> = new Set([
+    'IMPOSTOR',
+    'FAKE',
+    'FABRICATED',
+    'UNMASKED_IMPOSTOR'
+  ]);
+
+  let hasTargetSemanticInvalidation = false;
+
+  for (const rec of matchingRecords) {
+    const action = rec.canonicalAction;
+    if (!action) continue;
+
+    // Check action for NPC
+    if (action.type === 'UPDATE_NPC') {
+      const payload = action.payload;
+      // MUST strictly match target entity ID. Actions for other entities MUST NOT demote target!
+      if (payload && payload.id === targetId) {
+        const changes = payload.changes;
+        if (changes) {
+          // If entityReference specifies identity invalidation:
+          const entRef = changes.entityReference;
+          if (entRef) {
+            const resId = entRef.resolvedEntityId ? entRef.resolvedEntityId.trim() : '';
+            const cause = entRef.evidence?.cause ? entRef.evidence.cause.trim() : '';
+            if (INVALID_RESOLVED_IDS.has(resId) || CANONICAL_INVALIDATION_CAUSES.has(cause)) {
+              hasTargetSemanticInvalidation = true;
+            }
+          }
+
+          // If role specifies identity invalidation:
+          if (changes.role && INVALID_ROLES.has(changes.role.trim().toUpperCase())) {
+            hasTargetSemanticInvalidation = true;
+          }
+        }
+      }
+    }
+
+    // Check action for ITEM
+    if (action.type === 'MODIFY_INVENTORY' && targetEntity.entityType === 'ITEM') {
+      const payload = action.payload;
+      const itemId = payload?.item?.id;
+      const itemName = payload?.item?.name;
+      if ((itemId && itemId === targetId) || (targetEntity.name && itemName === targetEntity.name)) {
+        const cause = payload.acquisition?.cause ? String(payload.acquisition.cause).trim() : '';
+        const entRef = payload.item?.entityReference;
+        const resId = entRef?.resolvedEntityId ? entRef.resolvedEntityId.trim() : '';
+        const refCause = entRef?.evidence?.cause ? entRef.evidence.cause.trim() : '';
+
+        if (
+          CANONICAL_INVALIDATION_CAUSES.has(cause) ||
+          cause === 'FORGERY_CONFISCATED' ||
+          INVALID_RESOLVED_IDS.has(resId) ||
+          CANONICAL_INVALIDATION_CAUSES.has(refCause)
+        ) {
+          hasTargetSemanticInvalidation = true;
+        }
+      }
+    }
+
+    // Check action for FACTION
+    if (action.type === 'UPDATE_FACTION' && targetEntity.entityType === 'FACTION') {
+      const payload = action.payload;
+      if (payload && payload.id === targetId) {
+        const changes = payload.changes;
+        const entRef = changes?.entityReference;
+        const resId = entRef?.resolvedEntityId ? entRef.resolvedEntityId.trim() : '';
+        const refCause = entRef?.evidence?.cause ? entRef.evidence.cause.trim() : '';
+        if (
+          INVALID_RESOLVED_IDS.has(resId) ||
+          CANONICAL_INVALIDATION_CAUSES.has(refCause) ||
+          ((changes as any)?.role && INVALID_ROLES.has((changes as any).role.trim().toUpperCase()))
+        ) {
+          hasTargetSemanticInvalidation = true;
+        }
+      }
+    }
+  }
+
+  // Check current canonical state if target entity was mutated by THIS SPECIFIC event (cleanId)
+  if (!hasTargetSemanticInvalidation && canonicalState?.worldInfo?.npcs && (!targetEntity.entityType || targetEntity.entityType === 'NPC')) {
+    const npc = canonicalState.worldInfo.npcs.find(n => n.id === targetId);
+    if (npc) {
+      const entRef = npc.entityReference;
+      const resId = entRef?.resolvedEntityId ? entRef.resolvedEntityId.trim() : '';
+      const verifiedEvId = entRef?.evidence?.verifiedEventId;
+      const cause = entRef?.evidence?.cause ? entRef.evidence.cause.trim() : '';
+      // The canonical state mutation MUST be authoritatively verified to have originated from cleanId
+      if (verifiedEvId === cleanId) {
+        if (
+          INVALID_RESOLVED_IDS.has(resId) ||
+          CANONICAL_INVALIDATION_CAUSES.has(cause) ||
+          (npc.role && INVALID_ROLES.has(npc.role.trim().toUpperCase()))
+        ) {
+          hasTargetSemanticInvalidation = true;
+        }
+      }
+    }
+  }
+
+  return hasTargetSemanticInvalidation;
+}
+
+/**
  * Pure decision gate for evaluating Canon Demotion.
  *
  * Constitution Rules:
@@ -417,14 +578,14 @@ export function evaluateCanonDemotion(
   }
 
   // Defense 3: Reject standalone LLM claims
-  if (signals.llmClaimedDemotion && !signals.verifiedInvalidationEventId && !signals.invalidationClaim) {
+  if (signals.llmClaimedDemotion && !signals.verifiedInvalidationEventId) {
     return { demote: false, reason: 'LLM_CLAIM_REJECTED' };
   }
 
-  // Defense 4: Must have an authoritative invalidation claim or event ID
-  const eventId = signals.verifiedInvalidationEventId || signals.invalidationClaim?.evidenceIds?.[0];
+  // Defense 4: Must have an authoritative committed event ID (no evidenceIds[0] fallback)
+  const eventId = signals.verifiedInvalidationEventId;
   if (!eventId || typeof eventId !== 'string' || !eventId.trim()) {
-    return { demote: false, reason: 'NO_INVALIDATION_SIGNAL' };
+    return { demote: false, reason: signals.llmClaimedDemotion ? 'LLM_CLAIM_REJECTED' : 'NO_INVALIDATION_SIGNAL' };
   }
 
   // If invalidationClaim exists, verify claimType
@@ -460,6 +621,22 @@ export function evaluateCanonDemotion(
 
   if (!isCausallyRelated) {
     return { demote: false, reason: 'UNRELATED_EVENT' };
+  }
+
+  // Defense 7: Deterministic Identity-Invalidation Semantic Verification
+  // The event details/actionType/payload must specifically denote actual identity invalidation,
+  // impersonation discovery, or forged/fabricated identity.
+  // Mere death, movement, damage, item loss, or normal status/state change is NOT demotion.
+  const isIdentityInvalidation = isEventDeterministicIdentityInvalidation(
+    eventId,
+    { name: targetName, id: signals.targetCanonicalId, entityType: signals.entityType },
+    authEv,
+    canonicalState,
+    historicalRecords
+  );
+
+  if (!isIdentityInvalidation) {
+    return { demote: false, reason: 'NON_IDENTITY_INVALIDATION_EVENT' };
   }
 
   return {
@@ -1201,34 +1378,69 @@ export function observeCandidateNovelHistory(
   }
 
   // 5. Invalidation / Demotion processing
-  // If proposal has verifiedClaims regarding invalidation/revocation/demotion,
-  // evaluateCanonDemotion and demoteCanonRecordToNovel.
+  // Decoupled from proposal.verifiedClaims (which are generic claim verifications).
+  // Evaluates strictly against proposal.identityInvalidationDeclarations and Sovereign Engine committed events.
   let demotedCount = 0;
-  if (Array.isArray(proposal.verifiedClaims)) {
-    for (const vc of proposal.verifiedClaims) {
-      const decision = evaluateCanonDemotion(
-        {
-          targetCanonicalId: vc.targetEntityId,
-          entityType: (vc as any).entityType || 'NPC',
-          invalidationClaim: vc,
-          verifiedInvalidationEventId: vc.evidenceIds?.[0]
-        },
-        canonicalState,
-        historicalRecords
-      );
+  const declarations = proposal.identityInvalidationDeclarations;
 
-      if (decision.demote) {
-        const res = demoteCanonRecordToNovel(
-          records,
-          vc.targetEntityId,
-          (vc as any).entityType || 'NPC',
-          (vc as any).name || vc.targetEntityId,
-          storyTurnCount,
-          decision.reason,
-          decision.validatedEventId
+  if (Array.isArray(declarations) && declarations.length > 0) {
+    // Fail-closed: uncommitted proposals are ignored
+    const isProposalCommitted =
+      canonicalState.lastCommittedEventId === proposal.eventId ||
+      historicalRecords.some(r => r.eventId === proposal.eventId || r.proposalId === proposal.proposalId);
+
+    if (isProposalCommitted) {
+      const processedEntityEvents = new Set<string>();
+
+      for (const decl of declarations) {
+        if (!decl.targetCanonicalId) continue;
+        const targetEventId = decl.declaredEventId || proposal.eventId;
+        const dedupeKey = `${decl.targetCanonicalId}:${targetEventId}`;
+        if (processedEntityEvents.has(dedupeKey)) continue;
+
+        // Prevent duplicate demotion for the same event
+        const alreadyDemotedForEvent = records.some(
+          r => (r.canonicalId === decl.targetCanonicalId || r.demotedFromCanonicalId === decl.targetCanonicalId) &&
+               r.lifecycle === 'DEMOTED_NOVEL' &&
+               r.sourceEventIds?.includes(targetEventId)
         );
-        records = [...res.updatedRecords];
-        demotedCount++;
+        if (alreadyDemotedForEvent) {
+          processedEntityEvents.add(dedupeKey);
+          continue;
+        }
+
+        const targetName =
+          decl.targetName ||
+          canonicalState.worldInfo?.npcs?.find(n => n.id === decl.targetCanonicalId)?.name ||
+          canonicalState.character?.inventory?.find(i => i.id === decl.targetCanonicalId)?.name ||
+          canonicalState.worldInfo?.factions?.find(f => f.id === decl.targetCanonicalId)?.name ||
+          decl.targetCanonicalId;
+
+        const decision = evaluateCanonDemotion(
+          {
+            targetCanonicalId: decl.targetCanonicalId,
+            entityType: decl.entityType || 'NPC',
+            targetName,
+            verifiedInvalidationEventId: targetEventId
+          },
+          canonicalState,
+          historicalRecords
+        );
+
+        if (decision.demote) {
+          const res = demoteCanonRecordToNovel(
+            records,
+            decl.targetCanonicalId,
+            decl.entityType || 'NPC',
+            targetName,
+            storyTurnCount,
+            decision.reason,
+            decision.validatedEventId
+          );
+          records = [...res.updatedRecords];
+          demotedCount++;
+          processedEntityEvents.add(dedupeKey);
+        }
       }
     }
   }

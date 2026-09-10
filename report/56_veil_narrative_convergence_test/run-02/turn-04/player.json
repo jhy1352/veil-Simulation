@@ -1,0 +1,10 @@
+{
+  "playerInput": "벽면에 희미하게 적혀 있는 고대 화산파의 구결(口訣)을 가사 속 암호와 대조하며 큰 소리로 읊조린다.",
+  "storyTurnCount": 4,
+  "timestamp": "2026-09-10T02:38:18.908Z",
+  "sessionConfig": {
+    "worldPreset": "화산비고",
+    "characterName": "백연화",
+    "model": "gemini-3.5-flash"
+  }
+}

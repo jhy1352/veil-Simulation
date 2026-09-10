@@ -16,6 +16,19 @@ import { assertValidMeaningTree } from './grammar';
 import { canonicalizeMeaningTree, canonicalizeValue } from './canonicalizer';
 import { meaningNodeToAction } from './adapter';
 
+export interface PlayerIdentityContext {
+  /** Canonical entityId for the protagonist/player (e.g. character.id) */
+  readonly characterId?: string;
+  /** Canonical name of the protagonist/player (e.g. character.name) */
+  readonly characterName?: string;
+  /** Known aliases or IDs associated with the protagonist */
+  readonly aliases?: readonly string[];
+  /** Canonical entityIds for known NPCs */
+  readonly knownNpcIds?: readonly string[];
+  /** Canonical names for known NPCs */
+  readonly knownNpcNames?: readonly string[];
+}
+
 export interface RuntimeProjectionResult {
   readonly actions: readonly TransitionAction[];
   readonly canonicalMeaning: ReturnType<typeof canonicalizeMeaningTree>;
@@ -33,14 +46,95 @@ function canonicalizeChildrenForRuntime(node: MeaningNode): readonly MeaningNode
   return children;
 }
 
-function projectNode(node: MeaningNode, actions: TransitionAction[]): void {
-  if (node.atom === 'ACTION') {
-    const action = meaningNodeToAction(node);
+function isBlockingCausalMarker(node: MeaningNode): boolean {
+  return (
+    node.scope === 'HYPOTHETICAL' ||
+    node.scope === 'UNVERIFIED' ||
+    node.fields?.epistemicStatus === 'HEARSAY' ||
+    node.fields?.epistemicStatus === 'UNKNOWN' ||
+    node.fields?.epistemicStatus === 'DENIED' ||
+    node.fields?.epistemicStatus === 'UNPROVEN' ||
+    node.fields?.causalStatus === 'UNPROVEN' ||
+    node.fields?.polarity === 'NEGATED' ||
+    node.fields?.modality === 'INTENTIONAL' ||
+    node.fields?.modality === 'POSSIBLE' ||
+    node.fields?.modality === 'COUNTERFACTUAL'
+  );
+}
+
+/**
+ * A CAUSE is an execution dependency boundary. Every descendant semantic
+ * witness belongs to that causal dependency. A non-authoritative descendant
+ * therefore prevents the dependent parent ACTION from becoming executable.
+ *
+ * Raw CLAIM nodes remain non-authoritative even when their fields say
+ * OBSERVED/VERIFIED. Gate-issued verified evidence is represented separately
+ * from raw MeaningTree CLAIM text and is validated by the authority layer.
+ *
+ * This deliberately does not treat every nested ACTION/TIME/CONSTRAINT as
+ * non-executable by itself. It only searches the causal subtree for explicit
+ * non-authoritative evidence markers.
+ */
+function hasBlockingCausalDependency(node: MeaningNode): boolean {
+  if (isBlockingCausalMarker(node)) return true;
+  return canonicalizeChildrenForRuntime(node).some(child => hasBlockingCausalDependency(child));
+}
+
+/**
+ * Evaluate execution dependencies before projecting an ACTION. This is kept
+ * separate from descendant context propagation so a blocked CAUSE cannot be
+ * discovered only after its parent ACTION has already been emitted.
+ */
+function hasBlockingExecutionDependency(node: MeaningNode): boolean {
+  return canonicalizeChildrenForRuntime(node).some(
+    child => child.atom === 'CAUSE' && hasBlockingCausalDependency(child)
+  );
+}
+
+function projectNode(
+  node: MeaningNode,
+  actions: TransitionAction[],
+  context?: PlayerIdentityContext,
+  isNonExecutableContext = false
+): void {
+  const isCompoundWrapper = node.atom === 'ACTION' && node.value === 'COMPOUND_EVENT_SEQUENCE';
+  const isClaimOrHearsay =
+    node.fields?.epistemicStatus === 'HEARSAY';
+  const isNonExecutableScope =
+    node.scope === 'HYPOTHETICAL' ||
+    node.scope === 'UNVERIFIED';
+  const isNegatedOrIntentional =
+    node.fields?.polarity === 'NEGATED' ||
+    node.fields?.modality === 'INTENTIONAL';
+  const isUnproven =
+    node.fields?.epistemicStatus === 'UNPROVEN' ||
+    node.fields?.causalStatus === 'UNPROVEN' ||
+    (node.atom === 'CAUSE' && node.scope === 'UNVERIFIED');
+  const isNonCanonicalModality =
+    node.fields?.modality === 'POSSIBLE' ||
+    node.fields?.modality === 'COUNTERFACTUAL';
+  const isNonCanonicalEpistemic =
+    node.fields?.epistemicStatus === 'UNKNOWN' ||
+    node.fields?.epistemicStatus === 'DENIED';
+  const hasBlockingDependency = node.atom === 'ACTION' && hasBlockingExecutionDependency(node);
+
+  const currentNonExecutable =
+    isNonExecutableContext ||
+    isClaimOrHearsay ||
+    isNonExecutableScope ||
+    isNegatedOrIntentional ||
+    isUnproven ||
+    isNonCanonicalModality ||
+    isNonCanonicalEpistemic ||
+    hasBlockingDependency;
+
+  if (node.atom === 'ACTION' && !isCompoundWrapper && !currentNonExecutable) {
+    const action = meaningNodeToAction(node, context);
     if (action) actions.push(action);
   }
 
   for (const child of canonicalizeChildrenForRuntime(node)) {
-    projectNode(child, actions);
+    projectNode(child, actions, context, currentNonExecutable);
   }
 }
 
@@ -48,10 +142,13 @@ function projectNode(node: MeaningNode, actions: TransitionAction[]): void {
  * Projects a validated MeaningTree into the exact action sequence Runtime must use.
  * The result is deterministic for a given semantic tree.
  */
-export function projectMeaningTreeToRuntimeActions(root: MeaningNode): RuntimeProjectionResult {
+export function projectMeaningTreeToRuntimeActions(
+  root: MeaningNode,
+  context?: PlayerIdentityContext
+): RuntimeProjectionResult {
   assertValidMeaningTree(root);
   const actions: TransitionAction[] = [];
-  projectNode(root, actions);
+  projectNode(root, actions, context);
   return Object.freeze({
     actions: Object.freeze(actions),
     canonicalMeaning: canonicalizeMeaningTree(root),
@@ -87,7 +184,8 @@ export interface ProjectionConsistencyResult {
  */
 export function checkMeaningTreeProjectionConsistency(
   meaningTree: MeaningNode | undefined,
-  actualActions: readonly TransitionAction[]
+  actualActions: readonly TransitionAction[],
+  context?: PlayerIdentityContext
 ): ProjectionConsistencyResult {
   if (!meaningTree) {
     return Object.freeze({
@@ -99,7 +197,7 @@ export function checkMeaningTreeProjectionConsistency(
   }
 
   try {
-    const projection = projectMeaningTreeToRuntimeActions(meaningTree);
+    const projection = projectMeaningTreeToRuntimeActions(meaningTree, context);
     const isConsistent = actionsSemanticallyEqual(projection.actions, actualActions);
     return Object.freeze({
       isConsistent,
@@ -123,9 +221,10 @@ export function checkMeaningTreeProjectionConsistency(
  */
 export function assertMeaningTreeProjectionConsistency(
   meaningTree: MeaningNode | undefined,
-  actualActions: readonly TransitionAction[]
+  actualActions: readonly TransitionAction[],
+  context?: PlayerIdentityContext
 ): void {
-  const result = checkMeaningTreeProjectionConsistency(meaningTree, actualActions);
+  const result = checkMeaningTreeProjectionConsistency(meaningTree, actualActions, context);
   if (!result.isConsistent) {
     throw new Error(result.reason || '[COMPOSITION_PROJECTION_REJECTED]');
   }

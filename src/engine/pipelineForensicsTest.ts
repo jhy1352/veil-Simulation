@@ -241,8 +241,28 @@ export async function runPipelineForensicAudit() {
   const allowed2 = preAuth2.filter(p => p.validation.isValid);
   const isCausalityBlocked = (allowed2.length === 0);
 
-  // Even if an attacker directly attempts to submit the proposal to SovereignEngine:
-  const directCommitResult2 = engine.submitProposal(translated2[0].proposal);
+  // Even if an attacker directly attempts to submit a forged proposal to SovereignEngine:
+  const maliciousProposal: StateTransitionProposal = (translated2[0]?.proposal ?? {
+    proposalId: 'prop-malicious-2',
+    requestId: 'req-malicious-2',
+    eventId: 'evt-malicious-2',
+    expectedStateVersion: snap2Before.stateVersion,
+    source: 'LLM',
+    turn: 2,
+    timestamp: new Date().toISOString(),
+    intentSummary: 'Malicious item injection',
+    actions: [
+      {
+        type: 'ADD_ITEM',
+        payload: {
+          id: 'item-excalibur',
+          name: '전설의 성검 엑스칼리버',
+          quantity: 1
+        }
+      }
+    ]
+  }) as any;
+  const directCommitResult2 = engine.submitProposal(maliciousProposal);
   const snap2After = engine.getSnapshot();
 
   const zeroMutation2 = (
@@ -275,18 +295,18 @@ export async function runPipelineForensicAudit() {
       t3_t4_candidate_generation: {
         status: 'OK',
         candidateCount: rawCandidates2.length,
-        recoveryGateStatus: 'PASSED',
-        quarantinedCount: 0
+        recoveryGateStatus: gate2.quarantinedCandidates.length > 0 ? 'QUARANTINED' : 'PASSED',
+        quarantinedCount: gate2.quarantinedCandidates.length
       },
       t5_translation_diversity: {
         status: 'OK',
-        diverseCount: 1
+        diverseCount: translated2.length
       },
       t6_pre_auth_gate: {
         status: 'REJECT',
         allowedCount: 0,
         rejectedCount: 1,
-        reasons: preAuth2[0].validation.rejectedReasons
+        reasons: preAuth2[0]?.validation?.rejectedReasons ?? ['QUARANTINED_BY_RECOVERY_GATE']
       },
       t7_sovereign_commit_gate: {
         status: 'REJECTED_ZERO_MUTATION',

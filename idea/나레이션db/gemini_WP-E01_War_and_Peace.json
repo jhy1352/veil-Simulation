@@ -1,0 +1,128 @@
+{
+  "record_type": "WORK_DIFFERENTIAL_RECORD",
+  "db_id": "GEMINI-WP-E01",
+  "analyzer": "Gemini",
+  "work": {
+    "work_id": "WP-E01",
+    "title": "War and Peace",
+    "author": "Leo Tolstoy",
+    "original_language": "Russian",
+    "publication_period": "1865-1869",
+    "genre": "Epic Novel / Historical Fiction",
+    "source_status": "MEMORY"
+  },
+  "normalization": {
+    "state_unit": "PRE_STATE -> EVENT -> POST_STATE -> ΔSTATE",
+    "secondary_units": ["Δ²STATE", "ACCUMULATION", "TRAJECTORY"],
+    "layers": ["RAW_OBSERVATION", "STRUCTURAL_INTERPRETATION", "MECHANISM", "VARIATION_DETAIL"],
+    "generalization_status": "CANDIDATE_ONLY"
+  },
+  "scene_records": [
+    {
+      "scene_id": "SE-001",
+      "focus": "Austerlitz / Andrei's wound",
+      "pre_state": {
+        "DESIRE": "heroic honor / Napoleon / self-realization",
+        "EXPECTATION": "worldly heroic achievement",
+        "AGENCY": "HIGH"
+      },
+      "event": "wounding and altered perception under extreme threat",
+      "post_state": {
+        "DESIRE": "shift toward inner peace",
+        "EXPECTATION": "collapse of worldly achievement model",
+        "KNOWLEDGE": "heroic glory model is questioned",
+        "AGENCY": "DECREASE"
+      },
+      "delta_state": ["DESIRE_REVERSAL", "EXPECTATION_DECREASE", "KNOWLEDGE_REFRAMING", "AGENCY_DECREASE"],
+      "delta2_state": "heroic desire + life threat/nature -> illusion collapse -> later path dependence",
+      "accumulation": ["PERSISTENCE", "PATH_DEPENDENCE"],
+      "trajectory": "heroic glory -> disenchantment -> internal reflection",
+      "structure": "GOAL/IDEAL -> EXTREME_EVENT -> MODEL_COLLAPSE -> REORIENTATION",
+      "mechanism": "A high-cost event can invalidate a previously dominant model of desired life and redirect later choices.",
+      "variation": "The same extreme event may reinforce or overturn a prior worldview depending on the agent's existing model.",
+      "loss_risk": "High if reduced to a generic battlefield revelation."
+    },
+    {
+      "scene_id": "SE-002",
+      "focus": "Moscow captivity / Platon Karataev",
+      "pre_state": {
+        "DESIRE": "ideological reform / intellectual projects",
+        "SOCIAL_POSITION": "HIGH",
+        "EXISTENTIAL_ILLUSION": "HIGH",
+        "AGENCY": "HIGH"
+      },
+      "event": "capture, deprivation, and contact with Karataev",
+      "post_state": {
+        "DESIRE": "simple survival / acceptance",
+        "SOCIAL_POSITION": "LOW",
+        "KNOWLEDGE": "ordinary life becomes more salient than abstract systems",
+        "AGENCY": "FLIP_TO_PASSIVITY"
+      },
+      "delta_state": ["SOCIAL_POSITION_DECREASE", "EXISTENTIAL_ILLUSION_EXTINCTION", "DESIRE_REORIENTATION", "AGENCY_MODE_CHANGE"],
+      "delta2_state": "deprivation removes intellectual defenses and generates solidarity/internal freedom",
+      "accumulation": ["PERSISTENCE"],
+      "trajectory": "intellectual/ideological project -> deprivation -> simplification -> internal reorientation",
+      "structure": "IDEALIZED_MODEL -> CONSTRAINT/DEPRIVATION -> MODEL_REDUCTION -> NEW_VALUE_BASIS",
+      "mechanism": "Severe external constraints can remove previously available identity supports and expose alternative value structures.",
+      "variation": "Constraint can lead to collapse, adaptation, solidarity, or resistance.",
+      "loss_risk": "High if captivity is reduced to a generic lesson or friendship."
+    },
+    {
+      "scene_id": "SE-003",
+      "focus": "Natasha crisis",
+      "pre_state": {
+        "DESIRE": "romantic intoxication",
+        "RELATIONSHIP": "engaged to Andrei",
+        "SOCIAL_ARTIFICE": "HIGH"
+      },
+      "event": "attempted elopement with Anatole and resulting scandal",
+      "post_state": {
+        "DESIRE": "guilt / empathy",
+        "RELATIONSHIP": "engagement severed",
+        "EXPECTATION": "DECREASE",
+        "MORAL_SELF_MODEL": "revised"
+      },
+      "delta_state": ["DESIRE_REVERSAL", "RELATIONSHIP_SEVERANCE", "EXPECTATION_DECREASE", "SELF_MODEL_CHANGE"],
+      "delta2_state": "romantic impulse + scandal -> ego/worldview collapse -> later moral maturity",
+      "accumulation": ["REINTERPRETATION", "PERSISTENCE"],
+      "trajectory": "social attention -> fall/guilt -> moral maturation",
+      "structure": "IMPULSE -> CONSEQUENCE -> SELF_MODEL_DISRUPTION -> REORIENTATION",
+      "mechanism": "A socially consequential choice can alter both relationship state and the agent's model of self.",
+      "variation": "The same social consequence can produce denial, shame, adaptation, or growth.",
+      "loss_risk": "High if reduced to a romance scandal."
+    }
+  ],
+  "global_change_patterns": [
+    "extreme event -> prior worldview/goal model collapse -> reorientation",
+    "deprivation -> removal of prior supports -> alternative value basis",
+    "socially consequential choice -> relationship consequence -> self-model change"
+  ],
+  "trajectory_candidates": [
+    "heroic glory -> disenchantment -> internal reflection",
+    "ideological project -> deprivation -> simplification -> internal reorientation",
+    "social attention -> fall/guilt -> moral maturation"
+  ],
+  "work_specific_variables": [
+    "EXISTENTIAL_ILLUSION",
+    "SOCIAL_ARTIFICE",
+    "MORAL_SELF_MODEL"
+  ],
+  "work_specific_variable_policy": "These are retained as observed/work-specific variables and are not promoted to canonical variables from one work alone.",
+  "cross_work_candidates": [
+    "MODEL_COLLAPSE_AFTER_HIGH_COST_EVENT",
+    "CONSTRAINT_CAN_RESTRUCTURE_VALUE_BASIS",
+    "CHOICE_CONSEQUENCE_CAN_CHANGE_SELF_MODEL",
+    "SECOND_ORDER_CHANGE"
+  ],
+  "confidence": {
+    "evidence": "LIMITED_BY_MEMORY_SOURCE",
+    "interpretation": "MEDIUM",
+    "generalization": "LOW / CANDIDATE_ONLY"
+  },
+  "provenance": {
+    "analysis_unit": "Gemini",
+    "source_fidelity": "MEMORY",
+    "coverage_warning": "Only the supplied three scene records are stored. This record must not be treated as full-work forensic coverage.",
+    "note": "Stored as normalized research data; no missing scenes were invented."
+  }
+}

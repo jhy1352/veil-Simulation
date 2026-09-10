@@ -38,8 +38,9 @@ export interface OffscreenEventRecord {
   factionId?: string;
   involvedNpcIds?: string[];
   narrativeTime?: NarrativeTime;
-  timestamp: string;
+  timestamp?: string;
   visibility?: 'PUBLIC' | 'FACTION_ONLY' | 'PRIVATE' | 'HIDDEN' | 'RUMOR';
+  turn?: number;
 }
 
 export interface NpcRecord {
@@ -73,7 +74,7 @@ export interface FactionRecord {
   leader?: string;
   alignment?: string;
   influence?: string | number;
-  description: string;
+  description?: string;
   attitudeTowardsPlayer?: string;
   relationshipToProtagonist?: string;
   impression?: string;
@@ -86,6 +87,7 @@ export interface NarrativeSeed {
   content: string;
   status: 'active' | 'resolved' | 'dormant';
   turnCreated?: number;
+  category?: string;
   entityReference?: EntityReferenceBundle;
 }
 
@@ -142,10 +144,6 @@ export interface InventoryItem {
 export type Item = InventoryItem;
 export type CanonicalEntityReferenceType = 'CHARACTER' | 'NPC' | 'FACTION' | 'ITEM' | 'NARRATIVE_SEED';
 
-// ----------------------------------------------------
-// Canonical Entity Identity Evidence Boundary
-// ----------------------------------------------------
-
 export interface EntityReferenceEvidence {
   sourceNpcId?: string;
   context?: string;
@@ -154,15 +152,10 @@ export interface EntityReferenceEvidence {
   cost?: { name?: string; id?: string; quantity: number };
 }
 
-/**
- * LLM-provided identity claim plus independent identity evidence.
- * claimedEntityId is a claim only; Engine/Resolver remains authoritative.
- */
 export interface EntityReferenceBundle {
   entityType: CanonicalEntityReferenceType;
   claimedEntityId?: string;
   evidence: EntityReferenceEvidence;
-  /** Engine-only transient field. Never accepted as an authority from LLM output. */
   resolvedEntityId?: string;
 }
 
@@ -253,10 +246,6 @@ export interface GMMetaData {
   statDeltas?: { stat: StatType; delta: number }[];
 }
 
-// ----------------------------------------------------
-// Section: Engine Memory, Historical Records & State Firewall
-// ----------------------------------------------------
-
 export type InformationAccessBoundary =
   | 'PUBLIC'
   | 'FACTION'
@@ -299,12 +288,81 @@ export interface HistoricalRecord {
   payload: Record<string, any>;
 }
 
+/**
+ * Official External Candidate Contract (LLM Generation Schema)
+ * Exactly these 9 fields are permitted in rawMetadata.
+ * Any other field is an UNKNOWN_FIELD violation at Recovery Gate.
+ */
+export interface ExternalRawMetadata {
+  foreshadowSeeds?: string[];
+  resolvedSeeds?: {
+    content: string;
+    resolutionSummary?: string;
+    entityReference?: EntityReferenceBundle;
+  }[];
+  cameraOffscreenEvents?: string[];
+  newNpcs?: {
+    name: string;
+    alias?: string;
+    npcClass?: NpcClass | string;
+    innerThought?: string;
+    metInStory?: boolean;
+    isDead?: boolean;
+    origin?: string;
+    background?: string;
+    martialArts?: string;
+    values?: string;
+    affiliation?: string;
+    entityReference?: EntityReferenceBundle;
+  }[];
+  newFactions?: {
+    name: string;
+    description?: string;
+    attitudeTowardsPlayer?: string;
+    entityReference?: EntityReferenceBundle;
+  }[];
+  inventoryChanges?: {
+    name: string;
+    quantity: number;
+    action: 'add' | 'remove';
+    cause?: string;
+    cost?: { name?: string; id?: string; quantity: number };
+    verifiedEventId?: string;
+    entityReference?: EntityReferenceBundle;
+  }[];
+  statDeltas?: {
+    stat: StatType | string;
+    delta: number;
+  }[];
+  characterChanges?: {
+    name?: string;
+    alias?: string;
+    background?: string;
+    martialArts?: string;
+    entityReference?: EntityReferenceBundle;
+  };
+  chapterChanges?: {
+    currentChapter?: string;
+    upcomingChapters?: string[];
+  };
+}
+
+export interface ExternalCandidateOutput {
+  label: string;
+  narrativeSummary: string;
+  rawMetadata: ExternalRawMetadata;
+}
+
+/**
+ * Internal Engine Candidate Packet
+ * Trusted intermediate representation produced by extractCandidatesFromMetadata
+ */
 export interface CandidatePacket {
-  candidateId: string;
-  turn: number;
-  narrativeDate?: string;
-  timestamp: string;
-  npcChanges?: {
+  candidateId: string; // [RUNTIME_REQUIRED] Canonical ID assigned by Parser Authority (1..N)
+  turn: number; // [RUNTIME_REQUIRED] Current Turn
+  narrativeDate?: string; // [RUNTIME_REQUIRED] In-world date
+  timestamp: string; // [RUNTIME_REQUIRED] Creation timestamp
+  npcChanges?: { // [LEGACY_INTERNAL] Mapped from external 'newNpcs'
     name: string;
     alias?: string;
     npcClass?: NpcClass;
@@ -317,27 +375,44 @@ export interface CandidatePacket {
     values?: string;
     affiliation?: string;
     informationAccess?: InformationAccessBoundary;
+    information?: {
+      factId: string;
+      elementIds: readonly string[];
+      recipientNpcId: string;
+      sourceNpcId?: string;
+      acquisition: 'OBSERVATION' | 'INVESTIGATION' | 'TESTIMONY' | 'RECORD' | 'TRANSFER' | 'RELATIONSHIP' | 'ABILITY';
+      state?: 'MATCH' | 'DISTORTED';
+      understoodText?: string;
+    } | readonly {
+      factId: string;
+      elementIds: readonly string[];
+      recipientNpcId: string;
+      sourceNpcId?: string;
+      acquisition: 'OBSERVATION' | 'INVESTIGATION' | 'TESTIMONY' | 'RECORD' | 'TRANSFER' | 'RELATIONSHIP' | 'ABILITY';
+      state?: 'MATCH' | 'DISTORTED';
+      understoodText?: string;
+    }[];
     entityReference?: EntityReferenceBundle;
   }[];
-  factionChanges?: {
+  factionChanges?: { // [LEGACY_INTERNAL] Mapped from external 'newFactions'
     name: string;
     description?: string;
     attitudeTowardsPlayer?: string;
     informationAccess?: InformationAccessBoundary;
     entityReference?: EntityReferenceBundle;
   }[];
-  seedChanges?: {
+  seedChanges?: { // [LEGACY_INTERNAL] Mapped from external 'foreshadowSeeds' & 'resolvedSeeds'
     content: string;
     status: 'active' | 'resolved' | 'dormant';
     action: 'create' | 'resolve' | 'dormant';
     resolutionSummary?: string;
     entityReference?: EntityReferenceBundle;
   }[];
-  offscreenEvents?: {
+  offscreenEvents?: { // [LEGACY_INTERNAL] Mapped from external 'cameraOffscreenEvents'
     event: string;
     informationAccess?: InformationAccessBoundary;
   }[];
-  inventoryChanges?: {
+  inventoryChanges?: { // [RUNTIME_REQUIRED] Preserved from external 'inventoryChanges'
     name: string;
     quantity: number;
     action: 'add' | 'remove';
@@ -353,23 +428,23 @@ export interface CandidatePacket {
     cost?: { name?: string; id?: string; quantity: number };
     verifiedEventId?: string;
   }[];
-  statChanges?: {
+  statChanges?: { // [LEGACY_INTERNAL] Mapped from external 'statDeltas'
     stat: StatType;
     delta: number;
   }[];
-  characterChanges?: {
+  characterChanges?: { // [RUNTIME_REQUIRED] Preserved from external 'characterChanges'
     name?: string;
     alias?: string;
     background?: string;
     martialArts?: string;
     entityReference?: EntityReferenceBundle;
   };
-  chapterChanges?: {
+  chapterChanges?: { // [RUNTIME_REQUIRED] Strictly nested structure from external 'chapterChanges'
     currentChapter?: string;
     upcomingChapters?: string[];
   };
-  recommendedDC?: number;
-  rawMetadataBlock?: string;
+  recommendedDC?: number; // [DEAD / FORBIDDEN_EXTERNAL] Prohibited from external metadata
+  rawMetadataBlock?: string; // [RUNTIME_REQUIRED]
 }
 
 export interface ValidationDiagnosticLog {

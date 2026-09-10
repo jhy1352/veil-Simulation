@@ -1,0 +1,576 @@
+===================================================================
+ ARGUMENT BINDING RED-TEAM SUITE (C-9 ~ C-17)
+===================================================================
+
+--- C-9: 명시적 다중 대응 ---
+입력 문장/의미: "상인은 철수에게 열쇠를 주고, 영희에게는 은화를 주었다." (각각 다른 독립된 시맨틱 이벤트로 명시적 분리)
+생성된 SemanticEvent:
+[
+  {
+    "eventId": "se-c9-1",
+    "action": "GIFT",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entityName": "상인",
+        "status": "RESOLVED"
+      },
+      {
+        "role": "RECIPIENT",
+        "entityName": "철수",
+        "status": "RESOLVED"
+      },
+      {
+        "role": "OBJECT",
+        "entityName": "열쇠",
+        "status": "RESOLVED"
+      }
+    ],
+    "scope": "OFFSCREEN",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "NONE"
+  },
+  {
+    "eventId": "se-c9-2",
+    "action": "GIFT",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entityName": "상인",
+        "status": "RESOLVED"
+      },
+      {
+        "role": "RECIPIENT",
+        "entityName": "영희",
+        "status": "RESOLVED"
+      },
+      {
+        "role": "OBJECT",
+        "entityName": "은화",
+        "status": "RESOLVED"
+      }
+    ],
+    "scope": "OFFSCREEN",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "NONE"
+  }
+]
+event.roles[] 원본 순서:
+  Event 1: [0] SUBJECT:상인 (RESOLVED), [1] RECIPIENT:철수 (RESOLVED), [2] OBJECT:열쇠 (RESOLVED)
+  Event 2: [0] SUBJECT:상인 (RESOLVED), [1] RECIPIENT:영희 (RESOLVED), [2] OBJECT:은화 (RESOLVED)
+생성된 MeaningTree의 ROLE 구조: Event[se-c9-1]: { SUBJECT:상인, RECIPIENT:철수, OBJECT:열쇠 } | Event[se-c9-2]: { SUBJECT:상인, RECIPIENT:영희, OBJECT:은화 }
+Runtime projection 결과:
+[
+  {
+    "type": "GIFT",
+    "payload": {
+      "eventId": "se-c9-1",
+      "polarity": "ASSERTED",
+      "epistemicStatus": "OBSERVED",
+      "modality": "NONE"
+    }
+  },
+  {
+    "type": "GIFT",
+    "payload": {
+      "eventId": "se-c9-2",
+      "polarity": "ASSERTED",
+      "epistemicStatus": "OBSERVED",
+      "modality": "NONE"
+    }
+  }
+]
+validateActionSignature() 결과: Event 1 valid=true, Event 2 valid=true
+RECIPIENT ↔ OBJECT 대응관계가 실제로 보존됐는지: YES
+GREEN / RED: GREEN
+최초 정보 손실 지점: None
+
+--- C-10: 단일 이벤트 내부 다중 대응 ---
+입력 문장/의미: "상인은 철수와 영희에게 각각 열쇠와 은화를 선물했다." (단일 SemanticEvent 객체 내부 배치)
+생성된 SemanticEvent:
+{
+  "eventId": "se-c10",
+  "action": "GIFT",
+  "roles": [
+    {
+      "role": "SUBJECT",
+      "entityName": "상인",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "철수",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "영희",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "열쇠",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "은화",
+      "status": "RESOLVED"
+    }
+  ],
+  "scope": "OFFSCREEN",
+  "polarity": "ASSERTED",
+  "epistemicStatus": "OBSERVED",
+  "modality": "NONE"
+}
+event.roles[] 원본 순서: [0] SUBJECT:상인 (RESOLVED), [1] RECIPIENT:철수 (RESOLVED), [2] RECIPIENT:영희 (RESOLVED), [3] OBJECT:열쇠 (RESOLVED), [4] OBJECT:은화 (RESOLVED)
+생성된 MeaningTree의 ROLE 구조: Event[se-c10]: { SUBJECT:상인, RECIPIENT:철수, RECIPIENT:영희, OBJECT:열쇠, OBJECT:은화 }
+Runtime projection 결과:
+[
+  {
+    "type": "GIFT",
+    "payload": {
+      "eventId": "se-c10",
+      "polarity": "ASSERTED",
+      "epistemicStatus": "OBSERVED",
+      "modality": "NONE"
+    }
+  }
+]
+validateActionSignature() 결과: valid=true
+RECIPIENT ↔ OBJECT 대응관계가 실제로 보존됐는지: NO (철수와 열쇠, 영희와 은화의 연결 고리 상실)
+GREEN / RED: RED
+최초 정보 손실 지점: SemanticEvent Extraction Boundary (단일 플랫 이벤트 객체의 구조적 한계)
+
+--- C-11: 순서가 의미를 결정하는 대응 ---
+입력 문장/의미: "상인은 철수에게 열쇠를, 영희에게는 은화를 건넸다." (교차 배치하여 순서 기반 매핑 유도)
+생성된 SemanticEvent:
+{
+  "eventId": "se-c11",
+  "action": "GIFT",
+  "roles": [
+    {
+      "role": "SUBJECT",
+      "entityName": "상인",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "철수",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "열쇠",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "영희",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "은화",
+      "status": "RESOLVED"
+    }
+  ],
+  "scope": "OFFSCREEN",
+  "polarity": "ASSERTED",
+  "epistemicStatus": "OBSERVED",
+  "modality": "NONE"
+}
+event.roles[] 원본 순서: [0] SUBJECT:상인 (RESOLVED), [1] RECIPIENT:철수 (RESOLVED), [2] OBJECT:열쇠 (RESOLVED), [3] RECIPIENT:영희 (RESOLVED), [4] OBJECT:은화 (RESOLVED)
+생성된 MeaningTree의 ROLE 구조: Event[se-c11]: { SUBJECT:상인, RECIPIENT:철수, OBJECT:열쇠, RECIPIENT:영희, OBJECT:은화 }
+Runtime projection 결과:
+[
+  {
+    "type": "GIFT",
+    "payload": {
+      "eventId": "se-c11",
+      "polarity": "ASSERTED",
+      "epistemicStatus": "OBSERVED",
+      "modality": "NONE"
+    }
+  }
+]
+validateActionSignature() 결과: valid=true
+RECIPIENT ↔ OBJECT 대응관계가 실제로 보존됐는지: NO (순서에 따른 매핑 메타데이터가 런타임에 도달하지 못함)
+GREEN / RED: RED
+최초 정보 손실 지점: MeaningTree Compiling Stage (순서 중심의 역할 정보들을 하나의 플랫한 자식 노드 풀로 컴파일)
+
+--- C-12: 순서가 의미를 결정하지 않는 ambiguity ---
+입력 문장/의미: "상인은 철수와 영희에게 은화와 열쇠를 뒤섞어 주었다." (순서 매핑 불가능하도록 뒤섞어 배치)
+생성된 SemanticEvent:
+{
+  "eventId": "se-c12",
+  "action": "GIFT",
+  "roles": [
+    {
+      "role": "SUBJECT",
+      "entityName": "상인",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "은화",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "열쇠",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "철수",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "영희",
+      "status": "RESOLVED"
+    }
+  ],
+  "scope": "OFFSCREEN",
+  "polarity": "ASSERTED",
+  "epistemicStatus": "OBSERVED",
+  "modality": "NONE"
+}
+event.roles[] 원본 순서: [0] SUBJECT:상인 (RESOLVED), [1] OBJECT:은화 (RESOLVED), [2] OBJECT:열쇠 (RESOLVED), [3] RECIPIENT:철수 (RESOLVED), [4] RECIPIENT:영희 (RESOLVED)
+생성된 MeaningTree의 ROLE 구조: Event[se-c12]: { SUBJECT:상인, OBJECT:은화, OBJECT:열쇠, RECIPIENT:철수, RECIPIENT:영희 }
+Runtime projection 결과:
+[
+  {
+    "type": "GIFT",
+    "payload": {
+      "eventId": "se-c12",
+      "polarity": "ASSERTED",
+      "epistemicStatus": "OBSERVED",
+      "modality": "NONE"
+    }
+  }
+]
+validateActionSignature() 결과: valid=true
+RECIPIENT ↔ OBJECT 대응관계가 실제로 보존됐는지: NO (어떠한 대응 구조도 남지 않고 섞임)
+GREEN / RED: RED
+최초 정보 손실 지점: SemanticEvent Extraction Boundary (애초에 모호성을 검출하고 차단하지 못한 채 플랫 승인함)
+
+--- C-13: 부분 대응 ---
+입력 문장/의미: "상인은 철수에게 은화를 주고, 영희에게도 무언가 주었으나 모호하다."
+생성된 SemanticEvent:
+{
+  "eventId": "se-c13",
+  "action": "GIFT",
+  "roles": [
+    {
+      "role": "SUBJECT",
+      "entityName": "상인",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "철수",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "은화",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "영희",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "status": "AMBIGUOUS"
+    }
+  ],
+  "scope": "OFFSCREEN",
+  "polarity": "ASSERTED",
+  "epistemicStatus": "OBSERVED",
+  "modality": "NONE"
+}
+event.roles[] 원본 순서: [0] SUBJECT:상인 (RESOLVED), [1] RECIPIENT:철수 (RESOLVED), [2] OBJECT:은화 (RESOLVED), [3] RECIPIENT:영희 (RESOLVED), [4] OBJECT:undefined (AMBIGUOUS)
+생성된 MeaningTree의 ROLE 구조: (컴파일 실패하므로 존재하지 않거나 RECONCILIATION_REQUIRED)
+Runtime projection 결과:
+[]
+validateActionSignature() 결과: valid=false, errors=["Required ROLE 'OBJECT' has ambiguous or unresolved reference status: 'AMBIGUOUS'"]
+RECIPIENT ↔ OBJECT 대응관계가 실제로 보존됐는지: YES (모호성을 올바르게 차단하여 잘못된 상태 오염을 철저 방어함)
+GREEN / RED: GREEN
+최초 정보 손실 지점: None (에러 검출 성공)
+
+--- C-14: 3x3 비순차 대응 ---
+입력 문장/의미: "상인은 A, B, C에게 각각 Y, Z, X를 주었다." (A↔Y, B↔Z, C↔X 비순차 대응관계)
+생성된 SemanticEvent:
+{
+  "eventId": "se-c14",
+  "action": "GIFT",
+  "roles": [
+    {
+      "role": "SUBJECT",
+      "entityName": "상인",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "A",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "B",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "C",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "Y",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "Z",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "X",
+      "status": "RESOLVED"
+    }
+  ],
+  "scope": "OFFSCREEN",
+  "polarity": "ASSERTED",
+  "epistemicStatus": "OBSERVED",
+  "modality": "NONE"
+}
+event.roles[] 원본 순서: [0] SUBJECT:상인 (RESOLVED), [1] RECIPIENT:A (RESOLVED), [2] RECIPIENT:B (RESOLVED), [3] RECIPIENT:C (RESOLVED), [4] OBJECT:Y (RESOLVED), [5] OBJECT:Z (RESOLVED), [6] OBJECT:X (RESOLVED)
+생성된 MeaningTree의 ROLE 구조: Event[se-c14]: { SUBJECT:상인, RECIPIENT:A, RECIPIENT:B, RECIPIENT:C, OBJECT:Y, OBJECT:Z, OBJECT:X }
+Runtime projection 결과:
+[
+  {
+    "type": "GIFT",
+    "payload": {
+      "eventId": "se-c14",
+      "polarity": "ASSERTED",
+      "epistemicStatus": "OBSERVED",
+      "modality": "NONE"
+    }
+  }
+]
+validateActionSignature() 결과: valid=true
+RECIPIENT ↔ OBJECT 대응관계가 실제로 보존됐는지: NO (단순 인덱스 지핑 적용 시에도 비순차 대응이 불가능하므로 뒤섞여 오염됨)
+GREEN / RED: RED
+최초 정보 손실 지점: SemanticEvent Extraction Boundary (플랫 리스트의 3x3 복합 관계 표현 불가능성)
+
+--- C-15: 공유 객체 ---
+입력 문장/의미: "상인은 철수와 영희에게 함께 쓰라며 단 하나의 은화주머니를 주었다."
+생성된 SemanticEvent:
+{
+  "eventId": "se-c15",
+  "action": "GIFT",
+  "roles": [
+    {
+      "role": "SUBJECT",
+      "entityName": "상인",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "철수",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "영희",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "은화주머니",
+      "status": "RESOLVED"
+    }
+  ],
+  "scope": "OFFSCREEN",
+  "polarity": "ASSERTED",
+  "epistemicStatus": "OBSERVED",
+  "modality": "NONE"
+}
+event.roles[] 원본 순서: [0] SUBJECT:상인 (RESOLVED), [1] RECIPIENT:철수 (RESOLVED), [2] RECIPIENT:영희 (RESOLVED), [3] OBJECT:은화주머니 (RESOLVED)
+생성된 MeaningTree의 ROLE 구조: Event[se-c15]: { SUBJECT:상인, RECIPIENT:철수, RECIPIENT:영희, OBJECT:은화주머니 }
+Runtime projection 결과:
+[
+  {
+    "type": "GIFT",
+    "payload": {
+      "eventId": "se-c15",
+      "polarity": "ASSERTED",
+      "epistemicStatus": "OBSERVED",
+      "modality": "NONE"
+    }
+  }
+]
+validateActionSignature() 결과: valid=true
+RECIPIENT ↔ OBJECT 대응관계가 실제로 보존됐는지: NO (공유의 관계적 성격이 생략되고 플랫하게 투영되어 개별 수령처럼 왜곡될 가능성 있음)
+GREEN / RED: RED
+최초 정보 손실 지점: SemanticEvent Extraction Boundary
+
+--- C-16: 일부 ROLE ambiguity ---
+입력 문장/의미: "상인은 철수에게 열쇠를 주었으나, 영희에게는 무엇을 주었는지 미해결 상태이다."
+생성된 SemanticEvent:
+{
+  "eventId": "se-c16",
+  "action": "GIFT",
+  "roles": [
+    {
+      "role": "SUBJECT",
+      "entityName": "상인",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "철수",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "entityName": "열쇠",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "RECIPIENT",
+      "entityName": "영희",
+      "status": "RESOLVED"
+    },
+    {
+      "role": "OBJECT",
+      "status": "UNRESOLVED"
+    }
+  ],
+  "scope": "OFFSCREEN",
+  "polarity": "ASSERTED",
+  "epistemicStatus": "OBSERVED",
+  "modality": "NONE"
+}
+event.roles[] 원본 순서: [0] SUBJECT:상인 (RESOLVED), [1] RECIPIENT:철수 (RESOLVED), [2] OBJECT:열쇠 (RESOLVED), [3] RECIPIENT:영희 (RESOLVED), [4] OBJECT:undefined (UNRESOLVED)
+생성된 MeaningTree의 ROLE 구조: (컴파일 실패하므로 존재하지 않거나 RECONCILIATION_REQUIRED)
+Runtime projection 결과:
+[]
+validateActionSignature() 결과: valid=false, errors=["Required ROLE 'OBJECT' has ambiguous or unresolved reference status: 'UNRESOLVED'"]
+RECIPIENT ↔ OBJECT 대응관계가 실제로 보존됐는지: YES (UNRESOLVED 상태를 올바르게 잡아내어 잘못된 상태 전이를 원천 차단함)
+GREEN / RED: GREEN
+최초 정보 손실 지점: None
+
+--- C-17: argument binding + event boundary + CAUSE 종합 ---
+입력 문장/의미: "상인은 철수에게 열쇠를 주었고, 철수가 성공했으므로 그 인과적 보상으로 영희에게 은화를 주었다."
+생성된 SemanticEvent:
+[
+  {
+    "eventId": "se-c17-1",
+    "action": "GIFT",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entityName": "상인",
+        "status": "RESOLVED"
+      },
+      {
+        "role": "RECIPIENT",
+        "entityName": "철수",
+        "status": "RESOLVED"
+      },
+      {
+        "role": "OBJECT",
+        "entityName": "열쇠",
+        "status": "RESOLVED"
+      }
+    ],
+    "scope": "OFFSCREEN",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "NONE"
+  },
+  {
+    "eventId": "se-c17-2",
+    "action": "GIFT",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entityName": "상인",
+        "status": "RESOLVED"
+      },
+      {
+        "role": "RECIPIENT",
+        "entityName": "영희",
+        "status": "RESOLVED"
+      },
+      {
+        "role": "OBJECT",
+        "entityName": "은화",
+        "status": "RESOLVED"
+      }
+    ],
+    "causes": [
+      {
+        "reason": "철수가 성공적으로 열쇠를 획득했으므로 보상 연쇄 작동",
+        "type": "CAUSAL_DEPENDENCY",
+        "causeId": "se-c17-1"
+      }
+    ],
+    "scope": "OFFSCREEN",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "NONE"
+  }
+]
+event.roles[] 원본 순서:
+  Event 1: [0] SUBJECT:상인 (RESOLVED), [1] RECIPIENT:철수 (RESOLVED), [2] OBJECT:열쇠 (RESOLVED)
+  Event 2: [0] SUBJECT:상인 (RESOLVED), [1] RECIPIENT:영희 (RESOLVED), [2] OBJECT:은화 (RESOLVED)
+생성된 MeaningTree의 ROLE 구조: Event[se-c17-1]: { SUBJECT:상인, RECIPIENT:철수, OBJECT:열쇠 } | Event[se-c17-2]: { SUBJECT:상인, RECIPIENT:영희, OBJECT:은화 }
+Runtime projection 결과:
+[
+  {
+    "type": "GIFT",
+    "payload": {
+      "eventId": "se-c17-1",
+      "polarity": "ASSERTED",
+      "epistemicStatus": "OBSERVED",
+      "modality": "NONE"
+    }
+  },
+  {
+    "type": "GIFT",
+    "payload": {
+      "eventId": "se-c17-2",
+      "polarity": "ASSERTED",
+      "epistemicStatus": "OBSERVED",
+      "modality": "NONE"
+    }
+  }
+]
+validateActionSignature() 결과: Event 1 valid=true, Event 2 valid=true
+RECIPIENT ↔ OBJECT 대응관계가 실제로 보존됐는지: YES (명확한 이벤트 경계 분할 및 CAUSE 기반 인과적 관계 유지로 왜곡 차단 완수)
+GREEN / RED: GREEN
+최초 정보 손실 지점: None
+
+===================================================================
+ SUMMARY TABLE (C-9 ~ C-17)
+===================================================================
+C-9 (명시적 다중 대응)      | Validator: VALID   | Compiler: COMPILED | MeaningTree: PRESERVED | Runtime: 2 ACTIONS | GREEN
+C-10 (단일 이벤트 내부)     | Validator: VALID   | Compiler: COMPILED | MeaningTree: FLATTENED | Runtime: 1 ACTION  | RED
+C-11 (순서 지배적 대응)     | Validator: VALID   | Compiler: COMPILED | MeaningTree: FLATTENED | Runtime: 1 ACTION  | RED
+C-12 (순서 교란 Ambiguity)  | Validator: VALID   | Compiler: COMPILED | MeaningTree: FLATTENED | Runtime: 1 ACTION  | RED
+C-13 (부분 대응)            | Validator: INVALID | Compiler: RECONCIL | MeaningTree: BLOCKED   | Runtime: 0 ACTIONS | GREEN
+C-14 (3x3 비순차 대응)      | Validator: VALID   | Compiler: COMPILED | MeaningTree: FLATTENED | Runtime: 1 ACTION  | RED
+C-15 (공유 객체)            | Validator: VALID   | Compiler: COMPILED | MeaningTree: FLATTENED | Runtime: 1 ACTION  | RED
+C-16 (일부 ROLE Ambiguity)  | Validator: INVALID | Compiler: RECONCIL | MeaningTree: BLOCKED   | Runtime: 0 ACTIONS | GREEN
+C-17 (종합 Causal Boundary) | Validator: VALID   | Compiler: COMPILED | MeaningTree: PRESERVED | Runtime: 2 ACTIONS | GREEN
+===================================================================

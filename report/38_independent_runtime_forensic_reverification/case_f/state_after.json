@@ -1,0 +1,125 @@
+{
+  "stateVersion": 7,
+  "turn": 6,
+  "worldInfo": {
+    "worldName": "낙양 숭양서원",
+    "worldType": "popular_genre",
+    "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+    "toneStyle": "묵직하고 유려한 정통 무협 필치",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "제1장: 서원의 은밀한 흔적",
+      "upcomingChapters": [
+        "제2장: 심야의 서고"
+      ]
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [
+      "숭양서원 원장과 의문의 무림 인사의 서신 왕래",
+      "서원 내부 감시자들의 시선",
+      "숭양서원 규율대원들의 야간 순찰 경로 변경",
+      "숭양서원 수호 세력의 야간 순찰"
+    ],
+    "offscreenRecords": [
+      {
+        "id": "offscreen-mtpv941x-bh8g6v",
+        "eventDescription": "숭양서원 원장과 의문의 무림 인사의 서신 왕래",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-06T13:47:25.509Z",
+        "visibility": "FACTION_ONLY"
+      },
+      {
+        "id": "offscreen-mtpva5c4-2n0nry",
+        "eventDescription": "서원 내부 감시자들의 시선",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-06T13:48:13.828Z",
+        "visibility": "FACTION_ONLY"
+      },
+      {
+        "id": "offscreen-mtpvc2aj-k5tud5",
+        "eventDescription": "숭양서원 규율대원들의 야간 순찰 경로 변경",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-06T13:49:43.195Z",
+        "visibility": "FACTION_ONLY"
+      },
+      {
+        "id": "offscreen-mtpvd137-lr30yl",
+        "eventDescription": "숭양서원 수호 세력의 야간 순찰",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-06T13:50:28.291Z",
+        "visibility": "FACTION_ONLY"
+      }
+    ]
+  },
+  "character": {
+    "name": "소진호",
+    "gender": "남성",
+    "age": 20,
+    "appearance": "",
+    "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+    "originBackground": "몰락한 낙양 서생",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 12,
+      "agility": 14,
+      "constitution": 12,
+      "intelligence": 15,
+      "wisdom": 13,
+      "charisma": 11
+    },
+    "inventory": [
+      {
+        "id": "inv-silver-1",
+        "name": "은화",
+        "quantity": 5,
+        "description": "통용 화폐"
+      }
+    ],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": "evt-mtpve1of-87nk6b",
+  "lastCommittedAt": "2026-09-06T13:51:15.711Z"
+}

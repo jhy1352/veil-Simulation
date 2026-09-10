@@ -1,0 +1,1554 @@
+FORENSIC INVESTIGATION EVIDENCE REPORT (R1 Offscreen Evidence Reuse)
+***
+
+1. SUMMARY OF REPRODUCTION CHECKLISTS:
+- Turn 2 Inventory Changed (R1-A): YES
+- Turn 5 NPC Created (R1-B): YES
+- Turn 3 Double Consumption Blocked (R1-C): YES
+
+- Final Reproduction Status:
+  r1a_eventId: REPRODUCED
+  r1a_recordId: BLOCKED
+  r1b: REPRODUCED
+  r1c: BLOCKED
+
+2. DETAILED TRACE EVIDENCE FOR ALL TURNS:
+
+*** TURN 1 (Canonical Offscreen Event Creation for Item) ***
+- State Before (snapshotT1_before):
+{
+  "stateVersion": 1,
+  "turn": 1,
+  "worldInfo": {
+    "worldName": "",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [],
+    "offscreenRecords": []
+  },
+  "character": {
+    "name": "",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": null,
+  "lastCommittedAt": "2026-09-07T08:46:54.401Z"
+}
+
+- Candidate rawMetadata (candT1):
+{
+  "cameraOffscreenEvents": [
+    "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다."
+  ]
+}
+
+- CandidatePacket output from extractCandidatesFromMetadata (packetT1):
+{
+  "candidateId": "1",
+  "turn": 1,
+  "narrativeDate": "1년차 봄 1일",
+  "timestamp": "2026-09-07T08:46:54.402Z",
+  "npcChanges": [],
+  "factionChanges": [],
+  "seedChanges": [],
+  "offscreenEvents": [
+    {
+      "event": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+      "informationAccess": "FACTION"
+    }
+  ],
+  "inventoryChanges": [],
+  "statChanges": [],
+  "rawMetadataBlock": "{\"cameraOffscreenEvents\":[\"T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.\"]}"
+}
+
+- RECORD_OFFSCREEN_EVENT Proposal (proposalT1):
+{
+  "proposalId": "prop-req-mtqzyhtu-1uston",
+  "requestId": "req-mtqzyhtu-1uston",
+  "eventId": "evt-mtqzyhtu-3cdsgq",
+  "expectedStateVersion": 1,
+  "source": "LLM",
+  "turn": 1,
+  "timestamp": "2026-09-07T08:46:54.402Z",
+  "intentSummary": "Turn 1 Candidate State Transition",
+  "actions": [
+    {
+      "type": "RECORD_OFFSCREEN_EVENT",
+      "payload": {
+        "id": "offscreen-mtqzyhtv-56kqrs",
+        "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+        "timestamp": "2026-09-07T08:46:54.403Z",
+        "visibility": "FACTION_ONLY"
+      }
+    }
+  ],
+  "rawClaims": [
+    "{\"cameraOffscreenEvents\":[\"T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.\"]}"
+  ],
+  "originInputId": "1",
+  "meaningTree": {
+    "atom": "INTENT",
+    "scope": "PROPOSAL",
+    "value": "Turn 1 Candidate State Transition",
+    "children": [
+      {
+        "atom": "ACTION",
+        "scope": "PROPOSAL",
+        "value": "RECORD_OFFSCREEN_EVENT",
+        "fields": {
+          "actionType": "RECORD_OFFSCREEN_EVENT",
+          "payload": {
+            "id": "offscreen-mtqzyhtv-56kqrs",
+            "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+            "timestamp": "2026-09-07T08:46:54.403Z",
+            "visibility": "FACTION_ONLY"
+          }
+        }
+      }
+    ]
+  }
+}
+
+- PreAuth 결과: PASS
+
+- Validator 결과:
+{
+  "isValid": true,
+  "rejectedReasons": []
+}
+
+- SovereignEngine commit 결과:
+{
+  "success": true,
+  "rejectedReasons": []
+}
+
+- Canonical Offscreen Event ID:
+offscreen-mtqzyhtv-56kqrs
+
+- State After (snapshotT1_after):
+{
+  "stateVersion": 2,
+  "turn": 1,
+  "worldInfo": {
+    "worldName": "",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [
+      "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다."
+    ],
+    "offscreenRecords": [
+      {
+        "id": "offscreen-mtqzyhtv-56kqrs",
+        "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.403Z",
+        "visibility": "FACTION_ONLY"
+      }
+    ]
+  },
+  "character": {
+    "name": "",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": "evt-mtqzyhtu-3cdsgq",
+  "lastCommittedAt": "2026-09-07T08:46:54.402Z"
+}
+
+
+*** TURN 2 (R1-A Exploitation Attempt: First use of offscreen record) ***
+- State Before (snapshotT2_before):
+{
+  "stateVersion": 2,
+  "turn": 1,
+  "worldInfo": {
+    "worldName": "",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [
+      "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다."
+    ],
+    "offscreenRecords": [
+      {
+        "id": "offscreen-mtqzyhtv-56kqrs",
+        "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.403Z",
+        "visibility": "FACTION_ONLY"
+      }
+    ]
+  },
+  "character": {
+    "name": "",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": "evt-mtqzyhtu-3cdsgq",
+  "lastCommittedAt": "2026-09-07T08:46:54.402Z"
+}
+
+- Candidate rawMetadata (candT2):
+{
+  "inventoryChanges": [
+    {
+      "name": "은검",
+      "quantity": 1,
+      "action": "add",
+      "entityReference": {
+        "entityType": "ITEM",
+        "evidence": {
+          "verifiedEventId": "offscreen-mtqzyhtv-56kqrs",
+          "cause": "DISCOVERY"
+        }
+      }
+    }
+  ]
+}
+
+- CandidatePacket output from extractCandidatesFromMetadata (packetT2):
+{
+  "candidateId": "2",
+  "turn": 2,
+  "narrativeDate": "1년차 봄 1일",
+  "timestamp": "2026-09-07T08:46:54.408Z",
+  "npcChanges": [],
+  "factionChanges": [],
+  "seedChanges": [],
+  "offscreenEvents": [],
+  "inventoryChanges": [
+    {
+      "name": "은검",
+      "quantity": 1,
+      "action": "add",
+      "entityReference": {
+        "entityType": "ITEM",
+        "evidence": {
+          "verifiedEventId": "offscreen-mtqzyhtv-56kqrs",
+          "cause": "DISCOVERY"
+        }
+      },
+      "cause": "DISCOVERY",
+      "verifiedEventId": "offscreen-mtqzyhtv-56kqrs",
+      "acquisition": {
+        "cause": "DISCOVERY",
+        "verifiedEventId": "offscreen-mtqzyhtv-56kqrs"
+      }
+    }
+  ],
+  "statChanges": [],
+  "rawMetadataBlock": "{\"inventoryChanges\":[{\"name\":\"은검\",\"quantity\":1,\"action\":\"add\",\"entityReference\":{\"entityType\":\"ITEM\",\"evidence\":{\"verifiedEventId\":\"offscreen-mtqzyhtv-56kqrs\",\"cause\":\"DISCOVERY\"}}}]}"
+}
+
+- SafeProposal from buildSafeProposalFromCandidate (proposalT2):
+{
+  "proposalId": "prop-req-mtqzyhu0-bjcvov",
+  "requestId": "req-mtqzyhu0-bjcvov",
+  "eventId": "evt-mtqzyhu0-pveo6s",
+  "expectedStateVersion": 2,
+  "source": "LLM",
+  "turn": 2,
+  "timestamp": "2026-09-07T08:46:54.408Z",
+  "intentSummary": "Turn 2 Candidate State Transition",
+  "actions": [
+    {
+      "type": "MODIFY_INVENTORY",
+      "payload": {
+        "item": {
+          "id": "item-mtqzyhu1-l610d9",
+          "name": "은검",
+          "quantity": 1,
+          "entityReference": {
+            "entityType": "ITEM",
+            "evidence": {
+              "verifiedEventId": "offscreen-mtqzyhtv-56kqrs",
+              "cause": "DISCOVERY"
+            },
+            "resolvedEntityId": "item-mtqzyhu1-l610d9"
+          }
+        },
+        "operation": "ADD",
+        "acquisition": {
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "offscreen-mtqzyhtv-56kqrs"
+        }
+      }
+    }
+  ],
+  "rawClaims": [
+    "{\"inventoryChanges\":[{\"name\":\"은검\",\"quantity\":1,\"action\":\"add\",\"entityReference\":{\"entityType\":\"ITEM\",\"evidence\":{\"verifiedEventId\":\"offscreen-mtqzyhtv-56kqrs\",\"cause\":\"DISCOVERY\"}}}]}"
+  ],
+  "originInputId": "2",
+  "meaningTree": {
+    "atom": "INTENT",
+    "scope": "PROPOSAL",
+    "value": "Turn 2 Candidate State Transition",
+    "children": [
+      {
+        "atom": "ACTION",
+        "scope": "PROPOSAL",
+        "value": "MODIFY_INVENTORY",
+        "fields": {
+          "actionType": "MODIFY_INVENTORY",
+          "payload": {
+            "item": {
+              "id": "item-mtqzyhu1-l610d9",
+              "name": "은검",
+              "quantity": 1,
+              "entityReference": {
+                "entityType": "ITEM",
+                "evidence": {
+                  "verifiedEventId": "offscreen-mtqzyhtv-56kqrs",
+                  "cause": "DISCOVERY"
+                },
+                "resolvedEntityId": "item-mtqzyhu1-l610d9"
+              }
+            },
+            "operation": "ADD",
+            "acquisition": {
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "offscreen-mtqzyhtv-56kqrs"
+            }
+          }
+        },
+        "children": [
+          {
+            "atom": "ENTITY",
+            "scope": "PROPOSAL",
+            "id": "item-mtqzyhu1-l610d9",
+            "value": "은검",
+            "fields": {
+              "quantity": 1
+            }
+          },
+          {
+            "atom": "CAUSE",
+            "scope": "PROPOSAL",
+            "value": "DISCOVERY_PICKUP",
+            "fields": {
+              "verifiedEventId": "offscreen-mtqzyhtv-56kqrs"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+- MODIFY_INVENTORY ADD action 존재 여부: YES
+- PreAuth 결과: PASS
+
+- Validator 결과:
+{
+  "isValid": true,
+  "rejectedReasons": []
+}
+
+- SovereignEngine commit 결과:
+{
+  "success": true,
+  "rejectedReasons": []
+}
+
+- State After (snapshotT2_after):
+{
+  "stateVersion": 3,
+  "turn": 2,
+  "worldInfo": {
+    "worldName": "",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [
+      "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다."
+    ],
+    "offscreenRecords": [
+      {
+        "id": "offscreen-mtqzyhtv-56kqrs",
+        "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.403Z",
+        "visibility": "FACTION_ONLY"
+      }
+    ]
+  },
+  "character": {
+    "name": "",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [
+      {
+        "id": "item-mtqzyhu1-l610d9",
+        "name": "은검",
+        "quantity": 1
+      }
+    ],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": "evt-mtqzyhu0-pveo6s",
+  "lastCommittedAt": "2026-09-07T08:46:54.408Z"
+}
+
+- Inventory Before: []
+- Inventory After: [
+  {
+    "id": "item-mtqzyhu1-l610d9",
+    "name": "은검",
+    "quantity": 1
+  }
+]
+
+
+*** TURN 3 (R1-C Exploitation Attempt: Double consumption check) ***
+- State Before (snapshotT3_before):
+{
+  "stateVersion": 3,
+  "turn": 2,
+  "worldInfo": {
+    "worldName": "",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [
+      "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다."
+    ],
+    "offscreenRecords": [
+      {
+        "id": "offscreen-mtqzyhtv-56kqrs",
+        "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.403Z",
+        "visibility": "FACTION_ONLY"
+      }
+    ]
+  },
+  "character": {
+    "name": "",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [
+      {
+        "id": "item-mtqzyhu1-l610d9",
+        "name": "은검",
+        "quantity": 1
+      }
+    ],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": "evt-mtqzyhu0-pveo6s",
+  "lastCommittedAt": "2026-09-07T08:46:54.408Z"
+}
+
+- Candidate rawMetadata (candT3):
+{
+  "inventoryChanges": [
+    {
+      "name": "은검2",
+      "quantity": 1,
+      "action": "add",
+      "entityReference": {
+        "entityType": "ITEM",
+        "evidence": {
+          "verifiedEventId": "offscreen-mtqzyhtv-56kqrs",
+          "cause": "DISCOVERY"
+        }
+      }
+    }
+  ]
+}
+
+- CandidatePacket output from extractCandidatesFromMetadata (packetT3):
+{
+  "candidateId": "3",
+  "turn": 3,
+  "narrativeDate": "1년차 봄 1일",
+  "timestamp": "2026-09-07T08:46:54.412Z",
+  "npcChanges": [],
+  "factionChanges": [],
+  "seedChanges": [],
+  "offscreenEvents": [],
+  "inventoryChanges": [
+    {
+      "name": "은검2",
+      "quantity": 1,
+      "action": "add",
+      "entityReference": {
+        "entityType": "ITEM",
+        "evidence": {
+          "verifiedEventId": "offscreen-mtqzyhtv-56kqrs",
+          "cause": "DISCOVERY"
+        }
+      },
+      "cause": "DISCOVERY",
+      "verifiedEventId": "offscreen-mtqzyhtv-56kqrs",
+      "acquisition": {
+        "cause": "DISCOVERY",
+        "verifiedEventId": "offscreen-mtqzyhtv-56kqrs"
+      }
+    }
+  ],
+  "statChanges": [],
+  "rawMetadataBlock": "{\"inventoryChanges\":[{\"name\":\"은검2\",\"quantity\":1,\"action\":\"add\",\"entityReference\":{\"entityType\":\"ITEM\",\"evidence\":{\"verifiedEventId\":\"offscreen-mtqzyhtv-56kqrs\",\"cause\":\"DISCOVERY\"}}}]}"
+}
+
+- SafeProposal from buildSafeProposalFromCandidate (proposalT3):
+{
+  "proposalId": "prop-req-mtqzyhu4-mf4uzi",
+  "requestId": "req-mtqzyhu4-mf4uzi",
+  "eventId": "evt-mtqzyhu4-ua2k7b",
+  "expectedStateVersion": 3,
+  "source": "LLM",
+  "turn": 3,
+  "timestamp": "2026-09-07T08:46:54.412Z",
+  "intentSummary": "Turn 3 Candidate State Transition",
+  "actions": [],
+  "rawClaims": [
+    "{\"inventoryChanges\":[{\"name\":\"은검2\",\"quantity\":1,\"action\":\"add\",\"entityReference\":{\"entityType\":\"ITEM\",\"evidence\":{\"verifiedEventId\":\"offscreen-mtqzyhtv-56kqrs\",\"cause\":\"DISCOVERY\"}}}]}"
+  ],
+  "originInputId": "3",
+  "meaningTree": {
+    "atom": "INTENT",
+    "scope": "PROPOSAL",
+    "value": "Turn 3 Candidate State Transition",
+    "children": []
+  }
+}
+
+- MODIFY_INVENTORY ADD action 존재 여부: NO
+- PreAuth 결과: FAIL
+
+- Validator 결과:
+{
+  "isValid": false,
+  "rejectedReasons": [
+    "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+  ]
+}
+
+- SovereignEngine commit 결과:
+{
+  "success": false,
+  "rejectedReasons": [
+    "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+  ]
+}
+
+- State After (snapshotT3_after):
+{
+  "stateVersion": 3,
+  "turn": 2,
+  "worldInfo": {
+    "worldName": "",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [
+      "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다."
+    ],
+    "offscreenRecords": [
+      {
+        "id": "offscreen-mtqzyhtv-56kqrs",
+        "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.403Z",
+        "visibility": "FACTION_ONLY"
+      }
+    ]
+  },
+  "character": {
+    "name": "",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [
+      {
+        "id": "item-mtqzyhu1-l610d9",
+        "name": "은검",
+        "quantity": 1
+      }
+    ],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": "evt-mtqzyhu0-pveo6s",
+  "lastCommittedAt": "2026-09-07T08:46:54.408Z"
+}
+
+- Inventory Before: [
+  {
+    "id": "item-mtqzyhu1-l610d9",
+    "name": "은검",
+    "quantity": 1
+  }
+]
+- Inventory After: [
+  {
+    "id": "item-mtqzyhu1-l610d9",
+    "name": "은검",
+    "quantity": 1
+  }
+]
+
+
+*** TURN 4 (Canonical Offscreen Event Creation for NPC) ***
+- State Before (snapshotT4_before):
+{
+  "stateVersion": 3,
+  "turn": 2,
+  "worldInfo": {
+    "worldName": "",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [
+      "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다."
+    ],
+    "offscreenRecords": [
+      {
+        "id": "offscreen-mtqzyhtv-56kqrs",
+        "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.403Z",
+        "visibility": "FACTION_ONLY"
+      }
+    ]
+  },
+  "character": {
+    "name": "",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [
+      {
+        "id": "item-mtqzyhu1-l610d9",
+        "name": "은검",
+        "quantity": 1
+      }
+    ],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": "evt-mtqzyhu0-pveo6s",
+  "lastCommittedAt": "2026-09-07T08:46:54.408Z"
+}
+
+- RECORD_OFFSCREEN_EVENT Proposal (proposalT4):
+{
+  "proposalId": "prop-req-mtqzyhu4-7vhul0",
+  "requestId": "req-mtqzyhu4-7vhul0",
+  "eventId": "evt-mtqzyhu4-cwjw9k",
+  "expectedStateVersion": 3,
+  "source": "LLM",
+  "turn": 4,
+  "timestamp": "2026-09-07T08:46:54.412Z",
+  "intentSummary": "Turn 4 Candidate State Transition",
+  "actions": [
+    {
+      "type": "RECORD_OFFSCREEN_EVENT",
+      "payload": {
+        "id": "offscreen-mtqzyhu4-luc97j",
+        "eventDescription": "T4-EVENT: 홍길동이라는 정체불명의 협객이 등장을 하였다.",
+        "timestamp": "2026-09-07T08:46:54.412Z",
+        "visibility": "FACTION_ONLY"
+      }
+    }
+  ],
+  "rawClaims": [
+    "{\"cameraOffscreenEvents\":[\"T4-EVENT: 홍길동이라는 정체불명의 협객이 등장을 하였다.\"]}"
+  ],
+  "originInputId": "4",
+  "meaningTree": {
+    "atom": "INTENT",
+    "scope": "PROPOSAL",
+    "value": "Turn 4 Candidate State Transition",
+    "children": [
+      {
+        "atom": "ACTION",
+        "scope": "PROPOSAL",
+        "value": "RECORD_OFFSCREEN_EVENT",
+        "fields": {
+          "actionType": "RECORD_OFFSCREEN_EVENT",
+          "payload": {
+            "id": "offscreen-mtqzyhu4-luc97j",
+            "eventDescription": "T4-EVENT: 홍길동이라는 정체불명의 협객이 등장을 하였다.",
+            "timestamp": "2026-09-07T08:46:54.412Z",
+            "visibility": "FACTION_ONLY"
+          }
+        }
+      }
+    ]
+  }
+}
+
+- PreAuth 결과: PASS
+
+- Validator 결과:
+{
+  "isValid": true,
+  "rejectedReasons": []
+}
+
+- SovereignEngine commit 결과:
+{
+  "success": true,
+  "rejectedReasons": []
+}
+
+- Canonical NPC Offscreen Event ID:
+offscreen-mtqzyhu4-luc97j
+
+- State After (snapshotT4_after):
+{
+  "stateVersion": 4,
+  "turn": 4,
+  "worldInfo": {
+    "worldName": "",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [
+      "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+      "T4-EVENT: 홍길동이라는 정체불명의 협객이 등장을 하였다."
+    ],
+    "offscreenRecords": [
+      {
+        "id": "offscreen-mtqzyhtv-56kqrs",
+        "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.403Z",
+        "visibility": "FACTION_ONLY"
+      },
+      {
+        "id": "offscreen-mtqzyhu4-luc97j",
+        "eventDescription": "T4-EVENT: 홍길동이라는 정체불명의 협객이 등장을 하였다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.412Z",
+        "visibility": "FACTION_ONLY"
+      }
+    ]
+  },
+  "character": {
+    "name": "",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [
+      {
+        "id": "item-mtqzyhu1-l610d9",
+        "name": "은검",
+        "quantity": 1
+      }
+    ],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": "evt-mtqzyhu4-cwjw9k",
+  "lastCommittedAt": "2026-09-07T08:46:54.412Z"
+}
+
+
+*** TURN 5 (R1-B Novelty Identity Spawning Attempt) ***
+- State Before (snapshotT5_before):
+{
+  "stateVersion": 4,
+  "turn": 4,
+  "worldInfo": {
+    "worldName": "",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [
+      "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+      "T4-EVENT: 홍길동이라는 정체불명의 협객이 등장을 하였다."
+    ],
+    "offscreenRecords": [
+      {
+        "id": "offscreen-mtqzyhtv-56kqrs",
+        "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.403Z",
+        "visibility": "FACTION_ONLY"
+      },
+      {
+        "id": "offscreen-mtqzyhu4-luc97j",
+        "eventDescription": "T4-EVENT: 홍길동이라는 정체불명의 협객이 등장을 하였다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.412Z",
+        "visibility": "FACTION_ONLY"
+      }
+    ]
+  },
+  "character": {
+    "name": "",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [
+      {
+        "id": "item-mtqzyhu1-l610d9",
+        "name": "은검",
+        "quantity": 1
+      }
+    ],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": "evt-mtqzyhu4-cwjw9k",
+  "lastCommittedAt": "2026-09-07T08:46:54.412Z"
+}
+
+- Candidate rawMetadata (candT5):
+{
+  "newNpcs": [
+    {
+      "id": "npc-hong",
+      "name": "홍길동",
+      "entityReference": {
+        "entityType": "NPC",
+        "evidence": {
+          "verifiedEventId": "offscreen-mtqzyhu4-luc97j",
+          "cause": "ENCOUNTER"
+        }
+      }
+    }
+  ]
+}
+
+- CandidatePacket output from extractCandidatesFromMetadata (packetT5):
+{
+  "candidateId": "5",
+  "turn": 5,
+  "narrativeDate": "1년차 봄 1일",
+  "timestamp": "2026-09-07T08:46:54.413Z",
+  "npcChanges": [
+    {
+      "name": "홍길동",
+      "npcClass": "Class C",
+      "innerThought": "[미인지 상태]",
+      "metInStory": false,
+      "isDead": false,
+      "informationAccess": "UNKNOWN",
+      "entityReference": {
+        "entityType": "NPC",
+        "evidence": {
+          "verifiedEventId": "offscreen-mtqzyhu4-luc97j",
+          "cause": "ENCOUNTER"
+        }
+      }
+    }
+  ],
+  "factionChanges": [],
+  "seedChanges": [],
+  "offscreenEvents": [],
+  "inventoryChanges": [],
+  "statChanges": [],
+  "rawMetadataBlock": "{\"newNpcs\":[{\"id\":\"npc-hong\",\"name\":\"홍길동\",\"entityReference\":{\"entityType\":\"NPC\",\"evidence\":{\"verifiedEventId\":\"offscreen-mtqzyhu4-luc97j\",\"cause\":\"ENCOUNTER\"}}}]}"
+}
+
+- SafeProposal from buildSafeProposalFromCandidate (proposalT5):
+{
+  "proposalId": "prop-req-mtqzyhu5-f2frqb",
+  "requestId": "req-mtqzyhu5-f2frqb",
+  "eventId": "evt-mtqzyhu5-uuswl3",
+  "expectedStateVersion": 4,
+  "source": "LLM",
+  "turn": 5,
+  "timestamp": "2026-09-07T08:46:54.413Z",
+  "intentSummary": "Turn 5 Candidate State Transition",
+  "actions": [
+    {
+      "type": "ADD_NPC",
+      "payload": {
+        "id": "npc-mtqzyhu6-ugw3ft",
+        "name": "홍길동",
+        "alias": "",
+        "npcClass": "Class C",
+        "innerThought": "[미인지 상태]",
+        "impression": "[미인지 상태]",
+        "metInStory": false,
+        "status": "UNMET",
+        "origin": "",
+        "background": "",
+        "martialArts": "",
+        "values": "",
+        "affiliation": "",
+        "entityReference": {
+          "entityType": "NPC",
+          "evidence": {
+            "verifiedEventId": "offscreen-mtqzyhu4-luc97j",
+            "cause": "ENCOUNTER"
+          },
+          "resolvedEntityId": "npc-mtqzyhu6-ugw3ft"
+        }
+      }
+    }
+  ],
+  "rawClaims": [
+    "{\"newNpcs\":[{\"id\":\"npc-hong\",\"name\":\"홍길동\",\"entityReference\":{\"entityType\":\"NPC\",\"evidence\":{\"verifiedEventId\":\"offscreen-mtqzyhu4-luc97j\",\"cause\":\"ENCOUNTER\"}}}]}"
+  ],
+  "originInputId": "5",
+  "meaningTree": {
+    "atom": "INTENT",
+    "scope": "PROPOSAL",
+    "value": "Turn 5 Candidate State Transition",
+    "children": [
+      {
+        "atom": "ACTION",
+        "scope": "PROPOSAL",
+        "value": "ADD_NPC",
+        "fields": {
+          "actionType": "ADD_NPC",
+          "payload": {
+            "id": "npc-mtqzyhu6-ugw3ft",
+            "name": "홍길동",
+            "alias": "",
+            "npcClass": "Class C",
+            "innerThought": "[미인지 상태]",
+            "impression": "[미인지 상태]",
+            "metInStory": false,
+            "status": "UNMET",
+            "origin": "",
+            "background": "",
+            "martialArts": "",
+            "values": "",
+            "affiliation": "",
+            "entityReference": {
+              "entityType": "NPC",
+              "evidence": {
+                "verifiedEventId": "offscreen-mtqzyhu4-luc97j",
+                "cause": "ENCOUNTER"
+              },
+              "resolvedEntityId": "npc-mtqzyhu6-ugw3ft"
+            }
+          }
+        },
+        "children": [
+          {
+            "atom": "ENTITY",
+            "scope": "PROPOSAL",
+            "id": "npc-mtqzyhu6-ugw3ft",
+            "value": "홍길동",
+            "fields": {
+              "payload": {
+                "id": "npc-mtqzyhu6-ugw3ft",
+                "name": "홍길동",
+                "alias": "",
+                "npcClass": "Class C",
+                "innerThought": "[미인지 상태]",
+                "impression": "[미인지 상태]",
+                "metInStory": false,
+                "status": "UNMET",
+                "origin": "",
+                "background": "",
+                "martialArts": "",
+                "values": "",
+                "affiliation": "",
+                "entityReference": {
+                  "entityType": "NPC",
+                  "evidence": {
+                    "verifiedEventId": "offscreen-mtqzyhu4-luc97j",
+                    "cause": "ENCOUNTER"
+                  },
+                  "resolvedEntityId": "npc-mtqzyhu6-ugw3ft"
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+- ADD_NPC action 존재 여부: YES
+- PreAuth 결과: PASS
+
+- Validator 결과:
+{
+  "isValid": true,
+  "rejectedReasons": []
+}
+
+- SovereignEngine commit 결과:
+{
+  "success": true,
+  "rejectedReasons": []
+}
+
+- State After (snapshotT5_after):
+{
+  "stateVersion": 5,
+  "turn": 5,
+  "worldInfo": {
+    "worldName": "",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [
+      {
+        "id": "npc-mtqzyhu6-ugw3ft",
+        "name": "홍길동",
+        "alias": "",
+        "npcClass": "Class C",
+        "innerThought": "[미인지 상태]",
+        "impression": "[미인지 상태]",
+        "metInStory": false,
+        "status": "UNMET",
+        "origin": "",
+        "background": "",
+        "martialArts": "",
+        "values": "",
+        "affiliation": "",
+        "entityReference": {
+          "entityType": "NPC",
+          "evidence": {
+            "verifiedEventId": "offscreen-mtqzyhu4-luc97j",
+            "cause": "ENCOUNTER"
+          },
+          "resolvedEntityId": "npc-mtqzyhu6-ugw3ft"
+        }
+      }
+    ],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [
+      "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+      "T4-EVENT: 홍길동이라는 정체불명의 협객이 등장을 하였다."
+    ],
+    "offscreenRecords": [
+      {
+        "id": "offscreen-mtqzyhtv-56kqrs",
+        "eventDescription": "T1-EVENT: 삼화상인이 주인공에게 은검을 선물로 주었다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.403Z",
+        "visibility": "FACTION_ONLY"
+      },
+      {
+        "id": "offscreen-mtqzyhu4-luc97j",
+        "eventDescription": "T4-EVENT: 홍길동이라는 정체불명의 협객이 등장을 하였다.",
+        "narrativeTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "timestamp": "2026-09-07T08:46:54.412Z",
+        "visibility": "FACTION_ONLY"
+      }
+    ]
+  },
+  "character": {
+    "name": "",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [
+      {
+        "id": "item-mtqzyhu1-l610d9",
+        "name": "은검",
+        "quantity": 1
+      }
+    ],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "lastCommittedEventId": "evt-mtqzyhu5-uuswl3",
+  "lastCommittedAt": "2026-09-07T08:46:54.413Z"
+}
+
+- NPC Before: []
+- NPC After: [
+  "홍길동"
+]
+
+***

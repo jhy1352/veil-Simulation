@@ -1,0 +1,37 @@
+[
+  {
+    "caseId": "Case_A",
+    "turnCount": 1,
+    "historyRecordsCreated": []
+  },
+  {
+    "caseId": "Case_B",
+    "turnCount": 2,
+    "historyRecordsCreated": []
+  },
+  {
+    "caseId": "Case_C",
+    "turnCount": 3,
+    "historyRecordsCreated": []
+  },
+  {
+    "caseId": "Case_D",
+    "turnCount": 4,
+    "historyRecordsCreated": []
+  },
+  {
+    "caseId": "Case_E",
+    "turnCount": 5,
+    "historyRecordsCreated": []
+  },
+  {
+    "caseId": "Case_F",
+    "turnCount": 6,
+    "historyRecordsCreated": []
+  },
+  {
+    "caseId": "Case_G",
+    "turnCount": 7,
+    "historyRecordsCreated": []
+  }
+]

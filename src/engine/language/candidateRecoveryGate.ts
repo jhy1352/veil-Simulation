@@ -72,6 +72,23 @@ export interface CandidateRecoveryGateResult<T = any> {
   quarantinedCount: number;
 }
 
+/**
+ * Official Allow-list of External Candidate rawMetadata Keys.
+ * Exactly these 9 fields are permitted in external candidate generation.
+ * Any other field is an UNKNOWN_FIELD violation.
+ */
+export const ALLOWED_EXTERNAL_RAW_METADATA_KEYS: ReadonlySet<string> = new Set([
+  'foreshadowSeeds',
+  'resolvedSeeds',
+  'cameraOffscreenEvents',
+  'newNpcs',
+  'newFactions',
+  'inventoryChanges',
+  'statDeltas',
+  'characterChanges',
+  'chapterChanges'
+]);
+
 function isNonEmptyString(value: unknown): value is string {
   return typeof value === 'string' && value.trim().length > 0;
 }
@@ -97,6 +114,11 @@ export function validateCandidateStructure(candidate: any): CandidateValidationR
     reasons.push(`candidateId out of bounds [1, 5] (got ${candidate.candidateId})`);
   }
 
+  // Prohibit top-level engine-owned fields from LLM
+  if ((candidate as any).resolvedEntityId !== undefined) {
+    reasons.push('candidate.resolvedEntityId is engine-owned and strictly prohibited in LLM candidate output');
+  }
+
   // 3. label must be a string
   if (typeof candidate.label !== 'string') {
     reasons.push(`label must be a string (got ${typeof candidate.label})`);
@@ -113,121 +135,333 @@ export function validateCandidateStructure(candidate: any): CandidateValidationR
   if (typeof candidate.rawMetadata !== 'object' || candidate.rawMetadata === null || Array.isArray(candidate.rawMetadata)) {
     reasons.push(`rawMetadata must be a non-null, non-array object (got ${candidate.rawMetadata === null ? 'null' : Array.isArray(candidate.rawMetadata) ? 'array' : typeof candidate.rawMetadata})`);
   } else {
-    // 5-1. ITEM / inventoryChanges
-    if (Array.isArray(candidate.rawMetadata.inventoryChanges)) {
-      for (let i = 0; i < candidate.rawMetadata.inventoryChanges.length; i++) {
-        const inv = candidate.rawMetadata.inventoryChanges[i];
-        if (typeof inv !== 'object' || inv === null || Array.isArray(inv)) {
-          reasons.push(`inventoryChanges[${i}] must be a non-null object carrying entityReference`);
-          continue;
-        }
-        if (!isNonEmptyString(inv.name)) {
-          reasons.push(`inventoryChanges[${i}].name must be a non-empty string`);
-        }
-        const ref = inv.entityReference;
-        if (typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
-          reasons.push(`inventoryChanges[${i}] missing required entityReference bundle`);
-          continue;
-        }
-        if (ref.entityType !== 'ITEM') {
-          reasons.push(`inventoryChanges[${i}].entityReference.entityType must be ITEM`);
-        }
-        if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
-          reasons.push(`inventoryChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
-        }
-        const evidence = ref.evidence;
-        if (typeof evidence !== 'object' || evidence === null || Array.isArray(evidence)) {
-          reasons.push(`inventoryChanges[${i}].entityReference.evidence must be a non-null object`);
-        } else {
-          const hasEvidence = [evidence.sourceNpcId, evidence.context, evidence.verifiedEventId, evidence.cause]
-            .some(isNonEmptyString) || (evidence.cost && typeof evidence.cost === 'object');
-          if (!hasEvidence) {
-            reasons.push(`inventoryChanges[${i}].entityReference.evidence must contain at least one identity/acquisition evidence field`);
+    // 5-0. External Allow-list Firewall (Article 2 / Rule 1-2):
+    // Strictly reject any key not in the official 9 external fields
+    const rawKeys = Object.keys(candidate.rawMetadata);
+    for (const key of rawKeys) {
+      if (!ALLOWED_EXTERNAL_RAW_METADATA_KEYS.has(key)) {
+        reasons.push(`rawMetadata contains unauthorized external field '${key}' (UNKNOWN_FIELD violation)`);
+      }
+    }
+
+    // 5-1. foreshadowSeeds
+    if (candidate.rawMetadata.foreshadowSeeds !== undefined) {
+      if (!Array.isArray(candidate.rawMetadata.foreshadowSeeds)) {
+        reasons.push('rawMetadata.foreshadowSeeds must be an array');
+      } else {
+        for (let i = 0; i < candidate.rawMetadata.foreshadowSeeds.length; i++) {
+          const seed = candidate.rawMetadata.foreshadowSeeds[i];
+          if (typeof seed !== 'string' || seed.trim().length === 0) {
+            reasons.push(`foreshadowSeeds[${i}] must be a non-empty string`);
           }
-        }
-        // LLM is never allowed to pre-populate an engine resolution.
-        if (ref.resolvedEntityId !== undefined) {
-          reasons.push(`inventoryChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
         }
       }
     }
 
-    // 5-2. NPC / npcChanges
-    if (Array.isArray(candidate.rawMetadata.npcChanges)) {
-      for (let i = 0; i < candidate.rawMetadata.npcChanges.length; i++) {
-        const npc = candidate.rawMetadata.npcChanges[i];
-        if (typeof npc === 'object' && npc !== null && !Array.isArray(npc)) {
+    // 5-2. resolvedSeeds
+    if (candidate.rawMetadata.resolvedSeeds !== undefined) {
+      if (!Array.isArray(candidate.rawMetadata.resolvedSeeds)) {
+        reasons.push('rawMetadata.resolvedSeeds must be an array');
+      } else {
+        for (let i = 0; i < candidate.rawMetadata.resolvedSeeds.length; i++) {
+          const res = candidate.rawMetadata.resolvedSeeds[i];
+          if (typeof res !== 'object' || res === null || Array.isArray(res)) {
+            reasons.push(`resolvedSeeds[${i}] must be a non-null object`);
+            continue;
+          }
+          if (typeof res.content !== 'string' || res.content.trim().length === 0) {
+            reasons.push(`resolvedSeeds[${i}].content must be a non-empty string`);
+          }
+          if (res.resolutionSummary !== undefined && typeof res.resolutionSummary !== 'string') {
+            reasons.push(`resolvedSeeds[${i}].resolutionSummary must be a string when provided`);
+          }
+          if (res.resolvedEntityId !== undefined) {
+            reasons.push(`resolvedSeeds[${i}].resolvedEntityId is engine-owned and must not be supplied by LLM`);
+          }
+          const ref = res.entityReference;
+          if (ref !== undefined) {
+            if (typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
+              reasons.push(`resolvedSeeds[${i}].entityReference must be a non-null object`);
+            } else {
+              if (ref.entityType !== undefined && ref.entityType !== 'NARRATIVE_SEED') {
+                reasons.push(`resolvedSeeds[${i}].entityReference.entityType must be NARRATIVE_SEED`);
+              }
+              if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+                reasons.push(`resolvedSeeds[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
+              }
+              if (ref.resolvedEntityId !== undefined) {
+                reasons.push(`resolvedSeeds[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    // 5-3. cameraOffscreenEvents
+    if (candidate.rawMetadata.cameraOffscreenEvents !== undefined) {
+      if (!Array.isArray(candidate.rawMetadata.cameraOffscreenEvents)) {
+        reasons.push('rawMetadata.cameraOffscreenEvents must be an array');
+      } else {
+        for (let i = 0; i < candidate.rawMetadata.cameraOffscreenEvents.length; i++) {
+          const ev = candidate.rawMetadata.cameraOffscreenEvents[i];
+          if (typeof ev !== 'string' || ev.trim().length === 0) {
+            reasons.push(`cameraOffscreenEvents[${i}] must be a non-empty string`);
+          }
+        }
+      }
+    }
+
+    // 5-4. newNpcs
+    if (candidate.rawMetadata.newNpcs !== undefined) {
+      if (!Array.isArray(candidate.rawMetadata.newNpcs)) {
+        reasons.push('rawMetadata.newNpcs must be an array');
+      } else {
+        for (let i = 0; i < candidate.rawMetadata.newNpcs.length; i++) {
+          const npc = candidate.rawMetadata.newNpcs[i];
+          if (typeof npc !== 'object' || npc === null || Array.isArray(npc)) {
+            reasons.push(`newNpcs[${i}] must be a non-null object`);
+            continue;
+          }
+          if (typeof npc.name !== 'string' || npc.name.trim().length === 0) {
+            reasons.push(`newNpcs[${i}].name must be a non-empty string`);
+          }
+          if (npc.alias !== undefined && typeof npc.alias !== 'string') {
+            reasons.push(`newNpcs[${i}].alias must be a string when provided`);
+          }
+          if (npc.npcClass !== undefined && typeof npc.npcClass !== 'string') {
+            reasons.push(`newNpcs[${i}].npcClass must be a string when provided`);
+          }
+          if (npc.innerThought !== undefined && typeof npc.innerThought !== 'string') {
+            reasons.push(`newNpcs[${i}].innerThought must be a string when provided`);
+          }
+          if (npc.metInStory !== undefined && typeof npc.metInStory !== 'boolean') {
+            reasons.push(`newNpcs[${i}].metInStory must be a boolean when provided`);
+          }
+          if (npc.isDead !== undefined && typeof npc.isDead !== 'boolean') {
+            reasons.push(`newNpcs[${i}].isDead must be a boolean when provided`);
+          }
+          if (npc.origin !== undefined && typeof npc.origin !== 'string') {
+            reasons.push(`newNpcs[${i}].origin must be a string when provided`);
+          }
+          if (npc.background !== undefined && typeof npc.background !== 'string') {
+            reasons.push(`newNpcs[${i}].background must be a string when provided`);
+          }
+          if (npc.martialArts !== undefined && typeof npc.martialArts !== 'string') {
+            reasons.push(`newNpcs[${i}].martialArts must be a string when provided`);
+          }
+          if (npc.values !== undefined && typeof npc.values !== 'string') {
+            reasons.push(`newNpcs[${i}].values must be a string when provided`);
+          }
+          if (npc.affiliation !== undefined && typeof npc.affiliation !== 'string') {
+            reasons.push(`newNpcs[${i}].affiliation must be a string when provided`);
+          }
+          if (npc.resolvedEntityId !== undefined) {
+            reasons.push(`newNpcs[${i}].resolvedEntityId is engine-owned and must not be supplied by LLM`);
+          }
           const ref = npc.entityReference;
-          if (ref && typeof ref === 'object' && !Array.isArray(ref)) {
-            if (ref.entityType && ref.entityType !== 'NPC') {
-              reasons.push(`npcChanges[${i}].entityReference.entityType must be NPC`);
-            }
-            if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
-              reasons.push(`npcChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
-            }
-            if (ref.resolvedEntityId !== undefined) {
-              reasons.push(`npcChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+          if (ref !== undefined) {
+            if (typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
+              reasons.push(`newNpcs[${i}].entityReference must be a non-null object`);
+            } else {
+              if (ref.entityType !== undefined && ref.entityType !== 'NPC') {
+                reasons.push(`newNpcs[${i}].entityReference.entityType must be NPC`);
+              }
+              if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+                reasons.push(`newNpcs[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
+              }
+              if (ref.resolvedEntityId !== undefined) {
+                reasons.push(`newNpcs[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+              }
             }
           }
         }
       }
     }
 
-    // 5-3. FACTION / factionChanges
-    if (Array.isArray(candidate.rawMetadata.factionChanges)) {
-      for (let i = 0; i < candidate.rawMetadata.factionChanges.length; i++) {
-        const fac = candidate.rawMetadata.factionChanges[i];
-        if (typeof fac === 'object' && fac !== null && !Array.isArray(fac)) {
+    // 5-5. newFactions
+    if (candidate.rawMetadata.newFactions !== undefined) {
+      if (!Array.isArray(candidate.rawMetadata.newFactions)) {
+        reasons.push('rawMetadata.newFactions must be an array');
+      } else {
+        for (let i = 0; i < candidate.rawMetadata.newFactions.length; i++) {
+          const fac = candidate.rawMetadata.newFactions[i];
+          if (typeof fac !== 'object' || fac === null || Array.isArray(fac)) {
+            reasons.push(`newFactions[${i}] must be a non-null object`);
+            continue;
+          }
+          if (typeof fac.name !== 'string' || fac.name.trim().length === 0) {
+            reasons.push(`newFactions[${i}].name must be a non-empty string`);
+          }
+          if (fac.description !== undefined && typeof fac.description !== 'string') {
+            reasons.push(`newFactions[${i}].description must be a string when provided`);
+          }
+          if (fac.attitudeTowardsPlayer !== undefined && typeof fac.attitudeTowardsPlayer !== 'string') {
+            reasons.push(`newFactions[${i}].attitudeTowardsPlayer must be a string when provided`);
+          }
+          if (fac.resolvedEntityId !== undefined) {
+            reasons.push(`newFactions[${i}].resolvedEntityId is engine-owned and must not be supplied by LLM`);
+          }
           const ref = fac.entityReference;
-          if (ref && typeof ref === 'object' && !Array.isArray(ref)) {
-            if (ref.entityType && ref.entityType !== 'FACTION') {
-              reasons.push(`factionChanges[${i}].entityReference.entityType must be FACTION`);
-            }
-            if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
-              reasons.push(`factionChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
-            }
-            if (ref.resolvedEntityId !== undefined) {
-              reasons.push(`factionChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
-            }
-          }
-        }
-      }
-    }
-
-    // 5-4. NARRATIVE_SEED / seedChanges
-    if (Array.isArray(candidate.rawMetadata.seedChanges)) {
-      for (let i = 0; i < candidate.rawMetadata.seedChanges.length; i++) {
-        const seed = candidate.rawMetadata.seedChanges[i];
-        if (typeof seed === 'object' && seed !== null && !Array.isArray(seed)) {
-          const ref = seed.entityReference;
-          if (ref && typeof ref === 'object' && !Array.isArray(ref)) {
-            if (ref.entityType && ref.entityType !== 'NARRATIVE_SEED') {
-              reasons.push(`seedChanges[${i}].entityReference.entityType must be NARRATIVE_SEED`);
-            }
-            if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
-              reasons.push(`seedChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
-            }
-            if (ref.resolvedEntityId !== undefined) {
-              reasons.push(`seedChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+          if (ref !== undefined) {
+            if (typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
+              reasons.push(`newFactions[${i}].entityReference must be a non-null object`);
+            } else {
+              if (ref.entityType !== undefined && ref.entityType !== 'FACTION') {
+                reasons.push(`newFactions[${i}].entityReference.entityType must be FACTION`);
+              }
+              if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+                reasons.push(`newFactions[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
+              }
+              if (ref.resolvedEntityId !== undefined) {
+                reasons.push(`newFactions[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+              }
             }
           }
         }
       }
     }
 
-    // 5-5. CHARACTER / characterChanges
-    if (candidate.rawMetadata.characterChanges && typeof candidate.rawMetadata.characterChanges === 'object' && !Array.isArray(candidate.rawMetadata.characterChanges)) {
+    // 5-6. inventoryChanges
+    if (candidate.rawMetadata.inventoryChanges !== undefined) {
+      if (!Array.isArray(candidate.rawMetadata.inventoryChanges)) {
+        reasons.push('rawMetadata.inventoryChanges must be an array');
+      } else {
+        for (let i = 0; i < candidate.rawMetadata.inventoryChanges.length; i++) {
+          const inv = candidate.rawMetadata.inventoryChanges[i];
+          if (typeof inv !== 'object' || inv === null || Array.isArray(inv)) {
+            reasons.push(`inventoryChanges[${i}] must be a non-null object`);
+            continue;
+          }
+          if (!isNonEmptyString(inv.name)) {
+            reasons.push(`inventoryChanges[${i}].name must be a non-empty string`);
+          }
+          if (inv.quantity !== undefined) {
+            if (typeof inv.quantity !== 'number' || !Number.isFinite(inv.quantity) || inv.quantity <= 0) {
+              reasons.push(`inventoryChanges[${i}].quantity must be a positive finite number`);
+            }
+          }
+          if (inv.action !== undefined && inv.action !== 'add' && inv.action !== 'remove') {
+            reasons.push(`inventoryChanges[${i}].action must be 'add' or 'remove'`);
+          }
+          if (inv.resolvedEntityId !== undefined) {
+            reasons.push(`inventoryChanges[${i}].resolvedEntityId is engine-owned and must not be supplied by LLM`);
+          }
+          if (inv.cause !== undefined && typeof inv.cause !== 'string') {
+            reasons.push(`inventoryChanges[${i}].cause must be a string when provided`);
+          }
+          if (inv.verifiedEventId !== undefined && typeof inv.verifiedEventId !== 'string') {
+            reasons.push(`inventoryChanges[${i}].verifiedEventId must be a string when provided`);
+          }
+          if (inv.cost !== undefined) {
+            if (typeof inv.cost !== 'object' || inv.cost === null || Array.isArray(inv.cost)) {
+              reasons.push(`inventoryChanges[${i}].cost must be an object when provided`);
+            }
+          }
+          const ref = inv.entityReference;
+          if (ref === undefined || typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
+            reasons.push(`inventoryChanges[${i}].entityReference must be a non-null object`);
+          } else {
+              if (ref.entityType !== undefined && ref.entityType !== 'ITEM') {
+                reasons.push(`inventoryChanges[${i}].entityReference.entityType must be ITEM`);
+              }
+              if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+                reasons.push(`inventoryChanges[${i}].entityReference.claimedEntityId must be a non-empty string when provided`);
+              }
+              if (ref.resolvedEntityId !== undefined) {
+                reasons.push(`inventoryChanges[${i}].entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+              }
+              if (ref.evidence !== undefined) {
+                if (typeof ref.evidence !== 'object' || ref.evidence === null || Array.isArray(ref.evidence)) {
+                  reasons.push(`inventoryChanges[${i}].entityReference.evidence must be a non-null object`);
+                }
+              }
+            }
+          }
+        }
+      }
+
+    // 5-7. statDeltas
+    if (candidate.rawMetadata.statDeltas !== undefined) {
+      if (!Array.isArray(candidate.rawMetadata.statDeltas)) {
+        reasons.push('rawMetadata.statDeltas must be an array');
+      } else {
+        for (let i = 0; i < candidate.rawMetadata.statDeltas.length; i++) {
+          const sd = candidate.rawMetadata.statDeltas[i];
+          if (typeof sd !== 'object' || sd === null || Array.isArray(sd)) {
+            reasons.push(`statDeltas[${i}] must be a non-null object`);
+            continue;
+          }
+          if (typeof sd.stat !== 'string' || sd.stat.trim().length === 0) {
+            reasons.push(`statDeltas[${i}].stat must be a non-empty string`);
+          }
+          if (typeof sd.delta !== 'number' || !Number.isFinite(sd.delta)) {
+            reasons.push(`statDeltas[${i}].delta must be a finite number`);
+          }
+        }
+      }
+    }
+
+    // 5-8. characterChanges
+    if (candidate.rawMetadata.characterChanges !== undefined) {
       const char = candidate.rawMetadata.characterChanges;
-      const ref = char.entityReference;
-      if (ref && typeof ref === 'object' && !Array.isArray(ref)) {
-        if (ref.entityType && ref.entityType !== 'CHARACTER') {
-          reasons.push(`characterChanges.entityReference.entityType must be CHARACTER`);
+      if (typeof char !== 'object' || char === null || Array.isArray(char)) {
+        reasons.push('rawMetadata.characterChanges must be a non-null object');
+      } else {
+        if (char.alias !== undefined && typeof char.alias !== 'string') {
+          reasons.push('characterChanges.alias must be a string when provided');
         }
-        if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
-          reasons.push(`characterChanges.entityReference.claimedEntityId must be a non-empty string when provided`);
+        if (char.name !== undefined && typeof char.name !== 'string') {
+          reasons.push('characterChanges.name must be a string when provided');
         }
-        if (ref.resolvedEntityId !== undefined) {
-          reasons.push(`characterChanges.entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM`);
+        if (char.background !== undefined && typeof char.background !== 'string') {
+          reasons.push('characterChanges.background must be a string when provided');
+        }
+        if (char.martialArts !== undefined && typeof char.martialArts !== 'string') {
+          reasons.push('characterChanges.martialArts must be a string when provided');
+        }
+        if (char.resolvedEntityId !== undefined) {
+          reasons.push('characterChanges.resolvedEntityId is engine-owned and must not be supplied by LLM');
+        }
+        const ref = char.entityReference;
+        if (ref !== undefined) {
+          if (typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
+            reasons.push('characterChanges.entityReference must be a non-null object when provided');
+          } else {
+            if (ref.entityType !== undefined && ref.entityType !== 'CHARACTER') {
+              reasons.push('characterChanges.entityReference.entityType must be CHARACTER');
+            }
+            if (ref.claimedEntityId !== undefined && !isNonEmptyString(ref.claimedEntityId)) {
+              reasons.push('characterChanges.entityReference.claimedEntityId must be a non-empty string when provided');
+            }
+            if (ref.resolvedEntityId !== undefined) {
+              reasons.push('characterChanges.entityReference.resolvedEntityId is engine-owned and must not be supplied by LLM');
+            }
+          }
+        }
+      }
+    }
+
+    // 5-9. chapterChanges
+    if (candidate.rawMetadata.chapterChanges !== undefined) {
+      const chap = candidate.rawMetadata.chapterChanges;
+      if (typeof chap !== 'object' || chap === null || Array.isArray(chap)) {
+        reasons.push('rawMetadata.chapterChanges must be a non-null object');
+      } else {
+        if (chap.currentChapter !== undefined && typeof chap.currentChapter !== 'string') {
+          reasons.push('chapterChanges.currentChapter must be a string when provided');
+        }
+        if (chap.upcomingChapters !== undefined) {
+          if (!Array.isArray(chap.upcomingChapters)) {
+            reasons.push('chapterChanges.upcomingChapters must be an array when provided');
+          } else {
+            for (let i = 0; i < chap.upcomingChapters.length; i++) {
+              const up = chap.upcomingChapters[i];
+              if (typeof up !== 'string') {
+                reasons.push(`chapterChanges.upcomingChapters[${i}] must be a string`);
+              }
+            }
+          }
         }
       }
     }

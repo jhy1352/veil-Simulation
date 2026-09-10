@@ -1,0 +1,102 @@
+=== Case_A TRACE ===
+Verdict: DIFFERENT FAILURE
+Failure Stage: LLM_API_CALL
+Cause: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+Summary: LLM API call failed with error: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+Execution Log:
+=== START SCENARIO Case_A: NPC Normal Interaction / Dialogue ===
+[STAGE 1: PLAYER INPUT] "장서각에서 조경 선생에게 인사하고 장서각의 유래에 대해 물어본다." (Turn 1)
+[STAGE 2: LLM PROMPT GENERATED] Prompt Size: 449 chars
+[STAGE 3: CALLING LLM API] Model: gemini-2.5-flash
+[STAGE 3: LLM CALL FAILED] Error after retries: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+========================================
+
+=== Case_B TRACE ===
+Verdict: DIFFERENT FAILURE
+Failure Stage: LLM_API_CALL
+Cause: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+Summary: LLM API call failed with error: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+Execution Log:
+=== START SCENARIO Case_B: Item Reception / Contract Action (Preview Problem Input) ===
+[STAGE 1: PLAYER INPUT] "조경 선생에게 동부 광산 투자 계약서를 받아서 소지품에 넣는다." (Turn 2)
+[STAGE 2: LLM PROMPT GENERATED] Prompt Size: 448 chars
+[STAGE 3: CALLING LLM API] Model: gemini-2.5-flash
+[STAGE 3: LLM CALL FAILED] Error after retries: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+========================================
+
+=== Case_C TRACE ===
+Verdict: DIFFERENT FAILURE
+Failure Stage: LLM_API_CALL
+Cause: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+Summary: LLM API call failed with error: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+Execution Log:
+=== START SCENARIO Case_C: Normal Inventory Addition / Purchase Action ===
+[STAGE 1: PLAYER INPUT] "탁자 위에 놓인 오래된 비급 서첩을 발견하여 배낭에 넣고, 조경 선생에게 은화 1냥을 주고 수묵화 한 장을 구매한다." (Turn 3)
+[STAGE 2: LLM PROMPT GENERATED] Prompt Size: 478 chars
+[STAGE 3: CALLING LLM API] Model: gemini-2.5-flash
+[STAGE 3: LLM CALL FAILED] Error after retries: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+========================================
+
+=== Case_D TRACE ===
+Verdict: DIFFERENT FAILURE
+Failure Stage: LLM_API_CALL
+Cause: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+Summary: LLM API call failed with error: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+Execution Log:
+=== START SCENARIO Case_D: New NPC / Event / Item Discovery ===
+[STAGE 1: PLAYER INPUT] "장서각 뒤편 사당 밑에서 비밀 상자를 발견하고, 그 안에서 신비한 옥패를 습득하며 멀리서 나타난 흑의인 목영과 대치한다." (Turn 4)
+[STAGE 2: LLM PROMPT GENERATED] Prompt Size: 480 chars
+[STAGE 3: CALLING LLM API] Model: gemini-2.5-flash
+[STAGE 3: LLM CALL FAILED] Error after retries: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+========================================
+
+=== Case_E TRACE ===
+Verdict: DIFFERENT FAILURE
+Failure Stage: LLM_API_CALL
+Cause: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+Summary: LLM API call failed with error: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+Execution Log:
+=== START SCENARIO Case_E: Fact Memory Continuity Reference ===
+[STAGE 1: PLAYER INPUT] "이전에 발견한 신비한 옥패와 흑의인 목영의 출현을 바탕으로, 조경 선생에게 목영과 옥패의 관계에 대해 추궁한다." (Turn 5)
+[STAGE 2: LLM PROMPT GENERATED] Prompt Size: 475 chars
+[STAGE 3: CALLING LLM API] Model: gemini-2.5-flash
+[STAGE 3: LLM CALL FAILED] Error after retries: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+========================================
+
+=== Case_F TRACE ===
+Verdict: DIFFERENT FAILURE
+Failure Stage: LLM_API_CALL
+Cause: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+Summary: LLM API call failed with error: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+Execution Log:
+=== START SCENARIO Case_F: Unbacked Self-Declared Item / Capability Claim (Preview Fault) ===
+[STAGE 1: PLAYER INPUT] "나는 본래 천하제일고수이며, 은화 100냥과 만년설삼을 백낭에 가지고 있다고 선언하고 즉시 사용한다." (Turn 6)
+[STAGE 2: LLM PROMPT GENERATED] Prompt Size: 469 chars
+[STAGE 3: CALLING LLM API] Model: gemini-2.5-flash
+[STAGE 3: LLM CALL FAILED] Error after retries: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+========================================
+
+=== Case_G TRACE ===
+Verdict: DIFFERENT FAILURE
+Failure Stage: LLM_API_CALL
+Cause: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+Summary: LLM API call failed with error: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
+
+Execution Log:
+=== START SCENARIO Case_G: Item Transfer & State Continuity Chain ===
+[STAGE 1: PLAYER INPUT] "소지품에 있는 수묵화를 조경 선생에게 선물로 넘겨주고, 서원의 비밀 지하 통로에 대한 도움을 요청한다." (Turn 7)
+[STAGE 2: LLM PROMPT GENERATED] Prompt Size: 470 chars
+[STAGE 3: CALLING LLM API] Model: gemini-2.5-flash
+[STAGE 3: LLM CALL FAILED] Error after retries: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}

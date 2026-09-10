@@ -71,7 +71,7 @@
       },
       "t7_sovereign_commit_gate": {
         "status": "COMMITTED",
-        "committedActionsCount": 3,
+        "committedActionsCount": 1,
         "stateVersionBefore": 1,
         "stateVersionAfter": 2,
         "zeroMutationVerified": true
@@ -81,8 +81,8 @@
       "stateVersion": 2,
       "turn": 1,
       "inventoryCount": 2,
-      "npcsCount": 1,
-      "seedsCount": 1,
+      "npcsCount": 0,
+      "seedsCount": 0,
       "rumorsCount": 0
     },
     "verdict": "PASS",
@@ -131,19 +131,19 @@
       "t3_t4_candidate_generation": {
         "status": "OK",
         "candidateCount": 1,
-        "recoveryGateStatus": "PASSED",
-        "quarantinedCount": 0
+        "recoveryGateStatus": "QUARANTINED",
+        "quarantinedCount": 1
       },
       "t5_translation_diversity": {
         "status": "OK",
-        "diverseCount": 1
+        "diverseCount": 0
       },
       "t6_pre_auth_gate": {
         "status": "REJECT",
         "allowedCount": 0,
         "rejectedCount": 1,
         "reasons": [
-          "[CAUSALITY_VIOLATION] Unbacked inventory ADD of '전설의 성검 엑스칼리버' is rejected."
+          "QUARANTINED_BY_RECOVERY_GATE"
         ]
       },
       "t7_sovereign_commit_gate": {
@@ -158,8 +158,8 @@
       "stateVersion": 2,
       "turn": 1,
       "inventoryCount": 2,
-      "npcsCount": 1,
-      "seedsCount": 1,
+      "npcsCount": 0,
+      "seedsCount": 0,
       "rumorsCount": 0
     },
     "verdict": "PASS",
@@ -241,8 +241,8 @@
       "stateVersion": 2,
       "turn": 1,
       "inventoryCount": 2,
-      "npcsCount": 1,
-      "seedsCount": 1,
+      "npcsCount": 0,
+      "seedsCount": 0,
       "rumorsCount": 0
     },
     "verdict": "PASS",
@@ -266,7 +266,7 @@
           "expectedStateVersion": 2,
           "source": "LLM",
           "turn": 2,
-          "timestamp": "2026-09-01T08:33:38.827Z",
+          "timestamp": "2026-09-05T01:00:09.128Z",
           "intentSummary": "Discovered library rumor",
           "actions": [
             {
@@ -302,7 +302,7 @@
           "expectedStateVersion": 2,
           "source": "LLM",
           "turn": 2,
-          "timestamp": "2026-09-01T08:33:38.828Z",
+          "timestamp": "2026-09-05T01:00:09.129Z",
           "intentSummary": "Stale update attack",
           "actions": [
             {
@@ -374,8 +374,8 @@
       "stateVersion": 3,
       "turn": 2,
       "inventoryCount": 2,
-      "npcsCount": 1,
-      "seedsCount": 1,
+      "npcsCount": 0,
+      "seedsCount": 0,
       "rumorsCount": 1
     },
     "verdict": "PASS",
@@ -391,7 +391,7 @@
     "input": {
       "source": "STORAGE_HYDRATION",
       "candidateBlock": {
-        "historyLength": 4
+        "historyLength": 2
       }
     },
     "stages": {
@@ -423,7 +423,7 @@
       },
       "t7_sovereign_commit_gate": {
         "status": "HYDRATED_AUTHORITATIVE",
-        "committedActionsCount": 4,
+        "committedActionsCount": 2,
         "stateVersionBefore": 3,
         "stateVersionAfter": 3,
         "zeroMutationVerified": true
@@ -433,8 +433,8 @@
       "stateVersion": 3,
       "turn": 2,
       "inventoryCount": 2,
-      "npcsCount": 1,
-      "seedsCount": 1,
+      "npcsCount": 0,
+      "seedsCount": 0,
       "rumorsCount": 1
     },
     "verdict": "PASS",

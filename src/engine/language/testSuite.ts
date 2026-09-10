@@ -448,11 +448,12 @@ export function runLanguageTestSuite(): { total: number; passed: number; failed:
       "scope": "PROPOSAL",
       "value": "RECORD_OFFSCREEN_EVENT",
       "fields": {
-        "eventDescription": "무당파 장문인이 폐관 수련에 들어갔다.",
-        "location": "무당산",
-      },
-    },
-  ],
+        "id": "offscreen_baek_rang_rumor",
+        "eventDescription": "무당파 장문인이 폐관 수련에 들어가며 백랑을 새로운 선봉으로 조우하게 되었다.",
+        "location": "무당산"
+      }
+    }
+  ]
 }
 \`\`\``;
 
@@ -503,6 +504,14 @@ export function runLanguageTestSuite(): { total: number; passed: number; failed:
       npcClass: 'Class A',
       innerThought: '소협의 실력을 가늠하고 있다.',
       status: 'ALIVE',
+      entityReference: {
+        entityType: 'NPC',
+        evidence: {
+          cause: 'MET_DURING_STORY',
+          verifiedEventId: 'offscreen_baek_rang_rumor',
+          context: '무당산에서 백랑을 조우함'
+        }
+      }
     },
   };
   const candidateTree = actionToMeaningNode(candidateAction, 'PROPOSAL');

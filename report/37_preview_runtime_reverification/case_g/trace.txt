@@ -1,0 +1,5 @@
+=== START SCENARIO Case_G: Item Transfer & State Continuity Chain ===
+[STAGE 1: PLAYER INPUT] "소지품에 있는 수묵화를 조경 선생에게 선물로 넘겨주고, 서원의 비밀 지하 통로에 대한 도움을 요청한다." (Turn 7)
+[STAGE 2: LLM PROMPT GENERATED] Prompt Size: 470 chars
+[STAGE 3: CALLING LLM API] Model: gemini-2.5-flash
+[STAGE 3: LLM CALL FAILED] Error after retries: {"error":{"code":404,"message":"This model models/gemini-2.5-flash is no longer available to new users. Please update your code to use models/gemini-3.6-flash for the latest features and improvements. We recommend you to use the Interactions API.","status":"NOT_FOUND"}}
