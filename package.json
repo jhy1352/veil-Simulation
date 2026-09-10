@@ -32,7 +32,8 @@
     "test:wake-necessity": "tsx src/engine/index/wakeNecessityGateTest.ts",
     "test:wake-aggregation": "tsx src/engine/index/wakeAggregationTest.ts",
     "test:redteam-campaign": "tsx src/engine/advancedRedTeamPenetrationSuite.ts",
-    "test:redteam-mission": "tsx scripts/final_redteam_penetration_mission_runner.ts"
+    "test:redteam-mission": "tsx scripts/final_redteam_penetration_mission_runner.ts",
+    "test:semantic-candidate-contract": "tsx src/engine/language/semanticCandidateContractTest.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
@@ -48,11 +49,9 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
-    "@types/node": "^22.14.0",
     "autoprefixer": "^10.4.21",
     "esbuild": "^0.25.0",
     "tailwindcss": "^4.1.14",
-    "tsx": "^4.21.0",
     "typescript": "^7.0.2",
     "vite": "^6.2.3"
   }
