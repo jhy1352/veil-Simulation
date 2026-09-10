@@ -30,15 +30,10 @@ import type {
 /** Maximum number of semantic events carried by one candidate. */
 export const MAX_SEMANTIC_EVENTS_PER_CANDIDATE = 8;
 
-/**
- * LLM #1 candidate-side semantic payload.
- * This is deliberately separate from ExternalRawMetadata.
- */
 export interface SemanticCandidateOutput {
   semanticEvents: SemanticEvent[];
 }
 
-/** Internal packet shape used during the transition from Candidate -> Engine Language. */
 export type CandidatePacketWithSemanticEvents = CandidatePacket & {
   semanticEvents?: SemanticEvent[];
 };
@@ -127,7 +122,7 @@ function validateRole(role: unknown, index: number, errors: string[]): role is S
     errors.push(`roles[${index}].status must be RESOLVED, UNRESOLVED, or AMBIGUOUS when provided`);
   }
 
-  return errors.length === 0;
+  return true;
 }
 
 function validateEvent(event: unknown, index: number, errors: string[]): event is SemanticEvent {
@@ -198,8 +193,18 @@ export function validateSemanticCandidateOutput(value: unknown): {
     errors.push(`semanticEvents exceeds maximum ${MAX_SEMANTIC_EVENTS_PER_CANDIDATE} events per candidate`);
   }
 
+  const eventIds = new Set<string>();
   for (let index = 0; index < value.semanticEvents.length; index++) {
-    validateEvent(value.semanticEvents[index], index, errors);
+    const event = value.semanticEvents[index];
+    validateEvent(event, index, errors);
+    if (isRecord(event) && isNonEmptyString(event.eventId)) {
+      const eventId = event.eventId.trim();
+      if (eventIds.has(eventId)) {
+        errors.push(`semanticEvents[${index}].eventId duplicates an earlier eventId`);
+      } else {
+        eventIds.add(eventId);
+      }
+    }
   }
 
   return {
