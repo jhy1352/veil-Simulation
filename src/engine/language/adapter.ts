@@ -6,7 +6,6 @@
  */
 
 import {
-  ActionType,
   ProposalSource,
   StateTransitionProposal,
   TransitionAction,
@@ -14,6 +13,8 @@ import {
 import { MeaningNode, Scope } from './types';
 import { assertValidMeaningTree } from './grammar';
 import { projectMeaningTreeToRuntimeActions } from './runtimeProjection';
+
+export { meaningNodeToAction } from './runtimeActionAdapter';
 
 export interface MeaningTreeProposalOptions {
   proposalId?: string;
@@ -133,37 +134,6 @@ export function classifyEntityRole(
     if (roleObj.entityName && (npcs.some((n: any) => n.name === roleObj.entityName) || npcNames.includes(roleObj.entityName))) return 'NPC';
   }
   return 'UNKNOWN';
-}
-
-/**
- * Converts a validated MeaningNode into a standard VEIL TransitionAction if applicable.
- */
-export function meaningNodeToAction(node: MeaningNode, _context?: any): TransitionAction | null {
-  assertValidMeaningTree(node);
-
-  if (node.atom === 'ACTION') {
-    const actionType = (node.fields?.actionType || node.value) as ActionType;
-    if (actionType && typeof actionType === 'string') {
-      let payload: any = {};
-      if (node.fields?.payload && typeof node.fields.payload === 'object') {
-        payload = node.fields.payload;
-      } else if (node.fields) {
-        const { actionType: _at, description: _d, category: _c, ...restFields } = node.fields;
-        if (Object.keys(restFields).length > 0) {
-          payload = restFields;
-        }
-      }
-
-      return {
-        type: actionType,
-        payload,
-        description: node.fields?.description as string | undefined,
-        category: node.fields?.category as any,
-      };
-    }
-  }
-
-  return null;
 }
 
 /**
