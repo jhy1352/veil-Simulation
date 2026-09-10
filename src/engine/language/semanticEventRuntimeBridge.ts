@@ -66,8 +66,10 @@ function mapInventoryAcquisition(
   event: SemanticEvent,
   context: SemanticRuntimeBridgeContext
 ): SemanticRuntimeBridgeResult {
+  const action = event.action.toUpperCase();
   const object = findRole(event, 'OBJECT');
   const recipient = findRole(event, 'RECIPIENT');
+  const subject = findRole(event, 'SUBJECT');
 
   if (!object || !object.entityName) {
     return {
@@ -77,7 +79,17 @@ function mapInventoryAcquisition(
     };
   }
 
-  if (event.action.toUpperCase() === 'GIFT' && !isPlayerRole(recipient, context)) {
+  // PICKUP always mutates the player inventory in the current Sovereign Action
+  // model, so a non-player SUBJECT must never be projected into that action.
+  if (action === 'PICKUP' && !isPlayerRole(subject, context)) {
+    return {
+      status: 'UNSUPPORTED',
+      actions: [],
+      errors: ['PICKUP currently maps only to player inventory; SUBJECT must resolve to the player.'],
+    };
+  }
+
+  if (action === 'GIFT' && !isPlayerRole(recipient, context)) {
     return {
       status: 'UNSUPPORTED',
       actions: [],
@@ -115,11 +127,10 @@ function mapInventoryAcquisition(
     };
   }
 
-  const acquisitionCause = event.action.toUpperCase() === 'PICKUP' ? 'DISCOVERY_PICKUP' : 'GIFT';
-  const sourceNpc = findRole(event, 'SUBJECT');
-  const sourceNpcId = sourceNpc ? context.resolveCanonicalEntityId?.(sourceNpc) : undefined;
+  const acquisitionCause = action === 'PICKUP' ? 'DISCOVERY_PICKUP' : 'GIFT';
+  const sourceNpcId = subject ? context.resolveCanonicalEntityId?.(subject) : undefined;
 
-  const action: TransitionAction = {
+  const actionResult: TransitionAction = {
     type: 'MODIFY_INVENTORY',
     payload: {
       item,
@@ -137,7 +148,7 @@ function mapInventoryAcquisition(
 
   return {
     status: 'MAPPABLE',
-    actions: [action],
+    actions: [actionResult],
     errors: [],
   };
 }
