@@ -14,10 +14,6 @@ function assertEqual(actual: unknown, expected: unknown, message: string): void 
   }
 }
 
-function assert(condition: boolean, message: string): void {
-  if (!condition) throw new Error(message);
-}
-
 const baseGift: SemanticEvent = {
   eventId: 'frontend-event-1',
   action: 'GIFT',
@@ -75,6 +71,45 @@ function run(): void {
     'EXISTING_EVENT',
     'Trusted verified-event resolution must classify the acquisition as an existing-event cause.'
   );
+
+  const npcPickup: SemanticEvent = {
+    eventId: 'frontend-event-pickup-npc',
+    action: 'PICKUP',
+    roles: [
+      { role: 'SUBJECT', entityName: '상인', status: 'RESOLVED' },
+      { role: 'OBJECT', entityName: '은화', status: 'RESOLVED' },
+    ],
+    scope: 'PROPOSAL',
+    polarity: 'ASSERTED',
+    epistemicStatus: 'OBSERVED',
+    modality: 'NONE',
+  };
+
+  const blockedNpcPickup = semanticEventToRuntimeActions(npcPickup, {
+    playerName: '플레이어',
+    resolveInventoryItem: inventoryResolver,
+    resolveVerifiedEventId: () => 'verified-pickup-1',
+  });
+
+  assertEqual(blockedNpcPickup.status, 'UNSUPPORTED', 'NPC pickup must not be projected into player inventory.');
+  assertEqual(blockedNpcPickup.actions, [], 'NPC pickup must emit no player inventory mutation.');
+
+  const playerPickup: SemanticEvent = {
+    ...npcPickup,
+    eventId: 'frontend-event-pickup-player',
+    roles: [
+      { role: 'SUBJECT', entityName: '플레이어', status: 'RESOLVED' },
+      { role: 'OBJECT', entityName: '은화', status: 'RESOLVED' },
+    ],
+  };
+
+  const mappedPlayerPickup = semanticEventToRuntimeActions(playerPickup, {
+    playerName: '플레이어',
+    resolveInventoryItem: inventoryResolver,
+    resolveVerifiedEventId: () => 'verified-pickup-2',
+  });
+
+  assertEqual(mappedPlayerPickup.status, 'MAPPABLE', 'Player pickup should remain mappable when authority is supplied.');
 
   const unsupportedSequence: SemanticEvent[] = [
     baseGift,
