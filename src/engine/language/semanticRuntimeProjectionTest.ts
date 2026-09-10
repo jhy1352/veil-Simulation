@@ -26,19 +26,28 @@ const giftEvent: SemanticEvent = {
   provenance: 'frontend-reference',
 };
 
+function expectProjectionFailure(fn: () => unknown, message: string): void {
+  let failed = false;
+  try {
+    fn();
+  } catch {
+    failed = true;
+  }
+  assert(failed, message);
+}
+
 function run(): void {
   const compiled = compileSemanticEventsToMeaningTree([giftEvent]);
   assert(compiled.status === 'COMPILED', 'SemanticEvent compiles into MeaningTree');
   if (!compiled.meaningTree) throw new Error('FAIL: compiler did not produce MeaningTree');
 
-  const blockedWithoutTrustedAuthority = projectMeaningTreeToRuntimeActions(
-    compiled.meaningTree,
-    {
+  expectProjectionFailure(
+    () => projectMeaningTreeToRuntimeActions(compiled.meaningTree!, {
       playerName: '플레이어',
       resolveInventoryItem: () => ({ id: 'item-silver', name: '은화', quantity: 1 }),
-    }
+    }),
+    'MeaningTree projection fails closed without trusted verified-event resolution'
   );
-  assert(blockedWithoutTrustedAuthority.actions.length === 0, 'MeaningTree projection blocks without trusted verified-event resolution');
 
   const projected = projectMeaningTreeToRuntimeActions(
     compiled.meaningTree,
@@ -57,16 +66,15 @@ function run(): void {
   assert(action.payload.acquisition.verifiedEventId === 'verified-runtime-proof-1', 'Only trusted resolver output reaches verifiedEventId');
   assert(action.payload.acquisition.sourceNpcId === undefined, 'Unresolved NPC identity is not invented');
 
-  const tampered = projectMeaningTreeToRuntimeActions(
-    compiled.meaningTree,
-    {
+  expectProjectionFailure(
+    () => projectMeaningTreeToRuntimeActions(compiled.meaningTree!, {
       playerName: '플레이어',
       resolveInventoryItem: () => ({ id: 'item-silver', name: '은화', quantity: 1 }),
       resolveVerifiedEventId: () => 'tampered-authority',
       semanticEvents: [{ ...giftEvent, eventId: 'different-event' }],
-    }
+    }),
+    'MeaningTree eventId mismatch cannot select a different SemanticEvent'
   );
-  assert(tampered.actions.length === 0, 'MeaningTree eventId mismatch cannot select a different SemanticEvent');
 
   console.log('Semantic runtime projection tests: PASS');
 }
