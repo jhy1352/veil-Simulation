@@ -35,6 +35,11 @@ function run(): void {
   });
   assert(!missingEventId.valid, 'Missing eventId is rejected at the structural boundary');
 
+  const duplicateEventId = validateSemanticCandidateOutput({
+    semanticEvents: [validEvent, { ...validEvent, action: 'GIFT' }],
+  });
+  assert(!duplicateEventId.valid, 'Duplicate eventId values are rejected before semantic routing');
+
   const badRole = validateSemanticCandidateOutput({
     semanticEvents: [{
       ...validEvent,
