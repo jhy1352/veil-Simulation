@@ -89,11 +89,9 @@ async function run() {
   }
 
   const ai = new GoogleGenAI({ apiKey });
-  const modelName = 'gemini-3.7-flash';
+  const modelName = 'gemini-3.5-flash';
   const generationConfig = {
-    thinkingConfig: {
-      thinkingBudget: 4096
-    }
+    // Model default generation params
   };
 
   const results: any[] = [];
@@ -103,7 +101,6 @@ async function run() {
   console.log('================================================================');
   console.log('Starting VEIL Semantic Preservation A/B Test (16 cases x 2 cond)');
   console.log('Model:', modelName);
-  console.log('Thinking Budget:', generationConfig.thinkingConfig.thinkingBudget);
   console.log('Output Directory:', outputDir);
   console.log('================================================================\n');
 
@@ -125,8 +122,7 @@ async function run() {
           model: modelName,
           contents: [{ role: 'user', parts: [{ text: userContent }] }],
           config: {
-            systemInstruction: SYSTEM_INSTRUCTION_CONDITION_A,
-            thinkingConfig: generationConfig.thinkingConfig
+            systemInstruction: SYSTEM_INSTRUCTION_CONDITION_A
           }
         });
         rawLlmOutput = response.text || '';
@@ -157,7 +153,7 @@ async function run() {
       };
       results.push(recordA);
       console.log(`     Condition A Complete (Parsed: ${parseResult.success}, Time: ${recordA.durationMs}ms)`);
-      await sleep(1500);
+      await sleep(2000);
     }
 
     // Run Condition B (Directive - With Directive)
@@ -175,8 +171,7 @@ async function run() {
           model: modelName,
           contents: [{ role: 'user', parts: [{ text: userContent }] }],
           config: {
-            systemInstruction: SYSTEM_INSTRUCTION_CONDITION_B,
-            thinkingConfig: generationConfig.thinkingConfig
+            systemInstruction: SYSTEM_INSTRUCTION_CONDITION_B
           }
         });
         rawLlmOutput = response.text || '';
@@ -207,7 +202,7 @@ async function run() {
       };
       results.push(recordB);
       console.log(`     Condition B Complete (Parsed: ${parseResult.success}, Time: ${recordB.durationMs}ms)\n`);
-      await sleep(1500);
+      await sleep(2000);
     }
   }
 

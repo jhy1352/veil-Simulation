@@ -252,18 +252,20 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
       systemInstruction: MASTER_SYSTEM_INSTRUCTION
     };
 
-    if (selectedModel === 'gemini-2.5-flash') {
-      targetModel = 'gemini-2.5-flash';
-      // Gemini 2.5 Flash default execution
+    if (selectedModel === 'gemini-3.5-flash' || selectedModel === 'gemini-2.5-flash') {
+      targetModel = selectedModel;
+      // Gemini 3.5 / 2.5 Flash execution
     } else if (selectedModel === 'gemini-3.6-flash') {
       targetModel = 'gemini-3.6-flash';
       // Gemini 3.6 Flash uses native dynamic thinking by default
     } else {
-      // Default: Gemini 3.7 Flash with explicit 4096 thinking budget
-      targetModel = 'gemini-3.7-flash';
-      config.thinkingConfig = {
-        thinkingBudget: 4096
-      };
+      // Default: Gemini 3.5 Flash or Gemini 3.7 Flash
+      targetModel = selectedModel || 'gemini-3.5-flash';
+      if (targetModel === 'gemini-3.7-flash') {
+        config.thinkingConfig = {
+          thinkingBudget: 4096
+        };
+      }
     }
 
     const t3_geminiRequestStart = Date.now();
