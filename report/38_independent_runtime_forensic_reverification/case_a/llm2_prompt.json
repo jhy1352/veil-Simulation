@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "parts": [
+      {
+        "text": "[TRPG Campaign Context]\n- 세계관명: 낙양 숭양서원\n- 배경 설정: 남송 말기 정통 무협 세계관, 낙양의 숭양서원\n- 문체 스타일: 묵직하고 유려한 정통 무협 필치\n- 현재 챕터: 제1장: 서원의 은밀한 흔적\n- 주인공 이름: 소진호 (나이: 20, 성별: 남성)\n- 출신/배경: 몰락한 낙양 서생\n- 목적: 가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것\n- 현재 능력치: 근력(12), 민첩(14), 건강(12), 지능(15), 지혜(13), 매력(11)\n- Canonical 소지품 목록:\n  * [inv-silver-1] 은화 (5개): 통용 화폐\n- 진행 중인 서사 복선/시드:\n없음\n\n[Player Action Declaration]: \"장서각에서 조경 선생에게 인사하고 장서각의 유래에 대해 물어본다.\""
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {
+        "text": "[SOVEREIGN VEIL PIPELINE - PHASE 2 NARRATIVE SYNTHESIZER & INTENT FIDELITY JUDGE]\nORIGINAL PLAYER INPUT (PROVENANCE & FIDELITY REFERENCE ONLY - NOT CANONICAL WORLD TRUTH):\n\"장서각에서 조경 선생에게 인사하고 장서각의 유래에 대해 물어본다.\"\n\nPRE-AUTHORIZED ALLOW CANDIDATES (ONLY THESE MAY BE SELECTED):\n[Candidate 1] \"조경 선생의 온화한 환대와 장서각의 은밀한 안개\"\nSummary: 소진호가 예를 갖추어 묻자, 장서각의 늙은 서생 조경은 차를 따르며 숭양서원 장서각이 단순한 학문의 전당이 아닌, 과거 무림의 풍파 속에서 기인들의 비급과 정수를 보존하기 위해 세워진 보루였음을 은밀히 암시합니다. 또한, 소진호의 성씨에 기묘한 반응을 보입니다.\n\n[Candidate 2] \"조경 선생의 깐깐한 시험과 낙양 소씨 가문에 대한 언급\"\nSummary: 조경은 소진호의 인사를 차갑게 받으며, 학문적 깊이가 없는 자는 장서각의 깊은 뜻을 이해할 수 없다고 훈계합니다. 그러나 소진호가 몰락한 낙양 서생 가문의 자제임을 알아채고, 과거 그의 조부가 장서각에 기증했던 한 고서에 대해 의문스러운 질문을 던집니다.\n\nINSTRUCTIONS:\n1. Compare the Original Player Input above with each of the ALLOW candidates.\n2. Select the single candidate from the ALLOWED list that is most faithful to the player's intended action declaration and request.\n3. Output a single JSON line specifying the selected candidate ID: {\"selectedCandidateId\": <number>}\n4. Output the full narrative text for this turn describing the selected turn sequence.\n5. Do NOT introduce new state changes outside the selected candidate."
+      }
+    ]
+  }
+]

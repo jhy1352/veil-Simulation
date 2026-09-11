@@ -1,0 +1,14 @@
+=== START CASE Case_G: Multi-Turn Continuity Chain ===
+[STAGE 1: PLAYER INPUT] "조경 선생의 조언을 듣고 사당의 비밀 통로로 내려가 옥패의 홈을 맞춘다." (Turn 7)
+[STAGE 2: LLM #1 PROMPT GENERATED] Length: 16298 chars
+[STAGE 3: CALLING LLM #1 API] Model: gemini-3.5-flash
+[STAGE 3: LLM #1 RESPONSE RECEIVED] Length: 1995 chars
+[STAGE 4: PARSE CANDIDATES] Count: 1
+[STAGE 5: RECOVERY GATE] Total: 1, Passed: 1, Quarantined: 0
+[STAGE 7: DIVERSITY GATE] Retained 1 diverse candidate(s)
+[STAGE 8: PRE-AUTH RESULTS] Total: 1, Allowed: 1, Rejected: 0
+[STAGE 9: PHASE 2 LLM #2 SYNTHESIZER] Selecting among 1 ALLOW candidate(s)...
+[STAGE 9: LLM #2 SYNTHESIZER RESPONSE RECEIVED] Length: 2022 chars
+[STAGE 10: CANDIDATE SELECTION] Selected ID: 1 (사당 지하 석실의 봉인 해제와 숨겨진 비밀 통로의 개방)
+[STAGE 11: SOVEREIGN COMMIT] Success: true, New Records: 2
+[STAGE 12: STATE DIFF CHECK] Changed keys: stateVersion, turn, worldInfo, lastCommittedEventId, lastCommittedAt

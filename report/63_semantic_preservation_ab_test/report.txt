@@ -1,0 +1,3905 @@
+================================================================================
+VEIL NARRATIVE ENGINE 3.1 - SEMANTIC PRESERVATION A/B TEST REPORT
+Report ID: 63_semantic_preservation_ab_test
+Model: gemini-3.7-flash
+Total Test Cases: 16
+Total Executed Runs: 32 / 32
+Timestamp: 2026-09-11T12:33:38.843Z
+================================================================================
+
+1. TEST OBJECTIVE & CONDITIONS
+--------------------------------------------------------------------------------
+Objective:
+  Evaluate the empirical difference in SemanticEvent representation fidelity
+  between Baseline (Condition A) and Semantic Preservation Directive (Condition B).
+
+Condition A (Baseline):
+  Master System Instruction for LLM #1 candidate generation WITHOUT the
+  SEMANTIC PRESERVATION DIRECTIVE.
+
+Condition B (Directive):
+  Master System Instruction for LLM #1 candidate generation WITH the
+  SEMANTIC PRESERVATION DIRECTIVE (10 Tenets & Epistemic Authority Axiom).
+
+Input Cases:
+  T01: 단순 사건 - 플레이어가 바닥에서 녹슨 단검을 주웠다.
+  T02: 복합 사건 - 경비병이 문을 열고 안으로 들어간 뒤, 바닥에 떨어진 열쇠를 주워 주머니에 넣었다.
+  T03: 의도 - 플레이어는 경비병에게서 열쇠를 훔치려고 했다.
+  T04: 실패한 시도 - 플레이어가 열쇠를 훔치려 했지만 실패했다.
+  T05: 전언 - 마을 사람들은 북쪽 폐허에 검은 보물이 있다고 말했다.
+  T06: 부정 - 플레이어는 열쇠를 줍지 않았다.
+  T07: 추론 - 문이 열려 있는 것을 보니 누군가 조금 전에 들어간 것 같다.
+  T08: 가능성 - 아마 경비병이 열쇠를 숨겼을 것이다.
+  T09: 명시적 인과 - 경비병이 문을 열고 들어갔다. 그래서 플레이어가 안으로 들어갔다.
+  T10: 단순 시간적 순서 - 경비병이 문을 열고 들어간 뒤 플레이어가 열쇠를 주웠다.
+  T11: 존재하지 않는 대상 - 존재하지 않는 NPC가 플레이어에게 검을 주었다.
+  T12: 동일명 개체 - 같은 이름의 경비병 두 명 중 한 명이 열쇠를 건넸다.
+  T13: 발견과 고민 - 플레이어가 열쇠를 발견했고, 그것을 챙길까 고민했다.
+  T14: 대명사 - 플레이어가 낡은 상자를 열었다. 그는 그것을 주머니에 넣었다.
+  T15: 주장과 검증 - 플레이어가 열쇠를 가져갔다고 경비병이 주장했지만 실제로는 확인되지 않았다.
+  T16: 복합 의미 - 플레이어가 열쇠를 주우려고 했지만 손이 닿지 않았고, 결국 경비병에게 열쇠를 달라고 부탁했다.
+
+2. A/B TEST EXECUTION SUMMARY TABLE
+--------------------------------------------------------------------------------
+| Test ID | Category | Input | Cond A Parse | Cond B Parse | SemanticEvents (A) | SemanticEvents (B) |
+|---|---|---|---|---|---|---|
+| T01 | 단순 사건 | 플레이어가 바닥에서 녹슨 단검을 주웠다. | OK | OK | 1/1/1 | 1/2/1 |
+| T02 | 복합 사건 | 경비병이 문을 열고 안으로 들어간 뒤, 바닥에 떨어진 열쇠를 주워 주머니에 넣었다. | OK | OK | 0/0/0/0 | 2/1/1 |
+| T03 | 의도 | 플레이어는 경비병에게서 열쇠를 훔치려고 했다. | OK | OK | 0/0 | 1/1 |
+| T04 | 실패한 시도 | 플레이어가 열쇠를 훔치려 했지만 실패했다. | OK | OK | 1/1/1 | 1/1/1 |
+| T05 | 전언 | 마을 사람들은 북쪽 폐허에 검은 보물이 있다고 말했다. | OK | OK | 0/0/0 | 1/1/1 |
+| T06 | 부정 | 플레이어는 열쇠를 줍지 않았다. | OK | OK | 1 | 0/0/0 |
+| T07 | 추론 | 문이 열려 있는 것을 보니 누군가 조금 전에 들어간 것 같다. | OK | OK | 1/1/1 | 1/1/1 |
+| T08 | 가능성 | 아마 경비병이 열쇠를 숨겼을 것이다. | OK | OK | 1/1/1 | 1/1/1 |
+| T09 | 명시적 인과 | 경비병이 문을 열고 들어갔다. 그래서 플레이어가 안으로 들어갔다. | OK | OK | 1/1/1 | 1/1 |
+| T10 | 단순 시간적 순서 | 경비병이 문을 열고 들어간 뒤 플레이어가 열쇠를 주웠다. | OK | OK | 1/1 | 1/1/1 |
+| T11 | 존재하지 않는 대상 | 존재하지 않는 NPC가 플레이어에게 검을 주었다. | OK | OK | 1/1 | 0/0 |
+| T12 | 동일명 개체 | 같은 이름의 경비병 두 명 중 한 명이 열쇠를 건넸다. | OK | OK | 1/1/1 | 1/1 |
+| T13 | 발견과 고민 | 플레이어가 열쇠를 발견했고, 그것을 챙길까 고민했다. | OK | OK | 1/1/1 | 1/1/1 |
+| T14 | 대명사 | 플레이어가 낡은 상자를 열었다. 그는 그것을 주머니에 넣었다. | OK | OK | 1/1 | 1 |
+| T15 | 주장과 검증 | 플레이어가 열쇠를 가져갔다고 경비병이 주장했지만 실제로는 확인되지 않았다. | OK | OK | 1/1/1 | 2/1/1 |
+| T16 | 복합 의미 | 플레이어가 열쇠를 주우려고 했지만 손이 닿지 않았고, 결국 경비병에게 열쇠를 달라고 부탁했다. | OK | OK | 1/1/1 | 1/1/1 |
+
+3. DETAILED PER-TEST RAW EVIDENCE & SEMANTIC ANALYSIS
+--------------------------------------------------------------------------------
+
+================================================================================
+[TEST T01] 단순 사건
+Input: "플레이어가 바닥에서 녹슨 단검을 주웠다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: hr6jaufDCu-i9tMP7YSdmAY
+Parse Success: true
+Raw LLM Output:
+```json
+[
+  {
+    "actionType": "SET_WORLD_METADATA",
+    "payload": {
+      "worldName": "기본 세계",
+      "settingDescription": "스산한 안개와 퇴락한 문명의 흔적이 감도는 정통 고전 판타지 세계",
+      "toneStyle": "정통 고전 판타지"
+    }
+  },
+  {
+    "actionType": "ADVANCE_CHAPTER",
+    "payload": {
+      "currentChapter": "제1장: 안개 낀 폐허",
+      "upcomingChapters": [
+        "제2장: 황야의 이정표",
+        "제3장: 그늘진 심연"
+      ]
+    }
+  },
+  {
+    "actionType": "ADD_NARRATIVE_SEED",
+    "payload": {
+      "id": "seed_rusty_dagger_discovery",
+      "seedType": "SECONDARY",
+      "title": "먼지 속에 묻힌 칼날",
+      "clueText": "무너진 돌바닥 틈새에서 발견된 날이 닳고 녹슨 철제 단검.",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "actionType": "MODIFY_INVENTORY",
+    "payload": {
+      "item": {
+        "id": "item_rusty_dagger",
+        "name": "녹슨 단검",
+        "quantity": 1
+      },
+      "operation": "ADD",
+      "acquisition": {
+        "cause": "DISCOVERY_PICKUP",
+        "verifiedEventId": "seed_rusty_dagger_discovery"
+      }
+    }
+  }
+]
+```
+
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "스산한 긁는 소리",
+    "narrativeSummary": "단검을 집어 드는 순간, 정적을 깨고 서쪽 무너진 석벽 너머에서 무언가 단단한 발톱으로 돌을 긁어내리는 듯한 기괴한 소리가 들려옵니다. 바람에 섞인 소리인지, 혹은 폐허 속에 도사린 무언가의 움직임인지 분간하기 어렵습니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_rusty_dagger_found_tension",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "녹슨 단검" }
+        ],
+        "scope": "CANONICAL",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": ["seed_scraping_noise_in_ruins"],
+      "inventoryChanges": [
+        {
+          "name": "녹슨 단검",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "evt_rusty_dagger_found_tension"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 안개 낀 폐허"
+      }
+    }
+  },
+  {
+    "label": "빛바랜 가문의 표식",
+    "narrativeSummary": "거친 손잡이를 잡고 단검을 들어 올리자, 붉은 녹과 진흙에 가려져 있던 폼멜(자루 끝 장식) 부근에 희미하게 각인된 기하학적 문양이 드러납니다. 비록 날은 다 바스러졌으나 과거 이 인근을 지배했던 영주의 사가(私家) 문장과 유사해 보입니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_rusty_dagger_found_lore",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "녹슨 단검" }
+        ],
+        "scope": "CANONICAL",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": ["seed_forgotten_crest_mystery"],
+      "inventoryChanges": [
+        {
+          "name": "문양이 새겨진 녹슨 단검",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "evt_rusty_dagger_found_lore"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 안개 낀 폐허"
+      }
+    }
+  },
+  {
+    "label": "삐걱이는 하중",
+    "narrativeSummary": "몸을 숙여 단검을 쥐는 찰나, 발아래를 받치고 있던 썩은 나무 널판지가 버티지 못하고 깊고 위태로운 비명을 지릅니다. 체중을 급격히 분산시키지 않으면 바닥이 꺼지며 지하 공동으로 추락할 위험이 도사리고 있습니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_rusty_dagger_found_hazard",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "녹슨 단검" }
+        ],
+        "scope": "CANONICAL",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": ["seed_unstable_floorboards"],
+      "inventoryChanges": [
+        {
+          "name": "녹슨 단검",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "evt_rusty_dagger_found_hazard"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 안개 낀 폐허"
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+사방을 메운 회색 안개는 습기를 머금어 무겁게 가라앉아 있었고, 무너진 돌벽 틈새로 새어 나오는 밤바람은 을씨년스러운 소리를 내며 폐허의 정적을 흔들고 있었습니다. 한때 누군가의 안식처였거나 경계 초소였을 이 이름 없는 석조 건물은 이제 천장이 완전히 무너져 내려, 밤하늘의 희미한 잔광만이 먼지 쌓인 바닥을 겨우 비출 뿐이었습니다.
+
+방랑자의 여정은 늘 결핍과 침묵으로 가득 차 있었습니다. 거친 흙바닥 위를 느리게 거닐던 당신의 시선 끝에, 이질적인 금속의 잔상이 걸려들었습니다. 깨진 돌더미와 마른 잡초 덩굴 사이에 반쯤 묻혀 있던 그것은 아주 오래전 버려진 듯한 단검이었습니다. 
+
+가죽 가닥이 다 헤어져 썩어가는 손잡이, 그리고 붉고 검은 철 녹이 겹겹이 슬어 날의 이가 거칠게 빠져버린 단검. 
+
+당신은 천천히 몸을 숙였습니다. 손가락 끝에 닿는 쇠붙이의 감각은 밤공기보다 더 차가웠고, 가느다란 흙먼지가 피부 위로 까슬하게 묻어났습니다. 손아귀에 힘을 주어 흙더미 속에서 단검을 들어 올리자, 세월의 무게를 이기지 못한 붉은 녹 가루가 바스라지며 밤바람에 흩날렸습니다. 무기로서의 쓸모는 진즉에 잃어버린 듯하지만, 험난한 황야를 걷는 방랑자에게는 이 보잘것없는 고철 조각조차도 손에 쥘 수 있는 유일한 위안이 되어 줄 것입니다.
+
+단검을 쥔 당신의 손끝으로 차가운 금속의 침묵이 타고 올라옵니다. 이 스산한 폐허의 안개 속에서, 당신은 단검을 갈무리하며 주위를 둘러봅니다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: atqjapedNv-x1e8P9OCx4Qc
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "녹슨 철날의 획득",
+    "narrativeSummary": "길가의 마른 흙바닥에 반쯤 묻혀 있던 녹슨 단검을 흙먼지를 털어내며 주워 올립니다. 날은 심하게 무디고 손잡이의 가죽은 오래전에 삭아 없어졌지만, 날끝은 여전히 단단하여 급할 때 신체를 보호할 최소한의 도구는 되어줄 것입니다.",
+    "semanticEvents": [
+      {
+        "eventId": "event_pickup_rusty_dagger_01",
+        "action": "PICKUP",
+        "roles": [
+          {
+            "role": "SUBJECT",
+            "entityName": "주인공"
+          },
+          {
+            "role": "OBJECT",
+            "entityName": "녹슨 단검",
+            "entityId": "item_rusty_dagger"
+          },
+          {
+            "role": "LOCATION",
+            "entityName": "흙길 바닥"
+          }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "seed_rusty_dagger: 흙바닥에 버려져 있던 붉은 녹이 슨 무딘 단검."
+      ],
+      "inventoryChanges": [
+        {
+          "name": "녹슨 단검",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "seed_rusty_dagger"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 황량한 가도(街道)",
+        "upcomingChapters": [
+          "2장: 그늘진 이정표",
+          "3장: 숲속의 야영지"
+        ]
+      }
+    }
+  },
+  {
+    "label": "도망자의 흔적",
+    "narrativeSummary": "단검을 들어 올리자, 붉은 녹 아래에 거칠게 굳어버린 오래된 혈흔이 보입니다. 단검이 놓여 있던 가시덤불 근처에는 찢겨 나간 올이 굵은 옷자락이 걸려 있어, 이것이 단순한 유실물이 아니라 누군가 다급하게 도망치며 흘린 흔적임을 시사합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "event_pickup_rusty_dagger_02",
+        "action": "PICKUP",
+        "roles": [
+          {
+            "role": "SUBJECT",
+            "entityName": "주인공"
+          },
+          {
+            "role": "OBJECT",
+            "entityName": "녹슨 단검",
+            "entityId": "item_rusty_dagger"
+          }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED"
+      },
+      {
+        "eventId": "event_observe_blood_trace",
+        "action": "OBSERVE",
+        "roles": [
+          {
+            "role": "SUBJECT",
+            "entityName": "주인공"
+          },
+          {
+            "role": "OBJECT",
+            "entityName": "말라붙은 혈흔과 찢긴 옷자락"
+          }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "seed_bloody_escape_trace: 단검에 남은 오래된 혈흔과 덤불에 걸린 찢어진 옷자락."
+      ],
+      "inventoryChanges": [
+        {
+          "name": "녹슨 단검",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "seed_bloody_escape_trace"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 황량한 가도(街道)",
+        "upcomingChapters": [
+          "2장: 피 흘린 자의 궤적",
+          "3장: 밀렵꾼의 오막살이"
+        ]
+      }
+    }
+  },
+  {
+    "label": "부서진 철날 속의 서신",
+    "narrativeSummary": "바닥의 단검을 쥐고 힘을 주어 당기자, 붉은 녹에 갉아 먹힌 쇠날이 허무하게 툭 부러집니다. 쓸모없어진 쇳조각을 버리려던 찰나, 손잡이의 닳아빠진 가죽 끈 사이에 빽빽하게 접혀 들어가 있던 작고 얇은 밀랍 칠한 종이 뭉치가 흙바닥으로 떨어집니다.",
+    "semanticEvents": [
+      {
+        "eventId": "event_break_dagger_discover_letter",
+        "action": "PICKUP",
+        "roles": [
+          {
+            "role": "SUBJECT",
+            "entityName": "주인공"
+          },
+          {
+            "role": "OBJECT",
+            "entityName": "밀랍 칠한 종이 쪽지",
+            "entityId": "item_waxed_letter"
+          }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "seed_secret_letter_scrap: 단검 손잡이 내부에서 발견된 정체불명의 밀랍 종이 쪽지."
+      ],
+      "inventoryChanges": [
+        {
+          "name": "밀랍 종이 쪽지",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "seed_secret_letter_scrap"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 황량한 가도(街道)",
+        "upcomingChapters": [
+          "2장: 해독되지 않은 밀서",
+          "3장: 성벽 아래의 밀회"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+황량한 가도(街道)의 가을바람은 쓸쓸한 소리를 내며 거친 흙길을 쓸고 지나갔습니다. 길가에 아무렇게나 자라난 마른 잡초와 가시덤불 사이, 반쯤 흙에 파묻힌 철제 덩어리가 낮게 가라앉은 가을 햇살을 받아 둔탁하게 빛나고 있었습니다.
+
+당신은 걸음을 멈추고 허리를 굽혔습니다. 차가운 흙먼지를 털어내며 들어 올린 것은 한 자루의 단검이었습니다.
+
+손에 닿는 감촉은 낯설고도 차가웠습니다. 가죽을 감았던 칼자루는 빗물과 바람에 삭아 뼈대만 앙상하게 드러나 있었고, 칼날은 온통 붉은 녹으로 뒤덮여 원래의 푸르스름한 철빛을 잃어버린 지 오래였습니다. 엄지손가락으로 조심스럽게 날끝을 문지르자, 거친 쇳가루가 버석거리며 손가락 끝에 묻어났습니다.
+
+이 무딘 쇳조각은 어떤 사연으로 이 차가운 길바닥에 홀로 버려지게 되었을까요? 쓸쓸한 방랑의 길 위에서, 어쩌면 이 단검은 당신의 텅 빈 손을 채워줄 유일한 동반자가 될지도 모릅니다. 당신은 무기를 조심스럽게 살피며 다음 걸음을 준비합니다.
+
+
+================================================================================
+[TEST T02] 복합 사건
+Input: "경비병이 문을 열고 안으로 들어간 뒤, 바닥에 떨어진 열쇠를 주워 주머니에 넣었다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: tr6jaq7gEpCYvr0P792_oQY
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "침묵 속의 미행",
+    "narrativeSummary": "경비병이 문을 닫기 직전, 찰나의 틈을 타 문틈으로 스며들어 그의 뒤를 밟습니다. 좁고 어두운 회랑 내부에서 들키지 않고 거리를 유지해야 합니다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병이 들어간 방 내부에서 들려오는 희미한 말소리"
+      ],
+      "newNpcs": [
+        {
+          "name": "성채 순찰병",
+          "alias": "부주의한 경비병",
+          "npcClass": "Class A",
+          "innerThought": "[미인지 상태]",
+          "metInStory": false,
+          "origin": "영지 하층민 정착지",
+          "affiliation": "영주 성채 경비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 잠입의 서막",
+        "upcomingChapters": [
+          "2장: 회랑의 그림자",
+          "3장: 엇갈린 열쇠"
+        ]
+      }
+    }
+  },
+  {
+    "label": "열쇠탈취 계획 수립",
+    "narrativeSummary": "경비병이 방 안에서 다른 일에 집중하는 사이, 문을 살그머니 열고 들어가 주머니 속의 열쇠를 소리 없이 소매치기할 기회를 노립니다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병의 주머니 틈으로 보이는 가죽 끈의 위치"
+      ],
+      "newNpcs": [
+        {
+          "name": "성채 순찰병",
+          "alias": "부주의한 경비병",
+          "npcClass": "Class A",
+          "innerThought": "[미인지 상태]",
+          "metInStory": false,
+          "origin": "영지 하층민 정착지",
+          "affiliation": "영주 성채 경비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 잠입의 서막",
+        "upcomingChapters": [
+          "2장: 은밀한 손손길",
+          "3장: 갇힌 자의 방"
+        ]
+      }
+    }
+  },
+  {
+    "label": "우회로 탐색 및 철수",
+    "narrativeSummary": "경비병이 지키는 정면 문을 포기하고, 그가 들어간 방의 반대편 막다른 복도 구석에 숨겨진 환기구나 지붕으로 이어지는 좁은 통로가 있는지 조사합니다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "오래된 석벽 사이로 불어오는 밤바람의 흐름"
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 잠입의 서막",
+        "upcomingChapters": [
+          "2장: 먼지 쌓인 다락방",
+          "3장: 성채의 천장"
+        ]
+      }
+    }
+  },
+  {
+    "label": "소동 유발 및 유인",
+    "narrativeSummary": "주변에 굴러다니는 돌멩이나 목재 파편을 멀리 던져 소리를 냅니다. 경비병이 소리를 듣고 다시 문을 열고 밖으로 나오도록 유도한 뒤, 그의 뒤통수를 기습할 각오를 다집니다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "어둠 속에서 무기가 될 만한 둔탁한 돌조각"
+      ],
+      "newNpcs": [
+        {
+          "name": "성채 순찰병",
+          "alias": "부주의한 경비병",
+          "npcClass": "Class A",
+          "innerThought": "[미인지 상태]",
+          "metInStory": false,
+          "origin": "영지 하층민 정착지",
+          "affiliation": "영주 성채 경비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 잠입의 서막",
+        "upcomingChapters": [
+          "2장: 복도의 매복",
+          "3장: 탈취된 경비복"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+[PROPOSALS_BLOCK]
+[
+  {
+    "action": "SET_WORLD_METADATA",
+    "properties": {
+      "worldName": "기본 세계",
+      "settingDescription": "중세 판타지 세계관",
+      "toneStyle": "정통 고전 판타지"
+    }
+  },
+  {
+    "action": "ADVANCE_CHAPTER",
+    "properties": {
+      "currentChapter": "1장: 잠입의 서막",
+      "upcomingChapters": [
+        "2장: 회랑의 그림자",
+        "3장: 엇갈린 열쇠"
+      ]
+    }
+  },
+  {
+    "action": "ADD_NPC",
+    "properties": {
+      "id": "npc_castle_guard_01",
+      "name": "성채 순찰병",
+      "npcClass": "Class A",
+      "innerThought": "[미인지 상태]",
+      "currentStatus": "ALIVE"
+    }
+  },
+  {
+    "action": "ADD_FACTION",
+    "properties": {
+      "id": "faction_castle_garrison",
+      "name": "영주 성채 경비대",
+      "description": "성채의 치안과 외곽 방비를 담당하는 정규 병력들. 규율은 엄격하나 야간 근무자들은 피로에 찌들어 있다.",
+      "attitudeTowardsPlayer": "SUSPICIOUS"
+    }
+  },
+  {
+    "action": "ADD_NARRATIVE_SEED",
+    "properties": {
+      "id": "seed_guard_dropped_key",
+      "seedType": "SECONDARY",
+      "title": "경비병의 부주의와 철제 열쇠",
+      "clueText": "순찰병이 떨어뜨렸다 급히 주워 담은 놋쇠 열쇠는 성채 하층 감옥 혹은 무기고의 것으로 보인다.",
+      "status": "ACTIVE"
+    }
+  }
+]
+[PROPOSALS_END]
+
+차가운 밤이슬이 성채 외벽의 거친 사암 틈새마다 끈적하게 배어드는 시각이었다. 
+
+방랑자로서 수많은 밤길을 걸어왔던 사내는, 지금 깊은 회랑 모퉁이의 어둠 속에 몸을 바짝 붙인 채 숨을 죽이고 있었다. 그가 걸친 빛바랜 가죽 망토는 석벽의 그림자와 구분되지 않을 정도로 어두웠다. 
+
+끼이익, 하고 둔탁한 마찰음이 복도의 정적을 깨뜨렸다. 저만치 앞에서 허름한 쇠가죽 갑옷을 걸친 순찰병 하나가 육중한 목재 문을 밀어 열고 있었다. 밤이 깊어 눈꺼풀이 무거워진 탓인지, 경비병의 움직임은 매끄럽지 못하고 거칠었다. 허리춤을 더듬거리며 열쇠뭉치를 꺼내던 그의 손끝이 미끄러졌고, 이내 쨍그랑하는 금속성 파열음이 바닥에 깔린 돌판 위로 차갑게 흘러내렸다.
+
+순찰병은 나직하게 욕설을 내뱉었다. 그는 둔중한 몸을 굽혀 바닥의 거친 모래 먼지 사이에 떨어진 놋쇠 열쇠를 대충 쓸어 담듯 주워 올렸다. 차가운 쇠붙이가 그의 기름진 가죽 주머니 속으로 밀려 들어가는 광경이, 숨죽인 사내의 안구에 또렷하게 새겨졌다. 
+
+덜컥.
+
+경비병이 문 안으로 완전히 들어가자, 무거운 목재 문이 미처 다 닫히지 않은 채 아주 미세한 틈을 남겨두고 느슨하게 멈추어 섰다. 틈새 사이로 희미한 촛불의 흔들림과 함께, 성채 내부의 시큼한 맥주 냄새와 그을음 향이 섞인 공기가 복도로 흘러나왔다. 
+
+사내의 손바닥에는 마땅한 무기도, 쥐어줄 패도 없었다. 오직 그가 가진 방랑의 경험과, 저 어둠 너머로 열린 좁은 틈새만이 눈앞에 놓여 있을 뿐이었다. 이 차가운 복도에서, 사내는 다음 발걸음을 어디로 디뎌야 할지 묵묵히 저울질하기 시작했다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: i9qjaueMGciD0-kPz5-WgAc
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "침묵하는 통로",
+    "narrativeSummary": "주인공은 숨을 죽인 채 경비병의 행동을 관찰합니다. 경비병은 바닥에 떨어진 묵직한 황동 열쇠를 주워 가죽 주머니에 넣고는, 무거운 참나무 문을 닫고 안으로 사라집니다. 통로에는 다시 서늘한 정적과 횃불의 그을음 냄새만이 감돕니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_guard_enters_door",
+        "action": "OBSERVE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "TARGET", "entityName": "성문 경비병" },
+          { "role": "LOCATION", "entityName": "참나무 문 앞 통로" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED"
+      },
+      {
+        "eventId": "evt_guard_retrieves_key",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "성문 경비병" },
+          { "role": "OBJECT", "entityName": "황동 열쇠" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병의 가죽 주머니에 들어간 황동 열쇠",
+        "참나무 문 너머에서 들려오는 희미한 구두굽 소리"
+      ],
+      "newNpcs": [
+        {
+          "name": "성문 경비병",
+          "npcClass": "Class A",
+          "innerThought": "비번 교대 시간까지 겨우 한 시간 남았군. 열쇠를 잃어버렸다면 백부장에게 채찍질을 당했을 거다.",
+          "metInStory": true,
+          "origin": "영지 성하 마을",
+          "affiliation": "영주 직속 경비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 그림자 밟기",
+        "upcomingChapters": [
+          "잠긴 문을 여는 법",
+          "경비대의 순찰로"
+        ]
+      }
+    }
+  },
+  {
+    "label": "경비병의 경계심",
+    "narrativeSummary": "열쇠를 주워 주머니에 넣던 경비병이 문을 닫으려다 말고 멈칫합니다. 통로 바닥의 미세한 흙먼지가 흐트러진 것을 눈치챈 그는, 눈을 찌푸리며 기둥 뒤 어둠을 향해 한 걸음 다가서며 칼자루에 손을 올립니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_guard_suspicion",
+        "action": "SUSPECT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "성문 경비병" },
+          { "role": "TARGET", "entityName": "주인공" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "통로 어둠 속에 드리운 기둥의 그림자",
+        "경비병의 가죽 장화가 딛고 있는 바닥의 먼지"
+      ],
+      "newNpcs": [
+        {
+          "name": "성문 경비병",
+          "npcClass": "Class A",
+          "innerThought": "쥐새끼 소리는 아니었다. 기둥 뒤에 누군가 숨어 있는 것 같은데...",
+          "metInStory": true,
+          "origin": "영지 성하 마을",
+          "affiliation": "영주 직속 경비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 그림자 밟기",
+        "upcomingChapters": [
+          "기둥 뒤의 대치",
+          "발각된 방랑자"
+        ]
+      }
+    }
+  },
+  {
+    "label": "바닥에 흘린 서장",
+    "narrativeSummary": "경비병은 다급하게 바닥의 열쇠를 주워 주머니에 넣고 문 안으로 서둘러 들어갑니다. 그러나 그가 허리를 숙였다가 일어나는 과정에서, 품속에 부실하게 꽂혀 있던 붉은 밀랍 봉인의 양가죽 서장 한 장이 조용히 미끄러져 바닥에 떨어집니다. 경비병은 이를 모른 채 문을 닫아버립니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_letter_dropped",
+        "action": "DROP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "성문 경비병" },
+          { "role": "OBJECT", "entityName": "밀랍 봉인된 서장" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "바닥에 떨어진 붉은 밀랍 봉인의 서장",
+        "서장에 찍힌 낯선 가문의 문장"
+      ],
+      "newNpcs": [
+        {
+          "name": "성문 경비병",
+          "npcClass": "Class A",
+          "innerThought": "서신을 제시간에 전달해야만 해. 영주관의 비서관이 기다리고 있을 거다.",
+          "metInStory": true,
+          "origin": "영지 성하 마을",
+          "affiliation": "영주 직속 경비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 그림자 밟기",
+        "upcomingChapters": [
+          "비밀의 서장",
+          "봉인 속의 이름"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+차가운 지하 통로의 공기는 축축하고 무거웠다. 벽면의 철제 거치대에 걸린 횃불이 이따금 타지 않은 기름을 튀기며 매캐한 그을음을 뿜어냈고, 아른거리는 붉은 빛줄기는 통로 바닥의 불규칙한 돌 틈새마다 긴 그림자를 드리웠다.
+
+쇠가죽 장화를 신은 경비병의 발걸음 소리가 정적을 깨뜨렸다. 철제 흉갑이 움직일 때마다 가죽 끈과 부딪히며 둔탁한 마찰음이 났고, 그의 허리춤에 매달린 단검집이 허벅지를 때렸다. 경비병은 문 앞에서 잠시 멈추어 서서 손을 더듬거리더니, 무거운 참나무 문을 밀어 열었다. 문경첩이 윤활유가 마른 탓에 날카로운 비명을 질렀다. 
+
+바로 그 순간, 그의 손가락 사이로 묵직한 쇳소리를 내며 무언가가 바닥의 차가운 돌판 위로 떨어졌다. 둔탁하게 부딪히는 소리 뒤에 이어진 것은 쇠사슬이 쓸리는 듯한 마찰음이었다. 바닥에 떨어진 것은 투박하게 제련된 황동 열쇠였다. 경비병은 나지막하게 욕설을 내뱉으며 허리를 굽혔다. 그의 거친 손가락이 돌바닥을 쓸어 열쇠를 움켜쥐었고, 그것은 이내 그의 조잡한 가죽 주머니 속으로 사라졌다.
+
+이내 경비병은 문 안으로 발을 들여놓았다. 그의 등 뒤로 무거운 참나무 문이 서서히 닫히기 시작했다. 완전히 닫히지 않은 문틈 사이로, 안쪽 방의 좁고 어두운 계단실과 그곳에서 흘러나오는 더운 열기가 스며 나왔다. 정적이 다시 지하 통로를 잠식하기 시작했다.
+
+
+================================================================================
+[TEST T03] 의도
+Input: "플레이어는 경비병에게서 열쇠를 훔치려고 했다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: ptqjaoOtFcOG0-kP7MyzqAg
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "은밀한 손놀림 (소매치기)",
+    "narrativeSummary": "경비병이 졸음에 겨워 횃불 아래에서 꾸벅이는 찰나를 노려, 가죽 허리띠에 매달린 놋쇠 열쇠 뭉치를 소리 없이 풀어내려 합니다. 가장 정석적이고 조용한 접근이지만 미세한 감각이 필요합니다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병 한스의 허리춤에 달린 열쇠가 이 지하 요새의 유일한 출입 통로를 연다는 사실"
+      ],
+      "newNpcs": [
+        {
+          "name": "경비병 한스",
+          "alias": "나태한 초병",
+          "npcClass": "Class A",
+          "innerThought": "교대 시간이 꼬박 한 시간은 남았군. 뜨끈한 수프가 간절하다...",
+          "metInStory": true,
+          "origin": "성벽 아래 하층지구",
+          "affiliation": "영주 수비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 밤의 장막 아래에서",
+        "upcomingChapters": [
+          "2장: 철창 너머의 통로",
+          "2장: 쇠사슬의 경보음"
+        ]
+      }
+    }
+  },
+  {
+    "label": "주의 분산 후 날카로운 낚아채기",
+    "narrativeSummary": "주변의 작은 돌을 어둠 속으로 던져 둔탁한 마찰음을 냅니다. 경비병이 무기를 다잡으며 소리가 난 방향으로 몸을 돌리는 찰나, 그의 사각지대로 파고들어 열쇠를 낚아채는 대담한 시도입니다.",
+    "rawMetadata": {
+      "newNpcs": [
+        {
+          "name": "경비병 한스",
+          "alias": "나태한 초병",
+          "npcClass": "Class A",
+          "innerThought": "방금 어둠 속에서 쥐새끼가 기어 다니는 소리인가? 귀찮게스리...",
+          "metInStory": true,
+          "origin": "성벽 아래 하층지구",
+          "affiliation": "영주 수비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 밤의 장막 아래에서",
+        "upcomingChapters": [
+          "2장: 그림자 추적",
+          "2장: 등불 아래의 대치"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+```json
+[
+  {
+    "type": "ADD_NPC",
+    "payload": {
+      "id": "npc_guard_hans",
+      "name": "경비병 한스",
+      "npcClass": "Class A",
+      "innerThought": "교대 시간이 꼬박 한 시간은 남았군. 뜨끈한 수프가 간절하다...",
+      "currentStatus": "ALIVE"
+    }
+  },
+  {
+    "type": "ADVANCE_CHAPTER",
+    "payload": {
+      "currentChapter": "1장: 밤의 장막 아래에서",
+      "upcomingChapters": [
+        "2장: 철창 너머의 통로",
+        "2장: 쇠사슬의 경보음"
+      ]
+    }
+  }
+]
+```
+
+차갑게 식은 지하 통로의 공기는 곰팡내와 그을린 타르 냄새로 무겁게 가라앉아 있었습니다. 벽면에 걸린 조잡한 철제 횃불만이 불규칙한 주황빛 그림자를 벽면에 길게 늘어뜨릴 뿐이었습니다. 
+
+당신의 시야 끝에 걸린 사내는 영주 수비대의 문양이 바래진 무거운 가죽 갑옷을 걸친 채, 창대에 몸을 기대고 서서 이따금 턱을 아래로 꺾으며 졸음을 쫓고 있었습니다. 사내의 이름은 한스. 그저 몇 닢의 은화에 목숨을 저당 잡힌 흔한 성벽 아래 출신의 초병이었습니다. 그의 가죽 허리띠 오른쪽, 불빛을 받아 이따금 둔탁한 노란빛을 발하는 놋쇠 열쇠 뭉치가 걸려 있었습니다. 그것이 철창 너머의 길을 열어줄 유일한 실마리였습니다.
+
+당신은 숨을 죽인 채, 거친 돌벽에 등을 밀착했습니다. 심장 고동 소리가 귓가를 거세게 때렸고, 차가운 땀방울이 관자놀이를 타고 흘러내렸습니다. 금속과 금속이 부딪치는 아주 작은 쇳소리 하나라도 정적을 깨뜨린다면, 이 어두운 회랑은 순식간에 당신의 무덤이 될 것입니다. 
+
+숨을 내쉬는 순간, 경비병 한스가 가볍게 몸을 뒤척이며 깊은 한숨을 내쉬었습니다. 가죽 갑옷이 찌걱이며 쓸리는 소리가 통로에 나지막이 울려 퍼집니다. 지금이 손을 뻗을 기회입니다. 허나 아주 미세한 손놀림의 오차도 허용되지 않는 살얼음판과 같은 순간입니다.
+
+---
+
+### [판정 안내]
+경비병의 허리춤에서 소리 없이 열쇠를 훔쳐내기 위해 **민첩성(AGI)**을 기반으로 한 **소매치기 판정**이 필요합니다.
+
+* **수행할 판정**: 민첩성 (AGI) 판정
+* **난이도 (Target DC)**: **13**
+  * *성공 시*: 경비병이 알아차리지 못하게 열쇠 뭉치를 조용히 손에 넣고 그림자 속으로 후퇴합니다.
+  * *실패 시*: 금속 마찰음이 나거나 가죽 끈이 팽팽해지며 경비병 한스가 잠에서 깨어나 당신의 덜미를 잡으려 할 것입니다.
+
+주사위(d20)를 굴려 그 결과를 알려주십시오. (당신의 AGI 보정치는 +0입니다.)
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: zNqjatnVGMu21e8Pt9rS4Ag
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "대담한 손놀림 (직접 소매치기)",
+    "narrativeSummary": "경비병의 허리춤에서 가죽 끈에 묶인 청동 열쇠 꾸러미를 직접 훔쳐냅니다. 경비병의 주의가 순간적으로 흐트러진 틈을 타야 하며, 정밀한 손재주가 요구됩니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_pickpocket_attempt_01",
+        "action": "STEAL_ATTEMPT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "TARGET", "entityName": "경비병" },
+          { "role": "OBJECT", "entityName": "감옥 열쇠" }
+        ],
+        "scope": "INTENT",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "ASSERTED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "seed_dungeon_secret_door: 지하 감옥 가장 깊은 곳, 녹슨 무쇠 문 뒤에서 들려오는 희미한 신음 소리"
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 쇠창살과 회색 장벽",
+        "upcomingChapters": [
+          "탈옥의 흔적",
+          "추적당하는 방랑자"
+        ]
+      }
+    }
+  },
+  {
+    "label": "환경적 교란 후 탈취 (주의 분산)",
+    "narrativeSummary": "주변의 횃불 받침대를 건드리거나 놋그릇을 떨어뜨려 소음을 내고, 경비병이 뒤를 돌아본 틈을 타 열쇠를 훔칩니다. 신중한 타이밍 포착이 필요합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_distract_and_steal_01",
+        "action": "DISTRACT_ATTEMPT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "TARGET", "entityName": "경비병" }
+        ],
+        "scope": "INTENT",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "ASSERTED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "seed_careless_guards: 이 성채 경비병들의 기강이 극도로 느슨해진 배후의 정황"
+      ],
+      "chapterChanges": {
+        "currentChapter": "1장: 쇠창살과 회색 장벽",
+        "upcomingChapters": [
+          "요새의 허점",
+          "그늘 속의 도주"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+```json
+{
+  "proposals": [
+    {
+      "actionType": "SET_WORLD_METADATA",
+      "worldName": "기본 세계",
+      "settingDescription": "중세 판타지 세계관",
+      "toneStyle": "정통 고전 판타지"
+    },
+    {
+      "actionType": "ADVANCE_CHAPTER",
+      "currentChapter": "1장: 쇠창살과 회색 장벽"
+    },
+    {
+      "actionType": "ADD_NPC",
+      "id": "npc_prison_guard_01",
+      "name": "경비병 베른",
+      "npcClass": "Class A",
+      "innerThought": "지루한 당직 근무에 졸음이 쏟아지며, 얼른 교대 시간이 오기만을 바라고 있다.",
+      "currentStatus": "ALIVE"
+    }
+  ]
+}
+```
+
+차가운 화강암 벽에서 배어 나오는 눅눅한 습기와 곰팡이 냄새가 좁은 통로를 가득 채우고 있습니다. 철제 횃불 걸이에서 흘러내린 그을음이 벽면을 검게 물들였고, 바람 한 점 통하지 않는 지하 복도에는 가끔씩 흔들리는 불꽃의 미세한 파찰음만이 울릴 뿐입니다.
+
+통로 벽에 기대어 서 있는 경비병 베른은 투구 아래로 무거운 눈꺼풀을 깜빡이며 졸음과 싸우고 있습니다. 그의 가죽대와 쇠사슬 갑옷이 그가 숨을 쉴 때마다 둔탁한 소리를 냅니다. 그의 허리춤, 무거운 가죽 벨트 끝에는 녹슨 청동 고리에 꿰인 묵직한 열쇠 꾸러미가 매달려 있습니다. 그 열쇠들이 감옥의 철문을 열 수 있는 유일한 열쇠입니다.
+
+당신은 차가운 바닥에 몸을 밀착한 채 숨을 죽입니다. 경비병의 숨소리가 주기적으로 거칠어지는 지금이야말로 손을 뻗을 기회입니다. 그러나 방랑자로서의 경험은 당신에게 경고합니다. 무장한 경비병의 몸에 손을 대는 것은 극도의 정밀함과 침착함을 요구하는 일입니다. 까딱하여 열쇠가 서로 부딪쳐 쇳소리라도 나는 날에는, 이 어둡고 좁은 지하 감옥 전체가 비상종 소리로 가득 찰 것입니다.
+
+당신의 손끝이 미세하게 떨립니다. 어떤 방식으로 이 위험한 시도를 감행하겠습니까?
+
+---
+
+**[판정 안내]**
+경비병의 허리춤에서 열쇠를 훔치는 행동은 당신의 신체적 제어력과 신중함을 시험합니다. 
+
+* **선택 1: 대담한 손놀림 (직접 소매치기)**
+  * 경비병의 허리로 직접 손을 뻗어 열쇠 고리를 풀어냅니다. 
+  * **요구 판정**: **민첩 (Sleight of Hand / 손재주) 판정**
+  * **목표 난이도 (DC)**: **14**
+
+* **선택 2: 환경적 교란 후 탈취 (주의 분산)**
+  * 주변의 소품을 이용해 소음을 내어 경비병의 시선을 돌린 뒤 틈을 노립니다.
+  * **요구 판정**: **민첩 (Stealth / 은신) 또는 지능 (Deduction / 책략) 판정**
+  * **목표 난이도 (DC)**: **12** (실패 시 소음의 진원지를 수색하던 경비병에게 발각될 위험이 커집니다.)
+
+행동을 선택하신 후, 주사위(D20)를 굴려 결과를 알려주십시오. 수정치(민첩 STR 10 / AGI 10 이므로 보너스 +0)를 더한 최종 값을 제안해 주시기 바랍니다.
+
+
+================================================================================
+[TEST T04] 실패한 시도
+Input: "플레이어가 열쇠를 훔치려 했지만 실패했다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: 3L6jasXAOMGXosUP_8Hz6Ag
+Parse Success: true
+Raw LLM Output:
+```json
+[
+  {
+    "action": "SET_WORLD_METADATA",
+    "payload": {
+      "worldName": "기본 세계",
+      "settingDescription": "진흙과 쇠 냄새, 차가운 빗줄기가 가득한 정통 고전 중세 판타지 세계",
+      "toneStyle": "정통 고전 판타지"
+    }
+  },
+  {
+    "action": "ADD_NPC",
+    "payload": {
+      "id": "npc_heinz",
+      "name": "하인츠",
+      "npcClass": "Class A",
+      "innerThought": "이 쥐새끼 같은 방랑자 놈이 감히 내 열쇠에 손을 대? 이참에 도둑질 죄목으로 고발하겠다고 협박해서, 아무도 안 가려는 북쪽 수렁으로 심부름이나 보낼까.",
+      "currentStatus": "ALIVE"
+    }
+  },
+  {
+    "action": "ADD_NARRATIVE_SEED",
+    "payload": {
+      "id": "seed_stolen_key",
+      "seedType": "MAIN",
+      "title": "하인츠의 철제 궤짝",
+      "clueText": "여관 주인 하인츠가 목숨처럼 아끼는 청동 열쇠는 마차 화물칸 뒤편의 무거운 철제 궤짝과 연결되어 있다.",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "action": "ADVANCE_CHAPTER",
+    "payload": {
+      "currentChapter": "1장: 빗나간 손끝, 무거운 대가",
+      "upcomingChapters": [
+        "2장: 수렁의 심부름꾼",
+        "3장: 젖은 가죽 포대"
+      ]
+    }
+  }
+]
+```
+
+[CANDIDATES_BLOCK]
+```json
+[
+  {
+    "label": "능글맞은 변명과 협상",
+    "narrativeSummary": "하인츠의 거친 손아귀를 억지로 뿌리치지 않고, 옷자락에 묻은 먼지를 털어주려 했다는 둥 능청스러운 변명으로 대화를 시도합니다. 상대의 탐욕을 자극할 만한 다른 제안을 던져 주의를 돌립니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_excuse_attempt",
+        "action": "TALK",
+        "roles": [
+          {
+            "role": "SUBJECT",
+            "entityName": "주인공"
+          },
+          {
+            "role": "TARGET",
+            "entityName": "하인츠"
+          }
+        ],
+        "scope": "PROPOSAL"
+      }
+    ],
+    "rawMetadata": {
+      "statDeltas": []
+    }
+  },
+  {
+    "label": "빗속의 도주",
+    "narrativeSummary": "잡힌 손목을 비틀어 빼내며, 선술집의 삐걱이는 나무 문을 박차고 어두운 빗줄기가 쏟아지는 진흙 골목으로 도망칩니다. 거리를 잘 아는 방랑자의 이점을 살려 추적을 따돌려야 합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_flee_attempt",
+        "action": "ESCAPE",
+        "roles": [
+          {
+            "role": "SUBJECT",
+            "entityName": "주인공"
+          },
+          {
+            "role": "LOCATION",
+            "entityName": "빗속의 골목길"
+          }
+        ],
+        "scope": "PROPOSAL"
+      }
+    ],
+    "rawMetadata": {
+      "statDeltas": []
+    }
+  },
+  {
+    "label": "굴복과 양보",
+    "narrativeSummary": "순순히 잘못을 인정하며 무릎을 꿇거나 고개를 숙입니다. 하인츠가 경비병을 부르는 대신 사적인 보복이나 무리한 노동을 요구할 때, 이를 받아들이며 훗날을 기약합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_surrender_attempt",
+        "action": "SURRENDER",
+        "roles": [
+          {
+            "role": "SUBJECT",
+            "entityName": "주인공"
+          },
+          {
+            "role": "TARGET",
+            "entityName": "하인츠"
+          }
+        ],
+        "scope": "PROPOSAL"
+      }
+    ],
+    "rawMetadata": {
+      "statDeltas": []
+    }
+  }
+]
+```
+[CANDIDATES_END]
+
+스무스 강 하구에 자리 잡은 포구 선술집 '외눈박이 갈매기' 안은 눅눅한 소금기와 썩은 여물 냄새로 가득했다. 천장의 옹이구멍으로 스며든 빗방울이 가끔 뚝뚝 떨어져 낡은 참나무 탁자를 적셨다. 
+
+너덜너덜한 가죽 외투를 걸친 방랑자는 탁자 모퉁이에 기대어 선술집 주인이자 화물 관리인인 하인츠의 움직임을 쫓았다. 뚱뚱한 몸집에 어울리지 않게 눈매가 매서운 노인의 허리춤에는 낡은 청동 열쇠 뭉치가 매달려 있었다. 강바람이 문틈으로 들이칠 때마다 그 열쇠들은 둔탁한 금속음을 내며 흔들렸다. 북쪽 상단이 맡겨두고 간 궤짝을 열 수 있는 유일한 열쇠였다.
+
+기회는 하인츠가 독한 에일 맥주 잔을 나르느라 등을 돌렸을 때 찾아왔다. 방랑자는 소리 없이 다가가 손가락을 뻗었다. 젖은 가죽 장갑 밑으로 차가운 청동의 감각이 닿는 순간, 찰나의 부주의가 침묵을 깨뜨렸다. 고리가 미세하게 쇠사슬에 긁히며 찌르르한 금속음이 울렸다.
+
+"어이, 쥐새끼."
+
+그을음이 잔뜩 묻은 하인츠의 거친 손이 화살처럼 뻗어 나와 방랑자의 손목을 움켜쥐었다. 쇠집게 같은 악력에 뼈마디가 저릿했다. 노인의 일그러진 얼굴에 밴 누런 치아와 시큼한 술 냄새가 코끝을 찔렀다. 선술집 안의 소란스러운 소음이 일순간 잦아들고, 몇몇 선원들의 시선이 이쪽으로 쏠리기 시작했다. 손끝에 닿았던 청동 열쇠는 여전히 노인의 굵은 허리띠에 단단히 매달려 있었다. 도둑질은 실패했다. 단단히 붙들린 손목 위로 무거운 침묵이 내려앉는다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: BtujativF8fU1e8PhZHcgQ0
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "움켜쥔 손목, 매서운 눈초리",
+    "narrativeSummary": "열쇠 꾸러미를 건드리던 주인공의 손끝이 거친 가죽 벨트에 스치는 순간, 경비대장 베른의 두꺼운 손가락바닥이 주인공의 손목을 강하게 움켜잡습니다. 선술집의 소음이 순간 멀어지며, 기름진 찌개 냄새 사이로 차가운 적의가 차오릅니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_001_theft_failure",
+        "action": "STEAL",
+        "roles": [
+          {"role": "SUBJECT", "entityName": "주인공"},
+          {"role": "TARGET", "entityName": "경비대장 베른"},
+          {"role": "OBJECT", "entityName": "감옥 철쇠 열쇠"}
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "베른의 허리춤에 달린 열쇠는 단순한 창고 열쇠가 아닌, 성채 지하 깊은 곳의 비밀 통로와 연결되어 있다."
+      ],
+      "newNpcs": [
+        {
+          "name": "베른",
+          "alias": "외눈의 경비대장",
+          "npcClass": "Class A",
+          "innerThought": "쥐새끼 같은 놈이 감히 내 허리춤에 손을 대? 이대로 성채 감옥에 처넣어 본보기를 보여주마.",
+          "metInStory": true,
+          "origin": "국경 요새 오르샤",
+          "affiliation": "요새 수비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1막: 차가운 쇠사슬의 궤적",
+        "upcomingChapters": [
+          "지하 감옥의 침묵",
+          "탈출의 실마리"
+        ]
+      }
+    }
+  },
+  {
+    "label": "금속의 이중주와 허둥대는 군중",
+    "narrativeSummary": "열쇠가 바닥의 흙더미 위로 둔탁한 소리를 내며 떨어집니다. 쇠붙이 소리에 베른이 고개를 돌리기 직전, 주인공은 본능적으로 발걸음을 뒤로 물려 군중 속으로 몸을 숨깁니다. 베른은 자신의 열쇠가 떨어진 것을 발견하고 신경질적으로 주위를 둘러보기 시작합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_002_dropped_key",
+        "action": "DROP",
+        "roles": [
+          {"role": "SUBJECT", "entityName": "주인공"},
+          {"role": "OBJECT", "entityName": "감옥 철쇠 열쇠"}
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "잃어버릴 뻔한 열쇠를 수거한 베른은 평소보다 경계를 강화할 것이며, 선술집 출입구를 봉쇄하려 할 것이다."
+      ],
+      "newNpcs": [
+        {
+          "name": "베른",
+          "alias": "외눈의 경비대장",
+          "npcClass": "Class A",
+          "innerThought": "열쇠 고리가 풀렸다고? 아니, 누군가 손을 댄 게 분명하다. 이 안의 놈들을 전부 수색해야겠어.",
+          "metInStory": true,
+          "origin": "국경 요새 오르샤",
+          "affiliation": "요새 수비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1막: 밀폐된 주막의 독안개",
+        "upcomingChapters": [
+          "포위망 돌파",
+          "밤의 추적자들"
+        ]
+      }
+    }
+  },
+  {
+    "label": "외나무다리 위에서 나타난 구원자",
+    "narrativeSummary": "주인공의 어설픈 손짓이 고리에 걸리는 순간, 옆자리에서 거칠게 들이켜던 외팔이 용병 가트가 맥주잔을 베른의 가슴팍에 쏟아버립니다. 왁자지껄한 욕설과 함께 시선이 흩어지며, 주인공은 일촉즉발의 발각 위기에서 간신히 한 걸음 벗어납니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_003_distraction_intervention",
+        "action": "INTERRUPT",
+        "roles": [
+          {"role": "SUBJECT", "entityName": "외팔이 가트"},
+          {"role": "TARGET", "entityName": "경비대장 베른"}
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "용병 가트는 무상으로 주인공을 도운 것이 아니다. 그는 주인공의 손기술을 알아보고 다른 제안을 건네려 한다."
+      ],
+      "newNpcs": [
+        {
+          "name": "가트",
+          "alias": "외팔이 가트",
+          "npcClass": "Class B",
+          "innerThought": "초짜치고는 배짱이 두둑하군. 하지만 기술이 엉망이야. 내 밑에서 일 하나만 도와준다면 쓸모가 있겠는데.",
+          "metInStory": true,
+          "origin": "용병 길드 '검은 늑대'",
+          "affiliation": "무소속 용병"
+        },
+        {
+          "name": "베른",
+          "alias": "외눈의 경비대장",
+          "npcClass": "Class A",
+          "innerThought": "이 더러운 용병 놈이 미쳤나! 감히 수비대장의 제복에 이따위 구정물을 쏟아?",
+          "metInStory": true,
+          "origin": "국경 요새 오르샤",
+          "affiliation": "요새 수비대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "1막: 연기 가득한 은신처",
+        "upcomingChapters": [
+          "용병의 은밀한 제안",
+          "목숨의 값어치"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+탁하고 축축한 북부 국경 지대의 밤공기가 선술집 ‘거친 멧돼지 품’의 삐걱거리는 목조 문틈 사이로 끈적하게 스며듭니다. 사방은 온통 가짜 향료를 섞어 태우는 독한 담배 연기와 시큼하게 쉰 에일 맥주, 그리고 구석 초라한 화로에서 타오르는 눅눅한 참나무 장작의 매캐한 냄새로 가득 차 있습니다.
+
+당신은 가쁜 숨을 누르며, 탁자 구석에 기대어 졸고 있는 사내에게로 조심스럽게 다가갔습니다. 사내의 허리춤에는 묵직한 황동 고리에 걸린 차가운 무쇠 열쇠 뭉치가 매달려 있었습니다. 요새 지하의 단단한 철문을 열 수 있는 유일한 열쇠. 방랑의 길 위에서 이 요새를 통과하기 위해서는 반드시 손에 넣어야만 하는 물건이었습니다.
+
+숨을 들이쉬고, 손끝에 감각을 집중했습니다. 수많은 소음 속에 당신의 발소리를 묻으며, 손을 뻗어 열쇠 고리의 얇은 가죽 매듭으로 다가갔습니다. 아주 미세한 마찰음조차 허용되지 않는 침묵의 순간이었습니다.
+
+그러나 손끝이 낡은 가죽 벨트의 표면에 닿았을 때, 예기치 못한 떨림이 손끝을 타고 흘렀습니다. 긴장으로 굳은 손가락 끝이 쇠붙이의 미끄러운 단면을 제대로 움켜쥐지 못하고 빗나간 것입니다. 아주 미세하지만 선명한 쇳소리, *찰그랑*. 
+
+황동 고리가 사내의 가죽 갑옷 징에 부딪히며 주막의 소란함 속에서도 날카로운 경고음을 쏘아 올렸습니다.
+
+그 순간, 의자에 비스듬히 누워 있던 육중한 신형이 무서운 속도로 바로 서며, 당신이 채 손을 거두기도 전에 가죽 장갑을 낀 거친 손길이 허공을 갈랐습니다.
+
+---
+
+**[판정 가이드]**
+현재 경비대장 베른이 당신의 도둑질을 눈치채고 손목을 움켜잡거나 상황을 파악하려는 직전의 찰나입니다. 당신이 어떤 방식으로 이 실패의 인과를 받아들이고 대처할지에 따라 상황의 전개가 달라집니다.
+
+* **지문 행동 제안**:
+  1. **[대면과 저항]** 베른에게 손목을 잡힌 채, 순순히 잡히지 않고 뒤로 밀치며 단검을 뽑아 들거나 도주를 시도합니다. (난이도 DC 14 민첩/근력 판정 필요)
+  2. **[군중 속의 은신]** 쇳소리가 나자마자 열쇠를 포기하고 몸을 굽혀 급히 탁자 밑과 취객들 사이로 파고들어 종적을 감춥니다. (난이도 DC 12 은신 판정 필요)
+  3. **[변명과 사교]** "지갑이 떨어지신 줄 알았습니다, 나리." 하고 능청스럽게 고개를 숙이며 베른의 의심을 거두려 시도합니다. (난이도 DC 15 기만 판정 필요)
+
+당신의 다음 행동 선언과 함께, 필요한 경우 다이스 롤(1D20) 결과를 제시해 주십시오.
+
+
+================================================================================
+[TEST T05] 전언
+Input: "마을 사람들은 북쪽 폐허에 검은 보물이 있다고 말했다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: xvOjauGuM_nE0-kPj8TjoQo
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "북쪽 폐허로 직접 출발한다",
+    "narrativeSummary": "마을 사람들의 소문을 바탕으로 별다른 채비 지체 없이 북쪽의 험준한 산길을 향해 발걸음을 옮깁니다. 메마른 산바람과 고요한 황량함 속에서 폐허로 향하는 추적을 시작합니다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "북쪽 폐허에 안치되었다는 검은 보물의 진위와 위험성"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 험난한 여정의 시작",
+        "upcomingChapters": [
+          "황량한 북쪽 산길",
+          "검은 보석의 유적"
+        ]
+      }
+    }
+  },
+  {
+    "label": "마을 주점에서 소문의 세부 정보를 탐문한다",
+    "narrativeSummary": "곧바로 길을 떠나기보다 마을의 낡은 주점에 들러 오래된 약초꾼이나 노인들에게 폐허의 물리적 위치, 지체된 위협, 보물에 얽힌 옛이야기를 캐묻습니다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "북쪽 폐허에 안치되었다는 검은 보물의 진위와 위험성"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 소요의 시초",
+        "upcomingChapters": [
+          "주점에서의 탐문과 기묘한 정황",
+          "북쪽 폐허 탐사"
+        ]
+      }
+    }
+  },
+  {
+    "label": "마을 상점이나 잡화상을 찾아 지도와 채비를 점검한다",
+    "narrativeSummary": "북쪽 산맥의 지형과 장기간의 이동에 대비하여 마을 상인에게 옛 지적도나 지형 정보를 묻고 여장을 가다듬습니다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "북쪽 폐허에 안치되었다는 검은 보물의 진위와 위험성"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 준비와 탐색",
+        "upcomingChapters": [
+          "유적 지도의 확보",
+          "북쪽 산맥 진입"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+이른 아침의 서리가 덜 깬 변방 마을의 광장에는 메마른 바람만이 나직하게 지나가고 있었습니다. 굴뚝마다 피어오르는 옅은 연기가 나뭇가지 사이에 맴돌고, 우물가에 모여든 농부들과 나뭇꾼들은 낮은 목소리로 이야기를 나누고 있었습니다.
+
+"북쪽 회색 굴곡 너머, 고대 성채의 잔해 속에 검은 빛을 띤 무언가가 묻혀 있다는군."
+
+"지난달 산을 넘던 약초꾼도 보았다고 했지. 햇빛을 반사하지 않고 오히려 주변의 빛을 흡수하는 듯한 칠흑의 덩어리였다고..."
+
+마을 사람들의 입을 통해 전해진 이야기는 댓가를 바라는 탐욕과 알 수 없는 황폐함에 대한 경계심이 뒤섞여 있었습니다. 당신이 짚고 섰던 먼지 묻은 지팡이 끝으로 차가운 흙바람이 스쳐 지나갑니다. 북쪽의 봉우리들은 짙은 안개 속에 감춰진 채, 오랫동안 사람의 발길이 닿지 않은 석조 폐허의 윤곽만을 아득히 내비치고 있습니다.
+
+배낭을쳐메고 길을 나설 준비를 마친 당신의 앞에 세 갈래의 선택이 놓여 있습니다. 북쪽 산길로 즉시 향하거나, 주점의 험악한 입담 속에서 더 정교한 진실을 가려내거나, 혹시 모를 위험에 대비해 채비를 점검할 수도 있습니다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: 9vSjarHoGP6j9tMPvfmigAU
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "선술집에서 소문의 출처와 상세 정보 탐문하기",
+    "narrativeSummary": "마을 선술집의 소란스러운 식탁 사이를 거닐며 북쪽 폐허에 대한 소문이 어디서 시작되었는지, 최근 그곳을 다녀온 사냥꾼이나 상인이 있는지 정보를 수집합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_gather_rumor_01",
+        "action": "GATHER_INFORMATION",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "마을 선술집" },
+          { "role": "CONSTRAINT", "entityName": "북쪽 폐허의 검은 보물 소문" }
+        ],
+        "scope": "INTENT",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "HEARSAY",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "북쪽 폐허 지하에 매장되어 있다는 검은 금속의 소문"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 바람 부는 국경 마을과 소문",
+        "upcomingChapters": [
+          "제2장: 북쪽 산길의 안개",
+          "제3장: 잊혀진 가문과 붉은 이끼의 유적"
+        ]
+      }
+    }
+  },
+  {
+    "label": "채비를 마치고 즉시 북쪽 산길로 향하기",
+    "narrativeSummary": "마을 사람들의 쓸데없는 과장을 뒤로하고, 날이 더 어두워지기 전에 여장을 정돈하여 북쪽 산맥으로 이어지는 고개로 발걸음을 옮깁니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_depart_north_01",
+        "action": "TRAVEL",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "북쪽 폐허 진입로" }
+        ],
+        "scope": "INTENT",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "북쪽 산길 수풀 속에서 발견된 최근의 핏자국과 수레바퀴 자국"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 바람 부는 국경 마을과 소문",
+        "upcomingChapters": [
+          "제2장: 폐허의 외벽과 감시탑",
+          "제3장: 검은 보물의 정체"
+        ]
+      }
+    }
+  },
+  {
+    "label": "마을 성당의 기록을 찾아 고대 역사 확인하기",
+    "narrativeSummary": "단순한 민담인지 역사적 사실인지 판가름하기 위해 마을 변두리에 자리한 오래된 성당의 서기나 노학자를 찾아가 지역 연대기를 조회합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_research_records_01",
+        "action": "RESEARCH",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "마을 성당 서고" }
+        ],
+        "scope": "INTENT",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "HEARSAY",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "백 년 전 북쪽 성채를 몰락시킨 원인 불명의 화재 기록"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 바람 부는 국경 마을과 소문",
+        "upcomingChapters": [
+          "제2장: 봉인된 문과 고문서의 단서",
+          "제3장: 지하 묘지에 잠든 유산"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+황혼이 지는 국경 지대의 마을, 식어가는 굴뚝 연기가 짓눌린 하늘 아래로 낮게 깔리고 있었습니다. 오랜 방랑으로 닳아버린 가죽 장화 끝에 밟히는 자갈 소리만이 서산으로 넘어가는 해를 배웅하는 정적을 깼습니다.
+
+우물가에 모여 서서 말린 땔감을 묶던 주민들은 외지인의 걸음걸이를 지켜보며 낮은 목소리로 험담과 경고를 섞어 나눴습니다. 그들의 입에서 반복해서 흘러나온 이야기는 하나였습니다. 북쪽 억새풀 능선 너머, 수십 년 전 잿더미로 변해 버려진 고성 폐허에 결코 인간의 손길이 닿아서는 안 될 '검은 보물'이 잠들어 있다는 소문이었습니다. 어떤 이에게는 일평생을 바꿀 신기루 같은 부의 기회였고, 다른 이에게는 접근하는 자의 목숨을 앗아가는 불길한 징조였습니다.
+
+북쪽 산맥에서 불어오는 바람은 벌써부터 살을 깎아낼 듯 차가웠습니다. 마을 경계에 서서 멀리 솟아오른 험준한 암봉과 그 아래 검게 엎드린 폐허의 윤곽을 바라봅니다. 
+
+당신은 이제 이 소문의 진위를 파악하고 다음 행동을 결정해야 합니다.
+
+
+================================================================================
+[TEST T06] 부정
+Input: "플레이어는 열쇠를 줍지 않았다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: FvSjap6yCLrq2roPvYn1-Q0
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "열쇠를 두고 방랑을 계속하며 마을로 향한다",
+    "narrativeSummary": "바닥에 떨어진 철제 열쇠를 외면한 채, 주인공은 발걸음을 옮겨 미지의 마을을 향해 나아간다. 뒤로 남겨진 열쇠는 차가운 새벽 이슬 속에 묻혀 잊혀지고, 눈앞의 안개 낀 길만이 새로운 여정의 시작을 알린다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_LEAVE_KEY_01",
+        "action": "IGNORE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "철제 열쇠" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "버려진 열쇠가 품고 있던 비밀은 영원히 미궁 속으로 가라앉는다."
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "인근 숲속의 야영지에서 누군가 사라진 열쇠를 찾으며 서성이기 시작한다."
+      ],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 안개 낀 갈림길",
+        "upcomingChapters": [
+          "방랑자의 발걸음",
+          "이방인을 경계하는 마을",
+          "침묵의 초원"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+시린 새벽안개가 갈색 대지를 낮게 짓누르고 있었다. 발밑의 풀잎마다 맺힌 이슬이 차가운 습기를 뿜어내며 묵묵한 침묵을 자아낸다. 지평선 너머로 희미한 여명이 밝아오고 있으나, 세상을 감싼 회색빛 장막은 쉽사리 걷힐 기미를 보이지 않는다. 
+
+주인공은 그 자리에 선 채, 바닥에 나뒹굴던 녹슨 철제 열쇠를 시선에서 거두었다. 그것이 어떤 문을 열기 위한 것이었든, 혹은 누군가의 잊힌 유물이든 상관없었다. 이유를 알 수 없는 부자연스러운 끌림이나 값싼 호기심에 목숨을 의탁할 만큼 방랑자의 삶은 어설프지 않다. 
+
+인간의 발길이 드문 이 황량한 대지 위에서, 불확실한 단서에 집착하는 것은 곧 위험을 자초하는 일일 터다. 열쇠는 고요히 진흙 속에 방치된 채 차갑게 식어갔다. 
+
+그는 시선을 거두고 서쪽으로 향하는 가파른 오르막길을 향해 걸음을 옮겼다. 바람이 스쳐 지나가며 옷깃을 여미게 만들고, 먼 대기 속에서 이질적인 생명의 기운이 가늘게 피어올랐다. 미지의 마을이 가까워지고 있음을 알리는 신호였다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: H_Sjaq76ApzQrfcPntmo-AY
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "열쇠를 두고 방랑을 계속하며 마을로 향한다",
+    "narrativeSummary": "주인공은 바닥에 떨어진 열쇠에 시선을 주지 않은 채, 차가운 돌바닥을 등지고 안개 낀 갈림길을 따라 인근의 작은 마을로 발걸음을 옮긴다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "버려진 열쇠가 품고 있던 비밀과, 그것을 회수하지 않음으로써 빗장이 걸린 채 남겨진 미지의 공간."
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "안개 속에서 누군가의 은밀한 시선이 방랑자가 지나친 자리의 열쇠를 조용히 응시하고 있다."
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 안개 낀 갈림길과 방랑자의 발걸음",
+        "upcomingChapters": [
+          "적막한 간판 없는 주막에서의 하룻밤",
+          "마을 어귀에서 마주치는 수상한 상단",
+          "버려진 열쇠에 얽힌 소문의 파편"
+        ]
+      }
+    }
+  },
+  {
+    "label": "주변을 더 자세히 수색하여 열쇠 외의 흔적을 찾는다",
+    "narrativeSummary": "열쇠를 지나쳐 주변의 잡초 덤불과 허물어진 담벼락 틈새를 세밀하게 살피며, 이 장소에 무슨 일이 있었는지에 대한 다른 단서를 찾아 나선다.",
+    "rawMetadata": {
+      "foreshadowsSeeds": [],
+      "foreshadowSeeds": [
+        "누군가 급하게 자리를 떠난 듯한 짓밟힌 흔적과 오래된 마차 바퀴 자국."
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "먼 북쪽 산세에서 밤바람을 타고 스산한 종소리가 울려 퍼진다."
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 버려진 터전의 흔적을 쫓아서",
+        "upcomingChapters": [
+          "발견된 마차 자국을 따라 도달한 숲속의 오래된 이정표",
+          "인적 끊긴 황무지에서의 밤",
+          "다가오는 폭풍우와 은신처의 탐색"
+        ]
+      }
+    }
+  },
+  {
+    "label": "잠시 멈춰 서서 주변의 대기와 지형을 관찰하며 휴식을 취한다",
+    "narrativeSummary": "발걸음을 멈추고 거친 호흡을 가다듬으며 사방의 정경을 눈에 담는다. 중세 판타지의 스산한 공기와 대지의 냄새를 느끼며 체력을 정비한다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "황혼이 내려앉는 대지 위로 드리워지는 거대한 야생의 그림자."
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "인근 영지의 순찰대가 순찰 경로를 변경하여 이쪽으로 향하고 있다."
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 황혼의 경계에서",
+        "upcomingChapters": [
+          "순찰대와의 조우와 검문",
+          "영지 경계선을 넘는 방랑자",
+          "새로운 목적지를 향한 여정"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+차가운 새벽 안개가 스산하게 내려앉은 갈림길이었다. 흙냄새와 축축한 이끼의 서늘함이 콧속을 스쳤고, 사방은 고요함에 잠겨 있었다. 
+
+바닥의 낡은 철제 쇠고리 곁에는 녹슨 열쇠 한 자루가 덩그러니 놓여 있었으나, 방랑자의 시선은 그것을 스쳐 지나갔다. 인연이 닿지 않은 물건에 마음을 내어주지 않는 것은 오랜 방랑 생활이 가르쳐준 무언의 철칙이었다. 열쇠는 그저 부서진 석조 기단 아래에 버려진 채, 영원히 열리지 않을 자물쇠와 함께 침묵을 지키기로 운명 지어진 듯했다.
+
+주인공은 가벼운 배낭의 끈을 고쳐 메며 발걸음을 재촉했다. 정처 없는 길 위에서 목적지 없는 행보는 계속된다. 등 뒤로 멀어지는 갈림길의 풍경은 이내 짙은 안개 속으로 자취를 감추었고, 전방으로는 듬성듬성 자란 가시나무와 흐릿한 지평선만이 아득하게 펼쳐졌다. 
+
+세상은 여전히 넓고, 침묵으로 가득 차 있었다.
+
+
+================================================================================
+[TEST T07] 추론
+Input: "문이 열려 있는 것을 보니 누군가 조금 전에 들어간 것 같다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: KvSjapvVBpec0-kP5MeumQU
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "열린 문 안쪽의 어둠을 경계하며 조용히 내부로 걸어 들어간다.",
+    "narrativeSummary": "주인공은 열린 문틈 사이로 흘러나오는 미약한 기척과 냄새를 살피며, 방심하지 않은 태도로 건물 내부에 발을 들인다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_ENTER_BUILDING_01",
+        "action": "OBSERVE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "열린 문 안쪽의 공간" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "건물 내부로 먼저 들어간 정체 불명의 인물의 흔적"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "열린 문 안쪽의 공간에서 누군가의 발소리가 미세하게 안쪽으로 멀어진다."
+      ],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 열린 문과 첫 번째 흔적",
+        "upcomingChapters": [
+          "건물 내부의 탐색과 인물의 흔적 추적",
+          "내부 거주자 혹은 선행자와의 조우",
+          "숨겨진 공간이나 단서의 발견"
+        ]
+      }
+    }
+  },
+  {
+    "label": "문의 주변을 잠시 멈춰 서서 관찰하며 외부의 흔적을 조사한다.",
+    "narrativeSummary": "섣부르게 안으로 들어가는 대신, 문설주나 바닥에 남은 발자국, 먼지의 흔적을 통해 먼저 들어간 자의 정체나 규모를 가늠해 본다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_INVESTIGATE_THRESHOLD_01",
+        "action": "INVESTIGATE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "문 앞" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "문 앞에 남겨진 선행자의 발자국과 흔적"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 열린 문과 첫 번째 흔적",
+        "upcomingChapters": [
+          "발자국을 통한 선행자의 신원 추정",
+          "신중한 잠입 또는 접근",
+          "예상치 못한 외부 변수의 발생"
+        ]
+      }
+    }
+  },
+  {
+    "label": "낮은 목소리로 안쪽을 향해 사람이 있는지 부른다.",
+    "narrativeSummary": "무작정 숨어들기보다는 기척을 숨기지 않고 안을 향해 인기척을 확인하며 대화를 시도한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_CALL_INSIDE_01",
+        "action": "SPEAK",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "건물 내부" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "건물 내부자의 반응과 경계 태세"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "주인공의 목소리에 반응하여 안쪽의 움직임이 일순간 멈춘다."
+      ],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 열린 문과 첫 번째 흔적",
+        "upcomingChapters": [
+          "내부 인물의 경계 혹은 응답",
+          "초면의 인물과의 대화 시작",
+          "상황에 따른 대치 또는 협상"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+경첩이 삐그덕 소리를 내며 완전히 젖혀진 문틈 사이로, 습기를 머금은 곰팡이 냄새와 오래된 목재의 냄새가 흘러나왔다. 바닥에 쌓인 얇은 회색 먼지 위에는 분명 선명하게 찍힌 누군가의 발자국 자국이 안쪽을 향해 뻗어 있었다. 발길질의 흔적은 다급하지도, 그렇다고 태만하지도 않은 일정한 보폭을 유지하고 있었다.
+
+주인공이 선 자리에서 시선을 던지자, 문 안쪽은 빛이 닿지 않아 깊은 어둠에 잠겨 있었다. 건물의 외벽을 이룬 회색 석조는 오랜 세월 비바람에 씻겨 거칠게 마모되어 있었고, 그 위에 달린 낡은 나무 문은 누구의 손길이라도 닿으면 금세라도 부서질 것처럼 위태롭게 매달려 있었다. 
+
+바람이 불어올 때마다 문짝이 가볍게 떨며 스산한 마찰음을 냈고, 그 소음 너머로 안쪽에서 들려오는 미약한 이질적인 기척—무언가가 바닥을 스치는 듯한 아주 미세한 소리—가 주인공의 청각을 스쳤다. 누군가 방금 전에 이곳에 들어간 것은 명백한 사실이었다. 하지만 그가 우연히 머무는 나그네인지, 아니면 의도를 가지고 이곳을 찾은 이인지는 아직 알 수 없다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: NfSjavTZLtix0-kPx9qhiAo
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "조심스럽게 문 안으로 발을 들여놓는다.",
+    "narrativeSummary": "열린 문틈 사이로 흐려지는 인기척을 쫓아, 주인공은 숨을 죽인 채 어둠과 빛이 교차하는 내부로 걸음을 옮긴다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_001",
+        "action": "ENTER",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "열린 문 안쪽 공간" }
+        ],
+        "scope": "CLAIM",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "열린 문 안쪽에서 느껴지는 미지의 존재에 대한 흔적"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 열린 문과 방랑자의 발걸음",
+        "upcomingChapters": [
+          "실내의 구조 파악 및 인물 조우",
+          "내부 환경에서의 단서 수집"
+        ]
+      }
+    }
+  },
+  {
+    "label": "문가에 멈춰 서서 내부의 공기와 소리를 살핀다.",
+    "narrativeSummary": "성급한 진입을 피하고, 문턱에 멈춰 서서 내부에서 새어 나오는 소리와 냄새, 미세한 기류 변화를 통해 상황을 분석한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_002",
+        "action": "OBSERVE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "TARGET", "entityName": "실내 공간" }
+        ],
+        "scope": "CLAIM",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "건물 내부의 청각적·후각적 단서 탐색"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 열린 문과 방랑자의 발걸음",
+        "upcomingChapters": [
+          "경계 태세를 유지한 채의 신중한 접근",
+          "외부 도피로 확인"
+        ]
+      }
+    }
+  },
+  {
+    "label": "인기척을 향해 낮게 소리 내어 부른다.",
+    "narrativeSummary": "누가 먼저 들어갔는지 확인하기 위해, 긴장된 어조로 실내를 향해 인기척의 주인을 부른다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_003",
+        "action": "SPEAK",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "TARGET", "entityName": "내부의 미지의 인물" }
+        ],
+        "scope": "CLAIM",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "내부 인물의 반응 유도 및 신원 확인"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 열린 문과 방랑자의 발걸음",
+        "upcomingChapters": [
+          "미지의 인물과의 대화 혹은 경계",
+          "방랑자의 신분 노출 여부 확인"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+시원한 새벽 공기 속에서 녹슨 경첩이 달린 두께 칠판의 목문은 반쯤 열린 채 미세하게 떨리고 있었다. 문틈 사이로 흘러나오는 것은 퀴퀴한 먼지 냄새와 함께 희미하게 타오르는 등유의 냄새였다. 조금 전까지 이곳을 통과한 누군가가 남기고 간 온기가 아직 공기 중에 맴돌고 있었다.
+
+주인공은 발걸음을 멈추고 문 앞에 섰다. 바닥에는 이슬에 젖은 진흙 위로 선명하지만 정돈되지 않은 발자국 몇 개가 어둠 속으로 이어져 있었다. 건물의 외벽은 오랜 세월 비바람을 맞고 바래 있었고, 창문들은 모두 굳게 닫히거나 널판지로 막혀 있어 유일하게 열려 있는 이 문만이 내부로 통하는 유일한 길임을 말해주고 있었다.
+
+안쪽은 깊은 침묵에 잠겨 있었으나, 목재가 미세하게 삐걱거리는 소리가 아주 낮고 짧게 들려왔다. 누군가 이 공간의 깊은 곳으로 서둘러 몸을 숨겼거나, 혹은 예기치 못한 방문자를 경계하며 숨을 죽이고 있다는 방증이었다.
+
+
+================================================================================
+[TEST T08] 가능성
+Input: "아마 경비병이 열쇠를 숨겼을 것이다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: P_SjaobxKYS90-kP6ZWtmAQ
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "경비병의 초소를 은밀히 수색하여 열쇠를 찾는다",
+    "narrativeSummary": "주인공은 사람들의 눈을 피해 경비병의 초소 주변으로 다가간다. 비번인 경비병이 자리를 비운 사이, 낡은 나무 책상 서랍과 짚초 아래를 뒤져 열쇠의 흔적을 쫓는다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_SEARCH_GUARD_POST_01",
+        "action": "SEARCH",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "경비병 초소" },
+          { "role": "OBJECT", "entityName": "열쇠" }
+        ],
+        "scope": "CLAIM",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "INFERRED",
+        "modality": "POSSIBLE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병 초소 은밀 수색 및 열쇠 은닉처 탐색"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 초소의 은밀한 수색",
+        "upcomingChapters": [
+          "초소 내부의 단서 확보",
+          "경비병의 귀환과 위기 상황 대처"
+        ]
+      }
+    }
+  },
+  {
+    "label": "근무 중인 경비병에게 접근해 대화를 통해 정보를 유도한다",
+    "narrativeSummary": "주인공은 무모하게 초소를 뒤지는 대신, 출입구를 지키는 경비병에게 다가가 능청스럽게 말을 건넨다. 대화의 허점을 파고들어 열쇠의 보관 장소나 관리 책임을 알아내려 한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_APPROACH_GUARD_01",
+        "action": "DIALOGUE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "COUNTERPARTY", "entityName": "경비병" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병과의 대화를 통한 열쇠 정보 유도"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 경비병과의 접촉",
+        "upcomingChapters": [
+          "경비병의 경계심 해제 혹은 불신 심화",
+          "열쇠 위치에 대한 단서 획득"
+        ]
+      }
+    }
+  },
+  {
+    "label": "주변을 수색하며 경비병의 동선과 교대 시간을 관찰한다",
+    "narrativeSummary": "단정적으로 열쇠의 위치를 추단하기보다, 한 걸음 물러서서 경비병의 움직임과 초소 주변의 지형을 살핀다. 교대 시간이 언제인지, 열쇠가 실제로 이동하는 순간이 언제인지 시야를 넓혀 관찰한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_OBSERVE_PATROL_01",
+        "action": "OBSERVE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBSERVER", "entityName": "주인공" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병 동선 파악 및 교대 시간 조사"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 경비병의 동선 관찰",
+        "upcomingChapters": [
+          "취약 시간대 포착",
+          "은밀한 침투 경로 확보"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+차가운 새벽 공기가 돌담의 이끼 냄새를 싣고 좁은 골목길을 스쳐 지나간다. 주인공의 시선이 향한 곳은 저 멀리 흐릿하게 윤곽을 드러낸 통제 구역의 경비초소다. 낡은 목재로 지어진 그곳에는 등불 하나가 위태롭게 매달려 미세한 바람에 흔들리고 있었고, 문 앞에는 철갑을 두른 경비병의 묵묵한 등판이 가로막고 서 있다.
+
+과연 그들이 문의 자물쇠를 여는 열쇠를 몸 지닌 채 은닉하고 있는지, 혹은 초소 내부의 안전한 장소에 따로 보관해 두었는지는 아직 눈으로 확인된 바가 없다. 다만 방랑자로서 오랜 세월 거친 세파를 겪으며 터득한 경험에 비추어 보면, 출입을 통제하는 이들이 가장 확실한 수단을 자신들의 시야가 닿는 곳에서 멀리 두지 않는 법이다.
+
+초소 주변의 공기는 고요하다못해 무겁고, 경비병의 부츠 소리가 규칙적으로 자갈을 짓밟는 소리만이 유일한 박자를 이룬다. 주인공이 품고 있는 추측이 명중한 것인지, 아니면 또 다른 변수가 기다리고 있는 것인지는 행동을 개시하는 순간 판가름날 것이다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: DL-jasaCKsOf1e8PuPfi8Ac
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "잠든 경비병의 허리춤을 소매치기하기",
+    "narrativeSummary": "벽에 기대어 깊은 잠에 빠진 경비병에게 고양이처럼 소리 없이 다가갑니다. 그의 가죽 대대와 품 안을 더듬어 자물쇠를 열 쇠붙이가 있는지 조심스럽게 수색합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_stealth_search_guard",
+        "action": "STEAL_ATTEMPT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "TARGET", "entityName": "잠든 경비병" },
+          { "role": "OBJECT", "entityName": "열쇠꾸러미" }
+        ],
+        "scope": "INTENT",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "UNVERIFIED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병의 가죽 주머니 속에 든 낯선 가문의 인장 반지",
+        "일정한 주기로 복도를 지나가는 순찰대 발소리"
+      ],
+      "newNpcs": [
+        {
+          "name": "알렉",
+          "alias": "보초병 알렉",
+          "npcClass": "Class B",
+          "innerThought": "에일 맥주를 너무 마셨군... 머리가 깨질 것 같다. 교대 시간까지는 아직 멀었겠지.",
+          "metInStory": true,
+          "origin": "성 하부 성곽 마을",
+          "affiliation": "영주 성채 자경대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 습기 찬 석조 감옥의 밤",
+        "upcomingChapters": [
+          "지하 통로의 침묵",
+          "감시탑 아래의 탈출구"
+        ]
+      }
+    }
+  },
+  {
+    "label": "경비 대기실의 오크나무 책상 뒤지기",
+    "narrativeSummary": "잠든 경비병에게서 시선을 떼지 않은 채, 구석에 방치된 경비 대기실의 낡은 책상 위와 서랍 내부를 은밀하게 뒤져 열쇠를 찾습니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_search_desk",
+        "action": "SEARCH_ENVIRONMENT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "경비 대기실 책상" }
+        ],
+        "scope": "INTENT",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "UNVERIFIED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "지하 감옥 배정 장부에 적힌 지워진 죄수의 이름",
+        "서랍 안쪽의 굳은 촛농 아래 숨겨진 이중 바닥"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 습기 찬 석조 감옥의 밤",
+        "upcomingChapters": [
+          "먼지 덮인 장부",
+          "허물어진 지하 배수로"
+        ]
+      }
+    }
+  },
+  {
+    "label": "육체적 제압 후 열쇠 강탈하기",
+    "narrativeSummary": "설익은 수색으로 경비병을 깨우는 우를 범하는 대신, 졸고 있는 그의 등 뒤로 접근하여 목을 졸라 기절시킨 뒤 확실하게 품을 뒤져 열쇠를 확보합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_subdue_guard",
+        "action": "SUBDUE_ATTEMPT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "TARGET", "entityName": "잠든 경비병" }
+        ],
+        "scope": "INTENT",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "UNVERIFIED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병이 소지한 무딘 단검의 출처",
+        "기절한 경비병의 부재가 탄로 나기까지 남은 시간"
+      ],
+      "newNpcs": [
+        {
+          "name": "알렉",
+          "alias": "보초병 알렉",
+          "npcClass": "Class B",
+          "innerThought": "어두컴컴한 지하에서 보초나 서는 신세라니... 얼른 교대하고 쉬고 싶다.",
+          "metInStory": true,
+          "origin": "성 하부 성곽 마을",
+          "affiliation": "영주 성채 자경대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 습기 찬 석조 감옥의 밤",
+        "upcomingChapters": [
+          "피 묻은 가죽 옷",
+          "울려 퍼지는 경보음"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+한기가 뼛속까지 스며드는 지하 감옥의 공기는 곰팡내와 굳은 소금기, 그리고 어스름한 기름 냄새로 무겁게 내려앉아 있었습니다. 천장 틈새로 뚝, 뚝 떨어지는 물방울 소리만이 시간이 흐르고 있음을 간신히 알릴 뿐, 사방은 죽은 듯 고요했습니다. 
+
+방랑자로서 수많은 경계를 넘나들며 쌓인 생존의 육감은 차가운 쇠창살 너머를 향해 곤두서 있었습니다. 당신의 시선은 철문 너머, 벽에 고정된 횃불 받침대 아래에 비스듬히 앉아 있는 사내에게 머물렀습니다. 자경대의 문양이 조잡하게 박힌 가죽 갑옷을 걸친 보초병. 그는 어지간히 독한 맥주를 들이켰는지, 턱을 가슴팍까지 묻은 채 고단한 숨소리를 거칠게 내쉬며 졸고 있었습니다. 
+
+당신의 머릿속에 한 가지 확신이 스쳤습니다. **‘아마 경비병이 열쇠를 숨겼을 것이다.’**
+
+보통 이런 자들은 열쇠꾸러미를 공공연한 못에 걸어두기보다, 자신의 손때가 묻은 가죽 주머니 속이나 헐거운 허리띠 안쪽에 밀어 넣는 법입니다. 눈앞의 무거운 철문을 열고 이 지독한 습기 속을 벗어나려면, 우선 저 경비병의 경계를 무너뜨리거나 그가 가진 것을 손에 넣어야만 합니다.
+
+흔들리는 주황빛 불꽃이 당신과 졸고 있는 경비병 사이의 짧은 거리를 불안하게 비추고 있습니다. 어떻게 행동하시겠습니까?
+
+---
+
+### [행동 선택 및 판정 안내]
+어떤 방식을 택하느냐에 따라 난이도(DC)와 필요한 능력치 판정이 달라집니다. 위 제안된 후보들 중 하나를 선택하시거나, 본인의 의도를 담은 다른 행동을 구체적으로 선언해 주십시오. 행동이 결정되면 주사위(D20) 판정으로 이어집니다.
+
+
+================================================================================
+[TEST T09] 명시적 인과
+Input: "경비병이 문을 열고 들어갔다. 그래서 플레이어가 안으로 들어갔다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: SfSjarqYI6DarfcPppnH6Ao
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "안으로 들어가 실내를 둘러본다",
+    "narrativeSummary": "플레이어는 경비병의 뒤를 이어 문 안으로 발을 디딘다. 어두운 실내에는 은은한 등불 하나가 흔들리고 있으며, 방 안의 구조와 사람들의 동선을 차분히 관찰한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_ENTER_ROOM_01",
+        "action": "MOVE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "실내" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "실내의 정체와 경비병의 목적에 대한 호기심"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "문밖의 복도에서 멀어지는 발소리가 희미해진다."
+      ],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 문 안쪽의 풍경",
+        "upcomingChapters": [
+          "실내의 인물들과의 대화",
+          "방 안의 단서 탐색"
+        ]
+      }
+    }
+  },
+  {
+    "label": "경비병에게 이곳이 어디인지 묻는다",
+    "narrativeSummary": "문 안으로 들어간 직후, 플레이어는 걸음을 멈추고 앞서 걸어가던 경비병을 향해 이곳이 어떤 곳이며 자신을 왜 이곳으로 데려왔는지 묻는다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_ASK_GUARD_01",
+        "action": "SPEAK",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "TARGET", "entityName": "경비병" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병의 의도와 이 장소의 정체"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 문 안쪽의 풍경",
+        "upcomingChapters": [
+          "경비병의 답변과 경계",
+          "실내의 분위기 파악"
+        ]
+      }
+    }
+  },
+  {
+    "label": "경비병의 움직임을 경계하며 멈춰 선다",
+    "narrativeSummary": "문 안으로 완전히 들어가지 않고 문턱에 멈춰 서서, 경비병의 태도와 주변의 공기를 경계 어린 눈빛으로 살핀다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_HALT_THRESHOLD_01",
+        "action": "OBSERVE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "문턱" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "밀폐된 공간에 대한 경계심"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 문 안쪽의 풍경",
+        "upcomingChapters": [
+          "경비병의 반응 유도",
+          "퇴로 확인"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+경비병의 묵직한 손길이 무쇠 장식을 두른 경첩 달린 문을 밀어젖히자, 내부에 고여 있던 탁한 공기가 바깥으로 흘러나왔다. 퀴퀴한 먼지 냄새와 함께 바닥에 놓인 등불의 기름 타는 냄새가 코끝을 스친다. 철컥이는 갑옷 소리를 내며 앞서 걷던 경비병이 어둠이 내려앉은 실내로 발을 디뎠고, 그 뒤를 이어 플레이어도 조용히 문턱을 넘었다.
+
+무거운 나무문이 뒤에서 천천히 닫히며 둔탁한 소음을 울렸다. 바깥의 소스라치는 바람 소리가 차단되자, 방 안은 기묘할 정도로 정적에 휩싸였다. 
+
+희미한 등불 빛에 의지해 시선을 던지자, 실내의 대략적인 윤곽이 드러난다. 높고 둥근 천장 아래로 낡은 나무 탁자와 몇 개의 의자가 어지러이 놓여 있고, 사방의 벽면에는 정체를 알 수 없는 문서들과 닳고 닳은 지도들이 어수선하게 걸려 있었다. 앞서 걸어가던 경비병은 멈춰 서서 어깨 너머로 뒤를 돌아보며, 짧게 숨을 내쉴 뿐 아직 이렇다 할 말을 건네지 않는다. 
+
+방 안의 공기는 가라앉아 있었고, 이곳에서의 대화나 행동 하나가 앞으로의 향방을 결정지을 것임을 무언으로 경고하고 있었다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: U_SjatKZEdSw2roPudfX0AY
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "안으로 들어가 내부 환경을 관찰하고 경비병의 의도를 살핀다.",
+    "narrativeSummary": "플레이어는 열린 문을 통해 어둡고 서늘한 석조 방 안으로 들어간다. 경비병의 뒤를 묵묵히 따르며 공간의 구조와 방 안의 분위기를 관찰한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_ENTER_ROOM_001",
+        "action": "ENTER",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "석조 방" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "열린 문 너머의 석조 방 안에서 느껴지는 스산한 기운과 경비병의 무언의 압박"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "복도를 지키던 다른 경비병이 자리를 정돈하며 철문이 닫히는 소리가 멀리서 들려온다."
+      ],
+      "newNpcs": [
+        {
+          "name": "성문 경비병",
+          "npcClass": "Class A",
+          "innerThought": "[미인지 상태]",
+          "metInStory": true,
+          "origin": "왕국 영지",
+          "affiliation": "왕국 경비대"
+        }
+      ],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 미지의 문",
+        "upcomingChapters": [
+          "경비병의 심문과 방 안의 조사",
+          "방 내부 인물과의 조우"
+        ]
+      }
+    }
+  },
+  {
+    "label": "문턱에 멈춰 서서 경비병에게 이곳이 어디인지 묻는다.",
+    "narrativeSummary": "안으로 선뜻 발을 들이는 대신 문턱에 멈춰 선다. 이 방의 용도와 자신을 이리로 데려온 이유를 경비병에게 직접 따져 묻는다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_QUESTION_GUARD_001",
+        "action": "SPEAK",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "TARGET", "entityName": "성문 경비병" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "방 안으로 들어가기를 망설이는 방랑자의 경계심"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [],
+      "newNpcs": [
+        {
+          "name": "성문 경비병",
+          "npcClass": "Class A",
+          "innerThought": "[미인지 상태]",
+          "metInStory": true,
+          "origin": "왕국 영지",
+          "affiliation": "왕국 경비대"
+        }
+      ],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 미지의 문",
+        "upcomingChapters": [
+          "경비병과의 대립",
+          "방 안의 실체 확인"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+경비병이 거칠게 삐걱거리는 철문을 밀어젖히자, 안쪽에서 눅눅하고 서늘한 공기가 훅 끼쳐들었다. 횃불의 불빛이 닿지 않는 어둠 속에서 젖은 흙 냄새와 오래된 석조 건축물의 비린내가 섞여 코끝을 스쳤다.
+
+경비병은 뒤를 돌아보거나 대답을 건네는 대신, 무거운 철갑 소리를 내며 성큼성큼 안으로 걸어 들어갔다. 그의 등 뒤로 보이는 방 안은 좁고 투박했으며, 한쪽 벽면에 난 작은 틈새로 겨우 연한 회색빛 낮의 햇살이 가늘게 줄기를 뻗고 있었다. 
+
+플레이어는 그 무뚝뚝한 인도를 따라 낡은 문턱을 넘었다. 발밑의 돌바닥은 냉기를 머금은 채 축축했고, 문이 닫히는 순간 묵직한 마찰음이 좁은 공간을 가득 채우며 바깥 세계와의 통로를 단절시켰다. 방 안에는 투박한 나무 탁자 하나와 쇠사슬이 매달려 있는 고풍스러운 벽면 외에는 별다른 집기가 보이지 않았다. 경비병은 방의 구석에 멈춰 서서 가만히 플레이어의 움직임을 주시했다.
+
+
+================================================================================
+[TEST T10] 단순 시간적 순서
+Input: "경비병이 문을 열고 들어간 뒤 플레이어가 열쇠를 주웠다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: GvWjaoX8B43mosUPue-JsAU
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    label: "열쇠를 주워 주머니에 숨기고 경비병의 기척을 살핀다",
+    narrativeSummary: "차갑고 녹슨 철제 열쇠를 바닥에서 은밀하게 집어 들며, 다가오는 발소리가 다시 돌아오지 않는지 주위를 경계합니다.",
+    semanticEvents: [
+      {
+        eventId: "event_pickup_key_01",
+        action: "PICKUP",
+        roles: [
+          { role: "SUBJECT", entityName: "주인공" },
+          { role: "OBJECT", entityName: "철제 열쇠" },
+          { role: "LOCATION", entityName: "경비실 입구" }
+        ],
+        scope: "CANONICAL",
+        polarity: "ASSERTED",
+        epistemicStatus: "OBSERVED",
+        modality: "NONE",
+        provenance: "Turn 1 Player Prompt"
+      }
+    ],
+    rawMetadata: {
+      foreshadowSeeds: [
+        "열쇠가 열어줄 잠긴 문의 정체와 경비병의 목적"
+      ],
+      inventoryChanges: [
+        {
+          name: "철제 열쇠",
+          quantity: 1,
+          action: "add",
+          cause: "DISCOVERY_PICKUP",
+          verifiedEventId: "event_pickup_key_01"
+        }
+      ],
+      chapterChanges: {
+        currentChapter: "제1장: 열쇠와 침묵",
+        upcomingChapters: [
+          "잠긴 문의 자물쇠를 대조하고 탈출로를 모색",
+          "회랑 너머로 들려오는 낯선 발소리의 정체 파악"
+        ]
+      }
+    }
+  },
+  {
+    label: "열쇠를 즉시 자물쇠에 꽂아 탈출을 시도한다",
+    narrativeSummary: "경비병이 자리를 비운 찰나의 기회를 놓치지 않고, 바닥에서 주운 열쇠를 문고리의 열쇠구멍에 밀어 넣어 개방을 시도합니다.",
+    semanticEvents: [
+      {
+        eventId: "event_use_key_01",
+        action: "GIFT",
+        roles: [
+          { role: "SUBJECT", entityName: "주인공" },
+          { role: "INSTRUMENT", entityName: "철제 열쇠" },
+          { role: "TARGET", entityName: "철문 자물쇠" }
+        ],
+        scope: "CANONICAL",
+        polarity: "ASSERTED",
+        epistemicStatus: "OBSERVED",
+        modality: "INTENTIONAL",
+        provenance: "Turn 1 Player Prompt"
+      }
+    ],
+    rawMetadata: {
+      foreshadowSeeds: [
+        "경비병이 돌아오기 전 문을 열 수 있을 것인가"
+      ],
+      inventoryChanges: [
+        {
+          name: "철제 열쇠",
+          quantity: 1,
+          action: "add",
+          cause: "DISCOVERY_PICKUP",
+          verifiedEventId: "event_pickup_key_01"
+        }
+      ],
+      chapterChanges: {
+        currentChapter: "제1장: 열쇠와 침묵",
+        upcomingChapters: [
+          "자물쇠 해제 성공 여부에 따른 은신 혹은 도주",
+          "복도 복귀 시 경비병과의 조우 위험"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+차가운 석조 바닥 위로 스며드는 희미한 회색 빛은 이 공간이 지하 혹은 빛이 닿기 힘든 구중궁궐의 내밀한 곳임을 말해주고 있었다. 묵직한 참나무 문이 닫히며 삐걱거리는 소리가 멎은 지 고작 몇 호흡이 지났을 뿐이다. 문틈 너머로 멀어지는 철갑 부츠 소리가 불규칙한 메아리를 남기고 사라져 갈 때, 시선은 바닥으로 향했다.
+
+문지방 부근의 어스름한 그림자 속에 은백색 광채를 미처 숨기지 못한 작은 철제 열쇠가 떨어져 있었다. 그것은 경비병이 허리춤의 가죽 고리를 매만지며 급히 자리를 비울 때 흘린 유실물임에 틀림없었다. 
+
+공기는 무겁고 서늘했다. 습한 돌 냄새와 오래된 쇳가루 냄새가 섞여 코끝을 스쳤다. 방랑자로 떠돌며 단련된 감각이 경계 태세를 갖추도록 신호를 보냈다. 저 열쇠가 어디로 통하는 문을 열 수 있는지는 알 수 없으나, 현재 이 고립된 공간에서 유일하게 허락된 변수이자 손에 쥔 유일한 실마리였다.
+
+발소리가 완전히 멎은 고요 속에서, 열쇠를 집어 든 손가락 끝에 닿는 감촉은 서늘하면서도 단단했다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: ZPSjavqeC_fLrfcP-8fj2AY
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "철제 열쇠를 은밀히 수거하고 주변을 살핀다",
+    "narrativeSummary": "주인공은 경비병이 시야에서 사라진 틈을 타 바닥에 떨어진 철제 열쇠를 신속하고 조용히 집어 듭니다. 차갑고 묵직한 금속의 촉감이 손바닥에 닿는 순간, 낡은 자물쇠를 열 수 있을지 모른다는 가능성이 생깁니다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_PICKUP_IRON_KEY_01",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "철제 열쇠" },
+          { "role": "LOCATION", "entityName": "문 앞 복도" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL",
+        "provenance": "TURN_1_PLAYER_ACTION"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "바닥에 떨어진 의문의 철제 열쇠의 용도와 이것이 감춘 비밀"
+      ],
+      "inventoryChanges": [
+        {
+          "name": "철제 열쇠",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "EVT_PICKUP_IRON_KEY_01"
+        }
+      ]
+    }
+  },
+  {
+    "label": "열쇠를 주워 곧바로 문을 열고 탈출을 시도한다",
+    "narrativeSummary": "주인공은 즉시 열쇠를 집어 들어 잠겨 있던 문에 꽂아 넣습니다. 낡은 톱니바퀴가 맞물리는 둔탁한 소리가 울릴 위험을 무릅쓰고 경비병이 돌아오기 전에 서둘러 자리를 뜨려 합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_USE_IRON_KEY_01",
+        "action": "USE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "INSTRUMENT", "entityName": "철제 열쇠" },
+          { "role": "TARGET", "entityName": "문" }
+        ],
+        "scope": "HYPOTHETICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "INFERRED",
+        "modality": "INTENTIONAL",
+        "provenance": "TURN_1_PLAYER_ACTION"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병이 돌아오기 전 탈출을 감행하려는 급박한 시도"
+      ],
+      "inventoryChanges": [
+        {
+          "name": "철제 열쇠",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "EVT_USE_IRON_KEY_01"
+        }
+      ]
+    }
+  },
+  {
+    "label": "열쇠를 원래 있던 자리나 다른 곳에 숨겨둔다",
+    "narrativeSummary": "주인공은 열쇠를 주워 들었으나 당장 사용하는 대신, 경비병의 눈을 속이기 위해 근처의 어두운 구석이나 틈새에 은밀히 감춰둡니다. 누군가 이 열쇠를 찾으러 올 때의 반응을 관찰하려는 의도입니다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_HIDE_IRON_KEY_01",
+        "action": "HIDE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "철제 열쇠" },
+          { "role": "LOCATION", "entityName": "문 앞 어두운 구석" }
+        ],
+        "scope": "HYPOTHETICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "INFERRED",
+        "modality": "INTENTIONAL",
+        "provenance": "TURN_1_PLAYER_ACTION"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "누군가 흘린 열쇠를 숨겨둠으로써 벌어질 예기치 못한 소동"
+      ]
+    }
+  }
+]
+[CANDIDATES_END]
+
+어두운 복도에 무거운 침묵이 내려앉았다. 경비병의 철갑 부츠 소리가 멀어지며 석조 벽에 부딪혀 메아리치던 잔향마저 잦아든다. 그가 남긴 빈틈의 공간, 차가운 석판 바닥 위에는 투박한 쇳소리를 내며 떨어졌던 철제 열쇠가 덩그러니 놓여 있었다. 
+
+주인공의 시선이 바닥에 닿았다. 녹이 슬어 붉게 바랜 표면, 투박하게 깎인 톱니 모양은 이 열쇠가 오랜 세월 동안 비밀리에 다뤄져 왔음을 말해주고 있었다. 공기 중에는 먼지와 퀴퀴한 습기가 엉켜 무거웠고, 저 멀리서 타오르는 횃불의 불빛이 불규칙하게 흔들리며 벽면에 기괴한 그림자를 드리웠다. 
+
+손을 뻗어 열쇠를 쥐자, 서늘한 철의 감각이 손바닥의 굳은살을 타고 스며들었다. 이것이 단순한 우연인지, 아니면 의도된 함정인지 판단하기에는 정보가 턱없이 부족했다. 그러나 확실한 것은, 이 작은 금속 조각 하나가 현재의 정체된 상황에 미세한 균열을 내기 시작했다는 사실이었다. 
+
+문 밖에서는 여전히 바람 소리만이 묘한 긴장감을 유지하며 공간을 채우고 있었다.
+
+
+================================================================================
+[TEST T11] 존재하지 않는 대상
+Input: "존재하지 않는 NPC가 플레이어에게 검을 주었다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: bfSjaq3sLsyk0-kPzobGwQs
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "존재하지 않는 NPC의 환영을 의심하며 검을 거부하고 주변을 경계한다",
+    "narrativeSummary": "주인공은 눈앞의 형체가 실체가 없는 환영이거나 기이한 왜곡임을 직감하고, 손에 쥐여지려던 검을 밀어낸다. 주변의 대기와 공기의 흐름을 살피며 이 이질적인 현상의 근원을 찾으려 한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_REJECT_GHOST_SWORD_01",
+        "action": "OBSERVE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "알 수 없는 형체" },
+          { "role": "INSTRUMENT", "entityName": "녹슨 철검" }
+        ],
+        "scope": "OBSERVATION",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL",
+        "provenance": "Player attempts to interact with non-existent NPC event"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "안개 낀 대지 위에서 출몰하는 실체 없는 기억의 파편 혹은 환영"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "멀리 떨어진 가도의 폐가에서 까마귀 한 마리가 날아오른다."
+      ],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 안개 속의 도회",
+        "upcomingChapters": [
+          "환영의 정체 추적",
+          "버려진 가도의 비밀"
+        ]
+      }
+    }
+  },
+  {
+    "label": "의심을 거두고 건네진 검을 받아들여 그 무게와 출처를 확인한다",
+    "narrativeSummary": "어째서인지 주변에 아무도 없었음에도 눈앞에 나타난 형체와 그가 건네는 검을 받아든다. 차가운 철의 촉감이 손바닥에 닿는 순간, 이 검에 얽힌 인과와 사연을 파헤치기 위한 여정이 시작된다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_ACCEPT_GHOST_SWORD_01",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "미지의 철검" },
+          { "role": "SOURCE", "entityName": "정체 불명의 형체" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED",
+        "modality": "COMMITMENT",
+        "provenance": "Player accepts the sword from an unverified source"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "주인공의 손에 들어온 이름 모를 검의 저주 혹은 사연"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "황혼 무렵, 인근 마을의 종소리가 둔탁하게 울려 퍼진다."
+      ],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [
+        {
+          "name": "미지의 철검",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "EVT_ACCEPT_GHOST_SWORD_01"
+        }
+      ],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 안개 속의 도회",
+        "upcomingChapters": [
+          "손에 쥔 검의 비밀 탐색",
+          "방랑자의 새로운 행보"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+황혼의 회색빛 안개가 대지를 부드럽게 감싸 안는 시간이었다. 대기는 서늘했고, 수풀 사이로 불어오는 바람에는 젖은 흙냄새와 멀리서부터 실려 온 썩은 낙엽의 향이 섞여 있었다. 방랑자인 주인공이 걸음을 멈춘 곳은 인적이라곤 찾아볼 수 없는 오래된 가도의 삼거리였다.
+
+그 순간, 공간의 결이 미묘하게 일그러졌다. 
+
+눈을 깜박이는 사이, 시야의 가장자리에서부터 한 점의 그림자가 응집되더니 형체를 갖추었다. 그것은 분명 사람이었으나, 살아 숨 쉬는 자의 온기나 무게감이 결여된 유령과도 같은 상이었다. 백주대낮도 아니건만 대낮의 안개 속에서 피어오른 그 형체는 소리 없이 다가와, 낡고 녹슨 철검 한 자루를 주인공의 앞에 내밀었다.
+
+손잡이를 쥔 그 손은 허공에 떠 있는 듯 현실감각이 희미했고, 검을 건네는 입술은 움직였으나 어떠한 소리도 들리지 않았다. 다만 그 침묵 속에서 기이한 무게감이 주인공의 어깨를 짓누를 뿐이었다. 
+
+존재하지 않는 자가 건넨 검. 그것은 세계의 인과를 거스르듯 조용히 주인공의 손길을 기다리고 있었다. 안개 너머에서 불어오는 바람만이 이 기묘한 정적을 쓸고 지나갈 뿐, 사방은 죽은 듯이 고요했다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: d_Sjaqz4Ir-D0-kPsfW7yQo
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "환각이나 착각으로 치부하며 검을 거부함",
+    "narrativeSummary": "주인공은 눈앞의 형체 없는 존재나 환영이 건네는 검의 허구성을 직시하고, 이를 손에 쥐지 않은 채 경계하며 자리를 벗어난다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "안개 낀 방랑길에서 마주친 기묘한 환영과 출처를 알 수 없는 검의 정체"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 안개 속의 환영",
+        "upcomingChapters": [
+          "기묘한 환각의 근원을 추적",
+          "방랑자의 길을 가로막는 새로운 지형 도달"
+        ]
+      }
+    }
+  },
+  {
+    "label": "존재하지 않는 자의 검을 의심스럽게 집어 듦",
+    "narrativeSummary": "플레이어는 실체 없는 허깨비가 내민 검의 무게를 가늠하며, 물리적으로 존재하지 않는 듯하면서도 손에 닿는 기이한 무기를 억지로 거두어 든다.",
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "실체와 환영의 경계에 놓인 기이한 검의 출처와 그 저주"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [
+        {
+          "name": "형체 없는 검",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "seed_phantom_sword_01"
+        }
+      ],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 안개 속의 환영",
+        "upcomingChapters": [
+          "형체 없는 검의 진정한 성질을 시험",
+          "방랑길에서 만나는 첫 번째 실질적 위협"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+안개 자중에 젖은 황무지의 찬 공기가 주인공의 옷자락을 무겁게 적셨다. 사방에는 사람의 기척이라곤 찾아볼 수 없는 고요만이 내려앉아 있었다. 
+
+문득, 시야의 가장자리가 왜곡되며 서늘한 기운이 척추를 타고 올랐다. 눈앞에 사람이 서 있었다. 아니, 서 있다고 믿어야 할 실루엣이 존재했다. 얼굴의 이목구비는 안개에 짓눌린 듯 흐릿했고, 형체는 온전치 못했다. 그 존재는 명백히 이 세상의 이치에서 벗어난, 실재하지 않는 허상이었다. 
+
+그럼에도 불구하고, 그 불투명한 손끝은 허공 속에서 검 한 자루를 쥐어 짜내듯 주인공을 향해 내밀고 있었다. 녹슨 철판을 두들기는 듯한 기묘한 저음이 귀가 아닌 뇌리에 직접 박혀들었다.
+
+"받아라……."
+
+주위의 공기가 일순간 얼어붙듯 가라앉았다. 그것은 물리적인 실체를 지닌 물건이라기보다는, 기억의 파편이나 뒤틀린 환각의 소산처럼 보였다. 만약 손을 뻗어 그것을 잡는다면, 손가락은 허공을 헛되이 쥘 것인가, 아니면 차가운 쇳덩이의 촉감을 온전히 느끼게 될 것인가.
+
+
+================================================================================
+[TEST T12] 동일명 개체
+Input: "같은 이름의 경비병 두 명 중 한 명이 열쇠를 건넸다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: gPSjarGdCvnkrfcP3ZvwuAw
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "철문 개방 및 내부 진입",
+    "narrativeSummary": "경비병이 건넨 쇠 열쇠를 받아들고, 녹슨 고리가 삐그덕거리는 철문의 자물쇠에 꽂아 돌린다. 묵직한 마찰음과 함께 문이 열리며 어둡고 서늘한 내부의 공기가 흘러나온다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_001_OPEN_DOOR",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "쇠 열쇠" },
+          { "role": "INSTRUMENT", "entityName": "철문" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "철문 너머에서 들려오는 희미한 금속성의 울음소리"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "다른 한 명의 경비병이 자리를 떠나 교대 구역으로 향한다."
+      ],
+      "newNpcs": [
+        {
+          "name": "경비병 가스",
+          "alias": "열쇠를 건넨 자",
+          "npcClass": "Class A",
+          "innerThought": "이방인이 무사히 안으로 들어가기만 한다면 내 책임은 면할 수 있을 것이다.",
+          "metInStory": true,
+          "origin": "왕국 남부",
+          "affiliation": "왕국 경비대"
+        }
+      ],
+      "inventoryChanges": [
+        {
+          "name": "쇠 열쇠",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "EVT_001_OPEN_DOOR"
+        }
+      ],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 문을 여는 자",
+        "upcomingChapters": [
+          "제2장: 미지의 통로",
+          "제3장: 내부의 감시자"
+        ]
+      }
+    }
+  },
+  {
+    "label": "경비병에게 열쇠의 용도를 심문",
+    "narrativeSummary": "열쇠를 받아 쥐는 대신, 두 명의 경비병을 번갈아 응시하며 이 열쇠가 정확히 어디로 통하는지, 왜 자신에게 건네는 것인지 추궁한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_002_INTERROGATION",
+        "action": "GIFT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "TARGET", "entityName": "경비병" }
+        ],
+        "scope": "INTENT",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "두 경비병 사이에 오가는 미묘한 시선 교환"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "교대 시간이 다가오며 인근 순찰대의 발소리가 가까워진다."
+      ],
+      "newNpcs": [
+        {
+          "name": "경비병 가스",
+          "alias": "열쇠를 건넨 자",
+          "npcClass": "Class A",
+          "innerThought": "왜 물어보는 거지? 그냥 시키는 대로 할 것이지.",
+          "metInStory": true,
+          "origin": "왕국 남부",
+          "affiliation": "왕국 경비대"
+        }
+      ],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 경계의 시선",
+        "upcomingChapters": [
+          "제2장: 은밀한 거래",
+          "제3장: 의심의 문턱"
+        ]
+      }
+    }
+  },
+  {
+    "label": "열쇠를 거절하고 자리를 이탈",
+    "narrativeSummary": "경비병이 내민 손을 외면한 채, 낡은 석조 회랑의 그늘 속으로 물러나며 그들의 제안을 거부하고 경계 태세를 유지한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_003_REFUSAL",
+        "action": "CONSTRAINT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "COUNTERPARTY", "entityName": "경비병" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "거절당한 경비병들의 어두워지는 표정"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "성벽 위로 야간 순찰대의 횃불이 흔들린다."
+      ],
+      "newNpcs": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 거절의 대가",
+        "upcomingChapters": [
+          "제2장: 그림자 속의 숨바꼭질",
+          "제3장: 새로운 출구 모색"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+차가운 회색 석벽을 적시는 밤안개가 가늘게 흩어지는 시각, 녹슨 철제 고리를 단단히 움켜쥔 경비병의 손가락마디가 희미하게 떨리고 있었다. 눈앞에 선 두 명의 경비병은 같은 갑옷을 입고, 똑같은 면갑을 눌러썼으며, 외모나 풍기는 기운마저 흡사하여 마치 거울을 마주한 듯한 기묘한 기시감을 불러일으켰다. 그 중 한 명이 내민 손바닥 위에는 묵직하고 투박한 형태의 철 열쇠가 덩그러니 놓여 있었다. 
+
+석회와 이끼가 뒤섞인 벽면을 타고 내리는 습한 공기 속에서, 열쇠의 표면에 맺힌 이슬방울이 달빛을 받아 미세하게 반짝였다. 그들이 누구이며, 이 열쇠가 정확히 어느 문의 자물쇠를 위한 것인지에 대한 설명은 없었다. 다만 차가운 철제 쇳덩이가 전해오는 무게감만이 이 행동이 지닌 실재를 증명하고 있을 뿐이다. 회랑의 저편에서는 멀리서 밤 순찰을 도는 부츠 소리가 불규칙한 박자로 다가오고 있었다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: ivSjatnqMLTprfcPkans8Aw
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "경비병이 건넨 열쇠를 받아 들고 문을 살핀다",
+    "narrativeSummary": "주인공은 동일한 갑옷을 입고 동일한 목소리를 내는 두 경비병 중 한 명이 내민 낡은 철제 열쇠를 받아 든다. 차가운 금속의 촉감이 손바닥에 닿는 순간, 경비병은 의미심장한 눈빛을 던지며 저 너머의 어두운 복도를 가리킨다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_001_PICKUP_KEY",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공", "entityId": "PLAYER" },
+          { "role": "OBJECT", "entityName": "철제 열쇠", "entityId": "ITEM_IRON_KEY" },
+          { "role": "SOURCE", "entityName": "경비병", "entityId": "NPC_GUARD" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "NONE",
+        "provenance": "TURN_1_PLAYER_PROMPT"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "두 명의 동일한 경비병 중 누가 진짜 열쇠를 주었으며, 그 뒤에 숨겨진 의도는 무엇인가?"
+      ],
+      "inventoryChanges": [
+        {
+          "name": "철제 열쇠",
+          "quantity": 1,
+          "action": "add",
+          "cause": "GIFT_REWARD",
+          "verifiedEventId": "EVT_001_PICKUP_KEY"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 의문의 열쇠와 두 명의 경비병",
+        "upcomingChapters": [
+          "철제 열쇠로 열린 문 너머의 미지의 공간 탐색",
+          "경비병들의 정체와 영지 내 권력 구도의 파악"
+        ]
+      }
+    }
+  },
+  {
+    "label": "열쇠를 받기 전, 두 경비병의 신원을 의심하며 추궁한다",
+    "narrativeSummary": "주인공은 내밀어진 열쇠를 곧바로 받지 않고, 똑같은 얼굴과 복장을 한 두 경비병을 번갈아 바라보며 이 유별난 상황의 이유를 추궁한다. 경비병 중 한 명이 미묘한 미소를 지으며 입을 연다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_002_QUESTION_GUARDS",
+        "action": "INTERROGATE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공", "entityId": "PLAYER" },
+          { "role": "COUNTERPARTY", "entityName": "경비병들", "entityId": "NPC_GUARDS" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL",
+        "provenance": "TURN_1_PLAYER_PROMPT"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "쌍둥이 혹은 도플갱어일지도 모르는 경비병들의 비밀"
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 의문의 열쇠와 두 명의 경비병",
+        "upcomingChapters": [
+          "경비병들의 진실 규명과 시험",
+          "열쇠에 얽힌 숨겨진 내막 조사"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+차가운 석조 회랑의 그늘 속에서, 두 명의 경비병이 서 있었다. 투구의 면갑을 올린 그들의 얼굴은 놀라울 만큼 닮아 있었고, 갑옷의 흠집마저 같았다. 마치 거울의 양면처럼 똑같은 존재가 나란히 선 채, 그중 우측에 선 이가 녹슨 철제 열쇠를 주인공의 손바닥 위에 올려놓았다. 
+
+쇠붙이의 표면은 서늘했고, 그 무게는 생각보다 무거웠다.
+
+"이 문을 열 수 있는 건 오직 이것뿐이오."
+
+두 사람이 동시에 입을 열었다. 목소리의 고저와 억양까지 완벽하게 포개져, 회랑의 높은 천장으로 묘한 메아리를 흩뿌렸다. 그들 중 누가 진정한 의도를 가지고 이 열쇠를 건넨 것인지, 혹은 이 기묘한 상황 자체가 어떤 거대한 시험의 서막인지 판단하기에는 아직 단서가 턱없이 부족하다. 
+
+손바닥 위에 묵직하게 놓인 열쇠의 결이 늦가을의 스산한 바람을 타고 전해져 왔다.
+
+
+================================================================================
+[TEST T13] 발견과 고민
+Input: "플레이어가 열쇠를 발견했고, 그것을 챙길까 고민했다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: Pb-jaoecGMjhvr0P67LVqQY
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "청동 열쇠를 집어 올려 품에 넣는다",
+    "narrativeSummary": "방랑자는 잠시 망설이다 허리를 굽혀 차가운 금속 열쇠를 손에 쥡니다. 가슬가슬한 청동의 녹과 묵직한 질감이 손바닥에 선명하게 전해집니다. 그는 이것을 여정의 작은 단서로 삼아 품속 깊은 곳에 갈무리합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_key_pickup_intent",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "녹슨 청동 열쇠" }
+        ],
+        "scope": "PROPOSAL"
+      }
+    ],
+    "rawMetadata": {
+      "inventoryChanges": [
+        {
+          "name": "녹슨 청동 열쇠",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "seed_mysterious_key"
+        }
+      ]
+    }
+  },
+  {
+    "label": "열쇠를 건드리지 않고 주변의 흔적을 면밀히 조사한다",
+    "narrativeSummary": "바닥에 떨어진 열쇠 자체보다 그것이 왜 이곳에 놓여 있는지에 의문을 품습니다. 방랑자는 무릎을 꿇고 흙먼지와 이끼가 낀 주변 돌바닥을 살피며, 누군가 지나간 발자국이나 쓸린 자국이 있는지 관찰합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_observe_surroundings",
+        "action": "OBSERVE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "열쇠 주변의 돌바닥" }
+        ],
+        "scope": "PROPOSAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "바닥의 먼지 위에 남은 낯선 가죽 장화의 궤적"
+      ]
+    }
+  },
+  {
+    "label": "열쇠 주변에 장치된 함정이나 마법적 조작이 있는지 살핀다",
+    "narrativeSummary": "외진 통로 한가운데에 고스란히 놓인 열쇠에 의구심을 느낍니다. 방랑자는 손을 대기 전, 인위적으로 물리적 장력을 가해둔 인장선이나 바닥의 비정상적인 유격 등 함정의 징후를 신중하게 탐색합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_trap_detection",
+        "action": "OBSERVE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "CONSTRAINT", "entityName": "숨겨진 함정" }
+        ],
+        "scope": "PROPOSAL"
+      }
+    ],
+    "rawMetadata": {
+      "statDeltas": []
+    }
+  }
+]
+[CANDIDATES_END]
+
+```json
+[
+  {
+    "type": "SET_WORLD_METADATA",
+    "payload": {
+      "worldName": "기본 세계",
+      "settingDescription": "중세 판타지 세계관",
+      "toneStyle": "정통 고전 판타지"
+    }
+  },
+  {
+    "type": "ADD_NARRATIVE_SEED",
+    "payload": {
+      "id": "seed_mysterious_key",
+      "seedType": "SECONDARY",
+      "title": "녹슨 청동 열쇠",
+      "clueText": "버려진 통로 바닥에 떨어져 있던, 고풍스러운 덩굴손 무늬가 새겨진 청동 열쇠.",
+      "status": "ACTIVE"
+    }
+  },
+  {
+    "type": "ADVANCE_CHAPTER",
+    "payload": {
+      "currentChapter": "제1장: 먼지 쌓인 회랑",
+      "upcomingChapters": [
+        "제2장: 굳게 닫힌 문",
+        "제3장: 어둠 속의 불빛"
+      ]
+    }
+  }
+]
+```
+
+길고 험난한 방랑의 끝자락, 발걸음이 닿은 곳은 오래전에 사람들의 기억 속에서 잊힌 석조 회랑이었다. 천장 틈새로 스며든 희미한 달빛만이 미세한 먼지 입자들을 비추며 비스듬히 내리쬐고 있었고, 사방에는 축축한 이끼와 세월이 부려놓은 흙먼지 냄새가 자욱했다. 가죽 장화 밑창이 거친 돌바닥을 누를 때마다 사각거리는 모래 소리가 사방의 고요를 나지막이 흔들었다.
+
+방랑자는 멈춰 섰다. 
+
+발끝이 닿기 직전의 어스름한 바닥, 갈라진 돌 틈새에 무언가 이질적인 물체가 반쯤 파묻혀 있었다. 허리를 굽혀 시선을 낮추자, 푸르스름한 녹이 슬어 있는 금속의 형체가 드러났다. 고풍스러운 덩굴손 모양이 손잡이에 정교하게 음각된 청동 열쇠였다. 오랜 세월 동안 차가운 습기 속에 방치되어 있었는지 본래의 빛을 잃고 산화되어 있었지만, 그것이 지닌 묵직한 윤곽만큼은 여전히 쇠락한 가치를 증명하는 듯했다.
+
+이런 은밀하고 외진 회랑 한가운데에 누군가 열쇠를 떨어뜨리고 갔다는 사실은 기이한 일이었다. 우연한 흘림이었을까, 혹은 이 길을 지날 누군가를 향해 던져진 정교한 덫일까. 
+
+방랑자는 섣불리 손을 뻗지 않은 채, 청동 열쇠의 차가운 궤적을 묵묵히 내려다보며 깊은 사색에 잠겼다. 흙먼지 위에 고요히 누워 있는 이 쇳조각을 주워 품에 넣는 순간, 자신 역시 이 오래된 회랑이 간직한 비밀의 톱니바퀴 속으로 맞물려 들어갈 것임을 어렴풋이 짐작하면서.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: k_SjarfwKqbV2roPhp-OsAk
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "열쇠를 집어 들고 주머니에 넣는다.",
+    "narrativeSummary": "주인공은 바닥에 떨어진 낡은 열쇠를 집어 듭니다. 차가운 쇠붙이의 촉감이 손바닥에 닿고, 이 열쇠가 어디에 쓰이는 것인지 알 수 없으나 향후 탐색에 중요한 단서가 될 잠재성을 지닙니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_pickup_key_01",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "낡은 열쇠" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL",
+        "provenance": "TURN 1 PLAYER ACTION"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "버려진 열쇠가 열 수 있는 문이나 자물쇠의 정체"
+      ],
+      "inventoryChanges": [
+        {
+          "name": "낡은 열쇠",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "evt_pickup_key_01"
+        }
+      ]
+    }
+  },
+  {
+    "label": "열쇠를 제자리에 두고 지나친다.",
+    "narrativeSummary": "주인공은 낡은 열쇠를 주의 깊게 살피지만, 굳이 쓸모를 알 수 없는 물건을 챙겨 짐을 늘릴 이유가 없다고 판단하여 그대로 둔 채 자리를 떠납니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_ignore_key_01",
+        "action": "IGNORE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "낡은 열쇠" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL",
+        "provenance": "TURN 1 PLAYER ACTION"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "바닥에 버려진 채 방치된 낡은 열쇠"
+      ]
+    }
+  },
+  {
+    "label": "열쇠 주변을 더 자세히 수색한다.",
+    "narrativeSummary": "주인공은 열쇠를 바로 집어 드는 대신, 그것이 떨어진 주변의 흔적과 바닥 상태를 세밀히 살펴봅니다. 혹시 숨겨진 자물쇠나 추가적인 단서가 있는지 조사합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_search_area_01",
+        "action": "INVESTIGATE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "LOCATION", "entityName": "열쇠 발견 장소" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL",
+        "provenance": "TURN 1 PLAYER ACTION"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "열쇠 주변의 은닉된 공간이나 추가 단서"
+      ]
+    }
+  }
+]
+[CANDIDATES_END]
+
+차가운 습기가 감도는 공간, 희미한 먼지가 가라앉은 바닥 위에 덩그러니 놓인 낡은 철제 열쇠. 세월의 풍파를 겪어 표면이 거칠게 부식된 그 작은 물체는 어쩐지 주변의 적막과 어우러져 기묘한 무게감을 뿜어내고 있습니다. 
+
+방랑자인 주인공은 발걸음을 멈추고 그것을 내려다봅니다. 이것이 누군가의 부주의로 흘려진 유물인지, 아니면 의도적으로 남겨진 이정표인지 현재로서는 알 길이 없습니다. 차가운 공기 속에서 주인공의 호흡 소리만이 가늘게 울려 퍼질 뿐, 주변은 고요하기만 합니다. 열쇠를 집어 들 것인가, 아니면 이 채비 없는 길에 또 다른 짐을 늘리지 않고 지나칠 것인가. 선택은 오로지 그의 몫입니다.
+
+
+================================================================================
+[TEST T14] 대명사
+Input: "플레이어가 낡은 상자를 열었다. 그는 그것을 주머니에 넣었다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: m_SjaqeEPezp2roPyruVgAY
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "상자 속 내용물을 확인하고 주머니에 갈무리한다",
+    "narrativeSummary": "주인공이 낡은 상자의 뚜껑을 열어젖히자, 오랜 세월 묵은 먼지와 함께 엷은 금속 광채가 시야에 들어온다. 그는 그 안에 담긴 물건을 조심스럽게 꺼내어 자신의 주머니 속으로 집어넣는다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_OPEN_BOX_01",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "낡은 상자 속의 물건" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "낡은 상자 속에서 발견된 정체 모를 물건의 기원과 용도"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "황혼 무렵, 인근 가도에서 행상을 노리는 무법자들의 움직임이 감지된다."
+      ],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [
+        {
+          "name": "낡은 금속 명판",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "EVT_OPEN_BOX_01"
+        }
+      ],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 서막, 낡은 상자와의 조우",
+        "upcomingChapters": [
+          "제2장: 방랑자의 길목에서 마주한 흔적",
+          "제3장: 가도의 그늘"
+        ]
+      }
+    }
+  },
+  {
+    "label": "상자를 조심스럽게 열어 주위의 기색을 살핀다",
+    "narrativeSummary": "섣불리 물건을 수거하기 앞서, 주인공은 낡은 상자의 경첩이 삐걱이는 소리에 귀를 기울인다. 주변의 인적이 드문 것을 확인한 뒤, 상자 안을 유심히 관찰하며 혹시 모를 함정이나 표식이 있는지 살핀다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_INSPECT_BOX_02",
+        "action": "OBSERVE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "낡은 상자" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "상자에 새겨진 미지의 문양과 은밀한 경고"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "근처 숲 속에서 인기척을 감춘 누군가가 이쪽을 응시하고 있다."
+      ],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 서막, 낡은 상자와의 조우",
+        "upcomingChapters": [
+          "제2장: 방랑자의 길목에서 마주한 흔적",
+          "제3장: 가도의 그늘"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+경첩이 녹슨 낡은 목재 상자는 오랜 세월 동안 비바람에 시달린 듯 거친 나이테를 드러내고 있었다. 뚜껑을 들어 올리자, 퀴퀴한 곰팡이 냄새와 함께 건조된 먼지가 미세한 회오리를 그리며 가라앉았다. 그 안에는 정체를 가늠하기 어려운 자그마한 금속 물품이 홀로 덩그러니 놓여 있었다. 
+
+주인공은 망설임 없이 손을 뻗어 그것을 집어 들었다. 손끝에 닿는 감촉은 서늘했고, 표면에는 마모된 홈들이 미세하게 파여 있었다. 그는 주변을 가볍게 둘러본 뒤, 그 물건을 자신의 코트 주머니 깊숙이 밀어 넣었다. 
+
+사위는 고요했다. 멀리서 불어오는 바람이 잡목림의 잎사귀를 스치는 소리만이 황혼이 내려앉는 대지 위에 묵직하게 내려앉고 있었다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: pPSjat-nNpfnrfcP9szIqAY
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "상자 개봉 및 소장품 획득",
+    "narrativeSummary": "플레이어가 낡은 상자를 열어 그 안에 담긴 물품을 꺼내 주머니에 수납합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "evt_open_box_01",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "낡은 상자 속의 물품" },
+          { "role": "LOCATION", "entityName": "현재 위치" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "낡은 상자 속에서 발견된 정체 모를 물건의 용도"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "인근 마을의 대장간에서 이른 아침 철을 두드리는 망치 소리가 울려 퍼진다."
+      ],
+      "newNpcs": [],
+      "newFactions": [],
+      "inventoryChanges": [
+        {
+          "name": "낡은 상자 속 물품",
+          "quantity": 1,
+          "action": "add",
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "evt_open_box_01"
+        }
+      ],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 방랑자의 시작",
+        "upcomingChapters": [
+          "낡은 상자의 정체 추적",
+          "첫 번째 갈림길에서의 선택"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+시원스럽게 내리쬐는 늦봄의 햇살이 가라앉은 먼지를 비추는 공간. 당신의 손끝이 삐걱거리는 쇠붙이 경첩을 품은 낡은 상자의 뚜껑에 닿습니다. 나무결은 오랜 세월 동안 비바람에 시달린 듯 거칠고 바래 있으며, 닫혀 있던 틈새로는 퀴퀴한 먼지와 함께 미약한 세월의 냄새가 흘러나옵니다.
+
+상자의 뚜껑을 들어 올리자, 경첩이 비명을 지르듯 날카로운음을 냅니다. 그 안에는 오랜 시간 동안 누구의 손도 닿지 않았음을 증명하듯 고요히 잠들어 있는 작은 물체 하나가 놓여 있습니다. 당신은 망설임 없이 손을 뻗어 그것을 집어 들고는, 이내 외투의 깊숙한 주머니 속으로 밀어 넣습니다. 거친 천 스웨이드 안감에 닿는 서늘한 감촉이 손끝을 타고 전해집니다.
+
+방 안은 다시 깊은 적막으로 잠깁니다. 바깥세상의 소음은 두꺼운 벽에 가로막혀 아득하게만 들려오고, 당신의 주머니 속에는 이제 새로운 인과의 씨앗이 담겼습니다.
+
+
+================================================================================
+[TEST T15] 주장과 검증
+Input: "플레이어가 열쇠를 가져갔다고 경비병이 주장했지만 실제로는 확인되지 않았다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: rPSjaq_FF6jt2roP8M_LoAo
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "경비병의 주장에 차분히 반박하며 주머니와 소지품을 스스로 보임",
+    "narrativeSummary": "주인공은 열쇠를 훔치지 않았다는 사실을 증명하기 위해 거친 언행을 삼가고 고요히 두 손을 들어 보이며 겉옷과 주머니를 직접 뒤져 보입니다. 의심 어린 경비병의 시선 속에서 결백을 드러내려는 행동입니다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_001_INSPECT_DENIAL",
+        "action": "DEFEND",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "COUNTERPARTY", "entityName": "경비병" },
+          { "role": "STATE", "entityName": "결백 주장" }
+        ],
+        "scope": "CLAIM",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "ASSERTED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "사라진 열쇠의 진짜 행방을 추적해야 한다."
+      ]
+    }
+  },
+  {
+    "label": "경비병의 무례한 고발을 꾸짖으며 현장을 떠나려 함",
+    "narrativeSummary": "근거 없는 억측으로 방랑자의 길을 막아선 경비병의 태도를 엄중히 지적하며, 더 이상의 소모적인 언쟁을 피하기 위해 자리를 벗어나려 합니다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_002_LEAVE_CONFRONTATION",
+        "action": "DEPART",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "COUNTERPARTY", "entityName": "경비병" }
+        ],
+        "scope": "INTENT",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "ASSERTED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병과의 마찰로 인해 영지 내 경계가 강화될 수 있다."
+      ]
+    }
+  },
+  {
+    "label": "열쇠가 사라진 장소와 정황에 대해 경비병에게 역으로 추궁함",
+    "narrativeSummary": "경비병의 일방적인 주장 속에서 허점을 찾기 위해, 언제 어디서 열쇠가 사라졌는지 그 구체적인 정황과 목격자가 있는지 냉정하게 따져 묻습니다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_003_INVESTIGATE_ACCUSATION",
+        "action": "INQUIRE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "COUNTERPARTY", "entityName": "경비병" },
+          { "role": "OBJECT", "entityName": "사라진 열쇠" }
+        ],
+        "scope": "OBSERVATION",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "INFERRED",
+        "modality": "POSSIBLE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "열쇠 분실 사건 뒤에 숨겨진 내부의 밀고나 음모가 존재할 수 있다."
+      ]
+    }
+  }
+]
+[CANDIDATES_END]
+
+차가운 석조 회랑을 채우는 것은 스산한 초봄의 바람과, 철갑을 두른 경비병의 거친 숨소리뿐이었다. 해 질 녘의 붉은 노을이 회랑의 좁은 창살을 통해 비스듬히 스며들어, 바닥에 놓인 먼지 쌓인 석판 위에 기괴한 그림자를 드리우고 있었다.
+
+경비병의 투구 아래로 번뜩이는 시선은 집요했다. 그는 손에 쥔 미늘창의 자루를 꽉 쥐며 방랑자의 앞을 가로막았다. 그의 거친 목소리는 좁은 통로를 울리며 메아리쳤으나, 그 주장에 실린 근거는 빈약하기 짝이 없었다. 단지 최근 이 구역에서 보관 중이던 철제 열쇠가 사라졌다는 이유로, 마침 그곳을 지나던 외지인인 주인공을 향해 일방적인 의심의 화살을 돌리고 있는 형국이었다.
+
+"이 주변을 얼쩡거린 건 너뿐이야. 어서 내놓아라. 그 열쇠가 없어진다면 내 목이 날아간단 말이다."
+
+경비병의 목소리에는 초조함과 권위가 뒤섞여 있었다. 그러나 그의 손끝은 떨리고 있었고, 열쇠가 실제로 주인공의 소지품 속에 들어있는지 확신하지 못하는 기색이 역력했다. 객관적인 증거는 어디에도 존재하지 않았다. 오직 타국에서 흘러온 방랑자라는 이유만으로 가해지는 부당한 억측일 뿐이었다. 
+
+회랑의 공기는 무겁게 가라앉아 있었고, 선택의 순간이 다가오고 있었다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: tvSjarX4At232roPoaiD2Aw
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "경비병의 주장에 차분히 반박하며 주머니를 보여준다",
+    "narrativeSummary": "주인공은 당황하지 않고 경비병의 눈을 정면으로 응시하며, 결백을 증명하기 위해 자발적으로 외투와 주머니를 열어보인다. 억울하지만 폭력을 피하고 대화로 해결하려는 태도다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_001",
+        "action": "DENY",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "COUNTERPARTY", "entityName": "경비병" },
+          { "role": "OBJECT", "entityName": "열쇠 도난 혐의" }
+        ],
+        "scope": "CLAIM",
+        "polarity": "NEGATED",
+        "epistemicStatus": "ASSERTED",
+        "modality": "INTENTIONAL",
+        "provenance": "TURN_1_PLAYER_ACTION"
+      },
+      {
+        "eventId": "EVT_002",
+        "action": "EXHIBIT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "소지품" },
+          { "role": "OBSERVER", "entityName": "경비병" }
+        ],
+        "scope": "OBSERVATION",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "NONE",
+        "provenance": "TURN_1_PLAYER_ACTION"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "사라진 열쇠의 진짜 행방과 경비병의 의심 뒤에 숨은 동기"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "문서 보관소 안쪽에서 누군가의 급한 발소리가 멀어져간다."
+      ],
+      "newNpcs": [
+        {
+          "name": "브롬",
+          "alias": "초소의 경비병",
+          "npcClass": "Class A",
+          "innerThought": "상부에서 열쇠 분실 책임을 물겠다고 엄포를 놓았으니, 당장 눈앞의 외지인이라도 붙잡아 범인으로 몰아야 할 판이다.",
+          "metInStory": true,
+          "origin": "왕국 서부 연경",
+          "affiliation": "영주 직속 경비대"
+        }
+      ],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 오해와 의심의 문턱",
+        "upcomingChapters": [
+          "경비병의 오해를 풀고 진짜 범인의 흔적 추적",
+          "영지 내 상인 조합과의 첫 접촉"
+        ]
+      }
+    }
+  },
+  {
+    "label": "경비병의 무례한 태도를 질타하며 물러서지 않고 대치한다",
+    "narrativeSummary": "근거 없는 비난에 격분한 주인공은 경비병의 멱살을 잡거나 위협적인 자세를 취하지는 않더라도, 단호한 어조로 상대의 권한 남용을 지적하며 날카롭게 맞선다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_003",
+        "action": "CONFRONT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "COUNTERPARTY", "entityName": "경비병" },
+          { "role": "CAUSE", "entityName": "근거 없는 횡포" }
+        ],
+        "scope": "CLAIM",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "ASSERTED",
+        "modality": "INTENTIONAL",
+        "provenance": "TURN_1_PLAYER_ACTION"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "영지 내 경비대의 독선과 방랑자에 대한 차별적 시선"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "근처를 지나던 행인이 두 사람의 대립을 불안한 눈으로 지켜보다 자리를 피한다."
+      ],
+      "newNpcs": [
+        {
+          "name": "브롬",
+          "alias": "초소의 경비병",
+          "npcClass": "Class A",
+          "innerThought": "이 녀석 보게? 고개 뼛속까지 뻣뻣한 방랑자 놈이군. 더 철저히 조사해야겠어.",
+          "metInStory": true,
+          "origin": "왕국 서부 연경",
+          "affiliation": "영주 직속 경비대"
+        }
+      ],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 오해와 의심의 문턱",
+        "upcomingChapters": [
+          "경비대와의 물리적 충돌 및 구금 위기",
+          "도시 내부 지하 밀수꾼들의 도움 요청"
+        ]
+      }
+    }
+  },
+  {
+    "label": "말없이 자리를 피하려 등돌려 걸음을 옮긴다",
+    "narrativeSummary": "시시비비를 가릴 가치도 없다는 듯, 주인공은 경비병의 일방적인 주장을 무시한 채 곧장 발걸음을 돌려 군중 속으로 사라지려 시도한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_004",
+        "action": "WITHDRAW",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "COUNTERPARTY", "entityName": "경비병" }
+        ],
+        "scope": "CLAIM",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "ASSERTED",
+        "modality": "INTENTIONAL",
+        "provenance": "TURN_1_PLAYER_ACTION"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "추적을 피해 숨어든 골목 속에서 마주칠 새로운 위협"
+      ],
+      "resolvedSeeds": [],
+      "cameraOffscreenEvents": [
+        "경비병이 황급히 호루라기를 꺼내 불며 지원을 요청한다."
+      ],
+      "newNpcs": [
+        {
+          "name": "브롬",
+          "alias": "초소의 경비병",
+          "npcClass": "Class A",
+          "innerThought": "도망친다? 저놈이 범인이 확실하다! 당장 잡아들여야 해!",
+          "metInStory": true,
+          "origin": "왕국 서부 연경",
+          "affiliation": "영주 직속 경비대"
+        }
+      ],
+      "inventoryChanges": [],
+      "statDeltas": [],
+      "chapterChanges": {
+        "currentChapter": "제1장: 오해와 의심의 문턱",
+        "upcomingChapters": [
+          "경비대의 추격을 따돌리고 구시가지로 잠입",
+          "비밀 은신처에서의 예기치 않은 조우"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+오후의 탁한 햇살이 회색 석회암으로 쌓아 올린 성벽 아래를 비스듬히 내리꽂고 있었다. 먼지 낀 대기 속에서 철갑을 두른 경비병의 거친 숨소리가 좁은 통로를 울렸다. 그의 손가락은 아직 잉크가 채 마르지 않은 장부와 그 옆의 텅 빈 쇠고리를 번갈아 가리키고 있었다. 
+
+"방금 전까지 이 자리에 걸려 있던 철제 열소쇠가 감쪽같이 사라졌어. 네가 이 구역을 지나간 유일한 외지인이지. 이 주머니 속에 무엇이 들어 있는지 확인해야겠어."
+
+경비병 브롬의 목소리에는 초조함과 억지스러운 확신이 뒤섞여 있었다. 치안을 유지해야 할 자의 의무감이라기보다는, 상부의 문책을 피하기 위해 아무나 붙잡고 화풀이를 하려는 비루한 책임 전가가 묻어나는 어조였다. 주변을 오가는 행인들은 그 살벌한 기운을 감지하고는 슬그머니 시선을 피하며 걸음을 재촉했다. 
+
+아직 주머니 속이나 품 안에는 그 어떤 열쇠도 존재하지 않았다. 증거는 없으나 혐의만이 난무하는 공기 속에서, 주인공의 선택에 따라 이 작은 시비는 전혀 다른 국면으로 흘러들 참이었다.
+
+
+================================================================================
+[TEST T16] 복합 의미
+Input: "플레이어가 열쇠를 주우려고 했지만 손이 닿지 않았고, 결국 경비병에게 열쇠를 달라고 부탁했다."
+--------------------------------------------------------------------------------
+--- CONDITION A (BASELINE) ---
+Response ID: wfSjavHGNbXs2roPpNTjiAo
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "경비병이 부탁을 수락하고 열쇠를 건넴",
+    "narrativeSummary": "경비병이 플레이어의 부탁을 귀찮아하면서도 허리춤에서 열쇠를 꺼내 건네준다. 플레이어는 손에 닿지 않던 열쇠를 안전하게 획득한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_KEY_ACQUIRED_01",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "철제 열쇠" },
+          { "role": "SOURCE", "entityName": "경비병" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED",
+        "modality": "NONE",
+        "provenance": "경비병과의 상호작용 성공"
+      }
+    ],
+    "rawMetadata": {
+      "inventoryChanges": [
+        {
+          "name": "철제 열쇠",
+          "quantity": 1,
+          "action": "add",
+          "cause": "GIFT_REWARD",
+          "verifiedEventId": "EVT_KEY_ACQUIRED_01"
+        }
+      ],
+      "newNpcs": [
+        {
+          "name": "문지기 경비병",
+          "npcClass": "Class A",
+          "innerThought": "무슨 일로 이 열쇠가 필요한 거지? 수상하지만 귀찮게 굴지 말고 빨리 넘겨주는 게 상책이다.",
+          "metInStory": true,
+          "origin": "지역 영지",
+          "affiliation": "영주 시위대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 문지기의 경계",
+        "upcomingChapters": [
+          "획득한 열쇠로 잠긴 문 개방",
+          "안쪽 구역의 정세 파악"
+        ]
+      }
+    }
+  },
+  {
+    "label": "경비병이 뇌물을 요구함",
+    "narrativeSummary": "경비병이 손을 내저으며 공짜는 없다며 소소한 은전 한 잎을 요구한다. 플레이어는 대가를 치르거나 다른 방법을 찾아야 한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_GUARD_DEMAND_BRIBES",
+        "action": "GIFT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "경비병" },
+          { "role": "TARGET", "entityName": "주인공" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED",
+        "modality": "NONE",
+        "provenance": "경비병의 속물적 태도"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병의 부패와 영지 내부의 기강 해이"
+      ],
+      "newNpcs": [
+        {
+          "name": "부패한 경비병",
+          "npcClass": "Class A",
+          "innerthought": "낯선 자가 호기심을 부린다. 기름칠을 좀 해야겠어.",
+          "metInStory": true,
+          "origin": "지역 영지",
+          "affiliation": "영주 시위대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 문지기의 경계",
+        "upcomingChapters": [
+          "경비병에게 뇌물 지불 혹은 교섭",
+          "비밀 통로 탐색"
+        ]
+      }
+    }
+  },
+  {
+    "label": "경비병이 부탁을 거절하고 자리를 뜸",
+    "narrativeSummary": "경비병은 규율을 운위하며 외부인의 요청을 매몰차게 거절한 뒤, 순찰을 돌기 위해 그 자리를 떠난다. 열쇠는 여전히 손에 닿지 않는 곳에 방치된다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_GUARD_REFUSE",
+        "action": "GIFT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "경비병" },
+          { "role": "TARGET", "entityName": "주인공" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "VERIFIED",
+        "modality": "NONE",
+        "provenance": "엄격한 규율 집행"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병의 삼엄한 경계와 구역 진입의 어려움"
+      ],
+      "newNpcs": [
+        {
+          "name": "깐깐한 경비병",
+          "npcClass": "Class A",
+          "innerthought": "규정 외의 행동은 허락할 수 없다. 당장 저리 꺼지라고.",
+          "metInStory": true,
+          "origin": "지역 영지",
+          "affiliation": "영주 시위대"
+        }
+      ],
+      "chapterChanges": {
+        "currentChapter": "제1장: 문지기의 경계",
+        "upcomingChapters": [
+          "경비병의 시선을 피해 열쇠를 확보할 방도 강구",
+          "우회로 탐색"
+        ]
+      }
+    }
+  }
+]
+[CANDIDATES_END]
+
+차가운 회색 석조 바닥 위, 손가락 끝이 아슬아슬하게 닿지 않던 철제 열쇠를 향한 시선을 거두고, 방랑자는 고개를 들어 경비병을 바라보았다. 굳게 닫힌 철문 곁을 지키고 서 있던 경비병은 사슬 갑옷의 무게를 지탱하듯 한쪽 어깨를 벽에 기대고 있었다. 그의 철모 밑으로 드러난 눈동자는 피로와 무관심이 뒤섞인 탁한 빛을 띠고 있었다.
+
+"저기," 
+
+방랑자가 낮게 가라앉은 목소리로 입을 열었다. 손가락 끝으로 바닥을 가리키자, 경비병은 귀찮다는 듯 눈썹을 찌푸리며 시선을 옮겼다. 좁은 틈새 너머, 바닥에 뒹굴고 있는 열쇠 조각과 쇠붙이의 윤곽이 희미하게 드러났다. 
+
+경비병은 잠시 숨을 내쉬며 허리춤에 차인 검집을 가볍게 두드렸다. 철제 갑옷이 부딪치는 둔탁한 소리가 좁은 회랑에 울려 퍼졌다. 
+
+"원참, 이래서 외지인들은 손이 많이 간다니까."
+
+그가 나지막이 툴툴거리며 무거운 발걸음을 옮겼다. 철제 부츠가 돌바닥을 구르는 소리가 규칙적으로 울린다. 경비병은 쪼그려 앉아 바닥에 뒹굴던 열쇠를 집어 들더니, 잠시 그것의 무게를 가늠하듯 손바닥 위에서 가볍게 튕겼다. 그리고는 차가운 눈빛으로 방랑자를 향해 몸을 돌렸다.
+
+--- CONDITION B (DIRECTIVE) ---
+Response ID: zPSjav7IK5qw0-kPprfrwQ4
+Parse Success: true
+Raw LLM Output:
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "경비병이 부정한 대가를 요구하며 거절함",
+    "narrativeSummary": "철갑을 두른 경비병은 손을 내민 방랑자의 청을 차갑게 무시하며, 그 은빛 열쇠가 비천한 자의 손에 닿기에는 과분하다고 비웃는다. 그는 열쇠를 원한다면 눈앞의 소란을 해결하거나 적지 않은 통행세를 바치라며 턱짓한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_GUARD_REFUSE_01",
+        "action": "REFUSE_GIFT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "경비병" },
+          { "role": "RECIPIENT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "철제 열쇠" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병이 쥐고 있는 철제 열쇠와 그가 숨기고 있는 영지의 부패한 비밀"
+      ],
+      "newNpcs": [
+        {
+          "name": "알드리히",
+          "alias": "오만방자한 문루 경비병",
+          "npcClass": "Class A",
+          "innerThought": "행색을 보니 푼돈이라도 우려내야겠군. 방랑자 따위가 영내에 들어오는 건 피곤한 일이다.",
+          "metInStory": true,
+          "origin": "하이델란 영지",
+          "affiliation": "영주 직속 경비대"
+        }
+      ]
+    }
+  },
+  {
+    "label": "경비병이 무심하게 열쇠를 건네줌",
+    "narrativeSummary": "경비병은 귀찮다는 듯 쇳소리를 내며 바닥에 떨어진 낡은 철제 열쇠를 군화발로 툭 차서 주인공의 발치 앞에 밀어준다. 친절은 아니었으나, 그의 무관심 덕분에 방랑자는 별다른 마찰 없이 열쇠를 손에 넣을 수 있게 된다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_GUARD_GIVE_01",
+        "action": "GIFT",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "경비병" },
+          { "role": "RECIPIENT", "entityName": "주인공" },
+          { "role": "OBJECT", "entityName": "철제 열쇠" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "경비병이 무심하게 내어준 열쇠가 열게 될 낡은 수문 관리소의 문"
+      ],
+      "inventoryChanges": [
+        {
+          "name": "철제 열쇠",
+          "quantity": 1,
+          "action": "add",
+          "cause": "GIFT_REWARD",
+          "verifiedEventId": "EVT_GUARD_GIVE_01"
+        }
+      ],
+      "newNpcs": [
+        {
+          "name": "브롬",
+          "alias": "나태한 수문 경비병",
+          "npcClass": "Class A",
+          "innerThought": "근무 중에 자꾸 귀찮게 구는군. 얼른 받아치우고 눈 좀 붙여야겠어.",
+          "metInStory": true,
+          "origin": "하이델란 영지",
+          "affiliation": "영주 직속 경비대"
+        }
+      ]
+    }
+  },
+  {
+    "label": "경비병이 의심하며 신원 조회를 요구함",
+    "narrativeSummary": "경비병은 열쇠를 집어 들려는 주인공의 손을 매섭게 제지하며 멈춰 세운다. 그는 이 구역에서 최근 귀중품 도난 사건이 빈발했다며, 방랑자의 행색과 짐작할 수 없는 소속을 엄중히 추궁하기 시작한다.",
+    "semanticEvents": [
+      {
+        "eventId": "EVT_GUARD_INTERROGATE_01",
+        "action": "INTERROGATE",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "경비병" },
+          { "role": "TARGET", "entityName": "주인공" }
+        ],
+        "scope": "CANONICAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "OBSERVED",
+        "modality": "INTENTIONAL"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": [
+        "영내를 떠도는 도난 사건의 실체와 경비대의 은밀한 음모"
+      ],
+      "newNpcs": [
+        {
+          "name": "카스퍼",
+          "alias": "깐깐한 초소 경비대장",
+          "npcClass": "Class A",
+          "innerThought": "외지인들은 늘 문제가 생긴단 말이야. 철저하게 신원을 확인해야 해.",
+          "metInStory": true,
+          "origin": "중앙 수도",
+          "affiliation": "왕국 치안유지단"
+        }
+      ]
+    }
+  }
+]
+[CANDIDATES_END]
+
+회색빛 석회암 벽돌 사이로 이슬이 맺히는 새벽녘, 차가운 공기가 폐부를 찌른다. 낡은 가죽 부츠를 신은 방랑자의 손끝이 허공을 갈랐으나, 빗물 고인 도랑 깊숙한 곳에 박힌 철제 열쇠는 간발의 차로 닿지 않았다. 손끝에 스치는 것은 오직 축축한 이끼와 서늘한 쇳내뿐이었다. 
+
+눈앞에는 투박한 철제 흉갑을 걸친 경비병이 미간을 찌푸린 채 무뚝둑하게 서 있었다. 그는 도랑가에 쪼그리고 앉아 허우적거리는 방랑자의 행색을 한심하다는 듯 내려다보고 있었다. 
+
+"이봐," 
+
+경비병이 묵직한 미늘창의 자루로 바닥을 쿵 내리찍으며 탁한 목소리를 냈다. 그의 눈동자에는 외지인을 향한 뿌리 깊은 경계와 귀찮음이 서려 있었다. 
+
+"거기서 뭐 하는 거지? 영내의 시설물에 함부로 손을 대는 건 허가되지 않는다. 네가 떨어뜨린 그 열쇠 말이다…… 네 녀석의 손으로는 평생 주워봐야 닿지 않을 깊이지."
+
+================================================================================
+END OF REPORT
+================================================================================

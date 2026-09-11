@@ -1,0 +1,156 @@
+{
+  "snapshotBefore": {
+    "worldInfo": {
+      "worldName": "화산비고 (華山秘庫)",
+      "worldType": "popular_genre",
+      "settingDescription": "화산파의 잊혀진 지하 비고. 사방이 거친 암벽과 알 수 없는 기문둔갑의 진법으로 둘러싸여 있으며, 고대의 영약과 비급이 숨겨져 있다고 전해진다. 공기는 차갑고 습하며, 오래된 먼지와 이끼 냄새가 어우러져 있다.",
+      "toneStyle": "중후하고 고풍스러운 정통 무협 소설의 문체. 화려한 미사여구를 배제하고, 차가운 공기와 심리적 긴장감을 감각적인 묘사로 전달함.",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "백연화 (白蓮花)",
+      "gender": "여성",
+      "age": "19",
+      "appearance": "화산파의 백색 도포를 입은 단정한 용모의 여도 협. 눈매가 날카롭고 맑으며, 허리춤에는 오래된 고검이 매여 있다.",
+      "goal": "",
+      "originBackground": "화산파의 장문인 직속 제자였으나, 비고 탐사 도중 진법의 폭주로 일행과 떨어져 홀로 미로 같은 비고 아래에 남겨졌다.",
+      "backgroundType": "preset",
+      "flaw": "어둠 속에 홀로 남겨질 때 극심한 불안을 느끼는 폐소공포증.",
+      "flawType": "preset",
+      "oath": "화산파의 명예를 실추시키지 않고 비고의 무공이 마도(魔道)의 손에 들어가지 않게 수호하겠다.",
+      "oathType": "preset",
+      "anchor": "사부님이 물려주신 낡은 흑철검식 도장.",
+      "anchorType": "preset",
+      "faction": "화산파 (華山派)",
+      "factionType": "preset",
+      "metaElements": {
+        "background": "",
+        "flaw": "",
+        "oath": "",
+        "anchor": "",
+        "faction": ""
+      },
+      "stats": {
+        "strength": 12,
+        "agility": 14,
+        "constitution": 10,
+        "intelligence": 12,
+        "wisdom": 13,
+        "charisma": 11
+      },
+      "inventory": [
+        {
+          "id": "inv_silver_coin",
+          "name": "은화",
+          "quantity": 20,
+          "type": "재화",
+          "isEquipped": false
+        },
+        {
+          "id": "inv_old_sword",
+          "name": "낡은 흑철검",
+          "quantity": 1,
+          "type": "무기",
+          "isEquipped": true
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "",
+      "timeline": []
+    }
+  },
+  "snapshotAfter": {
+    "worldInfo": {
+      "worldName": "화산비고 (華山秘庫)",
+      "worldType": "popular_genre",
+      "settingDescription": "화산파의 잊혀진 지하 비고. 사방이 거친 암벽과 알 수 없는 기문둔갑의 진법으로 둘러싸여 있으며, 고대의 영약과 비급이 숨겨져 있다고 전해진다. 공기는 차갑고 습하며, 오래된 먼지와 이끼 냄새가 어우러져 있다.",
+      "toneStyle": "중후하고 고풍스러운 정통 무협 소설의 문체. 화려한 미사여구를 배제하고, 차가운 공기와 심리적 긴장감을 감각적인 묘사로 전달함.",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "백연화 (白蓮花)",
+      "gender": "여성",
+      "age": "19",
+      "appearance": "화산파의 백색 도포를 입은 단정한 용모의 여도 협. 눈매가 날카롭고 맑으며, 허리춤에는 오래된 고검이 매여 있다.",
+      "goal": "",
+      "originBackground": "화산파의 장문인 직속 제자였으나, 비고 탐사 도중 진법의 폭주로 일행과 떨어져 홀로 미로 같은 비고 아래에 남겨졌다.",
+      "backgroundType": "preset",
+      "flaw": "어둠 속에 홀로 남겨질 때 극심한 불안을 느끼는 폐소공포증.",
+      "flawType": "preset",
+      "oath": "화산파의 명예를 실추시키지 않고 비고의 무공이 마도(魔道)의 손에 들어가지 않게 수호하겠다.",
+      "oathType": "preset",
+      "anchor": "사부님이 물려주신 낡은 흑철검식 도장.",
+      "anchorType": "preset",
+      "faction": "화산파 (華山派)",
+      "factionType": "preset",
+      "metaElements": {
+        "background": "",
+        "flaw": "",
+        "oath": "",
+        "anchor": "",
+        "faction": ""
+      },
+      "stats": {
+        "strength": 12,
+        "agility": 14,
+        "constitution": 10,
+        "intelligence": 12,
+        "wisdom": 13,
+        "charisma": 11
+      },
+      "inventory": [
+        {
+          "id": "inv_silver_coin",
+          "name": "은화",
+          "quantity": 20,
+          "type": "재화",
+          "isEquipped": false
+        },
+        {
+          "id": "inv_old_sword",
+          "name": "낡은 흑철검",
+          "quantity": 1,
+          "type": "무기",
+          "isEquipped": true
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "",
+      "timeline": []
+    }
+  }
+}

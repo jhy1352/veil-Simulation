@@ -1,0 +1,61 @@
+[
+  {
+    "recordId": "rec-evt-mtpv941w-fdqt19-1",
+    "eventId": "evt-mtpv941w-fdqt19",
+    "requestId": "req-mtpv941w-z2g59t",
+    "proposalId": "prop-req-mtpv941w-z2g59t",
+    "turn": 1,
+    "timestamp": "2026-09-06T13:47:25.506Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "RECORD_OFFSCREEN_EVENT",
+    "details": "{\"id\":\"offscreen-mtpv941x-bh8g6v\",\"eventDescription\":\"숭양서원 원장과 의문의 무림 인사의 서신 왕래\",\"timestamp\":\"2026-09-06T13:47:25.509Z\",\"visibility\":\"FACTION_ONLY\"}",
+    "canonicalAction": {
+      "type": "RECORD_OFFSCREEN_EVENT",
+      "payload": {
+        "id": "offscreen-mtpv941x-bh8g6v",
+        "eventDescription": "숭양서원 원장과 의문의 무림 인사의 서신 왕래",
+        "timestamp": "2026-09-06T13:47:25.509Z",
+        "visibility": "FACTION_ONLY"
+      }
+    },
+    "stateVersionAfterCommit": 2,
+    "informationAccess": "FACTION_ONLY",
+    "previousStateHash": "csh_862b5798687699f8",
+    "originInputId": "act-Case_A-1"
+  },
+  {
+    "recordId": "rec-evt-mtpv941w-fdqt19-2",
+    "eventId": "evt-mtpv941w-fdqt19",
+    "requestId": "req-mtpv941w-z2g59t",
+    "proposalId": "prop-req-mtpv941w-z2g59t",
+    "turn": 1,
+    "timestamp": "2026-09-06T13:47:25.506Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "ADVANCE_CHAPTER",
+    "details": "{\"currentChapter\":\"제1장: 서원의 은밀한 흔적\",\"upcomingChapters\":[\"제2장: 묵향 뒤에 숨은 검결\",\"제3장: 무너진 서고의 비밀\"]}",
+    "canonicalAction": {
+      "type": "ADVANCE_CHAPTER",
+      "payload": {
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 묵향 뒤에 숨은 검결",
+          "제3장: 무너진 서고의 비밀"
+        ]
+      }
+    },
+    "stateVersionAfterCommit": 2,
+    "informationAccess": "PUBLIC",
+    "previousStateHash": "csh_862b5798687699f8",
+    "originInputId": "act-Case_A-1"
+  }
+]

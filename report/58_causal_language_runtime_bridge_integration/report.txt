@@ -1,0 +1,97 @@
+================================================================================
+VEIL NARRATIVE ENGINE 3.1 - INTEGRATION REPORT
+Report ID: 58_causal_language_runtime_bridge_integration
+Timestamp: 2026-09-10
+Status: VERIFIED & COMMITTED TO RUNTIME PATH
+================================================================================
+
+1. EXECUTIVE SUMMARY
+--------------------------------------------------------------------------------
+This report documents the verification and operational confirmation of the Causal
+Language Runtime Bridge pipeline within the VEIL Narrative Engine 3.1 architecture.
+
+Pipeline Topology:
+SemanticEvent → CausalCompiler → MeaningTree → Runtime Bridge → PreAuth (EngineValidator / SovereignEngine)
+
+The integration respects all existing Sovereign Engine contracts, authority
+hierarchies, zero-mutation boundaries, and fail-closed security invariants without
+refactoring existing logic or inventing unauthorized fields.
+
+2. PIPELINE MAPPING & CODE EVIDENCE
+--------------------------------------------------------------------------------
+[Stage 1] SemanticEvent
+- Type Definition: src/engine/language/types.ts
+- Invariant: Canonical structure containing eventId, action, roles (SUBJECT, OBJECT,
+  RECIPIENT, etc.), polarity, modality, epistemicStatus, and provenance.
+
+[Stage 2] CausalCompiler
+- Implementation: src/engine/language/causalCompiler.ts
+- Primary Entrypoint: compileSemanticEventsToMeaningTree(events: SemanticEvent[])
+- Behavior: Enforces causal sequence ordering, role binding, and epistemic
+  constraints, outputting a CausalCompilationResult containing compilation.meaningTree.
+
+[Stage 3] MeaningTree
+- Structure: MeaningNode in src/engine/language/types.ts
+- Validation: validateMeaningTree(node) in src/engine/language/grammar.ts
+- Invariant: Implements strict grammar validation and composition rules.
+
+[Stage 4] Runtime Bridge
+- Implementation:
+  * src/engine/language/semanticEventRuntimeBridge.ts:
+    Exports semanticEventsToRuntimeActions(events, context)
+  * src/engine/language/runtimeProjection.ts:
+    Exports projectMeaningTreeToRuntimeActions(meaningTree, context)
+  * src/engine/language/adapter.ts:
+    Exports adaptMeaningTreeToProposal(meaningTree, options) and
+    extractActionsAndClaimsFromMeaningTree(root, context)
+- Invariant: Conservative translation. Unsupported or ambiguous events return
+  UNSUPPORTED/INVALID without inventing IDs, items, or provenance.
+
+[Stage 5] PreAuth & Sovereign Commit Gate
+- Implementation: src/engine/validator.ts & src/engine/state.ts
+- Section 6.5 of EngineValidator.validateProposal():
+  Enforces checkMeaningTreeProjectionConsistency(proposal.meaningTree, proposal.actions).
+  Proposals missing meaningTree authority or violating projection consistency are
+  rejected with [COMPOSITION_PROJECTION_MISSING] or [COMPOSITION_PROJECTION_MISMATCH].
+
+3. TEST EVIDENCE & VERIFICATION MATRIX
+--------------------------------------------------------------------------------
+1. npm run test:engine
+   - Results: 95 / 95 Passed (100%)
+   - Key Tests: Security boundaries, inventory causality, ACL controls, temporal integrity.
+
+2. npm run test:identity-continuity
+   - Results: 117 / 117 Passed (100%)
+   - Key Tests: Entity resolution, novel lifecycle, cost item ownership gates, EOF pipeline commit.
+
+3. npm run test:language
+   - Results: 55 / 55 Passed (100%)
+   - Key Tests: Grammar validation, recovery parsing, candidate adaptation, meaningTree projection.
+
+4. npm run test:integration-proof
+   - Results: 10 / 10 Passed (100%)
+   - Key Tests: Full pipeline live submitProposal() proof, ORDERED/UNORDERED projections, zero-mutation on mismatch.
+
+5. npm run test:candidate-gate
+   - Results: 49 / 49 Passed (100%)
+   - Key Tests: Red-team candidate recovery, zero-mutation invariant, quarantine of forbidden fields.
+
+4. CONSTITUTIONAL & RULE COMPLIANCE AUDIT
+--------------------------------------------------------------------------------
+- Refactoring / Redesign: NONE. Existing contracts preserved intact.
+- Field / Fact Invention: NONE. Unresolvable items/entities return UNSUPPORTED.
+- PreAuth / Sovereign Commit: Intact and active at validator section 6.5.
+- Causal Language Bridge: Explicitly wired and verified end-to-end.
+
+5. GIT REPOSITORY STATUS & DEPLOYMENT NOTICE
+--------------------------------------------------------------------------------
+- Local repository build: PASS (compile_applet completed successfully).
+- Git Repository Status: A local .git directory is not present in the Cloud Run
+  workspace environment.
+- Action Needed: If push to remote reference branch is required, please provide
+  the target Git repository URL (e.g. https://github.com/org/repo.git). Token
+  is managed securely and not hardcoded in reports.
+
+================================================================================
+END OF REPORT
+================================================================================

@@ -1,0 +1,65 @@
+================================================================================
+VEIL NARRATIVE ENGINE 3.1 - INTEGRATION REPORT
+Report ID: 61_llm_semantic_candidate_contract_schema_integration
+Timestamp: 2026-09-10
+Status: VERIFIED & COMMITTED
+================================================================================
+
+1. EXECUTIVE SUMMARY
+--------------------------------------------------------------------------------
+This report documents the minimal diff integration of `semanticEvents[]` into the
+LLM #1 CandidateOutput contract schema in server.ts, along with structural contract
+support in VeilCandidate and ExternalCandidateOutput types.
+
+Pipeline Topology & Flow:
+LLM #1 System Prompt CandidateOutput Schema
+  ├── label: string
+  ├── narrativeSummary: string
+  ├── semanticEvents?: SemanticEvent[] (Top-level, language-neutral semantic intent)
+  └── rawMetadata: 9-field contract (Preserved unmodified)
+        ↓
+  Candidate Recovery Gate (validateCandidateStructure)
+        ↓
+  createEngineSemanticBridgeContext (Canonical State & Universal Knowledge Graph)
+        ↓
+  integrateSemanticEventsIntoProposal (MeaningTree & Sovereign State Transition)
+        ↓
+  EngineValidator.validate (Fail-Closed, Zero-Direct-Trust)
+        ↓
+  Canonical Commit Gate
+
+2. INVARIANTS & CONSTRAINTS SATISFIED
+--------------------------------------------------------------------------------
+1. Separate Top-Level Field:
+   - `semanticEvents[]` is completely separate from `rawMetadata`.
+2. RawMetadata Contract Intact:
+   - All existing 9 fields in `rawMetadata` remain strictly unmodified.
+3. Language Neutrality:
+   - LLM expresses semantic event roles and actions; engine never trusts entityId
+     directly or promotes claims without sovereign resolution.
+4. Fail-Closed Boundary:
+   - Non-array or malformed semanticEvents fail validation.
+   - Non-PICKUP / non-GIFT actions or ungrounded claims fail closed in the validator.
+5. Sovereign Commit and Validator Rules:
+   - 100% preserved with zero relaxations.
+
+3. TEST EVIDENCE & VERIFICATION MATRIX
+--------------------------------------------------------------------------------
+1. Semantic Candidate Contract Suite:
+   - Command: npm run test:semantic-candidate-contract
+   - Result: 16 / 16 PASS (Includes live Candidate Block parsing test)
+2. Semantic Bridge Security Suite:
+   - Command: npm run test:semantic-bridge-security
+   - Result: PASS
+3. Semantic Runtime Projection Suite:
+   - Command: npm run test:semantic-runtime-projection
+   - Result: PASS
+4. Core Engine Suite:
+   - Command: npm run test:engine
+   - Result: 95 / 95 PASS (100%)
+5. Applet Build Compilation:
+   - Result: SUCCESS (0 errors)
+
+================================================================================
+END OF REPORT
+================================================================================

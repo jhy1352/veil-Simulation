@@ -1,0 +1,258 @@
+{
+  "record_type": "WORK_DIFFERENTIAL_RECORD",
+  "db_id": "GPT-MM-E01",
+  "analyzer": "GPT",
+  "work": {
+    "work_id": "MM-E01",
+    "title": "Middlemarch: A Study of Provincial Life",
+    "author": "George Eliot",
+    "original_language": "English",
+    "publication_period": "1871-1872",
+    "genre": "Novel / Provincial Life",
+    "source_status": "FULL_TEXT",
+    "coverage": "Prelude + Book I-VIII + Chapters I-LXXXVI + Finale",
+    "raw_coverage_confidence": "HIGH"
+  },
+  "normalization": {
+    "state_unit": "PRE_STATE -> EVENT -> POST_STATE -> ΔSTATE",
+    "secondary_units": ["Δ²STATE", "ACCUMULATION", "TRAJECTORY"],
+    "layers": ["RAW_OBSERVATION", "STRUCTURAL_INTERPRETATION", "MECHANISM", "VARIATION_DETAIL"],
+    "generalization_status": "CANDIDATE_ONLY"
+  },
+  "canonical_variables_observed": [
+    "DESIRE", "EXPECTED_STATE", "EXPECTATION", "RELATIONSHIP", "TRUST", "KNOWLEDGE",
+    "KNOWLEDGE_ASYMMETRY", "BELIEF_ABOUT_OTHERS", "OBLIGATION", "RESOURCE",
+    "SOCIAL_POSITION", "REPUTATION", "RISK", "AGENCY", "CHOICE_SPACE",
+    "SELF_MODEL", "OTHER_MODEL"
+  ],
+  "scene_records": [
+    {
+      "scene_id": "SE-001",
+      "focus": "Dorothea / Casaubon marriage",
+      "pre_state": ["EXPECTATION", "DESIRE", "CHOICE_SPACE"],
+      "event": "marriage commitment",
+      "post_state": ["RELATIONSHIP", "OBLIGATION", "CHOICE_SPACE"],
+      "delta_state": ["RELATIONSHIP_CHANGE", "OBLIGATION_INCREASE", "FUTURE_CHOICE_SPACE_CHANGE"],
+      "delta2_state": "choice -> commitment -> altered future choice space",
+      "accumulation": ["PERSISTENCE", "PATH_DEPENDENCE"],
+      "structure": "CHOICE -> COMMITMENT -> ALTERED_CHOICE_SPACE",
+      "mechanism": "A chosen commitment changes later feasible choices rather than merely adding a local event.",
+      "variation": "The meaning of commitment depends on the pre-existing model of the future and the person chosen.",
+      "loss_risk": "High if commitment is reduced to a generic relationship event."
+    },
+    {
+      "scene_id": "SE-002",
+      "focus": "Post-marriage expectation collision",
+      "pre_state": ["EXPECTATION", "OTHER_MODEL", "AGENCY"],
+      "event": "experienced reality conflicts with projected marital model",
+      "post_state": ["EXPECTATION", "KNOWLEDGE", "RELATIONSHIP", "AGENCY"],
+      "delta_state": ["EXPECTATION_DECREASE", "KNOWLEDGE_INCREASE", "RELATIONAL_REDEFINITION", "AGENCY_DECREASE"],
+      "delta2_state": "expectation gap -> model reassessment -> future interpretation",
+      "accumulation": ["PERSISTENCE", "REINTERPRETATION"],
+      "structure": "EXPECTED_STATE -> ACTUAL_STATE -> GAP -> RESPONSE",
+      "mechanism": "Mismatch between projected and experienced relationship changes interpretation and subsequent choice conditions.",
+      "variation": "The agent may update the model or resist updating it.",
+      "loss_risk": "High if represented only as marital conflict."
+    },
+    {
+      "scene_id": "SE-003",
+      "focus": "Knowledge of Casaubon",
+      "pre_state": ["KNOWLEDGE", "OTHER_MODEL"],
+      "event": "continued observation reveals additional information",
+      "post_state": ["KNOWLEDGE", "OTHER_MODEL"],
+      "delta_state": ["KNOWLEDGE_INCREASE", "OTHER_MODEL_REFINEMENT"],
+      "delta2_state": "new information -> other-model change -> relationship/behavior implications",
+      "accumulation": ["PERSISTENCE", "REINTERPRETATION"],
+      "structure": "OBSERVATION -> INFORMATION_GAIN -> MODEL_REFINEMENT",
+      "mechanism": "Information changes the internal model of another person, which can alter later interpretation.",
+      "variation": "Information gain does not guarantee model update.",
+      "loss_risk": "High if knowledge is stored without distinguishing the model built from it."
+    },
+    {
+      "scene_id": "SE-004",
+      "focus": "Casaubon jealousy",
+      "pre_state": ["RELATIONSHIP", "BELIEF_ABOUT_OTHERS"],
+      "event": "interpretation generates suspicion",
+      "post_state": ["BELIEF_ABOUT_OTHERS", "RELATIONSHIP", "RISK"],
+      "delta_state": ["SUSPICION_INCREASE", "RELATIONAL_PRESSURE", "FUTURE_CONSTRAINT"],
+      "delta2_state": "relationship state -> interpretation -> suspicion -> future constraint",
+      "accumulation": ["PERSISTENCE", "PATH_DEPENDENCE"],
+      "structure": "STATE -> INTERPRETATION -> BELIEF_CHANGE -> RELATIONAL_EFFECT",
+      "mechanism": "An interpreted rather than directly observed state can become causally relevant through subsequent behavior.",
+      "variation": "The interpretation may be accurate, inaccurate, or unresolved.",
+      "loss_risk": "High if suspicion is treated as equivalent to fact."
+    },
+    {
+      "scene_id": "SE-005",
+      "focus": "Dorothea / Will",
+      "pre_state": ["PRIOR_RELATIONAL_HISTORY", "OTHER_MODEL"],
+      "event": "new person enters the decision field",
+      "post_state": ["OTHER_MODEL", "RELATIONSHIP", "CHOICE_SPACE"],
+      "delta_state": ["COMPARATIVE_MODELING", "RELATIONAL_CHANGE", "CHOICE_SPACE_CHANGE"],
+      "delta2_state": "prior relational experience -> new person -> comparative model -> new relationship state",
+      "accumulation": ["PATH_DEPENDENCE", "REINTERPRETATION"],
+      "structure": "PRIOR_STATE -> NEW_RELATION -> COMPARATIVE_REASSESSMENT",
+      "mechanism": "A new relationship is interpreted through accumulated prior relational states rather than from zero.",
+      "variation": "The same new person can produce different outcomes depending on prior state.",
+      "loss_risk": "High if reduced to a generic romance triangle."
+    },
+    {
+      "scene_id": "SE-006",
+      "focus": "Lydgate / Rosamond",
+      "pre_state": ["DESIRE", "GOAL", "OTHER_MODEL", "RESOURCE"],
+      "event": "commitment combines distinct future models",
+      "post_state": ["RELATIONSHIP", "OBLIGATION", "RESOURCE", "AGENCY"],
+      "delta_state": ["GOAL_CONFLICT", "RESOURCE_CONSTRAINT", "AGENCY_PRESSURE"],
+      "delta2_state": "individual goal + other goal -> commitment -> resource constraint -> goal conflict",
+      "accumulation": ["PERSISTENCE", "CASCADE", "PATH_DEPENDENCE"],
+      "structure": "MULTIPLE_GOALS -> COMMITMENT -> SHARED_CONSTRAINT -> CONFLICT",
+      "mechanism": "A relationship can bind incompatible future models to shared resources and obligations.",
+      "variation": "Conflict intensity depends on the compatibility of pre-existing goals and available resources.",
+      "loss_risk": "High if reduced to simple marital incompatibility."
+    },
+    {
+      "scene_id": "SE-007",
+      "focus": "Economic pressure",
+      "pre_state": ["RESOURCE", "RELATIONSHIP", "AGENCY"],
+      "event": "resource condition deteriorates",
+      "post_state": ["RESOURCE", "RELATIONSHIP", "AGENCY", "CHOICE_SPACE"],
+      "delta_state": ["RESOURCE_DECREASE", "RELATIONAL_PRESSURE", "AGENCY_CHANGE", "CHOICE_SPACE_REDUCTION"],
+      "delta2_state": "resource change -> relationship pressure -> agency change -> future option change",
+      "accumulation": ["PERSISTENCE", "CASCADE", "PATH_DEPENDENCE"],
+      "structure": "RESOURCE_CHANGE -> RELATIONAL_PRESSURE -> AGENCY_CHANGE",
+      "mechanism": "Material constraints propagate through relationships into future decision possibilities.",
+      "variation": "Resource pressure can increase or decrease agency depending on support and adaptation.",
+      "loss_risk": "High if economics is treated as background rather than a state variable."
+    },
+    {
+      "scene_id": "SE-008",
+      "focus": "Fred",
+      "pre_state": ["EXPECTED_STATE", "RESOURCE", "AGENCY"],
+      "event": "expected resource fails",
+      "post_state": ["RESOURCE", "AGENCY", "BEHAVIOR", "RELATIONSHIP"],
+      "delta_state": ["RESOURCE_FAILURE", "AGENCY_PRESSURE", "BEHAVIOR_CHANGE", "RELATIONSHIP_VIABILITY_CHANGE"],
+      "delta2_state": "resource failure -> consequence -> behavioral reorientation -> capability development -> relationship viability",
+      "accumulation": ["PERSISTENCE", "PATH_DEPENDENCE"],
+      "structure": "DEPENDENCE -> FAILURE -> CONSEQUENCE -> REORIENTATION",
+      "mechanism": "Failure changes incentives and constraints, making behavior change consequential rather than merely declarative.",
+      "variation": "Failure can produce adaptation, avoidance, or further deterioration.",
+      "loss_risk": "High if labeled simply as redemption."
+    },
+    {
+      "scene_id": "SE-009",
+      "focus": "Bulstrode hidden past",
+      "pre_state": ["KNOWLEDGE_ASYMMETRY", "RISK", "REPUTATION"],
+      "event": "past information is triggered and disclosed",
+      "post_state": ["KNOWLEDGE_ASYMMETRY", "RISK", "REPUTATION", "SOCIAL_POSITION"],
+      "delta_state": ["ASYMMETRY_REDUCTION", "RISK_ACTIVATION", "REPUTATION_COLLAPSE", "NETWORK_CONSEQUENCES"],
+      "delta2_state": "past concealed fact -> trigger -> active risk -> disclosure -> reputation/network consequences",
+      "accumulation": ["DORMANT", "REACTIVATION", "CASCADE", "PERSISTENCE"],
+      "structure": "PAST_EVENT -> DORMANCY -> TRIGGER -> CURRENT_EFFECT",
+      "mechanism": "A past state can remain causally dormant until information distribution changes.",
+      "variation": "Disclosure may alter reputation, trust, network position, or only local knowledge.",
+      "loss_risk": "High if secret-reveal is stored without dormant-state and information-distribution structure."
+    },
+    {
+      "scene_id": "SE-010",
+      "focus": "Finale / long-term trajectories",
+      "pre_state": ["LOCAL_STATE_CHANGES"],
+      "event": "multiple prior changes accumulate",
+      "post_state": ["LONG_TERM_TRAJECTORY", "RELATIONSHIP", "SOCIAL_POSITION", "CHOICE_SPACE"],
+      "delta_state": ["ACCUMULATION", "PATH_DEPENDENCE", "TRAJECTORY_CONVERGENCE/DIVERGENCE"],
+      "delta2_state": "previous state change alters conditions for subsequent state change",
+      "accumulation": ["PERSISTENCE", "FADE", "CASCADE", "BRANCHING", "PATH_DEPENDENCE", "REINTERPRETATION", "DORMANCY"],
+      "structure": "LOCAL_TRANSITIONS -> ACCUMULATED_STATE -> LONG_TERM_TRAJECTORY",
+      "mechanism": "Narrative history is not a list of independent events; earlier changes modify later transition conditions.",
+      "variation": "Different characters can receive different downstream effects from related events.",
+      "loss_risk": "Very high if the work is compressed into a linear plot."
+    }
+  ],
+  "global_change_patterns": [
+    "choice -> commitment -> future choice space change",
+    "expectation gap -> model reassessment -> future interpretation",
+    "new information -> other model change -> relationship change -> behavior",
+    "past event -> dormant -> trigger -> active risk",
+    "resource change -> relationship pressure -> agency change -> career/future change"
+  ],
+  "accumulation_findings": {
+    "persistence": ["marriage", "debt/resource commitment", "social reputation", "past information", "obligation", "relational history"],
+    "fade": ["temporary emotions", "temporary tensions"],
+    "cascade": "STRONG",
+    "branching": "STRONG",
+    "path_dependence": "VERY_STRONG",
+    "reinterpretation": "VERY_STRONG",
+    "dormant_past": "OBSERVED",
+    "reversal_types": ["FACT_REVERSAL", "INTERPRETATION_REVERSAL"]
+  },
+  "trajectories": [
+    "Dorothea: ideal -> ideal projected onto person -> commitment -> expectation collision -> other-model refinement -> relational reassessment -> different choice basis",
+    "Lydgate: professional ideal -> commitment -> resource pressure -> relational pressure -> social dependence -> reduced agency -> altered long-term life",
+    "Rosamond: idealized future model -> person fitted into model -> reality resists model -> continued interpretive pressure -> relational consequences",
+    "Fred: dependence -> failure -> consequence -> behavioral reorientation -> capability development -> relationship viability -> stable long-term state",
+    "Bulstrode: hidden past -> dormancy -> trigger -> threat -> exposure -> reputation collapse -> network consequences"
+  ],
+  "structural_candidates": [
+    "EXPECTED_STATE -> ACTUAL_STATE -> GAP -> RESPONSE",
+    "CHOICE -> COMMITMENT -> ALTERED_CHOICE_SPACE",
+    "ACTUAL_PERSON != MODEL_OF_PERSON",
+    "FACT -> INFORMATION_DISTRIBUTION -> SOCIAL_INTERPRETATION -> SOCIAL_STATE",
+    "PAST_EVENT -> DORMANCY -> LATER_TRIGGER -> CURRENT_EFFECT"
+  ],
+  "mechanism_candidates": [
+    "expectation gap can force model update or model resistance",
+    "resource failure changes incentives and agency",
+    "new information changes trust or suspicion depending on interpretation",
+    "past information can remain inert or trigger social consequences"
+  ],
+  "cross_work_candidates": [
+    "EXPECTATION_GAP",
+    "CHOICE_ALTERS_FUTURE_CHOICE_SPACE",
+    "OTHER_MODEL_IS_STATE",
+    "KNOWLEDGE_ASYMMETRY",
+    "DORMANT_PAST_CAN_REACTIVATE",
+    "SOCIAL_INFORMATION_PROPAGATION",
+    "MODEL_UPDATE_IS_NOT_AUTOMATIC",
+    "INTENTION_OUTCOME_SEPARATION",
+    "RELATIONAL_STATE_IS_NOT_EQUAL_TO_SUM_OF_CHARACTER_STATES",
+    "SECOND_ORDER_CHANGE"
+  ],
+  "ai_cliche_separation": [
+    {"surface": "betrayal", "structural_candidate": "information asymmetry + hidden state + trust change + future constraint"},
+    {"surface": "complicated romance", "structural_candidate": "relationship history + changed person-model + new relational interpretation + altered choice basis"},
+    {"surface": "redemption", "structural_candidate": "behavior failure + consequence + altered incentives/constraints + behavior change + relationship viability"}
+  ],
+  "compression_loss": {
+    "high_loss_variables": ["OTHER_MODEL", "KNOWLEDGE_ASYMMETRY", "CHOICE_SPACE", "EXPECTATION", "REPUTATION"],
+    "preserve_candidates": ["DESIRE", "EXPECTATION", "CHOICE", "COMMITMENT", "OBLIGATION", "RESOURCE", "RELATIONSHIP", "TRUST", "KNOWLEDGE", "KNOWLEDGE_ASYMMETRY", "OTHER_MODEL", "REPUTATION", "RISK", "AGENCY", "CHOICE_SPACE"],
+    "unresolved_removal": ["SOCIAL_POSITION", "OBLIGATION", "SELF_MODEL"]
+  },
+  "unresolved_questions": [
+    "cross-genre repetition of the observed transition structures",
+    "whether commitment consistently changes future choice space",
+    "independence or dependency among candidate state variables",
+    "conditions under which dormant past becomes active",
+    "whether second-order change generalizes across works",
+    "how multi-perspective state representation affects transition analysis"
+  ],
+  "final_differential_record": {
+    "raw_observation": [
+      "people act with expected life models",
+      "choices create relationships, obligations, resources, and social position",
+      "reality can conflict with expectations",
+      "people reinterpret, resist, or change behavior",
+      "state changes alter future choice space",
+      "facts are distributed asymmetrically",
+      "private facts can remain dormant, reactivate, and propagate socially"
+    ],
+    "structural_interpretation": "STATE -> CHOICE -> COMMITMENT -> ALTERED_STATE_SPACE -> EXPECTATION_COLLISION -> INTERPRETATION/RESISTANCE -> RELATIONAL_CHANGE -> NEW_CHOICE -> FURTHER_STATE_CHANGE",
+    "parallel_information_path": "PAST_FACT -> KNOWLEDGE_DISTRIBUTION -> INTERPRETATION -> SOCIAL_STATE",
+    "strongest_delta2_candidate": "previous state change alters conditions for subsequent state change",
+    "generalization_status": "CANDIDATE_ONLY",
+    "confidence": {"evidence": "HIGH", "interpretation": "HIGH", "generalization": "MEDIUM"}
+  },
+  "provenance": {
+    "analysis_unit": "GPT",
+    "source_fidelity": "FULL_TEXT as declared by supplied result",
+    "note": "Stored as normalized research data; no new claims added beyond the supplied record."
+  }
+}

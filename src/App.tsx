@@ -21,11 +21,10 @@ import {
   deepMerge
 } from './utils/factory';
 import { parseGMResponseMetaData } from './utils/parser';
-import {
-  extractCandidatesFromMetadata
-} from './utils/engineValidator';
 import { SovereignEngine } from './engine/state';
-import { buildSafeProposalFromCandidate } from './engine/proposalParser';
+import { generateProposalId } from './engine/proposalParser';
+import { observeCandidateNovelHistory } from './engine/index/novelHistory';
+import { projectPassports } from './engine/index/passport';
 import { StateTransitionProposal, TransitionAction } from './engine/types';
 import { actionToMeaningNode, adaptMeaningTreeToProposal } from './engine/language';
 import { TurnLatencyProfiler } from './utils/latency';
@@ -155,7 +154,14 @@ export default function App() {
           setStoryTurnCount(snap.turn);
           setGameState(parsed.messages && parsed.messages.length > 0 ? 'playing' : 'creation');
           if (parsed.engineState) {
-            setEngineState(parsed.engineState);
+            const snap = hydratedEngine.getSnapshot();
+            const hist = hydratedEngine.getHistory();
+            const novelRecs = parsed.engineState.novelHistoryRecords || [];
+            const derivedPassports = projectPassports(snap, hist, novelRecs);
+            setEngineState({
+              ...parsed.engineState,
+              passports: derivedPassports
+            });
           }
           if (parsed.selectedModel) {
             setSelectedModel(parsed.selectedModel);
@@ -221,9 +227,9 @@ export default function App() {
       };
       const meaningTree = actionToMeaningNode(action, 'PROPOSAL');
       const proposal = adaptMeaningTreeToProposal(meaningTree, {
-        proposalId: `prop-player-char-${Date.now()}`,
-        requestId: `req-player-char-${Date.now()}`,
-        eventId: `evt-player-char-${Date.now()}`,
+        proposalId: generateProposalId('prop-player-char'),
+        requestId: generateProposalId('req-player-char'),
+        eventId: generateProposalId('evt-player-char'),
         expectedStateVersion: snap.stateVersion,
         source: 'PLAYER',
         turn: storyTurnCount,
@@ -233,6 +239,20 @@ export default function App() {
       const res = engine.submitProposal(proposal);
       if (res.success) {
         setCharacter(res.snapshot.character);
+        setEngineState(prev => {
+          const novelRecs = prev.novelHistoryRecords || [];
+          const derivedPassports = projectPassports(
+            res.snapshot,
+            engine.getHistory(),
+            novelRecs
+          );
+          return {
+            ...prev,
+            passports: derivedPassports,
+            historicalRecords: engine.getHistory() as any,
+            diagnostics: engine.getDiagnostics()
+          };
+        });
       }
     } else {
       // Creation mode: pre-game character building
@@ -250,9 +270,9 @@ export default function App() {
       const snap = engine.getSnapshot();
       const nextWorld = { ...snap.worldInfo, ...partial };
       const proposal: StateTransitionProposal = {
-        proposalId: `prop-player-world-${Date.now()}`,
-        requestId: `req-player-world-${Date.now()}`,
-        eventId: `evt-player-world-${Date.now()}`,
+        proposalId: generateProposalId('prop-player-world'),
+        requestId: generateProposalId('req-player-world'),
+        eventId: generateProposalId('evt-player-world'),
         expectedStateVersion: snap.stateVersion,
         source: 'PLAYER',
         turn: storyTurnCount,
@@ -268,6 +288,20 @@ export default function App() {
       const res = engine.submitProposal(proposal);
       if (res.success) {
         setWorldInfo(res.snapshot.worldInfo);
+        setEngineState(prev => {
+          const novelRecs = prev.novelHistoryRecords || [];
+          const derivedPassports = projectPassports(
+            res.snapshot,
+            engine.getHistory(),
+            novelRecs
+          );
+          return {
+            ...prev,
+            passports: derivedPassports,
+            historicalRecords: engine.getHistory() as any,
+            diagnostics: engine.getDiagnostics()
+          };
+        });
       }
     } else {
       // Creation mode: pre-game world building
@@ -285,13 +319,25 @@ export default function App() {
     setStoryTurnCount(1);
 
     // Initialize Sovereign Engine with genesis state
-    sovereignEngineRef.current = new SovereignEngine(
+    const genesisEngine = new SovereignEngine(
       worldInfo,
       character,
       [],
       1,
       1
     );
+    sovereignEngineRef.current = genesisEngine;
+
+    // Baseline Identity Passport Projection for Genesis State
+    const initialPassports = projectPassports(
+      genesisEngine.getSnapshot(),
+      [],
+      []
+    );
+    setEngineState(prev => ({
+      ...prev,
+      passports: initialPassports
+    }));
 
     // Initial opening prompt to GM
     const initialPrompt = `[서사 개막 선언]
@@ -364,11 +410,18 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
         // Succeeded: Authoritative engine is stored and UI state synchronized from verified snapshot
         sovereignEngineRef.current = hydratedEngine;
         const snap = hydratedEngine.getSnapshot();
+        const hist = hydratedEngine.getHistory();
+        const novelRecs = loadedPayload.engineState?.novelHistoryRecords || [];
+        const derivedPassports = projectPassports(snap, hist, novelRecs);
+
         setCharacter(snap.character);
         setWorldInfo(snap.worldInfo);
         setMessages(loadedPayload.messages || []);
         setStoryTurnCount(snap.turn);
-        setEngineState(loadedPayload.engineState || createEmptyEngineState());
+        setEngineState({
+          ...(loadedPayload.engineState || createEmptyEngineState()),
+          passports: derivedPassports
+        });
         setGameState('playing');
         setWaitingForRoll(null);
         setModelError(null);
@@ -508,32 +561,57 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
       let turnCommittedIds: string[] = [];
 
       // Check if server explicitly issued and authorized a candidate state mutation
-      const hasAuthorizedMutation = Boolean(metaData && data?.selectedCandidateId && !data?.isFallbackNonMutation);
+      const authorizedProposal: StateTransitionProposal | null = data?.authorizedProposal || null;
+      const authorizedCandidatePacket: CandidatePacket | null = data?.authorizedCandidatePacket || null;
 
-      if (hasAuthorizedMutation) {
-        // 1. Extract raw CandidatePacket from server-authorized metadata with canonical selectedCandidateId
-        const candidate: CandidatePacket = extractCandidatesFromMetadata(
-          metaData,
-          storyTurnCount,
-          currentWorldInfo.currentTime.formattedTime,
-          data.selectedCandidateId
-        );
+      const hasAuthorizedMutation = Boolean(
+        authorizedProposal &&
+        Array.isArray(authorizedProposal.actions) &&
+        authorizedProposal.actions.length > 0 &&
+        !data?.isFallbackNonMutation
+      );
 
-        // 2. Build Safe Proposal via Sovereign Proposal Builder with 8 Narrative Defense Rules
-        const snapshot = engine.getSnapshot();
-        const proposal = buildSafeProposalFromCandidate(
-          snapshot,
-          candidate,
-          storyTurnCount,
-          engine.getHistory()
-        );
-
-        // 3. Submit Proposal to Sovereign Engine Commit Gate (Atomic Validation & Commit)
-        const commitResult = engine.submitProposal(proposal);
+      if (hasAuthorizedMutation && authorizedProposal) {
+        // Direct Sovereign Commit Gate invocation using Server-PreAuthorized Proposal (Proposal A)
+        const commitResult = engine.submitProposal(authorizedProposal);
 
         if (commitResult.success) {
           currentWorldInfo = commitResult.snapshot.worldInfo;
           currentCharacter = commitResult.snapshot.character;
+
+          // Commit-First Novel History Observation & Promotion: ONLY on successful commit
+          const currentNovelRecords = (nextEngineState as any).novelHistoryRecords || [];
+          const candidateForObservation: CandidatePacket = authorizedCandidatePacket || ({
+            candidateId: String(data?.selectedCandidateId || 1),
+            turn: currentWorldInfo.dcHistory?.length || 1,
+            timestamp: new Date().toISOString(),
+            narrativeSummary: cleanText || '',
+            npcChanges: [],
+            inventoryChanges: [],
+            secretChanges: [],
+            statChanges: {},
+            currentTimeChange: undefined,
+            factCheckSummary: '',
+            physicalDefect: undefined
+          } as unknown as CandidatePacket);
+
+          const observationResult = observeCandidateNovelHistory(
+            currentNovelRecords,
+            candidateForObservation,
+            authorizedProposal,
+            commitResult.snapshot,
+            storyTurnCount,
+            engine.getHistory()
+          );
+          (nextEngineState as any).novelHistoryRecords = observationResult.updatedRecords;
+
+          // Identity Passport Projection: Deterministic derived-state from Authoritative State + History + NovelHistory
+          const derivedPassports = projectPassports(
+            commitResult.snapshot,
+            engine.getHistory(),
+            observationResult.updatedRecords
+          );
+          nextEngineState.passports = derivedPassports;
 
           turnVerdict = 'PASSED';
           turnCommittedIds = commitResult.newHistoricalRecords.map(r => r.recordId);
@@ -543,20 +621,22 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
             turn: storyTurnCount,
             timestamp: new Date().toISOString(),
             outcome: 'PASSED',
-            details: `Turn ${storyTurnCount} candidate packet committed cleanly (${commitResult.committedActionsCount} actions, StateVersion: ${commitResult.stateVersion}).`,
+            details: `Turn ${storyTurnCount} authorized proposal committed cleanly (${commitResult.committedActionsCount} actions, StateVersion: ${commitResult.stateVersion}).`,
             rejectedReasons: []
           };
 
           nextEngineState.historicalRecords = engine.getHistory() as any;
           nextEngineState.diagnostics = engine.getDiagnostics();
-          nextEngineState.pendingCandidates.push(candidate);
+          if (authorizedCandidatePacket) {
+            nextEngineState.pendingCandidates.push(authorizedCandidatePacket);
+          }
           nextEngineState.validationLogs.push(diagnosticLog);
 
           traceSteps.push({
             step: 'T6_VALIDATED',
             status: 'OK',
             timestamp: Date.now(),
-            details: 'Proposal passed all Sovereign Engine commit gate rules'
+            details: 'Authorized proposal passed all Sovereign Engine commit gate rules'
           });
 
           traceSteps.push({
@@ -573,7 +653,7 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
           const assistantMessage: StoryMessage = {
             id: `msg-${Date.now()}-assistant`,
             role: 'assistant',
-            content: rawOutputText,
+            content: cleanText,
             cleanText: cleanText || rawOutputText,
             metaData: metaData || undefined,
             rawMetaBlock: rawMetaBlock || undefined,
@@ -585,7 +665,7 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
           setMessages(prev => [...prev, assistantMessage]);
           setStoryTurnCount(prev => prev + 1);
         } else {
-          // Safe No-Commit: Canonical State remains unmodified & Narrative is isolated
+          // Safe No-Commit: Canonical State and Novel History remain unmodified & Narrative is isolated
           turnVerdict = 'REJECTED';
           turnRejections = [...commitResult.rejectedReasons, ...commitResult.conflictDetails];
 
@@ -611,7 +691,7 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
             step: 'T7_COMMITTED',
             status: 'REJECTED',
             timestamp: Date.now(),
-            details: 'Canonical state protected without mutation (Atomic safe no-commit)'
+            details: 'Canonical state and Novel History protected without mutation (Atomic safe no-commit)'
           });
 
           setModelError(`[VEIL_COMMIT_BLOCKED] 제안된 변이가 5.7 Commit Gate에서 거부되었습니다: ${commitResult.rejectedReasons.join('; ')}`);
@@ -634,7 +714,7 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
         const assistantMessage: StoryMessage = {
           id: `msg-${Date.now()}-assistant`,
           role: 'assistant',
-          content: rawOutputText,
+          content: cleanText,
           cleanText: cleanText || rawOutputText,
           metaData: undefined,
           rawMetaBlock: rawMetaBlock || undefined,

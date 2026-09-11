@@ -1,0 +1,14 @@
+=== START CASE Case_C: Normal Inventory Purchase Action ===
+[STAGE 1: PLAYER INPUT] "탁자 위에 놓인 오래된 비급 서첩을 발견하여 배낭에 넣고, 조경 선생에게 은화 1냥을 주고 수묵화 한 장을 구매한다." (Turn 3)
+[STAGE 2: LLM #1 PROMPT GENERATED] Length: 5255 chars
+[STAGE 3: CALLING LLM #1 API] Model: gemini-3.5-flash
+[STAGE 3: LLM #1 RESPONSE RECEIVED] Length: 3238 chars
+[STAGE 4: PARSE CANDIDATES] Count: 1
+[STAGE 5: RECOVERY GATE] Total: 1, Passed: 1, Quarantined: 0
+[STAGE 7: DIVERSITY GATE] Retained 1 diverse candidate(s)
+[STAGE 8: PRE-AUTH RESULTS] Total: 1, Allowed: 1, Rejected: 0
+[STAGE 9: PHASE 2 LLM #2 SYNTHESIZER] Selecting among 1 ALLOW candidate(s)...
+[STAGE 9: LLM #2 SYNTHESIZER RESPONSE RECEIVED] Length: 2855 chars
+[STAGE 10: CANDIDATE SELECTION] Selected ID: 1 (묵향 속에 가려진 연원과 법식의 교환)
+[STAGE 11: SOVEREIGN COMMIT] Success: true, New Records: 1
+[STAGE 12: STATE DIFF CHECK] Changed keys: stateVersion, turn, worldInfo, lastCommittedEventId, lastCommittedAt

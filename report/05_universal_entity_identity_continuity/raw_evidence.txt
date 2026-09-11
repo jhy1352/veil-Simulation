@@ -1,0 +1,86 @@
+
+> react-example@0.0.0 test:identity-continuity
+> tsx src/engine/index/entityIdentityResolverTest.ts
+
+
+=== Running VEIL Canonical Entity Identity Resolver Test Suite ===
+
+  ✓ Test A1: Exact match status
+  ✓ Test A2: Canonical ID preserved
+  ✓ Test A3: Proposal contains inventory action
+  ✓ Test A4: Proposal maintains canonical ID
+  ✓ Test B1: Recovered status without LLM ID
+  ✓ Test B2: Recovered exact canonical ID
+  ✓ Test B3: Recovered proposal contains inventory action
+  ✓ Test B4: Recovered ID used in proposal
+  ✓ Test C1: Ambiguous status for multiple matches
+  ✓ Test C2: Ambiguous item mutation is strictly blocked in proposal
+  ✓ Test D1: Conflict on non-existent claimed ID
+  ✓ Test D2: Conflict on name-ID mismatch
+  ✓ Test D3: Conflicting item mutation is blocked in proposal
+  ✓ Test E1: Index miss without evidence is AMBIGUOUS, not NOVEL
+  ✓ Test E2: No canonical ID issued
+  ✓ Test E3: Index miss without evidence is blocked from mutating state
+  ✓ Test F1: NOVEL status granted when positive evidence exists
+  ✓ Test F2: Resolver does NOT issue ID
+  ✓ Test F3: Engine allocates new canonical ID and produces proposal
+  ✓ Test F4: Engine generated item ID prefix
+  ✓ Test F5: Engine transient resolvedEntityId populated
+  ✓ Gate Test 1: Complete bundle passes gate
+  ✓ Gate Test 2: Missing entityReference bundle is quarantined
+  ✓ Gate Test 3: LLM-supplied resolvedEntityId is quarantined
+
+--- NPC Identity Continuity Tests ---
+  ✓ NPC Test 1: Exact match status
+  ✓ NPC Test 1: Preserves canonical ID
+  ✓ NPC Test 2: Recovered by alias
+  ✓ NPC Test 2: Matches canonical ID npc-abbot
+  ✓ NPC Test 3: Novel status with valid verifiedEventId
+  ✓ NPC Test 3: Resolver does not issue ID
+  ✓ NPC Test 4: Index miss without evidence is AMBIGUOUS
+  ✓ NPC Test 5: Conflict on bogus claimed ID
+
+--- Faction Identity Continuity Tests ---
+  ✓ Faction Test 1: Exact match
+  ✓ Faction Test 1: Preserves fac-shaolin ID
+  ✓ Faction Test 2: Recovered without claimed ID
+  ✓ Faction Test 2: Matches fac-shaolin
+  ✓ Faction Test 3: Novel faction with cause
+  ✓ Faction Test 4: Index miss without evidence is AMBIGUOUS
+
+--- Narrative Seed Identity Continuity Tests ---
+  ✓ Seed Test 1: Exact match
+  ✓ Seed Test 1: Matches seed-stolen-manual
+  ✓ Seed Test 2: Novel seed with cause
+  ✓ Seed Test 3: Index miss without evidence is AMBIGUOUS
+  ✓ Seed Test 4: Proposal contains RESOLVE_NARRATIVE_SEED
+  ✓ Seed Test 4: Resolves exact seed canonical ID
+
+--- Character Identity Continuity Tests ---
+  ✓ Character Test 1: Matches protagonist without claimed ID
+  ✓ Character Test 1: Canonical ID is protagonist
+  ✓ Character Test 2: Exact match with claimed protagonist ID
+  ✓ Character Test 2: Preserves protagonist ID
+  ✓ Character Test 3: Mismatched character name against claimed protagonist ID produces CONFLICT
+  ✓ Character Test 4: Conflicting character identity strictly blocks character stat mutations
+
+--- Full EOF Pipeline & SovereignEngine Commit Tests ---
+  ✓ EOF Test 1: Candidate passes Recovery Gate
+  ✓ EOF Test 2: Proposal contains all validated actions
+  ✓ EOF Test 3: EngineValidator approves the proposal
+  ✓ EOF Test 4: SovereignEngine successfully commits the proposal
+  ✓ EOF Test 5: Existing 철검 successfully removed
+  ✓ EOF Test 6: Novel 벽력탄 added with Engine-issued ID
+  ✓ EOF Test 7: Canonical NPC innerThought updated
+  ✓ EOF Test 8: Novel NPC added with Engine-issued ID
+  ✓ EOF Test 9: Novel Faction added with Engine-issued ID
+  ✓ EOF Test 10: Novel Seed added with Engine-issued ID
+  ✓ EOF Test 11: Immutable Historical Records created for all actions
+
+--- Red Team Adversarial Attack Tests ---
+  ✓ Red Team 1: Fabricated eventId is rejected as AMBIGUOUS
+  ✓ Red Team 2: Fabricated sourceNpcId is rejected as AMBIGUOUS
+  ✓ Red Team 3: Spoofed claimedEntityId on canonical entity triggers CONFLICT
+
+Results: 64 passed, 0 failed.
+

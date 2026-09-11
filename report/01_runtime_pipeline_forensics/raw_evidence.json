@@ -1,0 +1,447 @@
+[
+  {
+    "scenarioId": "SCENARIO-01-VALID-TURN",
+    "scenarioName": "Standard Valid Turn Pipeline",
+    "turn": 1,
+    "input": {
+      "playerPrompt": "성문 앞 경비대장에게 다가가 마을에서 일어난 이상 현상에 대해 묻는다.",
+      "source": "LLM",
+      "candidateBlock": [
+        {
+          "candidateId": 1,
+          "label": "경비대장 바란과의 대화",
+          "narrativeSummary": "경비대장이 북쪽 숲에서 목격된 푸른 도깨비불에 대해 경고한다.",
+          "rawMetadata": {
+            "factCheckSummary": "1) [검증]: 경비대장 및 소문 등록",
+            "newNpcs": [
+              {
+                "name": "바란",
+                "affiliation": "성문 경비대",
+                "metInStory": true,
+                "innerThought": "북쪽 숲의 이변을 경계하고 있다."
+              }
+            ],
+            "foreshadowSeeds": [
+              "북쪽 숲의 푸른 불꽃"
+            ],
+            "cameraOffscreenEvents": [
+              "북쪽 숲에 밤마다 기괴한 푸른 불빛이 나타난다."
+            ]
+          }
+        },
+        {
+          "candidateId": 2,
+          "label": "경비병들의 수군거림",
+          "narrativeSummary": "경비병들이 최근 실종된 상단에 대해 이야기한다.",
+          "rawMetadata": {
+            "factCheckSummary": "1) [검증]: 상단 실종 소문 등록",
+            "cameraOffscreenEvents": [
+              "남부 상단이 숲 입구에서 통째로 사라졌다."
+            ]
+          }
+        }
+      ]
+    },
+    "stages": {
+      "t0_player_input": {
+        "status": "OK",
+        "mutatedCanonicalState": true,
+        "details": "Player input treated as intent proposal only. Zero direct mutation."
+      },
+      "t1_t2_context_assembly": {
+        "status": "OK",
+        "kgEntitiesCount": 2,
+        "roadmapAttached": true
+      },
+      "t3_t4_candidate_generation": {
+        "status": "OK",
+        "candidateCount": 2,
+        "recoveryGateStatus": "PASSED",
+        "quarantinedCount": 0
+      },
+      "t5_translation_diversity": {
+        "status": "OK",
+        "diverseCount": 2
+      },
+      "t6_pre_auth_gate": {
+        "status": "ALLOW",
+        "allowedCount": 2,
+        "rejectedCount": 0,
+        "reasons": []
+      },
+      "t7_sovereign_commit_gate": {
+        "status": "COMMITTED",
+        "committedActionsCount": 1,
+        "stateVersionBefore": 1,
+        "stateVersionAfter": 2,
+        "zeroMutationVerified": true
+      }
+    },
+    "canonicalStateSnapshot": {
+      "stateVersion": 2,
+      "turn": 1,
+      "inventoryCount": 2,
+      "npcsCount": 0,
+      "seedsCount": 0,
+      "rumorsCount": 0
+    },
+    "verdict": "PASS",
+    "constitutionalEvidence": [
+      "제6조: Player input did not directly alter World State (Zero pre-commit mutation)",
+      "제12조: Canonical Commit Gate verified proposal atomically before mutating Canonical State",
+      "제16조: StateVersion advanced monotonically from 1 to 2"
+    ]
+  },
+  {
+    "scenarioId": "SCENARIO-02-ADVERSARIAL-CAUSALITY-DEFENSE",
+    "scenarioName": "Adversarial Causality Bypass Defense",
+    "turn": 2,
+    "input": {
+      "playerPrompt": "주변을 둘러본다.",
+      "source": "LLM",
+      "candidateBlock": [
+        {
+          "candidateId": 1,
+          "label": "돌발 아이템 발견 주장",
+          "narrativeSummary": "길가에 떨어진 전설의 엑스칼리버를 주워 가방에 넣는다.",
+          "rawMetadata": {
+            "factCheckSummary": "1) [위조]: 검증되지 않은 전설 무기 강제 추가",
+            "inventoryChanges": [
+              {
+                "name": "전설의 성검 엑스칼리버",
+                "quantity": 1,
+                "action": "add"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "stages": {
+      "t0_player_input": {
+        "status": "OK",
+        "mutatedCanonicalState": false,
+        "details": "Player input harmless inquiry."
+      },
+      "t1_t2_context_assembly": {
+        "status": "OK",
+        "kgEntitiesCount": 3,
+        "roadmapAttached": true
+      },
+      "t3_t4_candidate_generation": {
+        "status": "OK",
+        "candidateCount": 1,
+        "recoveryGateStatus": "QUARANTINED",
+        "quarantinedCount": 1
+      },
+      "t5_translation_diversity": {
+        "status": "OK",
+        "diverseCount": 0
+      },
+      "t6_pre_auth_gate": {
+        "status": "REJECT",
+        "allowedCount": 0,
+        "rejectedCount": 1,
+        "reasons": [
+          "QUARANTINED_BY_RECOVERY_GATE"
+        ]
+      },
+      "t7_sovereign_commit_gate": {
+        "status": "REJECTED_ZERO_MUTATION",
+        "committedActionsCount": 0,
+        "stateVersionBefore": 2,
+        "stateVersionAfter": 2,
+        "zeroMutationVerified": true
+      }
+    },
+    "canonicalStateSnapshot": {
+      "stateVersion": 2,
+      "turn": 1,
+      "inventoryCount": 2,
+      "npcsCount": 0,
+      "seedsCount": 0,
+      "rumorsCount": 0
+    },
+    "verdict": "PASS",
+    "constitutionalEvidence": [
+      "제2조 10항: 어떤 입력도 검증된 상태 전이 관문을 우회하여 세계를 변경할 수 없다.",
+      "제8조: LLM은 아이템 생성이나 상태 변경을 최종 확정할 수 없다.",
+      "제59조 Fail-Closed: Causality 미충족 인벤토리 변경은 거부되고 Canonical State는 완벽히 보호됨 (Zero Mutation)."
+    ]
+  },
+  {
+    "scenarioId": "SCENARIO-03-PLAYER-ACL-FORGERY-DEFENSE",
+    "scenarioName": "Player Direct ACL Privilege Escalation Defense",
+    "turn": 1,
+    "input": {
+      "source": "PLAYER",
+      "candidateBlock": [
+        {
+          "type": "SET_WORLD_METADATA",
+          "payload": {
+            "settingDescription": "플레이어가 전지전능한 신으로 강림함"
+          }
+        },
+        {
+          "type": "SET_CHARACTER_SECRET",
+          "payload": {
+            "secret": "나는 사실 절대신이다"
+          }
+        },
+        {
+          "type": "UPDATE_CHARACTER_STATS",
+          "payload": {
+            "strength": 999,
+            "agility": 999
+          }
+        }
+      ]
+    },
+    "stages": {
+      "t0_player_input": {
+        "status": "BLOCKED",
+        "mutatedCanonicalState": false,
+        "details": "Player privilege escalation intercepted by Immigration Gate & ACL firewall."
+      },
+      "t1_t2_context_assembly": {
+        "status": "SKIPPED",
+        "kgEntitiesCount": 0,
+        "roadmapAttached": false
+      },
+      "t3_t4_candidate_generation": {
+        "status": "SKIPPED",
+        "candidateCount": 0,
+        "recoveryGateStatus": "N/A",
+        "quarantinedCount": 0
+      },
+      "t5_translation_diversity": {
+        "status": "SKIPPED",
+        "diverseCount": 0
+      },
+      "t6_pre_auth_gate": {
+        "status": "REJECT",
+        "allowedCount": 0,
+        "rejectedCount": 1,
+        "reasons": [
+          "[PROVENANCE_VIOLATION] Canonical world metadata cannot be altered by source 'PLAYER' without independent canonical evidence.",
+          "[PROVENANCE_VIOLATION] Character secret cannot be modified or established by source 'PLAYER' without independent canonical evidence.",
+          "[INVALID_STAT_VALUE] Action #3: Stat 'strength' must be a finite integer between 1 and 30. Received: 999",
+          "[INVALID_STAT_VALUE] Action #3: Stat 'agility' must be a finite integer between 1 and 30. Received: 999"
+        ]
+      },
+      "t7_sovereign_commit_gate": {
+        "status": "REJECTED_ZERO_MUTATION",
+        "committedActionsCount": 0,
+        "stateVersionBefore": 2,
+        "stateVersionAfter": 2,
+        "zeroMutationVerified": true
+      }
+    },
+    "canonicalStateSnapshot": {
+      "stateVersion": 2,
+      "turn": 1,
+      "inventoryCount": 2,
+      "npcsCount": 0,
+      "seedsCount": 0,
+      "rumorsCount": 0
+    },
+    "verdict": "PASS",
+    "constitutionalEvidence": [
+      "제7조: Player Input은 세계의 사실이 아니며 권한 상승을 수행할 수 없다.",
+      "제14조: Canonical Commit Gate는 변경 출처(ACL)와 규칙을 검증하여 권한 없는 변경을 원천 차단한다.",
+      "제84조 절대금지: Player Input의 직접 Canonical State mutation 금지."
+    ]
+  },
+  {
+    "scenarioId": "SCENARIO-04-STALE-STATE-AND-IDEMPOTENCY",
+    "scenarioName": "Stale State Version Conflict & Idempotency Defense",
+    "turn": 2,
+    "input": {
+      "source": "LLM",
+      "candidateBlock": [
+        {
+          "proposalId": "prop-req-turn-4-unique-1",
+          "requestId": "req-turn-4-unique-1",
+          "eventId": "evt-turn-4-unique-1",
+          "expectedStateVersion": 2,
+          "source": "LLM",
+          "turn": 2,
+          "timestamp": "2026-09-05T01:00:09.128Z",
+          "intentSummary": "Discovered library rumor",
+          "actions": [
+            {
+              "type": "ADD_RUMOR",
+              "payload": {
+                "rumor": "도서관에 고대 비전서가 보관되어 있다는 소문이 돌기 시작했다."
+              }
+            }
+          ],
+          "meaningTree": {
+            "atom": "INTENT",
+            "scope": "PROPOSAL",
+            "value": "Discovered library rumor",
+            "children": [
+              {
+                "atom": "ACTION",
+                "scope": "PROPOSAL",
+                "value": "ADD_RUMOR",
+                "fields": {
+                  "actionType": "ADD_RUMOR",
+                  "payload": {
+                    "rumor": "도서관에 고대 비전서가 보관되어 있다는 소문이 돌기 시작했다."
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "proposalId": "prop-req-stale-attack-2",
+          "requestId": "req-stale-attack-2",
+          "eventId": "evt-stale-attack-2",
+          "expectedStateVersion": 2,
+          "source": "LLM",
+          "turn": 2,
+          "timestamp": "2026-09-05T01:00:09.129Z",
+          "intentSummary": "Stale update attack",
+          "actions": [
+            {
+              "type": "ADD_RUMOR",
+              "payload": {
+                "rumor": "위조된 소문"
+              }
+            }
+          ],
+          "meaningTree": {
+            "atom": "INTENT",
+            "scope": "PROPOSAL",
+            "value": "Stale update attack",
+            "children": [
+              {
+                "atom": "ACTION",
+                "scope": "PROPOSAL",
+                "value": "ADD_RUMOR",
+                "fields": {
+                  "actionType": "ADD_RUMOR",
+                  "payload": {
+                    "rumor": "위조된 소문"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "stages": {
+      "t0_player_input": {
+        "status": "OK",
+        "mutatedCanonicalState": false,
+        "details": "Standard input"
+      },
+      "t1_t2_context_assembly": {
+        "status": "OK",
+        "kgEntitiesCount": 3,
+        "roadmapAttached": true
+      },
+      "t3_t4_candidate_generation": {
+        "status": "OK",
+        "candidateCount": 2,
+        "recoveryGateStatus": "PASSED",
+        "quarantinedCount": 0
+      },
+      "t5_translation_diversity": {
+        "status": "OK",
+        "diverseCount": 2
+      },
+      "t6_pre_auth_gate": {
+        "status": "OK",
+        "allowedCount": 1,
+        "rejectedCount": 1,
+        "reasons": [
+          "[STALE_STATE_CONFLICT] Proposal expected state version 2, but current sovereign state is at version 3."
+        ]
+      },
+      "t7_sovereign_commit_gate": {
+        "status": "COMMITTED_THEN_REJECTED_STALE",
+        "committedActionsCount": 1,
+        "stateVersionBefore": 2,
+        "stateVersionAfter": 3,
+        "zeroMutationVerified": true
+      }
+    },
+    "canonicalStateSnapshot": {
+      "stateVersion": 3,
+      "turn": 2,
+      "inventoryCount": 2,
+      "npcsCount": 0,
+      "seedsCount": 0,
+      "rumorsCount": 1
+    },
+    "verdict": "PASS",
+    "constitutionalEvidence": [
+      "제16조 State Version: 오래된 상태를 기반으로 생성된 Transition의 조용한 덮어쓰기 방지",
+      "제17조 Idempotency: 동일 requestId 중복 요청의 재실행 및 중복 세계 사건 발생 원천 방지"
+    ]
+  },
+  {
+    "scenarioId": "SCENARIO-05-SOVEREIGN-STORAGE-HYDRATION",
+    "scenarioName": "Sovereign Storage Hydration & Historical Chain Replay",
+    "turn": 2,
+    "input": {
+      "source": "STORAGE_HYDRATION",
+      "candidateBlock": {
+        "historyLength": 2
+      }
+    },
+    "stages": {
+      "t0_player_input": {
+        "status": "N/A",
+        "mutatedCanonicalState": false,
+        "details": "Storage load"
+      },
+      "t1_t2_context_assembly": {
+        "status": "N/A",
+        "kgEntitiesCount": 0,
+        "roadmapAttached": false
+      },
+      "t3_t4_candidate_generation": {
+        "status": "N/A",
+        "candidateCount": 0,
+        "recoveryGateStatus": "N/A",
+        "quarantinedCount": 0
+      },
+      "t5_translation_diversity": {
+        "status": "N/A",
+        "diverseCount": 0
+      },
+      "t6_pre_auth_gate": {
+        "status": "VERIFIED",
+        "allowedCount": 1,
+        "rejectedCount": 0,
+        "reasons": []
+      },
+      "t7_sovereign_commit_gate": {
+        "status": "HYDRATED_AUTHORITATIVE",
+        "committedActionsCount": 2,
+        "stateVersionBefore": 3,
+        "stateVersionAfter": 3,
+        "zeroMutationVerified": true
+      }
+    },
+    "canonicalStateSnapshot": {
+      "stateVersion": 3,
+      "turn": 2,
+      "inventoryCount": 2,
+      "npcsCount": 0,
+      "seedsCount": 0,
+      "rumorsCount": 1
+    },
+    "verdict": "PASS",
+    "constitutionalEvidence": [
+      "제51조 Storage Version Isolation & 제53조 Session Restoration",
+      "제54조 Cloud Data Trust Boundary: Load된 데이터는 Replay 무결성 검증을 거친 후만 승격됨",
+      "제59조 Fail-Closed: 변조된 역사 기록은 즉시 예외 발생하며 조용한 로딩을 거부함"
+    ]
+  }
+]

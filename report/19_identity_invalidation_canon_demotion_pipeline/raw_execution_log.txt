@@ -1,0 +1,176 @@
+
+> react-example@0.0.0 test:novel-lifecycle
+> tsx src/engine/index/novelLifecycleTest.ts
+
+=== Running VEIL Novel History / Canon Lifecycle Test Suite ===
+
+--- [Case 8] Existing Active Canon Protection ---
+  ✓ Case 8: "철수" is recognized as Active Canon in current state
+  ✓ Case 8: "철수" is NOT recorded in Novel History (Active Canon Defense)
+  ✓ Case 8: Novel History records remain empty
+  ✓ Case 8: Resolver recovers existing Canon ID
+  ✓ Case 8: Resolved ID is npc-chulsoo
+
+--- [Case 6] UNMET NPC Not Misjudged as Active Canon ---
+  ✓ Case 6: "은둔고수" (metInStory: false) is NOT Active Canon
+  ✓ Case 6: "은둔고수" successfully recorded in Novel History upon encounter
+  ✓ Case 6: Lifecycle is NOVEL
+
+--- [Case 9] Existing Inactive Canon Protection ---
+  ✓ Case 9: Deceased NPC committed to Engine
+  ✓ Case 9: "영희" recognized as Inactive Canon (DEAD)
+  ✓ Case 9: "빈 약병" recognized as Inactive Canon (qty 0)
+  ✓ Case 9: "과거 살인사건의 진상" recognized as Inactive Canon (resolved seed)
+  ✓ Case 9: Deceased NPC blocked from Novel History
+  ✓ Case 9: Resurrection action completely blocked by proposal parser
+
+--- [Case 2] Passive Novel Mention Stays NOVEL ---
+  ✓ Case 2: "지나가던 상인" recorded in Novel History
+  ✓ Case 2: Lifecycle is strictly NOVEL
+  ✓ Case 2: No canonicalId assigned
+  ✓ Case 2: Promoted count is 0
+  ✓ Case 2: evaluateCanonPromotion rejects passive mention
+  ✓ Case 2: Rejection reason is PASSIVE_MENTION_BLOCKED
+
+--- [Case 3] Fake verifiedEventId Rejection ---
+  ✓ Case 3: Fake verifiedEventId produces 0 promotions
+  ✓ Case 3: NPC stays NOVEL
+  ✓ Case 3: No canonicalId assigned
+
+--- [Case 4] Fake sourceNpcId Rejection ---
+  ✓ Case 4: Fake sourceNpcId produces 0 promotions
+  ✓ Case 4: Item stays NOVEL
+  ✓ Case 4: Item canonicalId is undefined
+
+--- [Case 5] Fake evidenceIds Rejection ---
+  ✓ Case 5: Fake evidenceIds produce 0 promotions
+  ✓ Case 5: NPC stays NOVEL
+
+--- [Case 1] New Novel Entity as Active Actor -> Immediately CANON_LINKED ---
+  ✓ Case 1: Sovereign Engine successfully committed active proposal
+  ✓ Case 1: Promoted count >= 2 (both NPC and Item)
+  ✓ Case 1: "약초꾼 노인" found in Novel History
+  ✓ Case 1: "약초꾼 노인" immediately promoted to CANON_LINKED
+  ✓ Case 1: Linked canonical ID is npc-herbalist-elder
+  ✓ Case 1: Linked at turn 4
+  ✓ Case 1: "백년설삼" found in Novel History
+  ✓ Case 1: "백년설삼" immediately promoted to CANON_LINKED
+  ✓ Case 1: Linked canonical ID is item-ginseng
+
+--- [Case 7] Existing Novel Entity Promoted on Subsequent Turn ---
+  ✓ Case 7: Merchant was previously NOVEL
+  ✓ Case 7: Sovereign Engine committed sword proposal
+  ✓ Case 7: Existing Novel merchant promoted to CANON_LINKED
+  ✓ Case 7: Correct canonicalId assigned
+  ✓ Case 7: Linked at turn 5
+
+--- [Case 10] Commit Failure -> Novel History Untouched ---
+  ✓ Case 10: Engine rejects proposal with stale stateVersion
+  ✓ Case 10: Rejected NPC is NOT present in Novel History
+  ✓ Case 10: Novel History count strictly unchanged
+
+--- [Case 11] LLM Signal Injection Block ---
+  ✓ Case 11: Adversarial record created in Novel History
+  ✓ Case 11: Lifecycle remains strictly NOVEL
+  ✓ Case 11: Untrusted relatedSeedId filtered out
+  ✓ Case 11: Untrusted isRelevantToProtagonist filtered out
+  ✓ Case 11: evaluateCanonPromotion rejects spoofed claims
+  ✓ Case 11: Rejection reason is NO_CANON_PROMOTION_SIGNAL
+
+--- [Case 12] CANON_LINKED Permanent Invariant ---
+  ✓ Case 12: Lifecycle remains CANON_LINKED (never demoted)
+  ✓ Case 12: Canonical ID remains intact
+  ✓ Case 12: Seen count incremented
+
+--- [Case 13] Candidate Recovery Gate Failure ---
+  ✓ Case 13: Candidate quarantined by Recovery Gate
+  ✓ Case 13: 0 passed candidates
+  ✓ Case 13: Novel History records remain untouched
+
+--- [Case 14] Real But Unrelated Authoritative Event -> Rejection ---
+  ✓ Case 14: Real authoritative warehouse fire event committed
+  ✓ Case 14: Real inventory commit succeeded on engine
+  ✓ Case 14: Promoted count is strictly 0 for unrelated authoritative event
+  ✓ Case 14: "우연히 마주친 낚시꾼" recorded in Novel History
+  ✓ Case 14: "우연히 마주친 낚시꾼" stays strictly NOVEL
+  ✓ Case 14: No canonicalId assigned to unrelated event actor
+  ✓ Case 14: "낡은 낚싯대" recorded in Novel History
+  ✓ Case 14: "낡은 낚싯대" stays strictly NOVEL
+  ✓ Case 14: No canonicalId assigned to item with unrelated event
+
+--- [Case 15] Real Related Authoritative Event -> Canon Promotion ---
+  ✓ Case 15: Real related boatman rescue event committed
+  ✓ Case 15: Real related gift proposal committed on engine
+  ✓ Case 15: Both NPC and Item promoted for related authoritative event
+  ✓ Case 15: "강가의 뱃사공" found in Novel History
+  ✓ Case 15: "강가의 뱃사공" promoted to CANON_LINKED
+  ✓ Case 15: Canonical ID assigned to boatman
+  ✓ Case 15: "명품 노" found in Novel History
+  ✓ Case 15: "명품 노" promoted to CANON_LINKED
+  ✓ Case 15: Canonical ID assigned to oar
+
+--- [Case 16] Inactive Canon Statuses Are Not Demotion ---
+  ✓ Case 16: DEAD status does not trigger demotion
+  ✓ Case 16: Reason is CANON_INACTIVE_STATUS_NOT_DEMOTION
+  ✓ Case 16: CONSUMED status does not trigger demotion
+  ✓ Case 16: RESOLVED seed does not trigger demotion
+  ✓ Case 16: Pure inactivity does not trigger demotion
+  ✓ Case 16: Reason is INACTIVITY_ONLY_NOT_DEMOTION
+
+--- [Case 17] Unverified LLM Claims and Fake Evidence Rejection ---
+  ✓ Case 17: Pure LLM claim is rejected
+  ✓ Case 17: Reason is LLM_CLAIM_REJECTED
+  ✓ Case 17: Fake invalidation event is rejected
+  ✓ Case 17: Reason is FAKE_OR_UNVERIFIED_EVENT
+
+--- [Case 18] Real But Unrelated Event Invalidation Rejection ---
+  ✓ Case 18: Fire event commit succeeded on engine
+  ✓ Case 18: Unrelated authoritative event is rejected for demotion
+  ✓ Case 18: Reason is UNRELATED_EVENT
+
+--- [Case 19] Authoritative Causal Invalidation & Demotion Lineage Tracking ---
+  ✓ Case 19: Fraud event commit succeeded on engine
+  ✓ Case 19: Authoritative invalidation succeeds
+  ✓ Case 19: Reason is AUTHORITATIVE_CAUSAL_INVALIDATION
+  ✓ Case 19: Lifecycle transitions to DEMOTED_NOVEL
+  ✓ Case 19: demotedAtTurn is correctly recorded
+  ✓ Case 19: demotedFromCanonicalId is preserved
+  ✓ Case 19: transitionHistory is present
+  ✓ Case 19: transitionHistory has 3 entries
+  ✓ Case 19: Last transition fromDomain is CANON
+  ✓ Case 19: Last transition toDomain is NOVEL
+  ✓ Case 19: Version incremented to 3
+  ✓ Case 19: predecessorId is npc-chulsoo
+
+--- [Case 20] Genesis Canon Demotion ---
+  ✓ Case 20: Genesis canon demoted to DEMOTED_NOVEL
+  ✓ Case 20: demotedFromCanonicalId preserved
+  ✓ Case 20: transitionHistory created
+  ✓ Case 20: transitionHistory has 2 entries
+  ✓ Case 20: Initial entry fromDomain is CANON
+  ✓ Case 20: Second entry is CANON -> NOVEL
+  ✓ Case 20: Version is 2
+
+--- [Case 21] Candidate Declaration to Canon Demotion Pipeline ---
+  ✓ Case 21.1: Fraud event successfully committed to Sovereign Engine
+  ✓ Case 21.1: Proposal includes untrusted declarations
+  ✓ Case 21.1: Exactly 1 declaration attached
+  ✓ Case 21.1: Untrusted declaration was NOT promoted to canonical actions
+  ✓ Case 21.1: Untrusted declaration was NOT converted to verifiedClaims
+  ✓ Case 21.1: Successfully demoted 1 Canon entity on committed invalidation
+  ✓ Case 21.1: Demoted record found in updated records
+  ✓ Case 21.1: Lifecycle is DEMOTED_NOVEL
+  ✓ Case 21.1: demotedFromCanonicalId preserved
+  ✓ Case 21.1: sourceEventIds includes fraudEvId
+  ✓ Case 21.1: Duplicate demotion for same event is prevented
+  ✓ Case 21.2: Movement event rejected from triggering demotion
+  ✓ Case 21.2: Movement event demote is false
+  ✓ Case 21.2: Reason is NON_IDENTITY_INVALIDATION_EVENT
+  ✓ Case 21.3: Uncommitted proposal declarations are ignored
+  ✓ Case 21.3: Uncommitted event demote is false
+  ✓ Case 21.3: Reason is FAKE_OR_UNVERIFIED_EVENT
+  ✓ Case 21.4: Pure LLM claim demote is false
+  ✓ Case 21.4: Reason is LLM_CLAIM_REJECTED
+
+Results: 126 passed, 0 failed.
+

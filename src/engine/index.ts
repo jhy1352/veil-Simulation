@@ -6,4 +6,8 @@ export * from './proposalParser';
 export * from './mutationBoundary';
 export * from './immigrationGate';
 export * from './index/index';
+export * from './index/novelHistory';
+export * from './index/npcInformationTypes';
+export * from './index/npcInformationAction';
+export * from './index/npcInformationProjection';
 export * from './language/index';

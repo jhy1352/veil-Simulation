@@ -13,8 +13,7 @@
  *    - Selection tampering strictly fails-closed to non-mutation.
  */
 
-import { parseCandidatesBlock, VeilCandidate } from '../../../server.ts';
-import { runCandidateRecoveryGate } from './candidateRecoveryGate.ts';
+import { parseCandidatesBlock, VeilCandidate, runCandidateRecoveryGate } from './candidateRecoveryGate.ts';
 import { extractCandidatesFromMetadata } from '../../utils/engineValidator.ts';
 import { buildSafeProposalFromCandidate } from '../proposalParser.ts';
 import { filterDiverseCandidates } from './diversity.ts';
@@ -54,15 +53,12 @@ export function runCandidateIdentityBDesignSuite(): BDesignTestReport {
   console.log('================================================================\n');
 
   const baseMetadata = {
-    factCheckSummary: '검증 완료',
     foreshadowSeeds: ['Seed A'],
     cameraOffscreenEvents: ['Event A'],
-    currentChapter: '1장 시작',
-    upcomingChapters: ['2장 전개', '3장 위기', '4장 결말'],
-    statChanges: '변동 없음',
-    recommendedDC: 10,
-    dcReason: '기본 판정',
-    contextVerificationDeclaration: '정사 맥락 일치'
+    chapterChanges: {
+      currentChapter: '1장 시작',
+      upcomingChapters: ['2장 전개', '3장 위기', '4장 결말']
+    }
   };
 
   // Test 1: Missing candidateId from LLM -> Parser assigns canonical 1..N
@@ -247,7 +243,7 @@ export function runCandidateIdentityBDesignSuite(): BDesignTestReport {
     "candidateId": 200,
     "label": "제2안: 전술적 우회",
     "narrativeSummary": "적의 측면으로 우회한다",
-    "rawMetadata": ${JSON.stringify({ ...baseMetadata, recommendedDC: 12 })}
+    "rawMetadata": ${JSON.stringify({ ...baseMetadata, cameraOffscreenEvents: ['Event B'] })}
   }
 ]
 [CANDIDATES_END]

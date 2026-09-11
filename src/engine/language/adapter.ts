@@ -6,7 +6,6 @@
  */
 
 import {
-  ActionType,
   ProposalSource,
   StateTransitionProposal,
   TransitionAction,
@@ -14,6 +13,8 @@ import {
 import { MeaningNode, Scope } from './types';
 import { assertValidMeaningTree } from './grammar';
 import { projectMeaningTreeToRuntimeActions } from './runtimeProjection';
+
+export { meaningNodeToAction } from './runtimeActionAdapter';
 
 export interface MeaningTreeProposalOptions {
   proposalId?: string;
@@ -108,48 +109,45 @@ export function actionToMeaningNode(action: TransitionAction, scope: Scope = 'PR
 }
 
 /**
- * Converts a validated MeaningNode into a standard VEIL TransitionAction if applicable.
+ * Classifies entity role for identity matching
  */
-export function meaningNodeToAction(node: MeaningNode): TransitionAction | null {
-  assertValidMeaningTree(node);
-
-  if (node.atom === 'ACTION') {
-    const actionType = (node.fields?.actionType || node.value) as ActionType;
-    if (actionType && typeof actionType === 'string') {
-      let payload: any = {};
-      if (node.fields?.payload && typeof node.fields.payload === 'object') {
-        payload = node.fields.payload;
-      } else if (node.fields) {
-        const { actionType: _at, description: _d, category: _c, ...restFields } = node.fields;
-        if (Object.keys(restFields).length > 0) {
-          payload = restFields;
-        }
-      }
-
-      return {
-        type: actionType,
-        payload,
-        description: node.fields?.description as string | undefined,
-        category: node.fields?.category as any,
-      };
-    }
+export function classifyEntityRole(
+  roleObj: { role?: string; entityId?: string; entityName?: string; entityType?: string; status?: string },
+  context?: any
+): 'PLAYER' | 'NPC' | 'ENVIRONMENT' | 'UNKNOWN' {
+  if (roleObj.status && roleObj.status !== 'RESOLVED') {
+    return 'UNKNOWN';
   }
+  if (roleObj.entityType === 'PLAYER') return 'PLAYER';
+  if (roleObj.entityType === 'NPC') return 'NPC';
+  if (context) {
+    const protId = context.protagonistId || context.characterId;
+    const protName = context.protagonistName || context.characterName;
+    const aliases = context.protagonistAliases || context.aliases || [];
+    const npcs = context.npcs || [];
+    const npcIds = context.knownNpcIds || [];
+    const npcNames = context.knownNpcNames || [];
 
-  return null;
+    if (roleObj.entityId && protId === roleObj.entityId) return 'PLAYER';
+    if (roleObj.entityName && (protName === roleObj.entityName || aliases.includes(roleObj.entityName))) return 'PLAYER';
+    if (roleObj.entityId && (npcs.some((n: any) => n.id === roleObj.entityId) || npcIds.includes(roleObj.entityId))) return 'NPC';
+    if (roleObj.entityName && (npcs.some((n: any) => n.name === roleObj.entityName) || npcNames.includes(roleObj.entityName))) return 'NPC';
+  }
+  return 'UNKNOWN';
 }
 
 /**
  * Extracts all TransitionActions and Claims from a root MeaningTree recursively.
  * Uses the single deterministic Runtime Projection for actions.
  */
-export function extractActionsAndClaimsFromMeaningTree(root: MeaningNode): {
+export function extractActionsAndClaimsFromMeaningTree(root: MeaningNode, context?: any): {
   actions: TransitionAction[];
   rawClaims: string[];
   intentSummary?: string;
 } {
   assertValidMeaningTree(root);
 
-  const projection = projectMeaningTreeToRuntimeActions(root);
+  const projection = projectMeaningTreeToRuntimeActions(root, context);
   const rawClaims: string[] = [];
   let intentSummary: string | undefined;
 

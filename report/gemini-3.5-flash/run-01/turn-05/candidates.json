@@ -1,0 +1,55 @@
+{
+  "rawCandidatesBlock": [
+    {
+      "label": "중량감 있는 돌문의 강제 개방 (근력 판정)",
+      "narrativeSummary": "기전은 움직였으나 오랫동안 먼지와 돌가루가 엉겨 붙어 굳어버린 돌문은 쉽게 열리지 않습니다. 연화는 온 힘을 다해 어깨와 손바닥으로 문을 밀어내어 온전한 틈새를 만들어야 합니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "강제로 열린 문 틈새로 새어 나간 기전의 소음"
+        ]
+      },
+      "candidateId": 1
+    },
+    {
+      "label": "불안정한 공동 바닥의 낙석 회피 (민첩 판정)",
+      "narrativeSummary": "돌문이 열리며 웅장한 진동이 울리고, 틈새 너머 공동의 천장에서 거대한 고드름 모양의 석순과 암석 조각들이 바닥으로 떨어지기 시작합니다. 신속하게 몸을 피해 경계를 넘어섭니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "무너져 내리는 지하 공동의 천장 균열"
+        ]
+      },
+      "candidateId": 2
+    },
+    {
+      "label": "끝없는 심연의 시각적 압박 극복 (의지 판정)",
+      "narrativeSummary": "좁은 미로를 벗어나 갑작스럽게 마주한 광활하고 어두운 공동의 규모에 압도당합니다. 어둠의 깊이가 가늠되지 않는 열린 공간에서 일어나는 또 다른 형태의 공포를 정신력으로 이겨내야 합니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "무한한 어둠 속에서 느껴지는 아득한 시선"
+        ]
+      },
+      "candidateId": 3
+    }
+  ],
+  "totalParsedCount": 1,
+  "preAuthResults": [
+    {
+      "candidateId": 1,
+      "label": "중량감 있는 돌문의 강제 개방 (근력 판정)",
+      "narrativeSummary": "기전은 움직였으나 오랫동안 먼지와 돌가루가 엉겨 붙어 굳어버린 돌문은 쉽게 열리지 않습니다. 연화는 온 힘을 다해 어깨와 손바닥으로 문을 밀어내어 온전한 틈새를 만들어야 합니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "강제로 열린 문 틈새로 새어 나간 기전의 소음"
+        ]
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    }
+  ],
+  "allowedIds": [],
+  "rejectedIds": [
+    1
+  ]
+}

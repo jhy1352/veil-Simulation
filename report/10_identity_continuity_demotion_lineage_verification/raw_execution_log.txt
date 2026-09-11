@@ -1,0 +1,274 @@
+=== Running VEIL Novel History / Canon Lifecycle Test Suite ===
+
+--- [Case 8] Existing Active Canon Protection ---
+  ✓ Case 8: "철수" is recognized as Active Canon in current state
+  ✓ Case 8: "철수" is NOT recorded in Novel History (Active Canon Defense)
+  ✓ Case 8: Novel History records remain empty
+  ✓ Case 8: Resolver recovers existing Canon ID
+  ✓ Case 8: Resolved ID is npc-chulsoo
+
+--- [Case 6] UNMET NPC Not Misjudged as Active Canon ---
+  ✓ Case 6: "은둔고수" (metInStory: false) is NOT Active Canon
+  ✓ Case 6: "은둔고수" candidate parsed as CandidatePacket
+  ✓ Case 6: "은둔고수" recorded into Novel History upon narrative appearance
+  ✓ Case 6: "은둔고수" lifecycle is NOVEL (not promoted prematurely)
+  ✓ Case 6: Novel ID assigned with deterministic prefix
+
+--- [Case 2] Novel Candidate Without Canonical Mutation -> Stays NOVEL ---
+  ✓ Case 2: Candidate without mutation creates NOVEL record
+  ✓ Case 2: "지나가던 상인" lifecycle is NOVEL
+  ✓ Case 2: Novel entity has no canonicalId
+  ✓ Case 2: Promoted count is 0
+
+--- [Case 3] Direct Spoofed lifecycle: CANON_LINKED -> Sanitized to NOVEL ---
+  ✓ Case 3: Candidate with spoofed CANON_LINKED processed
+  ✓ Case 3: Lifecycle sanitized to NOVEL
+  ✓ Case 3: Spoofed canonicalId stripped
+  ✓ Case 3: Promoted count is 0
+
+--- [Case 4] Candidate Claiming Arbitrary Existing Canon ID -> Sanitized to NOVEL ---
+  ✓ Case 4: Candidate spoofing npc-chulsoo processed
+  ✓ Case 4: Lifecycle is NOVEL
+  ✓ Case 4: Impostor canonicalId is empty
+  ✓ Case 4: Promoted count is 0
+
+--- [Case 5] Fake or Fabricated evidenceIds -> Rejection ---
+  ✓ Case 5: Fake evidenceIds produce 0 promotions
+  ✓ Case 5: NPC stays NOVEL
+
+--- [Case 1] New Novel Entity as Active Actor -> Immediately CANON_LINKED ---
+  ✓ Case 1: Sovereign Engine successfully committed active proposal
+  ✓ Case 1: Promoted count >= 2 (both NPC and Item)
+  ✓ Case 1: "약초꾼 노인" found in Novel History
+  ✓ Case 1: "약초꾼 노인" immediately promoted to CANON_LINKED
+  ✓ Case 1: Linked canonical ID is npc-herbalist-elder
+  ✓ Case 1: Linked at turn 4
+  ✓ Case 1: "백년설삼" found in Novel History
+  ✓ Case 1: "백년설삼" immediately promoted to CANON_LINKED
+  ✓ Case 1: Linked canonical ID is item-ginseng
+
+--- [Case 7] Existing Novel Entity Promoted on Subsequent Turn ---
+  ✓ Case 7: Merchant was NOVEL before turn 5
+  ✓ Case 7: Merchant active proposal committed to Sovereign Engine
+  ✓ Case 7: Promoted count is 1
+  ✓ Case 7: Merchant found in Novel History
+  ✓ Case 7: Merchant promoted from NOVEL to CANON_LINKED
+  ✓ Case 7: Linked canonical ID is npc-merchant-traveler
+  ✓ Case 7: Linked at turn 5
+
+--- [Case 9] Historical Record Preservation Across Turn Increments ---
+  ✓ Case 9: Herbalist elder persists in Novel History at turn 6
+  ✓ Case 9: Herbalist elder remains CANON_LINKED
+  ✓ Case 9: Merchant persists in Novel History at turn 6
+  ✓ Case 9: Merchant remains CANON_LINKED
+  ✓ Case 9: "주막 주모" recorded as NOVEL at turn 6
+
+--- [Case 10] Dead/Dormant/Consumed Status Changes Do Not Mutate Novel History Records ---
+  ✓ Case 10: Proposal with dead/consumed/resolved actions committed to engine
+  ✓ Case 10: NPC herbalist elder is DEAD in committed state
+  ✓ Case 10: Item ginseng is consumed (quantity 0) in committed state
+  ✓ Case 10: Novel history for herbalist elder still exists
+  ✓ Case 10: Novel history for herbalist elder remains CANON_LINKED (historical record immutable)
+  ✓ Case 10: Herbalist canonicalId preserved
+  ✓ Case 10: Novel history for ginseng still exists
+  ✓ Case 10: Novel history for ginseng remains CANON_LINKED (historical record immutable)
+  ✓ Case 10: Ginseng canonicalId preserved
+
+--- [Case 11] Deterministic Causal Evidence Evaluation ---
+  ✓ Case 11: Valid actor in proposal actions passes causal link check
+  ✓ Case 11: Spoofed actor not in actions fails causal link check
+  ✓ Case 11: Valid acquisition item passes causal link check
+  ✓ Case 11: Arbitrary inventory mutation without acquisition fails causal link check
+  ✓ Case 11: Acquisition with matching verifiedEventId passes causal link check
+  ✓ Case 11: Acquisition with fake/mismatched eventId fails causal link check
+
+--- [Case 12] Pure Passive / Non-Actor Mentions in Proposals -> Rejection ---
+  ✓ Case 12: Scene description mentioning passive spectator committed to engine
+  ✓ Case 12: Promoted count is 0 for passive spectator
+  ✓ Case 12: "구경꾼 소년" recorded in Novel History
+  ✓ Case 12: "구경꾼 소년" lifecycle is strictly NOVEL (not promoted)
+  ✓ Case 12: "구경꾼 소년" has no canonicalId
+
+--- [Case 13] LLM-Claimed Promotion Without Committed Engine Proposal -> Rejection ---
+  ✓ Case 13: 0 passed candidates
+  ✓ Case 13: Novel History records remain untouched
+
+--- [Case 14] Real But Unrelated Authoritative Event -> Rejection ---
+  ✓ Case 14: Real authoritative warehouse fire event committed
+  ✓ Case 14: Real inventory commit succeeded on engine
+  ✓ Case 14: Promoted count is strictly 0 for unrelated authoritative event
+  ✓ Case 14: "우연히 마주친 낚시꾼" recorded in Novel History
+  ✓ Case 14: "우연히 마주친 낚시꾼" stays strictly NOVEL
+  ✓ Case 14: No canonicalId assigned to unrelated event actor
+  ✓ Case 14: "낡은 낚싯대" recorded in Novel History
+  ✓ Case 14: "낡은 낚싯대" stays strictly NOVEL
+  ✓ Case 14: No canonicalId assigned to item with unrelated event
+
+--- [Case 15] Real Related Authoritative Event -> Canon Promotion ---
+  ✓ Case 15: Real related boatman rescue event committed
+  ✓ Case 15: Real related gift proposal committed on engine
+  ✓ Case 15: Both NPC and Item promoted for related authoritative event
+  ✓ Case 15: "강가의 뱃사공" found in Novel History
+  ✓ Case 15: "강가의 뱃사공" promoted to CANON_LINKED
+  ✓ Case 15: Canonical ID assigned to boatman
+  ✓ Case 15: "명품 노" found in Novel History
+  ✓ Case 15: "명품 노" promoted to CANON_LINKED
+  ✓ Case 15: Canonical ID assigned to oar
+
+--- [Case 16] Inactive Canon Statuses Are Not Demotion ---
+  ✓ Case 16: DEAD status does not trigger demotion
+  ✓ Case 16: Reason is CANON_INACTIVE_STATUS_NOT_DEMOTION
+  ✓ Case 16: CONSUMED status does not trigger demotion
+  ✓ Case 16: RESOLVED seed does not trigger demotion
+  ✓ Case 16: Pure inactivity does not trigger demotion
+  ✓ Case 16: Reason is INACTIVITY_ONLY_NOT_DEMOTION
+
+--- [Case 17] Unverified LLM Claims and Fake Evidence Rejection ---
+  ✓ Case 17: Pure LLM claim is rejected
+  ✓ Case 17: Reason is LLM_CLAIM_REJECTED
+  ✓ Case 17: Fake invalidation event is rejected
+  ✓ Case 17: Reason is FAKE_OR_UNVERIFIED_EVENT
+
+--- [Case 18] Real But Unrelated Event Invalidation Rejection ---
+  ✓ Case 18: Fire event commit succeeded on engine
+  ✓ Case 18: Unrelated authoritative event is rejected for demotion
+  ✓ Case 18: Reason is UNRELATED_EVENT
+
+--- [Case 19] Authoritative Causal Invalidation & Demotion Lineage Tracking ---
+  ✓ Case 19: Fraud event commit succeeded on engine
+  ✓ Case 19: Authoritative invalidation succeeds
+  ✓ Case 19: Reason is AUTHORITATIVE_CAUSAL_INVALIDATION
+  ✓ Case 19: Lifecycle transitions to DEMOTED_NOVEL
+  ✓ Case 19: demotedAtTurn is correctly recorded
+  ✓ Case 19: demotedFromCanonicalId is preserved
+  ✓ Case 19: transitionHistory is present
+  ✓ Case 19: transitionHistory has 3 entries
+  ✓ Case 19: Last transition fromDomain is CANON
+  ✓ Case 19: Last transition toDomain is NOVEL
+  ✓ Case 19: Version incremented to 3
+  ✓ Case 19: predecessorId is npc-chulsoo
+
+--- [Case 20] Genesis Canon Demotion ---
+  ✓ Case 20: Genesis canon demoted to DEMOTED_NOVEL
+  ✓ Case 20: demotedFromCanonicalId preserved
+  ✓ Case 20: transitionHistory created
+  ✓ Case 20: transitionHistory has 2 entries
+  ✓ Case 20: Initial entry fromDomain is CANON
+  ✓ Case 20: Second entry is CANON -> NOVEL
+  ✓ Case 20: Version is 2
+
+Results: 107 passed, 0 failed.
+
+=== Running VEIL Identity Passport Test Suite ===
+
+--- Test Suite 1: Genesis & Canon Entity Baseline ---
+  ✓ Character has synthetic passport character:protagonist
+  ✓ Character passport is CANON domain
+  ✓ Character passport version is 1
+  ✓ Character passport status is ACTIVE
+  ✓ Living NPC has passport
+  ✓ Living NPC passport status is ACTIVE
+  ✓ Living NPC is CANON domain
+  ✓ Faction has passport
+  ✓ Faction passport status is ACTIVE
+  ✓ Item with quantity > 0 has passport
+  ✓ Item with quantity > 0 is ACTIVE
+  ✓ Active narrative seed has passport
+  ✓ Active narrative seed is ACTIVE
+
+--- Test Suite 2: Over-eager ACTIVE Correction ---
+  ✓ Dead NPC is indexed in Canon passports
+  ✓ Dead NPC status is strictly RETIRED (not over-eager ACTIVE)
+  ✓ Zero-quantity item is indexed in Canon passports
+  ✓ Zero-quantity item is strictly RETIRED
+  ✓ Resolved narrative seed is indexed in Canon passports
+  ✓ Resolved narrative seed is strictly RETIRED
+
+--- Test Suite 3: OVERWRITE_CHARACTER and Reference Extraction ---
+  ✓ Inventory item from OVERWRITE_CHARACTER receives passport
+  ✓ OVERWRITE_CHARACTER inventory item is CANON domain
+  ✓ OVERWRITE_CHARACTER inventory item is ACTIVE in state
+  ✓ Inventory item receives historical stamp from OVERWRITE_CHARACTER
+  ✓ Stamp references exact history recordId
+  ✓ Second inventory item from OVERWRITE_CHARACTER receives passport
+  ✓ Second item receives historical stamp
+
+--- Test Suite 4: MODIFY_INVENTORY Reference Extraction ---
+  ✓ Modified inventory item has passport
+  ✓ Hat receives stamp from MODIFY_INVENTORY
+  ✓ Source NPC referenced in acquisition receives passport
+  ✓ Source NPC receives stamp
+  ✓ NPC not in current WorldInfo is RETIRED
+  ✓ Cost item referenced in acquisition receives passport
+  ✓ Cost item receives stamp
+  ✓ Spent cost item not in current inventory is RETIRED
+
+--- Test Suite 5: Novel <-> Canon Promotion & Lineage Tracking ---
+  ✓ Novel entity has passport in phase 1
+  ✓ Novel passport domain is NOVEL
+  ✓ Novel passport initial version is 1
+  ✓ Novel passport status is ACTIVE
+  ✓ Novel passport has no predecessor
+  ✓ Novel passport receives stamp resolved against sourceEventId
+  ✓ Stamp references exact history recordId
+  ✓ Novel passport still exists after promotion (forensic continuity)
+  ✓ Novel passport domain remains NOVEL
+  ✓ Novel passport status is RETIRED upon promotion to Canon
+  ✓ Novel passport version remains 1
+  ✓ Promoted Canon entity receives Canon passport
+  ✓ Promoted passport domain is CANON
+  ✓ Promoted Canon passport increments version to 2
+  ✓ Canon passport links to novel predecessor ID
+  ✓ Promoted Canon passport status is ACTIVE
+  ✓ Promoted Canon passport receives canonical action stamp
+  ✓ Canonical stamp matches ADD_NPC recordId
+  ✓ INACTIVE_NOVEL entity receives passport
+  ✓ INACTIVE_NOVEL passport is strictly RETIRED
+
+--- Test Suite 6: SovereignEngine Post-EOF Commit Integration ---
+  ✓ Genesis passports projected from engine
+  ✓ Commit gate rejects stale proposal
+  ✓ Ghost NPC is NOT projected in passports when commit fails
+  ✓ Engine successfully commits valid proposal
+  ✓ Hermit NPC passport created post-EOF commit
+  ✓ Hermit NPC is ACTIVE
+  ✓ Hermit NPC receives stamp from committed proposal
+  ✓ Secret Book passport created post-EOF commit
+  ✓ Secret Book is ACTIVE
+  ✓ Secret Book receives stamp from committed proposal
+
+--- Test Suite 7: Deterministic Ordering & Immutability ---
+  ✓ PassportState is frozen
+  ✓ passports array is frozen
+  ✓ Passport character:protagonist is frozen
+  ✓ Passport character:protagonist stamps are frozen
+  ✓ Passport fac-shaolin is frozen
+  ✓ Passport fac-shaolin stamps are frozen
+  ✓ Passport item-broken-dagger is frozen
+  ✓ Passport item-broken-dagger stamps are frozen
+  ✓ Passport item-iron-sword is frozen
+  ✓ Passport item-iron-sword stamps are frozen
+  ✓ Passport npc-abbot is frozen
+  ✓ Passport npc-abbot stamps are frozen
+  ✓ Passport npc-fallen is frozen
+  ✓ Passport npc-fallen stamps are frozen
+  ✓ Passport seed-active is frozen
+  ✓ Passport seed-active stamps are frozen
+  ✓ Passport seed-resolved is frozen
+  ✓ Passport seed-resolved stamps are frozen
+  ✓ Passport novel:npc:가객 is frozen
+  ✓ Passport novel:npc:가객 stamps are frozen
+  ✓ All CANON passports precede NOVEL passports deterministically
+
+--- Test Suite 8: Demoted Entity Passport Projection ---
+  ✓ Demoted entity passport exists in projected passports
+  ✓ Demoted entity has historyDomain NOVEL
+  ✓ Demoted entity has status ACTIVE in NOVEL domain
+  ✓ Demoted entity has passportVersion 3
+  ✓ Demoted entity links to previous canon entity ID
+  ✓ Demoted entity passport contains historical stamp for demotion event
+  ✓ Demotion stamp matches recordId rec-fraud-1
+
+========================================
+Results: 92 passed, 0 failed.
+========================================

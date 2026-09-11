@@ -1,0 +1,55 @@
+{
+  "rawCandidatesBlock": [
+    {
+      "label": "안개 속에 숨겨진 날카로운 살기",
+      "narrativeSummary": "차가운 안개 너머로 불길하게 요동치는 기운이 감지됩니다. 좁은 통로를 지나던 도중 갑작스러운 함정이나 기습에 대비해야 하는 상황입니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "안개 너머에 도사린 고대의 덫"
+        ]
+      },
+      "candidateId": 1
+    },
+    {
+      "label": "좁아지는 벽면과 폐쇄감의 압박",
+      "narrativeSummary": "통로가 급격히 좁아지며 어깨가 암벽에 쓸릴 정도로 틈새가 협소해집니다. 어둠과 한기가 연화의 폐소공포증을 강하게 자극하여 이성을 흐트러뜨리려 합니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "어둠이 속삭이는 환각"
+        ]
+      },
+      "candidateId": 2
+    },
+    {
+      "label": "기문둔갑의 경계선",
+      "narrativeSummary": "냉기가 흘러나오는 경계를 넘어서는 순간, 기이한 바람 소리와 함께 공간의 방향감이 흐려지는 것을 느낍니다. 단순한 동굴이 아닌 진법의 초입에 들어선 징후입니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "방향을 잃어버리는 미로진"
+        ]
+      },
+      "candidateId": 3
+    }
+  ],
+  "totalParsedCount": 1,
+  "preAuthResults": [
+    {
+      "candidateId": 1,
+      "label": "안개 속에 숨겨진 날카로운 살기",
+      "narrativeSummary": "차가운 안개 너머로 불길하게 요동치는 기운이 감지됩니다. 좁은 통로를 지나던 도중 갑작스러운 함정이나 기습에 대비해야 하는 상황입니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "안개 너머에 도사린 고대의 덫"
+        ]
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    }
+  ],
+  "allowedIds": [],
+  "rejectedIds": [
+    1
+  ]
+}

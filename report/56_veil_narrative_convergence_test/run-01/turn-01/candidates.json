@@ -1,0 +1,45 @@
+{
+  "rawCandidatesBlock": [
+    {
+      "label": "바람이 새어드는 미세한 암벽의 틈",
+      "narrativeSummary": "습기 찬 암벽을 손끝으로 더듬어 가던 중, 손가락 끝에 스치는 미세한 냉기를 감지합니다. 돌과 돌이 맞물린 틈새에서 지하 깊은 곳의 거친 공기가 흘러나오고 있습니다. 이 틈새 어딘가에 벽을 움직이는 장치가 숨겨져 있을 가능성이 큽니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "벽 틈새 너머에서 새어 나오는 기묘한 바람 소리"
+        ]
+      },
+      "candidateId": 1
+    },
+    {
+      "label": "이끼 아래 숨겨진 매화 문양의 음각석",
+      "narrativeSummary": "거친 돌출부를 만지다 축축한 이끼를 벗겨내자, 화산파 고유의 삼십육검결을 암시하는 듯한 기묘한 선각이 만져집니다. 이 돌 자체가 진법의 눈(陣眼)이거나, 통로를 여는 기관 장치의 일부일 수 있습니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "화산파 고대의 기문둔갑 배치도"
+        ]
+      },
+      "candidateId": 2
+    }
+  ],
+  "totalParsedCount": 1,
+  "preAuthResults": [
+    {
+      "candidateId": 1,
+      "label": "바람이 새어드는 미세한 암벽의 틈",
+      "narrativeSummary": "습기 찬 암벽을 손끝으로 더듬어 가던 중, 손가락 끝에 스치는 미세한 냉기를 감지합니다. 돌과 돌이 맞물린 틈새에서 지하 깊은 곳의 거친 공기가 흘러나오고 있습니다. 이 틈새 어딘가에 벽을 움직이는 장치가 숨겨져 있을 가능성이 큽니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "벽 틈새 너머에서 새어 나오는 기묘한 바람 소리"
+        ]
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    }
+  ],
+  "allowedIds": [],
+  "rejectedIds": [
+    1
+  ]
+}

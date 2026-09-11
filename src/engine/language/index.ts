@@ -12,3 +12,7 @@ export * from './adapter';
 export * from './diversity';
 export * from './candidateRecoveryGate';
 export * from './runtimeProjection';
+export * from './semanticEventRuntimeBridge';
+export * from './semanticCandidateContract';
+export * from './runtimeSemanticCandidate';
+export * from './semanticRuntimeIntegrationGuard';

@@ -11,6 +11,7 @@ import { WorldInfo, Character } from '../types';
 import { createEmptyCharacter, createEmptyWorldInfo } from '../utils/factory';
 import { deepClone, applyActionToDraftState } from './actionApplier';
 import { canonicalizeValue } from './language/canonicalizer';
+import { isEngineAuthorized, authorizeEngineProposal } from './internalCapability';
 
 /**
  * Deterministically computes the canonical state hash for state provenance.
@@ -50,6 +51,77 @@ function deepFreeze<T>(obj: T): Readonly<T> {
 }
 
 /**
+ * Finalizes engine-owned metadata on actions at the Canonical Commit boundary.
+ *
+ * Semantic/novel uncertainty is not invented here. Only deterministic metadata
+ * required to replay a committed action is filled from the proposal's canonical
+ * event context. The resulting action is validated before execution and history
+ * storage, so MeaningTree projection remains aligned with the canonical action.
+ *
+ * This boundary currently applies to a single direct ACTION MeaningTree, which is
+ * the established shape for the affected RECORD_OFFSCREEN_EVENT path. Compound
+ * MeaningTree handling is intentionally left untouched rather than guessing how
+ * multiple projected actions should map to one proposal-level event context.
+ */
+function finalizeCanonicalActionMetadata(proposal: StateTransitionProposal): StateTransitionProposal {
+  const canonicalProposal = deepClone(proposal);
+  if (proposal.verifiedClaims) {
+    canonicalProposal.verifiedClaims = proposal.verifiedClaims;
+  }
+  if (isEngineAuthorized(proposal)) {
+    authorizeEngineProposal(canonicalProposal);
+  }
+
+  if (canonicalProposal.actions.length !== 1 || canonicalProposal.actions[0].type !== 'RECORD_OFFSCREEN_EVENT') {
+    return canonicalProposal;
+  }
+
+  const action = canonicalProposal.actions[0];
+  const payload = action.payload as any;
+  const canonicalPayload = {
+    ...payload,
+    id: payload.id || `offscreen-${canonicalProposal.eventId}-1`,
+    timestamp: payload.timestamp || canonicalProposal.timestamp,
+  };
+
+  canonicalProposal.actions = [{
+    ...action,
+    payload: canonicalPayload,
+  }];
+
+  // MeaningTree is the proposal-side authority for action projection. Keep its
+  // embedded ACTION payload synchronized with the finalized canonical action.
+  if (canonicalProposal.meaningTree) {
+    canonicalProposal.meaningTree = deepClone(canonicalProposal.meaningTree);
+    if (
+      canonicalProposal.meaningTree.atom === 'ACTION' &&
+      (canonicalProposal.meaningTree.fields?.actionType === 'RECORD_OFFSCREEN_EVENT' || canonicalProposal.meaningTree.value === 'RECORD_OFFSCREEN_EVENT')
+    ) {
+      canonicalProposal.meaningTree.fields = {
+        ...(canonicalProposal.meaningTree.fields || {}),
+        actionType: 'RECORD_OFFSCREEN_EVENT',
+        payload: canonicalPayload,
+      };
+    } else if (Array.isArray(canonicalProposal.meaningTree.children)) {
+      for (const child of canonicalProposal.meaningTree.children) {
+        if (
+          child.atom === 'ACTION' &&
+          (child.fields?.actionType === 'RECORD_OFFSCREEN_EVENT' || child.value === 'RECORD_OFFSCREEN_EVENT')
+        ) {
+          child.fields = {
+            ...(child.fields || {}),
+            actionType: 'RECORD_OFFSCREEN_EVENT',
+            payload: canonicalPayload,
+          };
+        }
+      }
+    }
+  }
+
+  return canonicalProposal;
+}
+
+/**
  * TRPG 3.1 Sovereign Engine
  * Encapsulates the single sovereign Canonical State and Commit Gate.
  */
@@ -79,38 +151,21 @@ export class SovereignEngine {
     this.stateVersion = initialStateVersion;
     this.turn = initialTurn;
     this.lastCommittedAt = new Date().toISOString();
-    this.genesisSnapshot = genesisSnapshot
-      ? deepFreeze(deepClone(genesisSnapshot))
-      : deepFreeze({
-          stateVersion: this.stateVersion,
-          turn: this.turn,
-          worldInfo: deepClone(this.worldInfo),
-          character: deepClone(this.character),
-          lastCommittedEventId: this.lastCommittedEventId,
-          lastCommittedAt: this.lastCommittedAt
-        });
     this.historyManager = new HistoryManager(initialHistory || []);
+    this.genesisSnapshot = genesisSnapshot ? deepClone(genesisSnapshot) : this.getSnapshot();
+
+    // Restore idempotency tracking from history
     if (initialHistory) {
       for (const rec of initialHistory) {
         if (rec.eventId) this.recordedEventIds.add(rec.eventId);
         if (rec.requestId) this.executedRequestIds.add(rec.requestId);
-        if (rec.proposalId && rec.proposalId.startsWith('prop-')) {
-          this.executedRequestIds.add(rec.proposalId.slice(5));
-        }
       }
     }
   }
 
   /**
-   * Retrieves the initial Genesis snapshot of this engine instance.
-   */
-  public getGenesisSnapshot(): CanonicalState {
-    return this.genesisSnapshot;
-  }
-
-  /**
-   * Hydrates an engine instance from persisted snapshot and history.
-   * Validates snapshot schema and deterministic historical provenance prior to instantiation.
+   * Hydrates an engine from a canonical snapshot and immutable historical chain.
+   * The supplied history is replayed deterministically and must reproduce the snapshot exactly.
    */
   public static hydrate(
     snapshot: CanonicalState,
@@ -143,15 +198,23 @@ export class SovereignEngine {
 
         if (curr.turn < prev.turn) {
           throw new Error(
-            `[HYDRATION_INTEGRITY_VIOLATION] History turn regression at index ${i}: turn ${curr.turn} precedes turn ${prev.turn}.`
+            `[HYDRATION_INTEGRITY_VIOLATION] History turn regression at index ${i}: turn ${curr.turn} precedes '${prev.turn}'.`
           );
         }
 
         if (curr.stateVersionAfterCommit < prev.stateVersionAfterCommit) {
           throw new Error(
-            `[HYDRATION_INTEGRITY_VIOLATION] History stateVersion regression at index ${i}: version ${curr.stateVersionAfterCommit} precedes version ${prev.stateVersionAfterCommit}.`
+            `[HYDRATION_INTEGRITY_VIOLATION] History stateVersion regression at index ${i}: version ${curr.stateVersionAfterCommit} precedes '${prev.stateVersionAfterCommit}'.`
           );
         }
+      }
+
+      // A non-empty historical chain must always terminate at an explicit committed event.
+      // Null/undefined here would allow the snapshot to detach from the supplied History.
+      if (snapshot.lastCommittedEventId === null || snapshot.lastCommittedEventId === undefined) {
+        throw new Error(
+          `[HYDRATION_INTEGRITY_VIOLATION] Non-empty history requires a non-null snapshot lastCommittedEventId.`
+        );
       }
 
       // Step 2: Provenance, previousStateHash & Deterministic Action Replay Validation
@@ -183,27 +246,25 @@ export class SovereignEngine {
 
         let group = proposalGroupMap.get(rec.proposalId);
         if (group) {
-          if (rec.previousStateHash !== undefined || group.previousStateHash !== undefined) {
-            if (group.previousStateHash !== rec.previousStateHash) {
-              throw new Error(
-                `[HYDRATION_PROVENANCE_VIOLATION] Conflicting previousStateHash for proposal '${rec.proposalId}' in record '${rec.recordId}'. Expected '${group.previousStateHash}', found '${rec.previousStateHash}'.`
-              );
-            }
-            if (group.stateVersionAfterCommit !== rec.stateVersionAfterCommit) {
-              throw new Error(
-                `[HYDRATION_PROVENANCE_VIOLATION] Conflicting stateVersionAfterCommit for proposal '${rec.proposalId}' in record '${rec.recordId}'. Expected '${group.stateVersionAfterCommit}', found '${rec.stateVersionAfterCommit}'.`
-              );
-            }
-            if (group.turn !== rec.turn) {
-              throw new Error(
-                `[HYDRATION_PROVENANCE_VIOLATION] Conflicting turn for proposal '${rec.proposalId}' in record '${rec.recordId}'. Expected '${group.turn}', found '${rec.turn}'.`
-              );
-            }
-            if (group.eventId !== rec.eventId) {
-              throw new Error(
-                `[HYDRATION_PROVENANCE_VIOLATION] Conflicting eventId for proposal '${rec.proposalId}' in record '${rec.recordId}'. Expected '${group.eventId}', found '${rec.eventId}'.`
-              );
-            }
+          if (group.previousStateHash !== rec.previousStateHash) {
+            throw new Error(
+              `[HYDRATION_PROVENANCE_VIOLATION] Conflicting previousStateHash for proposal '${rec.proposalId}' in record '${rec.recordId}'. Expected '${group.previousStateHash}', found '${rec.previousStateHash}'.`
+            );
+          }
+          if (group.stateVersionAfterCommit !== rec.stateVersionAfterCommit) {
+            throw new Error(
+              `[HYDRATION_PROVENANCE_VIOLATION] Conflicting stateVersionAfterCommit for proposal '${rec.proposalId}' in record '${rec.recordId}'. Expected '${group.stateVersionAfterCommit}', found '${rec.stateVersionAfterCommit}'.`
+            );
+          }
+          if (group.turn !== rec.turn) {
+            throw new Error(
+              `[HYDRATION_PROVENANCE_VIOLATION] Conflicting turn for proposal '${rec.proposalId}' in record '${rec.recordId}'. Expected '${group.turn}', found '${rec.turn}'.`
+            );
+          }
+          if (group.eventId !== rec.eventId) {
+            throw new Error(
+              `[HYDRATION_PROVENANCE_VIOLATION] Conflicting eventId for proposal '${rec.proposalId}' in record '${rec.recordId}'. Expected '${group.eventId}', found '${rec.eventId}'.`
+            );
           }
           group.records.push(rec);
         } else {
@@ -233,8 +294,27 @@ export class SovereignEngine {
         }
       }
 
-      // Check if provenance tracking is active (any record has previousStateHash)
+      // Current-format historical records carry previousStateHash on every record.
+      // A completely hashless progressed chain is not a valid current-format save.
       const hasProvenanceTracking = history.some(r => r.previousStateHash !== undefined);
+      const lastRecordForFormatCheck = history[history.length - 1];
+      if (!hasProvenanceTracking && lastRecordForFormatCheck.stateVersionAfterCommit > 1) {
+        throw new Error(
+          `[HYDRATION_PROVENANCE_VIOLATION] Progressed non-empty history is missing previousStateHash provenance.`
+        );
+      }
+
+      // Each distinct proposal represents one committed state version.
+      // Multiple records inside the same proposal may share that version.
+      for (let gIdx = 1; gIdx < proposalGroups.length; gIdx++) {
+        const prevGroup = proposalGroups[gIdx - 1];
+        const currGroup = proposalGroups[gIdx];
+        if (currGroup.stateVersionAfterCommit <= prevGroup.stateVersionAfterCommit) {
+          throw new Error(
+            `[HYDRATION_INTEGRITY_VIOLATION] Proposal stateVersion must strictly advance between groups: '${prevGroup.proposalId}'=${prevGroup.stateVersionAfterCommit}, '${currGroup.proposalId}'=${currGroup.stateVersionAfterCommit}.`
+          );
+        }
+      }
 
       if (hasProvenanceTracking) {
         // Deterministic Replay Engine
@@ -361,12 +441,10 @@ export class SovereignEngine {
         );
       }
 
-      if (snapshot.lastCommittedEventId !== null && snapshot.lastCommittedEventId !== undefined) {
-        if (snapshot.lastCommittedEventId !== lastRecord.eventId) {
-          throw new Error(
-            `[HYDRATION_INTEGRITY_VIOLATION] Snapshot lastCommittedEventId '${snapshot.lastCommittedEventId}' does not match last history eventId '${lastRecord.eventId}'.`
-          );
-        }
+      if (snapshot.lastCommittedEventId !== lastRecord.eventId) {
+        throw new Error(
+          `[HYDRATION_INTEGRITY_VIOLATION] Snapshot lastCommittedEventId '${snapshot.lastCommittedEventId}' does not match last history eventId '${lastRecord.eventId}'.`
+        );
       }
     }
 
@@ -424,13 +502,20 @@ export class SovereignEngine {
   }
 
   /**
+   * Retrieves a deeply frozen immutable snapshot of the genesis anchor state.
+   */
+  public getGenesisSnapshot(): CanonicalState {
+    return deepFreeze(deepClone(this.genesisSnapshot));
+  }
+
+  /**
    * Retrieves runtime diagnostics for engine sovereign state.
    */
   public getDiagnostics(): EngineDiagnostics {
     return {
       stateVersion: this.stateVersion,
       totalExecutedRequests: this.executedRequestIds.size,
-      totalRecordedEvents: this.recordedEventIds.size,
+      totalRecordedEvents: this.historyManager.count,
       totalHistoricalRecords: this.historyManager.count,
       lastEventId: this.lastCommittedEventId
     };
@@ -448,11 +533,12 @@ export class SovereignEngine {
    * Processes a StateTransitionProposal through the Canonical Commit Gate.
    */
   public submitProposal(proposal: StateTransitionProposal): CommitResult {
+    const canonicalProposal = finalizeCanonicalActionMetadata(proposal);
     const currentSnapshot = this.getSnapshot();
 
     // Step 1: Pre-Commit Validation & Idempotency Check
     const verdict = EngineValidator.validate(
-      proposal,
+      canonicalProposal,
       currentSnapshot,
       this.executedRequestIds,
       this.recordedEventIds,
@@ -463,7 +549,7 @@ export class SovereignEngine {
       return Object.freeze({
         success: false,
         stateVersion: this.stateVersion,
-        eventId: proposal.eventId,
+        eventId: canonicalProposal.eventId,
         committedActionsCount: 0,
         rejectedReasons: verdict.rejectedReasons,
         conflictDetails: verdict.conflictDetails,
@@ -499,21 +585,21 @@ export class SovereignEngine {
         const recordDetails = action.description ? `[${action.description}] ${payloadStr}` : payloadStr;
 
         const record: ImmutableHistoricalRecord = {
-          recordId: `rec-${proposal.eventId}-${newRecords.length + 1}`,
-          eventId: proposal.eventId,
-          requestId: proposal.requestId,
-          proposalId: proposal.proposalId,
-          turn: proposal.turn,
-          timestamp: proposal.timestamp,
+          recordId: `rec-${canonicalProposal.eventId}-${newRecords.length + 1}`,
+          eventId: canonicalProposal.eventId,
+          requestId: canonicalProposal.requestId,
+          proposalId: canonicalProposal.proposalId,
+          turn: canonicalProposal.turn,
+          timestamp: canonicalProposal.timestamp,
           narrativeTime: actionNarrativeTime,
-          source: proposal.source,
+          source: canonicalProposal.source,
           actionType: action.type,
           details: recordDetails,
           canonicalAction: deepClone(action),
           stateVersionAfterCommit: targetStateVersion,
           informationAccess: infoAccess,
           previousStateHash: previousStateHash,
-          originInputId: proposal.originInputId,
+          originInputId: canonicalProposal.originInputId,
           category: action.category
         };
         newRecords.push(record);
@@ -523,7 +609,7 @@ export class SovereignEngine {
       return Object.freeze({
         success: false,
         stateVersion: this.stateVersion,
-        eventId: proposal.eventId,
+        eventId: canonicalProposal.eventId,
         committedActionsCount: 0,
         rejectedReasons: Object.freeze([`[ATOMIC_EXECUTION_FAILURE] ${err?.message || String(err)}`]),
         conflictDetails: Object.freeze([]),
@@ -536,13 +622,13 @@ export class SovereignEngine {
     this.worldInfo = draftWorldInfo;
     this.character = draftCharacter;
     this.stateVersion = targetStateVersion;
-    this.turn = proposal.turn;
-    this.lastCommittedEventId = proposal.eventId;
-    this.lastCommittedAt = proposal.timestamp;
+    this.turn = canonicalProposal.turn;
+    this.lastCommittedEventId = canonicalProposal.eventId;
+    this.lastCommittedAt = canonicalProposal.timestamp;
 
     // Register idempotency signatures
-    this.executedRequestIds.add(proposal.requestId);
-    this.recordedEventIds.add(proposal.eventId);
+    this.executedRequestIds.add(canonicalProposal.requestId);
+    this.recordedEventIds.add(canonicalProposal.eventId);
 
     // Commit history
     for (const record of newRecords) {
@@ -554,7 +640,7 @@ export class SovereignEngine {
     return Object.freeze({
       success: true,
       stateVersion: this.stateVersion,
-      eventId: proposal.eventId,
+      eventId: canonicalProposal.eventId,
       committedActionsCount: verdict.sanitizedActions.length,
       rejectedReasons: Object.freeze([]),
       conflictDetails: Object.freeze([]),

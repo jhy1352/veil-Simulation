@@ -1,0 +1,114 @@
+{
+  "stateVersion": {
+    "before": 2,
+    "after": 3
+  },
+  "turn": {
+    "before": 1,
+    "after": 2
+  },
+  "worldInfo": {
+    "before": {
+      "worldName": "낙양 숭양서원",
+      "worldType": "popular_genre",
+      "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+      "toneStyle": "묵직하고 유려한 정통 무협 필치",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [],
+      "chapters": {
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 묵향 뒤에 숨은 검결",
+          "제3장: 무너진 서고의 비밀"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [
+        "숭양서원 원장과 의문의 무림 인사의 서신 왕래"
+      ],
+      "offscreenRecords": [
+        {
+          "id": "offscreen-mtpv941x-bh8g6v",
+          "eventDescription": "숭양서원 원장과 의문의 무림 인사의 서신 왕래",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-09-06T13:47:25.509Z",
+          "visibility": "FACTION_ONLY"
+        }
+      ]
+    },
+    "after": {
+      "worldName": "낙양 숭양서원",
+      "worldType": "popular_genre",
+      "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+      "toneStyle": "묵직하고 유려한 정통 무협 필치",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [],
+      "chapters": {
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 동부 광산의 장막",
+          "제3장: 비급의 실마리"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [
+        "숭양서원 원장과 의문의 무림 인사의 서신 왕래",
+        "서원 내부 감시자들의 시선"
+      ],
+      "offscreenRecords": [
+        {
+          "id": "offscreen-mtpv941x-bh8g6v",
+          "eventDescription": "숭양서원 원장과 의문의 무림 인사의 서신 왕래",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-09-06T13:47:25.509Z",
+          "visibility": "FACTION_ONLY"
+        },
+        {
+          "id": "offscreen-mtpva5c4-2n0nry",
+          "eventDescription": "서원 내부 감시자들의 시선",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-09-06T13:48:13.828Z",
+          "visibility": "FACTION_ONLY"
+        }
+      ]
+    }
+  },
+  "lastCommittedEventId": {
+    "before": "evt-mtpv941w-fdqt19",
+    "after": "evt-mtpva5c3-h6bush"
+  },
+  "lastCommittedAt": {
+    "before": "2026-09-06T13:47:25.506Z",
+    "after": "2026-09-06T13:48:13.827Z"
+  }
+}

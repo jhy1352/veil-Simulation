@@ -1,0 +1,10 @@
+{
+  "playerInput": "바닥에 떨어진 기괴한 조각상이 새겨진 돌판을 발견하고, 진기를 집중하여 문양을 살펴본다.",
+  "storyTurnCount": 2,
+  "timestamp": "2026-09-10T02:37:28.605Z",
+  "sessionConfig": {
+    "worldPreset": "화산비고",
+    "characterName": "백연화",
+    "model": "gemini-3.5-flash"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "rawCandidatesBlock": [
+    {
+      "label": "벽면의 미세한 요철과 바람의 흐름을 감지",
+      "narrativeSummary": "백연화가 차가운 암벽을 짚어가는 과정에서 손가락 끝에 닿는 이끼의 습도와 공기의 미세한 흐름을 포착합니다. 암벽 틈새 중 한 곳에서 미약한 바람이 새어 나오는 것을 발견하며, 그 부근에 기문둔갑의 투로와 연결된 은밀한 틈새가 존재함을 인지하게 됩니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "벽 틈새의 미세한 바람"
+        ],
+        "chapterChanges": {
+          "currentChapter": "제1장: 어둠의 나락, 홀로 서다",
+          "upcomingChapters": [
+            "무너진 진법의 흔적",
+            "비고의 은밀한 통로"
+          ]
+        }
+      },
+      "candidateId": 1
+    },
+    {
+      "label": "화산파 고유의 기문 각인을 발견",
+      "narrativeSummary": "손끝으로 암벽의 거친 표면을 더듬던 중, 단순한 자연석이 아닌 인위적으로 다듬어진 흔적을 발견합니다. 아주 작고 정교하게 새겨진 화산파 고유의 매화 각인(梅花刻印)의 일부를 찾아내며, 이것이 비고의 기동 장치 중 하나임을 깨닫게 됩니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "벽면에 새겨진 매화 각인"
+        ],
+        "chapterChanges": {
+          "currentChapter": "제1장: 어둠의 나락, 홀로 서다",
+          "upcomingChapters": [
+            "매화각인의 비밀",
+            "선인들의 흔적"
+          ]
+        }
+      },
+      "candidateId": 2
+    },
+    {
+      "label": "바닥에 매몰된 석판과 도르래 장치 접촉",
+      "narrativeSummary": "벽면을 만지며 발걸음을 옮기다 발끝에 단단하고 평평한 석판이 밟힙니다. 벽면 아래쪽으로 손을 뻗자, 흙먼지와 이끼 속에 파묻힌 구리 도르래의 일부와 쇠사슬이 손끝에 걸려옵니다. 물리적인 조작으로 열 수 있는 수동식 개폐 장치일 가능성이 큽니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "흙 속에 묻힌 구리 도르래"
+        ],
+        "chapterChanges": {
+          "currentChapter": "제1장: 어둠의 나락, 홀로 서다",
+          "upcomingChapters": [
+            "지하의 톱니바퀴",
+            "무거운 석문"
+          ]
+        }
+      },
+      "candidateId": 3
+    }
+  ],
+  "totalParsedCount": 3,
+  "preAuthResults": [
+    {
+      "candidateId": 1,
+      "label": "벽면의 미세한 요철과 바람의 흐름을 감지",
+      "narrativeSummary": "백연화가 차가운 암벽을 짚어가는 과정에서 손가락 끝에 닿는 이끼의 습도와 공기의 미세한 흐름을 포착합니다. 암벽 틈새 중 한 곳에서 미약한 바람이 새어 나오는 것을 발견하며, 그 부근에 기문둔갑의 투로와 연결된 은밀한 틈새가 존재함을 인지하게 됩니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "벽 틈새의 미세한 바람"
+        ],
+        "chapterChanges": {
+          "currentChapter": "제1장: 어둠의 나락, 홀로 서다",
+          "upcomingChapters": [
+            "무너진 진법의 흔적",
+            "비고의 은밀한 통로"
+          ]
+        }
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    },
+    {
+      "candidateId": 2,
+      "label": "화산파 고유의 기문 각인을 발견",
+      "narrativeSummary": "손끝으로 암벽의 거친 표면을 더듬던 중, 단순한 자연석이 아닌 인위적으로 다듬어진 흔적을 발견합니다. 아주 작고 정교하게 새겨진 화산파 고유의 매화 각인(梅花刻印)의 일부를 찾아내며, 이것이 비고의 기동 장치 중 하나임을 깨닫게 됩니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "벽면에 새겨진 매화 각인"
+        ],
+        "chapterChanges": {
+          "currentChapter": "제1장: 어둠의 나락, 홀로 서다",
+          "upcomingChapters": [
+            "매화각인의 비밀",
+            "선인들의 흔적"
+          ]
+        }
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    },
+    {
+      "candidateId": 3,
+      "label": "바닥에 매몰된 석판과 도르래 장치 접촉",
+      "narrativeSummary": "벽면을 만지며 발걸음을 옮기다 발끝에 단단하고 평평한 석판이 밟힙니다. 벽면 아래쪽으로 손을 뻗자, 흙먼지와 이끼 속에 파묻힌 구리 도르래의 일부와 쇠사슬이 손끝에 걸려옵니다. 물리적인 조작으로 열 수 있는 수동식 개폐 장치일 가능성이 큽니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "흙 속에 묻힌 구리 도르래"
+        ],
+        "chapterChanges": {
+          "currentChapter": "제1장: 어둠의 나락, 홀로 서다",
+          "upcomingChapters": [
+            "지하의 톱니바퀴",
+            "무거운 석문"
+          ]
+        }
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    }
+  ],
+  "allowedIds": [],
+  "rejectedIds": [
+    1,
+    2,
+    3
+  ]
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "role": "user",
+    "parts": [
+      {
+        "text": "장서각에서 조경 선생에게 인사하고 장서각의 유래에 대해 물어본다."
+      }
+    ]
+  },
+  {
+    "role": "model",
+    "parts": [
+      {
+        "text": "[CANDIDATES_BLOCK]\n[\n  {\n    \"candidateId\": 1,\n    \"label\": \"조경 선생의 온화한 환대와 장서각의 은밀한 안개\",\n    \"narrativeSummary\": \"소진호가 예를 갖추어 묻자, 장서각의 늙은 서생 조경은 차를 따르며 숭양서원 장서각이 단순한 학문의 전당이 아닌, 과거 무림의 풍파 속에서 기인들의 비급과 정수를 보존하기 위해 세워진 보루였음을 은밀히 암시합니다. 또한, 소진호의 성씨에 기묘한 반응을 보입니다.\",\n    \"rawMetadata\": {\n      \"factCheckSummary\": \"1) [장서각 내부 설정]: 검증 완료. 2) [조경 선생 인물 정보]: 온화하고 은밀한 성정 일치.\",\n      \"foreshadowSeeds\": [\"seed-so-legacy-hint\"],\n      \"cameraOffscreenEvents\": [\"숭양서원 내밀한 세력들의 움직임\"],\n      \"currentChapter\": \"제1장: 서원의 은밀한 흔적\",\n      \"upcomingChapters\": [\"제2장: 심야의 서고\", \"제3장: 숨겨진 기연\"],\n      \"statChanges\": \"체력 변동 없음\",\n      \"recommendedDC\": 12,\n      \"dcReason\": \"조경 선생의 숨겨진 어조와 눈빛 뒤에 감춰진 진의를 포착하기 위한 지혜(Wisdom) 판정\",\n      \"contextVerificationDeclaration\": \"정사 맥락 일치\"\n    }\n  }\n]\n[CANDIDATES_END]\n\n\n\n고색창연한 묵향이 내려앉은 장서각의 내부는 바깥의 소란스러운 세상과는 단절된 듯 깊고 고요했다. 서가 사이로 비스듬히 스며드는 오후의 햇살 속에서 무수한 먼지들이 마치 오랜 세월의 먼지 낀 기억들처럼 느리게 부유하고 있었다. \n\n소진호는 의복 매무새를 단정히 하고, 책상 너머에서 오래된 고서를 정돈하고 있던 늙은 서생, 조경 선생을 향해 두 손을 모아 정중히 읍했다.\n\n\"낙양의 후학 소진호, 서원의 대유이신 조경 선생을 뵙습니다. 외람되오나, 이 장서각의 유래가 깊고 웅장하여 후학의 어리석은 눈으로도 범상치 않음을 느끼옵니다. 혹 이 유서 깊은 전각이 품은 내력에 대해 가르침을 청해도 되겠습니까?\"\n\n조경은 천천히 고개를 들었다. 깊게 파인 주름 사이로 드러난 그의 눈빛은 흐릿한 듯하면서도, 순간적으로 사람의 폐부를 꿰뚫어 보는 듯한 기묘한 이채를 띠고 있었다. 소진호를 가만히 응시하던 노인은 이내 손에 들고 있던 먼지떨이를 내려놓고, 낡은 찻잔에 더운물 부어 차를 우려내기 시작했다. 은은한 차향이 장서각의 묵향과 섞여들었다.\n\n\"소(蘇)씨라… 낙양의 소씨 가문이라니, 참으로 오랜만에 듣는 성씨로구나.\"\n\n찻잔을 따르던 조경의 마른 손끝이 아주 미세하게 멈칫했다. 그는 소진호에게 찻잔을 권하며, 장서각 내부의 깊은 어둠을 향해 시선을 던졌다.\n\n\"이곳 숭양서원의 장서각은 흔히 유학의 경전을 보관하는 곳으로만 알려져 있지. 하지만 세상의 풍파란 본래 양(陽)이 있으면 음(陰)이 있고, 글(文)이 있으면 이를 지키는 힘(武)이 필요한 법이란다. 수십 년 전, 천하가 요동치고 무림의 풍파가 이 낙양을 덮쳤을 때… 뜻있는 기인들과 지사들은 자신들의 일생을 바쳐 이룩한 정수와 비급이 한낱 난신적자의 손에 들어가는 것을 경계했지.\"\n\n조경은 찻잔을 가볍게 돌리며 말을 이어갔다. 그의 목소리는 낮고 은밀하여, 마치 서가 사이의 어둠 속으로 스며드는 듯했다.\n\n\"그리하여 조정과 무림의 눈을 피해, 그 위대한 정수들을 가장 안전하게 보존할 수 있는 보루를 세웠으니… 그것이 바로 이 장서각의 진짜 시작이란다. 겉으로는 성현의 말씀을 담은 서책들이 쌓여 있지만, 이 깊은 안개 같은 서고 어딘가에는 세상의 판도를 바꿀 수도 있는 힘들이 숨겨져 있지. 네 성씨를 보니… 어쩌면 너 역시 이곳에 올 인연이 있었던 모양이구나.\"\n\n조경 선생의 기묘한 반응과 은밀한 암시는 소진호의 가슴속에 묻어둔 불꽃을 자극했다. 가전 비급을 되찾고 가문의 몰락 뒤에 숨겨진 진실을 밝히려는 그의 목적지에, 이 장서각이 매우 중요한 열쇠가 될 것임을 직감하게 만드는 순간이었다."
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {
+        "text": "조경 선생에게 동부 광산 투자 계약서를 받아서 소지품에 넣는다."
+      }
+    ]
+  },
+  {
+    "role": "model",
+    "parts": [
+      {
+        "text": "[CANDIDATES_BLOCK]\n[\n  {\n    \"candidateId\": 1,\n    \"label\": \"조경 선생의 신뢰와 동부 광산 투자 계약서의 양도\",\n    \"narrativeSummary\": \"조경 선생은 소진호가 낙양 소씨의 후손임을 확신하고, 품속에서 봉인된 '동부 광산 투자 계약서'를 꺼내 건넵니다. 이 문서는 소씨 가문이 몰락하기 전 남겨둔 유산이자 가전 비급의 실마리를 쥔 핵심 단서입니다.\",\n    \"rawMetadata\": {\n      \"factCheckSummary\": \"1) [동부 광산 투자 계약서]: 가문 유산 설정과 부합. 2) [인벤토리 추가]: 동부 광산 투자 계약서 획득 반영.\",\n      \"foreshadowSeeds\": [\"seed-east-mine-secret\"],\n      \"cameraOffscreenEvents\": [],\n      \"currentChapter\": \"제1장: 서원의 은밀한 흔적\",\n      \"upcomingChapters\": [\"제2장: 심야의 서고\"],\n      \"statChanges\": \"인벤토리 추가: 동부 광산 투자 계약서 (item-east-mine-contract)\",\n      \"inventoryAction\": {\n        \"action\": \"MODIFY_INVENTORY\",\n        \"type\": \"ADD\",\n        \"item\": {\n          \"itemId\": \"item-east-mine-contract\",\n          \"name\": \"동부 광산 투자 계약서\",\n          \"type\": \"DOCUMENT\",\n          \"description\": \"낙양 소씨 가문이 몰락하기 전 동부 광산에 투자했던 계약서. 봉인이 찍혀 있으며 가전 비급의 실마리가 숨겨져 있다.\"\n        },\n        \"acquisition\": {\n          \"cause\": \"GIFT_REWARD\",\n          \"verifiedEventId\": \"event-jg-contract-handover\"\n        }\n      },\n      \"contextVerificationDeclaration\": \"정사 맥락 일치\"\n    }\n  }\n]\n[CANDIDATES_END]\n\n\n\n조경 선생은 소진호의 깊고 곧은 눈빛을 한참 동안 소리 없이 응시했다. 서가 너머로 흐르는 침묵 속에서, 늙은 서생의 눈가에 서린 경계심이 천천히 걷히고 깊은 탄식이 흘러나왔다.\n\n\"과연... 눈매가 그 시절 소 대협을 쏙 빼닮았구나. 낙양의 푸른 대나무라 불리던 소씨 가문의 의기가 어찌 그리 쉽게 꺾이겠느냐.\"\n\n그는 주변의 동태를 살피듯 장서각 입구 쪽을 한 번 휘둘러본 뒤, 이내 품속 깊은 곳에 손을 넣었다. 그의 마른 손끝이 꺼내놓은 것은 붉은 밀랍으로 엄중히 봉인된, 누렇게 빛바랜 한 장의 가죽 종이였다. 세월의 때가 묻었으나 그 위에 새겨진 낙양 관아의 직인과 소씨 가문의 문양은 여전히 또렷했다.\n\n\"이것은 소씨 가문이 몰락하기 직전, 동부 광산에 막대한 거금을 투자하고 받아둔 계약서란다. 세상 사람들은 그저 가문이 마지막 발악으로 재물을 탐한 흔적이라 조롱했으나... 실상은 그렇지 않다. 너희 선대께서 가문의 명맥과 비급의 정수를 지키기 위해, 그 광산의 가장 깊고 비밀스러운 갱도에 가전의 유산을 봉인해 두고 이 계약서를 그 열쇠이자 증표로 남기신 게야.\"\n\n조경 선생은 떨리는 손으로 계약서를 소진호에게 내밀었다.\n\n\"이제 주인을 찾아가는구나. 부디 이것을 품에 깊이 숨기고, 서원의 눈귀를 피해 진실을 찾아내거라. 이 늙은이가 해줄 수 있는 것은 여기까지다.\"\n\n소진호는 떨리는 두 손으로 조경 선생이 건네는 **[동부 광산 투자 계약서]**를 받았다. 거친 가죽의 질감과 묵직한 밀랍의 온기가 손끝을 타고 가슴 깊은 곳으로 전해졌다. 그는 고개를 깊이 숙여 감사의 예를 표한 뒤, 품속 가장 안전한 곳에 계약서를 밀어 넣었다. 가문의 몰락을 둘러싼 거대한 음모의 실타래를 풀 첫 번째 단서가 그의 손바닥 안에서 무겁게 숨 쉬고 있었다."
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {
+        "text": "[TRPG Campaign Context]\n- 세계관명: 낙양 숭양서원\n- 배경 설정: 남송 말기 정통 무협 세계관, 낙양의 숭양서원\n- 문체 스타일: 묵직하고 유려한 정통 무협 필치\n- 현재 챕터: 제1장: 서원의 은밀한 흔적\n- 주인공 이름: 소진호 (나이: 20, 성별: 남성)\n- 출신/배경: 몰락한 낙양 서생\n- 목적: 가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것\n- 현재 능력치: 근력(12), 민첩(14), 건강(12), 지능(15), 지혜(13), 매력(11)\n- Canonical 소지품 목록:\n  * [inv-silver-1] 은화 (5개): 통용 화폐\n- 진행 중인 서사 복선/시드:\n없음\n\n[Player Action Declaration]: \"탁자 위에 놓인 오래된 비급 서첩을 발견하여 배낭에 넣고, 조경 선생에게 은화 1냥을 주고 수묵화 한 장을 구매한다.\""
+      }
+    ]
+  },
+  {
+    "role": "user",
+    "parts": [
+      {
+        "text": "[SOVEREIGN VEIL PIPELINE - PHASE 2 NARRATIVE SYNTHESIZER & INTENT FIDELITY JUDGE]\nORIGINAL PLAYER INPUT (PROVENANCE & FIDELITY REFERENCE ONLY - NOT CANONICAL WORLD TRUTH):\n\"탁자 위에 놓인 오래된 비급 서첩을 발견하여 배낭에 넣고, 조경 선생에게 은화 1냥을 주고 수묵화 한 장을 구매한다.\"\n\nPRE-AUTHORIZED ALLOW CANDIDATES (ONLY THESE MAY BE SELECTED):\n[Candidate 1] \"묵향 속에 가려진 연원과 법식의 교환\"\nSummary: 소진호가 탁자 위 서첩에 눈길을 주자, 조경 선생은 그것이 비급의 잔해이되 구결이 태반이나 유실된 '훼손된 도인법 서첩'임을 일러주며 흔쾌히 가질 것을 허락합니다. 이어 소진호는 은화 1냥을 건네고 숭양산의 산세가 그려진 수묵화를 구매하여 품에 넣습니다.\n\nINSTRUCTIONS:\n1. Compare the Original Player Input above with each of the ALLOW candidates.\n2. Select the single candidate from the ALLOWED list that is most faithful to the player's intended action declaration and request.\n3. Output a single JSON line specifying the selected candidate ID: {\"selectedCandidateId\": <number>}\n4. Output the full narrative text for this turn describing the selected turn sequence.\n5. Do NOT introduce new state changes outside the selected candidate."
+      }
+    ]
+  }
+]

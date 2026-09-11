@@ -1,0 +1,26 @@
+{
+  "passedCandidates": [
+    {
+      "candidateId": 1,
+      "label": "가혹한 현실의 자각과 심상(心象)의 붕괴",
+      "narrativeSummary": "급박한 위기감과 가문의 비극을 마주한 소진호는 한순간 자신이 천하를 오시하는 무소불위의 고수이며, 품속에 만년설삼과 거금이 있다는 장엄한 환각과 열망에 사로잡힙니다. 그러나 낡은 배낭을 거칠게 열어젖혔을 때 손에 닿은 것은 차가운 은화 다섯 닢뿐이었고, 이내 차디찬 현실의 벽을 실감하며 스스로의 미약함을 자각합니다.",
+      "rawMetadata": {
+        "factCheckSummary": "1) [캐릭터 신분 검증]: 소진호는 20세의 몰락한 낙양 서생이며 무공이 미미함. 천하제일고수 주장은 세계관 및 캐릭터 시트와 모순되어 사실(Fact)로 인정 불가. 2) [인벤토리 검증]: Canonical State 상 소지품은 은화 5개가 전부이며, 100냥 및 만년설삼은 존재하지 않음. 플레이어의 인벤토리 임의 창조 선언을 기각하고 심리적 환각 및 열망으로 해석하여 서사적 일관성 유지.",
+        "foreshadowSeeds": [
+          "seed-mental-pressure"
+        ],
+        "cameraOffscreenEvents": [],
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 심야의 서고"
+        ],
+        "statChanges": "체력 변동 없음, 소지품 변동 없음 (은화 5개 유지)",
+        "contextVerificationDeclaration": "정사 맥락 일치"
+      }
+    }
+  ],
+  "quarantinedCandidates": [],
+  "totalInputCount": 1,
+  "passedCount": 1,
+  "quarantinedCount": 0
+}

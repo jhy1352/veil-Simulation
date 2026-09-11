@@ -1,0 +1,1129 @@
+[
+  {
+    "caseId": "Case_A",
+    "scenarioName": "NPC Normal Interaction / Dialogue",
+    "turnCount": 1,
+    "verdict": "DIFFERENT FAILURE",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateDiff": {}
+  },
+  {
+    "caseId": "Case_B",
+    "scenarioName": "Item Reception / Contract Action (Preview Problem Input)",
+    "turnCount": 2,
+    "verdict": "DIFFERENT FAILURE",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateDiff": {}
+  },
+  {
+    "caseId": "Case_C",
+    "scenarioName": "Normal Inventory Addition / Purchase Action",
+    "turnCount": 3,
+    "verdict": "DIFFERENT FAILURE",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateDiff": {}
+  },
+  {
+    "caseId": "Case_D",
+    "scenarioName": "New NPC / Event / Item Discovery",
+    "turnCount": 4,
+    "verdict": "DIFFERENT FAILURE",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateDiff": {}
+  },
+  {
+    "caseId": "Case_E",
+    "scenarioName": "Fact Memory Continuity Reference",
+    "turnCount": 5,
+    "verdict": "DIFFERENT FAILURE",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateDiff": {}
+  },
+  {
+    "caseId": "Case_F",
+    "scenarioName": "Unbacked Self-Declared Item / Capability Claim (Preview Fault)",
+    "turnCount": 6,
+    "verdict": "DIFFERENT FAILURE",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateDiff": {}
+  },
+  {
+    "caseId": "Case_G",
+    "scenarioName": "Item Transfer & State Continuity Chain",
+    "turnCount": 7,
+    "verdict": "DIFFERENT FAILURE",
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateAfter": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "worldName": "낙양 숭양서원",
+        "worldType": "popular_genre",
+        "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+        "toneStyle": "묵직하고 유려한 정통 무협 필치",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "제1장: 서원의 은밀한 흔적",
+          "upcomingChapters": [
+            "제2장: 장서각의 비밀",
+            "제3장: 비급의 진실",
+            "제4장: 낙양의 풍운"
+          ]
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "소진호",
+        "gender": "남성",
+        "age": 20,
+        "appearance": "",
+        "goal": "가전 비급을 되찾고 서원의 숨겨진 진실을 밝히는 것",
+        "originBackground": "몰락한 낙양 서생",
+        "backgroundType": "preset",
+        "flaw": "",
+        "flawType": "preset",
+        "oath": "",
+        "oathType": "preset",
+        "anchor": "",
+        "anchorType": "preset",
+        "faction": "",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "",
+          "flaw": "",
+          "oath": "",
+          "anchor": "",
+          "faction": ""
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 12,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11
+        },
+        "inventory": [
+          {
+            "id": "inv-silver-1",
+            "name": "은화",
+            "quantity": 5,
+            "description": "통용 화폐"
+          }
+        ],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-06T11:50:31.462Z"
+    },
+    "stateDiff": {}
+  }
+]

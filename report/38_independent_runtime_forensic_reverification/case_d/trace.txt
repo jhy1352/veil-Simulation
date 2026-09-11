@@ -1,0 +1,14 @@
+=== START CASE Case_D: New NPC & Item Discovery ===
+[STAGE 1: PLAYER INPUT] "장서각 뒤편 사당 밑에서 비밀 상자를 발견하고, 그 안에서 신비한 옥패를 습득하며 멀리서 나타난 흑의인 목영과 대치한다." (Turn 4)
+[STAGE 2: LLM #1 PROMPT GENERATED] Length: 8506 chars
+[STAGE 3: CALLING LLM #1 API] Model: gemini-3.5-flash
+[STAGE 3: LLM #1 RESPONSE RECEIVED] Length: 2519 chars
+[STAGE 4: PARSE CANDIDATES] Count: 1
+[STAGE 5: RECOVERY GATE] Total: 1, Passed: 1, Quarantined: 0
+[STAGE 7: DIVERSITY GATE] Retained 1 diverse candidate(s)
+[STAGE 8: PRE-AUTH RESULTS] Total: 1, Allowed: 1, Rejected: 0
+[STAGE 9: PHASE 2 LLM #2 SYNTHESIZER] Selecting among 1 ALLOW candidate(s)...
+[STAGE 9: LLM #2 SYNTHESIZER RESPONSE RECEIVED] Length: 2333 chars
+[STAGE 10: CANDIDATE SELECTION] Selected ID: 1 (장서각 배후의 사당, 비밀 상자와 어둠 속의 추적자)
+[STAGE 11: SOVEREIGN COMMIT] Success: true, New Records: 2
+[STAGE 12: STATE DIFF CHECK] Changed keys: stateVersion, turn, worldInfo, lastCommittedEventId, lastCommittedAt

@@ -1,9 +1,11 @@
 import { StateTransitionProposal, ValidationVerdict, CanonicalState, TransitionAction, ProposalSource, ActionType, ImmutableHistoricalRecord, VerifiedClaim } from './types';
 import { isEngineAuthorized } from './internalCapability';
-import { WorldInfo, Character, NarrativeTime } from '../types';
+import { WorldInfo, Character, NarrativeTime, OffscreenEventRecord } from '../types';
 import { deepClone, applyActionToDraftState } from './actionApplier';
 import { ImmigrationGate } from './immigrationGate';
 import { checkMeaningTreeProjectionConsistency } from './language/runtimeProjection';
+import { resolveNpcIdentity } from './index/entityIdentityResolver';
+import { resolveCurrentCausalAuthority } from './index/authoritativeEvidence';
 
 const ALLOWED_STAT_KEYS = new Set(['strength', 'agility', 'constitution', 'intelligence', 'wisdom', 'charisma']);
 const ALLOWED_VISIBILITY = new Set(['PUBLIC', 'FACTION_ONLY', 'PRIVATE', 'HIDDEN', 'RUMOR']);
@@ -537,6 +539,28 @@ export class EngineValidator {
             rejectedReasons.push(`[INVALID_ACTION] Action #${i + 1} (ADD_NPC) affinity must be a finite integer between 0 and 100.`);
             actionValid = false;
           }
+
+          // Article 5 / 8 / 16: Independent Identity Resolution Gate for LLM ADD_NPC
+          // LLM-sourced ADD_NPC must be independently verified as NOVEL against current canonicalState + historyRecords.
+          // EXACT / RECOVERED / AMBIGUOUS / CONFLICT must all be rejected.
+          if (actionValid && proposal.source === 'LLM') {
+            const identityResolution = resolveNpcIdentity(
+              currentState,
+              historyRecords || [],
+              npc.name,
+              npc.entityReference
+            );
+
+            if (identityResolution.status !== 'NOVEL') {
+              conflictDetails.push(
+                `[IDENTITY_PROVENANCE_VIOLATION] Action #${i + 1}: LLM ADD_NPC '${npc.name}' did not independently resolve as NOVEL (status: ${identityResolution.status}, reason: ${identityResolution.reason}).`
+              );
+              rejectedReasons.push(
+                `[IDENTITY_PROVENANCE_VIOLATION] LLM ADD_NPC '${npc.name}' requires an independently verified NOVEL identity resolution.`
+              );
+              actionValid = false;
+            }
+          }
           break;
         }
 
@@ -582,7 +606,7 @@ export class EngineValidator {
             } else if ((changes as any).affinity !== undefined && (typeof (changes as any).affinity !== 'number' || isNaN((changes as any).affinity) || !Number.isFinite((changes as any).affinity) || (changes as any).affinity < 0 || (changes as any).affinity > 100 || !Number.isInteger((changes as any).affinity))) {
               rejectedReasons.push(`[INVALID_ACTION] Action #${i + 1} (UPDATE_NPC) affinity must be a finite integer between 0 and 100.`);
               actionValid = false;
-            } else if (proposal.source === 'LLM') {
+            } else if (proposal.source === 'LLM' || proposal.source === 'PLAYER') {
               // Multi-field check: EVERY changed attribute in changes must have a corresponding VerifiedClaim.
               // No partial pass (some() is strictly forbidden).
               const changeEntries = Object.entries(changes);
@@ -622,7 +646,7 @@ export class EngineValidator {
             conflictDetails.push(`[DEAD_NPC_STATUS_PROTECTION] Action #${i + 1}: NPC '${targetNpc.name}' (${id}) is DEAD. Cannot modify status of a deceased NPC.`);
             rejectedReasons.push(`[DEAD_NPC_STATUS_PROTECTION] Cannot modify status of a deceased NPC.`);
             actionValid = false;
-          } else if (proposal.source === 'LLM') {
+          } else if (proposal.source === 'LLM' || proposal.source === 'PLAYER') {
             const hasClaim = hasMatchingVerifiedClaim(proposal.verifiedClaims, id, 'status', status, targetNpc.name);
             if (!hasClaim) {
               conflictDetails.push(`[CLAIM_AUTHORITY_VIOLATION] Action #${i + 1}: LLM SET_NPC_STATUS for '${id}' (status='${status}') lacks a matching Gate-issued VerifiedClaim (Entity='${id}', Attribute='status', Value='${status}').`);
@@ -754,7 +778,7 @@ export class EngineValidator {
               }
             }
 
-            if (actionValid && proposal.source === 'LLM') {
+            if (actionValid && (proposal.source === 'LLM' || proposal.source === 'PLAYER')) {
               const changeEntries = Object.entries(changes);
               if (changeEntries.length === 0) {
                 rejectedReasons.push(`[INVALID_ACTION] Action #${i + 1} (UPDATE_FACTION) changes object is empty.`);
@@ -949,59 +973,37 @@ export class EngineValidator {
                       rejectedReasons.push(`[CAUSALITY_VIOLATION] Duplicate consumption of event '${verifiedEventId}'.`);
                       actionValid = false;
                     } else {
-                      // Locate Trusted Event in World Seeds, Offscreen Records, Camera Events, or History (strictly pre-existing prior to proposal)
-                      let foundEventText: string | null = null;
-                      let eventIsActive = false;
-
-                      // A. Narrative Seeds in Current State (pre-existing prior to proposal)
                       const matchingSeed = currentState.worldInfo.seeds.find(s => s.id === verifiedEventId);
-                      if (matchingSeed) {
-                        foundEventText = matchingSeed.content;
-                        eventIsActive = matchingSeed.status === 'active' || matchingSeed.status === 'dormant';
-                      }
+                      const matchingOff = currentState.worldInfo.offscreenRecords?.find(o => o.id === verifiedEventId);
 
-                      // B. Offscreen Records in Current State (pre-existing prior to proposal)
-                      if (!foundEventText && currentState.worldInfo.offscreenRecords) {
-                        const matchingOff = currentState.worldInfo.offscreenRecords.find(o => o.id === verifiedEventId);
-                        if (matchingOff) {
-                          foundEventText = matchingOff.eventDescription;
-                          eventIsActive = true;
+                      // Resolve Current Causal Authority via Engine Authoritative Evidence Resolver
+                      const authorityResolution = resolveCurrentCausalAuthority(
+                        verifiedEventId,
+                        currentState,
+                        historyRecords,
+                        {
+                          operation: 'ADD',
+                          acquisitionCause: acquisition.cause,
+                          targetItemName: item.name,
+                          targetItemId: item.id,
+                          sourceNpcId: acquisition.sourceNpcId
                         }
-                      }
+                      );
 
-                      // C. Camera Offscreen Events in Current State (pre-existing prior to proposal)
-                      if (!foundEventText && currentState.worldInfo.cameraOffscreenEvents) {
-                        const matchingCam = currentState.worldInfo.cameraOffscreenEvents.find(
-                          e => e === verifiedEventId
-                        );
-                        if (matchingCam) {
-                          foundEventText = matchingCam;
-                          eventIsActive = true;
-                        }
-                      }
-
-                      // D. Historical Records (pre-existing prior to proposal)
-                      if (!foundEventText && historyRecords && historyRecords.length > 0) {
-                        const matchingHist = historyRecords.find(
-                          r => r.eventId === verifiedEventId || r.recordId === verifiedEventId
-                        );
-                        if (matchingHist) {
-                          foundEventText = matchingHist.details || (matchingHist as any).summary || null;
-                          eventIsActive = (matchingHist as any).informationStatus === 'CANONICAL' || (matchingHist as any).status === 'CANONICAL' || !(matchingHist as any).status;
-                        }
-                      }
-
-                      // Note: Section 5.7 & Provenance Boundary: Intra-proposal actions and draft data CANNOT serve as canonical evidence.
-
-                      if (!foundEventText) {
+                      if (!authorityResolution.found) {
                         conflictDetails.push(`[CAUSALITY_VIOLATION] Action #${i + 1}: verifiedEventId '${verifiedEventId}' does not exist in canonical world state, history, or active context.`);
                         rejectedReasons.push(`[CAUSALITY_VIOLATION] Event '${verifiedEventId}' not found in canonical records.`);
                         actionValid = false;
-                      } else if (!eventIsActive) {
+                      } else if (authorityResolution.isInactive) {
                         conflictDetails.push(`[CAUSALITY_VIOLATION] Action #${i + 1}: Event '${verifiedEventId}' is resolved, superseded, or no longer an active obtainable context.`);
                         rejectedReasons.push(`[CAUSALITY_VIOLATION] Event '${verifiedEventId}' is not an active obtainable context.`);
                         actionValid = false;
+                      } else if (!authorityResolution.hasAuthority || authorityResolution.isInvalidated) {
+                        conflictDetails.push(`[CAUSAL_AUTHORITY_INVALID] Action #${i + 1}: Event '${verifiedEventId}' has lost current causal authority. ${authorityResolution.conflictDetail || ''}`);
+                        rejectedReasons.push(`[CAUSAL_AUTHORITY_INVALID] Event '${verifiedEventId}' is no longer authoritative (${authorityResolution.rejectionReason || 'AUTHORITY_LOST'}).`);
+                        actionValid = false;
                       } else {
+                        const foundEventText = authorityResolution.eventText || '';
                         // Causal Item Relevance Check
                         const itemNameClean = item.name.trim().toLowerCase();
                         const eventTextClean = foundEventText.toLowerCase();
@@ -1040,7 +1042,62 @@ export class EngineValidator {
                           rejectedReasons.push(`[CAUSALITY_VIOLATION] Event '${verifiedEventId}' has no causal connection to item '${item.name}'.`);
                           actionValid = false;
                         } else {
-                          consumedEventIds.add(verifiedEventId);
+                          // Additional sourceNpcId Structural Provenance Gate if sourceNpcId is specified
+                          const sourceNpcId = typeof acquisition.sourceNpcId === 'string' && acquisition.sourceNpcId.trim()
+                            ? acquisition.sourceNpcId.trim()
+                            : undefined;
+
+                          if (sourceNpcId) {
+                            const sourceNpc = draftWorld.npcs.find(n => n.id === sourceNpcId);
+                            if (!sourceNpc) {
+                              conflictDetails.push(`[PROVENANCE_VIOLATION] Action #${i + 1}: Acquisition sourceNpcId '${sourceNpcId}' does not exist in canonical NPCs.`);
+                              rejectedReasons.push(`[PROVENANCE_VIOLATION] sourceNpcId '${sourceNpcId}' not found in canonical NPCs.`);
+                              actionValid = false;
+                            } else if (
+                              draftWorld.factions.some(f => f.id === sourceNpcId) ||
+                              draftWorld.seeds.some(s => s.id === sourceNpcId) ||
+                              draftCharacter.inventory.some(inv => inv.id === sourceNpcId)
+                            ) {
+                              conflictDetails.push(`[PROVENANCE_VIOLATION] Action #${i + 1}: sourceNpcId '${sourceNpcId}' collides with a non-NPC entity ID (faction/seed/item).`);
+                              rejectedReasons.push(`[PROVENANCE_VIOLATION] sourceNpcId '${sourceNpcId}' cannot reuse non-NPC entity ID.`);
+                              actionValid = false;
+                            } else {
+                              // Verify structured provenance link between verifiedEventId and sourceNpcId
+                              let hasStructuredNpcLink = false;
+
+                              if (matchingOff) {
+                                if (Array.isArray(matchingOff.involvedNpcIds) && matchingOff.involvedNpcIds.includes(sourceNpcId)) {
+                                  hasStructuredNpcLink = true;
+                                }
+                                if (!hasStructuredNpcLink && (matchingOff as any).information) {
+                                  const infoList = Array.isArray((matchingOff as any).information)
+                                    ? (matchingOff as any).information
+                                    : [(matchingOff as any).information];
+                                  if (infoList.some((t: any) => t?.sourceNpcId === sourceNpcId || t?.recipientNpcId === sourceNpcId)) {
+                                    hasStructuredNpcLink = true;
+                                  }
+                                }
+                              }
+
+
+
+                              if (!hasStructuredNpcLink && matchingSeed) {
+                                if (Array.isArray((matchingSeed as any).involvedNpcIds) && (matchingSeed as any).involvedNpcIds.includes(sourceNpcId)) {
+                                  hasStructuredNpcLink = true;
+                                }
+                              }
+
+                              if (!hasStructuredNpcLink) {
+                                conflictDetails.push(`[PROVENANCE_VIOLATION] Action #${i + 1}: sourceNpcId '${sourceNpcId}' lacks structured provenance connection to verified event '${verifiedEventId}'.`);
+                                rejectedReasons.push(`[PROVENANCE_VIOLATION] sourceNpcId '${sourceNpcId}' has no structured link to event '${verifiedEventId}'.`);
+                                actionValid = false;
+                              }
+                            }
+                          }
+
+                          if (actionValid) {
+                            consumedEventIds.add(verifiedEventId);
+                          }
                         }
                       }
                     }
