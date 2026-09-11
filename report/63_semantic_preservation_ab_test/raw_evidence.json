@@ -1,0 +1,972 @@
+[
+  {
+    "testId": "T01",
+    "category": "단순 사건",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "플레이어가 바닥에서 녹슨 단검을 주웠다.",
+    "rawLlmOutput": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"단검의 상태 점검 및 주변 경계\",\n    \"narrativeSummary\": \"진흙탕 속에서 건져 올린 녹슨 단검의 무게와 날 상태를 확인하며, 누군가 떨어뜨리고 간 흔적인지 주변의 발자국과 기척을 살핍니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_PICKUP_DAGGER_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"주인공\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"황량한 길목\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"녹슨 단검 자루에 새겨진 마모된 문양과 최근의 이동 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_PICKUP_DAGGER_01\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 버려진 길목의 잔해\"\n      }\n    }\n  },\n  {\n    \"label\": \"단검의 문양 조사 및 과거 추적\",\n    \"narrativeSummary\": \"단검 손잡이 부근의 흙을 털어내어 가문이나 용병단의 표식을 세밀히 판별하려 시도합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_PICKUP_DAGGER_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"주인공\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"단검에 희미하게 남은 특정 세력의 음각 표식\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_PICKUP_DAGGER_02\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 버려진 길목의 잔해\"\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n```json\n{\n  \"actions\": [\n    {\n      \"actionType\": \"ADD_NARRATIVE_SEED\",\n      \"id\": \"SEED_RUSTY_DAGGER_ORIGIN\",\n      \"seedType\": \"SECONDARY\",\n      \"title\": \"녹슨 단검의 출처\",\n      \"clueText\": \"자루 끝이 거칠게 닳아 있고 붉은 녹이 슨 무명 단검. 누군가 급박하게 흘리고 간 정황이 엿보인다.\",\n      \"status\": \"ACTIVE\"\n    },\n    {\n      \"actionType\": \"MODIFY_INVENTORY\",\n      \"item\": {\n        \"id\": \"item_rusty_dagger\",\n        \"name\": \"녹슨 단검\",\n        \"quantity\": 1\n      },\n      \"operation\": \"ADD\",\n      \"acquisition\": {\n        \"cause\": \"DISCOVERY_PICKUP\",\n        \"verifiedEventId\": \"SEED_RUSTY_DAGGER_ORIGIN\"\n      }\n    },\n    {\n      \"actionType\": \"ADVANCE_CHAPTER\",\n      \"currentChapter\": \"제1장: 버려진 길목의 잔해\",\n      \"upcomingChapters\": [\n        \"제2장: 황야의 발자국\",\n        \"제3장: 첫 번째 정착지\"\n      ]\n    }\n  ]\n}\n```\n\n***\n\n마른 바람이 황량한 길목의 흙먼지를 낮게 쓸고 지나갑니다. 갈라진 땅과 잡초 사이에 반쯤 파묻혀 있던 쇳조각 위로 손을 뻗어 흙을 털어내자, 둔탁한 감촉과 함께 묵직한 날붙이 하나가 손안에 잡힙니다.\n\n비바람에 오랜 시간 노출되었는지 칼날 전반에 거친 붉은 녹이 슬어 있으나, 손잡이를 감싼 가죽 끈은 여전히 단단히 묶여 있습니다. 칼등은 투박하며, 자루 끝에는 거친 도구로 새겨 넣었다가 마모된 듯한 희미한 흠집들이 남아 있습니다. 무기로서의 예리함은 크게 무뎌졌으나, 위급한 순간에 찌르거나 줄을 끊어내는 용도로는 충분히 제 몫을 할 수 있을 정도의 단검입니다.\n\n사방은 고요하며, 멀리서 메마른 나뭇가지가 바람에 흔들리는 소리만이 들려옵니다. 단검을 손에 쥔 당신의 앞에는 버려진 마차 바퀴 자국이 희미하게 이어진 흙길이 펼쳐져 있습니다.",
+    "parsedJson": [
+      {
+        "label": "단검의 상태 점검 및 주변 경계",
+        "narrativeSummary": "진흙탕 속에서 건져 올린 녹슨 단검의 무게와 날 상태를 확인하며, 누군가 떨어뜨리고 간 흔적인지 주변의 발자국과 기척을 살핍니다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_PICKUP_DAGGER_01",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "주인공"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 단검"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "황량한 길목"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "녹슨 단검 자루에 새겨진 마모된 문양과 최근의 이동 흔적"
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 단검",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "EVT_PICKUP_DAGGER_01"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 버려진 길목의 잔해"
+          }
+        }
+      },
+      {
+        "label": "단검의 문양 조사 및 과거 추적",
+        "narrativeSummary": "단검 손잡이 부근의 흙을 털어내어 가문이나 용병단의 표식을 세밀히 판별하려 시도합니다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_PICKUP_DAGGER_02",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "주인공"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 단검"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "단검에 희미하게 남은 특정 세력의 음각 표식"
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 단검",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "EVT_PICKUP_DAGGER_02"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 버려진 길목의 잔해"
+          }
+        }
+      }
+    ],
+    "parseSuccess": true,
+    "model": "gemini-3.7-flash",
+    "actualModelVersion": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "responseId": "I7OjapGNG6GXvr0Pv4LzqQY",
+    "durationMs": 16504,
+    "timestamp": "2026-09-11T07:52:19.480Z"
+  },
+  {
+    "testId": "T01",
+    "category": "단순 사건",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "플레이어가 바닥에서 녹슨 단검을 주웠다.",
+    "rawLlmOutput": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"녹슨 단검 수습 및 노정 재개\",\n    \"narrativeSummary\": \"바닥에 버려진 녹슨 단검을 주워 흙을 털어내고 품에 갈무리한 뒤, 황량한 길목을 따라 묵묵히 걸음을 이어간다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_rusty_dagger\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"주인공\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"마른 흙길\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"NONE\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"버려진 녹슨 단검의 칼자루에 새겨진 마모된 문장\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_rusty_dagger\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 황량한 길목의 조우\",\n        \"upcomingChapters\": [\n          \"제2장: 녹슨 칼날의 내력\",\n          \"제3장: 성벽 너머의 그림자\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"단검 세부 감정 및 주변 족적 조사\",\n    \"narrativeSummary\": \"주워 든 단검의 슴베와 날 상태를 면밀히 살피고, 그것이 떨어진 주변 흙바닥에 남은 발자국이나 마차 바큇자국을 수색한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_and_inspect_dagger\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"주인공\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"마른 흙길\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"NONE\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"단검 주변 흙바닥에 희미하게 남겨진 서두른 발자국의 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_and_inspect_dagger\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 황량한 길목의 조우\",\n        \"upcomingChapters\": [\n          \"제2장: 흩어진 발자국을 따라서\",\n          \"제3장: 인적 끊긴 폐가\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"단검을 쥔 채 은폐 및 주변 경계\",\n    \"narrativeSummary\": \"무기를 손에 쥔 채 길가의 마른 수풀 사이로 몸을 낮추어, 누군가 근처에 매복해 있거나 뒤따라오지 않는지 숨을 죽이고 동태를 살핀다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_dagger_alert\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"주인공\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"길가 수풀\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"NONE\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"바람을 타고 간헐적으로 들려오는 메마른 나뭇가지 꺾이는 소리\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_dagger_alert\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 황량한 길목의 조우\",\n        \"upcomingChapters\": [\n          \"제2장: 풀숲 너머의 시선\",\n          \"제3장: 첫 번째 대치\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n```json\n{\n  \"actions\": [\n    {\n      \"type\": \"ADD_NARRATIVE_SEED\",\n      \"id\": \"seed_rusty_dagger_origin\",\n      \"seedType\": \"SECONDARY\",\n      \"title\": \"버려진 녹슨 단검의 출처\",\n      \"clueText\": \"마른 흙먼지 속에 반쯤 파묻혀 있던 조잡한 단검. 붉은 녹이 슬어 있고 칼자루 끝에 거친 흠집이 나 있다.\",\n      \"status\": \"ACTIVE\"\n    },\n    {\n      \"type\": \"MODIFY_INVENTORY\",\n      \"item\": {\n        \"id\": \"item_rusty_dagger\",\n        \"name\": \"녹슨 단검\",\n        \"quantity\": 1\n      },\n      \"operation\": \"ADD\",\n      \"acquisition\": {\n        \"cause\": \"DISCOVERY_PICKUP\",\n        \"verifiedEventId\": \"seed_rusty_dagger_origin\"\n      }\n    },\n    {\n      \"type\": \"ADVANCE_CHAPTER\",\n      \"currentChapter\": \"제1장: 황량한 길목\",\n      \"upcomingChapters\": [\n        \"제2장: 녹슨 칼날의 내력\",\n        \"제3장: 성벽 너머의 그림자\"\n      ]\n    }\n  ]\n}\n```\n\n바람이 불 때마다 길가에 쌓인 마른 흙먼지가 발목을 스치며 바스락거리는 소리를 낸다. 인적이라곤 찾아보기 힘든 비포장 흙길 한가운데, 메마른 수풀 그늘 밑에 반쯤 묻혀 있던 쇳조각 하나가 흐린 볕을 받아 둔탁한 윤곽을 드러내고 있었다.\n\n허리를 숙여 흙더미를 털어내자 손끝에 닿는 것은 거칠고 차가운 감촉이었다. \n\n손에 쥔 물건은 평범한 사냥용 단검의 형상을 하고 있었으나, 오랜 시간 비바람에 방치되었는지 칼날 전면에 붉은 녹이 두껍게 앉아 날이 무뎌져 있다. 가죽을 덧대었던 손잡이는 삭아 부스러져 나갔고, 칼자루 끝자락 쇠붙이에는 무언가 단단한 것에 짓눌리거나 찍힌 듯한 깊은 흠집이 새겨져 있다. 조잡한 만듦새였지만, 아무렇게나 버려진 쇠붙이치고는 손에 쥐었을 때 제법 묵직한 무게가 손바닥을 타고 전해진다.\n\n손바닥으로 칼날에 묻은 거친 모래를 털어내자 눅눅한 쇠비린내가 코끝을 스친다. 주변 흙바닥에는 누군가 급하게 지나친 듯 쓸려나간 자국이 희미하게 남아 있었으나, 이미 바람에 깎여 언제 남겨진 흔적인지는 분명치 않다.\n\n손안에 들어온 차가운 쇠붙이를 갈무리한 채 고개를 들자, 끝없이 뻗은 황량한 길목 너머로 메마른 가을바람만이 낮게 울부짖고 있다.",
+    "parsedJson": [
+      {
+        "label": "녹슨 단검 수습 및 노정 재개",
+        "narrativeSummary": "바닥에 버려진 녹슨 단검을 주워 흙을 털어내고 품에 갈무리한 뒤, 황량한 길목을 따라 묵묵히 걸음을 이어간다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_rusty_dagger",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "주인공"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 단검"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "마른 흙길"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "버려진 녹슨 단검의 칼자루에 새겨진 마모된 문장"
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 단검",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_rusty_dagger"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 황량한 길목의 조우",
+            "upcomingChapters": [
+              "제2장: 녹슨 칼날의 내력",
+              "제3장: 성벽 너머의 그림자"
+            ]
+          }
+        }
+      },
+      {
+        "label": "단검 세부 감정 및 주변 족적 조사",
+        "narrativeSummary": "주워 든 단검의 슴베와 날 상태를 면밀히 살피고, 그것이 떨어진 주변 흙바닥에 남은 발자국이나 마차 바큇자국을 수색한다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_and_inspect_dagger",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "주인공"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 단검"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "마른 흙길"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "단검 주변 흙바닥에 희미하게 남겨진 서두른 발자국의 흔적"
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 단검",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_and_inspect_dagger"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 황량한 길목의 조우",
+            "upcomingChapters": [
+              "제2장: 흩어진 발자국을 따라서",
+              "제3장: 인적 끊긴 폐가"
+            ]
+          }
+        }
+      },
+      {
+        "label": "단검을 쥔 채 은폐 및 주변 경계",
+        "narrativeSummary": "무기를 손에 쥔 채 길가의 마른 수풀 사이로 몸을 낮추어, 누군가 근처에 매복해 있거나 뒤따라오지 않는지 숨을 죽이고 동태를 살핀다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_dagger_alert",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "주인공"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 단검"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "길가 수풀"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "바람을 타고 간헐적으로 들려오는 메마른 나뭇가지 꺾이는 소리"
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 단검",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_dagger_alert"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 황량한 길목의 조우",
+            "upcomingChapters": [
+              "제2장: 풀숲 너머의 시선",
+              "제3장: 첫 번째 대치"
+            ]
+          }
+        }
+      }
+    ],
+    "parseSuccess": true,
+    "model": "gemini-3.7-flash",
+    "actualModelVersion": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "responseId": "NbOjar7-Fe2u1e8P6cXG0QI",
+    "durationMs": 14996,
+    "timestamp": "2026-09-11T07:52:35.978Z"
+  },
+  {
+    "testId": "T02",
+    "category": "복합 사건",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "경비병이 문을 열고 안으로 들어간 뒤, 바닥에 떨어진 열쇠를 주워 주머니에 넣었다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 17388,
+    "timestamp": "2026-09-11T07:52:54.867Z"
+  },
+  {
+    "testId": "T02",
+    "category": "복합 사건",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "경비병이 문을 열고 안으로 들어간 뒤, 바닥에 떨어진 열쇠를 주워 주머니에 넣었다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 7243,
+    "timestamp": "2026-09-11T07:53:03.610Z"
+  },
+  {
+    "testId": "T03",
+    "category": "의도",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "플레이어는 경비병에게서 열쇠를 훔치려고 했다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 9154,
+    "timestamp": "2026-09-11T07:53:14.266Z"
+  },
+  {
+    "testId": "T03",
+    "category": "의도",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "플레이어는 경비병에게서 열쇠를 훔치려고 했다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 7204,
+    "timestamp": "2026-09-11T07:53:22.971Z"
+  },
+  {
+    "testId": "T04",
+    "category": "실패한 시도",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "플레이어가 열쇠를 훔치려 했지만 실패했다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 13285,
+    "timestamp": "2026-09-11T07:53:37.757Z"
+  },
+  {
+    "testId": "T04",
+    "category": "실패한 시도",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "플레이어가 열쇠를 훔치려 했지만 실패했다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 6940,
+    "timestamp": "2026-09-11T07:53:46.198Z"
+  },
+  {
+    "testId": "T05",
+    "category": "전언",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "마을 사람들은 북쪽 폐허에 검은 보물이 있다고 말했다.",
+    "rawLlmOutput": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"주막의 탁류 속에서 소문의 진위를 가늠하다\",\n    \"narrativeSummary\": \"주인공은 북쪽 폐허에 관한 뜬소문이 오가는 마을의 낡은 주막 한구석에서 사람들의 대화를 관찰하며, 소문 뒤에 숨겨진 위험과 구체적인 지형 정보를 파악하려 합니다.\",\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"북쪽 폐허에 묻혀 있다는 정체불명의 '검은 보물'과 과거 그곳에서 실종된 자들의 행방\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 안개 낀 길목의 풍문\",\n        \"upcomingChapters\": [\n          \"제2장: 무너진 성채의 잔해\",\n          \"제3장: 흑석(黑石)의 메아리\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"마을 북쪽 길목을 지키는 파수꾼에게 직접 묻다\",\n    \"narrativeSummary\": \"소문을 맹신하지 않고, 북쪽 숲과 폐허의 경계를 드나드는 경비병이나 길잡이에게 접근하여 실제 폐허 부근의 지형과 출몰하는 위협에 대해 캐묻습니다.\",\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"북쪽 폐허 부근에서 최근 목격되었다는 기이한 짐승들의 흔적\"\n      ]\n    }\n  },\n  {\n    \"label\": \"소문의 근원을 뒤로한 채 곧장 북쪽 숲길로 발걸음을 옮기다\",\n    \"narrativeSummary\": \"마을 사람들의 과장 섞인 입방아에 휘둘리지 않고, 직접 두 눈으로 확인하기 위해 북쪽 고갯길로 향하며 주변 식생과 버려진 옛 도로의 흔적을 살핍니다.\",\n    \"rawMetadata\": {}\n  }\n]\n[CANDIDATES_END]\n\n```json\n{\n  \"actions\": [\n    {\n      \"type\": \"ADVANCE_CHAPTER\",\n      \"payload\": {\n        \"currentChapter\": \"제1장: 안개 낀 길목의 풍문\",\n        \"upcomingChapters\": [\n          \"제2장: 무너진 성채의 잔해\",\n          \"제3장: 흑석(黑石)의 메아리\"\n        ]\n      }\n    },\n    {\n      \"type\": \"ADD_RUMOR\",\n      \"payload\": {\n        \"rumor\": \"북쪽 고개 너머의 잊힌 폐허 속에는 오래전 매몰된 검은 보물이 잠들어 있으나, 발을 들인 사냥꾼들은 짙은 안개 속에서 길을 잃거나 빈손으로 도망쳐 나왔다고 한다.\",\n        \"sourceContext\": \"국경 마을 주막의 주민들 사이에서 떠도는 이야기\"\n      }\n    },\n    {\n      \"type\": \"ADD_NARRATIVE_SEED\",\n      \"payload\": {\n        \"id\": \"seed_ruins_black_treasure\",\n        \"seedType\": \"MAIN\",\n        \"title\": \"북쪽 폐허의 검은 유물\",\n        \"clueText\": \"마을 사람들은 북쪽 폐허 깊은 곳에 값진 검은 보물이 묻혀 있다고 수군거리지만, 그 형태나 성질에 대해서는 저마다 말이 엇갈린다.\",\n        \"status\": \"ACTIVE\"\n      }\n    }\n  ]\n}\n```\n\n***\n\n마을을 감싼 초저녁의 공기는 습기를 머금어 무거웠고, 흙벽돌을 덧댄 낡은 가옥들 사이로 희미한 굴뚝 연기가 흩어지고 있었습니다.\n\n주막의 기름때 묻은 목재 탁자 주변에서는 맥주잔 부딪치는 소리와 거친 웃음소리가 뒤섞여 흘러나왔습니다. 그 탁한 소음 틈새로 오가는 이야기의 중심에는 어김없이 북쪽의 고갯길 너머, 빽빽한 가문비나무 숲에 가려진 옛 석조 폐허가 자리하고 있었습니다. \n\n\"그 잿빛 성터 밑바닥에 분명 손대지 않은 검은 보물이 묻혀 있다더군. 지난달에 약초를 캐러 갔던 늙은 약초꾼도 안개 너머에서 시커멓게 번쩍이는 탑 기둥을 봤다고 맹세했어.\"\n\"헛소리 마라. 설령 쇠붙이나 보석이 있다 한들, 가시덤불과 무너진 천장 틈에 도사린 짐승들을 어쩌려고? 몇 해 전 들어갔던 사냥패도 결국 장비만 내버려 두고 혼비백산해 도망쳐 나오지 않았나.\"\n\n마을 사람들의 입술을 타고 번지는 말들은 저마다 살이 붙어 부풀려져 있었지만, 한 가지 사실만은 분명해 보였습니다. 북쪽 숲 깊은 곳에 실제로 오래된 잔해가 존재하며, 그곳을 둘러싸고 탐욕과 경계가 뒤섞인 소문이 끊이지 않는다는 점이었습니다. \n\n당신은 아직 변변한 장비도, 길을 안내할 동행도 없는 낯선 이방인의 몸으로 이 마을의 서늘한 바람을 마주하고 있습니다. 북쪽으로 뻗은 비포장 흙길은 짙어지는 어스름 속으로 아득하게 이어져 있습니다.",
+    "parsedJson": [
+      {
+        "label": "주막의 탁류 속에서 소문의 진위를 가늠하다",
+        "narrativeSummary": "주인공은 북쪽 폐허에 관한 뜬소문이 오가는 마을의 낡은 주막 한구석에서 사람들의 대화를 관찰하며, 소문 뒤에 숨겨진 위험과 구체적인 지형 정보를 파악하려 합니다.",
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "북쪽 폐허에 묻혀 있다는 정체불명의 '검은 보물'과 과거 그곳에서 실종된 자들의 행방"
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 안개 낀 길목의 풍문",
+            "upcomingChapters": [
+              "제2장: 무너진 성채의 잔해",
+              "제3장: 흑석(黑石)의 메아리"
+            ]
+          }
+        }
+      },
+      {
+        "label": "마을 북쪽 길목을 지키는 파수꾼에게 직접 묻다",
+        "narrativeSummary": "소문을 맹신하지 않고, 북쪽 숲과 폐허의 경계를 드나드는 경비병이나 길잡이에게 접근하여 실제 폐허 부근의 지형과 출몰하는 위협에 대해 캐묻습니다.",
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "북쪽 폐허 부근에서 최근 목격되었다는 기이한 짐승들의 흔적"
+          ]
+        }
+      },
+      {
+        "label": "소문의 근원을 뒤로한 채 곧장 북쪽 숲길로 발걸음을 옮기다",
+        "narrativeSummary": "마을 사람들의 과장 섞인 입방아에 휘둘리지 않고, 직접 두 눈으로 확인하기 위해 북쪽 고갯길로 향하며 주변 식생과 버려진 옛 도로의 흔적을 살핍니다.",
+        "rawMetadata": {}
+      }
+    ],
+    "parseSuccess": true,
+    "model": "gemini-3.7-flash",
+    "actualModelVersion": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "responseId": "jLOjap7FBoa7vr0PsMKhuQs",
+    "durationMs": 12850,
+    "timestamp": "2026-09-11T07:54:00.550Z"
+  },
+  {
+    "testId": "T05",
+    "category": "전언",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "마을 사람들은 북쪽 폐허에 검은 보물이 있다고 말했다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 13174,
+    "timestamp": "2026-09-11T07:54:15.225Z"
+  },
+  {
+    "testId": "T06",
+    "category": "부정",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "플레이어는 열쇠를 줍지 않았다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 12235,
+    "timestamp": "2026-09-11T07:54:28.961Z"
+  },
+  {
+    "testId": "T06",
+    "category": "부정",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "플레이어는 열쇠를 줍지 않았다.",
+    "rawLlmOutput": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"열쇠를 지나쳐 발걸음을 재촉한다\",\n    \"narrativeSummary\": \"흙먼지 낀 바닥에 떨어진 낡은 철제 열쇠를 뒤로하고 방랑의 길을 계속 걷는다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_IGNORE_KEY_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"주인공\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"낡은 철제 열쇠\"\n          }\n        ],\n        \"scope\": \"OBSERVATION\",\n        \"polarity\": \"NEGATED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"NONE\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"길가에 버려진 낡은 철제 열쇠의 행방과 그 열쇠가 맞물릴 문\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 황량한 가도\"\n      }\n    }\n  },\n  {\n    \"label\": \"손을 대지 않고 주변 흔적을 살핀다\",\n    \"narrativeSummary\": \"열쇠를 건드리지 않은 채, 누군가 떨어뜨리고 간 발자국이나 마차 바퀴 자국이 있는지 주위를 조사한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_INVESTIGATE_SURROUNDINGS_01\",\n        \"action\": \"INVESTIGATE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"주인공\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"가도 주변\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"가도에 남겨진 의문의 바퀴 자국과 열쇠의 연관성\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 황량한 가도\"\n      }\n    }\n  },\n  {\n    \"label\": \"열쇠의 위치를 눈여겨둔 뒤 안전한 거리를 유지한다\",\n    \"narrativeSummary\": \"함정이나 미끼일 가능성을 경계하며 일정한 거리를 두고 주변의 기척에 귀를 기울인다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_OBSERVE_KEY_01\",\n        \"action\": \"OBSERVE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"주인공\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"주변 수풀\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 황량한 가도\"\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n```json\n{\n  \"actions\": [\n    {\n      \"action\": \"ADVANCE_CHAPTER\",\n      \"currentChapter\": \"제1장: 황량한 가도\",\n      \"upcomingChapters\": [\n        \"제2장: 버려진 파수탑\",\n        \"제3장: 엇갈린 발자국\"\n      ]\n    },\n    {\n      \"action\": \"ADD_NARRATIVE_SEED\",\n      \"id\": \"SEED_ABANDONED_KEY_01\",\n      \"seedType\": \"SECONDARY\",\n      \"title\": \"가도에 방치된 철제 열쇠\",\n      \"clueText\": \"마른 흙먼지 위에 누군가 떨어뜨린 투박한 철제 열쇠가 덩그러니 놓여 있다.\",\n      \"status\": \"ACTIVE\"\n    }\n  ]\n}\n```\n\n건조한 바람이 메마른 흙길 위를 스쳐 지나가며 잔모래를 흩뿌립니다.\n\n발치 아래, 마른 바큇자국 틈새에 녹이 슨 투박한 철제 열쇠 하나가 반쯤 묻혀 있습니다. 정교한 공예품은 아니지만, 거친 손길로 깎아낸 흔적이 뚜렷한 물건입니다. 누군가 서둘러 짐을 챙겨 떠나며 흘렸거나, 혹은 덜컹거리는 수레바퀴 틈에서 튕겨져 나왔을 법한 모습입니다.\n\n당신은 허리를 숙여 그것을 집어 들지 않았습니다. 모르는 자의 유실물에 함부로 손을 대지 않는 것은 방랑자로서 익힌 오랜 습관이자 불필요한 인과를 피하는 신중함일 것입니다.\n\n차가운 쇠붙이는 마른 흙바닥 위에 그대로 놓인 채, 스산하게 불어오는 바람 속에서 홀로 남아 있습니다. 길은 앞뒤로 길게 뻗어 있으며, 사위는 가도 주변의 메마른 풀벌레 소리만이 간헐적으로 들려올 뿐 고요합니다.",
+    "parsedJson": [
+      {
+        "label": "열쇠를 지나쳐 발걸음을 재촉한다",
+        "narrativeSummary": "흙먼지 낀 바닥에 떨어진 낡은 철제 열쇠를 뒤로하고 방랑의 길을 계속 걷는다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_IGNORE_KEY_01",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "주인공"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "낡은 철제 열쇠"
+              }
+            ],
+            "scope": "OBSERVATION",
+            "polarity": "NEGATED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "길가에 버려진 낡은 철제 열쇠의 행방과 그 열쇠가 맞물릴 문"
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 황량한 가도"
+          }
+        }
+      },
+      {
+        "label": "손을 대지 않고 주변 흔적을 살핀다",
+        "narrativeSummary": "열쇠를 건드리지 않은 채, 누군가 떨어뜨리고 간 발자국이나 마차 바퀴 자국이 있는지 주위를 조사한다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_INVESTIGATE_SURROUNDINGS_01",
+            "action": "INVESTIGATE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "주인공"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "가도 주변"
+              }
+            ],
+            "scope": "PROPOSAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "가도에 남겨진 의문의 바퀴 자국과 열쇠의 연관성"
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 황량한 가도"
+          }
+        }
+      },
+      {
+        "label": "열쇠의 위치를 눈여겨둔 뒤 안전한 거리를 유지한다",
+        "narrativeSummary": "함정이나 미끼일 가능성을 경계하며 일정한 거리를 두고 주변의 기척에 귀를 기울인다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_OBSERVE_KEY_01",
+            "action": "OBSERVE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "주인공"
+              },
+              {
+                "role": "TARGET",
+                "entityName": "주변 수풀"
+              }
+            ],
+            "scope": "PROPOSAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "chapterChanges": {
+            "currentChapter": "제1장: 황량한 가도"
+          }
+        }
+      }
+    ],
+    "parseSuccess": true,
+    "model": "gemini-3.7-flash",
+    "actualModelVersion": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "responseId": "trOjap3pMqu91e8PgLDVsAc",
+    "durationMs": 27166,
+    "timestamp": "2026-09-11T07:54:57.628Z"
+  },
+  {
+    "testId": "T07",
+    "category": "추론",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "문이 열려 있는 것을 보니 누군가 조금 전에 들어간 것 같다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 2441,
+    "timestamp": "2026-09-11T07:55:01.570Z"
+  },
+  {
+    "testId": "T07",
+    "category": "추론",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "문이 열려 있는 것을 보니 누군가 조금 전에 들어간 것 같다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 2747,
+    "timestamp": "2026-09-11T07:55:05.818Z"
+  },
+  {
+    "testId": "T08",
+    "category": "가능성",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "아마 경비병이 열쇠를 숨겼을 것이다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 2853,
+    "timestamp": "2026-09-11T07:55:10.171Z"
+  },
+  {
+    "testId": "T08",
+    "category": "가능성",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "아마 경비병이 열쇠를 숨겼을 것이다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 8292,
+    "timestamp": "2026-09-11T07:55:19.964Z"
+  },
+  {
+    "testId": "T09",
+    "category": "명시적 인과",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "경비병이 문을 열고 들어갔다. 그래서 플레이어가 안으로 들어갔다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 60361,
+    "timestamp": "2026-09-11T07:56:21.825Z"
+  },
+  {
+    "testId": "T09",
+    "category": "명시적 인과",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "경비병이 문을 열고 들어갔다. 그래서 플레이어가 안으로 들어갔다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 36.280065061s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"36s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 36.280065061s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"36s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 400,
+    "timestamp": "2026-09-11T07:56:23.726Z"
+  },
+  {
+    "testId": "T10",
+    "category": "단순 시간적 순서",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "경비병이 문을 열고 들어간 뒤 플레이어가 열쇠를 주웠다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 34.562948715s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.7-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"34s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 34.562948715s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.7-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"34s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 215,
+    "timestamp": "2026-09-11T07:56:25.443Z"
+  },
+  {
+    "testId": "T10",
+    "category": "단순 시간적 순서",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "경비병이 문을 열고 들어간 뒤 플레이어가 열쇠를 주웠다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 32.831865271s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"32s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 32.831865271s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"32s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 230,
+    "timestamp": "2026-09-11T07:56:27.173Z"
+  },
+  {
+    "testId": "T11",
+    "category": "존재하지 않는 대상",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "존재하지 않는 NPC가 플레이어에게 검을 주었다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 10125,
+    "timestamp": "2026-09-11T07:56:38.800Z"
+  },
+  {
+    "testId": "T11",
+    "category": "존재하지 않는 대상",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "존재하지 않는 NPC가 플레이어에게 검을 주었다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 19.494290502s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"19s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 19.494290502s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"19s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 208,
+    "timestamp": "2026-09-11T07:56:40.510Z"
+  },
+  {
+    "testId": "T12",
+    "category": "동일명 개체",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "같은 이름의 경비병 두 명 중 한 명이 열쇠를 건넸다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 13111,
+    "timestamp": "2026-09-11T07:56:55.122Z"
+  },
+  {
+    "testId": "T12",
+    "category": "동일명 개체",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "같은 이름의 경비병 두 명 중 한 명이 열쇠를 건넸다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 3.194374698s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.7-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"3s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 3.194374698s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.7-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"3s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 188,
+    "timestamp": "2026-09-11T07:56:56.810Z"
+  },
+  {
+    "testId": "T13",
+    "category": "발견과 고민",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "플레이어가 열쇠를 발견했고, 그것을 챙길까 고민했다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 1.477101041s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"1s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 1.477101041s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"1s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 216,
+    "timestamp": "2026-09-11T07:56:58.528Z"
+  },
+  {
+    "testId": "T13",
+    "category": "발견과 고민",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "플레이어가 열쇠를 발견했고, 그것을 챙길까 고민했다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 59.761958849s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.7-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"59s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 59.761958849s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.7-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"59s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 215,
+    "timestamp": "2026-09-11T07:57:00.244Z"
+  },
+  {
+    "testId": "T14",
+    "category": "대명사",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "플레이어가 낡은 상자를 열었다. 그는 그것을 주머니에 넣었다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 58.0338564s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"58s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 58.0338564s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"58s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 225,
+    "timestamp": "2026-09-11T07:57:01.971Z"
+  },
+  {
+    "testId": "T14",
+    "category": "대명사",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "플레이어가 낡은 상자를 열었다. 그는 그것을 주머니에 넣었다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 4976,
+    "timestamp": "2026-09-11T07:57:08.447Z"
+  },
+  {
+    "testId": "T15",
+    "category": "주장과 검증",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "플레이어가 열쇠를 가져갔다고 경비병이 주장했지만 실제로는 확인되지 않았다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 49.877074245s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"49s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 49.877074245s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.7-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"49s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 180,
+    "timestamp": "2026-09-11T07:57:10.128Z"
+  },
+  {
+    "testId": "T15",
+    "category": "주장과 검증",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "플레이어가 열쇠를 가져갔다고 경비병이 주장했지만 실제로는 확인되지 않았다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 48.153217035s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.7-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"48s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 48.153217035s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.7-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"48s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 224,
+    "timestamp": "2026-09-11T07:57:11.853Z"
+  },
+  {
+    "testId": "T16",
+    "category": "복합 의미",
+    "condition": "A",
+    "conditionDescription": "Baseline (System prompt without Semantic Preservation Directive)",
+    "input": "플레이어가 열쇠를 주우려고 했지만 손이 닿지 않았고, 결국 경비병에게 열쇠를 달라고 부탁했다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 7120,
+    "timestamp": "2026-09-11T07:57:20.474Z"
+  },
+  {
+    "testId": "T16",
+    "category": "복합 의미",
+    "condition": "B",
+    "conditionDescription": "Directive (System prompt with Semantic Preservation Directive)",
+    "input": "플레이어가 열쇠를 주우려고 했지만 손이 닿지 않았고, 결국 경비병에게 열쇠를 달라고 부탁했다.",
+    "rawLlmOutput": "ERROR: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 37.844930794s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.7-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"37s\"}]}}",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "parseError": "ApiError: {\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.7-flash\\nPlease retry in 37.844930794s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.7-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"37s\"}]}}",
+    "model": "gemini-3.7-flash",
+    "generationConfig": {
+      "thinkingConfig": {
+        "thinkingBudget": 4096
+      }
+    },
+    "durationMs": 186,
+    "timestamp": "2026-09-11T07:57:22.160Z"
+  }
+]
