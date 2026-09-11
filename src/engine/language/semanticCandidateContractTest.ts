@@ -3,6 +3,11 @@ import {
   markSemanticFrontendOutput,
   validateSemanticCandidateOutput,
 } from './semanticCandidateContract';
+import {
+  parseCandidatesBlock,
+  runCandidateRecoveryGate,
+  type VeilCandidate,
+} from './candidateRecoveryGate';
 import type { SemanticEvent } from './types';
 
 function assert(condition: boolean, message: string): void {
@@ -101,6 +106,44 @@ function run(): void {
     threw = true;
   }
   assert(threw, 'Invalid semantic frontend output fails closed');
+
+  // Test live Candidate Block JSON parsing & gate pass-through of top-level semanticEvents[]
+  const rawBlock = `
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "단검 획득",
+    "narrativeSummary": "바닥에 떨어진 단검을 줍는다.",
+    "semanticEvents": [
+      {
+        "eventId": "ev_pickup_1",
+        "action": "PICKUP",
+        "roles": [
+          { "role": "SUBJECT", "entityName": "플레이어" },
+          { "role": "OBJECT", "entityName": "단검" }
+        ],
+        "scope": "PROPOSAL",
+        "polarity": "ASSERTED",
+        "epistemicStatus": "ASSERTED",
+        "modality": "NONE"
+      }
+    ],
+    "rawMetadata": {
+      "foreshadowSeeds": ["단검의 비밀"]
+    }
+  }
+]
+[CANDIDATES_END]
+`;
+  const parsedBlock = parseCandidatesBlock(rawBlock);
+  assert(parsedBlock !== null && parsedBlock.length === 1, 'parseCandidatesBlock parses JSON array with semanticEvents');
+  const gated = runCandidateRecoveryGate<VeilCandidate>(parsedBlock);
+  assert(gated.passedCount === 1, 'Candidate with valid top-level semanticEvents passes Candidate Recovery Gate');
+  const passedCandidate = gated.passedCandidates[0];
+  const extractedEvents = getCandidateSemanticEvents(passedCandidate);
+  assert(extractedEvents.length === 1, 'Extracted semanticEvents matches parsed block');
+  assert(extractedEvents[0].action === 'PICKUP', 'Extracted event action is PICKUP');
+  assert(extractedEvents[0].eventId === 'ev_pickup_1', 'Extracted event eventId is ev_pickup_1');
 
   console.log('\nPASS: LLM #1 semantic candidate contract tests\n');
 }

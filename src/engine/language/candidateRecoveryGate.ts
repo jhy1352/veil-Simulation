@@ -22,6 +22,7 @@ export interface VeilCandidate {
   candidateId: number;
   label: string;
   narrativeSummary: string;
+  semanticEvents?: any[];
   rawMetadata: any;
   preAuthStatus?: 'ALLOW' | 'REJECT';
   preAuthReasons?: string[];
@@ -129,6 +130,11 @@ export function validateCandidateStructure(candidate: any): CandidateValidationR
   // 4. narrativeSummary must be a string
   if (typeof candidate.narrativeSummary !== 'string') {
     reasons.push(`narrativeSummary must be a string (got ${typeof candidate.narrativeSummary})`);
+  }
+
+  // 4.5 semanticEvents must be an array when provided
+  if (candidate.semanticEvents !== undefined && !Array.isArray(candidate.semanticEvents)) {
+    reasons.push(`semanticEvents must be an array when provided (got ${typeof candidate.semanticEvents})`);
   }
 
   // 5. rawMetadata must be a non-null, non-array object

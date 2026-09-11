@@ -350,6 +350,7 @@ export interface ExternalRawMetadata {
 export interface ExternalCandidateOutput {
   label: string;
   narrativeSummary: string;
+  semanticEvents?: any[];
   rawMetadata: ExternalRawMetadata;
 }
 

@@ -201,6 +201,20 @@ The output block must be wrapped precisely as follows:
 type CandidateOutput = {
   label: string; // Concise, distinct title/label for the candidate option
   narrativeSummary: string; // Detailed narrative summary of the branch's developments
+  semanticEvents?: {
+    eventId: string; // Unique event identifier
+    action: "PICKUP" | "GIFT" | string; // Language-neutral semantic action type (e.g. PICKUP, GIFT)
+    roles: {
+      role: "SUBJECT" | "TARGET" | "OBJECT" | "RECIPIENT" | "SOURCE" | "COUNTERPARTY" | "LOCATION" | "INSTRUMENT" | "BENEFICIARY" | "SPEAKER" | "OBSERVER" | "HOLDER" | "OWNER" | "TIME" | "CAUSE" | "VALUE" | "STATE" | "CONSTRAINT";
+      entityName?: string; // Entity or item name
+      entityId?: string; // Claimed entity reference if available (untrusted; verified and resolved by engine)
+    }[];
+    scope?: "CANONICAL" | "CLAIM" | "HYPOTHETICAL" | "PROPOSAL" | "OFFSCREEN" | "INTENT" | "HISTORICAL" | "OBSERVATION" | "UNVERIFIED";
+    polarity?: "ASSERTED" | "NEGATED" | "UNKNOWN";
+    epistemicStatus?: "OBSERVED" | "ASSERTED" | "HEARSAY" | "INFERRED" | "UNVERIFIED" | "UNKNOWN" | "VERIFIED";
+    modality?: "NONE" | "POSSIBLE" | "NECESSARY" | "COUNTERFACTUAL" | "INTENTIONAL" | "COMMITMENT";
+    provenance?: string; // Contextual claim or grounding event reference
+  }[];
   rawMetadata: {
     foreshadowSeeds?: string[]; // Array of newly created seed content strings
     resolvedSeeds?: {

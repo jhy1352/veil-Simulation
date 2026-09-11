@@ -94,7 +94,7 @@ export function createEngineSemanticBridgeContext(
   identityGraph?: UniversalKnowledgeGraph
 ): SemanticRuntimeBridgeContext {
   const graph = identityGraph || buildKnowledgeGraph(canonicalState, historicalRecords);
-  const playerId = canonicalState.character?.id || 'player';
+  const playerId = (canonicalState.character as any)?.id || 'player';
   const playerName = canonicalState.character?.name || '플레이어';
 
   return {

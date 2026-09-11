@@ -341,7 +341,7 @@ export function parseNaturalLanguageToEvents(text: string, baseScope: Scope = 'O
 /**
  * Deterministically compiles SemanticEvents into a Canonical MeaningTree.
  */
-export function compileSemanticEventsToMeaningTree(events: SemanticEvent[]): CausalCompilationResult {
+export function compileSemanticEventsToMeaningTree(events: readonly SemanticEvent[] | SemanticEvent[]): CausalCompilationResult {
   if (!events || events.length === 0) {
     return {
       status: 'UNKNOWN',
