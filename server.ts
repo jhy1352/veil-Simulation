@@ -12,6 +12,8 @@ import { CanonicalState, StateTransitionProposal } from './src/engine/types.ts';
 import { recoverSyntaxAndParseJson } from './src/engine/language/recovery.ts';
 import { filterDiverseCandidates } from './src/engine/language/diversity.ts';
 import { runCandidateRecoveryGate, parseCandidatesBlock, VeilCandidate } from './src/engine/language/candidateRecoveryGate.ts';
+import { integrateSemanticEventsIntoProposal, createEngineSemanticBridgeContext } from './src/engine/language/runtimeSemanticCandidate.ts';
+import { getCandidateSemanticEvents } from './src/engine/language/semanticCandidateContract.ts';
 
 const app = express();
 const PORT = 3000;
@@ -719,6 +721,8 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
       : [];
 
     // 1. Translation: Candidate -> Meaning Tree & Proposal
+    const bridgeContext = createEngineSemanticBridgeContext(canonicalState, historicalRecords);
+
     const translatedCandidates = candidates.map(c => {
       const candidatePacket = extractCandidatesFromMetadata(
         c.rawMetadata || {},
@@ -733,11 +737,41 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
         historicalRecords,
         playerInputId
       );
+
+      const rawSemanticEvents = getCandidateSemanticEvents(c);
+      const semanticEvents = rawSemanticEvents.length > 0
+        ? rawSemanticEvents
+        : getCandidateSemanticEvents(c.rawMetadata);
+
+      let finalProposal = proposal;
+      let finalMeaningTree = proposal.meaningTree!;
+
+      if (semanticEvents.length > 0) {
+        const integration = integrateSemanticEventsIntoProposal(
+          proposal,
+          semanticEvents,
+          bridgeContext
+        );
+
+        if (integration.status === 'MAPPABLE') {
+          finalProposal = integration.proposal;
+          finalMeaningTree = integration.meaningTree || finalProposal.meaningTree!;
+        } else if (integration.status === 'REJECTED') {
+          // Fail-closed for invalid / unsupported / ambiguous semantic events
+          finalProposal = {
+            ...proposal,
+            actions: [],
+            rejectedReasons: [...(proposal.rejectedReasons || []), ...integration.errors],
+          };
+          finalMeaningTree = finalProposal.meaningTree!;
+        }
+      }
+
       return {
         candidate: c,
         candidatePacket,
-        proposal,
-        meaningTree: proposal.meaningTree!
+        proposal: finalProposal,
+        meaningTree: finalMeaningTree
       };
     });
 

@@ -1,0 +1,70 @@
+================================================================================
+VEIL NARRATIVE ENGINE 3.1 - INTEGRATION REPORT
+Report ID: 60_semantic_event_runtime_pipeline_integration
+Timestamp: 2026-09-10
+Status: VERIFIED & COMMITTED TO RUNTIME PATH
+================================================================================
+
+1. EXECUTIVE SUMMARY
+--------------------------------------------------------------------------------
+This report documents the verification and operational insertion of the SemanticEvent
+path into the live /api/chat execution pipeline in server.ts within the VEIL Narrative
+Engine 3.1 architecture.
+
+Pipeline Topology:
+Gemini #1
+→ Candidate Packet
+→ semanticEvents[]
+→ Structural Validation (validateSemanticEventShape)
+→ CausalCompiler (compileSemanticEventsToMeaningTree)
+→ Engine-Owned Identity & Causal Resolver (createEngineSemanticBridgeContext)
+→ SemanticEvent Runtime Bridge (semanticEventsToRuntimeActions)
+→ StateTransitionProposal + MeaningTree
+→ Diversity Gate (filterDiverseCandidates)
+→ Sovereign Pre-Authorization (EngineValidator.validate)
+→ ALLOW / REJECT
+→ Gemini #2 (Literary Generation)
+
+2. CORE SECURITY & SOVEREIGN INVARIANTS SATISFIED
+--------------------------------------------------------------------------------
+1. Zero Direct Trust in LLM Claims:
+   - LLM `role.entityId` is never directly trusted as canonical ID.
+   - LLM `event.provenance` is never blindly promoted to verifiedEventId.
+   - Resolvers (resolveNpcIdentity, resolveInventoryItemIdentity, findAuthoritativeEvent)
+     strictly query CanonicalState, UniversalKnowledgeGraph, and HistoricalRecords.
+2. Scoped Event Support:
+   - Initial bridge support is strictly limited to PICKUP and GIFT.
+   - Unsupported or ungrounded events return REJECTED and fail closed.
+3. Validator Authority:
+   - EngineValidator authority, rules, and gates are completely preserved without
+     any relaxations or modifications.
+4. Fail-Closed Handling:
+   - Ambiguous, novel without proof, or ungrounded semantic events fail closed
+     before/at EngineValidator validation.
+
+3. TEST EVIDENCE & VERIFICATION MATRIX
+--------------------------------------------------------------------------------
+1. Semantic Candidate Contract Tests:
+   - Command: npm run test:semantic-candidate-contract
+   - Result: 11 / 11 PASS
+2. Semantic Bridge Security Tests:
+   - Command: npm run test:semantic-bridge-security
+   - Result: PASS
+3. Semantic Runtime Projection Tests:
+   - Command: npm run test:semantic-runtime-projection
+   - Result: PASS
+4. Core Engine Test Suite:
+   - Command: npm run test:engine
+   - Result: 95 / 95 PASS (100%)
+5. Candidate Gate & Recovery Suite:
+   - Command: npm run test:candidate-gate && npm run test:candidate-bdesign
+   - Result: PASS
+6. Language Grammar & Causal Language Suite:
+   - Command: npm run test:language
+   - Result: PASS
+7. Applet Compilation:
+   - Result: SUCCESS (0 errors)
+
+================================================================================
+END OF REPORT
+================================================================================

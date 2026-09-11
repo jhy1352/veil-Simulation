@@ -11,11 +11,18 @@
  *   that parser remains explicitly legacy/test-only.
  */
 
-import type { StateTransitionProposal, TransitionAction } from '../types';
-import type { MeaningNode, SemanticEvent } from './types';
+import type { CanonicalState, ImmutableHistoricalRecord, StateTransitionProposal, TransitionAction } from '../types';
+import type { MeaningNode, SemanticEvent, SemanticEventRole } from './types';
 import { compileSemanticEventsToMeaningTree } from './causalCompiler';
-import { semanticEventsToRuntimeActions } from './semanticEventRuntimeBridge';
+import {
+  semanticEventsToRuntimeActions,
+  type SemanticRuntimeBridgeContext,
+} from './semanticEventRuntimeBridge';
 import { actionToMeaningNode } from './adapter';
+import { resolveNpcIdentity, resolveInventoryItemIdentity } from '../index/entityIdentityResolver';
+import { findAuthoritativeEvent } from '../index/authoritativeEvidence';
+import { generateProposalId } from '../proposalParser';
+import { buildKnowledgeGraph, type UniversalKnowledgeGraph } from '../index/knowledgeGraph';
 
 export interface SemanticCandidateIntegrationResult {
   readonly status: 'NOT_PRESENT' | 'MAPPABLE' | 'REJECTED';
@@ -77,6 +84,100 @@ function buildProposalMeaningTree(actions: readonly TransitionAction[], proposal
 }
 
 /**
+ * Creates an authoritative engine-owned SemanticRuntimeBridgeContext.
+ * Resolvers look up entities and events in CanonicalState, UniversalKnowledgeGraph,
+ * and HistoricalRecords without trusting LLM claims or entityIds blindly.
+ */
+export function createEngineSemanticBridgeContext(
+  canonicalState: CanonicalState,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = [],
+  identityGraph?: UniversalKnowledgeGraph
+): SemanticRuntimeBridgeContext {
+  const graph = identityGraph || buildKnowledgeGraph(canonicalState, historicalRecords);
+  const playerId = canonicalState.character?.id || 'player';
+  const playerName = canonicalState.character?.name || '플레이어';
+
+  return {
+    playerId,
+    playerName,
+    resolveCanonicalEntityId: (role: SemanticEventRole): string | undefined => {
+      if (!role) return undefined;
+      if (
+        role.entityId === playerId ||
+        role.entityName === playerName ||
+        role.entityName === '플레이어' ||
+        role.entityName === 'player'
+      ) {
+        return playerId;
+      }
+      if (role.entityName && role.entityName.trim()) {
+        const resolution = resolveNpcIdentity(
+          canonicalState,
+          historicalRecords,
+          role.entityName.trim(),
+          role.entityId ? { entityType: 'NPC', claimedEntityId: role.entityId, evidence: {} } : undefined,
+          graph
+        );
+        if (resolution.status === 'EXACT' || resolution.status === 'RECOVERED') {
+          return resolution.canonicalId;
+        }
+      }
+      return undefined;
+    },
+    resolveInventoryItem: (role: SemanticEventRole) => {
+      if (!role || !role.entityName || !role.entityName.trim()) return undefined;
+      const itemName = role.entityName.trim();
+
+      const resolution = resolveInventoryItemIdentity(
+        canonicalState,
+        historicalRecords,
+        itemName,
+        role.entityId ? { entityType: 'ITEM', claimedEntityId: role.entityId, evidence: {} } : undefined,
+        graph
+      );
+
+      if (resolution.status === 'EXACT' || resolution.status === 'RECOVERED') {
+        const canonicalId = resolution.canonicalId!;
+        const existing = canonicalState.character?.inventory?.find(
+          (i) => i.id === canonicalId || i.name === itemName
+        );
+        const entity = graph.entities.get(canonicalId);
+        return {
+          id: canonicalId,
+          name: existing?.name || entity?.name || itemName,
+          quantity: 1,
+          description: existing?.description || (entity?.details as any)?.description,
+          category: existing?.category || (entity?.details as any)?.category,
+          rarity: existing?.rarity || (entity?.details as any)?.rarity,
+        };
+      }
+
+      if (resolution.status === 'NOVEL') {
+        const newId = generateProposalId('item');
+        return {
+          id: newId,
+          name: itemName,
+          quantity: 1,
+        };
+      }
+
+      return undefined;
+    },
+    resolveVerifiedEventId: (event: SemanticEvent): string | undefined => {
+      if (!event.provenance || typeof event.provenance !== 'string' || !event.provenance.trim()) {
+        return undefined;
+      }
+      const rawProv = event.provenance.trim();
+      const auth = findAuthoritativeEvent(rawProv, canonicalState, historicalRecords);
+      if (auth.found && auth.isActive !== false) {
+        return rawProv;
+      }
+      return undefined;
+    },
+  };
+}
+
+/**
  * Integrate optional LLM-produced SemanticEvents into the existing proposal.
  *
  * The legacy proposal remains the source for unrelated rawMetadata mutations.
@@ -86,10 +187,7 @@ function buildProposalMeaningTree(actions: readonly TransitionAction[], proposal
 export function integrateSemanticEventsIntoProposal(
   proposal: StateTransitionProposal,
   semanticEvents: readonly SemanticEvent[] | undefined,
-  context: {
-    playerId?: string;
-    playerName?: string;
-  } = {}
+  context: SemanticRuntimeBridgeContext = {}
 ): SemanticCandidateIntegrationResult {
   if (!semanticEvents || semanticEvents.length === 0) {
     return { status: 'NOT_PRESENT', proposal, errors: [] };
@@ -109,20 +207,7 @@ export function integrateSemanticEventsIntoProposal(
     };
   }
 
-  const existingInventoryActions = proposal.actions.filter(
-    (action): action is Extract<TransitionAction, { type: 'MODIFY_INVENTORY' }> => action.type === 'MODIFY_INVENTORY'
-  );
-
-  const bridge = semanticEventsToRuntimeActions(semanticEvents, {
-    ...context,
-    resolveCanonicalEntityId: (role) => role.entityId,
-    resolveInventoryItem: (role) => {
-      const match = existingInventoryActions.find((action) =>
-        action.payload.item.id === role.entityId || action.payload.item.name === role.entityName
-      );
-      return match?.payload.item;
-    },
-  });
+  const bridge = semanticEventsToRuntimeActions(semanticEvents, context);
 
   if (bridge.status !== 'MAPPABLE') {
     return {
