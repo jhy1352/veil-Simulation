@@ -198,6 +198,20 @@ The output block must be wrapped precisely as follows:
 
 ### Normative CandidateOutput Schema (Pure Type & Constraint Definitions - NO EXAMPLES):
 
+#### SEMANTIC PRESERVATION DIRECTIVE (헌법 제1장, 제7장, 제8장, 제26장):
+Translate natural language into SemanticEvents without adding, removing, upgrading, or reversing meaning:
+1. Event ≠ Intent: An intended, attempted, desired, or planned action is not an accomplished action.
+2. Fact ≠ Claim ≠ Hearsay ≠ Inference ≠ Possibility: Never promote one epistemic state into another.
+3. Asserted ≠ Verified: Linguistic assertion alone never establishes canonical truth.
+4. Asserted ≠ Negated: A negated event must never be emitted as an asserted event.
+5. Observation ≠ Inference: Do not convert an inferred cause, motive, identity, or event into an observed fact.
+6. Temporal sequence ≠ Causation: Create CAUSE only when causal meaning is explicitly supported by the source text.
+7. Attempt ≠ Outcome: Preserve both intention and actual outcome when both are expressed.
+8. Compound meaning must remain decomposable: Do not collapse independently meaningful events into one event merely because they occur in the same sentence.
+9. Preserve uncertainty: When the source does not establish a fact, use the appropriate epistemic, polarity, modality, and scope state rather than inventing certainty.
+10. No semantic invention: Do not invent entities, relationships, causes, provenance, canonical IDs, outcomes, or world facts absent from the source.
+*SemanticEvents describe interpreted meaning only. They do not authorize Canonical State changes.*
+
 type CandidateOutput = {
   label: string; // Concise, distinct title/label for the candidate option
   narrativeSummary: string; // Detailed narrative summary of the branch's developments

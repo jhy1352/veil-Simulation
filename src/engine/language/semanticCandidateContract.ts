@@ -2,11 +2,24 @@
  * @file src/engine/language/semanticCandidateContract.ts
  * @description Explicit LLM #1 -> SemanticEvent transport contract.
  *
- * RUNTIME BOUNDARY
- * ---------------
- * LLM #1 is the natural-language semantic frontend. It may translate multilingual
- * player/narrative language into language-neutral SemanticEvent data, but it does
- * not decide canonical truth and it does not resolve engine-owned canonical IDs.
+ * RUNTIME BOUNDARY & SEMANTIC PRESERVATION DIRECTIVE
+ * --------------------------------------------------
+ * LLM #1 is the natural-language semantic frontend. It translates natural language
+ * into SemanticEvents without adding, removing, upgrading, or reversing meaning.
+ *
+ * 1. Event ≠ Intent: An intended, attempted, desired, or planned action is not an accomplished action.
+ * 2. Fact ≠ Claim ≠ Hearsay ≠ Inference ≠ Possibility: Never promote one epistemic state into another.
+ * 3. Asserted ≠ Verified: Linguistic assertion alone never establishes canonical truth.
+ * 4. Asserted ≠ Negated: A negated event must never be emitted as an asserted event.
+ * 5. Observation ≠ Inference: Do not convert an inferred cause, motive, identity, or event into an observed fact.
+ * 6. Temporal sequence ≠ Causation: Create CAUSE only when causal meaning is explicitly supported by the source text.
+ * 7. Attempt ≠ Outcome: Preserve both intention and actual outcome when both are expressed.
+ * 8. Compound meaning must remain decomposable: Do not collapse independently meaningful events into one event merely because they occur in the same sentence.
+ * 9. Preserve uncertainty: When the source does not establish a fact, use the appropriate epistemic, polarity, modality, and scope state rather than inventing certainty.
+ * 10. No semantic invention: Do not invent entities, relationships, causes, provenance, canonical IDs, outcomes, or world facts absent from the source.
+ *
+ * SemanticEvents describe interpreted meaning only.
+ * They do not authorize Canonical State changes.
  *
  * IMPORTANT:
  * - `rawMetadata` remains the exact 9-field external legacy contract.
