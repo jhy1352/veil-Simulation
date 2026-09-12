@@ -481,6 +481,18 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
     };
 
     const newMessages = isInitial ? [userMessage] : [...messages, userMessage];
+    console.log('[SESSION_FORENSIC]', {
+      turn: storyTurnCount,
+      isInitial,
+      messagesLengthBefore: messages.length,
+      newMessagesLength: newMessages.length,
+      messages: newMessages.map((m, idx) => ({
+        index: idx,
+        role: m.role,
+        turn: m.turn,
+        contentPrefix: (m.cleanText || m.content || '').slice(0, 100)
+      }))
+    });
     setMessages(newMessages);
 
     try {
