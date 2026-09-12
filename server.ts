@@ -101,6 +101,24 @@ app.post('/api/chat', async (req, res) => {
     const effectiveUserPrompt = (userPrompt || customPrompt || '').trim();
     const playerInputId = generateProposalId('input');
 
+    // Forensic logging for raw request body immediately at /api/chat entry
+    console.log('[CHAT_REQUEST_FORENSIC]', JSON.stringify({
+      worldInfo,
+      character,
+      storyTurnCount,
+      userPrompt: effectiveUserPrompt,
+      selectedModel,
+      narrativeLocale: effectiveNarrativeLocale,
+      messagesLength: messages.length,
+      messages: messages.map((m: any, idx: number) => ({
+        index: idx,
+        role: m.role,
+        sender: m.sender,
+        turn: m.turn,
+        content: m.content || m.text || ''
+      }))
+    }, null, 2));
+
     const t1_requestStart = Date.now();
     const ai = getGeminiClient();
 
@@ -205,6 +223,17 @@ ${offscreenContext}
 ${kgContext}
 ${roadmapContext}
 ${summaryPacket ? `\n${summaryPacket}` : ''}`;
+
+    // Forensic logging for processed initialContextPrompt context vs raw request
+    console.log('[CHAT_CONTEXT_FORENSIC]', JSON.stringify({
+      rawWorldInfo: worldInfo,
+      rawCharacter: character,
+      contextWorldName: worldInfo?.worldName || '기본 세계',
+      contextCharacterName: character?.name || '주인공',
+      initialContextPrompt,
+      storyTurnCount,
+      effectiveUserPrompt
+    }, null, 2));
 
     // Add verbatim history ensuring alternating user/model turns
     literalWindow.forEach((msg: any, idx: number) => {
