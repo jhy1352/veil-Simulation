@@ -338,10 +338,14 @@ type CandidateOutput = {
 
 After the code blocks, you MUST output exactly one Zero-Mutation Narrative block wrapped precisely as follows:
 [ZERO_MUTATION_NARRATIVE]
-<A rich, engaging, immersive non-mutation narrative in the target runtime locale. This block is a pure fallback narrative that does NOT assume or perform any canonical state mutation. It represents a scene outcome where the player's action led to no persistent state changes (such as no unbacked item acquisitions, stat changes, new NPCs, or world info updates). The scene progresses strictly via dialogue, environmental description, atmosphere, or character observation.>
+<A rich, engaging, immersive non-mutation narrative in the target runtime locale. This block is a direct narrative response to the player's latest explicit action. It MUST preserve that action's intent, purpose, and immediate objective from the player's perspective, even when no canonical state mutation is confirmed. It may depict success, failure, delay, uncertainty, partial progress, or an unresolved result, but it MUST NOT replace the player's current objective with an unrelated action, discovery, motivation, or scene progression. The narrative must feel like a natural and causally responsive consequence of what the player just attempted, rather than a generic continuation of the previous scene. It MUST NOT assume or perform any canonical state mutation.>
 [ZERO_MUTATION_END]
 
-Crucial Invariant: The Zero-Mutation Narrative must be completely independent from the candidates' rawMetadata. You must NOT re-interpret or reuse candidate details to bypass state validation or fabricate pseudo-mutations inside the fallback narrative.
+Crucial Invariants:
+- The Zero-Mutation Narrative is a direct response to the player's latest explicit action.
+- Preserve player intent and purpose; do not substitute a different goal merely because it is narratively convenient.
+- A lack of canonical mutation does NOT permit ignoring, replacing, or sidestepping the player's action.
+- The Zero-Mutation Narrative must be completely independent from the candidates' rawMetadata. You must NOT re-interpret or reuse candidate details to bypass state validation or fabricate pseudo-mutations inside the fallback narrative.
 
 ---
 
