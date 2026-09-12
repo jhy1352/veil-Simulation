@@ -1,1 +1,899 @@
-[]
+[
+  {
+    "testId": "T01",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L1",
+    "condition": "A",
+    "runIndex": 1,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:23:58.551Z",
+    "input": "바닥에 젖은 발자국이 있었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"predicate\": \"LOCATED\",\n      \"subject\": \"젖은 발자국\",\n      \"object\": \"바닥\",\n      \"modality\": \"ACTUAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"scope\": \"FACT\",\n      \"rawSegment\": \"바닥에 젖은 발자국이 있었다.\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "predicate": "LOCATED",
+          "subject": "젖은 발자국",
+          "object": "바닥",
+          "modality": "ACTUAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "scope": "FACT",
+          "rawSegment": "바닥에 젖은 발자국이 있었다."
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionAttempts": 1,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:23:58.551Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 1,
+      "driftDetected": false,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T01",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L1",
+    "condition": "A",
+    "runIndex": 2,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:24:04.058Z",
+    "input": "바닥에 젖은 발자국이 있었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"predicate\": \"있다\",\n      \"subject\": \"젖은 발자국\",\n      \"object\": \"바닥\",\n      \"modality\": \"ACTUAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"scope\": \"FACT\",\n      \"rawSegment\": \"바닥에 젖은 발자국이 있었다.\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "predicate": "있다",
+          "subject": "젖은 발자국",
+          "object": "바닥",
+          "modality": "ACTUAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "scope": "FACT",
+          "rawSegment": "바닥에 젖은 발자국이 있었다."
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionAttempts": 1,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:24:04.058Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 1,
+      "driftDetected": false,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T01",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L1",
+    "condition": "A",
+    "runIndex": 3,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:24:30.367Z",
+    "input": "바닥에 젖은 발자국이 있었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}",
+    "rawLlmOutput": "",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "executionAttempts": 5,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:24:04.315Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:24:09.599Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T06:24:14.812Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T06:24:20.093Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T06:24:25.365Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 1,
+      "driftDetected": true,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T01",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L1",
+    "condition": "A",
+    "runIndex": 4,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:24:38.510Z",
+    "input": "바닥에 젖은 발자국이 있었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"predicate\": \"있었다\",\n      \"subject\": \"젖은 발자국\",\n      \"object\": \"바닥\",\n      \"modality\": \"ACTUAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"scope\": \"FACT\",\n      \"rawSegment\": \"바닥에 젖은 발자국이 있었다.\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "predicate": "있었다",
+          "subject": "젖은 발자국",
+          "object": "바닥",
+          "modality": "ACTUAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "scope": "FACT",
+          "rawSegment": "바닥에 젖은 발자국이 있었다."
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionAttempts": 2,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:24:30.568Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:24:38.510Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 1,
+      "driftDetected": false,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T01",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L1",
+    "condition": "A",
+    "runIndex": 5,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:24:42.584Z",
+    "input": "바닥에 젖은 발자국이 있었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"predicate\": \"EXIST\",\n      \"subject\": \"젖은 발자국\",\n      \"object\": \"바닥\",\n      \"modality\": \"ACTUAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"scope\": \"FACT\",\n      \"rawSegment\": \"바닥에 젖은 발자국이 있었다.\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "predicate": "EXIST",
+          "subject": "젖은 발자국",
+          "object": "바닥",
+          "modality": "ACTUAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "scope": "FACT",
+          "rawSegment": "바닥에 젖은 발자국이 있었다."
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionAttempts": 1,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:24:42.584Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 1,
+      "driftDetected": false,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T01",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L1",
+    "condition": "B",
+    "runIndex": 1,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:25:09.009Z",
+    "input": "바닥에 젖은 발자국이 있었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}\n\n[STRICT SEMANTIC PRESERVATION DIRECTIVE]\n1. Modality Distinction: Never conflate INTENT / ATTEMPT with COMPLETED OUTCOME. An attempt that failed must preserve polarity='NEGATED' or modality='INTENTIONAL' and must never emit a completed actual event.\n2. Epistemic & Authority Boundary: Claims, rumours, hearsay, or character utterances are strictly scope='CLAIM' and epistemicStatus='HEARSAY'. Repetition or consensus by multiple NPCs never upgrades a claim to canonical fact.\n3. Observation vs Inference: Separate physical sensory observations (epistemicStatus='OBSERVED') from character inferences (epistemicStatus='INFERRED') or speculation (modality='POSSIBLE').\n4. Temporal vs Causal: Co-occurrence or sequential occurrence in context does NOT imply causation unless explicitly stated with causal connectives.\n5. Entity Identity & Coreference: Do NOT assign arbitrary canonical IDs to ambiguous entities. Preserve ambiguity unless definite grammatical bindings exist.\n6. Contextual Isolation: Do NOT invent unstated consequences (e.g. hit, damage, pickup) simply because surrounding context describes combat or items.",
+    "rawLlmOutput": "",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "executionAttempts": 5,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:24:42.822Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:24:48.035Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T06:24:53.405Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T06:24:58.618Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T06:25:04.007Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 1,
+      "driftDetected": true,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T01",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L1",
+    "condition": "B",
+    "runIndex": 2,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:25:35.111Z",
+    "input": "바닥에 젖은 발자국이 있었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}\n\n[STRICT SEMANTIC PRESERVATION DIRECTIVE]\n1. Modality Distinction: Never conflate INTENT / ATTEMPT with COMPLETED OUTCOME. An attempt that failed must preserve polarity='NEGATED' or modality='INTENTIONAL' and must never emit a completed actual event.\n2. Epistemic & Authority Boundary: Claims, rumours, hearsay, or character utterances are strictly scope='CLAIM' and epistemicStatus='HEARSAY'. Repetition or consensus by multiple NPCs never upgrades a claim to canonical fact.\n3. Observation vs Inference: Separate physical sensory observations (epistemicStatus='OBSERVED') from character inferences (epistemicStatus='INFERRED') or speculation (modality='POSSIBLE').\n4. Temporal vs Causal: Co-occurrence or sequential occurrence in context does NOT imply causation unless explicitly stated with causal connectives.\n5. Entity Identity & Coreference: Do NOT assign arbitrary canonical IDs to ambiguous entities. Preserve ambiguity unless definite grammatical bindings exist.\n6. Contextual Isolation: Do NOT invent unstated consequences (e.g. hit, damage, pickup) simply because surrounding context describes combat or items.",
+    "rawLlmOutput": "",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "executionAttempts": 5,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:25:09.186Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:25:14.373Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T06:25:19.636Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T06:25:24.853Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T06:25:30.109Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 1,
+      "driftDetected": true,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T01",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L1",
+    "condition": "B",
+    "runIndex": 3,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:26:01.632Z",
+    "input": "바닥에 젖은 발자국이 있었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}\n\n[STRICT SEMANTIC PRESERVATION DIRECTIVE]\n1. Modality Distinction: Never conflate INTENT / ATTEMPT with COMPLETED OUTCOME. An attempt that failed must preserve polarity='NEGATED' or modality='INTENTIONAL' and must never emit a completed actual event.\n2. Epistemic & Authority Boundary: Claims, rumours, hearsay, or character utterances are strictly scope='CLAIM' and epistemicStatus='HEARSAY'. Repetition or consensus by multiple NPCs never upgrades a claim to canonical fact.\n3. Observation vs Inference: Separate physical sensory observations (epistemicStatus='OBSERVED') from character inferences (epistemicStatus='INFERRED') or speculation (modality='POSSIBLE').\n4. Temporal vs Causal: Co-occurrence or sequential occurrence in context does NOT imply causation unless explicitly stated with causal connectives.\n5. Entity Identity & Coreference: Do NOT assign arbitrary canonical IDs to ambiguous entities. Preserve ambiguity unless definite grammatical bindings exist.\n6. Contextual Isolation: Do NOT invent unstated consequences (e.g. hit, damage, pickup) simply because surrounding context describes combat or items.",
+    "rawLlmOutput": "",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "executionAttempts": 5,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:25:35.322Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:25:40.753Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T06:25:46.156Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T06:25:51.436Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T06:25:56.631Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 1,
+      "driftDetected": true,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T01",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L1",
+    "condition": "B",
+    "runIndex": 4,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:26:27.819Z",
+    "input": "바닥에 젖은 발자국이 있었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}\n\n[STRICT SEMANTIC PRESERVATION DIRECTIVE]\n1. Modality Distinction: Never conflate INTENT / ATTEMPT with COMPLETED OUTCOME. An attempt that failed must preserve polarity='NEGATED' or modality='INTENTIONAL' and must never emit a completed actual event.\n2. Epistemic & Authority Boundary: Claims, rumours, hearsay, or character utterances are strictly scope='CLAIM' and epistemicStatus='HEARSAY'. Repetition or consensus by multiple NPCs never upgrades a claim to canonical fact.\n3. Observation vs Inference: Separate physical sensory observations (epistemicStatus='OBSERVED') from character inferences (epistemicStatus='INFERRED') or speculation (modality='POSSIBLE').\n4. Temporal vs Causal: Co-occurrence or sequential occurrence in context does NOT imply causation unless explicitly stated with causal connectives.\n5. Entity Identity & Coreference: Do NOT assign arbitrary canonical IDs to ambiguous entities. Preserve ambiguity unless definite grammatical bindings exist.\n6. Contextual Isolation: Do NOT invent unstated consequences (e.g. hit, damage, pickup) simply because surrounding context describes combat or items.",
+    "rawLlmOutput": "",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "executionAttempts": 5,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:26:01.894Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:26:07.161Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T06:26:12.339Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T06:26:17.569Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T06:26:22.817Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 1,
+      "driftDetected": true,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T01",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L1",
+    "condition": "B",
+    "runIndex": 5,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:26:53.905Z",
+    "input": "바닥에 젖은 발자국이 있었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}\n\n[STRICT SEMANTIC PRESERVATION DIRECTIVE]\n1. Modality Distinction: Never conflate INTENT / ATTEMPT with COMPLETED OUTCOME. An attempt that failed must preserve polarity='NEGATED' or modality='INTENTIONAL' and must never emit a completed actual event.\n2. Epistemic & Authority Boundary: Claims, rumours, hearsay, or character utterances are strictly scope='CLAIM' and epistemicStatus='HEARSAY'. Repetition or consensus by multiple NPCs never upgrades a claim to canonical fact.\n3. Observation vs Inference: Separate physical sensory observations (epistemicStatus='OBSERVED') from character inferences (epistemicStatus='INFERRED') or speculation (modality='POSSIBLE').\n4. Temporal vs Causal: Co-occurrence or sequential occurrence in context does NOT imply causation unless explicitly stated with causal connectives.\n5. Entity Identity & Coreference: Do NOT assign arbitrary canonical IDs to ambiguous entities. Preserve ambiguity unless definite grammatical bindings exist.\n6. Contextual Isolation: Do NOT invent unstated consequences (e.g. hit, damage, pickup) simply because surrounding context describes combat or items.",
+    "rawLlmOutput": "",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "executionAttempts": 5,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:26:28.043Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:26:33.263Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T06:26:38.460Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T06:26:43.717Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T06:26:48.904Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 1,
+      "driftDetected": true,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T02",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L2",
+    "condition": "A",
+    "runIndex": 1,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:27:20.103Z",
+    "input": "바닥에 젖은 발자국이 있었다. 경비병은 누군가 북쪽 문으로 들어갔을 것이라고 말했다. 플레이어는 그 말을 들었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}",
+    "rawLlmOutput": "",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "executionAttempts": 5,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:26:54.165Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:26:59.384Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T06:27:04.635Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T06:27:09.835Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T06:27:15.102Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 4,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 4,
+      "driftDetected": true,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T02",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L2",
+    "condition": "A",
+    "runIndex": 2,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:27:39.876Z",
+    "input": "바닥에 젖은 발자국이 있었다. 경비병은 누군가 북쪽 문으로 들어갔을 것이라고 말했다. 플레이어는 그 말을 들었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"predicate\": \"EXIST\",\n      \"subject\": \"젖은 발자국\",\n      \"object\": \"바닥\",\n      \"modality\": \"ACTUAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"scope\": \"FACT\",\n      \"rawSegment\": \"바닥에 젖은 발자국이 있었다.\"\n    },\n    {\n      \"predicate\": \"ENTER\",\n      \"subject\": \"누군가\",\n      \"object\": \"북쪽 문\",\n      \"modality\": \"POSSIBLE\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"INFERRED\",\n      \"scope\": \"CLAIM\",\n      \"rawSegment\": \"누군가 북쪽 문으로 들어갔을 것이라고\"\n    },\n    {\n      \"predicate\": \"SAY\",\n      \"subject\": \"경비병\",\n      \"object\": \"누군가 북쪽 문으로 들어갔을 것이라는 사실\",\n      \"modality\": \"ACTUAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"scope\": \"FACT\",\n      \"rawSegment\": \"경비병은 누군가 북쪽 문으로 들어갔을 것이라고 말했다.\"\n    },\n    {\n      \"predicate\": \"HEAR\",\n      \"subject\": \"플레이어\",\n      \"object\": \"그 말\",\n      \"modality\": \"ACTUAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"scope\": \"FACT\",\n      \"rawSegment\": \"플레이어는 그 말을 들었다.\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "predicate": "EXIST",
+          "subject": "젖은 발자국",
+          "object": "바닥",
+          "modality": "ACTUAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "scope": "FACT",
+          "rawSegment": "바닥에 젖은 발자국이 있었다."
+        },
+        {
+          "predicate": "ENTER",
+          "subject": "누군가",
+          "object": "북쪽 문",
+          "modality": "POSSIBLE",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "INFERRED",
+          "scope": "CLAIM",
+          "rawSegment": "누군가 북쪽 문으로 들어갔을 것이라고"
+        },
+        {
+          "predicate": "SAY",
+          "subject": "경비병",
+          "object": "누군가 북쪽 문으로 들어갔을 것이라는 사실",
+          "modality": "ACTUAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "scope": "FACT",
+          "rawSegment": "경비병은 누군가 북쪽 문으로 들어갔을 것이라고 말했다."
+        },
+        {
+          "predicate": "HEAR",
+          "subject": "플레이어",
+          "object": "그 말",
+          "modality": "ACTUAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "scope": "FACT",
+          "rawSegment": "플레이어는 그 말을 들었다."
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionAttempts": 2,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:27:20.304Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:27:39.876Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 4,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 4,
+      "driftDetected": false,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T02",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L2",
+    "condition": "A",
+    "runIndex": 3,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:28:06.239Z",
+    "input": "바닥에 젖은 발자국이 있었다. 경비병은 누군가 북쪽 문으로 들어갔을 것이라고 말했다. 플레이어는 그 말을 들었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}",
+    "rawLlmOutput": "",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "executionAttempts": 5,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:27:40.274Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:27:45.481Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T06:27:50.755Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T06:27:56.007Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T06:28:01.237Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 4,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 4,
+      "driftDetected": true,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T02",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L2",
+    "condition": "A",
+    "runIndex": 4,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:28:32.322Z",
+    "input": "바닥에 젖은 발자국이 있었다. 경비병은 누군가 북쪽 문으로 들어갔을 것이라고 말했다. 플레이어는 그 말을 들었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}",
+    "rawLlmOutput": "",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "executionAttempts": 5,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:28:06.429Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:28:11.688Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T06:28:16.871Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T06:28:22.055Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T06:28:27.322Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 4,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 4,
+      "driftDetected": true,
+      "prohibitedViolations": []
+    }
+  },
+  {
+    "testId": "T02",
+    "group": "A_EPISTEMIC",
+    "contextLevel": "L2",
+    "condition": "A",
+    "runIndex": 5,
+    "model": "gemini-3.6-flash",
+    "timestamp": "2026-09-12T06:28:58.617Z",
+    "input": "바닥에 젖은 발자국이 있었다. 경비병은 누군가 북쪽 문으로 들어갔을 것이라고 말했다. 플레이어는 그 말을 들었다.",
+    "systemInstruction": "You are a pure semantic parser for TRPG narrative engine.\nExtract semantic events from the given user utterance/narrative text.\nOutput JSON only with schema:\n{\n  \"semanticEvents\": [\n    {\n      \"predicate\": string,\n      \"subject\": string,\n      \"object\"?: string,\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\" | \"INFERRED\" | \"HEARSAY\" | \"UNVERIFIED\",\n      \"scope\": \"FACT\" | \"CLAIM\" | \"BELIEF\" | \"RUMOR\",\n      \"causalRelation\"?: boolean,\n      \"rawSegment\": string\n    }\n  ]\n}",
+    "rawLlmOutput": "",
+    "parsedJson": null,
+    "parseSuccess": false,
+    "executionAttempts": 5,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T06:28:32.589Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T06:28:37.868Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T06:28:43.148Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T06:28:48.337Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T06:28:53.616Z",
+        "status": "ERROR",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-lim"
+      }
+    ],
+    "evaluation": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 4,
+      "precision": 0,
+      "recall": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "inventionCount": 0,
+      "omissionCount": 4,
+      "driftDetected": true,
+      "prohibitedViolations": []
+    }
+  }
+]
