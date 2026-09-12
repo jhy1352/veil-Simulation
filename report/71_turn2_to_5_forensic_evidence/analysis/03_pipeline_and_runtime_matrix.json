@@ -1,0 +1,60 @@
+{
+  "turns": [
+    {
+      "turn": 2,
+      "model": "gemini-3.5-flash",
+      "modelVersion": "gemini-3.5-flash",
+      "responseId": "YxeiauITmoDV7w_Ou_uADQ",
+      "timings": {
+        "phase1DurationMs": 12920,
+        "phase2DurationMs": 12843,
+        "totalDurationMs": 25763
+      },
+      "preAuthStatus": "REJECT",
+      "rejectionReason": "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions.",
+      "commitSuccess": false
+    },
+    {
+      "turn": 3,
+      "model": "gemini-3.5-flash",
+      "modelVersion": "gemini-3.5-flash",
+      "responseId": "fBeiatKUNtyAvr0Pi4vquA0",
+      "timings": {
+        "phase1DurationMs": 8178,
+        "phase2DurationMs": 10953,
+        "totalDurationMs": 19131
+      },
+      "preAuthStatus": "REJECT",
+      "rejectionReason": "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions.",
+      "commitSuccess": false
+    },
+    {
+      "turn": 4,
+      "model": "gemini-3.5-flash",
+      "modelVersion": "gemini-3.5-flash",
+      "responseId": "kBeiapUJj9PV7w-Rs_HpAQ",
+      "timings": {
+        "phase1DurationMs": 14146,
+        "phase2DurationMs": 13992,
+        "totalDurationMs": 28138
+      },
+      "preAuthStatus": "REJECT",
+      "rejectionReason": "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions.",
+      "commitSuccess": false
+    },
+    {
+      "turn": 5,
+      "model": "gemini-3.5-flash",
+      "modelVersion": "gemini-3.5-flash",
+      "responseId": "rBeiao-VC_aN1e8P8q_WkAo",
+      "timings": {
+        "phase1DurationMs": 18049,
+        "phase2DurationMs": 13285,
+        "totalDurationMs": 31334
+      },
+      "preAuthStatus": "REJECT",
+      "rejectionReason": "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions.",
+      "commitSuccess": false
+    }
+  ]
+}

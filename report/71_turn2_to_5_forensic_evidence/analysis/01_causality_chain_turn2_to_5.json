@@ -1,0 +1,151 @@
+{
+  "sessionContext": {
+    "world": "화산비고 (華山秘庫)",
+    "character": "백연화 (白蓮花)",
+    "factions": "화산파 (華山派)",
+    "baseInventory": [
+      {
+        "id": "inv_silver_coin",
+        "name": "은화",
+        "quantity": 20,
+        "type": "재화",
+        "isEquipped": false
+      },
+      {
+        "id": "inv_old_sword",
+        "name": "낡은 흑철검",
+        "quantity": 1,
+        "type": "무기",
+        "isEquipped": true
+      }
+    ]
+  },
+  "turnProgression": [
+    {
+      "turn": 2,
+      "phase": "수색 선언 및 돌판 발견",
+      "playerInput": "바닥에 떨어진 기괴한 조각상이 새겨진 돌판을 발견하고, 진기를 집중하여 문양을 살펴본다.",
+      "llmNarrativeSummary": "돌판의 기괴한 조각상 발견 및 진기 집중 운기",
+      "dicePromptIssued": "WIS (지혜) 판정 (DC 14)",
+      "actionsProposedInPhase1": [
+        {
+          "action": "ADD_NARRATIVE_SEED",
+          "payloadId": "seed_stone_slab_carving"
+        }
+      ],
+      "actionsProposedInPhase2": [],
+      "preAuthVerdict": "REJECT (EMPTY_PROPOSAL_REJECTED)",
+      "canonicalCommit": null,
+      "inventoryState": [
+        {
+          "id": "inv_silver_coin",
+          "name": "은화",
+          "quantity": 20,
+          "type": "재화",
+          "isEquipped": false
+        },
+        {
+          "id": "inv_old_sword",
+          "name": "낡은 흑철검",
+          "quantity": 1,
+          "type": "무기",
+          "isEquipped": true
+        }
+      ]
+    },
+    {
+      "turn": 3,
+      "phase": "주사위 판정 및 냉기 틈새 전진",
+      "playerInput": "돌판 옆 좁은 틈새에서 차가운 밤안개 같은 냉기가 흘러나오는 곳을 향해 검끝을 가리키며 천천히 전진한다.",
+      "llmNarrativeSummary": "돌판 옆 냉기 틈새 발견 및 흑철검을 겨누고 전진",
+      "dicePromptIssued": "AGI (민첩) 혹은 WIS (지혜) 판정 (DC 12)",
+      "actionsProposedInPhase1": [],
+      "actionsProposedInPhase2": [],
+      "preAuthVerdict": "REJECT (EMPTY_PROPOSAL_REJECTED)",
+      "canonicalCommit": null,
+      "inventoryState": [
+        {
+          "id": "inv_silver_coin",
+          "name": "은화",
+          "quantity": 20,
+          "type": "재화",
+          "isEquipped": false
+        },
+        {
+          "id": "inv_old_sword",
+          "name": "낡은 흑철검",
+          "quantity": 1,
+          "type": "무기",
+          "isEquipped": true
+        }
+      ]
+    },
+    {
+      "turn": 4,
+      "phase": "고대 구결 암호 대조 및 읊조림",
+      "playerInput": "벽면에 희미하게 적혀 있는 고대 화산파의 구결(口訣)을 가사 속 암호와 대조하며 큰 소리로 읊조린다.",
+      "llmNarrativeSummary": "암벽에 새겨진 고대 화산파 구결 해독 및 읊조림",
+      "dicePromptIssued": "INT (지능) 판정 (DC 14)",
+      "actionsProposedInPhase1": [],
+      "actionsProposedInPhase2": [],
+      "preAuthVerdict": "REJECT (EMPTY_PROPOSAL_REJECTED)",
+      "canonicalCommit": null,
+      "inventoryState": [
+        {
+          "id": "inv_silver_coin",
+          "name": "은화",
+          "quantity": 20,
+          "type": "재화",
+          "isEquipped": false
+        },
+        {
+          "id": "inv_old_sword",
+          "name": "낡은 흑철검",
+          "quantity": 1,
+          "type": "무기",
+          "isEquipped": true
+        }
+      ]
+    },
+    {
+      "turn": 5,
+      "phase": "돌문 개방 및 지하 광활한 공동 진입",
+      "playerInput": "구결이 끝나자 미세하게 떨리며 진동하는 돌문을 밀어젖히고 넓은 공동(空洞) 안으로 발을 내딛는다.",
+      "llmNarrativeSummary": "진동하는 거대한 돌문을 밀어젖히고 광활한 공동 안으로 발을 내딛음",
+      "dicePromptIssued": "AGI (민첩) 혹은 WIS (지혜) 판정 (DC 13)",
+      "actionsProposedInPhase1": [
+        {
+          "actionType": "RECORD_OFFSCREEN_EVENT",
+          "payload": {
+            "location": "화산비고 지하 통로"
+          }
+        },
+        {
+          "actionType": "ADD_NARRATIVE_SEED",
+          "payload": {
+            "id": "cavern_echo_01"
+          }
+        }
+      ],
+      "actionsProposedInPhase2": [],
+      "preAuthVerdict": "REJECT (EMPTY_PROPOSAL_REJECTED)",
+      "canonicalCommit": null,
+      "inventoryState": [
+        {
+          "id": "inv_silver_coin",
+          "name": "은화",
+          "quantity": 20,
+          "type": "재화",
+          "isEquipped": false
+        },
+        {
+          "id": "inv_old_sword",
+          "name": "낡은 흑철검",
+          "quantity": 1,
+          "type": "무기",
+          "isEquipped": true
+        }
+      ]
+    }
+  ]
+}
