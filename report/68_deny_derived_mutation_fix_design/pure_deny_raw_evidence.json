@@ -1,0 +1,32 @@
+{
+  "testType": "PURE_DENY_EXECUTION",
+  "actualModelVersion": "gemini-3.5-flash-lite",
+  "candidateRecoveryGate": {
+    "totalInputCount": 2,
+    "passedCount": 2,
+    "quarantinedCount": 0
+  },
+  "preAuthSummary": {
+    "total": 1,
+    "allowed": 0,
+    "rejected": 1
+  },
+  "authorizedProposal": null,
+  "isFallbackNonMutation": true,
+  "clientSovereignCommit": {
+    "executed": false,
+    "attemptedProposalId": null
+  },
+  "commitResult": {
+    "success": false,
+    "reason": "SKIPPED_NO_AUTHORIZED_ACTIONS"
+  },
+  "stateVersionBefore": 1,
+  "stateVersionAfter": 1,
+  "stateHashBefore": "csh_711e4a491efbd929",
+  "stateHashAfter": "csh_711e4a491efbd929",
+  "isStateUnchanged": true,
+  "committedActionsCount": 0,
+  "newHistoricalRecords": 0,
+  "rawResponseSnippet": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"바닥에 존재하지 않는 물품을 꺼내려던 행동의 무위\",\n    \"narrativeSummary\": \"알렉스는 가방 속을 뒤져 무언가를 꺼내려 하지만, 손에 잡히는 것은 아무것도 없다. 공허한 손짓만이 허공을 가를 뿐, 바닥에 내려놓으려던 고대 황금 나침반은 애초에 존재하지 않았다.\",\n    \"rawMetadata\": {}\n  },\n  {\n    \"label\": \"주변을 둘러보며 현재의 장소와 상황을 직시함\",\n    \"narrativeSummary\": \"허공에 손을 뻗었던 알렉스는 자신의 손에 아무것도 들려 있지 않음을 깨닫고 가만히 주변을 둘러본다. 발밑의 차가운 대지와 스쳐 지나가는 바람만이 이곳이 현실임을 일깨워준다.\",\n    \"rawMetadata\": {}\n  }\n]\n[CANDIDATES_END]\n\n차가운 공기가 고요하게 내려앉은 공간 속에서, 알렉스의 손이 품속이나 가방의 자락을 향해 움직였다. 무언가를"
+}

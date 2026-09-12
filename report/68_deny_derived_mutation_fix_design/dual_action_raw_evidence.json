@@ -1,0 +1,21 @@
+{
+  "testType": "DUAL_ACTION_COUNTER_EXAMPLE_EXECUTION",
+  "actualModelVersion": "gemini-3.5-flash-lite",
+  "userPrompt": "플레이어는 가방에 없는 고대 나침반을 꺼내보려다 없어서, 바닥에 떨어진 마른 나뭇가지를 주웠다.",
+  "authorizedProposal": null,
+  "isFallbackNonMutation": true,
+  "clientSovereignCommit": {
+    "executed": false,
+    "commitResult": {
+      "success": false,
+      "reason": "SKIPPED_NO_AUTHORIZED_ACTIONS"
+    }
+  },
+  "stateVersionBefore": 1,
+  "stateVersionAfter": 1,
+  "stateHashBefore": "csh_f26b2f9873326af8",
+  "stateHashAfter": "csh_f26b2f9873326af8",
+  "committedActionsCount": 0,
+  "inventoryAfter": [],
+  "rawResponseSnippet": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"마른 나뭇가지로 바닥을 짚으며 주변을 탐색한다\",\n    \"narrativeSummary\": \"알렉스는 빈 가방 속을 더듬던 손을 거두고, 발치에 나뒹구는 마른 나뭇가지를 집어 든다. 나뭇가지를 지팡이 삼아 흙바닥을 가볍게 짚어보며 주변의 지형과 공기의 흐름을 살핀다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_BRANCH_1_PICKUP_BRANCH\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"알렉스\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"마른 나뭇가지\" }\n        ],\n        \"scope\": \"CLAIM\",\n        \"polarity\": \"ASSERTED\",\n "
+}

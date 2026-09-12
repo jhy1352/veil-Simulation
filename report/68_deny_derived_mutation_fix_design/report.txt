@@ -1,4 +1,4 @@
-Report 68 — DENY-Derived Canonical Mutation Fix Design
+Report 68 — DENY-Derived Canonical Mutation Fix Design & Runtime Forensic Audit
 
 FACTS
 1. Current proposalParser.ts unconditionally converts candidate.chapterChanges into ADVANCE_CHAPTER.
@@ -18,4 +18,23 @@ This patch establishes a conservative semantic-intent binding for chapter advanc
 REGRESSION TARGET
 DENY case: candidate with chapterChanges but no qualifying player-intent semantic event => proposal actions [] => PreAuth REJECT => no commit/stateVersion change => non-mutation fallback.
 
-EOF VERIFIED: report file ends after the limitation/regression specification.
+================================================================================
+REAL RUNTIME FORENSIC AUDIT (PASS)
+================================================================================
+Branch: work/identity-continuity
+HEAD Commit: 8a12d176067b63a80acb4dccded0488670e31476
+Static Regression Test: npm run test:deny-derived-mutation (PASS)
+Model Tested: gemini-3.5-flash-lite
+
+[RAW RUNTIME INVARIANTS]
+- Invariant A (original denied intent canonical mutation = 0): PASS
+- Invariant B (LLM arbitrary replacement mutation = 0): PASS
+- Invariant C (authorizedProposal === null): PASS
+- Invariant D (client sovereign mutation = 0): PASS
+- Invariant E (stateVersion 1 -> 1 unchanged): PASS
+- Invariant F (stateHash csh_711e4a491efbd929 === csh_711e4a491efbd929): PASS
+- Invariant G (committedActionsCount === 0): PASS
+- Invariant H (newHistoricalRecords === 0): PASS
+
+VERDICT: GREEN
+EOF STATUS: PASS
