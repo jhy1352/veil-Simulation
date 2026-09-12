@@ -293,9 +293,10 @@ export function buildSafeProposalFromCandidate(
   }
 
   if (Array.isArray(candidate.seedChanges)) {
-    const currentActiveSeeds = currentSnapshot.worldInfo.seeds.filter(s => s.status === 'active');
+    const seedsList = currentSnapshot.worldInfo.seeds || [];
+    const currentActiveSeeds = seedsList.filter(s => s.status === 'active');
     let availableSlots = Math.max(0, 3 - currentActiveSeeds.length);
-    const seenSeedContents = new Set<string>(currentSnapshot.worldInfo.seeds.map(s => s.content.trim()));
+    const seenSeedContents = new Set<string>(seedsList.map(s => s.content.trim()));
     for (const seed of candidate.seedChanges) {
       if (!seed.content || typeof seed.content !== 'string' || !seed.content.trim()) continue;
       const trimmedContent = seed.content.trim();

@@ -485,7 +485,7 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
       };
     });
 
-    const allowedCandidates = preAuthResults.filter(c => c.preAuthStatus === 'ALLOW');
+    const allowedCandidates = preAuthResults.filter(c => Boolean(c) && c.preAuthStatus === 'ALLOW');
 
     // Requirement 6: ALL REJECT fallback -> NO_CANONICAL_MUTATION with clean literary fallback
     if (allowedCandidates.length === 0) {

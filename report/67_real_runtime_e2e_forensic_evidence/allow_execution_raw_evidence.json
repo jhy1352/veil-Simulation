@@ -1,0 +1,894 @@
+{
+  "testType": "ALLOW_EXECUTION",
+  "model": "gemini-3.5-flash",
+  "timestamp": "2026-09-12T10:37:04.537Z",
+  "inputPrompt": "플레이어는 바닥에서 녹슨 단검을 주웠다.",
+  "http": {
+    "url": "http://localhost:3000/api/chat",
+    "requestBody": {
+      "userPrompt": "플레이어는 바닥에서 녹슨 단검을 주웠다.",
+      "selectedModel": "gemini-3.5-flash",
+      "storyTurnCount": 1,
+      "messages": [
+        {
+          "role": "user",
+          "content": "플레이어는 바닥에서 녹슨 단검을 주웠다."
+        }
+      ],
+      "worldInfo": {
+        "currentTime": {
+          "formattedTime": "1년차 봄 1일 10:00",
+          "season": "SPRING",
+          "year": 1,
+          "day": 1,
+          "hour": 10,
+          "minute": 0
+        },
+        "currentLocation": "마을 광장",
+        "npcs": [],
+        "seeds": [],
+        "chapter": "서막",
+        "customMetadata": {}
+      },
+      "character": {
+        "name": "알렉스",
+        "inventory": [],
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10,
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 50,
+          "maxMp": 50,
+          "atk": 10,
+          "def": 5
+        },
+        "gold": 50,
+        "secrets": []
+      },
+      "engineState": {
+        "stateVersion": 1,
+        "lastCommittedEventId": null,
+        "lastCommittedAt": "2026-09-12T10:36:33.447Z",
+        "historicalRecords": []
+      }
+    },
+    "responseStatus": 200,
+    "responseData": {
+      "success": true,
+      "text": "```markdown\n1) [검증]: 완료\n```\n```json\n{\n  \"cameraOffscreenEvents\": [\n    \"어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리\"\n  ]\n}\n```\n\n[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"단검을 단단히 쥐고 주변 경계하기\",\n    \"narrativeSummary\": \"최소한의 무기를 확보한 알렉스는 몸을 낮추고, 단검의 자루를 고쳐 쥐며 사방의 어둠에 귀를 기울입니다. 무언가 나를 지켜보고 있거나, 이 단검을 떨어뜨린 주인이 근처에 있을지도 모른다는 경계심이 작동합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_rusty_dagger\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"알렉스\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"바닥\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\"어둠 속에서 느껴지는 미약한 인기척\"],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_rusty_dagger\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 어둠 속의 첫걸음\",\n        \"upcomingChapters\": [\"침묵의 통로\", \"숨겨진 흔적\"]\n      }\n    }\n  },\n  {\n    \"label\": \"단검을 품에 품고 앞으로 나아가기\",\n    \"narrativeSummary\": \"알렉스는 거친 금속의 촉감을 옷자락 안쪽에 숨겨둔 채, 머무르는 대신 조용히 발걸음을 옮겨 어둠 속으로 나아갑니다. 이곳에 오래 머무는 것은 인과적으로 이롭지 않다는 판단 하에 조심스러운 이동을 개시합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_rusty_dagger_alt\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"알렉스\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"바닥\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_rusty_dagger_alt\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 어둠 속의 첫걸음\",\n        \"upcomingChapters\": [\"깊어지는 미로\", \"낯선 대면\"]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n```json\n[\n  {\n    \"actionType\": \"ADD_NARRATIVE_SEED\",\n    \"payload\": {\n      \"id\": \"seed_unseen_presence\",\n      \"seedType\": \"SECONDARY\",\n      \"title\": \"어둠 속의 시선\",\n      \"clueText\": \"녹슨 단검이 흩어져 있던 주변 어둠 속에서 미약하게 느껴지는 기척입니다.\",\n      \"status\": \"ACTIVE\"\n    }\n  },\n  {\n    \"actionType\": \"MODIFY_INVENTORY\",\n    \"payload\": {\n      \"item\": {\n        \"id\": \"item_rusty_dagger\",\n        \"name\": \"녹슨 단검\",\n        \"quantity\": 1\n      },\n      \"operation\": \"ADD\",\n      \"acquisition\": {\n        \"cause\": \"DISCOVERY_PICKUP\",\n        \"verifiedEventId\": \"evt_pickup_rusty_dagger\"\n      }\n    }\n  },\n  {\n    \"actionType\": \"ADVANCE_CHAPTER\",\n    \"payload\": {\n      \"currentChapter\": \"서막: 어둠 속의 첫걸음\",\n      \"upcomingChapters\": [\"침묵의 통로\", \"숨겨진 흔적\"]\n    }\n  }\n]\n```\n\n바닥의 차디찬 냉기가 손가락 끝을 타고 흘러들었다. 거칠게 깔린 돌바닥은 오랜 세월 동안 인적이 끊긴 듯 축축한 흙먼지로 덮여 있었다. 알렉스는 어둠 속에서 유독 이질적인 감각을 풍기던 물건을 향해 신중하게 손을 뻗어 움켜쥐었다.\n\n손바닥에 닿는 촉감은 차갑고 거칠었다. 손가락을 단단히 감아쥐고 들어 올리자, 두껍게 내려앉은 붉은 녹더미가 버석거리는 작은 소리를 내며 사방으로 흩어졌다. 그것은 한 자루의 단검이었다. 가죽을 덧대어 감쌌을 손잡이는 이미 오랜 세월 전에 삭아 문드러져 가느다란 가죽 띠의 흔적만을 겨우 남겨두고 있었고, 날 또한 군데군데 이가 빠진 채 부식이 진행되어 날카로움을 잃은 상태였다.\n\n그럼에도 불구하고 손에 쥔 철붙이의 묵직한 무게감은 막연하기만 하던 현실의 무게를 상기시켰다. 알렉스는 단검을 단단히 고쳐 쥐었다. 녹슨 쇠날의 꺼칠꺼칠한 감각이 손가락 가죽을 파고들며 미미한 자극을 주었으나, 오히려 그 가벼운 통증만이 이 고요하고 캄캄한 공백 속에서 유일하게 신뢰할 수 있는 지표였다.\n\n그는 천천히 무릎을 굽혀 몸을 낮췄다. 스스로의 호흡이 빚어내는 거친 숨소리마저 억누르며, 사방을 빼곡히 채운 침묵을 향해 이목을 경주했다. 무겁게 가라앉은 공기 사이로 희미한 흙먼지 내음과 비린 금속의 냄새가 섞여 들었다. 이 쓸쓸한 쇠붙이를 바닥에 남긴 이는 대체 누구인가. 그리고 왜 이것을 여기에 버려두다시피 떨어뜨려야만 했는가.\n\n주변은 여전히 고요했으나, 눈에 보이지 않는 공기 속에 어떤 무거운 긴장이 밀려오는 듯한 감각이 피부 끝을 바짝 죄어왔다. 알렉스는 칼끝을 정면의 암흑을 향해 비스듬히 세운 채, 어둠 속에서 밀려올지도 모르는 실낱같은 기척을 붙잡기 위해 귀를 기울였다.",
+      "rawResponse": "```markdown\n1) [검증]: 완료\n```\n```json\n{\n  \"cameraOffscreenEvents\": [\n    \"어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리\"\n  ]\n}\n```\n\n[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"단검을 단단히 쥐고 주변 경계하기\",\n    \"narrativeSummary\": \"최소한의 무기를 확보한 알렉스는 몸을 낮추고, 단검의 자루를 고쳐 쥐며 사방의 어둠에 귀를 기울입니다. 무언가 나를 지켜보고 있거나, 이 단검을 떨어뜨린 주인이 근처에 있을지도 모른다는 경계심이 작동합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_rusty_dagger\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"알렉스\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"바닥\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\"어둠 속에서 느껴지는 미약한 인기척\"],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_rusty_dagger\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 어둠 속의 첫걸음\",\n        \"upcomingChapters\": [\"침묵의 통로\", \"숨겨진 흔적\"]\n      }\n    }\n  },\n  {\n    \"label\": \"단검을 품에 품고 앞으로 나아가기\",\n    \"narrativeSummary\": \"알렉스는 거친 금속의 촉감을 옷자락 안쪽에 숨겨둔 채, 머무르는 대신 조용히 발걸음을 옮겨 어둠 속으로 나아갑니다. 이곳에 오래 머무는 것은 인과적으로 이롭지 않다는 판단 하에 조심스러운 이동을 개시합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_rusty_dagger_alt\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"알렉스\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"바닥\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_rusty_dagger_alt\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 어둠 속의 첫걸음\",\n        \"upcomingChapters\": [\"깊어지는 미로\", \"낯선 대면\"]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n```json\n[\n  {\n    \"actionType\": \"ADD_NARRATIVE_SEED\",\n    \"payload\": {\n      \"id\": \"seed_unseen_presence\",\n      \"seedType\": \"SECONDARY\",\n      \"title\": \"어둠 속의 시선\",\n      \"clueText\": \"녹슨 단검이 흩어져 있던 주변 어둠 속에서 미약하게 느껴지는 기척입니다.\",\n      \"status\": \"ACTIVE\"\n    }\n  },\n  {\n    \"actionType\": \"MODIFY_INVENTORY\",\n    \"payload\": {\n      \"item\": {\n        \"id\": \"item_rusty_dagger\",\n        \"name\": \"녹슨 단검\",\n        \"quantity\": 1\n      },\n      \"operation\": \"ADD\",\n      \"acquisition\": {\n        \"cause\": \"DISCOVERY_PICKUP\",\n        \"verifiedEventId\": \"evt_pickup_rusty_dagger\"\n      }\n    }\n  },\n  {\n    \"actionType\": \"ADVANCE_CHAPTER\",\n    \"payload\": {\n      \"currentChapter\": \"서막: 어둠 속의 첫걸음\",\n      \"upcomingChapters\": [\"침묵의 통로\", \"숨겨진 흔적\"]\n    }\n  }\n]\n```\n\n바닥의 차디찬 냉기가 손가락 끝을 타고 흘러들었다. 거칠게 깔린 돌바닥은 오랜 세월 동안 인적이 끊긴 듯 축축한 흙먼지로 덮여 있었다. 알렉스는 어둠 속에서 유독 이질적인 감각을 풍기던 물건을 향해 신중하게 손을 뻗어 움켜쥐었다.\n\n손바닥에 닿는 촉감은 차갑고 거칠었다. 손가락을 단단히 감아쥐고 들어 올리자, 두껍게 내려앉은 붉은 녹더미가 버석거리는 작은 소리를 내며 사방으로 흩어졌다. 그것은 한 자루의 단검이었다. 가죽을 덧대어 감쌌을 손잡이는 이미 오랜 세월 전에 삭아 문드러져 가느다란 가죽 띠의 흔적만을 겨우 남겨두고 있었고, 날 또한 군데군데 이가 빠진 채 부식이 진행되어 날카로움을 잃은 상태였다.\n\n그럼에도 불구하고 손에 쥔 철붙이의 묵직한 무게감은 막연하기만 하던 현실의 무게를 상기시켰다. 알렉스는 단검을 단단히 고쳐 쥐었다. 녹슨 쇠날의 꺼칠꺼칠한 감각이 손가락 가죽을 파고들며 미미한 자극을 주었으나, 오히려 그 가벼운 통증만이 이 고요하고 캄캄한 공백 속에서 유일하게 신뢰할 수 있는 지표였다.\n\n그는 천천히 무릎을 굽혀 몸을 낮췄다. 스스로의 호흡이 빚어내는 거친 숨소리마저 억누르며, 사방을 빼곡히 채운 침묵을 향해 이목을 경주했다. 무겁게 가라앉은 공기 사이로 희미한 흙먼지 내음과 비린 금속의 냄새가 섞여 들었다. 이 쓸쓸한 쇠붙이를 바닥에 남긴 이는 대체 누구인가. 그리고 왜 이것을 여기에 버려두다시피 떨어뜨려야만 했는가.\n\n주변은 여전히 고요했으나, 눈에 보이지 않는 공기 속에 어떤 무거운 긴장이 밀려오는 듯한 감각이 피부 끝을 바짝 죄어왔다. 알렉스는 칼끝을 정면의 암흑을 향해 비스듬히 세운 채, 어둠 속에서 밀려올지도 모르는 실낱같은 기척을 붙잡기 위해 귀를 기울였다.",
+      "selectedCandidateId": 2,
+      "authorizedCandidate": {
+        "label": "단검을 단단히 쥐고 주변 경계하기",
+        "narrativeSummary": "최소한의 무기를 확보한 알렉스는 몸을 낮추고, 단검의 자루를 고쳐 쥐며 사방의 어둠에 귀를 기울입니다. 무언가 나를 지켜보고 있거나, 이 단검을 떨어뜨린 주인이 근처에 있을지도 모른다는 경계심이 작동합니다.",
+        "semanticEvents": [
+          {
+            "eventId": "event_guard_surroundings",
+            "action": "GUARD",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "알렉스"
+              }
+            ],
+            "scope": "INTENT",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "UNVERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "cameraOffscreenEvents": [
+            "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리"
+          ]
+        },
+        "candidateId": 2
+      },
+      "authorizedCandidatePacket": {
+        "candidateId": "2",
+        "turn": 1,
+        "narrativeDate": "1년차 봄 1일 10:00",
+        "timestamp": "2026-09-12T10:36:45.659Z",
+        "npcChanges": [],
+        "factionChanges": [],
+        "seedChanges": [],
+        "offscreenEvents": [
+          {
+            "event": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+            "informationAccess": "FACTION"
+          }
+        ],
+        "inventoryChanges": [],
+        "statChanges": [],
+        "rawMetadataBlock": "{\"cameraOffscreenEvents\":[\"어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리\"]}"
+      },
+      "authorizedProposal": {
+        "proposalId": "prop-req-mty9310b-7ahbxj",
+        "requestId": "req-mty9310b-7ahbxj",
+        "eventId": "evt-mty9310b-d6qb86",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-09-12T10:36:45.659Z",
+        "intentSummary": "Turn 1 Candidate State Transition",
+        "actions": [
+          {
+            "type": "RECORD_OFFSCREEN_EVENT",
+            "payload": {
+              "id": "offscreen-mty9310b-56kps4",
+              "eventDescription": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+              "timestamp": "2026-09-12T10:36:45.659Z",
+              "visibility": "FACTION_ONLY"
+            }
+          }
+        ],
+        "rawClaims": [
+          "{\"cameraOffscreenEvents\":[\"어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리\"]}"
+        ],
+        "originInputId": "input-mty92rnl-fof2de",
+        "meaningTree": {
+          "atom": "INTENT",
+          "scope": "PROPOSAL",
+          "value": "Turn 1 Candidate State Transition",
+          "children": [
+            {
+              "atom": "ACTION",
+              "scope": "PROPOSAL",
+              "value": "RECORD_OFFSCREEN_EVENT",
+              "fields": {
+                "actionType": "RECORD_OFFSCREEN_EVENT",
+                "payload": {
+                  "id": "offscreen-mty9310b-56kps4",
+                  "eventDescription": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+                  "timestamp": "2026-09-12T10:36:45.659Z",
+                  "visibility": "FACTION_ONLY"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "originInputId": "input-mty92rnl-fof2de",
+      "isFallbackNonMutation": false,
+      "preAuthSummary": {
+        "total": 3,
+        "allowed": 2,
+        "rejected": 1
+      },
+      "contextSnapshot": "[TRPG Campaign Context]\n- 세계관명: 기본 세계\n- 세계관 설정: \n- 문체 스타일: 기본 문체\n- 주인공 프로필: 알렉스 (나이: 미상, 성별: 미상)\n  * 출신/배경: [preset] 미상\n  * 결핍/트라우마: [preset] 없음\n  * 맹세: [preset] 없음\n  * 닻: [preset] 없음\n  * 소속/세력: [preset] 무소속\n  * 능력치: STR 10 / AGI 10 / CON 10 / INT 10 / WIS 10 / CHA 10\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 알렉스 (Protagonist)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+      "actualModelVersion": "gemini-3.5-flash",
+      "requestedModel": "gemini-3.5-flash",
+      "serverTimings": {
+        "t1_requestStart": 1789209393537,
+        "t2_contextAssemblyComplete": 1789209393537,
+        "t3_geminiRequestStart": 1789209393537,
+        "t4_geminiResponseReceived": 1789209424504,
+        "contextAssemblyMs": 0,
+        "geminiGenerationMs": 30967,
+        "inputCharCount": 983,
+        "outputCharCount": 3774,
+        "tokenCount": {
+          "promptTokens": 7712,
+          "candidatesTokens": 1652,
+          "totalTokens": 12687
+        }
+      }
+    }
+  },
+  "llmRawOutput": "```markdown\n1) [검증]: 완료\n```\n```json\n{\n  \"cameraOffscreenEvents\": [\n    \"어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리\"\n  ]\n}\n```\n\n[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"단검을 단단히 쥐고 주변 경계하기\",\n    \"narrativeSummary\": \"최소한의 무기를 확보한 알렉스는 몸을 낮추고, 단검의 자루를 고쳐 쥐며 사방의 어둠에 귀를 기울입니다. 무언가 나를 지켜보고 있거나, 이 단검을 떨어뜨린 주인이 근처에 있을지도 모른다는 경계심이 작동합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_rusty_dagger\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"알렉스\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"바닥\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\"어둠 속에서 느껴지는 미약한 인기척\"],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_rusty_dagger\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 어둠 속의 첫걸음\",\n        \"upcomingChapters\": [\"침묵의 통로\", \"숨겨진 흔적\"]\n      }\n    }\n  },\n  {\n    \"label\": \"단검을 품에 품고 앞으로 나아가기\",\n    \"narrativeSummary\": \"알렉스는 거친 금속의 촉감을 옷자락 안쪽에 숨겨둔 채, 머무르는 대신 조용히 발걸음을 옮겨 어둠 속으로 나아갑니다. 이곳에 오래 머무는 것은 인과적으로 이롭지 않다는 판단 하에 조심스러운 이동을 개시합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_rusty_dagger_alt\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"알렉스\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"녹슨 단검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"바닥\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 단검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_rusty_dagger_alt\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 어둠 속의 첫걸음\",\n        \"upcomingChapters\": [\"깊어지는 미로\", \"낯선 대면\"]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n```json\n[\n  {\n    \"actionType\": \"ADD_NARRATIVE_SEED\",\n    \"payload\": {\n      \"id\": \"seed_unseen_presence\",\n      \"seedType\": \"SECONDARY\",\n      \"title\": \"어둠 속의 시선\",\n      \"clueText\": \"녹슨 단검이 흩어져 있던 주변 어둠 속에서 미약하게 느껴지는 기척입니다.\",\n      \"status\": \"ACTIVE\"\n    }\n  },\n  {\n    \"actionType\": \"MODIFY_INVENTORY\",\n    \"payload\": {\n      \"item\": {\n        \"id\": \"item_rusty_dagger\",\n        \"name\": \"녹슨 단검\",\n        \"quantity\": 1\n      },\n      \"operation\": \"ADD\",\n      \"acquisition\": {\n        \"cause\": \"DISCOVERY_PICKUP\",\n        \"verifiedEventId\": \"evt_pickup_rusty_dagger\"\n      }\n    }\n  },\n  {\n    \"actionType\": \"ADVANCE_CHAPTER\",\n    \"payload\": {\n      \"currentChapter\": \"서막: 어둠 속의 첫걸음\",\n      \"upcomingChapters\": [\"침묵의 통로\", \"숨겨진 흔적\"]\n    }\n  }\n]\n```\n\n바닥의 차디찬 냉기가 손가락 끝을 타고 흘러들었다. 거칠게 깔린 돌바닥은 오랜 세월 동안 인적이 끊긴 듯 축축한 흙먼지로 덮여 있었다. 알렉스는 어둠 속에서 유독 이질적인 감각을 풍기던 물건을 향해 신중하게 손을 뻗어 움켜쥐었다.\n\n손바닥에 닿는 촉감은 차갑고 거칠었다. 손가락을 단단히 감아쥐고 들어 올리자, 두껍게 내려앉은 붉은 녹더미가 버석거리는 작은 소리를 내며 사방으로 흩어졌다. 그것은 한 자루의 단검이었다. 가죽을 덧대어 감쌌을 손잡이는 이미 오랜 세월 전에 삭아 문드러져 가느다란 가죽 띠의 흔적만을 겨우 남겨두고 있었고, 날 또한 군데군데 이가 빠진 채 부식이 진행되어 날카로움을 잃은 상태였다.\n\n그럼에도 불구하고 손에 쥔 철붙이의 묵직한 무게감은 막연하기만 하던 현실의 무게를 상기시켰다. 알렉스는 단검을 단단히 고쳐 쥐었다. 녹슨 쇠날의 꺼칠꺼칠한 감각이 손가락 가죽을 파고들며 미미한 자극을 주었으나, 오히려 그 가벼운 통증만이 이 고요하고 캄캄한 공백 속에서 유일하게 신뢰할 수 있는 지표였다.\n\n그는 천천히 무릎을 굽혀 몸을 낮췄다. 스스로의 호흡이 빚어내는 거친 숨소리마저 억누르며, 사방을 빼곡히 채운 침묵을 향해 이목을 경주했다. 무겁게 가라앉은 공기 사이로 희미한 흙먼지 내음과 비린 금속의 냄새가 섞여 들었다. 이 쓸쓸한 쇠붙이를 바닥에 남긴 이는 대체 누구인가. 그리고 왜 이것을 여기에 버려두다시피 떨어뜨려야만 했는가.\n\n주변은 여전히 고요했으나, 눈에 보이지 않는 공기 속에 어떤 무거운 긴장이 밀려오는 듯한 감각이 피부 끝을 바짝 죄어왔다. 알렉스는 칼끝을 정면의 암흑을 향해 비스듬히 세운 채, 어둠 속에서 밀려올지도 모르는 실낱같은 기척을 붙잡기 위해 귀를 기울였다.",
+  "candidateRecoveryGate": {
+    "passedCandidates": [
+      {
+        "label": "단검을 단단히 쥐고 주변 경계하기",
+        "narrativeSummary": "최소한의 무기를 확보한 알렉스는 몸을 낮추고, 단검의 자루를 고쳐 쥐며 사방의 어둠에 귀를 기울입니다. 무언가 나를 지켜보고 있거나, 이 단검을 떨어뜨린 주인이 근처에 있을지도 모른다는 경계심이 작동합니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_rusty_dagger",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "알렉스"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 단검"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "바닥"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "어둠 속에서 느껴지는 미약한 인기척"
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 단검",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_rusty_dagger"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 어둠 속의 첫걸음",
+            "upcomingChapters": [
+              "침묵의 통로",
+              "숨겨진 흔적"
+            ]
+          }
+        },
+        "candidateId": 1
+      },
+      {
+        "label": "단검을 품에 품고 앞으로 나아가기",
+        "narrativeSummary": "알렉스는 거친 금속의 촉감을 옷자락 안쪽에 숨겨둔 채, 머무르는 대신 조용히 발걸음을 옮겨 어둠 속으로 나아갑니다. 이곳에 오래 머무는 것은 인과적으로 이롭지 않다는 판단 하에 조심스러운 이동을 개시합니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_rusty_dagger_alt",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "알렉스"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 단검"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "바닥"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "inventoryChanges": [
+            {
+              "name": "녹슨 단검",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_rusty_dagger_alt"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 어둠 속의 첫걸음",
+            "upcomingChapters": [
+              "깊어지는 미로",
+              "낯선 대면"
+            ]
+          }
+        },
+        "candidateId": 2
+      }
+    ],
+    "quarantinedCandidates": [],
+    "totalInputCount": 2,
+    "passedCount": 2,
+    "quarantinedCount": 0
+  },
+  "parsedCandidates": [
+    {
+      "candidateId": 1,
+      "label": "단검을 단단히 쥐고 주변 경계하기",
+      "narrativeSummary": "최소한의 무기를 확보한 알렉스는 몸을 낮추고, 단검의 자루를 고쳐 쥐며 사방의 어둠에 귀를 기울입니다. 무언가 나를 지켜보고 있거나, 이 단검을 떨어뜨린 주인이 근처에 있을지도 모른다는 경계심이 작동합니다.",
+      "semanticEvents": [],
+      "parsedPacket": {
+        "candidateId": "1",
+        "turn": 1,
+        "narrativeDate": "1년차 봄 1일 10:00",
+        "timestamp": "2026-09-12T10:37:04.516Z",
+        "npcChanges": [],
+        "factionChanges": [],
+        "seedChanges": [
+          {
+            "content": "어둠 속에서 느껴지는 미약한 인기척",
+            "status": "active",
+            "action": "create"
+          }
+        ],
+        "offscreenEvents": [],
+        "chapterChanges": {
+          "currentChapter": "서막: 어둠 속의 첫걸음",
+          "upcomingChapters": [
+            "침묵의 통로",
+            "숨겨진 흔적"
+          ]
+        },
+        "inventoryChanges": [
+          {
+            "name": "녹슨 단검",
+            "quantity": 1,
+            "action": "add",
+            "cause": "DISCOVERY_PICKUP",
+            "verifiedEventId": "evt_pickup_rusty_dagger",
+            "acquisition": {
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_rusty_dagger"
+            }
+          }
+        ],
+        "statChanges": [],
+        "rawMetadataBlock": "{\"foreshadowSeeds\":[\"어둠 속에서 느껴지는 미약한 인기척\"],\"inventoryChanges\":[{\"name\":\"녹슨 단검\",\"quantity\":1,\"action\":\"add\",\"cause\":\"DISCOVERY_PICKUP\",\"verifiedEventId\":\"evt_pickup_rusty_dagger\"}],\"chapterChanges\":{\"currentChapter\":\"서막: 어둠 속의 첫걸음\",\"upcomingChapters\":[\"침묵의 통로\",\"숨겨진 흔적\"]}}"
+      },
+      "proposal": {
+        "proposalId": "prop-req-mty93fk6-tiulrj",
+        "requestId": "req-mty93fk6-tiulrj",
+        "eventId": "evt-mty93fk6-itsl79",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-09-12T10:37:04.516Z",
+        "intentSummary": "Turn 1 Candidate State Transition",
+        "actions": [
+          {
+            "type": "ADVANCE_CHAPTER",
+            "payload": {
+              "currentChapter": "서막: 어둠 속의 첫걸음",
+              "upcomingChapters": [
+                "침묵의 통로",
+                "숨겨진 흔적"
+              ]
+            }
+          }
+        ],
+        "rawClaims": [
+          "{\"foreshadowSeeds\":[\"어둠 속에서 느껴지는 미약한 인기척\"],\"inventoryChanges\":[{\"name\":\"녹슨 단검\",\"quantity\":1,\"action\":\"add\",\"cause\":\"DISCOVERY_PICKUP\",\"verifiedEventId\":\"evt_pickup_rusty_dagger\"}],\"chapterChanges\":{\"currentChapter\":\"서막: 어둠 속의 첫걸음\",\"upcomingChapters\":[\"침묵의 통로\",\"숨겨진 흔적\"]}}"
+        ],
+        "originInputId": "p_allow_1",
+        "meaningTree": {
+          "atom": "INTENT",
+          "scope": "PROPOSAL",
+          "value": "Turn 1 Candidate State Transition",
+          "children": [
+            {
+              "atom": "ACTION",
+              "scope": "PROPOSAL",
+              "value": "ADVANCE_CHAPTER",
+              "fields": {
+                "actionType": "ADVANCE_CHAPTER",
+                "payload": {
+                  "currentChapter": "서막: 어둠 속의 첫걸음",
+                  "upcomingChapters": [
+                    "침묵의 통로",
+                    "숨겨진 흔적"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "meaningTree": {
+        "atom": "INTENT",
+        "scope": "PROPOSAL",
+        "value": "Turn 1 Candidate State Transition",
+        "children": [
+          {
+            "atom": "ACTION",
+            "scope": "PROPOSAL",
+            "value": "ADVANCE_CHAPTER",
+            "fields": {
+              "actionType": "ADVANCE_CHAPTER",
+              "payload": {
+                "currentChapter": "서막: 어둠 속의 첫걸음",
+                "upcomingChapters": [
+                  "침묵의 통로",
+                  "숨겨진 흔적"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "preAuthVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "ADVANCE_CHAPTER",
+            "payload": {
+              "currentChapter": "서막: 어둠 속의 첫걸음",
+              "upcomingChapters": [
+                "침묵의 통로",
+                "숨겨진 흔적"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "candidateId": 2,
+      "label": "단검을 품에 품고 앞으로 나아가기",
+      "narrativeSummary": "알렉스는 거친 금속의 촉감을 옷자락 안쪽에 숨겨둔 채, 머무르는 대신 조용히 발걸음을 옮겨 어둠 속으로 나아갑니다. 이곳에 오래 머무는 것은 인과적으로 이롭지 않다는 판단 하에 조심스러운 이동을 개시합니다.",
+      "semanticEvents": [],
+      "parsedPacket": {
+        "candidateId": "2",
+        "turn": 1,
+        "narrativeDate": "1년차 봄 1일 10:00",
+        "timestamp": "2026-09-12T10:37:04.528Z",
+        "npcChanges": [],
+        "factionChanges": [],
+        "seedChanges": [],
+        "offscreenEvents": [],
+        "chapterChanges": {
+          "currentChapter": "서막: 어둠 속의 첫걸음",
+          "upcomingChapters": [
+            "깊어지는 미로",
+            "낯선 대면"
+          ]
+        },
+        "inventoryChanges": [
+          {
+            "name": "녹슨 단검",
+            "quantity": 1,
+            "action": "add",
+            "cause": "DISCOVERY_PICKUP",
+            "verifiedEventId": "evt_pickup_rusty_dagger_alt",
+            "acquisition": {
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_rusty_dagger_alt"
+            }
+          }
+        ],
+        "statChanges": [],
+        "rawMetadataBlock": "{\"inventoryChanges\":[{\"name\":\"녹슨 단검\",\"quantity\":1,\"action\":\"add\",\"cause\":\"DISCOVERY_PICKUP\",\"verifiedEventId\":\"evt_pickup_rusty_dagger_alt\"}],\"chapterChanges\":{\"currentChapter\":\"서막: 어둠 속의 첫걸음\",\"upcomingChapters\":[\"깊어지는 미로\",\"낯선 대면\"]}}"
+      },
+      "proposal": {
+        "proposalId": "prop-req-mty93fkg-wb7z7g",
+        "requestId": "req-mty93fkg-wb7z7g",
+        "eventId": "evt-mty93fkg-9fuez8",
+        "expectedStateVersion": 1,
+        "source": "LLM",
+        "turn": 1,
+        "timestamp": "2026-09-12T10:37:04.528Z",
+        "intentSummary": "Turn 1 Candidate State Transition",
+        "actions": [
+          {
+            "type": "ADVANCE_CHAPTER",
+            "payload": {
+              "currentChapter": "서막: 어둠 속의 첫걸음",
+              "upcomingChapters": [
+                "깊어지는 미로",
+                "낯선 대면"
+              ]
+            }
+          }
+        ],
+        "rawClaims": [
+          "{\"inventoryChanges\":[{\"name\":\"녹슨 단검\",\"quantity\":1,\"action\":\"add\",\"cause\":\"DISCOVERY_PICKUP\",\"verifiedEventId\":\"evt_pickup_rusty_dagger_alt\"}],\"chapterChanges\":{\"currentChapter\":\"서막: 어둠 속의 첫걸음\",\"upcomingChapters\":[\"깊어지는 미로\",\"낯선 대면\"]}}"
+        ],
+        "originInputId": "p_allow_1",
+        "meaningTree": {
+          "atom": "INTENT",
+          "scope": "PROPOSAL",
+          "value": "Turn 1 Candidate State Transition",
+          "children": [
+            {
+              "atom": "ACTION",
+              "scope": "PROPOSAL",
+              "value": "ADVANCE_CHAPTER",
+              "fields": {
+                "actionType": "ADVANCE_CHAPTER",
+                "payload": {
+                  "currentChapter": "서막: 어둠 속의 첫걸음",
+                  "upcomingChapters": [
+                    "깊어지는 미로",
+                    "낯선 대면"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "meaningTree": {
+        "atom": "INTENT",
+        "scope": "PROPOSAL",
+        "value": "Turn 1 Candidate State Transition",
+        "children": [
+          {
+            "atom": "ACTION",
+            "scope": "PROPOSAL",
+            "value": "ADVANCE_CHAPTER",
+            "fields": {
+              "actionType": "ADVANCE_CHAPTER",
+              "payload": {
+                "currentChapter": "서막: 어둠 속의 첫걸음",
+                "upcomingChapters": [
+                  "깊어지는 미로",
+                  "낯선 대면"
+                ]
+              }
+            }
+          }
+        ]
+      },
+      "preAuthVerdict": {
+        "isValid": true,
+        "rejectedReasons": [],
+        "conflictDetails": [],
+        "sanitizedActions": [
+          {
+            "type": "ADVANCE_CHAPTER",
+            "payload": {
+              "currentChapter": "서막: 어둠 속의 첫걸음",
+              "upcomingChapters": [
+                "깊어지는 미로",
+                "낯선 대면"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "clientSovereignCommit": {
+    "stateBefore": {
+      "stateVersion": 1,
+      "turn": 1,
+      "worldInfo": {
+        "currentTime": {
+          "formattedTime": "1년차 봄 1일 10:00",
+          "season": "SPRING",
+          "year": 1,
+          "day": 1,
+          "hour": 10,
+          "minute": 0
+        },
+        "currentLocation": "마을 광장",
+        "npcs": [],
+        "seeds": [],
+        "chapter": "서막",
+        "customMetadata": {}
+      },
+      "character": {
+        "name": "알렉스",
+        "inventory": [],
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10,
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 50,
+          "maxMp": 50,
+          "atk": 10,
+          "def": 5
+        },
+        "gold": 50,
+        "secrets": []
+      },
+      "lastCommittedEventId": null,
+      "lastCommittedAt": "2026-09-12T10:36:33.447Z"
+    },
+    "stateHashBefore": "csh_9f9c5e3f1b89281f",
+    "authorizedProposalReceived": {
+      "proposalId": "prop-req-mty9310b-7ahbxj",
+      "requestId": "req-mty9310b-7ahbxj",
+      "eventId": "evt-mty9310b-d6qb86",
+      "expectedStateVersion": 1,
+      "source": "LLM",
+      "turn": 1,
+      "timestamp": "2026-09-12T10:36:45.659Z",
+      "intentSummary": "Turn 1 Candidate State Transition",
+      "actions": [
+        {
+          "type": "RECORD_OFFSCREEN_EVENT",
+          "payload": {
+            "id": "offscreen-mty9310b-56kps4",
+            "eventDescription": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+            "timestamp": "2026-09-12T10:36:45.659Z",
+            "visibility": "FACTION_ONLY"
+          }
+        }
+      ],
+      "rawClaims": [
+        "{\"cameraOffscreenEvents\":[\"어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리\"]}"
+      ],
+      "originInputId": "input-mty92rnl-fof2de",
+      "meaningTree": {
+        "atom": "INTENT",
+        "scope": "PROPOSAL",
+        "value": "Turn 1 Candidate State Transition",
+        "children": [
+          {
+            "atom": "ACTION",
+            "scope": "PROPOSAL",
+            "value": "RECORD_OFFSCREEN_EVENT",
+            "fields": {
+              "actionType": "RECORD_OFFSCREEN_EVENT",
+              "payload": {
+                "id": "offscreen-mty9310b-56kps4",
+                "eventDescription": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+                "timestamp": "2026-09-12T10:36:45.659Z",
+                "visibility": "FACTION_ONLY"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "authorizedCandidatePacketReceived": {
+      "candidateId": "2",
+      "turn": 1,
+      "narrativeDate": "1년차 봄 1일 10:00",
+      "timestamp": "2026-09-12T10:36:45.659Z",
+      "npcChanges": [],
+      "factionChanges": [],
+      "seedChanges": [],
+      "offscreenEvents": [
+        {
+          "event": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+          "informationAccess": "FACTION"
+        }
+      ],
+      "inventoryChanges": [],
+      "statChanges": [],
+      "rawMetadataBlock": "{\"cameraOffscreenEvents\":[\"어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리\"]}"
+    },
+    "commitResult": {
+      "success": true,
+      "stateVersion": 2,
+      "eventId": "evt-mty9310b-d6qb86",
+      "committedActionsCount": 1,
+      "rejectedReasons": [],
+      "conflictDetails": [],
+      "newHistoricalRecords": [
+        {
+          "recordId": "rec-evt-mty9310b-d6qb86-1",
+          "eventId": "evt-mty9310b-d6qb86",
+          "requestId": "req-mty9310b-7ahbxj",
+          "proposalId": "prop-req-mty9310b-7ahbxj",
+          "turn": 1,
+          "timestamp": "2026-09-12T10:36:45.659Z",
+          "narrativeTime": {
+            "formattedTime": "1년차 봄 1일 10:00",
+            "season": "SPRING",
+            "year": 1,
+            "day": 1,
+            "hour": 10,
+            "minute": 0
+          },
+          "source": "LLM",
+          "actionType": "RECORD_OFFSCREEN_EVENT",
+          "details": "{\"id\":\"offscreen-mty9310b-56kps4\",\"eventDescription\":\"어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리\",\"timestamp\":\"2026-09-12T10:36:45.659Z\",\"visibility\":\"FACTION_ONLY\"}",
+          "canonicalAction": {
+            "type": "RECORD_OFFSCREEN_EVENT",
+            "payload": {
+              "id": "offscreen-mty9310b-56kps4",
+              "eventDescription": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+              "timestamp": "2026-09-12T10:36:45.659Z",
+              "visibility": "FACTION_ONLY"
+            }
+          },
+          "stateVersionAfterCommit": 2,
+          "informationAccess": "FACTION_ONLY",
+          "previousStateHash": "csh_9f9c5e3f1b89281f",
+          "originInputId": "input-mty92rnl-fof2de"
+        }
+      ],
+      "snapshot": {
+        "stateVersion": 2,
+        "turn": 1,
+        "worldInfo": {
+          "currentTime": {
+            "formattedTime": "1년차 봄 1일 10:00",
+            "season": "SPRING",
+            "year": 1,
+            "day": 1,
+            "hour": 10,
+            "minute": 0
+          },
+          "currentLocation": "마을 광장",
+          "npcs": [],
+          "seeds": [],
+          "chapter": "서막",
+          "customMetadata": {},
+          "cameraOffscreenEvents": [
+            "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리"
+          ],
+          "offscreenRecords": [
+            {
+              "id": "offscreen-mty9310b-56kps4",
+              "eventDescription": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+              "narrativeTime": {
+                "formattedTime": "1년차 봄 1일 10:00",
+                "season": "SPRING",
+                "year": 1,
+                "day": 1,
+                "hour": 10,
+                "minute": 0
+              },
+              "timestamp": "2026-09-12T10:36:45.659Z",
+              "visibility": "FACTION_ONLY"
+            }
+          ]
+        },
+        "character": {
+          "name": "알렉스",
+          "inventory": [],
+          "stats": {
+            "strength": 10,
+            "agility": 10,
+            "constitution": 10,
+            "intelligence": 10,
+            "wisdom": 10,
+            "charisma": 10,
+            "hp": 100,
+            "maxHp": 100,
+            "mp": 50,
+            "maxMp": 50,
+            "atk": 10,
+            "def": 5
+          },
+          "gold": 50,
+          "secrets": []
+        },
+        "lastCommittedEventId": "evt-mty9310b-d6qb86",
+        "lastCommittedAt": "2026-09-12T10:36:45.659Z"
+      }
+    },
+    "stateAfter": {
+      "stateVersion": 2,
+      "turn": 1,
+      "worldInfo": {
+        "currentTime": {
+          "formattedTime": "1년차 봄 1일 10:00",
+          "season": "SPRING",
+          "year": 1,
+          "day": 1,
+          "hour": 10,
+          "minute": 0
+        },
+        "currentLocation": "마을 광장",
+        "npcs": [],
+        "seeds": [],
+        "chapter": "서막",
+        "customMetadata": {},
+        "cameraOffscreenEvents": [
+          "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리"
+        ],
+        "offscreenRecords": [
+          {
+            "id": "offscreen-mty9310b-56kps4",
+            "eventDescription": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+            "narrativeTime": {
+              "formattedTime": "1년차 봄 1일 10:00",
+              "season": "SPRING",
+              "year": 1,
+              "day": 1,
+              "hour": 10,
+              "minute": 0
+            },
+            "timestamp": "2026-09-12T10:36:45.659Z",
+            "visibility": "FACTION_ONLY"
+          }
+        ]
+      },
+      "character": {
+        "name": "알렉스",
+        "inventory": [],
+        "stats": {
+          "strength": 10,
+          "agility": 10,
+          "constitution": 10,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 10,
+          "hp": 100,
+          "maxHp": 100,
+          "mp": 50,
+          "maxMp": 50,
+          "atk": 10,
+          "def": 5
+        },
+        "gold": 50,
+        "secrets": []
+      },
+      "lastCommittedEventId": "evt-mty9310b-d6qb86",
+      "lastCommittedAt": "2026-09-12T10:36:45.659Z"
+    },
+    "stateHashAfter": "csh_8d168bf5b2590055",
+    "newHistoricalRecords": [
+      {
+        "recordId": "rec-evt-mty9310b-d6qb86-1",
+        "eventId": "evt-mty9310b-d6qb86",
+        "requestId": "req-mty9310b-7ahbxj",
+        "proposalId": "prop-req-mty9310b-7ahbxj",
+        "turn": 1,
+        "timestamp": "2026-09-12T10:36:45.659Z",
+        "narrativeTime": {
+          "formattedTime": "1년차 봄 1일 10:00",
+          "season": "SPRING",
+          "year": 1,
+          "day": 1,
+          "hour": 10,
+          "minute": 0
+        },
+        "source": "LLM",
+        "actionType": "RECORD_OFFSCREEN_EVENT",
+        "details": "{\"id\":\"offscreen-mty9310b-56kps4\",\"eventDescription\":\"어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리\",\"timestamp\":\"2026-09-12T10:36:45.659Z\",\"visibility\":\"FACTION_ONLY\"}",
+        "canonicalAction": {
+          "type": "RECORD_OFFSCREEN_EVENT",
+          "payload": {
+            "id": "offscreen-mty9310b-56kps4",
+            "eventDescription": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+            "timestamp": "2026-09-12T10:36:45.659Z",
+            "visibility": "FACTION_ONLY"
+          }
+        },
+        "stateVersionAfterCommit": 2,
+        "informationAccess": "FACTION_ONLY",
+        "previousStateHash": "csh_9f9c5e3f1b89281f",
+        "originInputId": "input-mty92rnl-fof2de"
+      }
+    ],
+    "fullHistoryAfter": [
+      {
+        "recordId": "rec-evt-mty9310b-d6qb86-1",
+        "eventId": "evt-mty9310b-d6qb86",
+        "requestId": "req-mty9310b-7ahbxj",
+        "proposalId": "prop-req-mty9310b-7ahbxj",
+        "turn": 1,
+        "timestamp": "2026-09-12T10:36:45.659Z",
+        "narrativeTime": {
+          "formattedTime": "1년차 봄 1일 10:00",
+          "season": "SPRING",
+          "year": 1,
+          "day": 1,
+          "hour": 10,
+          "minute": 0
+        },
+        "source": "LLM",
+        "actionType": "RECORD_OFFSCREEN_EVENT",
+        "details": "{\"id\":\"offscreen-mty9310b-56kps4\",\"eventDescription\":\"어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리\",\"timestamp\":\"2026-09-12T10:36:45.659Z\",\"visibility\":\"FACTION_ONLY\"}",
+        "canonicalAction": {
+          "type": "RECORD_OFFSCREEN_EVENT",
+          "payload": {
+            "id": "offscreen-mty9310b-56kps4",
+            "eventDescription": "어둠 건너편 통로에서 미세한 흙먼지가 내려앉는 소리",
+            "timestamp": "2026-09-12T10:36:45.659Z",
+            "visibility": "FACTION_ONLY"
+          }
+        },
+        "stateVersionAfterCommit": 2,
+        "informationAccess": "FACTION_ONLY",
+        "previousStateHash": "csh_9f9c5e3f1b89281f",
+        "originInputId": "input-mty92rnl-fof2de"
+      }
+    ]
+  },
+  "trackingIds": {
+    "requestId": "req-mty9310b-7ahbxj",
+    "eventId": "evt-mty9310b-d6qb86",
+    "proposalId": "prop-req-mty9310b-7ahbxj",
+    "stateVersionBefore": 1,
+    "stateVersionAfter": 2,
+    "previousStateHash": "csh_9f9c5e3f1b89281f",
+    "recordIds": [
+      "rec-evt-mty9310b-d6qb86-1"
+    ]
+  }
+}
