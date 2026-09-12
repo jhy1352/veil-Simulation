@@ -347,49 +347,63 @@ export default function App() {
       gameState
     }, null, 2));
 
-    setGameState('playing');
-    setStoryTurnCount(1);
+    const genesisTurn = 1;
+    const cleanWorldInfo = deepMerge(createEmptyWorldInfo(), worldInfo);
+    const cleanCharacter = deepMerge(createEmptyCharacter(), character);
 
     console.log('[GENESIS_STATE_FORENSIC]', JSON.stringify({
-      worldInfo,
-      character,
-      storyTurnCount,
-      gameState
+      worldInfo: cleanWorldInfo,
+      character: cleanCharacter,
+      storyTurnCount: genesisTurn,
+      gameState: 'playing'
     }, null, 2));
 
-    // Initialize Sovereign Engine with genesis state
+    // Initialize Sovereign Engine with pristine genesis state
     const genesisEngine = new SovereignEngine(
-      worldInfo,
-      character,
+      cleanWorldInfo,
+      cleanCharacter,
       [],
       1,
       1
     );
     sovereignEngineRef.current = genesisEngine;
 
-    // Baseline Identity Passport Projection for Genesis State
+    // Baseline Identity Passport Projection for Genesis State strictly from genesis snapshot & empty history
     const initialPassports = projectPassports(
       genesisEngine.getSnapshot(),
       [],
       []
     );
-    setEngineState(prev => ({
-      ...prev,
-      passports: initialPassports
-    }));
+
+    // Pristine EngineState with ZERO leakage from previous runtime state
+    const cleanEngineState: EngineState = {
+      ...createEmptyEngineState(),
+      passports: initialPassports,
+      historicalRecords: [],
+      diagnostics: genesisEngine.getDiagnostics()
+    };
+
+    setCharacter(cleanCharacter);
+    setWorldInfo(cleanWorldInfo);
+    setMessages([]);
+    setEngineState(cleanEngineState);
+    setStoryTurnCount(genesisTurn);
+    setWaitingForRoll(null);
+    setModelError(null);
+    setGameState('playing');
 
     // Initial opening prompt to GM
     const initialPrompt = `[서사 개막 선언]
-세계관: ${worldInfo.worldName || '미지의 세계'} (${worldInfo.toneStyle || '원작 고유의 문체 충실 재현'})
-시대/배경: ${worldInfo.settingDescription || '새로운 이야기가 태동하는 시대'}
-주인공: ${character.name || '주인공'} (나이: ${character.age || '미상'}, 성별: ${character.gender || '미상'})
-출신: [${character.backgroundType || 'preset'}] ${character.originBackground || '미상'}
-결핍: [${character.flawType || 'preset'}] ${character.flaw || '없음'}
-맹세: [${character.oathType || 'preset'}] ${character.oath || '없음'}
-닻: [${character.anchorType || 'preset'}] ${character.anchor || '없음'}
-문파/세력: [${character.factionType || 'preset'}] ${character.faction || '무소속'}
-${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physicalDefect}` : ''}
-궁극적 목표: ${character.goal || '자신의 길을 개척하는 것'}
+세계관: ${cleanWorldInfo.worldName || '미지의 세계'} (${cleanWorldInfo.toneStyle || '원작 고유의 문체 충실 재현'})
+시대/배경: ${cleanWorldInfo.settingDescription || '새로운 이야기가 태동하는 시대'}
+주인공: ${cleanCharacter.name || '주인공'} (나이: ${cleanCharacter.age || '미상'}, 성별: ${cleanCharacter.gender || '미상'})
+출신: [${cleanCharacter.backgroundType || 'preset'}] ${cleanCharacter.originBackground || '미상'}
+결핍: [${cleanCharacter.flawType || 'preset'}] ${cleanCharacter.flaw || '없음'}
+맹세: [${cleanCharacter.oathType || 'preset'}] ${cleanCharacter.oath || '없음'}
+닻: [${cleanCharacter.anchorType || 'preset'}] ${cleanCharacter.anchor || '없음'}
+문파/세력: [${cleanCharacter.factionType || 'preset'}] ${cleanCharacter.faction || '무소속'}
+${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharacter.physicalDefect}` : ''}
+궁극적 목표: ${cleanCharacter.goal || '자신의 길을 개척하는 것'}
 
 대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오.`;
 
