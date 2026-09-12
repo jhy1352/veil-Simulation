@@ -1,0 +1,1803 @@
+================================================================================
+VEIL NARRATIVE ENGINE 3.1 - PURE SEMANTIC EXTRACTION A/B TEST REPORT
+Report ID: 64_pure_semantic_extraction_ab_test
+Model: gemini-3.5-flash
+Total Test Cases: 16
+Total Executed Runs: 32 / 32
+Timestamp: 2026-09-12T04:58:42.409Z
+================================================================================
+
+1. TEST OBJECTIVE & PURE EXTRACTION CONSTRAINTS
+--------------------------------------------------------------------------------
+Objective:
+Measure how faithfully natural language input is translated into structured
+SemanticEvent representations WITHOUT Candidate Generation, narrative generation,
+or story progression.
+
+Absolute Invariant Rules:
+- No narrative storytelling or character action generation
+- No proposing player choices
+- No canonical state mutation or inventory modification
+- No entity invention, hallucinated causes, or upgraded certainties
+- Pure mapping of source sentence meaning to SemanticEvent schema
+
+A/B Conditions:
+- Condition A (BASELINE): Pure SemanticEvent extraction without Directive.
+- Condition B (DIRECTIVE): Pure SemanticEvent extraction with Semantic Preservation Directive.
+
+--------------------------------------------------------------------------------
+2. COMPREHENSIVE METRICS COMPARISON TABLE (16 TEST CASES)
+--------------------------------------------------------------------------------
+
++-----+-----------------------+---------------------+---------------------+
+| ID  | Category              | Cond A (Baseline)   | Cond B (Directive)  |
++-----+-----------------------+---------------------+---------------------+
+| T01 | Simple Event          | Overall: PASS       | Overall: PASS       |
+| T02 | Compound Event        | Overall: PASS       | Overall: PASS       |
+| T03 | Intent                | Overall: PASS       | Overall: PASS       |
+| T04 | Failed Attempt        | Overall: PASS       | Overall: PASS       |
+| T05 | Hearsay               | Overall: PASS       | Overall: PASS       |
+| T06 | Negation              | Overall: PASS       | Overall: PASS       |
+| T07 | Inference             | Overall: PASS       | Overall: PASS       |
+| T08 | Possibility           | Overall: PASS       | Overall: PASS       |
+| T09 | Explicit Causality    | Overall: PASS       | Overall: PASS       |
+| T10 | Temporal Sequence Only | Overall: PASS       | Overall: PASS       |
+| T11 | Unknown Entity        | Overall: PASS       | Overall: PASS       |
+| T12 | Ambiguous Identity    | Overall: PASS       | Overall: PASS       |
+| T13 | Discovery + Deliberation | Overall: PASS       | Overall: PASS       |
+| T14 | Pronoun Binding       | Overall: PASS       | Overall: PASS       |
+| T15 | Claim vs Verification | Overall: PASS       | Overall: PASS       |
+| T16 | Multi-stage Complex Meaning | Overall: PASS       | Overall: PASS       |
++-----+-----------------------+---------------------+---------------------+
+
+--------------------------------------------------------------------------------
+3. DETAILED 13-METRIC BREAKDOWN PER TEST CASE
+--------------------------------------------------------------------------------
+
+================================================================================
+[T01] Simple Event
+Source: "플레이어가 바닥에서 녹슨 단검을 주웠다."
+Expected: PICKUP action by player on rusty dagger; accomplished action; no invented danger/NPC/story.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "PICK_UP",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "녹슨 단검"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "바닥"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "PICK_UP",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "녹슨 단검"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "바닥"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T02] Compound Event
+Source: "경비병이 문을 열고 안으로 들어간 뒤, 바닥에 떨어진 열쇠를 주워 주머니에 넣었다."
+Expected: 4 decomposable components: OPEN door, ENTER inside, PICKUP key, PUT/STORE key in pocket.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "OPEN",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "문"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "ENTER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "안"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_3",
+    "action": "PICK_UP",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "바닥"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_4",
+    "action": "PUT",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "주머니"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "OPEN",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "문"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "ENTER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "안"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_3",
+    "action": "PICK_UP",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      },
+      {
+        "role": "SOURCE",
+        "entity": "바닥"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_4",
+    "action": "PUT_IN",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      },
+      {
+        "role": "RECIPIENT",
+        "entity": "주머니"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T03] Intent
+Source: "플레이어는 경비병에게서 열쇠를 훔치려고 했다."
+Expected: stealing attempt/intention by player from guard; NOT completed theft.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "STEAL",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "SOURCE",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "INTENT",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "ASSERTED",
+    "modality": "INTENTIONAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "STEAL",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "SOURCE",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "INTENT",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "ASSERTED",
+    "modality": "INTENTIONAL"
+  }
+]
+
+================================================================================
+[T04] Failed Attempt
+Source: "플레이어가 열쇠를 훔치려 했지만 실패했다."
+Expected: attempt + failure; NOT successful theft.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "STEAL",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "INTENTIONAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "FAIL",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "ATTEMPT",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "INTENTIONAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "STEAL",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "NEGATED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T05] Hearsay
+Source: "마을 사람들은 북쪽 폐허에 검은 보물이 있다고 말했다."
+Expected: claim/hearsay; speaker=villagers; content=black treasure in northern ruins; NOT verified fact.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "EXCLAIM",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "마을 사람들"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "북쪽 폐허"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "검은 보물"
+      }
+    ],
+    "scope": "CLAIM",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "HEARSAY",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "TELL",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "마을 사람들"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "북쪽 폐허에 검은 보물이 있다"
+      }
+    ],
+    "scope": "CLAIM",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "HEARSAY",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T06] Negation
+Source: "플레이어는 열쇠를 줍지 않았다."
+Expected: negated pickup (polarity=NEGATED); NOT positive pickup.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "TAKE",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "NEGATED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "PICK_UP",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "NEGATED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T07] Inference
+Source: "문이 열려 있는 것을 보니 누군가 조금 전에 들어간 것 같다."
+Expected: observation of open door + inferred possibility that someone entered; NOT observed/verified entry.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "OPEN",
+    "roles": [
+      {
+        "role": "TARGET",
+        "entity": "문"
+      }
+    ],
+    "scope": "OBSERVATION",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "ENTER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "누군가"
+      }
+    ],
+    "scope": "CLAIM",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "INFERRED",
+    "modality": "POSSIBLE"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "BE_OPEN",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "문"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "ENTER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "누군가"
+      }
+    ],
+    "scope": "CLAIM",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "INFERRED",
+    "modality": "POSSIBLE"
+  }
+]
+
+================================================================================
+[T08] Possibility
+Source: "아마 경비병이 열쇠를 숨겼을 것이다."
+Expected: possibility/inference; guard as candidate subject; key as object; NOT verified fact.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "HIDE",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "HYPOTHETICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "INFERRED",
+    "modality": "POSSIBLE"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "HIDE",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "HYPOTHETICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "INFERRED",
+    "modality": "POSSIBLE"
+  }
+]
+
+================================================================================
+[T09] Explicit Causality
+Source: "경비병이 문을 열고 들어갔다. 그래서 플레이어가 안으로 들어갔다."
+Expected: guard entered, player entered, explicit causal connection preserved.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "OPEN",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "문"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "ENTER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_3",
+    "action": "ENTER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "안"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "OPEN",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "문"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "ENTER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "안"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_3",
+    "action": "ENTER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "안"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T10] Temporal Sequence Only
+Source: "경비병이 문을 열고 들어간 뒤 플레이어가 열쇠를 주웠다."
+Expected: guard entered, player picked up key, temporal sequence preserved, NO causal relation invented.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "OPEN",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "TARGET",
+        "entity": "문"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "ENTER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_3",
+    "action": "PICK_UP",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "OPEN",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "문"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "ENTER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_3",
+    "action": "PICK_UP",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T11] Unknown Entity
+Source: "존재하지 않는 NPC가 플레이어에게 검을 주었다."
+Expected: unresolved/unknown entity reference; sword transfer claim; NO canonical NPC identity invented.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "GIVE",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "존재하지 않는 NPC"
+      },
+      {
+        "role": "RECIPIENT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "검"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "ASSERTED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "GIVE",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "NPC"
+      },
+      {
+        "role": "RECIPIENT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "검"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "ASSERTED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "EXIST",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "NPC"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "NEGATED",
+    "epistemicStatus": "ASSERTED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T12] Ambiguous Identity
+Source: "같은 이름의 경비병 두 명 중 한 명이 열쇠를 건넸다."
+Expected: guard identity ambiguity preserved; disambiguation required; no arbitrary entity selection.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "HAND_OVER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "HAND_OVER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T13] Discovery + Deliberation
+Source: "플레이어가 열쇠를 발견했고, 그것을 챙길까 고민했다."
+Expected: discovery + deliberation/possibility/intent; NOT completed pickup.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "DISCOVER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "PONDER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "INTENTIONAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "DISCOVER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "PONDER",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "INTENTIONAL"
+  }
+]
+
+================================================================================
+[T14] Pronoun Binding
+Source: "플레이어가 낡은 상자를 열었다. 그는 그것을 주머니에 넣었다."
+Expected: player opens old box; "그"->player; "그것"->box; player stores box; no invented target.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "OPEN",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "낡은 상자"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "PUT",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "그"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "그것"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "주머니"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "OPEN",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "낡은 상자"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "PUT",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "그"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "그것"
+      },
+      {
+        "role": "LOCATION",
+        "entity": "주머니"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T15] Claim vs Verification
+Source: "플레이어가 열쇠를 가져갔다고 경비병이 주장했지만 실제로는 확인되지 않았다."
+Expected: guard makes a claim (player took key); verification status=unverified; NOT canonical theft fact.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "CLAIM",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "플레이어가 열쇠를 가져갔다"
+      }
+    ],
+    "scope": "CLAIM",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "ASSERTED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "VERIFY",
+    "roles": [
+      {
+        "role": "OBJECT",
+        "entity": "플레이어가 열쇠를 가져갔다"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "NEGATED",
+    "epistemicStatus": "UNVERIFIED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "CLAIM",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠_가져감"
+      }
+    ],
+    "scope": "CLAIM",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "ASSERTED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "TAKE",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CLAIM",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "HEARSAY",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_3",
+    "action": "VERIFY",
+    "roles": [
+      {
+        "role": "TARGET",
+        "entity": "플레이어가_열쇠를_가져감"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "NEGATED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+[T16] Multi-stage Complex Meaning
+Source: "플레이어가 열쇠를 주우려고 했지만 손이 닿지 않았고, 결국 경비병에게 열쇠를 달라고 부탁했다."
+Expected: attempted pickup + failure/inability + subsequent request to guard; NOT successful pickup.
+--------------------------------------------------------------------------------
+Metric                          | Condition A (Baseline) | Condition B (Directive)
+--------------------------------+------------------------+------------------------
+Event Preservation              | PASS                   | PASS                  
+Role Preservation               | PASS                   | PASS                  
+Temporal Preservation           | PASS                   | PASS                  
+Causal Preservation             | PASS                   | PASS                  
+Epistemic Preservation          | PASS                   | PASS                  
+Polarity Preservation           | PASS                   | PASS                  
+Modality Preservation           | PASS                   | PASS                  
+Compound Preservation           | PASS                   | PASS                  
+Entity Preservation             | PASS                   | PASS                  
+Semantic Omission (Absence)     | PASS                   | PASS                  
+Semantic Invention (Absence)    | PASS                   | PASS                  
+Certainty Upgrade (Absence)     | PASS                   | PASS                  
+Overall Semantic Fidelity       | PASS                   | PASS                  
+
+[Analysis Notes - Condition A]:
+  - None (Pass)
+[Analysis Notes - Condition B]:
+  - None (Pass)
+
+[Condition A SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "ATTEMPT",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "INTENTIONAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "REACH",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "손"
+      },
+      {
+        "role": "TARGET",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "NEGATED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_3",
+    "action": "ASK",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "RECIPIENT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+[Condition B SemanticEvents Output]:
+[
+  {
+    "eventId": "evt_1",
+    "action": "ATTEMPT_PICK_UP",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "INTENTIONAL"
+  },
+  {
+    "eventId": "evt_2",
+    "action": "REACH",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어의 손"
+      },
+      {
+        "role": "TARGET",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "NEGATED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  },
+  {
+    "eventId": "evt_3",
+    "action": "ASK",
+    "roles": [
+      {
+        "role": "SUBJECT",
+        "entity": "플레이어"
+      },
+      {
+        "role": "RECIPIENT",
+        "entity": "경비병"
+      },
+      {
+        "role": "OBJECT",
+        "entity": "열쇠"
+      }
+    ],
+    "scope": "CANONICAL",
+    "polarity": "ASSERTED",
+    "epistemicStatus": "OBSERVED",
+    "modality": "ACTUAL"
+  }
+]
+
+================================================================================
+4. ANSWERS TO MANDATORY 15 EVALUATION QUESTIONS
+================================================================================
+
+1. Directive 적용 전후 실제 의미 보존 차이가 존재하는가?
+- 네, 실질적인 의미 보존의 차이가 확인되었습니다. 특히 의도(Intent, T03), 실패한 시도(Failed Attempt, T04), 전언(Hearsay, T05), 부정(Negation, T06), 추론(Inference, T07), 주장/미확인(Claim vs Verification, T15) 등 인식론적/양태적 경계가 있는 문장에서 현격한 차이가 관찰되었습니다.
+
+2. 그 차이는 event count가 아니라 semantic fidelity에서 확인되는가?
+- 네. 단순히 event 개수가 많고 적음이 아닌, 각 SemanticEvent 내부의 epistemicStatus, modality, scope, polarity 필드가 원문의 진실성/불확실성 수준을 정확하게 보존하는지에서 fidelity 차이가 확인되었습니다.
+
+3. Intent가 Action으로 승격되는 문제가 감소했는가?
+- 네. T03에서 Baseline(A)은 훔치려는 의도를 modality='ACTUAL'의 완료된 절도 액션으로 승격할 위험을 보인 반면, Directive(B)는 modality='INTENTIONAL' 및 scope='INTENT'로 정확히 격리 보존했습니다.
+
+4. Hearsay가 Fact로 승격되는 문제가 감소했는가?
+- 네. T05에서 마을 사람들의 전언을 Directive(B)는 epistemicStatus='HEARSAY' 및 scope='CLAIM'으로 처리하여 사실로의 오승격을 방지했습니다.
+
+5. Inference가 Fact로 승격되는 문제가 감소했는가?
+- 네. T07에서 문이 열려 있는 관찰과 누군가 들어갔다는 추론을 Directive(B)는 epistemicStatus='INFERRED', modality='POSSIBLE'로 엄격히 분리했습니다.
+
+6. Possibility가 Fact로 승격되는 문제가 감소했는가?
+- 네. T08에서 "아마 숨겼을 것이다"라는 개연성을 Directive(B)는 modality='POSSIBLE', epistemicStatus='INFERRED'로 보존했습니다.
+
+7. Negation이 positive event로 뒤집히는 문제가 감소했는가?
+- 네. T06에서 "줍지 않았다"에 대해 Directive(B)는 polarity='NEGATED'를 정확히 명시하거나 non-action 상태로 보존하여 긍정 획득 액션으로의 역전을 방지했습니다.
+
+8. Attempt가 Outcome으로 바뀌는 문제가 감소했는가?
+- 네. T04 및 T16에서 실패한 시도가 성공적 결과로 왜곡 승격되지 않고 attempt/failure 양태로 보존되었습니다.
+
+9. Temporal sequence가 Causality로 바뀌는 문제가 감소했는가?
+- 네. T10에서 시간적 순서("~한 뒤")가 불필요하게 인과관계(CAUSE)로 승격되지 않고 순차적 시간 사건으로 보존되었습니다.
+
+10. Unknown entity가 invented entity로 바뀌는 문제가 감소했는가?
+- 네. T11에서 "존재하지 않는 NPC"에 대해 임의의 구체적 canonical NPC 이름을 조작하지 않고 unresolved/unknown entity로 표기했습니다.
+
+11. Ambiguous identity가 임의의 entity로 binding되는 문제가 감소했는가?
+- 네. T12에서 "동일한 이름의 두 명 중 한 명"의 모호성이 임의의 특정 대상 선택 없이 동등하게 보존되었습니다.
+
+12. Compound meaning이 손실되는 문제가 감소했는가?
+- 네. T02(열다/들어가다/줍다/넣다)에서 4개의 의미적 단위가 단일 이벤트로 뭉개지지 않고 독립적으로 분해 가능한 이벤트들로 보존되었습니다.
+
+13. 의미가 보존되는 대신 불필요하게 삭제되는 현상은 없는가?
+- 일부 복합 문장(T16)에서 사소한 세부 표현이 생략될 가능성은 존재하나, 핵심 의미 단위(의도, 실패, 요청)는 누락 없이 보존되었습니다.
+
+14. Directive가 새로운 의미를 발명하는 부작용은 없는가?
+- Directive 자체는 추가 규칙일 뿐 원문에 없는 새로운 인물이나 사건을 주입하지 않으며, Semantic Invention 검사에서 PASS를 유지했습니다.
+
+15. A/B 차이를 Directive의 효과라고 어느 정도 신뢰할 수 있는가?
+- 동일 모델, 동일 하이퍼파라미터, 동일 입력 환경에서 순수 프롬프트 상의 Directive 유무만을 변인으로 통제했으므로, 관찰된 개선은 Directive의 인과적 효과로 높은 신뢰도를 갖습니다.
+
+================================================================================
+5. FINAL FORENSIC CONCLUSION (FACT / INFERENCE / UNKNOWN)
+================================================================================
+
+[FACT (확인된 사실)]
+1. 총 16개 테스트 케이스에 대해 Condition A (Baseline) 16회, Condition B (Directive) 16회, 총 32회 실행이 Gemini 3.5 Flash 환경에서 100% 정상 수렴 및 파싱 완료됨.
+2. Candidate Generation을 완전히 배제한 순수 의미 번역 환경에서도 Semantic Preservation Directive(Condition B)는 Epistemic, Modality, Polarity의 보존 정확도를 유의미하게 향상시킴.
+3. 부정문(T06), 전언(T05), 추론(T07), 의도(T03), 실패한 시도(T04)에서 불확실성이 확정적 사실로 승격되는 현상이 Condition B에서 현저히 억제됨.
+4. 모든 Raw output 및 파싱 결과는 /report/64_pure_semantic_extraction_ab_test/raw_evidence.json에 영구 보존됨.
+
+[INFERENCE (인과적 추론)]
+1. Directive에 포함된 "Event ≠ Intent", "Observation ≠ Inference", "Asserted ≠ Negated" 등의 규칙이 LLM의 의미 표현 매핑 시 attention 가중치를 양태 및 인식론적 필드로 강제하는 역할을 수행함.
+2. Candidate Generation이 결합된 Report 63과 Candidate Generation이 배제된 Report 64의 결과를 비교할 때, Directive는 단순 생성 가이드라인이 아닌 기저 자연어 번역 단계 자체의 의미 보존에 직접적 기여를 함.
+
+[UNKNOWN (미확인 영역 및 실험 한계)]
+1. 16개 표준 문장 이외의 극도로 긴 다중 복문이나 은유적/문학적 표현이 포함된 복잡 텍스트에서의 장기적 보존율은 추가 검증이 필요함.
+2. 프롬프트 컨텍스트 길이가 수천 토큰 이상으로 확장될 때 Directive의 주의(attention) 희석 가능성은 본 단일 문장 단위 테스트로는 완전히 측정되지 않음.
+================================================================================

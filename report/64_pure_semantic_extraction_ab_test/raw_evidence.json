@@ -1,0 +1,2130 @@
+[
+  {
+    "testId": "T01",
+    "category": "Simple Event",
+    "input": "플레이어가 바닥에서 녹슨 단검을 주웠다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"PICK_UP\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"녹슨 단검\"\n        },\n        {\n          \"role\": \"LOCATION\",\n          \"entity\": \"바닥\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "PICK_UP",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "녹슨 단검"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "바닥"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3314,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T01",
+    "category": "Simple Event",
+    "input": "플레이어가 바닥에서 녹슨 단검을 주웠다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"PICK_UP\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"녹슨 단검\"\n        },\n        {\n          \"role\": \"LOCATION\",\n          \"entity\": \"바닥\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "PICK_UP",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "녹슨 단검"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "바닥"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 2825,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T02",
+    "category": "Compound Event",
+    "input": "경비병이 문을 열고 안으로 들어간 뒤, 바닥에 떨어진 열쇠를 주워 주머니에 넣었다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"OPEN\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"문\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"ENTER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"LOCATION\",\n          \"entity\": \"안\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_3\",\n      \"action\": \"PICK_UP\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        },\n        {\n          \"role\": \"LOCATION\",\n          \"entity\": \"바닥\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_4\",\n      \"action\": \"PUT\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        },\n        {\n          \"role\": \"LOCATION\",\n          \"entity\": \"주머니\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "OPEN",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "문"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "ENTER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "안"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_3",
+          "action": "PICK_UP",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "바닥"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_4",
+          "action": "PUT",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "주머니"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3805,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T02",
+    "category": "Compound Event",
+    "input": "경비병이 문을 열고 안으로 들어간 뒤, 바닥에 떨어진 열쇠를 주워 주머니에 넣었다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"OPEN\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"문\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"ENTER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"LOCATION\",\n          \"entity\": \"안\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_3\",\n      \"action\": \"PICK_UP\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        },\n        {\n          \"role\": \"SOURCE\",\n          \"entity\": \"바닥\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_4\",\n      \"action\": \"PUT_IN\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        },\n        {\n          \"role\": \"RECIPIENT\",\n          \"entity\": \"주머니\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "OPEN",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "문"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "ENTER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "안"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_3",
+          "action": "PICK_UP",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            },
+            {
+              "role": "SOURCE",
+              "entity": "바닥"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_4",
+          "action": "PUT_IN",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            },
+            {
+              "role": "RECIPIENT",
+              "entity": "주머니"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 4586,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T03",
+    "category": "Intent",
+    "input": "플레이어는 경비병에게서 열쇠를 훔치려고 했다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"STEAL\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"SOURCE\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"INTENT\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"ASSERTED\",\n      \"modality\": \"INTENTIONAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "STEAL",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "SOURCE",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "INTENT",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "ASSERTED",
+          "modality": "INTENTIONAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3079,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T03",
+    "category": "Intent",
+    "input": "플레이어는 경비병에게서 열쇠를 훔치려고 했다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"STEAL\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"SOURCE\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"INTENT\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"ASSERTED\",\n      \"modality\": \"INTENTIONAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "STEAL",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "SOURCE",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "INTENT",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "ASSERTED",
+          "modality": "INTENTIONAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3178,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T04",
+    "category": "Failed Attempt",
+    "input": "플레이어가 열쇠를 훔치려 했지만 실패했다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"STEAL\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"INTENTIONAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"FAIL\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "STEAL",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "INTENTIONAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "FAIL",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3311,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T04",
+    "category": "Failed Attempt",
+    "input": "플레이어가 열쇠를 훔치려 했지만 실패했다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"ATTEMPT\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"INTENTIONAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"STEAL\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "ATTEMPT",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "INTENTIONAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "STEAL",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "NEGATED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3604,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T05",
+    "category": "Hearsay",
+    "input": "마을 사람들은 북쪽 폐허에 검은 보물이 있다고 말했다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"EXCLAIM\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"마을 사람들\"\n        },\n        {\n          \"role\": \"LOCATION\",\n          \"entity\": \"북쪽 폐허\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"검은 보물\"\n        }\n      ],\n      \"scope\": \"CLAIM\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"HEARSAY\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "EXCLAIM",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "마을 사람들"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "북쪽 폐허"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "검은 보물"
+            }
+          ],
+          "scope": "CLAIM",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "HEARSAY",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3189,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T05",
+    "category": "Hearsay",
+    "input": "마을 사람들은 북쪽 폐허에 검은 보물이 있다고 말했다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"TELL\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"마을 사람들\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"북쪽 폐허에 검은 보물이 있다\"\n        }\n      ],\n      \"scope\": \"CLAIM\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"HEARSAY\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "TELL",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "마을 사람들"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "북쪽 폐허에 검은 보물이 있다"
+            }
+          ],
+          "scope": "CLAIM",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "HEARSAY",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3108,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T06",
+    "category": "Negation",
+    "input": "플레이어는 열쇠를 줍지 않았다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"TAKE\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "TAKE",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "NEGATED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3049,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T06",
+    "category": "Negation",
+    "input": "플레이어는 열쇠를 줍지 않았다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"PICK_UP\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "PICK_UP",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "NEGATED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3405,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T07",
+    "category": "Inference",
+    "input": "문이 열려 있는 것을 보니 누군가 조금 전에 들어간 것 같다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"OPEN\",\n      \"roles\": [\n        {\n          \"role\": \"TARGET\",\n          \"entity\": \"문\"\n        }\n      ],\n      \"scope\": \"OBSERVATION\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"ENTER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"누군가\"\n        }\n      ],\n      \"scope\": \"CLAIM\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"INFERRED\",\n      \"modality\": \"POSSIBLE\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "OPEN",
+          "roles": [
+            {
+              "role": "TARGET",
+              "entity": "문"
+            }
+          ],
+          "scope": "OBSERVATION",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "ENTER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "누군가"
+            }
+          ],
+          "scope": "CLAIM",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "INFERRED",
+          "modality": "POSSIBLE"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3160,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T07",
+    "category": "Inference",
+    "input": "문이 열려 있는 것을 보니 누군가 조금 전에 들어간 것 같다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"BE_OPEN\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"문\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"ENTER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"누군가\"\n        }\n      ],\n      \"scope\": \"CLAIM\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"INFERRED\",\n      \"modality\": \"POSSIBLE\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "BE_OPEN",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "문"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "ENTER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "누군가"
+            }
+          ],
+          "scope": "CLAIM",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "INFERRED",
+          "modality": "POSSIBLE"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3273,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T08",
+    "category": "Possibility",
+    "input": "아마 경비병이 열쇠를 숨겼을 것이다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"HIDE\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"HYPOTHETICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"INFERRED\",\n      \"modality\": \"POSSIBLE\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "HIDE",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "HYPOTHETICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "INFERRED",
+          "modality": "POSSIBLE"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3127,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T08",
+    "category": "Possibility",
+    "input": "아마 경비병이 열쇠를 숨겼을 것이다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"HIDE\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"HYPOTHETICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"INFERRED\",\n      \"modality\": \"POSSIBLE\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "HIDE",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "HYPOTHETICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "INFERRED",
+          "modality": "POSSIBLE"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 2908,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T09",
+    "category": "Explicit Causality",
+    "input": "경비병이 문을 열고 들어갔다. 그래서 플레이어가 안으로 들어갔다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"OPEN\",\n      \"roles\": [\n        { \"role\": \"SUBJECT\", \"entity\": \"경비병\" },\n        { \"role\": \"OBJECT\", \"entity\": \"문\" }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"ENTER\",\n      \"roles\": [\n        { \"role\": \"SUBJECT\", \"entity\": \"경비병\" }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_3\",\n      \"action\": \"ENTER\",\n      \"roles\": [\n        { \"role\": \"SUBJECT\", \"entity\": \"플레이어\" },\n        { \"role\": \"LOCATION\", \"entity\": \"안\" }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "OPEN",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "문"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "ENTER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_3",
+          "action": "ENTER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "안"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3915,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T09",
+    "category": "Explicit Causality",
+    "input": "경비병이 문을 열고 들어갔다. 그래서 플레이어가 안으로 들어갔다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"OPEN\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"문\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"ENTER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"LOCATION\",\n          \"entity\": \"안\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_3\",\n      \"action\": \"ENTER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"LOCATION\",\n          \"entity\": \"안\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "OPEN",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "문"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "ENTER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "안"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_3",
+          "action": "ENTER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "안"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 4297,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T10",
+    "category": "Temporal Sequence Only",
+    "input": "경비병이 문을 열고 들어간 뒤 플레이어가 열쇠를 주웠다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"OPEN\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"TARGET\",\n          \"entity\": \"문\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"ENTER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_3\",\n      \"action\": \"PICK_UP\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "OPEN",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "TARGET",
+              "entity": "문"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "ENTER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_3",
+          "action": "PICK_UP",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3444,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T10",
+    "category": "Temporal Sequence Only",
+    "input": "경비병이 문을 열고 들어간 뒤 플레이어가 열쇠를 주웠다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"OPEN\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"문\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"ENTER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_3\",\n      \"action\": \"PICK_UP\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "OPEN",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "문"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "ENTER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_3",
+          "action": "PICK_UP",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3477,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T11",
+    "category": "Unknown Entity",
+    "input": "존재하지 않는 NPC가 플레이어에게 검을 주었다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"GIVE\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"존재하지 않는 NPC\"\n        },\n        {\n          \"role\": \"RECIPIENT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"검\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"ASSERTED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "GIVE",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "존재하지 않는 NPC"
+            },
+            {
+              "role": "RECIPIENT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "검"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "ASSERTED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3181,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T11",
+    "category": "Unknown Entity",
+    "input": "존재하지 않는 NPC가 플레이어에게 검을 주었다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"GIVE\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"NPC\"\n        },\n        {\n          \"role\": \"RECIPIENT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"검\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"ASSERTED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"EXIST\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"NPC\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"NEGATED\",\n      \"epistemicStatus\": \"ASSERTED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "GIVE",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "NPC"
+            },
+            {
+              "role": "RECIPIENT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "검"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "ASSERTED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "EXIST",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "NPC"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "NEGATED",
+          "epistemicStatus": "ASSERTED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3689,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T12",
+    "category": "Ambiguous Identity",
+    "input": "같은 이름의 경비병 두 명 중 한 명이 열쇠를 건넸다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"HAND_OVER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "HAND_OVER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3107,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T12",
+    "category": "Ambiguous Identity",
+    "input": "같은 이름의 경비병 두 명 중 한 명이 열쇠를 건넸다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"HAND_OVER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "HAND_OVER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3073,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T13",
+    "category": "Discovery + Deliberation",
+    "input": "플레이어가 열쇠를 발견했고, 그것을 챙길까 고민했다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"DISCOVER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"PONDER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"INTENTIONAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "DISCOVER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "PONDER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "INTENTIONAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 2873,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T13",
+    "category": "Discovery + Deliberation",
+    "input": "플레이어가 열쇠를 발견했고, 그것을 챙길까 고민했다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"DISCOVER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"PONDER\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"INTENTIONAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "DISCOVER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "PONDER",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "INTENTIONAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 2930,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T14",
+    "category": "Pronoun Binding",
+    "input": "플레이어가 낡은 상자를 열었다. 그는 그것을 주머니에 넣었다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"OPEN\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"낡은 상자\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"PUT\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"그\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"그것\"\n        },\n        {\n          \"role\": \"LOCATION\",\n          \"entity\": \"주머니\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "OPEN",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "낡은 상자"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "PUT",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "그"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "그것"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "주머니"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3072,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T14",
+    "category": "Pronoun Binding",
+    "input": "플레이어가 낡은 상자를 열었다. 그는 그것을 주머니에 넣었다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"OPEN\",\n      \"roles\": [\n        { \"role\": \"SUBJECT\", \"entity\": \"플레이어\" },\n        { \"role\": \"OBJECT\", \"entity\": \"낡은 상자\" }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"PUT\",\n      \"roles\": [\n        { \"role\": \"SUBJECT\", \"entity\": \"그\" },\n        { \"role\": \"OBJECT\", \"entity\": \"그것\" },\n        { \"role\": \"LOCATION\", \"entity\": \"주머니\" }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "OPEN",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "낡은 상자"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "PUT",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "그"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "그것"
+            },
+            {
+              "role": "LOCATION",
+              "entity": "주머니"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 2915,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T15",
+    "category": "Claim vs Verification",
+    "input": "플레이어가 열쇠를 가져갔다고 경비병이 주장했지만 실제로는 확인되지 않았다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"CLAIM\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"플레이어가 열쇠를 가져갔다\"\n        }\n      ],\n      \"scope\": \"CLAIM\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"ASSERTED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"VERIFY\",\n      \"roles\": [\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"플레이어가 열쇠를 가져갔다\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"NEGATED\",\n      \"epistemicStatus\": \"UNVERIFIED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "CLAIM",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "플레이어가 열쇠를 가져갔다"
+            }
+          ],
+          "scope": "CLAIM",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "ASSERTED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "VERIFY",
+          "roles": [
+            {
+              "role": "OBJECT",
+              "entity": "플레이어가 열쇠를 가져갔다"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "NEGATED",
+          "epistemicStatus": "UNVERIFIED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3155,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T15",
+    "category": "Claim vs Verification",
+    "input": "플레이어가 열쇠를 가져갔다고 경비병이 주장했지만 실제로는 확인되지 않았다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"CLAIM\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠_가져감\"\n        }\n      ],\n      \"scope\": \"CLAIM\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"ASSERTED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"TAKE\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CLAIM\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"HEARSAY\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_3\",\n      \"action\": \"VERIFY\",\n      \"roles\": [\n        {\n          \"role\": \"TARGET\",\n          \"entity\": \"플레이어가_열쇠를_가져감\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "CLAIM",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠_가져감"
+            }
+          ],
+          "scope": "CLAIM",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "ASSERTED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "TAKE",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CLAIM",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "HEARSAY",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_3",
+          "action": "VERIFY",
+          "roles": [
+            {
+              "role": "TARGET",
+              "entity": "플레이어가_열쇠를_가져감"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "NEGATED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3416,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T16",
+    "category": "Multi-stage Complex Meaning",
+    "input": "플레이어가 열쇠를 주우려고 했지만 손이 닿지 않았고, 결국 경비병에게 열쇠를 달라고 부탁했다.",
+    "condition": "A",
+    "conditionName": "Baseline (No Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"ATTEMPT\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"INTENTIONAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"REACH\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"손\"\n        },\n        {\n          \"role\": \"TARGET\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_3\",\n      \"action\": \"ASK\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"RECIPIENT\",\n          \"entity\": \"경비병\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"열쇠\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "ATTEMPT",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "INTENTIONAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "REACH",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "손"
+            },
+            {
+              "role": "TARGET",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "NEGATED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_3",
+          "action": "ASK",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "RECIPIENT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3246,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  },
+  {
+    "testId": "T16",
+    "category": "Multi-stage Complex Meaning",
+    "input": "플레이어가 열쇠를 주우려고 했지만 손이 닿지 않았고, 결국 경비병에게 열쇠를 달라고 부탁했다.",
+    "condition": "B",
+    "conditionName": "Directive (With Directive)",
+    "model": "gemini-3.5-flash-lite",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"ATTEMPT_PICK_UP\",\n      \"roles\": [\n        { \"role\": \"SUBJECT\", \"entity\": \"플레이어\" },\n        { \"role\": \"OBJECT\", \"entity\": \"열쇠\" }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"INTENTIONAL\"\n    },\n    {\n      \"eventId\": \"evt_2\",\n      \"action\": \"REACH\",\n      \"roles\": [\n        { \"role\": \"SUBJECT\", \"entity\": \"플레이어의 손\" },\n        { \"role\": \"TARGET\", \"entity\": \"열쇠\" }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"NEGATED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    },\n    {\n      \"eventId\": \"evt_3\",\n      \"action\": \"ASK\",\n      \"roles\": [\n        { \"role\": \"SUBJECT\", \"entity\": \"플레이어\" },\n        { \"role\": \"RECIPIENT\", \"entity\": \"경비병\" },\n        { \"role\": \"OBJECT\", \"entity\": \"열쇠\" }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "ATTEMPT_PICK_UP",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "INTENTIONAL"
+        },
+        {
+          "eventId": "evt_2",
+          "action": "REACH",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어의 손"
+            },
+            {
+              "role": "TARGET",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "NEGATED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        },
+        {
+          "eventId": "evt_3",
+          "action": "ASK",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "RECIPIENT",
+              "entity": "경비병"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "열쇠"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionDurationMs": 3146,
+    "evaluation": {
+      "eventPreservation": "PASS",
+      "rolePreservation": "PASS",
+      "temporalPreservation": "PASS",
+      "causalPreservation": "PASS",
+      "epistemicPreservation": "PASS",
+      "polarityPreservation": "PASS",
+      "modalityPreservation": "PASS",
+      "compoundPreservation": "PASS",
+      "entityPreservation": "PASS",
+      "semanticOmission": "PASS",
+      "semanticInvention": "PASS",
+      "certaintyUpgrade": "PASS",
+      "overallSemanticFidelity": "PASS",
+      "analysisNotes": []
+    }
+  }
+]
