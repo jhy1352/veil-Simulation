@@ -285,6 +285,18 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
       });
     });
 
+    // Forensic log for Gemini API contents
+    console.log('[GEMINI_CONTENTS_FORENSIC]');
+    contents.forEach((item: any, idx: number) => {
+      console.log(`[GEMINI_CONTENTS_FORENSIC] Item ${idx} | role: ${item.role}`);
+      if (Array.isArray(item.parts)) {
+        item.parts.forEach((p: any, pIdx: number) => {
+          console.log(`[GEMINI_CONTENTS_FORENSIC] Item ${idx} Part ${pIdx} text:\n${p.text}`);
+        });
+      }
+    });
+    console.log('[GEMINI_CONTENTS_FORENSIC] Raw JSON payload:\n' + JSON.stringify(contents, null, 2));
+
     // Call Gemini API (Phase 1: Candidate Generation)
     const response = await ai.models.generateContent({
       model: targetModel,
