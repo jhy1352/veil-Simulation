@@ -1,0 +1,160 @@
+[
+  {
+    "testId": "T01",
+    "category": "Simple Event",
+    "condition": "A",
+    "runIndex": 1,
+    "model": "gemini-3.5-flash",
+    "timestamp": "2026-09-12T05:23:26.398Z",
+    "input": "플레이어가 바닥에서 녹슨 단검을 주웠다.",
+    "systemInstruction": "You are the VEIL 3.1 Pure Semantic Extraction Engine.\nYour SOLE duty is to parse and translate natural language text into a structured list of SemanticEvents.\n\n### STRICT RULES:\n- DO NOT generate narrative, storytelling, or continuation.\n- DO NOT propose actions, choices, or suggestions to the player.\n- DO NOT generate NPC autonomous actions or new story progression.\n- DO NOT alter canonical world state or mutate inventory.\n- DO NOT invent facts, entities, causes, outcomes, or intent not present in the source text.\n- Output ONLY valid JSON matching the exact output contract below.\n\n### Output JSON Contract:\n```json\n{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"ACTION_NAME\",\n      \"roles\": [\n        { \"role\": \"SUBJECT\" | \"TARGET\" | \"OBJECT\" | \"RECIPIENT\" | \"SOURCE\" | \"LOCATION\", \"entity\": \"entity_name\" }\n      ],\n      \"scope\": \"CANONICAL\" | \"CLAIM\" | \"HYPOTHETICAL\" | \"INTENT\" | \"HISTORICAL\" | \"OBSERVATION\" | \"UNVERIFIED\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\" | \"UNKNOWN\",\n      \"epistemicStatus\": \"OBSERVED\" | \"ASSERTED\" | \"HEARSAY\" | \"INFERRED\" | \"UNVERIFIED\",\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\" | \"COMMITMENT\"\n    }\n  ]\n}\n```",
+    "userPrompt": "Input Sentence:\n\"플레이어가 바닥에서 녹슨 단검을 주웠다.\"\n\nParse and extract the exact SemanticEvents JSON for the input sentence according to the contract.",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"PICK_UP\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"녹슨 단검\"\n        },\n        {\n          \"role\": \"SOURCE\",\n          \"entity\": \"바닥\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "PICK_UP",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "녹슨 단검"
+            },
+            {
+              "role": "SOURCE",
+              "entity": "바닥"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionAttempts": 1,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T05:23:22.828Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "evaluation": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "precision": 1,
+      "recall": 1,
+      "statusFidelity": 1,
+      "roleFidelity": 1,
+      "relationFidelity": 1,
+      "inventionRate": 0,
+      "omissionRate": 0,
+      "completenessScore": 1,
+      "notes": []
+    }
+  },
+  {
+    "testId": "T01",
+    "category": "Simple Event",
+    "condition": "A",
+    "runIndex": 2,
+    "model": "gemini-3.5-flash",
+    "timestamp": "2026-09-12T05:25:40.250Z",
+    "input": "플레이어가 바닥에서 녹슨 단검을 주웠다.",
+    "systemInstruction": "You are the VEIL 3.1 Pure Semantic Extraction Engine.\nYour SOLE duty is to parse and translate natural language text into a structured list of SemanticEvents.\n\n### STRICT RULES:\n- DO NOT generate narrative, storytelling, or continuation.\n- DO NOT propose actions, choices, or suggestions to the player.\n- DO NOT generate NPC autonomous actions or new story progression.\n- DO NOT alter canonical world state or mutate inventory.\n- DO NOT invent facts, entities, causes, outcomes, or intent not present in the source text.\n- Output ONLY valid JSON matching the exact output contract below.\n\n### Output JSON Contract:\n```json\n{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"ACTION_NAME\",\n      \"roles\": [\n        { \"role\": \"SUBJECT\" | \"TARGET\" | \"OBJECT\" | \"RECIPIENT\" | \"SOURCE\" | \"LOCATION\", \"entity\": \"entity_name\" }\n      ],\n      \"scope\": \"CANONICAL\" | \"CLAIM\" | \"HYPOTHETICAL\" | \"INTENT\" | \"HISTORICAL\" | \"OBSERVATION\" | \"UNVERIFIED\",\n      \"polarity\": \"ASSERTED\" | \"NEGATED\" | \"UNKNOWN\",\n      \"epistemicStatus\": \"OBSERVED\" | \"ASSERTED\" | \"HEARSAY\" | \"INFERRED\" | \"UNVERIFIED\",\n      \"modality\": \"ACTUAL\" | \"INTENTIONAL\" | \"POSSIBLE\" | \"COUNTERFACTUAL\" | \"COMMITMENT\"\n    }\n  ]\n}\n```",
+    "userPrompt": "Input Sentence:\n\"플레이어가 바닥에서 녹슨 단검을 주웠다.\"\n\nParse and extract the exact SemanticEvents JSON for the input sentence according to the contract.",
+    "rawLlmOutput": "{\n  \"semanticEvents\": [\n    {\n      \"eventId\": \"evt_1\",\n      \"action\": \"PICK_UP\",\n      \"roles\": [\n        {\n          \"role\": \"SUBJECT\",\n          \"entity\": \"플레이어\"\n        },\n        {\n          \"role\": \"OBJECT\",\n          \"entity\": \"녹슨 단검\"\n        },\n        {\n          \"role\": \"SOURCE\",\n          \"entity\": \"바닥\"\n        }\n      ],\n      \"scope\": \"CANONICAL\",\n      \"polarity\": \"ASSERTED\",\n      \"epistemicStatus\": \"OBSERVED\",\n      \"modality\": \"ACTUAL\"\n    }\n  ]\n}",
+    "parsedJson": {
+      "semanticEvents": [
+        {
+          "eventId": "evt_1",
+          "action": "PICK_UP",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entity": "플레이어"
+            },
+            {
+              "role": "OBJECT",
+              "entity": "녹슨 단검"
+            },
+            {
+              "role": "SOURCE",
+              "entity": "바닥"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "OBSERVED",
+          "modality": "ACTUAL"
+        }
+      ]
+    },
+    "parseSuccess": true,
+    "executionAttempts": 6,
+    "attemptLogs": [
+      {
+        "attempt": 1,
+        "timestamp": "2026-09-12T05:23:29.900Z",
+        "status": "RETRY_NEEDED",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.5-flash\\nPlease retry in 29.652711803s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.5-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"29s\"}]}}"
+      },
+      {
+        "attempt": 2,
+        "timestamp": "2026-09-12T05:23:55.375Z",
+        "status": "RETRY_NEEDED",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.5-flash\\nPlease retry in 4.362085905s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.5-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"4s\"}]}}"
+      },
+      {
+        "attempt": 3,
+        "timestamp": "2026-09-12T05:24:20.665Z",
+        "status": "RETRY_NEEDED",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.5-flash\\nPlease retry in 38.898081773s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"model\":\"gemini-3.5-flash\",\"location\":\"global\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"38s\"}]}}"
+      },
+      {
+        "attempt": 4,
+        "timestamp": "2026-09-12T05:24:46.130Z",
+        "status": "RETRY_NEEDED",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.5-flash\\nPlease retry in 13.500050192s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.5-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"13s\"}]}}"
+      },
+      {
+        "attempt": 5,
+        "timestamp": "2026-09-12T05:25:11.526Z",
+        "status": "RETRY_NEEDED",
+        "error": "{\"error\":{\"code\":429,\"message\":\"You exceeded your current quota, please check your plan and billing details. For more information on this error, head to: https://ai.google.dev/gemini-api/docs/rate-limits. To monitor your current usage, head to: https://ai.dev/rate-limit. \\n* Quota exceeded for metric: generativelanguage.googleapis.com/generate_content_free_tier_requests, limit: 20, model: gemini-3.5-flash\\nPlease retry in 47.964410868s.\",\"status\":\"RESOURCE_EXHAUSTED\",\"details\":[{\"@type\":\"type.googleapis.com/google.rpc.Help\",\"links\":[{\"description\":\"Learn more about Gemini API quotas\",\"url\":\"https://ai.google.dev/gemini-api/docs/rate-limits\"}]},{\"@type\":\"type.googleapis.com/google.rpc.QuotaFailure\",\"violations\":[{\"quotaMetric\":\"generativelanguage.googleapis.com/generate_content_free_tier_requests\",\"quotaId\":\"GenerateRequestsPerDayPerProjectPerModel-FreeTier\",\"quotaDimensions\":{\"location\":\"global\",\"model\":\"gemini-3.5-flash\"},\"quotaValue\":\"20\"}]},{\"@type\":\"type.googleapis.com/google.rpc.RetryInfo\",\"retryDelay\":\"47s\"}]}}"
+      },
+      {
+        "attempt": 6,
+        "timestamp": "2026-09-12T05:25:37.061Z",
+        "status": "SUCCESS"
+      }
+    ],
+    "evaluation": {
+      "tp": 4,
+      "fp": 0,
+      "fn": 0,
+      "statusErrors": 0,
+      "roleErrors": 0,
+      "relationErrors": 0,
+      "precision": 1,
+      "recall": 1,
+      "statusFidelity": 1,
+      "roleFidelity": 1,
+      "relationFidelity": 1,
+      "inventionRate": 0,
+      "omissionRate": 0,
+      "completenessScore": 1,
+      "notes": []
+    }
+  }
+]
