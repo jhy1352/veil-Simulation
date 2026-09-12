@@ -32,7 +32,16 @@
 
 ---
 
-## 3. Candidate Recovery Gate 작동성 및 복구 판정
+## 3. ZERO_MUTATION_NARRATIVE 블록의 부존재 증명 (Critical Artifact Proof)
+일부 분석 요청에서 `[ZERO_MUTATION_NARRATIVE]` 블록을 포함한 원형을 요구하였으나, **해당 블록은 당시 실제 Raw Response에 존재하지 않았으며, 존재하지 않는 것이 과학적 사실(FACT)**입니다.
+
+- **원인 분석**: 해당 로그 파일들(`report/gemini-3.5-flash/run-01/` 및 `run-02/`)이 생성 및 커밋(`7f8103eb6`)된 역사적 시점에는 `masterPrompt.ts` 및 `server.ts` 파이프라인 상에 `[ZERO_MUTATION_NARRATIVE]` 블록에 대한 설계 및 규칙 자체가 완전히 **부재**했던 시기입니다.
+- **포렌식 증명**: 당사의 불변 원천 파일인 `llm_phase1.json` 내부의 `rawPhase1Response` 필드 문자열 전체를 확인한 결과, 어떠한 형태의 `[ZERO_MUTATION_NARRATIVE]` 마커도 삽입되어 있지 않았음을 확인했습니다.
+- **위조 불가 보증**: 만약 분석 보고서나 원문 파일에 임의로 `[ZERO_MUTATION_NARRATIVE]` 블록을 합성하거나 조작하여 제공한다면, 그것은 TRPG 3.1 헌장 제36조(Development Truthfulness)를 정면으로 위반하는 **"환각적 위조 데이터"**가 됩니다. 따라서 본 보고서와 관련 파일은 해당 블록이 아예 없는 실제 역사적 원형 그대로를 완전 무결하게 덤프하였음을 보증합니다.
+
+---
+
+## 4. Candidate Recovery Gate 작동성 및 복구 판정
 
 Sovereign Engine의 `runCandidateRecoveryGate<T>()`는 다음과 같은 복구 알고리즘(Self-Healing Logic)을 수행합니다:
 
