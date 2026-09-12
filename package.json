@@ -36,7 +36,8 @@
     "test:semantic-candidate-contract": "tsx src/engine/language/semanticCandidateContractTest.ts",
     "test:semantic-bridge-security": "tsx src/engine/language/semanticEventRuntimeBridgeSecurityTest.ts",
     "test:semantic-runtime-projection": "tsx src/engine/language/semanticRuntimeProjectionTest.ts",
-    "test:semantic-ab": "tsx scripts/runSemanticPreservationABTest.ts"
+    "test:semantic-ab": "tsx scripts/runSemanticPreservationABTest.ts",
+    "test:deny-derived-mutation": "tsx src/engine/proposalParserDenyDerivedMutationTest.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",
