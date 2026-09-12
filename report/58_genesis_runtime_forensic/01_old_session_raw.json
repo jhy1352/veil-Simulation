@@ -1,0 +1,66 @@
+{
+  "storageKey": "engine_mk7_trpg_session_v1",
+  "character": {
+    "name": "백연화 (白蓮花)",
+    "gender": "여성",
+    "age": "19",
+    "faction": "화산파 (華山派)",
+    "originBackground": "화산파 속가 제자 출신",
+    "inventory": [
+      {
+        "id": "item-1",
+        "name": "화산 매화검",
+        "quantity": 1,
+        "type": "무기",
+        "isEquipped": true
+      }
+    ]
+  },
+  "worldInfo": {
+    "worldName": "화산비고 (華山秘庫)",
+    "toneStyle": "정통 무협의 비장미와 중후한 필치",
+    "settingDescription": "화산파의 비전과 잃어버린 매화검결이 잠든 암곡.",
+    "currentTime": {
+      "year": 12,
+      "season": "WINTER",
+      "formattedTime": "12년 겨울"
+    }
+  },
+  "storyTurnCount": 2,
+  "engineState": {
+    "historicalRecords": [
+      {
+        "eventId": "evt-01",
+        "description": "화산비고 입구 봉인 해제",
+        "source": "TURN_1_COMMIT"
+      }
+    ],
+    "checkpoints": [
+      {
+        "turn": 1,
+        "chapter": "서막",
+        "narrativeTime": "12년 겨울"
+      }
+    ],
+    "turnTraces": [
+      {
+        "turn": 1,
+        "verdict": "COMMITTED"
+      }
+    ],
+    "pendingCandidates": [],
+    "validationLogs": [
+      {
+        "logId": "log-1",
+        "turn": 1,
+        "outcome": "PASSED"
+      }
+    ],
+    "novelHistoryRecords": [
+      {
+        "id": "rec-1",
+        "eventTitle": "매화검 발견"
+      }
+    ]
+  }
+}
