@@ -194,6 +194,29 @@ function toImmutableRecords(records?: readonly (ImmutableHistoricalRecord | Hist
   });
 }
 
+/**
+ * Conservative canonical-mutation binding for roadmap/chapter metadata.
+ *
+ * `chapterChanges` is explicitly non-canonical roadmap data in the runtime prompt.
+ * It may become a canonical ADVANCE_CHAPTER mutation only when the candidate itself
+ * carries an explicit semantic INTENT event for ADVANCE_CHAPTER. This intentionally
+ * does not use prose keyword matching and does not treat arbitrary candidate prose
+ * as player authority.
+ */
+function hasExplicitChapterAdvanceIntent(candidate: CandidatePacket): boolean {
+  const semanticEvents = (candidate as CandidatePacket & { semanticEvents?: unknown }).semanticEvents;
+  if (!Array.isArray(semanticEvents) || semanticEvents.length === 0) return false;
+
+  return semanticEvents.some((event: any) => {
+    if (!event || typeof event !== 'object') return false;
+    return event.action === 'ADVANCE_CHAPTER' &&
+      event.scope === 'INTENT' &&
+      event.polarity === 'ASSERTED' &&
+      (event.epistemicStatus === 'ASSERTED' || event.epistemicStatus === 'VERIFIED') &&
+      (event.modality === 'INTENTIONAL' || event.modality === 'COMMITMENT');
+  });
+}
+
 export function buildSafeProposalFromCandidate(
   snapshotOrCandidate: CanonicalState | CandidatePacket,
   candidateOrOptions: CandidatePacket | { requestId?: string; eventId?: string; expectedStateVersion?: number; turn?: number; source?: ProposalSource },
@@ -333,7 +356,7 @@ export function buildSafeProposalFromCandidate(
     }
   }
 
-  if (candidate.chapterChanges) {
+  if (candidate.chapterChanges && hasExplicitChapterAdvanceIntent(candidate)) {
     const nextCurrentChapter = candidate.chapterChanges.currentChapter?.trim() || currentSnapshot.worldInfo.chapters?.currentChapter || DEFAULT_CHAPTER_NAME;
     const upcoming = (candidate.chapterChanges.upcomingChapters || []).map(c => (typeof c === 'string' ? c.trim() : '')).filter(Boolean).slice(0, 3);
     actions.push({ type: 'ADVANCE_CHAPTER', payload: { currentChapter: nextCurrentChapter, upcomingChapters: upcoming } });
@@ -363,7 +386,7 @@ export function buildSafeProposalFromCandidate(
       const cause = (inv as any).cause || (inv as any).acquisition?.cause || ev?.cause;
       const cost = (inv as any).cost || (inv as any).acquisition?.cost || ev?.cost;
       const verifiedEventId = (inv as any).verifiedEventId || (inv as any).acquisition?.verifiedEventId || ev?.verifiedEventId;
-      const sourceNpcId = typeof (inv as any).sourceNpcId === 'string' && (inv as any).sourceNpcId.trim() ? (inv as any).sourceNpcId.trim() : typeof (inv as any).acquisition?.sourceNpcId === 'string' && (inv as any).acquisition.sourceNpcId.trim() ? (inv as any).acquisition.sourceNpcId.trim() : undefined;
+      const sourceNpcId = typeof (inv as any).sourceNpcId === 'string' && (inv as any).sourceNpcId.trim() ? (inv as any).sourceNpcId.trim() : typeof (inv as any).acquisition?.sourceNpcId === 'string' && inv.acquisition.sourceNpcId.trim() ? inv.acquisition.sourceNpcId.trim() : undefined;
       const resolution = resolveCandidateInventoryIdentity(currentSnapshot, immutableHistory, inv, identityGraph);
       if (resolution.status === 'AMBIGUOUS' || resolution.status === 'CONFLICT') continue;
       const canonicalId = (resolution.status === 'EXACT' || resolution.status === 'RECOVERED') ? resolution.canonicalId! : generateProposalId('item');
