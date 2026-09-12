@@ -407,7 +407,12 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
 
 대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오.`;
 
-    await handleSendMessage(initialPrompt, true);
+    await handleSendMessage(initialPrompt, true, {
+      worldInfo: cleanWorldInfo,
+      character: cleanCharacter,
+      engineState: cleanEngineState,
+      storyTurnCount: genesisTurn
+    });
   };
 
   // Reset Session to clean creation mode
@@ -492,11 +497,25 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
   };
 
   // Core Turn Processing Pipeline (T0 ~ T7)
-  const handleSendMessage = useCallback(async (userPrompt: string, isInitial: boolean = false) => {
+  const handleSendMessage = useCallback(async (
+    userPrompt: string,
+    isInitial: boolean = false,
+    stateOverride?: {
+      worldInfo?: WorldInfo;
+      character?: Character;
+      engineState?: EngineState;
+      storyTurnCount?: number;
+    }
+  ) => {
     if (isGenerating) return;
 
+    const effectiveWorldInfo = stateOverride?.worldInfo ?? worldInfo;
+    const effectiveCharacter = stateOverride?.character ?? character;
+    const effectiveEngineState = stateOverride?.engineState ?? engineState;
+    const effectiveStoryTurnCount = stateOverride?.storyTurnCount ?? storyTurnCount;
+
     // T0: Player Input
-    const profiler = new TurnLatencyProfiler(storyTurnCount, selectedModel);
+    const profiler = new TurnLatencyProfiler(effectiveStoryTurnCount, selectedModel);
     profiler.markRequestStart(userPrompt.length);
 
     const turnStartTime = Date.now();
@@ -505,7 +524,7 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
         step: 'T0_PLAYER_INPUT',
         status: 'OK',
         timestamp: turnStartTime,
-        details: `Turn ${storyTurnCount} player input: "${userPrompt.slice(0, 50)}${userPrompt.length > 50 ? '...' : ''}" (${userPrompt.length} chars)`
+        details: `Turn ${effectiveStoryTurnCount} player input: "${userPrompt.slice(0, 50)}${userPrompt.length > 50 ? '...' : ''}" (${userPrompt.length} chars)`
       }
     ];
 
@@ -517,13 +536,13 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
       role: 'user',
       content: userPrompt,
       cleanText: userPrompt,
-      turn: storyTurnCount,
+      turn: effectiveStoryTurnCount,
       timestamp: new Date().toISOString()
     };
 
     const newMessages = isInitial ? [userMessage] : [...messages, userMessage];
     console.log('[SESSION_FORENSIC]', {
-      turn: storyTurnCount,
+      turn: effectiveStoryTurnCount,
       isInitial,
       messagesLengthBefore: messages.length,
       newMessagesLength: newMessages.length,
@@ -570,10 +589,10 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
         },
         body: JSON.stringify({
           messages: newMessages.map(m => ({ role: m.role, content: m.content })),
-          worldInfo,
-          character,
-          engineState,
-          storyTurnCount,
+          worldInfo: effectiveWorldInfo,
+          character: effectiveCharacter,
+          engineState: effectiveEngineState,
+          storyTurnCount: effectiveStoryTurnCount,
           userPrompt,
           selectedModel,
           narrativeLocale: effectiveLoc
@@ -608,26 +627,26 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
       });
 
       // T6 & T7: Sovereign Validation & Canonical Commit Gate
-      let currentWorldInfo = worldInfo;
-      let currentCharacter = character;
+      let currentWorldInfo = effectiveWorldInfo;
+      let currentCharacter = effectiveCharacter;
       const engine = getOrInitEngine(
-        worldInfo,
-        character,
-        engineState.historicalRecords || [],
-        storyTurnCount,
-        engineState.diagnostics
+        effectiveWorldInfo,
+        effectiveCharacter,
+        effectiveEngineState.historicalRecords || [],
+        effectiveStoryTurnCount,
+        effectiveEngineState.diagnostics
       );
 
       let nextEngineState: import('./types').EngineState = {
-        ...engineState,
-        historicalRecords: [...(engineState.historicalRecords || [])],
-        pendingCandidates: [...(engineState.pendingCandidates || [])],
-        validationLogs: [...(engineState.validationLogs || [])],
-        latencyHistory: [...(engineState.latencyHistory || [])],
-        turnTraces: [...(engineState.turnTraces || [])],
-        checkpoints: [...(engineState.checkpoints || [])],
-        saveDietEvents: [...(engineState.saveDietEvents || [])],
-        lastContextSnapshot: contextSnapshot || engineState.lastContextSnapshot,
+        ...effectiveEngineState,
+        historicalRecords: [...(effectiveEngineState.historicalRecords || [])],
+        pendingCandidates: [...(effectiveEngineState.pendingCandidates || [])],
+        validationLogs: [...(effectiveEngineState.validationLogs || [])],
+        latencyHistory: [...(effectiveEngineState.latencyHistory || [])],
+        turnTraces: [...(effectiveEngineState.turnTraces || [])],
+        checkpoints: [...(effectiveEngineState.checkpoints || [])],
+        saveDietEvents: [...(effectiveEngineState.saveDietEvents || [])],
+        lastContextSnapshot: contextSnapshot || effectiveEngineState.lastContextSnapshot,
         lastRawResponse: rawOutputText
       };
 
@@ -675,7 +694,7 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
             candidateForObservation,
             authorizedProposal,
             commitResult.snapshot,
-            storyTurnCount,
+            effectiveStoryTurnCount,
             engine.getHistory()
           );
           (nextEngineState as any).novelHistoryRecords = observationResult.updatedRecords;
@@ -693,10 +712,10 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
 
           const diagnosticLog: ValidationDiagnosticLog = {
             logId: `log-${Date.now()}`,
-            turn: storyTurnCount,
+            turn: effectiveStoryTurnCount,
             timestamp: new Date().toISOString(),
             outcome: 'PASSED',
-            details: `Turn ${storyTurnCount} authorized proposal committed cleanly (${commitResult.committedActionsCount} actions, StateVersion: ${commitResult.stateVersion}).`,
+            details: `Turn ${effectiveStoryTurnCount} authorized proposal committed cleanly (${commitResult.committedActionsCount} actions, StateVersion: ${commitResult.stateVersion}).`,
             rejectedReasons: []
           };
 
@@ -734,7 +753,7 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
             rawMetaBlock: rawMetaBlock || undefined,
             rawResponse: rawOutputText,
             contextSnapshot: contextSnapshot || undefined,
-            turn: storyTurnCount,
+            turn: effectiveStoryTurnCount,
             timestamp: new Date().toISOString()
           };
           setMessages(prev => [...prev, assistantMessage]);
@@ -746,10 +765,10 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
 
           const diagnosticLog: ValidationDiagnosticLog = {
             logId: `log-${Date.now()}`,
-            turn: storyTurnCount,
+            turn: effectiveStoryTurnCount,
             timestamp: new Date().toISOString(),
             outcome: 'REJECTED',
-            details: `Turn ${storyTurnCount} proposal rejected by Sovereign Gate: ${commitResult.rejectedReasons.join('; ')}`,
+            details: `Turn ${effectiveStoryTurnCount} proposal rejected by Sovereign Gate: ${commitResult.rejectedReasons.join('; ')}`,
             rejectedReasons: turnRejections
           };
 
@@ -795,7 +814,7 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
           rawMetaBlock: rawMetaBlock || undefined,
           rawResponse: rawOutputText,
           contextSnapshot: contextSnapshot || undefined,
-          turn: storyTurnCount,
+          turn: effectiveStoryTurnCount,
           timestamp: new Date().toISOString()
         };
         setMessages(prev => [...prev, assistantMessage]);
@@ -803,17 +822,17 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
       }
 
       // Checkpoint Snapshot (Every 100 turns or first turn)
-      if (storyTurnCount === 1 || storyTurnCount % 100 === 0) {
+      if (effectiveStoryTurnCount === 1 || effectiveStoryTurnCount % 100 === 0) {
         const lastCheckpoint = nextEngineState.checkpoints && nextEngineState.checkpoints.length > 0
           ? nextEngineState.checkpoints[nextEngineState.checkpoints.length - 1]
           : null;
 
         const diffSummary = lastCheckpoint
           ? `Changes since Turn ${lastCheckpoint.turn}: +${nextEngineState.historicalRecords.length - lastCheckpoint.historicalRecordCount} records, +${currentWorldInfo.npcs.length - lastCheckpoint.npcCount} NPCs, Chapter: "${lastCheckpoint.chapter}" -> "${currentWorldInfo.chapters?.currentChapter || '서막'}"`
-          : `Initial baseline checkpoint at Turn ${storyTurnCount}`;
+          : `Initial baseline checkpoint at Turn ${effectiveStoryTurnCount}`;
 
         const checkpoint: import('./types').CheckpointSnapshot = {
-          turn: storyTurnCount,
+          turn: effectiveStoryTurnCount,
           timestamp: new Date().toISOString(),
           chapter: currentWorldInfo.chapters?.currentChapter || '서막',
           narrativeTime: currentWorldInfo.currentTime.formattedTime,
@@ -835,10 +854,10 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
       }
 
       // Check for token diet threshold and log event if active
-      if (newMessages.length > 20 && storyTurnCount % 10 === 0) {
+      if (newMessages.length > 20 && effectiveStoryTurnCount % 10 === 0) {
         const dietEvent: import('./types').SaveDietEvent = {
           eventId: `diet-${Date.now()}`,
-          turn: storyTurnCount,
+          turn: effectiveStoryTurnCount,
           timestamp: new Date().toISOString(),
           eventType: 'AUTO_DIET_TRIGGERED',
           version: '3.1.0',
@@ -851,7 +870,7 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
 
       // Record Turn Trace
       const fullTrace: import('./types').TurnTrace = {
-        turn: storyTurnCount,
+        turn: effectiveStoryTurnCount,
         timestamp: new Date().toISOString(),
         playerInput: userPrompt,
         contextSnapshotSnippet: contextSnapshot ? contextSnapshot.slice(0, 300) + '...' : undefined,
