@@ -444,7 +444,6 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
           finalProposal = {
             ...proposal,
             actions: [],
-            rejectedReasons: [...(proposal.rejectedReasons || []), ...integration.errors],
           };
           finalMeaningTree = finalProposal.meaningTree!;
         }
