@@ -119,6 +119,19 @@ export default function App() {
   useEffect(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
+      let parsedForLog: any = null;
+      try {
+        if (saved) parsedForLog = JSON.parse(saved);
+      } catch (e) {}
+      console.log('[STORAGE_HYDRATION_FORENSIC]', JSON.stringify({
+        storageKey: STORAGE_KEY,
+        hasSaved: !!saved,
+        savedRaw: saved,
+        parsedCharacter: parsedForLog?.character ?? null,
+        parsedWorldInfo: parsedForLog?.worldInfo ?? null,
+        parsedStoryTurnCount: parsedForLog?.storyTurnCount ?? null
+      }, null, 2));
+
       if (saved) {
         const parsed: SessionPayload = JSON.parse(saved);
         if (parsed.character && parsed.worldInfo) {
@@ -327,8 +340,22 @@ export default function App() {
 
   // Complete Creation Phase and Launch Campaign
   const handleCompleteCreation = async () => {
+    console.log('[CREATION_STATE_FORENSIC]', JSON.stringify({
+      worldInfo,
+      character,
+      storyTurnCount,
+      gameState
+    }, null, 2));
+
     setGameState('playing');
     setStoryTurnCount(1);
+
+    console.log('[GENESIS_STATE_FORENSIC]', JSON.stringify({
+      worldInfo,
+      character,
+      storyTurnCount,
+      gameState
+    }, null, 2));
 
     // Initialize Sovereign Engine with genesis state
     const genesisEngine = new SovereignEngine(
