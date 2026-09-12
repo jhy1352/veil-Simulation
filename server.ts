@@ -68,6 +68,7 @@ export const ENGINE_SPECIFICATION_REV_3_1 = {
 // ============================================================================
 export { MASTER_SYSTEM_INSTRUCTION } from './src/engine/language/masterPrompt.ts';
 import { MASTER_SYSTEM_INSTRUCTION } from './src/engine/language/masterPrompt.ts';
+import { constructSystemInstructionWithLocale, normalizeNarrativeLocale } from './src/utils/locale.ts';
 
 // Helper for Gemini AI Client
 let aiClient: GoogleGenAI | null = null;
@@ -93,7 +94,10 @@ function getGeminiClient(): GoogleGenAI {
 app.post('/api/chat', async (req, res) => {
   const reqStartTime = Date.now();
   try {
-    const { messages = [], character, worldInfo, customPrompt, userPrompt, storyTurnCount = 1, selectedModel = 'gemini-3.7-flash' } = req.body;
+    const { messages = [], character, worldInfo, customPrompt, userPrompt, storyTurnCount = 1, selectedModel = 'gemini-3.7-flash', narrativeLocale } = req.body;
+    const rawLocaleHeader = req.headers['x-veil-narrative-locale'] as string | undefined;
+    const effectiveNarrativeLocale = normalizeNarrativeLocale(rawLocaleHeader || narrativeLocale || req.body.language);
+    const effectiveSystemInstruction = constructSystemInstructionWithLocale(MASTER_SYSTEM_INSTRUCTION, effectiveNarrativeLocale);
     const effectiveUserPrompt = (userPrompt || customPrompt || '').trim();
     const playerInputId = generateProposalId('input');
 
@@ -249,7 +253,7 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
     // Determine model and thinking configuration
     let targetModel = 'gemini-3.7-flash';
     const config: any = {
-      systemInstruction: MASTER_SYSTEM_INSTRUCTION
+      systemInstruction: effectiveSystemInstruction
     };
 
     if (selectedModel === 'gemini-3.5-flash' || selectedModel === 'gemini-2.5-flash') {
@@ -511,7 +515,7 @@ STRICT INVARIANTS:
         model: targetModel,
         contents: fallbackContents,
         config: {
-          systemInstruction: MASTER_SYSTEM_INSTRUCTION
+          systemInstruction: effectiveSystemInstruction
         }
       });
 
@@ -581,7 +585,7 @@ INSTRUCTIONS:
       model: targetModel,
       contents: phase2Contents,
       config: {
-        systemInstruction: MASTER_SYSTEM_INSTRUCTION
+        systemInstruction: effectiveSystemInstruction
       }
     });
 

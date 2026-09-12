@@ -566,6 +566,7 @@ export interface SessionPayload {
   character: Character;
   messages: (StoryMessage | Message)[];
   language?: Language;
+  narrativeLocale?: string;
   selectedModel?: GeminiModelType;
   storyTurnCount?: number;
   createdAt?: string;

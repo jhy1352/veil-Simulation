@@ -28,6 +28,11 @@ import { projectPassports } from './engine/index/passport';
 import { StateTransitionProposal, TransitionAction } from './engine/types';
 import { actionToMeaningNode, adaptMeaningTreeToProposal } from './engine/language';
 import { TurnLatencyProfiler } from './utils/latency';
+import {
+  getStoredNarrativeLocale,
+  setStoredNarrativeLocale,
+  getEffectiveNarrativeLocale
+} from './utils/locale';
 import { CreationPhase } from './components/CreationPhase';
 import { GameInterface } from './components/GameInterface';
 
@@ -44,6 +49,7 @@ export default function App() {
   const [storyTurnCount, setStoryTurnCount] = useState<number>(1);
   const [waitingForRoll, setWaitingForRoll] = useState<RollEvent | null>(null);
   const [language, setLanguage] = useState<Language>('ko');
+  const [narrativeLocale, setNarrativeLocale] = useState<string>(() => getStoredNarrativeLocale());
   const [selectedModel, setSelectedModel] = useState<GeminiModelType>('gemini-3.7-flash');
   const [fontSize, setFontSize] = useState<FontSizeLevel>(() => {
     try {
@@ -166,6 +172,10 @@ export default function App() {
           if (parsed.selectedModel) {
             setSelectedModel(parsed.selectedModel);
           }
+          if (parsed.narrativeLocale) {
+            setNarrativeLocale(parsed.narrativeLocale);
+            setStoredNarrativeLocale(parsed.narrativeLocale);
+          }
         }
       }
     } catch (e: any) {
@@ -200,6 +210,8 @@ export default function App() {
           engineState,
           storyTurnCount,
           selectedModel,
+          language,
+          narrativeLocale,
           genesisSnapshot: sovereignEngineRef.current ? sovereignEngineRef.current.getGenesisSnapshot() : undefined,
           createdAt: new Date().toISOString(),
           updatedAt: new Date().toISOString()
@@ -209,7 +221,7 @@ export default function App() {
         console.warn('Failed to persist session to localStorage:', e);
       }
     }
-  }, [character, worldInfo, messages, engineState, storyTurnCount, gameState, selectedModel]);
+  }, [character, worldInfo, messages, engineState, storyTurnCount, gameState, selectedModel, language, narrativeLocale]);
 
   // Partial Update Handlers routed through Sovereign Gate during active gameplay
   const handleUpdateCharacter = (partial: Partial<Character>) => {
@@ -414,6 +426,11 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
         const novelRecs = loadedPayload.engineState?.novelHistoryRecords || [];
         const derivedPassports = projectPassports(snap, hist, novelRecs);
 
+        if (loadedPayload.narrativeLocale) {
+          setNarrativeLocale(loadedPayload.narrativeLocale);
+          setStoredNarrativeLocale(loadedPayload.narrativeLocale);
+        }
+
         setCharacter(snap.character);
         setWorldInfo(snap.worldInfo);
         setMessages(loadedPayload.messages || []);
@@ -491,9 +508,13 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
       });
 
       // Call Backend API Route
+      const effectiveLoc = getEffectiveNarrativeLocale(narrativeLocale);
       const response = await fetch('/api/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'X-VEIL-Narrative-Locale': effectiveLoc
+        },
         body: JSON.stringify({
           messages: newMessages.map(m => ({ role: m.role, content: m.content })),
           worldInfo,
@@ -501,7 +522,8 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
           engineState,
           storyTurnCount,
           userPrompt,
-          selectedModel
+          selectedModel,
+          narrativeLocale: effectiveLoc
         })
       });
 
@@ -809,7 +831,7 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
     } finally {
       setIsGenerating(false);
     }
-  }, [character, worldInfo, engineState, messages, storyTurnCount, isGenerating, selectedModel]);
+  }, [character, worldInfo, engineState, messages, storyTurnCount, isGenerating, selectedModel, narrativeLocale]);
 
   return (
     <div className="min-h-screen bg-stone-950 text-stone-100 font-sans selection:bg-amber-500/30 selection:text-amber-200">
@@ -833,6 +855,9 @@ ${character.physicalDefect ? `신체 결손/낭만 돌파구: ${character.physic
           storyTurnCount={storyTurnCount}
           waitingForRoll={waitingForRoll}
           language={language}
+          onLanguageChange={setLanguage}
+          narrativeLocale={narrativeLocale}
+          onNarrativeLocaleChange={setNarrativeLocale}
           selectedModel={selectedModel}
           onSelectModel={setSelectedModel}
           fontSize={fontSize}

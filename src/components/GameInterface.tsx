@@ -23,6 +23,7 @@ import { EngineDiagnosticsModal } from './EngineDiagnosticsModal';
 import { ResetConfirmModal } from './ResetConfirmModal';
 import { ModelSelector } from './ModelSelector';
 import { FontSizeControl } from './FontSizeControl';
+import { LocaleSelector } from './LocaleSelector';
 import { MetadataAccordion } from './MetadataAccordion';
 import {
   Send,
@@ -57,6 +58,9 @@ interface GameInterfaceProps {
   storyTurnCount: number;
   waitingForRoll: RollEvent | null;
   language: Language;
+  onLanguageChange?: (newLang: Language) => void;
+  narrativeLocale?: string;
+  onNarrativeLocaleChange?: (newLocale: string) => void;
   selectedModel: GeminiModelType;
   onSelectModel: (model: GeminiModelType) => void;
   fontSize?: FontSizeLevel;
@@ -79,6 +83,9 @@ export function GameInterface({
   storyTurnCount,
   waitingForRoll,
   language,
+  onLanguageChange,
+  narrativeLocale = 'system',
+  onNarrativeLocaleChange,
   selectedModel,
   onSelectModel,
   fontSize = 'base',
@@ -351,6 +358,16 @@ export function GameInterface({
             selectedModel={selectedModel}
             onSelectModel={onSelectModel}
           />
+
+          {/* Multilingual Narrative Locale & UI Language Selector */}
+          {onNarrativeLocaleChange && onLanguageChange && (
+            <LocaleSelector
+              language={language}
+              onLanguageChange={onLanguageChange}
+              narrativeLocale={narrativeLocale}
+              onNarrativeLocaleChange={onNarrativeLocaleChange}
+            />
+          )}
 
           {/* Diagnostics Button */}
           <button
