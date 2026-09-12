@@ -46,7 +46,8 @@ import {
   VolumeX,
   Swords,
   ScrollText,
-  Zap
+  Zap,
+  Settings
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -108,6 +109,12 @@ export function GameInterface({
   const [isResetConfirmOpen, setIsResetConfirmOpen] = useState(false);
   const [copiedMeta, setCopiedMeta] = useState(false);
   const [isAudioMuted, setIsAudioMuted] = useState(soundEngine.isAudioMuted());
+  const [isUtilDropdownOpen, setIsUtilDropdownOpen] = useState(false);
+
+  const lastAssistantMsgId = useMemo(() => {
+    const last = [...messages].reverse().find(m => m.role === 'assistant');
+    return last ? last.id : null;
+  }, [messages]);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -121,12 +128,26 @@ export function GameInterface({
 
     const lines = lastAssistantMsg.content.split('\n');
     const choices: string[] = [];
-    const choiceRegex = /^\s*(?:[1-9]\.|\([1-9]\)|\[[1-9]\]|[①-⑩])\s+(.+)$/;
+    const seen = new Set<string>();
+    // Precise match: numbering + 2 to 60 characters
+    const choiceRegex = /^\s*(?:[1-9]\.|\([1-9]\)|\[[1-9]\]|[①-⑩])\s+([^.!?\n]{2,60}[.!?]?)$/;
+    const looseRegex = /^\s*(?:[1-9]\.|\([1-9]\)|\[[1-9]\]|[①-⑩])\s+(.+)$/;
 
     for (const line of lines) {
-      const match = line.match(choiceRegex);
-      if (match && match[1] && match[1].trim().length > 0) {
-        choices.push(match[1].trim());
+      let match = line.match(choiceRegex);
+      if (!match) {
+        const looseMatch = line.match(looseRegex);
+        if (looseMatch && looseMatch[1] && looseMatch[1].trim().length > 0 && looseMatch[1].trim().length < 65) {
+          match = looseMatch;
+        }
+      }
+
+      if (match && match[1]) {
+        const text = match[1].trim();
+        if (text.length > 0 && !seen.has(text)) {
+          choices.push(text);
+          seen.add(text);
+        }
       }
     }
     return choices;
@@ -223,7 +244,7 @@ export function GameInterface({
         worldName: worldInfo.worldName,
         currentChapter: worldInfo.chapters?.currentChapter,
         upcomingChapters: worldInfo.chapters?.upcomingChapters,
-        time: worldInfo.currentTime.formattedTime,
+        time: worldInfo.currentTime?.formattedTime || '',
         activeSeedsCount: worldInfo.seeds.filter(s => s.status === 'active').length,
         npcsCount: worldInfo.npcs.length,
         dcHistorySummary: worldInfo.dcHistory.slice(-5)
@@ -289,7 +310,7 @@ export function GameInterface({
                 {worldInfo.worldName || '세계'}
               </h1>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-stone-800 text-stone-300 font-mono">
-                {worldInfo.currentTime.formattedTime}
+                {worldInfo.currentTime?.formattedTime || ''}
               </span>
               <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-950 border border-amber-800/60 text-amber-300 font-mono">
                 턴 {storyTurnCount || 1}
@@ -331,28 +352,6 @@ export function GameInterface({
 
         {/* Right: Modal Triggers & Utilities */}
         <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap sm:flex-nowrap">
-          {/* Audio Mute/Unmute Toggle */}
-          <button
-            id="toggle-audio-mute-btn"
-            onClick={handleToggleMute}
-            className={`p-2 rounded-xl border transition-colors cursor-pointer flex items-center gap-1 text-xs ${
-              isAudioMuted
-                ? 'bg-stone-900 border-stone-800 text-stone-500 hover:text-stone-400'
-                : 'bg-amber-950/40 border-amber-800/50 text-amber-400 hover:text-amber-300'
-            }`}
-            title={isAudioMuted ? '음향 활성화' : '음향 음소거'}
-          >
-            {isAudioMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-          </button>
-
-          {/* Font Size Control for Mobile & Desktop */}
-          {onChangeFontSize && (
-            <FontSizeControl
-              fontSize={fontSize}
-              onChangeFontSize={onChangeFontSize}
-            />
-          )}
-
           {/* AI Model Selector (Dev & Test) */}
           <ModelSelector
             selectedModel={selectedModel}
@@ -369,65 +368,140 @@ export function GameInterface({
             />
           )}
 
-          {/* Diagnostics Button */}
-          <button
-            id="open-diagnostics-btn"
-            onClick={() => setIsDiagnosticsModalOpen(true)}
-            className="p-2 rounded-xl bg-stone-950/70 hover:bg-stone-800 border border-amber-900/40 text-amber-400 hover:text-amber-300 transition-colors cursor-pointer flex items-center gap-1 text-xs"
-            title="엔진 진단 및 역사 기록"
-          >
-            <Activity className="w-4 h-4" />
-            <span className="hidden md:inline font-mono">엔진 감사</span>
-          </button>
-
-          {/* World Lore Button */}
+          {/* World Lore Button (Primary) */}
           <button
             id="open-world-info-btn"
             onClick={() => setIsWorldModalOpen(true)}
             className="p-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-200 transition-colors cursor-pointer flex items-center gap-1 text-xs"
+            title={t.game.worldInfo}
           >
-            <Globe className="w-4 h-4" />
+            <Globe className="w-4 h-4 text-sky-400" />
             <span className="hidden sm:inline">{t.game.worldInfo}</span>
           </button>
 
-          {/* Character Sheet Button */}
+          {/* Character Sheet Button (Primary) */}
           <button
             id="open-character-sheet-btn"
             onClick={() => setIsCharModalOpen(true)}
             className="p-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-200 transition-colors cursor-pointer flex items-center gap-1 text-xs"
+            title={t.game.characterSheet}
           >
-            <User className="w-4 h-4" />
+            <User className="w-4 h-4 text-emerald-400" />
             <span className="hidden sm:inline">{t.game.characterSheet}</span>
           </button>
 
-          {/* Dice Roller Button */}
+          {/* Dice Roller Button (Primary) */}
           <button
             id="open-dice-roller-btn"
             onClick={() => setIsDiceModalOpen(true)}
-            className="p-2 rounded-xl bg-amber-600/90 hover:bg-amber-500 text-stone-950 font-bold transition-colors cursor-pointer flex items-center gap-1 text-xs shadow-md shadow-amber-950/40"
+            className="p-2 rounded-xl bg-amber-600/90 hover:bg-amber-500 text-stone-950 font-bold transition-colors cursor-pointer flex items-center gap-1 text-xs shadow-md shadow-amber-950/40 animate-pulse"
+            title={t.game.diceRoller}
           >
             <Dices className="w-4 h-4" />
             <span className="hidden sm:inline">{t.game.diceRoller}</span>
           </button>
 
-          {/* Cloud Sync Button */}
-          <button
-            id="open-cloud-sync-btn"
-            onClick={() => setIsCloudModalOpen(true)}
-            className="p-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-200 transition-colors cursor-pointer flex items-center gap-1 text-xs"
-          >
-            <Cloud className="w-4 h-4" />
-          </button>
+          {/* System Settings & Utilities Dropdown Menu */}
+          <div className="relative">
+            <button
+              id="system-settings-dropdown-btn"
+              onClick={() => setIsUtilDropdownOpen(!isUtilDropdownOpen)}
+              className={`p-2 rounded-xl border transition-all cursor-pointer flex items-center gap-1 text-xs ${
+                isUtilDropdownOpen
+                  ? 'bg-amber-950/50 border-amber-500/70 text-amber-300'
+                  : 'bg-stone-800 hover:bg-stone-700 border-stone-700 text-stone-300'
+              }`}
+              title="시스템 환경설정"
+            >
+              <Settings className={`w-4 h-4 ${isUtilDropdownOpen ? 'rotate-45' : ''} transition-transform duration-200`} />
+            </button>
 
-          {/* Reset Session Button */}
-          <button
-            id="reset-session-btn"
-            onClick={() => setIsResetConfirmOpen(true)}
-            className="p-2 rounded-xl bg-stone-800 hover:bg-rose-900/60 text-stone-400 hover:text-rose-200 transition-colors cursor-pointer text-xs"
-            title={t.game.resetSession}
-          >
-            <RotateCcw className="w-4 h-4" />
-          </button>
+            <AnimatePresence>
+              {isUtilDropdownOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -4, scale: 0.96 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 mt-2 w-56 rounded-2xl bg-stone-900 border border-stone-700 shadow-2xl z-50 p-2 space-y-1.5 backdrop-blur-md"
+                >
+                  <div className="px-2.5 py-1.5 border-b border-stone-800 text-[10px] font-bold text-stone-400 uppercase tracking-wider">
+                    시스템 환경 설정
+                  </div>
+
+                  {/* Audio Toggle Inside Menu */}
+                  <button
+                    onClick={() => {
+                      handleToggleMute();
+                      setIsUtilDropdownOpen(false);
+                    }}
+                    className="w-full text-left p-2 rounded-xl hover:bg-stone-800 transition-colors cursor-pointer flex items-center gap-2.5 text-xs text-stone-300"
+                  >
+                    {isAudioMuted ? (
+                      <>
+                        <VolumeX className="w-4 h-4 text-stone-500" />
+                        <span>효과음 비활성화됨</span>
+                      </>
+                    ) : (
+                      <>
+                        <Volume2 className="w-4 h-4 text-amber-400" />
+                        <span>효과음 활성화됨</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Font Size Inside Menu */}
+                  {onChangeFontSize && (
+                    <div className="p-2 rounded-xl hover:bg-stone-800/40 space-y-1">
+                      <div className="text-[10px] text-stone-500 font-bold">글자 크기 조절</div>
+                      <FontSizeControl
+                        fontSize={fontSize}
+                        onChangeFontSize={onChangeFontSize}
+                      />
+                    </div>
+                  )}
+
+                  {/* Engine Diagnostics Inside Menu */}
+                  <button
+                    onClick={() => {
+                      setIsDiagnosticsModalOpen(true);
+                      setIsUtilDropdownOpen(false);
+                    }}
+                    className="w-full text-left p-2 rounded-xl hover:bg-stone-800 transition-colors cursor-pointer flex items-center gap-2.5 text-xs text-stone-300"
+                  >
+                    <Activity className="w-4 h-4 text-emerald-400" />
+                    <span>실시간 엔진 감사</span>
+                  </button>
+
+                  {/* Cloud Sync Inside Menu */}
+                  <button
+                    onClick={() => {
+                      setIsCloudModalOpen(true);
+                      setIsUtilDropdownOpen(false);
+                    }}
+                    className="w-full text-left p-2 rounded-xl hover:bg-stone-800 transition-colors cursor-pointer flex items-center gap-2.5 text-xs text-stone-300"
+                  >
+                    <Cloud className="w-4 h-4 text-sky-400" />
+                    <span>클라우드 세션 보존</span>
+                  </button>
+
+                  {/* Reset Session Inside Menu (Danger Zone) */}
+                  <div className="border-t border-stone-800/80 my-1 pt-1">
+                    <button
+                      onClick={() => {
+                        setIsResetConfirmOpen(true);
+                        setIsUtilDropdownOpen(false);
+                      }}
+                      className="w-full text-left p-2 rounded-xl hover:bg-rose-950/40 hover:text-rose-300 text-rose-400 transition-colors cursor-pointer flex items-center gap-2.5 text-xs"
+                    >
+                      <RotateCcw className="w-4 h-4" />
+                      <span>세션 완전히 초기화</span>
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
       </header>
 
@@ -469,6 +543,31 @@ export function GameInterface({
                 <div className={`${proseFontSizeClass} font-serif whitespace-pre-wrap text-stone-200`}>
                   {msg.cleanText || msg.content}
                 </div>
+
+                {/* Inline Choice Chips (rendering only on the latest active GM message) */}
+                {msg.role === 'assistant' && msg.id === lastAssistantMsgId && !isGenerating && detectedChoices.length > 0 && (
+                  <div className="pt-3 pb-1 border-t border-stone-800/40 space-y-2">
+                    <div className="text-[10px] font-bold text-amber-500/80 flex items-center gap-1.5 px-0.5 font-sans tracking-wide">
+                      <Zap className="w-3 h-3 text-amber-400" />
+                      <span>추천 행동 선택지 (입력창에 반영):</span>
+                    </div>
+                    <div className="flex flex-wrap gap-1.5">
+                      {detectedChoices.map((choice, cIdx) => (
+                        <button
+                          key={cIdx}
+                          type="button"
+                          onClick={() => handleQuickChoiceClick(choice)}
+                          className="px-3 py-1.5 rounded-xl bg-stone-950 hover:bg-amber-950/20 border border-stone-800 hover:border-amber-500/40 text-left text-xs text-stone-300 hover:text-amber-200 transition-all flex items-center gap-2 cursor-pointer shadow-sm group active:scale-[0.98]"
+                        >
+                          <span className="w-4 h-4 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center text-[9px] font-bold shrink-0 group-hover:bg-amber-500 group-hover:text-black transition-colors font-sans">
+                            {cIdx + 1}
+                          </span>
+                          <span className="font-serif leading-none truncate max-w-[240px] sm:max-w-md">{choice}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
 
                 {/* Structured Metadata Badges & Developer Copy Tools if AI GM message */}
                 {msg.role === 'assistant' && (
@@ -577,12 +676,18 @@ export function GameInterface({
             <div className="flex items-center gap-2 font-bold text-red-400">
               <AlertTriangle className="w-4 h-4" />
               <span>
-                {selectedModel === 'gemini-3.7-flash'
+                {selectedModel === 'gemini-3.8-flash'
+                  ? 'Gemini 3.8 Flash'
+                  : selectedModel === 'gemini-3.7-flash'
                   ? 'Gemini 3.7 Flash'
                   : selectedModel === 'gemini-3.6-flash'
                   ? 'Gemini 3.6 Flash'
-                  : selectedModel === 'gemini-2.5-flash'
-                  ? 'Gemini 2.5 Flash'
+                  : selectedModel === 'gemini-3.5-flash'
+                  ? 'Gemini 3.5 Flash'
+                  : selectedModel === 'gemini-3.5-flash-lite'
+                  ? 'Gemini 3.5 Flash Lite'
+                  : selectedModel === 'gemini-3.1-flash-lite'
+                  ? 'Gemini 3.1 Flash Lite'
                   : selectedModel}{' '}
                 API 호출 에러
               </span>
@@ -591,6 +696,8 @@ export function GameInterface({
           </div>
         )}
 
+        {/* Safe Bottom Padding Spacer to prevent input overlay on mobile/desktop */}
+        <div className="h-28 sm:h-36 shrink-0" />
         <div ref={messagesEndRef} />
       </main>
 
@@ -616,31 +723,6 @@ export function GameInterface({
 
       {/* Bottom Input Area & Action Bar */}
       <footer className="space-y-2 shrink-0">
-        {/* Interactive Choice Chips (if detected from last GM narrative) */}
-        {!isGenerating && detectedChoices.length > 0 && (
-          <div className="space-y-1.5 pt-1">
-            <div className="text-[11px] font-bold text-amber-400 flex items-center gap-1.5 px-1">
-              <Zap className="w-3.5 h-3.5" />
-              <span>추천 행동 선택지 (클릭 시 입력창에 반영):</span>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-1.5 max-h-32 overflow-y-auto pr-1">
-              {detectedChoices.map((choice, cIdx) => (
-                <button
-                  key={cIdx}
-                  type="button"
-                  onClick={() => handleQuickChoiceClick(choice)}
-                  className="p-2 bg-stone-900/90 hover:bg-amber-950/40 border border-stone-800 hover:border-amber-500/60 rounded-xl text-left text-xs text-stone-200 hover:text-amber-200 transition-all flex items-start gap-2 shadow group cursor-pointer"
-                >
-                  <span className="w-4 h-4 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5 group-hover:bg-amber-500 group-hover:text-black transition-colors">
-                    {cIdx + 1}
-                  </span>
-                  <span className="line-clamp-2 leading-snug">{choice}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
         <div className="relative flex items-center bg-stone-900 border border-stone-800 rounded-2xl p-2 shadow-xl focus-within:border-amber-500/70 transition-colors">
           <textarea
             ref={inputRef}

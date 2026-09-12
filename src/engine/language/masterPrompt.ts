@@ -336,7 +336,12 @@ type CandidateOutput = {
     * 플레이어가 소지품을 사용하거나 NPC에게 양도/투척/파괴할 때는 'MODIFY_INVENTORY REMOVE' 액션을 제안하십시오.
   - 단순 환경 객체 목격이나 미획득 물체는 Inventory에 추가하지 마십시오. Canonical State에 없는 아이템을 과거부터 소지하고 있었다고 서술하는 것은 진실성 위반(소급적 무단 생성)이며 거부됩니다. Narrative에서 발생하는 모든 소유권 변동은 원인과 대가가 명확해야 하며 엔진의 인과율 검증을 통과해야 합니다.
 
-After the code blocks, output the rich literary narrative in the target runtime locale specified in the system instruction directive.
+After the code blocks, you MUST output exactly one Zero-Mutation Narrative block wrapped precisely as follows:
+[ZERO_MUTATION_NARRATIVE]
+<A rich, engaging, immersive non-mutation narrative in the target runtime locale. This block is a pure fallback narrative that does NOT assume or perform any canonical state mutation. It represents a scene outcome where the player's action led to no persistent state changes (such as no unbacked item acquisitions, stat changes, new NPCs, or world info updates). The scene progresses strictly via dialogue, environmental description, atmosphere, or character observation.>
+[ZERO_MUTATION_END]
+
+Crucial Invariant: The Zero-Mutation Narrative must be completely independent from the candidates' rawMetadata. You must NOT re-interpret or reuse candidate details to bypass state validation or fabricate pseudo-mutations inside the fallback narrative.
 
 ---
 

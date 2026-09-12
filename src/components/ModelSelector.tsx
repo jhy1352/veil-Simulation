@@ -21,29 +21,53 @@ interface ModelOption {
 
 const MODEL_OPTIONS: ModelOption[] = [
   {
+    id: 'gemini-3.8-flash',
+    name: 'Gemini 3.8 Flash',
+    shortName: '3.8 Flash',
+    badge: '최신 플래그십',
+    badgeColor: 'bg-indigo-950 border-indigo-700 text-indigo-300',
+    description: '최상급 추론 및 풍부한 세계 묘사 사양 (Thinking Budget 4096)'
+  },
+  {
     id: 'gemini-3.7-flash',
     name: 'Gemini 3.7 Flash',
     shortName: '3.7 Flash',
     badge: '공식 기본',
     badgeColor: 'bg-emerald-950 border-emerald-700 text-emerald-300',
-    description: 'TRPG 3.1 헌법 공식 엔진 사양 (Thinking Budget 4096)',
+    description: 'TRPG 3.1 헌법 공식 엔진 표준 사양 (Thinking Budget 4096)',
     isOfficial: true
   },
   {
     id: 'gemini-3.6-flash',
     name: 'Gemini 3.6 Flash',
     shortName: '3.6 Flash',
-    badge: '개발 테스트',
+    badge: '빠른 전개',
     badgeColor: 'bg-blue-950 border-blue-700 text-blue-300',
-    description: '서사 생성 속도 및 회귀 테스트용 개발 모델'
+    description: '서사 생성 속도가 매우 빠른 고성능 하이퍼 테스트 모델'
   },
   {
-    id: 'gemini-2.5-flash',
-    name: 'Gemini 2.5 Flash',
-    shortName: '2.5 Flash',
-    badge: '레거시/실험',
+    id: 'gemini-3.5-flash',
+    name: 'Gemini 3.5 Flash',
+    shortName: '3.5 Flash',
+    badge: '안정적 균형',
     badgeColor: 'bg-stone-800 border-stone-600 text-stone-300',
-    description: '구버전 호환 검증용 (업스트림 API 상태에 따라 변동 가능)'
+    description: '인과 검증 및 상태 추론의 밸런스가 잡힌 표준 3.5 모델'
+  },
+  {
+    id: 'gemini-3.5-flash-lite',
+    name: 'Gemini 3.5 Flash Lite',
+    shortName: '3.5 Lite',
+    badge: '경량 속도',
+    badgeColor: 'bg-orange-950 border-orange-800 text-orange-300',
+    description: '레이턴시 최소화와 가벼운 세션 묘사에 특화된 최적화 모델'
+  },
+  {
+    id: 'gemini-3.1-flash-lite',
+    name: 'Gemini 3.1 Flash Lite',
+    shortName: '3.1 Lite',
+    badge: '초경량',
+    badgeColor: 'bg-pink-950/80 border-pink-800 text-pink-300',
+    description: '최고 속도 응답 및 저용량 컨텍스트 처리 특화 모델'
   }
 ];
 
@@ -100,7 +124,7 @@ export function ModelSelector({ selectedModel, onSelectModel, variant = 'compact
                 <span>AI 모델 선택 (개발 및 테스트용)</span>
               </div>
               <p className="text-[10px] text-stone-400 mt-0.5 leading-tight">
-                공식 엔진 사양은 3.7 Flash(Budget 4096)이며, 3.6/2.5는 개발 테스트 목적으로 전환할 수 있습니다.
+                공식 엔진 사양은 3.7 Flash(Budget 4096)이며, 다양한 3.x Flash 및 Lite 모델로 실시간 전환이 가능합니다.
               </p>
             </div>
 

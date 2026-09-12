@@ -251,25 +251,28 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
     const t2_contextAssemblyComplete = Date.now();
 
     // Determine model and thinking configuration
+    const allowedModels = new Set([
+      'gemini-3.1-flash-lite',
+      'gemini-3.5-flash-lite',
+      'gemini-3.5-flash',
+      'gemini-3.6-flash',
+      'gemini-3.7-flash',
+      'gemini-3.8-flash'
+    ]);
+
     let targetModel = 'gemini-3.7-flash';
+    if (selectedModel && allowedModels.has(selectedModel)) {
+      targetModel = selectedModel;
+    }
+
     const config: any = {
       systemInstruction: effectiveSystemInstruction
     };
 
-    if (selectedModel === 'gemini-3.5-flash' || selectedModel === 'gemini-2.5-flash') {
-      targetModel = selectedModel;
-      // Gemini 3.5 / 2.5 Flash execution
-    } else if (selectedModel === 'gemini-3.6-flash') {
-      targetModel = 'gemini-3.6-flash';
-      // Gemini 3.6 Flash uses native dynamic thinking by default
-    } else {
-      // Default: Gemini 3.5 Flash or Gemini 3.7 Flash
-      targetModel = selectedModel || 'gemini-3.5-flash';
-      if (targetModel === 'gemini-3.7-flash') {
-        config.thinkingConfig = {
-          thinkingBudget: 4096
-        };
-      }
+    if (targetModel === 'gemini-3.7-flash' || targetModel === 'gemini-3.8-flash') {
+      config.thinkingConfig = {
+        thinkingBudget: 4096
+      };
     }
 
     const t3_geminiRequestStart = Date.now();
@@ -300,18 +303,33 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
     });
 
     const rawPhase1Response = response.text || '';
+
+    // Extract Zero-Mutation Narrative
+    let zeroMutationNarrative = '';
+    const zeroMatch = rawPhase1Response.match(/\[ZERO_MUTATION_NARRATIVE\]([\s\S]*?)\[ZERO_MUTATION_END\]/i);
+    if (zeroMatch) {
+      zeroMutationNarrative = zeroMatch[1].trim();
+    } else {
+      let cleaned = rawPhase1Response.replace(/\[CANDIDATES_BLOCK\][\s\S]*?\[CANDIDATES_END\]/gi, '');
+      cleaned = cleaned.replace(/\[ZERO_MUTATION_NARRATIVE\]/gi, '');
+      cleaned = cleaned.replace(/\[ZERO_MUTATION_END\]/gi, '');
+      cleaned = cleaned.replace(/```json[\s\S]*?```/gi, '');
+      zeroMutationNarrative = cleaned.trim();
+    }
+
     const rawCandidates = parseCandidatesBlock(rawPhase1Response);
 
     // VEIL Enforcement: Check if candidates block is present
     if (!rawCandidates) {
-      // Non-mutation or missing candidates block: return response directly
-      const outputCharCount = rawPhase1Response.length;
+      // Non-mutation or missing candidates block: return zero-mutation narrative safely
+      const outputCharCount = zeroMutationNarrative.length;
       const usageMetadata = (response as any).usageMetadata;
 
       return res.json({
         success: true,
-        text: rawPhase1Response,
-        rawResponse: rawPhase1Response,
+        text: zeroMutationNarrative,
+        rawResponse: zeroMutationNarrative,
+        isFallbackNonMutation: true,
         contextSnapshot: initialContextPrompt,
         actualModelVersion: response.modelVersion,
         requestedModel: targetModel,
@@ -344,13 +362,13 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
     // Fail-Closed: If 0 candidates passed gate, return non-mutation narrative safely
     if (candidates.length === 0) {
       console.warn('[VEIL Candidate Recovery Gate] All candidates quarantined. Failing closed to non-mutation.');
-      const outputCharCount = rawPhase1Response.length;
+      const outputCharCount = zeroMutationNarrative.length;
       const usageMetadata = (response as any).usageMetadata;
 
       return res.json({
         success: true,
-        text: rawPhase1Response,
-        rawResponse: rawPhase1Response,
+        text: zeroMutationNarrative,
+        rawResponse: zeroMutationNarrative,
         isFallbackNonMutation: true,
         quarantinedCount: gateResult.quarantinedCount,
         contextSnapshot: initialContextPrompt,
@@ -376,9 +394,25 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
 
     // VEIL Constraint: 1 to 5 candidate packets (ceiling of 5)
     if (candidates.length < 1 || candidates.length > 5) {
-      return res.status(422).json({
-        error: `[VEIL_CANDIDATE_VIOLATION] LLM #1 generated ${candidates.length} valid candidates, but VEIL strictly requires between 1 and 5 candidates (ceiling of 5).`,
-        rawResponse: rawPhase1Response
+      console.warn(`[VEIL Candidate Recovery Gate] Invalid candidate count: ${candidates.length}. Failing closed to non-mutation.`);
+      return res.json({
+        success: true,
+        text: zeroMutationNarrative,
+        rawResponse: zeroMutationNarrative,
+        isFallbackNonMutation: true,
+        contextSnapshot: initialContextPrompt,
+        actualModelVersion: response.modelVersion,
+        requestedModel: targetModel,
+        serverTimings: {
+          t1_requestStart,
+          t2_contextAssemblyComplete,
+          t3_geminiRequestStart,
+          t4_geminiResponseReceived,
+          contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
+          geminiGenerationMs: t4_geminiResponseReceived - t3_geminiRequestStart,
+          inputCharCount,
+          outputCharCount: zeroMutationNarrative.length
+        }
       });
     }
 
@@ -448,8 +482,8 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
           finalProposal = {
             ...proposal,
             actions: [],
-            rejectedReasons: [...(proposal.rejectedReasons || []), ...integration.errors],
-          };
+            rejectedReasons: [...((proposal as any).rejectedReasons || []), ...integration.errors],
+          } as any;
           finalMeaningTree = finalProposal.meaningTree!;
         }
       }
@@ -493,40 +527,14 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
 
     // Requirement 6: ALL REJECT fallback -> NO_CANONICAL_MUTATION with clean literary fallback
     if (allowedCandidates.length === 0) {
-      console.log('[VEIL Pre-Authorization Gate] All candidates REJECTED. Executing non-mutation literary fallback...');
-      const fallbackPrompt = `[SOVEREIGN VEIL PIPELINE - NON-MUTATION FALLBACK]
-All proposed state mutations for this turn were rejected by the Sovereign Engine Pre-Authorization Gate due to causality or world constraints.
-You MUST write a rich, engaging, immersive non-mutation narrative for this scene.
-
-STRICT INVARIANTS:
-1. Do NOT propose or assert any persistent state mutations (no unbacked item acquisitions, stat changes, or permanent modifications).
-2. Do NOT mention engine mechanics, system codes, rejections, or rules in the narrative prose.
-3. Write standard literary narrative advancing the dialogue, sensory details, and character interaction without canonical state mutations.`;
-
-      const fallbackContents = [
-        ...contents,
-        {
-          role: 'user',
-          parts: [{ text: fallbackPrompt }]
-        }
-      ];
-
-      const fallbackResponse = await ai.models.generateContent({
-        model: targetModel,
-        contents: fallbackContents,
-        config: {
-          systemInstruction: effectiveSystemInstruction
-        }
-      });
-
-      const rawFallbackResponse = fallbackResponse.text || '';
-      const outputCharCount = rawFallbackResponse.length;
-      const usageMetadata = (fallbackResponse as any).usageMetadata;
+      console.log('[VEIL Pre-Authorization Gate] All candidates REJECTED. Returning pre-generated Zero-Mutation Narrative...');
+      const outputCharCount = zeroMutationNarrative.length;
+      const usageMetadata = (response as any).usageMetadata;
 
       return res.json({
         success: true,
-        text: rawFallbackResponse,
-        rawResponse: rawFallbackResponse,
+        text: zeroMutationNarrative,
+        rawResponse: zeroMutationNarrative,
         isFallbackNonMutation: true,
         selectedCandidateId: null,
         authorizedCandidate: null,
@@ -538,7 +546,7 @@ STRICT INVARIANTS:
           rejected: candidates.length
         },
         contextSnapshot: initialContextPrompt,
-        actualModelVersion: fallbackResponse.modelVersion,
+        actualModelVersion: response.modelVersion,
         requestedModel: targetModel,
         serverTimings: {
           t1_requestStart,
@@ -616,8 +624,7 @@ INSTRUCTIONS:
     } else {
       // FAIL-CLOSED: Missing / UNKNOWN / REJECTED ID or selection parsing failure -> NO mutation metadata issued.
       console.warn(`[VEIL Phase 2] selectedCandidateId '${selectedId}' not found in PreAuth ALLOW list (Allowed IDs: [${allowedCandidates.map(c => c.candidateId).join(', ')}]). Failing closed to non-mutation.`);
-      const cleanNarrative = rawPhase2Response.replace(/\{"selectedCandidateId"\s*:\s*\d+\}/i, '').trim();
-      finalResponseText = cleanNarrative;
+      finalResponseText = zeroMutationNarrative;
     }
 
     const outputCharCount = finalResponseText.length;
