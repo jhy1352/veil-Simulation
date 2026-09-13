@@ -1,54 +1,54 @@
 {
-  "runId": "run_2026-09-13T01-58-08-391Z_ejddqg",
+  "runId": "run_2026-09-13T02-17-39-698Z_ws07fa",
   "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
   "turn": 1,
-  "timestamp": "2026-09-13T01:58:08.391Z",
-  "gitCommit": "4c341f1c869862e15d6c72319d1784e9a8b71830",
+  "timestamp": "2026-09-13T02:17:39.699Z",
+  "gitCommit": "906527db0463721b69cee97e51444441e92dd80b",
   "playerInput": {
-    "rawInput": "시작"
+    "rawInput": "[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 시이나 렌 (나이: 18, 성별: 남성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
   },
   "modelRuntime": {
     "requestedModel": "gemini-3.5-flash",
     "actualModelVersion": "gemini-3.5-flash",
-    "responseId": "EwOmarBb-rfV7w-W_bShBg",
+    "responseId": "rQemap28PPDJ2roPyveH0Ao",
     "serverTimings": {
-      "t1_requestStart": 1789264658663,
-      "t2_contextAssemblyComplete": 1789264658666,
-      "t3_geminiRequestStart": 1789264658666,
-      "t4_geminiResponseReceived": 1789264688946,
-      "contextAssemblyMs": 3,
-      "geminiGenerationMs": 30280,
-      "inputCharCount": 1680,
-      "outputCharCount": 1019,
+      "t1_requestStart": 1789265837560,
+      "t2_contextAssemblyComplete": 1789265837566,
+      "t3_geminiRequestStart": 1789265837566,
+      "t4_geminiResponseReceived": 1789265860251,
+      "contextAssemblyMs": 6,
+      "geminiGenerationMs": 22685,
+      "inputCharCount": 2198,
+      "outputCharCount": 923,
       "tokenCount": {
-        "promptTokens": 8313,
-        "candidatesTokens": 2001,
-        "totalTokens": 14609
+        "promptTokens": 8626,
+        "candidatesTokens": 2049,
+        "totalTokens": 12278
       }
     },
     "clientLatency": {
       "turn": 1,
       "model": "gemini-3.5-flash",
-      "t0_playerInput": 120151.30000001192,
-      "t1_requestStart": 120151.30000001192,
-      "t2_contextAssemblyComplete": 120151.5,
-      "t3_geminiRequestStart": 120151.5,
-      "t4_geminiResponseReceived": 150497.80000001192,
-      "t5_parserComplete": 150498.20000001788,
-      "t6_stateMutationComplete": 150498.20000001788,
-      "t7_uiUpdateComplete": 150498.30000001192,
+      "t0_playerInput": 81068.19999998808,
+      "t1_requestStart": 81068.19999998808,
+      "t2_contextAssemblyComplete": 81068.29999998212,
+      "t3_geminiRequestStart": 81068.29999998212,
+      "t4_geminiResponseReceived": 104210,
+      "t5_parserComplete": 104210.39999997616,
+      "t6_stateMutationComplete": 104210.39999997616,
+      "t7_uiUpdateComplete": 104210.59999999404,
       "contextAssemblyMs": 0,
-      "geminiGenerationMs": 30346,
+      "geminiGenerationMs": 23142,
       "parsingValidationMs": 0,
-      "totalTurnMs": 30347,
-      "inputCharCount": 2,
-      "outputCharCount": 1019,
+      "totalTurnMs": 23142,
+      "inputCharCount": 501,
+      "outputCharCount": 923,
       "retried": false
     }
   },
   "chatContextForensic": {
-    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아스카 세이라 (나이: 17, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 14 / AGI 14 / CON 7 / INT 11 / WIS 12 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
-    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망",
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 시이나 렌 (나이: 18, 성별: 남성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 5 / AGI 10 / CON 15 / INT 15 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 시이나 렌 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 시이나 렌 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망",
     "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
     "seedsContext": "",
     "offscreenContext": ""
@@ -58,152 +58,143 @@
       "role": "user",
       "parts": [
         {
-          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아스카 세이라 (나이: 17, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 14 / AGI 14 / CON 7 / INT 11 / WIS 12 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 1 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아스카 세이라 (나이: 17, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "parts": [
-        {
-          "text": "시작"
+          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 시이나 렌 (나이: 18, 성별: 남성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 5 / AGI 10 / CON 15 / INT 15 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 시이나 렌 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 1 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 시이나 렌 (나이: 18, 성별: 남성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오.\n\n[ADDITIONAL ACTION]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 시이나 렌 (나이: 18, 성별: 남성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
         }
       ]
     }
   ],
   "llmRawResponse": {
-    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"갈라진 대지 아래, 허물어진 신당을 조사하다\",\n    \"narrativeSummary\": \"세이라는 갈라진 콘크리트 틈새로 흘러나오는 짙은 향 향취를 따라가다, 반쯤 매몰된 고택의 허물어진 신당을 발견합니다. 찢겨진 부적과 깨진 옹기그릇 사이에서 불길하게 요동치는 지맥의 흔적을 추적합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_investigate_shrine_01\",\n        \"action\": \"INVESTIGATE\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"신월 3구역 신당 터\" }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"UNVERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"신월 3구역 지하에 봉인되었던 원혼들의 원한이 지맥 손상으로 깨어나고 있다.\",\n        \"세이라의 가문에 얽힌 금지된 저주가 이 땅의 부정과 공명하기 시작한다.\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 부서진 대지\",\n        \"upcomingChapters\": [\"지맥의 균열\", \"무당의 방울소리\", \"피로 물든 작두\"]\n      }\n    }\n  },\n  {\n    \"label\": \"안개 너머에서 들려오는 날카로운 방울 소리를 쫓아가다\",\n    \"narrativeSummary\": \"철거 구역의 안개 속에서 고요를 찢고 들려오는 기괴한 무속 방울 소리와 흐느낌을 향해 나아갑니다. 지맥이 뒤틀려 피를 흘리는 땅에서 누군가 부정을 가라앉히기 위한 씻김굿을 벌이고 있는 현장을 조우할 징조가 보입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_follow_bell_01\",\n        \"action\": \"FOLLOW_SOUND\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"TARGET\", \"entityName\": \"의문의 방울 소리\" }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"UNVERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"어둠 속에서 굿을 집전하는 무속인은 평범한 인간이 아닐 수 있다.\",\n        \"방울 소리는 살아있는 자를 유혹하는 악귀의 의식일지 모른다.\"\n      ],\n      \"newNpcs\": [\n        {\n          \"name\": \"설화\",\n          \"alias\": \"방울을 흔드는 자\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"[미인지 상태]\",\n          \"metInStory\": false,\n          \"origin\": \"신월동 영매 가문\",\n          \"affiliation\": \"무속인\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 부서진 대지\",\n        \"upcomingChapters\": [\"방울 소리의 주인\", \"씻김굿의 제물\", \"깨어난 악귀\"]\n      }\n    }\n  },\n  {\n    \"label\": \"지하철역 출구로 후퇴하며 오컬트 특별수사팀과 조우하다\",\n    \"narrativeSummary\": \"뒤틀린 지맥의 살기를 견디지 못하고 철거 지대 가장자리로 몸을 피하려 하지만, 기이하게도 가로등이 모두 꺼진 경계선에서 사건 현장을 통제하고 있는 오컬트 특수수사팀의 삼엄한 가이드라인과 마주하게 됩니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_encounter_police_01\",\n        \"action\": \"RETREAT\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"신월동 철거 지구 경계선\" }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"UNVERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"경찰 특수수사팀은 이미 이 구역의 오컬트적 징후를 파악하고 기밀 작전을 수행 중이다.\",\n        \"철거 구역 외곽을 감싸고 있는 어둠은 자연적인 밤이 아니다.\"\n      ],\n      \"newFactions\": [\n        {\n          \"name\": \"경찰청 오컬트 특별수사팀 (OSI)\",\n          \"description\": \"지맥 붕괴 및 초자연적 강력 범죄를 비밀리에 수사하는 정부 산하 기밀 기관\",\n          \"attitudeTowardsPlayer\": \"경계\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 부서진 대지\",\n        \"upcomingChapters\": [\"철저한 통제선\", \"특수수사팀의 기밀\", \"감춰진 보고서\"]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n하늘은 멍든 것처럼 보랏빛이 도는 잿빛으로 가라앉아 있었고, 낮게 깔린 황사 섞인 안개는 무거운 납덩이처럼 철거 구역의 잔해들을 짓누르고 있었습니다. 서울 도심 한구역, 재개발의 거대한 포크레인 발톱이 파헤치고 간 ‘신월 3구역’은 거대한 짐승의 썩어가는 사체와 다르지 않았습니다. \n\n무너진 붉은 벽돌더미와 앙상한 철근 뼈대 사이로, 젖어 썩어가는 합판과 버려진 세간들이 유해처럼 흩어져 있습니다. 바람이 불 때마다 반쯤 찢어진 방수천이 날카로운 깃발처럼 펄럭이며 기괴한 파열음을 냈고, 공기 중에는 굳지 않은 시멘트 독과 흙이 뒤섞인 비린내가 가득했습니다. 하지만 그 평범한 폐허의 냄새 아래, 폐부를 찌르는 듯한 또 다른 냄새가 섞여 있었습니다. 그것은 오래된 무덤을 파헤쳤을 때나 흘러나올 법한 습한 썩은 내, 그리고 정체 모를 향(香)의 잔향이었습니다.\n\n아스카 세이라. 열일곱의 소녀는 이 황량한 파괴의 중심에 서 있었습니다. 그녀의 기억은 안개에 잠긴 듯 불투명하며, 자신의 과거도, 이곳에 홀로 오게 된 경위도 온전히 떠오르지 않는 백지 상태였습니다. 그러나 가슴께에서 맥박 치는 기묘한 통증만큼은 생생했습니다. 그것은 뼛속까지 시리게 만드는 한기였고, 가문에 내린 금지된 저주의 쇠사슬이 살을 파고드는 듯한 족쇄의 감각이었습니다. \n\n그녀의 발밑에서 돌연, 나지막한 진동이 울렸습니다. 지진이라고 하기엔 지나치게 규칙적이고 음습한, 마치 대지 자체가 억눌린 신음을 내뱉는 듯한 진동이었습니다. 기이하게 비틀린 지맥의 상처에서 흘러나오는 살기(殺氣)가 그녀의 구두창을 타고 올라와 목덜미의 솜털을 꼿꼿이 세웠습니다.\n\n무덤과도 같은 이 정적 속에서, 세이라는 이제 첫걸음을 내딛어야 합니다. 잔해 속에서 뿜어져 나오는 비정상적인 열기와 향 냄새를 쫓을 것인가, 어둠을 가르고 들려오는 기묘한 소리에 귀를 기울일 것인가, 아니면 이 기괴한 장소 자체로부터 벗어날 방도를 찾을 것인가.\n\n어두운 철거 구역의 안개가 서서히 그녀의 발목을 집어삼키기 시작합니다. 당신은 이 어둠 속에서 무엇을 먼저 확인하겠습니까?\n[ZERO_MUTATION_END]",
-    "rawResponseText": "하늘은 멍든 것처럼 보랏빛이 도는 잿빛으로 가라앉아 있었고, 낮게 깔린 황사 섞인 안개는 무거운 납덩이처럼 철거 구역의 잔해들을 짓누르고 있었습니다. 서울 도심 한구역, 재개발의 거대한 포크레인 발톱이 파헤치고 간 ‘신월 3구역’은 거대한 짐승의 썩어가는 사체와 다르지 않았습니다. \n\n무너진 붉은 벽돌더미와 앙상한 철근 뼈대 사이로, 젖어 썩어가는 합판과 버려진 세간들이 유해처럼 흩어져 있습니다. 바람이 불 때마다 반쯤 찢어진 방수천이 날카로운 깃발처럼 펄럭이며 기괴한 파열음을 냈고, 공기 중에는 굳지 않은 시멘트 독과 흙이 뒤섞인 비린내가 가득했습니다. 하지만 그 평범한 폐허의 냄새 아래, 폐부를 찌르는 듯한 또 다른 냄새가 섞여 있었습니다. 그것은 오래된 무덤을 파헤쳤을 때나 흘러나올 법한 습한 썩은 내, 그리고 정체 모를 향(香)의 잔향이었습니다.\n\n아스카 세이라. 열일곱의 소녀는 이 황량한 파괴의 중심에 서 있었습니다. 그녀의 기억은 안개에 잠긴 듯 불투명하며, 자신의 과거도, 이곳에 홀로 오게 된 경위도 온전히 떠오르지 않는 백지 상태였습니다. 그러나 가슴께에서 맥박 치는 기묘한 통증만큼은 생생했습니다. 그것은 뼛속까지 시리게 만드는 한기였고, 가문에 내린 금지된 저주의 쇠사슬이 살을 파고드는 듯한 족쇄의 감각이었습니다. \n\n그녀의 발밑에서 돌연, 나지막한 진동이 울렸습니다. 지진이라고 하기엔 지나치게 규칙적이고 음습한, 마치 대지 자체가 억눌린 신음을 내뱉는 듯한 진동이었습니다. 기이하게 비틀린 지맥의 상처에서 흘러나오는 살기(殺氣)가 그녀의 구두창을 타고 올라와 목덜미의 솜털을 꼿꼿이 세웠습니다.\n\n무덤과도 같은 이 정적 속에서, 세이라는 이제 첫걸음을 내딛어야 합니다. 잔해 속에서 뿜어져 나오는 비정상적인 열기와 향 냄새를 쫓을 것인가, 어둠을 가르고 들려오는 기묘한 소리에 귀를 기울일 것인가, 아니면 이 기괴한 장소 자체로부터 벗어날 방도를 찾을 것인가.\n\n어두운 철거 구역의 안개가 서서히 그녀의 발목을 집어삼키기 시작합니다. 당신은 이 어둠 속에서 무엇을 먼저 확인하겠습니까?"
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"이끌리는 방울 소리\",\n    \"narrativeSummary\": \"시이나 렌은 붉은 라커로 '철거'라 낙서된 낡은 담벼락 모퉁이 너머, 썩어가는 목조 가옥의 잔해 속에서 바람을 타고 울리는 가녀린 놋쇠 방울 소리를 듣습니다. 지맥이 찢겨나간 땅에서 솟아오르는 불길한 냉기 속에서도, 그 맑고 이질적인 소리는 기묘하게도 그의 발길을 이끕니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_HEAR_BELL_001\",\n        \"action\": \"LISTEN\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"시이나 렌\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"의문의 방울 소리\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"폐허가 된 신당 골목\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"NONE\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"지맥의 균열과 찢어진 신당의 잔해\",\n        \"누군가 남긴 녹슨 무구\"\n      ],\n      \"cameraOffscreenEvents\": [\n        \"재개발 3구역 심부에서 정체불명의 한기가 급격히 팽창함.\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무너진 지맥의 자리\",\n        \"upcomingChapters\": [\n          \"1장: 놋쇠 방울의 유산\",\n          \"2장: 통제구역의 이면\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"깨진 아스팔트 위의 경계선\",\n    \"narrativeSummary\": \"진흙과 오수가 뒤섞인 내리막길 아래, 노란색 수사 통제선(POLICE LINE)이 처진 붕괴지가 보입니다. 푸른빛 경광등이 밤안개 속에 번뜩이고, 방수포를 뒤집어쓴 기괴한 형태의 '무언가'를 차량에 싣는 검은 코트의 인물들과 오컬트 특수수사팀의 실루엣이 시야에 들어옵니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_OBSERVE_POLICE_001\",\n        \"action\": \"OBSERVE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"시이나 렌\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"오컬트 특수수사팀\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"재개발구역 통제선\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"NONE\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"검은 정장의 수사관들이 수거한 궤짝\",\n        \"붕괴된 지반에서 발견된 이질적인 유골\"\n      ],\n      \"cameraOffscreenEvents\": [\n        \"오컬트 수사대 제3반이 현장에 기괴한 영적 잔류물이 잔존함을 확인.\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무너진 지맥의 자리\",\n        \"upcomingChapters\": [\n          \"1장: 통제선 너머의 푸른 불빛\",\n          \"2장: 그림자 수사대\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"상가 지하실의 암흑\",\n    \"narrativeSummary\": \"갑작스러운 뇌리의 통증과 정체모를 공포감에서 벗어나기 위해, 시이나 렌은 반쯤 무너진 콘크리트 상가 건물의 열린 지하문으로 몸을 숨깁니다. 썩은 물비린내와 습한 공기가 가득한 어둠 속에서, 손끝에 닿은 것은 타다 남은 향나무와 벽면에 흘려 쓰인 검은 붓글씨의 흔적입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_ENTER_BASEMENT_001\",\n        \"action\": \"ENTER\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"시이나 렌\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"폐상가 지하실\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"NONE\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"지하 장막에 남겨진 금줄의 잔해\",\n        \"피와 먹이 뒤섞인 부적의 형상\"\n      ],\n      \"cameraOffscreenEvents\": [\n        \"지하 깊은 곳에서 태동하던 굶주린 아귀가 지상으로 향하는 통로를 탐색함.\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무너진 지맥의 자리\",\n        \"upcomingChapters\": [\n          \"1장: 지하실의 검은 장막\",\n          \"2장: 의식의 파편\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n하늘은 낮게 가라앉아, 마치 썩어가는 동물의 가죽처럼 검푸른 빛을 띠고 있었다.\n\n공사 현장의 높은 소음 펜스 너머로, 이주가 끝나 거대한 무덤처럼 변해버린 홍련동 재개발 구역의 잔해가 앙상한 뼈대를 드러내고 있었다. 찢겨나간 흙바닥에서는 지맥이 터져 나오며 내뿜은, 습하고 비린내 나는 흙냄새와 탄내가 섞인 기묘한 가스가 엷은 안개처럼 피어올랐다. 무너진 콘크리트 벽면마다 붉은색 라커로 급하게 그어 내린 '철거'라는 글씨들이, 빗물에 녹아내려 마치 벽을 타고 흐르는 묵은 피처럼 붉은 궤적을 그리고 있었다.\n\n당신—시이나 렌은 그 차가운 진흙 바닥 위에서 눈을 떴다.\n\n이름. 오직 머릿속에 각인된 그 단 한 줄의 건조한 자아만을 제외하면, 당신이 왜 이 이지러진 유령 도시의 한복판에 홀로 누워 있었는지, 어째서 전신을 물들이는 한기 속에 던져졌는지 기억나지 않는다. 기억은 마치 썰물이 빠져나간 갯벌처럼 황량하게 비어 있었으며, 얇은 셔츠 사이로 파고드는 10월의 밤바람은 이가 맞부딪힐 만큼 시리게 뺨을 때렸다.\n\n덜커덩, 덜컹.\n\n바람이 거세질 때마다 공사장 펜스가 비명을 지르며 흔들렸고, 그 녹슨 철판들 사이로 어두운 골목길들이 마치 거대한 괴수의 벌어진 구강처럼 뻗어 있었다. 멀리서는 정체불명의 사이렌 소리가 윙윙거리며 대기를 흔들었고, 찢겨진 대지 깊은 곳에서는 마치 거대한 고대 생물이 비틀거리는 듯한 미세한 진동이 뼈마디를 타고 전해졌다.\n\n자신이 소유한 것은 오직 젖은 옷가지와 육신뿐. 사방은 적막과 오컬트적인 가스, 그리고 금방이라도 무언가 튀어나올 듯한 깊은 어둠에 잠겨 있다. 당신은 진흙투성이가 된 몸을 일으켜 세우며, 이 기괴한 침묵의 심장부로 들어서야 함을 깨닫는다.\n\n차갑게 젖은 골목길이 당신의 앞을 가로막고 있다. 이 처절한 원한과 불길한 징조가 도사린 거리를 향해, 당신은 어떤 첫 발걸음을 내딛겠습니까?\n[ZERO_MUTATION_END]",
+    "rawResponseText": "하늘은 낮게 가라앉아, 마치 썩어가는 동물의 가죽처럼 검푸른 빛을 띠고 있었다.\n\n공사 현장의 높은 소음 펜스 너머로, 이주가 끝나 거대한 무덤처럼 변해버린 홍련동 재개발 구역의 잔해가 앙상한 뼈대를 드러내고 있었다. 찢겨나간 흙바닥에서는 지맥이 터져 나오며 내뿜은, 습하고 비린내 나는 흙냄새와 탄내가 섞인 기묘한 가스가 엷은 안개처럼 피어올랐다. 무너진 콘크리트 벽면마다 붉은색 라커로 급하게 그어 내린 '철거'라는 글씨들이, 빗물에 녹아내려 마치 벽을 타고 흐르는 묵은 피처럼 붉은 궤적을 그리고 있었다.\n\n당신—시이나 렌은 그 차가운 진흙 바닥 위에서 눈을 떴다.\n\n이름. 오직 머릿속에 각인된 그 단 한 줄의 건조한 자아만을 제외하면, 당신이 왜 이 이지러진 유령 도시의 한복판에 홀로 누워 있었는지, 어째서 전신을 물들이는 한기 속에 던져졌는지 기억나지 않는다. 기억은 마치 썰물이 빠져나간 갯벌처럼 황량하게 비어 있었으며, 얇은 셔츠 사이로 파고드는 10월의 밤바람은 이가 맞부딪힐 만큼 시리게 뺨을 때렸다.\n\n덜커덩, 덜컹.\n\n바람이 거세질 때마다 공사장 펜스가 비명을 지르며 흔들렸고, 그 녹슨 철판들 사이로 어두운 골목길들이 마치 거대한 괴수의 벌어진 구강처럼 뻗어 있었다. 멀리서는 정체불명의 사이렌 소리가 윙윙거리며 대기를 흔들었고, 찢겨진 대지 깊은 곳에서는 마치 거대한 고대 생물이 비틀거리는 듯한 미세한 진동이 뼈마디를 타고 전해졌다.\n\n자신이 소유한 것은 오직 젖은 옷가지와 육신뿐. 사방은 적막과 오컬트적인 가스, 그리고 금방이라도 무언가 튀어나올 듯한 깊은 어둠에 잠겨 있다. 당신은 진흙투성이가 된 몸을 일으켜 세우며, 이 기괴한 침묵의 심장부로 들어서야 함을 깨닫는다.\n\n차갑게 젖은 골목길이 당신의 앞을 가로막고 있다. 이 처절한 원한과 불길한 징조가 도사린 거리를 향해, 당신은 어떤 첫 발걸음을 내딛겠습니까?"
   },
   "candidatePipeline": {
     "rawCandidatesBlock": [
       {
-        "label": "갈라진 대지 아래, 허물어진 신당을 조사하다",
-        "narrativeSummary": "세이라는 갈라진 콘크리트 틈새로 흘러나오는 짙은 향 향취를 따라가다, 반쯤 매몰된 고택의 허물어진 신당을 발견합니다. 찢겨진 부적과 깨진 옹기그릇 사이에서 불길하게 요동치는 지맥의 흔적을 추적합니다.",
+        "label": "이끌리는 방울 소리",
+        "narrativeSummary": "시이나 렌은 붉은 라커로 '철거'라 낙서된 낡은 담벼락 모퉁이 너머, 썩어가는 목조 가옥의 잔해 속에서 바람을 타고 울리는 가녀린 놋쇠 방울 소리를 듣습니다. 지맥이 찢겨나간 땅에서 솟아오르는 불길한 냉기 속에서도, 그 맑고 이질적인 소리는 기묘하게도 그의 발길을 이끕니다.",
         "semanticEvents": [
           {
-            "eventId": "evt_investigate_shrine_01",
-            "action": "INVESTIGATE",
+            "eventId": "EVT_HEAR_BELL_001",
+            "action": "LISTEN",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "의문의 방울 소리"
               },
               {
                 "role": "LOCATION",
-                "entityName": "신월 3구역 신당 터"
+                "entityName": "폐허가 된 신당 골목"
               }
             ],
-            "scope": "INTENT",
+            "scope": "CANONICAL",
             "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
           }
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "신월 3구역 지하에 봉인되었던 원혼들의 원한이 지맥 손상으로 깨어나고 있다.",
-            "세이라의 가문에 얽힌 금지된 저주가 이 땅의 부정과 공명하기 시작한다."
+            "지맥의 균열과 찢어진 신당의 잔해",
+            "누군가 남긴 녹슨 무구"
+          ],
+          "cameraOffscreenEvents": [
+            "재개발 3구역 심부에서 정체불명의 한기가 급격히 팽창함."
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 부서진 대지",
+            "currentChapter": "서막: 무너진 지맥의 자리",
             "upcomingChapters": [
-              "지맥의 균열",
-              "무당의 방울소리",
-              "피로 물든 작두"
+              "1장: 놋쇠 방울의 유산",
+              "2장: 통제구역의 이면"
             ]
           }
         },
         "candidateId": 1
       },
       {
-        "label": "안개 너머에서 들려오는 날카로운 방울 소리를 쫓아가다",
-        "narrativeSummary": "철거 구역의 안개 속에서 고요를 찢고 들려오는 기괴한 무속 방울 소리와 흐느낌을 향해 나아갑니다. 지맥이 뒤틀려 피를 흘리는 땅에서 누군가 부정을 가라앉히기 위한 씻김굿을 벌이고 있는 현장을 조우할 징조가 보입니다.",
+        "label": "깨진 아스팔트 위의 경계선",
+        "narrativeSummary": "진흙과 오수가 뒤섞인 내리막길 아래, 노란색 수사 통제선(POLICE LINE)이 처진 붕괴지가 보입니다. 푸른빛 경광등이 밤안개 속에 번뜩이고, 방수포를 뒤집어쓴 기괴한 형태의 '무언가'를 차량에 싣는 검은 코트의 인물들과 오컬트 특수수사팀의 실루엣이 시야에 들어옵니다.",
         "semanticEvents": [
           {
-            "eventId": "evt_follow_bell_01",
-            "action": "FOLLOW_SOUND",
+            "eventId": "EVT_OBSERVE_POLICE_001",
+            "action": "OBSERVE",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
               },
               {
                 "role": "TARGET",
-                "entityName": "의문의 방울 소리"
+                "entityName": "오컬트 특수수사팀"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "재개발구역 통제선"
               }
             ],
-            "scope": "INTENT",
+            "scope": "CANONICAL",
             "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
           }
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "어둠 속에서 굿을 집전하는 무속인은 평범한 인간이 아닐 수 있다.",
-            "방울 소리는 살아있는 자를 유혹하는 악귀의 의식일지 모른다."
+            "검은 정장의 수사관들이 수거한 궤짝",
+            "붕괴된 지반에서 발견된 이질적인 유골"
           ],
-          "newNpcs": [
-            {
-              "name": "설화",
-              "alias": "방울을 흔드는 자",
-              "npcClass": "Class A",
-              "innerThought": "[미인지 상태]",
-              "metInStory": false,
-              "origin": "신월동 영매 가문",
-              "affiliation": "무속인"
-            }
+          "cameraOffscreenEvents": [
+            "오컬트 수사대 제3반이 현장에 기괴한 영적 잔류물이 잔존함을 확인."
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 부서진 대지",
+            "currentChapter": "서막: 무너진 지맥의 자리",
             "upcomingChapters": [
-              "방울 소리의 주인",
-              "씻김굿의 제물",
-              "깨어난 악귀"
+              "1장: 통제선 너머의 푸른 불빛",
+              "2장: 그림자 수사대"
             ]
           }
         },
         "candidateId": 2
       },
       {
-        "label": "지하철역 출구로 후퇴하며 오컬트 특별수사팀과 조우하다",
-        "narrativeSummary": "뒤틀린 지맥의 살기를 견디지 못하고 철거 지대 가장자리로 몸을 피하려 하지만, 기이하게도 가로등이 모두 꺼진 경계선에서 사건 현장을 통제하고 있는 오컬트 특수수사팀의 삼엄한 가이드라인과 마주하게 됩니다.",
+        "label": "상가 지하실의 암흑",
+        "narrativeSummary": "갑작스러운 뇌리의 통증과 정체모를 공포감에서 벗어나기 위해, 시이나 렌은 반쯤 무너진 콘크리트 상가 건물의 열린 지하문으로 몸을 숨깁니다. 썩은 물비린내와 습한 공기가 가득한 어둠 속에서, 손끝에 닿은 것은 타다 남은 향나무와 벽면에 흘려 쓰인 검은 붓글씨의 흔적입니다.",
         "semanticEvents": [
           {
-            "eventId": "evt_encounter_police_01",
-            "action": "RETREAT",
+            "eventId": "EVT_ENTER_BASEMENT_001",
+            "action": "ENTER",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
               },
               {
                 "role": "LOCATION",
-                "entityName": "신월동 철거 지구 경계선"
+                "entityName": "폐상가 지하실"
               }
             ],
-            "scope": "INTENT",
+            "scope": "CANONICAL",
             "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
           }
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "경찰 특수수사팀은 이미 이 구역의 오컬트적 징후를 파악하고 기밀 작전을 수행 중이다.",
-            "철거 구역 외곽을 감싸고 있는 어둠은 자연적인 밤이 아니다."
+            "지하 장막에 남겨진 금줄의 잔해",
+            "피와 먹이 뒤섞인 부적의 형상"
           ],
-          "newFactions": [
-            {
-              "name": "경찰청 오컬트 특별수사팀 (OSI)",
-              "description": "지맥 붕괴 및 초자연적 강력 범죄를 비밀리에 수사하는 정부 산하 기밀 기관",
-              "attitudeTowardsPlayer": "경계"
-            }
+          "cameraOffscreenEvents": [
+            "지하 깊은 곳에서 태동하던 굶주린 아귀가 지상으로 향하는 통로를 탐색함."
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 부서진 대지",
+            "currentChapter": "서막: 무너진 지맥의 자리",
             "upcomingChapters": [
-              "철저한 통제선",
-              "특수수사팀의 기밀",
-              "감춰진 보고서"
+              "1장: 지하실의 검은 장막",
+              "2장: 의식의 파편"
             ]
           }
         },
@@ -212,132 +203,131 @@
     ],
     "parsedCandidates": [
       {
-        "label": "갈라진 대지 아래, 허물어진 신당을 조사하다",
-        "narrativeSummary": "세이라는 갈라진 콘크리트 틈새로 흘러나오는 짙은 향 향취를 따라가다, 반쯤 매몰된 고택의 허물어진 신당을 발견합니다. 찢겨진 부적과 깨진 옹기그릇 사이에서 불길하게 요동치는 지맥의 흔적을 추적합니다.",
+        "label": "이끌리는 방울 소리",
+        "narrativeSummary": "시이나 렌은 붉은 라커로 '철거'라 낙서된 낡은 담벼락 모퉁이 너머, 썩어가는 목조 가옥의 잔해 속에서 바람을 타고 울리는 가녀린 놋쇠 방울 소리를 듣습니다. 지맥이 찢겨나간 땅에서 솟아오르는 불길한 냉기 속에서도, 그 맑고 이질적인 소리는 기묘하게도 그의 발길을 이끕니다.",
         "semanticEvents": [
           {
-            "eventId": "evt_investigate_shrine_01",
-            "action": "INVESTIGATE",
+            "eventId": "EVT_HEAR_BELL_001",
+            "action": "LISTEN",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "의문의 방울 소리"
               },
               {
                 "role": "LOCATION",
-                "entityName": "신월 3구역 신당 터"
+                "entityName": "폐허가 된 신당 골목"
               }
             ],
-            "scope": "INTENT",
+            "scope": "CANONICAL",
             "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
           }
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "신월 3구역 지하에 봉인되었던 원혼들의 원한이 지맥 손상으로 깨어나고 있다.",
-            "세이라의 가문에 얽힌 금지된 저주가 이 땅의 부정과 공명하기 시작한다."
+            "지맥의 균열과 찢어진 신당의 잔해",
+            "누군가 남긴 녹슨 무구"
+          ],
+          "cameraOffscreenEvents": [
+            "재개발 3구역 심부에서 정체불명의 한기가 급격히 팽창함."
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 부서진 대지",
+            "currentChapter": "서막: 무너진 지맥의 자리",
             "upcomingChapters": [
-              "지맥의 균열",
-              "무당의 방울소리",
-              "피로 물든 작두"
+              "1장: 놋쇠 방울의 유산",
+              "2장: 통제구역의 이면"
             ]
           }
         },
         "candidateId": 1
       },
       {
-        "label": "안개 너머에서 들려오는 날카로운 방울 소리를 쫓아가다",
-        "narrativeSummary": "철거 구역의 안개 속에서 고요를 찢고 들려오는 기괴한 무속 방울 소리와 흐느낌을 향해 나아갑니다. 지맥이 뒤틀려 피를 흘리는 땅에서 누군가 부정을 가라앉히기 위한 씻김굿을 벌이고 있는 현장을 조우할 징조가 보입니다.",
+        "label": "깨진 아스팔트 위의 경계선",
+        "narrativeSummary": "진흙과 오수가 뒤섞인 내리막길 아래, 노란색 수사 통제선(POLICE LINE)이 처진 붕괴지가 보입니다. 푸른빛 경광등이 밤안개 속에 번뜩이고, 방수포를 뒤집어쓴 기괴한 형태의 '무언가'를 차량에 싣는 검은 코트의 인물들과 오컬트 특수수사팀의 실루엣이 시야에 들어옵니다.",
         "semanticEvents": [
           {
-            "eventId": "evt_follow_bell_01",
-            "action": "FOLLOW_SOUND",
+            "eventId": "EVT_OBSERVE_POLICE_001",
+            "action": "OBSERVE",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
               },
               {
                 "role": "TARGET",
-                "entityName": "의문의 방울 소리"
+                "entityName": "오컬트 특수수사팀"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "재개발구역 통제선"
               }
             ],
-            "scope": "INTENT",
+            "scope": "CANONICAL",
             "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
           }
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "어둠 속에서 굿을 집전하는 무속인은 평범한 인간이 아닐 수 있다.",
-            "방울 소리는 살아있는 자를 유혹하는 악귀의 의식일지 모른다."
+            "검은 정장의 수사관들이 수거한 궤짝",
+            "붕괴된 지반에서 발견된 이질적인 유골"
           ],
-          "newNpcs": [
-            {
-              "name": "설화",
-              "alias": "방울을 흔드는 자",
-              "npcClass": "Class A",
-              "innerThought": "[미인지 상태]",
-              "metInStory": false,
-              "origin": "신월동 영매 가문",
-              "affiliation": "무속인"
-            }
+          "cameraOffscreenEvents": [
+            "오컬트 수사대 제3반이 현장에 기괴한 영적 잔류물이 잔존함을 확인."
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 부서진 대지",
+            "currentChapter": "서막: 무너진 지맥의 자리",
             "upcomingChapters": [
-              "방울 소리의 주인",
-              "씻김굿의 제물",
-              "깨어난 악귀"
+              "1장: 통제선 너머의 푸른 불빛",
+              "2장: 그림자 수사대"
             ]
           }
         },
         "candidateId": 2
       },
       {
-        "label": "지하철역 출구로 후퇴하며 오컬트 특별수사팀과 조우하다",
-        "narrativeSummary": "뒤틀린 지맥의 살기를 견디지 못하고 철거 지대 가장자리로 몸을 피하려 하지만, 기이하게도 가로등이 모두 꺼진 경계선에서 사건 현장을 통제하고 있는 오컬트 특수수사팀의 삼엄한 가이드라인과 마주하게 됩니다.",
+        "label": "상가 지하실의 암흑",
+        "narrativeSummary": "갑작스러운 뇌리의 통증과 정체모를 공포감에서 벗어나기 위해, 시이나 렌은 반쯤 무너진 콘크리트 상가 건물의 열린 지하문으로 몸을 숨깁니다. 썩은 물비린내와 습한 공기가 가득한 어둠 속에서, 손끝에 닿은 것은 타다 남은 향나무와 벽면에 흘려 쓰인 검은 붓글씨의 흔적입니다.",
         "semanticEvents": [
           {
-            "eventId": "evt_encounter_police_01",
-            "action": "RETREAT",
+            "eventId": "EVT_ENTER_BASEMENT_001",
+            "action": "ENTER",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
               },
               {
                 "role": "LOCATION",
-                "entityName": "신월동 철거 지구 경계선"
+                "entityName": "폐상가 지하실"
               }
             ],
-            "scope": "INTENT",
+            "scope": "CANONICAL",
             "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
           }
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "경찰 특수수사팀은 이미 이 구역의 오컬트적 징후를 파악하고 기밀 작전을 수행 중이다.",
-            "철거 구역 외곽을 감싸고 있는 어둠은 자연적인 밤이 아니다."
+            "지하 장막에 남겨진 금줄의 잔해",
+            "피와 먹이 뒤섞인 부적의 형상"
           ],
-          "newFactions": [
-            {
-              "name": "경찰청 오컬트 특별수사팀 (OSI)",
-              "description": "지맥 붕괴 및 초자연적 강력 범죄를 비밀리에 수사하는 정부 산하 기밀 기관",
-              "attitudeTowardsPlayer": "경계"
-            }
+          "cameraOffscreenEvents": [
+            "지하 깊은 곳에서 태동하던 굶주린 아귀가 지상으로 향하는 통로를 탐색함."
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 부서진 대지",
+            "currentChapter": "서막: 무너진 지맥의 자리",
             "upcomingChapters": [
-              "철저한 통제선",
-              "특수수사팀의 기밀",
-              "감춰진 보고서"
+              "1장: 지하실의 검은 장막",
+              "2장: 의식의 파편"
             ]
           }
         },
@@ -347,132 +337,131 @@
     "recoveryGateResult": {
       "passedCandidates": [
         {
-          "label": "갈라진 대지 아래, 허물어진 신당을 조사하다",
-          "narrativeSummary": "세이라는 갈라진 콘크리트 틈새로 흘러나오는 짙은 향 향취를 따라가다, 반쯤 매몰된 고택의 허물어진 신당을 발견합니다. 찢겨진 부적과 깨진 옹기그릇 사이에서 불길하게 요동치는 지맥의 흔적을 추적합니다.",
+          "label": "이끌리는 방울 소리",
+          "narrativeSummary": "시이나 렌은 붉은 라커로 '철거'라 낙서된 낡은 담벼락 모퉁이 너머, 썩어가는 목조 가옥의 잔해 속에서 바람을 타고 울리는 가녀린 놋쇠 방울 소리를 듣습니다. 지맥이 찢겨나간 땅에서 솟아오르는 불길한 냉기 속에서도, 그 맑고 이질적인 소리는 기묘하게도 그의 발길을 이끕니다.",
           "semanticEvents": [
             {
-              "eventId": "evt_investigate_shrine_01",
-              "action": "INVESTIGATE",
+              "eventId": "EVT_HEAR_BELL_001",
+              "action": "LISTEN",
               "roles": [
                 {
                   "role": "SUBJECT",
-                  "entityName": "아스카 세이라"
+                  "entityName": "시이나 렌"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "의문의 방울 소리"
                 },
                 {
                   "role": "LOCATION",
-                  "entityName": "신월 3구역 신당 터"
+                  "entityName": "폐허가 된 신당 골목"
                 }
               ],
-              "scope": "INTENT",
+              "scope": "CANONICAL",
               "polarity": "ASSERTED",
-              "epistemicStatus": "UNVERIFIED"
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
             }
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "신월 3구역 지하에 봉인되었던 원혼들의 원한이 지맥 손상으로 깨어나고 있다.",
-              "세이라의 가문에 얽힌 금지된 저주가 이 땅의 부정과 공명하기 시작한다."
+              "지맥의 균열과 찢어진 신당의 잔해",
+              "누군가 남긴 녹슨 무구"
+            ],
+            "cameraOffscreenEvents": [
+              "재개발 3구역 심부에서 정체불명의 한기가 급격히 팽창함."
             ],
             "chapterChanges": {
-              "currentChapter": "서막: 부서진 대지",
+              "currentChapter": "서막: 무너진 지맥의 자리",
               "upcomingChapters": [
-                "지맥의 균열",
-                "무당의 방울소리",
-                "피로 물든 작두"
+                "1장: 놋쇠 방울의 유산",
+                "2장: 통제구역의 이면"
               ]
             }
           },
           "candidateId": 1
         },
         {
-          "label": "안개 너머에서 들려오는 날카로운 방울 소리를 쫓아가다",
-          "narrativeSummary": "철거 구역의 안개 속에서 고요를 찢고 들려오는 기괴한 무속 방울 소리와 흐느낌을 향해 나아갑니다. 지맥이 뒤틀려 피를 흘리는 땅에서 누군가 부정을 가라앉히기 위한 씻김굿을 벌이고 있는 현장을 조우할 징조가 보입니다.",
+          "label": "깨진 아스팔트 위의 경계선",
+          "narrativeSummary": "진흙과 오수가 뒤섞인 내리막길 아래, 노란색 수사 통제선(POLICE LINE)이 처진 붕괴지가 보입니다. 푸른빛 경광등이 밤안개 속에 번뜩이고, 방수포를 뒤집어쓴 기괴한 형태의 '무언가'를 차량에 싣는 검은 코트의 인물들과 오컬트 특수수사팀의 실루엣이 시야에 들어옵니다.",
           "semanticEvents": [
             {
-              "eventId": "evt_follow_bell_01",
-              "action": "FOLLOW_SOUND",
+              "eventId": "EVT_OBSERVE_POLICE_001",
+              "action": "OBSERVE",
               "roles": [
                 {
                   "role": "SUBJECT",
-                  "entityName": "아스카 세이라"
+                  "entityName": "시이나 렌"
                 },
                 {
                   "role": "TARGET",
-                  "entityName": "의문의 방울 소리"
+                  "entityName": "오컬트 특수수사팀"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "재개발구역 통제선"
                 }
               ],
-              "scope": "INTENT",
+              "scope": "CANONICAL",
               "polarity": "ASSERTED",
-              "epistemicStatus": "UNVERIFIED"
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
             }
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "어둠 속에서 굿을 집전하는 무속인은 평범한 인간이 아닐 수 있다.",
-              "방울 소리는 살아있는 자를 유혹하는 악귀의 의식일지 모른다."
+              "검은 정장의 수사관들이 수거한 궤짝",
+              "붕괴된 지반에서 발견된 이질적인 유골"
             ],
-            "newNpcs": [
-              {
-                "name": "설화",
-                "alias": "방울을 흔드는 자",
-                "npcClass": "Class A",
-                "innerThought": "[미인지 상태]",
-                "metInStory": false,
-                "origin": "신월동 영매 가문",
-                "affiliation": "무속인"
-              }
+            "cameraOffscreenEvents": [
+              "오컬트 수사대 제3반이 현장에 기괴한 영적 잔류물이 잔존함을 확인."
             ],
             "chapterChanges": {
-              "currentChapter": "서막: 부서진 대지",
+              "currentChapter": "서막: 무너진 지맥의 자리",
               "upcomingChapters": [
-                "방울 소리의 주인",
-                "씻김굿의 제물",
-                "깨어난 악귀"
+                "1장: 통제선 너머의 푸른 불빛",
+                "2장: 그림자 수사대"
               ]
             }
           },
           "candidateId": 2
         },
         {
-          "label": "지하철역 출구로 후퇴하며 오컬트 특별수사팀과 조우하다",
-          "narrativeSummary": "뒤틀린 지맥의 살기를 견디지 못하고 철거 지대 가장자리로 몸을 피하려 하지만, 기이하게도 가로등이 모두 꺼진 경계선에서 사건 현장을 통제하고 있는 오컬트 특수수사팀의 삼엄한 가이드라인과 마주하게 됩니다.",
+          "label": "상가 지하실의 암흑",
+          "narrativeSummary": "갑작스러운 뇌리의 통증과 정체모를 공포감에서 벗어나기 위해, 시이나 렌은 반쯤 무너진 콘크리트 상가 건물의 열린 지하문으로 몸을 숨깁니다. 썩은 물비린내와 습한 공기가 가득한 어둠 속에서, 손끝에 닿은 것은 타다 남은 향나무와 벽면에 흘려 쓰인 검은 붓글씨의 흔적입니다.",
           "semanticEvents": [
             {
-              "eventId": "evt_encounter_police_01",
-              "action": "RETREAT",
+              "eventId": "EVT_ENTER_BASEMENT_001",
+              "action": "ENTER",
               "roles": [
                 {
                   "role": "SUBJECT",
-                  "entityName": "아스카 세이라"
+                  "entityName": "시이나 렌"
                 },
                 {
                   "role": "LOCATION",
-                  "entityName": "신월동 철거 지구 경계선"
+                  "entityName": "폐상가 지하실"
                 }
               ],
-              "scope": "INTENT",
+              "scope": "CANONICAL",
               "polarity": "ASSERTED",
-              "epistemicStatus": "UNVERIFIED"
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
             }
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "경찰 특수수사팀은 이미 이 구역의 오컬트적 징후를 파악하고 기밀 작전을 수행 중이다.",
-              "철거 구역 외곽을 감싸고 있는 어둠은 자연적인 밤이 아니다."
+              "지하 장막에 남겨진 금줄의 잔해",
+              "피와 먹이 뒤섞인 부적의 형상"
             ],
-            "newFactions": [
-              {
-                "name": "경찰청 오컬트 특별수사팀 (OSI)",
-                "description": "지맥 붕괴 및 초자연적 강력 범죄를 비밀리에 수사하는 정부 산하 기밀 기관",
-                "attitudeTowardsPlayer": "경계"
-              }
+            "cameraOffscreenEvents": [
+              "지하 깊은 곳에서 태동하던 굶주린 아귀가 지상으로 향하는 통로를 탐색함."
             ],
             "chapterChanges": {
-              "currentChapter": "서막: 부서진 대지",
+              "currentChapter": "서막: 무너진 지맥의 자리",
               "upcomingChapters": [
-                "철저한 통제선",
-                "특수수사팀의 기밀",
-                "감춰진 보고서"
+                "1장: 지하실의 검은 장막",
+                "2장: 의식의 파편"
               ]
             }
           },
@@ -532,11 +521,11 @@
         "offscreenRecords": []
       },
       "character": {
-        "name": "아스카 세이라",
-        "gender": "여성",
-        "age": 17,
-        "appearance": "영력이 감도는 부적과 영도를 든 단정한 제복 차림의 소녀",
-        "goal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것",
+        "name": "시이나 렌",
+        "gender": "남성",
+        "age": 18,
+        "appearance": "교복 위에 가디건을 걸치고 날카롭고 결의에 찬 눈빛의 소년",
+        "goal": "도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것",
         "originBackground": "미상 / 백지 상태 (Tabula Rasa)",
         "backgroundType": "tabula_rasa",
         "flaw": "미상 / 백지 상태 (Tabula Rasa)",
@@ -555,23 +544,23 @@
           "faction": "미상 / 백지 상태 (Tabula Rasa)"
         },
         "stats": {
-          "strength": 14,
-          "agility": 14,
-          "constitution": 7,
-          "intelligence": 11,
-          "wisdom": 12,
+          "strength": 5,
+          "agility": 10,
+          "constitution": 15,
+          "intelligence": 15,
+          "wisdom": 8,
           "charisma": 15,
-          "vitality": 7,
-          "intellect": 11,
-          "insight": 12,
+          "vitality": 15,
+          "intellect": 15,
+          "insight": 8,
           "willpower": 15
         },
         "inventory": [],
         "secret": "",
         "physicalDefect": "",
         "timeline": [],
-        "title": "명문 퇴마사 후계자",
-        "currentGoal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것"
+        "title": "각성한 이능력자",
+        "currentGoal": "도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것"
       }
     },
     "engineState": {
@@ -614,11 +603,11 @@
         "offscreenRecords": []
       },
       "character": {
-        "name": "아스카 세이라",
-        "gender": "여성",
-        "age": 17,
-        "appearance": "영력이 감도는 부적과 영도를 든 단정한 제복 차림의 소녀",
-        "goal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것",
+        "name": "시이나 렌",
+        "gender": "남성",
+        "age": 18,
+        "appearance": "교복 위에 가디건을 걸치고 날카롭고 결의에 찬 눈빛의 소년",
+        "goal": "도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것",
         "originBackground": "미상 / 백지 상태 (Tabula Rasa)",
         "backgroundType": "tabula_rasa",
         "flaw": "미상 / 백지 상태 (Tabula Rasa)",
@@ -637,23 +626,23 @@
           "faction": "미상 / 백지 상태 (Tabula Rasa)"
         },
         "stats": {
-          "strength": 14,
-          "agility": 14,
-          "constitution": 7,
-          "intelligence": 11,
-          "wisdom": 12,
+          "strength": 5,
+          "agility": 10,
+          "constitution": 15,
+          "intelligence": 15,
+          "wisdom": 8,
           "charisma": 15,
-          "vitality": 7,
-          "intellect": 11,
-          "insight": 12,
+          "vitality": 15,
+          "intellect": 15,
+          "insight": 8,
           "willpower": 15
         },
         "inventory": [],
         "secret": "",
         "physicalDefect": "",
         "timeline": [],
-        "title": "명문 퇴마사 후계자",
-        "currentGoal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것"
+        "title": "각성한 이능력자",
+        "currentGoal": "도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것"
       }
     },
     "engineState": {
@@ -673,49 +662,49 @@
     {
       "step": "T0_PLAYER_INPUT",
       "status": "OK",
-      "timestamp": 1789264658043,
-      "details": "Turn 1 player input: \"시작\" (2 chars)"
+      "timestamp": 1789265836556,
+      "details": "Turn 1 player input: \"[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 &...\" (501 chars)"
     },
     {
       "step": "T1_REQUEST_START",
       "status": "OK",
-      "timestamp": 1789264658043,
+      "timestamp": 1789265836556,
       "details": "Initiating API POST /api/chat with model gemini-3.5-flash"
     },
     {
       "step": "T2_CONTEXT_ASSEMBLED",
       "status": "OK",
-      "timestamp": 1789264658043,
-      "details": "Context prepared with 2 total messages in history"
+      "timestamp": 1789265836556,
+      "details": "Context prepared with 1 total messages in history"
     },
     {
       "step": "T3_GEMINI_START",
       "status": "OK",
-      "timestamp": 1789264658043,
+      "timestamp": 1789265836556,
       "details": "Backend Gemini API request dispatched"
     },
     {
       "step": "T4_GEMINI_RECEIVED",
       "status": "OK",
-      "timestamp": 1789264688390,
-      "details": "Gemini response received (1019 chars)"
+      "timestamp": 1789265859698,
+      "details": "Gemini response received (923 chars)"
     },
     {
       "step": "T5_PARSED",
       "status": "OK",
-      "timestamp": 1789264688390,
+      "timestamp": 1789265859698,
       "details": "Metadata block parsed successfully"
     },
     {
       "step": "T6_VALIDATED",
       "status": "SKIPPED",
-      "timestamp": 1789264688390,
+      "timestamp": 1789265859698,
       "details": "No candidate state mutation proposed"
     },
     {
       "step": "T7_COMMITTED",
       "status": "SKIPPED",
-      "timestamp": 1789264688390,
+      "timestamp": 1789265859698,
       "details": "Canonical state unchanged"
     }
   ]

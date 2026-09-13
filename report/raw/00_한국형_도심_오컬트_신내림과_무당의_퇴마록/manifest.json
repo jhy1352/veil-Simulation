@@ -4,37 +4,43 @@
   "sanitizedDir": "00_한국형_도심_오컬트_신내림과_무당의_퇴마록",
   "gitCommit": "6e099653874cebb0fd3db87aa3ed389123effe83",
   "captureStartedAt": "2026-09-13T01:44:54.203Z",
-  "lastCapturedAt": "2026-09-13T02:01:38.466Z",
+  "lastCapturedAt": "2026-09-13T02:23:00.625Z",
   "turns": [
     {
       "turn": 1,
       "file": "turn_001_raw.json",
-      "sha256": "69f66290fee0aeaf8753ed9e59deab76601abaff83ac7a39b2c8a81d5c953c96",
-      "capturedAt": "2026-09-13T01:58:09.036Z"
+      "sha256": "12982f87c396073df400f74f70f4c8520ab898a111dbb096164942cd8bf7ee71",
+      "capturedAt": "2026-09-13T02:17:40.360Z"
     },
     {
       "turn": 2,
       "file": "turn_002_raw.json",
-      "sha256": "d4dbf0656fc796ab666ae85173b11b43531023711a44913c055977703785ba93",
-      "capturedAt": "2026-09-13T01:58:51.430Z"
+      "sha256": "1c13c8ba1e5a128d6dfc65c950c2fcd577e59791cc9e6a261eb8ee4158978a5a",
+      "capturedAt": "2026-09-13T02:18:20.368Z"
     },
     {
       "turn": 3,
       "file": "turn_003_raw.json",
-      "sha256": "5eefb6621c5eef28a54afeb71b1dca670f821415ac6d13378742845179b6b579",
-      "capturedAt": "2026-09-13T01:59:37.155Z"
+      "sha256": "0b2db2baa6e10986017b65c5c30c4c5deefeac38282618e3911d55f33e7921b6",
+      "capturedAt": "2026-09-13T02:19:16.715Z"
     },
     {
       "turn": 4,
       "file": "turn_004_raw.json",
-      "sha256": "aa4cc36a80ee1a61eab69e638e33a532f880b3626f0b973ee81fc60c617a7bb9",
-      "capturedAt": "2026-09-13T02:00:34.228Z"
+      "sha256": "763ebcdb782acaea6326fdca3a6159ac7e5cd1bf75df369569b1139e52ee8d74",
+      "capturedAt": "2026-09-13T02:20:29.886Z"
     },
     {
       "turn": 5,
       "file": "turn_005_raw.json",
-      "sha256": "c1f8c18634c9f76cfda825da01530788be1e42e3864e791aff3ab554ba0ffbd5",
-      "capturedAt": "2026-09-13T02:01:38.466Z"
+      "sha256": "40f8e2970b47b03d9fdbf579cb29813837f50353745cd5081d2ee7ccb7d7a67f",
+      "capturedAt": "2026-09-13T02:21:59.977Z"
+    },
+    {
+      "turn": 6,
+      "file": "turn_006_raw.json",
+      "sha256": "50308f6e6a54fd2ecccdf243aab55eabb4b1493563f0073b5bde36743afbaeb3",
+      "capturedAt": "2026-09-13T02:23:00.625Z"
     }
   ]
 }

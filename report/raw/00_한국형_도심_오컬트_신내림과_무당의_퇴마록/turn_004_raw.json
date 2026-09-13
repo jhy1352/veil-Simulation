@@ -1,54 +1,54 @@
 {
-  "runId": "run_2026-09-13T01-58-08-391Z_ejddqg",
+  "runId": "run_2026-09-13T02-17-39-698Z_ws07fa",
   "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
   "turn": 4,
-  "timestamp": "2026-09-13T02:00:33.580Z",
-  "gitCommit": "4c341f1c869862e15d6c72319d1784e9a8b71830",
+  "timestamp": "2026-09-13T02:20:29.231Z",
+  "gitCommit": "906527db0463721b69cee97e51444441e92dd80b",
   "playerInput": {
-    "rawInput": "싹 다 챙겨서 인벤토리에 넣는다"
+    "rawInput": "인벤토리에 챙긴다"
   },
   "modelRuntime": {
     "requestedModel": "gemini-3.5-flash",
     "actualModelVersion": "gemini-3.5-flash",
-    "responseId": "qwOmas64HMrK1e8Pp73EiAY",
+    "responseId": "PAimaoTLDYuz1e8Pkc7fiQM",
     "serverTimings": {
-      "t1_requestStart": 1789264811106,
-      "t2_contextAssemblyComplete": 1789264811106,
-      "t3_geminiRequestStart": 1789264811106,
-      "t4_geminiResponseReceived": 1789264834137,
-      "contextAssemblyMs": 0,
-      "geminiGenerationMs": 23031,
-      "inputCharCount": 4411,
-      "outputCharCount": 797,
+      "t1_requestStart": 1789265979677,
+      "t2_contextAssemblyComplete": 1789265979683,
+      "t3_geminiRequestStart": 1789265979683,
+      "t4_geminiResponseReceived": 1789266029784,
+      "contextAssemblyMs": 6,
+      "geminiGenerationMs": 50101,
+      "inputCharCount": 4461,
+      "outputCharCount": 421,
       "tokenCount": {
-        "promptTokens": 10056,
-        "candidatesTokens": 2537,
-        "totalTokens": 14783
+        "promptTokens": 10112,
+        "candidatesTokens": 2646,
+        "totalTokens": 15600
       }
     },
     "clientLatency": {
       "turn": 4,
       "model": "gemini-3.5-flash",
-      "t0_playerInput": 272253.40000000596,
-      "t1_requestStart": 272253.40000000596,
-      "t2_contextAssemblyComplete": 272253.59999999404,
-      "t3_geminiRequestStart": 272253.59999999404,
-      "t4_geminiResponseReceived": 295687.7000000179,
-      "t5_parserComplete": 295687.90000000596,
-      "t6_stateMutationComplete": 295687.90000000596,
-      "t7_uiUpdateComplete": 295688,
+      "t0_playerInput": 223559.09999999404,
+      "t1_requestStart": 223559.09999999404,
+      "t2_contextAssemblyComplete": 223559.19999998808,
+      "t3_geminiRequestStart": 223559.19999998808,
+      "t4_geminiResponseReceived": 273743,
+      "t5_parserComplete": 273743.39999997616,
+      "t6_stateMutationComplete": 273743.39999997616,
+      "t7_uiUpdateComplete": 273743.5,
       "contextAssemblyMs": 0,
-      "geminiGenerationMs": 23434,
+      "geminiGenerationMs": 50184,
       "parsingValidationMs": 0,
-      "totalTurnMs": 23435,
-      "inputCharCount": 17,
-      "outputCharCount": 797,
+      "totalTurnMs": 50184,
+      "inputCharCount": 9,
+      "outputCharCount": 421,
       "retried": false
     }
   },
   "chatContextForensic": {
-    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아스카 세이라 (나이: 17, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 14 / AGI 14 / CON 7 / INT 11 / WIS 12 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
-    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망",
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 시이나 렌 (나이: 18, 성별: 남성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 5 / AGI 10 / CON 15 / INT 15 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 시이나 렌 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 시이나 렌 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망",
     "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
     "seedsContext": "",
     "offscreenContext": ""
@@ -58,15 +58,7 @@
       "role": "user",
       "parts": [
         {
-          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아스카 세이라 (나이: 17, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 14 / AGI 14 / CON 7 / INT 11 / WIS 12 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 4 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아스카 세이라 (나이: 17, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
-        }
-      ]
-    },
-    {
-      "role": "user",
-      "parts": [
-        {
-          "text": "시작"
+          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 시이나 렌 (나이: 18, 성별: 남성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 5 / AGI 10 / CON 15 / INT 15 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 시이나 렌 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 4 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 시이나 렌 (나이: 18, 성별: 남성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
         }
       ]
     },
@@ -74,7 +66,7 @@
       "role": "model",
       "parts": [
         {
-          "text": "하늘은 멍든 것처럼 보랏빛이 도는 잿빛으로 가라앉아 있었고, 낮게 깔린 황사 섞인 안개는 무거운 납덩이처럼 철거 구역의 잔해들을 짓누르고 있었습니다. 서울 도심 한구역, 재개발의 거대한 포크레인 발톱이 파헤치고 간 ‘신월 3구역’은 거대한 짐승의 썩어가는 사체와 다르지 않았습니다. \n\n무너진 붉은 벽돌더미와 앙상한 철근 뼈대 사이로, 젖어 썩어가는 합판과 버려진 세간들이 유해처럼 흩어져 있습니다. 바람이 불 때마다 반쯤 찢어진 방수천이 날카로운 깃발처럼 펄럭이며 기괴한 파열음을 냈고, 공기 중에는 굳지 않은 시멘트 독과 흙이 뒤섞인 비린내가 가득했습니다. 하지만 그 평범한 폐허의 냄새 아래, 폐부를 찌르는 듯한 또 다른 냄새가 섞여 있었습니다. 그것은 오래된 무덤을 파헤쳤을 때나 흘러나올 법한 습한 썩은 내, 그리고 정체 모를 향(香)의 잔향이었습니다.\n\n아스카 세이라. 열일곱의 소녀는 이 황량한 파괴의 중심에 서 있었습니다. 그녀의 기억은 안개에 잠긴 듯 불투명하며, 자신의 과거도, 이곳에 홀로 오게 된 경위도 온전히 떠오르지 않는 백지 상태였습니다. 그러나 가슴께에서 맥박 치는 기묘한 통증만큼은 생생했습니다. 그것은 뼛속까지 시리게 만드는 한기였고, 가문에 내린 금지된 저주의 쇠사슬이 살을 파고드는 듯한 족쇄의 감각이었습니다. \n\n그녀의 발밑에서 돌연, 나지막한 진동이 울렸습니다. 지진이라고 하기엔 지나치게 규칙적이고 음습한, 마치 대지 자체가 억눌린 신음을 내뱉는 듯한 진동이었습니다. 기이하게 비틀린 지맥의 상처에서 흘러나오는 살기(殺氣)가 그녀의 구두창을 타고 올라와 목덜미의 솜털을 꼿꼿이 세웠습니다.\n\n무덤과도 같은 이 정적 속에서, 세이라는 이제 첫걸음을 내딛어야 합니다. 잔해 속에서 뿜어져 나오는 비정상적인 열기와 향 냄새를 쫓을 것인가, 어둠을 가르고 들려오는 기묘한 소리에 귀를 기울일 것인가, 아니면 이 기괴한 장소 자체로부터 벗어날 방도를 찾을 것인가.\n\n어두운 철거 구역의 안개가 서서히 그녀의 발목을 집어삼키기 시작합니다. 당신은 이 어둠 속에서 무엇을 먼저 확인하겠습니까?"
+          "text": "하늘은 낮게 가라앉아, 마치 썩어가는 동물의 가죽처럼 검푸른 빛을 띠고 있었다.\n\n공사 현장의 높은 소음 펜스 너머로, 이주가 끝나 거대한 무덤처럼 변해버린 홍련동 재개발 구역의 잔해가 앙상한 뼈대를 드러내고 있었다. 찢겨나간 흙바닥에서는 지맥이 터져 나오며 내뿜은, 습하고 비린내 나는 흙냄새와 탄내가 섞인 기묘한 가스가 엷은 안개처럼 피어올랐다. 무너진 콘크리트 벽면마다 붉은색 라커로 급하게 그어 내린 '철거'라는 글씨들이, 빗물에 녹아내려 마치 벽을 타고 흐르는 묵은 피처럼 붉은 궤적을 그리고 있었다.\n\n당신—시이나 렌은 그 차가운 진흙 바닥 위에서 눈을 떴다.\n\n이름. 오직 머릿속에 각인된 그 단 한 줄의 건조한 자아만을 제외하면, 당신이 왜 이 이지러진 유령 도시의 한복판에 홀로 누워 있었는지, 어째서 전신을 물들이는 한기 속에 던져졌는지 기억나지 않는다. 기억은 마치 썰물이 빠져나간 갯벌처럼 황량하게 비어 있었으며, 얇은 셔츠 사이로 파고드는 10월의 밤바람은 이가 맞부딪힐 만큼 시리게 뺨을 때렸다.\n\n덜커덩, 덜컹.\n\n바람이 거세질 때마다 공사장 펜스가 비명을 지르며 흔들렸고, 그 녹슨 철판들 사이로 어두운 골목길들이 마치 거대한 괴수의 벌어진 구강처럼 뻗어 있었다. 멀리서는 정체불명의 사이렌 소리가 윙윙거리며 대기를 흔들었고, 찢겨진 대지 깊은 곳에서는 마치 거대한 고대 생물이 비틀거리는 듯한 미세한 진동이 뼈마디를 타고 전해졌다.\n\n자신이 소유한 것은 오직 젖은 옷가지와 육신뿐. 사방은 적막과 오컬트적인 가스, 그리고 금방이라도 무언가 튀어나올 듯한 깊은 어둠에 잠겨 있다. 당신은 진흙투성이가 된 몸을 일으켜 세우며, 이 기괴한 침묵의 심장부로 들어서야 함을 깨닫는다.\n\n차갑게 젖은 골목길이 당신의 앞을 가로막고 있다. 이 처절한 원한과 불길한 징조가 도사린 거리를 향해, 당신은 어떤 첫 발걸음을 내딛겠습니까?"
         }
       ]
     },
@@ -90,7 +82,7 @@
       "role": "model",
       "parts": [
         {
-          "text": "세이라는 무릎을 꿇고 허리를 굽혀, 잿빛 먼지가 두껍게 내려앉은 철거 잔해더미 속으로 하얗고 가녀린 손을 뻗었습니다. 차가운 콘크리트 조각과 깨진 기와 틈새를 헤집자, 손가락 끝에 닿는 거친 벽지와 젖어 문드러진 목재의 감촉이 소름 끼치도록 생생하게 전해집니다. 어스름한 안개 너머로, 무너진 천장 기둥 아래 무언가 이질적인 실루엣들이 보이기 시작합니다. \n\n단순한 쓰레기 틈바구니라기엔 지나치게 인위적인 흔적들입니다. 바람이 불 때마다 음습한 흙냄새 사이로 은은한 향(香) 냄새와 비린 철분이 섞여 납빛 공기 중으로 피어오릅니다. 한 걸음만 잘못 디디면 예리한 철근이나 무너지는 붕괴 잔해에 깔릴 수 있는 위험천만한 폐허 속에서, 그녀는 본능적으로 자신의 생존과 잃어버린 기억의 파편을 채워줄 ‘유용한 무언가’를 찾고자 깊숙한 어둠 속을 관찰합니다.\n\n주변의 극도로 위태로운 구조와 어둠을 극복하고 쓸만한 도구를 안전하게 찾아내기 위해, 당신의 세심한 주의력과 직관이 시험대 위에 오릅니다.\n\n**[판정 안내]**\n* **시도 행동**: 폐허 주변 정밀 수색 및 유효 아이템 확보\n* **판정 종류**: 지혜(WIS) 혹은 지능(INT) 판정\n* **목표 난이도 (Target DC)**: **12**\n* **결과 예측**:\n  * **성공 (12 이상)**: 안전하게 잔해를 헤집고 가치 있는 물건 중 하나를 확보하여 가방(인벤토리)에 넣습니다. 또한 그것에 얽힌 기묘한 단서를 발견합니다.\n  * **실패 (11 이하)**: 어둠 속에서 예리한 유리에 손을 베여 가벼운 부상을 입거나, 소란스러운 수색 소리로 인해 이 지맥의 상처 뒤에 숨은 부정한 존재들의 주위를 끌게 됩니다.\n\n주사위(1d20)를 굴려 주십시오. 세이라의 능력치 보정값(지혜 WIS +1 / 지능 INT +0)을 더한 최종 결과를 입력해 주시면 판정이 확정됩니다."
+          "text": "시이나 렌은 지독한 한기 속에서 옷자락을 여미며 주변의 비틀린 폐허를 살폈다. \n\n사방은 칠흑 같은 어둠에 잠겨 있어 육안으로는 한 치 앞을 내다보기 조차 고통스러웠다. 대형 포크레인의 궤도 자국이 짓이기고 간 점토질 흙바닥 위에는 깨진 유리 조각과 날카로운 철근 토막들이 지뢰처럼 박혀 있었다. 거친 밤바람을 타고 사방에서 녹슨 철판이 부딪히는 소리가 고막을 긁어댔다. 아무런 도구도, 불빛도 없는 상태에서 무턱대고 어둠을 뒤적이다가는 무거운 잔해에 깔리거나 파상풍을 유발할 날카로운 철골에 손을 벨 위험이 가득했다.\n\n당신은 이 황량한 재개발 구역에서 쓸만한 물건을 찾아내기 위해 정신을 집중한다. 이 막막한 어둠 속에서, 어느 곳을 집중적으로 수색하겠는가? \n\n수색하려는 위치에 따라 요구되는 능력과 위험도가 달라집니다. 아래의 선택지 중 하나를 골라 주십시오.\n\n---\n\n### **[수색 선택지 및 판정 안내]**\n\n**1. 철거 현장 잔해 수색 (무기 확보)**\n* **설명**: 붕괴된 가설 비계 더미 속에서 손에 쥘 만한 쇠파이프를 찾아냅니다. 날카로운 고철 잔해 사이에서 상처를 입지 않고 안전하게 물건을 꺼내야 합니다.\n* **요구 판정**: **민첩(AGI) 판정** (날카로운 철골 사이에서 부상 없이 낙하하는 자재를 피하며 수색)\n* **목표 난이도 (DC)**: **10**\n\n**2. 버려진 함바집 가건물 수색 (생존 용품 확보)**\n* **설명**: 쓰러져 가는 임시 식당 안쪽으로 조심스럽게 기어 들어가 쓸만한 식수나 비상등을 찾습니다. 어두운 공간의 구조적 취약성을 파악해야 합니다.\n* **요구 판정**: **지능(INT) 판정** (무너질 위험이 있는 가건물의 구조를 분석하며 안전한 수색 경로 확보)\n* **목표 난이도 (DC)**: **11**\n\n**3. 깨진 무당의 제단 흔적 조사 (영적 신물 확보)**\n* **설명**: 철거민들이 재앙을 막기 위해 임시로 세웠으나 처참하게 짓밟힌 작은 제단터를 수색합니다. 본능적인 기시감을 따라 영적인 도구를 찾아냅니다.\n* **요구 판정**: **지혜(WIS) 판정** (숨겨진 주술적 흔적과 불길한 기운을 분별해 감추어진 신물을 수색)\n* **목표 난이도 (DC)**: **12**\n\n---\n\n원하는 수색 방향을 결정하신 뒤, 판정을 위해 **1d20 주사위**를 굴려 결과를 알려주십시오. (주사위 결과 값에 선택한 능력치 수정치를 더해 최종 성공 여부를 판정합니다.)"
         }
       ]
     },
@@ -98,7 +90,7 @@
       "role": "user",
       "parts": [
         {
-          "text": "지혜 주사위 20"
+          "text": "20"
         }
       ]
     },
@@ -106,7 +98,7 @@
       "role": "model",
       "parts": [
         {
-          "text": "주사위의 눈이 기적처럼 고결한 ‘20’을 가리킨 바로 그 순간, 세이라의 전신을 감돌던 한기가 일순간 벼락 같은 직관으로 뒤바뀌었습니다. 지혜의 눈이 떠지듯, 황량한 먼지 안개 속에서 무질서하게 얽혀 있던 잔해들의 틈새가 기하학적이고 명확한 구도로 쪼개져 그녀의 시야에 들어왔습니다. \n\n어디에 무너진 천장의 기둥이 위태롭게 걸쳐 있는지, 어디에 날카로운 깨진 유리와 철사 덤불이 도사리고 있는지, 그녀는 눈으로 보지 않고도 살갗을 스치는 기류의 변화만으로 완벽하게 간파했습니다. 세이라의 손끝은 단 한 점의 주저함도 없이 흙더미 깊숙한 곳, 마치 보이지 않는 실에 이끌리듯 정확한 구렁으로 미끄러져 들어갔습니다. 손가락 하나 다치지 않고, 옷자락에 먼지 한 톨 묻히지 않는 우아하고 기적적인 손길이었습니다.\n\n그리고 그녀의 하얀 손끝이 무너진 콘크리트 상판 아래, 굳게 봉인되어 있던 비밀의 궤적을 마주합니다. 깊은 어둠 속에는 세이라의 기이한 운명과 얽혀 있는 몇 가지 이질적인 도구들이 마치 발견되기를 기다려 왔다는 듯 차가운 빛을 발하고 있습니다. 가문에서 물려받은 혼(魂)의 떨림을 자극하는 오래된 주술적 유물, 생존을 위한 현실적인 무쇠 도구, 혹은 이 불길한 땅에 얽힌 진실을 담고 있는 누군가의 기록.\n\n그녀의 손가락이 닿는 순간, 주변의 불길한 노이즈와 안개가 잠시 숨을 죽였습니다. 기적적인 예지력으로 찾아낸 이 어둠 속의 조각들 중, 세이라가 마침내 움켜쥐어 자신의 것으로 삼을 것은 무엇입니까?"
+          "text": "주사위의 눈은 운명의 흐름을 완전히 비틀어버리듯 찬란한 '20'의 궤적을 그리며 멈추어 섰다. 칠흑 같은 어둠 속에서, 찰나의 흔들림도 용납하지 않는 절대적인 손길이 당신의 육신을 움직였다. \n\n시이나 렌의 손끝이 매서운 바람을 뚫고 뻗어 나간다. 무언가에 홀린 듯, 혹은 보이지 않는 실에 정교하게 이끌리듯, 당신의 발걸음은 일말의 주저함도 없이 어둠 한구석을 향했다. 깨진 아스팔트 틈새와 붕괴된 콘크리트 잔해가 칼날처럼 발목을 위협하는 와중에도, 당신의 발 디딤에는 기적적인 유려함이 깃들어 있었다. \n\n칼날 같은 밤바람이 머리칼을 세차게 흔드는 순간, 당신의 시선이 한 정점에 고정되었다. 진흙 속에 완전히 파묻혀 보이지 않아야 할 무언가가, 오직 당신의 눈에만 도드라지듯 기묘한 비장함을 띠고 그 존재를 드러내고 있었다. \n\n더럽혀진 장갑도 없이 맨손을 뻗었으나 날카로운 유리 파편은 기적적으로 손가락 사이를 비켜 나갔다. 젖은 진흙 더미를 헤치고 손가락이 단단하고 묵직한 물체의 감촉을 움켜쥐는 순간, 차가운 금속성의 기운이 뼈마디를 타고 머릿속까지 선명하게 관통했다. 당신은 어둠 속에서 숨을 죽인 채, 마침내 운명이 당신의 손아귀에 쥐여준 그 결과물을 천천히 들어 올리기 시작한다."
         }
       ]
     },
@@ -114,36 +106,57 @@
       "role": "user",
       "parts": [
         {
-          "text": "싹 다 챙겨서 인벤토리에 넣는다"
+          "text": "인벤토리에 챙긴다"
         }
       ]
     }
   ],
   "llmRawResponse": {
-    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"도구를 이용한 잔해 돌파 및 전진\",\n    \"narrativeSummary\": \"세이라는 획득한 녹슨 노루발못뽑이를 쥐고, 무너진 철근과 널빤지로 가로막힌 폐가들의 좁은 틈새를 강제로 비집어 열며 신월 3구역의 더 깊은 안쪽으로 진입합니다. 무쇠 방울이 그녀의 걸음마다 미세하게 공명하며 사악한 영들이 깃든 물리적 위험 구역을 경고하듯 흔들립니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_WIS_SEARCH_SUCCESS\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"오래된 무쇠 방울\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"신월 3구역 철거 잔해\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"가문의 저주와 아스카 세이라의 지맥 한기\",\n        \"신월 3구역의 핏빛 향 냄새와 의문의 제단\",\n        \"조사 일지에 기록된 실종된 조사관\"\n      ],\n      \"cameraOffscreenEvents\": [\n        \"오컬트 특수수사팀(OSI) 소속 대원들이 신월 3구역 북쪽 경계선에 접근하여 차량 통제선을 설치하기 시작했습니다.\"\n      ],\n      \"newFactions\": [\n        {\n          \"name\": \"오컬트 특수수사팀 (OSI)\",\n          \"description\": \"도시 전역의 초자연적 재해와 지맥 왜곡 사건을 비밀리에 추적하고 통제하는 경찰청 산하의 특수 수사부서\",\n          \"attitudeTowardsPlayer\": \"미인지 상태\"\n        }\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"오래된 무쇠 방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_WIS_SEARCH_SUCCESS\"\n        },\n        {\n          \"name\": \"녹슨 철제 노루발못뽑이\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_WIS_SEARCH_SUCCESS\"\n        },\n        {\n          \"name\": \"철거 예정지 조사 일지\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_WIS_SEARCH_SUCCESS\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 구역\",\n        \"upcomingChapters\": [\n          \"제1장: 붉은 실의 제단\",\n          \"제2장: 밤을 걷는 순경들\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"조사 일지 해독 및 배후 분석\",\n    \"narrativeSummary\": \"세이라는 비를 피할 수 있는 찌그러진 컨테이너 내부로 몸을 숨깁니다. 주머니에서 꺼낸 성냥이나 약한 불빛에 의지해 가쁜 숨을 몰아쉬며, 주운 '철거 예정지 조사 일지'의 피 얼룩진 페이지들을 넘겨 이 구역에 봉인되었던 악귀의 실체와 실종된 인부들의 행방을 해독하기 시작합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_WIS_SEARCH_SUCCESS\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"철거 예정지 조사 일지\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"신월 3구역 철거 잔해\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"가문의 저주와 아스카 세이라의 지맥 한기\",\n        \"신월 3구역의 핏빛 향 냄새와 의문의 제단\",\n        \"조사 일지에 기록된 실종된 조사관\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"오래된 무쇠 방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_WIS_SEARCH_SUCCESS\"\n        },\n        {\n          \"name\": \"녹슨 철제 노루발못뽑이\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_WIS_SEARCH_SUCCESS\"\n        },\n        {\n          \"name\": \"철거 예정지 조사 일지\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_WIS_SEARCH_SUCCESS\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 구역\"\n      }\n    }\n  },\n  {\n    \"label\": \"무쇠 방울을 이용한 영적 공명 시도\",\n    \"narrativeSummary\": \"세이라는 흙과 먼지를 털어낸 오래된 무쇠 방울을 움켜쥐고 잔해 한가운데에 섭니다. 그녀는 방울을 가볍게 흔들어 그 탁하고 무거운 소리가 철거 구역 전체로 퍼져나가게 합니다. 방울소리가 지맥의 왜곡된 살기와 공명하며, 숨겨진 사악한 기운의 발원지(제단)가 있는 방향으로 짙은 붉은 안개가 소용돌이치기 시작합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_WIS_SEARCH_SUCCESS\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"오래된 무쇠 방울\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"신월 3구역 철거 잔해\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"가문의 저주와 아스카 세이라의 지맥 한기\",\n        \"신월 3구역의 핏빛 향 냄새와 의문의 제단\",\n        \"조사 일지에 기록된 실종된 조사관\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"오래된 무쇠 방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_WIS_SEARCH_SUCCESS\"\n        },\n        {\n          \"name\": \"녹슨 철제 노루발못뽑이\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_WIS_SEARCH_SUCCESS\"\n        },\n        {\n          \"name\": \"철거 예정지 조사 일지\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_WIS_SEARCH_SUCCESS\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 구역\"\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n주사위의 위대한 흐름은 세이라에게 거역할 수 없는 명확한 손길을 부여했습니다. 그녀는 망설임 없이 손을 뻗어, 잿더미와 무너진 콘크리트 상판 사이의 좁고 어두운 틈새에 안치되듯 놓여 있던 세 가지 유물들을 차례로 움켜쥐었습니다. \n\n첫 번째로 손에 닿은 것은 낡아 흐릿해진 금속성 질감의 무쇠 방울이었습니다. 표면에 기묘한 기하학적 문양이 음각된 그것을 쥐는 순간, 세이라의 손끝에서부터 어깨, 그리고 척추를 타고 올라와 머릿속을 때리는 아득한 진동이 느껴졌습니다. 마치 그녀의 핏줄 속에 잠들어 있던 어떤 오래된 기억이 이 거친 무쇠 방울의 표면과 격렬하게 반응하듯, 미세한 맥박이 손가락 끝에서 고동쳤습니다. \n\n이어 그녀는 단단하고 묵직한 무쇠의 감촉을 지닌 녹슨 철제 노루발못뽑이를 잡아챘습니다. 지렛대로 쓸 수도, 혹은 위급한 순간 물리적인 둔기로 휘두를 수도 있을 만큼 든든한 무게감이 얇은 코트 안쪽으로 전해져 왔습니다. \n\n마지막으로 그녀가 거두어들인 것은 누렇게 바래고 모서리가 무참히 짓눌린 종이 뭉치, '철거 예정지 조사 일지'였습니다. 표면에는 정체 모를 붉은 액체가 튀어 말라붙은 흔적이 역력했고, 빗물에 번진 잉크 자국들이 마치 기괴한 부적의 선처럼 어지럽게 얽혀 있었습니다. \n\n세이라는 이 세 가지 도구들의 무거운 현실감을 피부로 느끼며, 그것들을 낡은 주머니와 품속 깊은 곳에 단단히 밀어 넣었습니다. 먼지와 썩은 흙 속에 묻혀 있던 과거의 파편들이 그녀의 몸과 밀착되자, 주변을 에워싸고 있던 지맥의 미세한 공명음이 한층 더 날카롭게 가라앉으며 그녀의 다음 움직임을 재촉하듯 숨을 죽였습니다.\n[ZERO_MUTATION_END]",
-    "rawResponseText": "주사위의 위대한 흐름은 세이라에게 거역할 수 없는 명확한 손길을 부여했습니다. 그녀는 망설임 없이 손을 뻗어, 잿더미와 무너진 콘크리트 상판 사이의 좁고 어두운 틈새에 안치되듯 놓여 있던 세 가지 유물들을 차례로 움켜쥐었습니다. \n\n첫 번째로 손에 닿은 것은 낡아 흐릿해진 금속성 질감의 무쇠 방울이었습니다. 표면에 기묘한 기하학적 문양이 음각된 그것을 쥐는 순간, 세이라의 손끝에서부터 어깨, 그리고 척추를 타고 올라와 머릿속을 때리는 아득한 진동이 느껴졌습니다. 마치 그녀의 핏줄 속에 잠들어 있던 어떤 오래된 기억이 이 거친 무쇠 방울의 표면과 격렬하게 반응하듯, 미세한 맥박이 손가락 끝에서 고동쳤습니다. \n\n이어 그녀는 단단하고 묵직한 무쇠의 감촉을 지닌 녹슨 철제 노루발못뽑이를 잡아챘습니다. 지렛대로 쓸 수도, 혹은 위급한 순간 물리적인 둔기로 휘두를 수도 있을 만큼 든든한 무게감이 얇은 코트 안쪽으로 전해져 왔습니다. \n\n마지막으로 그녀가 거두어들인 것은 누렇게 바래고 모서리가 무참히 짓눌린 종이 뭉치, '철거 예정지 조사 일지'였습니다. 표면에는 정체 모를 붉은 액체가 튀어 말라붙은 흔적이 역력했고, 빗물에 번진 잉크 자국들이 마치 기괴한 부적의 선처럼 어지럽게 얽혀 있었습니다. \n\n세이라는 이 세 가지 도구들의 무거운 현실감을 피부로 느끼며, 그것들을 낡은 주머니와 품속 깊은 곳에 단단히 밀어 넣었습니다. 먼지와 썩은 흙 속에 묻혀 있던 과거의 파편들이 그녀의 몸과 밀착되자, 주변을 에워싸고 있던 지맥의 미세한 공명음이 한층 더 날카롭게 가라앉으며 그녀의 다음 움직임을 재촉하듯 숨을 죽였습니다."
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"붉은 실이 감긴 의식용 대검과 전술 플래시 획득\",\n    \"narrativeSummary\": \"어둠 속에서 진흙을 헤치고 꺼낸 것은 낡은 가죽 칼집에 담긴 군용 대검이었습니다. 대검의 손잡이에는 액을 막기 위한 주술적 흔적인 듯 퇴색된 붉은 실이 촘촘히 감겨 있으며, 칼날은 서늘한 기운을 뿜어냅니다. 그 옆에 반쯤 묻혀 있던 방수 전술 플래시를 함께 확보하여, 어둠으로 가득 찬 이 유령 도시를 밝힐 강력한 수단과 최소한의 호신 무기를 손에 넣었습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_shamanic_dagger_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"시이나 렌\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"붉은 실이 감긴 군용 대검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"홍련동 공사현장 진흙더미\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      },\n      {\n        \"eventId\": \"evt_pickup_tactical_flash_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"시이나 렌\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"소형 전술 플래시\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"홍련동 공사현장 진흙더미\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_shamanic_dagger_origin: 군용 대검에 붉은 실을 감아 의식용으로 사용한 무속인은 누구인가?\",\n        \"seed_lost_police_gear: 이 공사현장에 방수 전술 플래시를 떨어뜨리고 간 자의 행방\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"붉은 실이 감긴 군용 대검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_shamanic_dagger_001\"\n        },\n        {\n          \"name\": \"소형 전술 플래시\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_tactical_flash_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 흙 아래의 복선\",\n        \"upcomingChapters\": [\n          \"1장: 지맥을 가른 붉은 흉터\",\n          \"2장: 방울 소리가 이끄는 밤\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"신비로운 황동 무녀 방울과 낡은 신물 대검 획득\",\n    \"narrativeSummary\": \"허물어진 가설 무대와 흙더미 속에서 무너져 내린 신당의 흔적을 발견했습니다. 손끝에 걸린 것은 기이하게도 지맥의 부정을 누르기 위해 제작된 두터운 무쇠 대검과, 붉은 매듭끈이 묶인 묵직한 황동 방울이었습니다. 어두운 밤하늘 아래에서 조차 희미하게 공명하는 듯한 이 신물들은 영적인 존재들과 마주했을 때 당신의 감각을 지켜줄 강력한 방패가 되어줄 것입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_shamanic_bell_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"시이나 렌\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"붉은 실이 감긴 황동 방울\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"붕괴된 임시 제단터\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      },\n      {\n        \"eventId\": \"evt_pickup_ritual_blade_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"시이나 렌\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"의식용 무쇠 대검\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"붕괴된 임시 제단터\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_altar_desecration: 제단을 처참하게 부수고 지맥을 터뜨린 거대한 영적 파괴의 주동자\",\n        \"seed_bell_resonance: 특정한 악귀나 공간에 반응하여 스스로 울리는 황동 방울의 비밀\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"붉은 실이 감긴 황동 방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_shamanic_bell_001\"\n        },\n        {\n          \"name\": \"의식용 무쇠 대검\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_ritual_blade_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 흙 아래의 복선\",\n        \"upcomingChapters\": [\n          \"1장: 부정한 제단의 곡소리\",\n          \"2장: 밤바람을 가르는 무쇠\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"실종된 특수수사팀의 전술 조끼와 호신용 삼단봉 획득\",\n    \"narrativeSummary\": \"진흙 속에 반쯤 파묻힌 채 갈기갈기 찢겨나간 경찰용 전술 조끼를 발견했습니다. 짐승의 발톱에 찢긴 듯한 흔적이 선명한 가죽 원단 사이에서, 여전히 견고한 두랄루민 재질의 경찰용 삼단봉과 충전식 고휘도 라이트를 온전히 수거했습니다. 조끼 내부에는 이 지역을 수색하던 특수수사팀의 깨진 무전기가 남겨져 있어, 이 도시에 도사린 위험이 심상치 않음을 시사합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_police_baton_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"시이나 렌\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"경찰용 삼단봉\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"찢겨진 경찰 전술조끼\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      },\n      {\n        \"eventId\": \"evt_pickup_police_light_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"시이나 렌\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"고휘도 충전식 라이트\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"찢겨진 경찰 전술조끼\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_missing_police_team: 전술 조끼를 갈기갈기 찢어발긴 기괴한 괴력의 정체와 실종된 경찰들\",\n        \"seed_broken_radio_signal: 깨진 무전기에서 이따금 흘러나오는 잡음 섞인 신호음\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"경찰용 삼단봉\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_police_baton_001\"\n        },\n        {\n          \"name\": \"고휘도 충전식 라이트\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_police_light_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 흙 아래의 복선\",\n        \"upcomingChapters\": [\n          \"1장: 통제구역 홍련동\",\n          \"2장: 무덤이 된 가설 가설막\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n시이나 렌은 차가운 진흙 속에 파묻힌 정체불명의 실루엣을 향해 손을 뻗어 단단히 쥐었습니다. 손가락 끝에 와닿는 한기 서린 금속성과 거친 질감이 뼈를 타고 고스란히 전해집니다. 이 혹한의 어둠 속에서 오직 육신과 젖은 옷가지뿐이던 당신에게, 이 손잡이의 감촉은 심해에서 붙잡은 동아줄과도 같습니다. \n\n진흙 서리 아래 깊숙이 박힌 물건을 완전히 뽑아내어 품속에 단단히 갈무리하려는 찰나, 사방을 짓누르던 적막이 한층 더 비릿한 바람을 머금고 요동치기 시작했습니다. 공기 중에 떠도는 기묘한 가스의 냄새가 짙어지고, 밤하늘을 수놓은 검푸른 구름이 낮게 내려앉아 주변의 실루엣을 흐릿하게 지워버립니다. 당신은 무릎을 꿇은 채 진흙투성이가 된 고철의 형태를 매만지며, 주위의 어둠 속에 도사린 불길한 영기가 자신을 주시하고 있는 것은 아닌지 숨을 죽였습니다.\n[ZERO_MUTATION_END]",
+    "rawResponseText": "시이나 렌은 차가운 진흙 속에 파묻힌 정체불명의 실루엣을 향해 손을 뻗어 단단히 쥐었습니다. 손가락 끝에 와닿는 한기 서린 금속성과 거친 질감이 뼈를 타고 고스란히 전해집니다. 이 혹한의 어둠 속에서 오직 육신과 젖은 옷가지뿐이던 당신에게, 이 손잡이의 감촉은 심해에서 붙잡은 동아줄과도 같습니다. \n\n진흙 서리 아래 깊숙이 박힌 물건을 완전히 뽑아내어 품속에 단단히 갈무리하려는 찰나, 사방을 짓누르던 적막이 한층 더 비릿한 바람을 머금고 요동치기 시작했습니다. 공기 중에 떠도는 기묘한 가스의 냄새가 짙어지고, 밤하늘을 수놓은 검푸른 구름이 낮게 내려앉아 주변의 실루엣을 흐릿하게 지워버립니다. 당신은 무릎을 꿇은 채 진흙투성이가 된 고철의 형태를 매만지며, 주위의 어둠 속에 도사린 불길한 영기가 자신을 주시하고 있는 것은 아닌지 숨을 죽였습니다."
   },
   "candidatePipeline": {
     "rawCandidatesBlock": [
       {
-        "label": "도구를 이용한 잔해 돌파 및 전진",
-        "narrativeSummary": "세이라는 획득한 녹슨 노루발못뽑이를 쥐고, 무너진 철근과 널빤지로 가로막힌 폐가들의 좁은 틈새를 강제로 비집어 열며 신월 3구역의 더 깊은 안쪽으로 진입합니다. 무쇠 방울이 그녀의 걸음마다 미세하게 공명하며 사악한 영들이 깃든 물리적 위험 구역을 경고하듯 흔들립니다.",
+        "label": "붉은 실이 감긴 의식용 대검과 전술 플래시 획득",
+        "narrativeSummary": "어둠 속에서 진흙을 헤치고 꺼낸 것은 낡은 가죽 칼집에 담긴 군용 대검이었습니다. 대검의 손잡이에는 액을 막기 위한 주술적 흔적인 듯 퇴색된 붉은 실이 촘촘히 감겨 있으며, 칼날은 서늘한 기운을 뿜어냅니다. 그 옆에 반쯤 묻혀 있던 방수 전술 플래시를 함께 확보하여, 어둠으로 가득 찬 이 유령 도시를 밝힐 강력한 수단과 최소한의 호신 무기를 손에 넣었습니다.",
         "semanticEvents": [
           {
-            "eventId": "EVT_WIS_SEARCH_SUCCESS",
+            "eventId": "evt_pickup_shamanic_dagger_001",
             "action": "PICKUP",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
               },
               {
                 "role": "OBJECT",
-                "entityName": "오래된 무쇠 방울"
+                "entityName": "붉은 실이 감긴 군용 대검"
               },
               {
                 "role": "LOCATION",
-                "entityName": "신월 3구역 철거 잔해"
+                "entityName": "홍련동 공사현장 진흙더미"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          },
+          {
+            "eventId": "evt_pickup_tactical_flash_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "시이나 렌"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "소형 전술 플래시"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "홍련동 공사현장 진흙더미"
               }
             ],
             "scope": "CANONICAL",
@@ -153,72 +166,75 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "가문의 저주와 아스카 세이라의 지맥 한기",
-            "신월 3구역의 핏빛 향 냄새와 의문의 제단",
-            "조사 일지에 기록된 실종된 조사관"
-          ],
-          "cameraOffscreenEvents": [
-            "오컬트 특수수사팀(OSI) 소속 대원들이 신월 3구역 북쪽 경계선에 접근하여 차량 통제선을 설치하기 시작했습니다."
-          ],
-          "newFactions": [
-            {
-              "name": "오컬트 특수수사팀 (OSI)",
-              "description": "도시 전역의 초자연적 재해와 지맥 왜곡 사건을 비밀리에 추적하고 통제하는 경찰청 산하의 특수 수사부서",
-              "attitudeTowardsPlayer": "미인지 상태"
-            }
+            "seed_shamanic_dagger_origin: 군용 대검에 붉은 실을 감아 의식용으로 사용한 무속인은 누구인가?",
+            "seed_lost_police_gear: 이 공사현장에 방수 전술 플래시를 떨어뜨리고 간 자의 행방"
           ],
           "inventoryChanges": [
             {
-              "name": "오래된 무쇠 방울",
+              "name": "붉은 실이 감긴 군용 대검",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_shamanic_dagger_001"
             },
             {
-              "name": "녹슨 철제 노루발못뽑이",
+              "name": "소형 전술 플래시",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
-            },
-            {
-              "name": "철거 예정지 조사 일지",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_tactical_flash_001"
             }
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 무덤이 된 구역",
+            "currentChapter": "서막: 흙 아래의 복선",
             "upcomingChapters": [
-              "제1장: 붉은 실의 제단",
-              "제2장: 밤을 걷는 순경들"
+              "1장: 지맥을 가른 붉은 흉터",
+              "2장: 방울 소리가 이끄는 밤"
             ]
           }
         },
         "candidateId": 1
       },
       {
-        "label": "조사 일지 해독 및 배후 분석",
-        "narrativeSummary": "세이라는 비를 피할 수 있는 찌그러진 컨테이너 내부로 몸을 숨깁니다. 주머니에서 꺼낸 성냥이나 약한 불빛에 의지해 가쁜 숨을 몰아쉬며, 주운 '철거 예정지 조사 일지'의 피 얼룩진 페이지들을 넘겨 이 구역에 봉인되었던 악귀의 실체와 실종된 인부들의 행방을 해독하기 시작합니다.",
+        "label": "신비로운 황동 무녀 방울과 낡은 신물 대검 획득",
+        "narrativeSummary": "허물어진 가설 무대와 흙더미 속에서 무너져 내린 신당의 흔적을 발견했습니다. 손끝에 걸린 것은 기이하게도 지맥의 부정을 누르기 위해 제작된 두터운 무쇠 대검과, 붉은 매듭끈이 묶인 묵직한 황동 방울이었습니다. 어두운 밤하늘 아래에서 조차 희미하게 공명하는 듯한 이 신물들은 영적인 존재들과 마주했을 때 당신의 감각을 지켜줄 강력한 방패가 되어줄 것입니다.",
         "semanticEvents": [
           {
-            "eventId": "EVT_WIS_SEARCH_SUCCESS",
+            "eventId": "evt_pickup_shamanic_bell_001",
             "action": "PICKUP",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
               },
               {
                 "role": "OBJECT",
-                "entityName": "철거 예정지 조사 일지"
+                "entityName": "붉은 실이 감긴 황동 방울"
               },
               {
                 "role": "LOCATION",
-                "entityName": "신월 3구역 철거 잔해"
+                "entityName": "붕괴된 임시 제단터"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          },
+          {
+            "eventId": "evt_pickup_ritual_blade_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "시이나 렌"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "의식용 무쇠 대검"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "붕괴된 임시 제단터"
               }
             ],
             "scope": "CANONICAL",
@@ -228,58 +244,75 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "가문의 저주와 아스카 세이라의 지맥 한기",
-            "신월 3구역의 핏빛 향 냄새와 의문의 제단",
-            "조사 일지에 기록된 실종된 조사관"
+            "seed_altar_desecration: 제단을 처참하게 부수고 지맥을 터뜨린 거대한 영적 파괴의 주동자",
+            "seed_bell_resonance: 특정한 악귀나 공간에 반응하여 스스로 울리는 황동 방울의 비밀"
           ],
           "inventoryChanges": [
             {
-              "name": "오래된 무쇠 방울",
+              "name": "붉은 실이 감긴 황동 방울",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_shamanic_bell_001"
             },
             {
-              "name": "녹슨 철제 노루발못뽑이",
+              "name": "의식용 무쇠 대검",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
-            },
-            {
-              "name": "철거 예정지 조사 일지",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_ritual_blade_001"
             }
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 무덤이 된 구역"
+            "currentChapter": "서막: 흙 아래의 복선",
+            "upcomingChapters": [
+              "1장: 부정한 제단의 곡소리",
+              "2장: 밤바람을 가르는 무쇠"
+            ]
           }
         },
         "candidateId": 2
       },
       {
-        "label": "무쇠 방울을 이용한 영적 공명 시도",
-        "narrativeSummary": "세이라는 흙과 먼지를 털어낸 오래된 무쇠 방울을 움켜쥐고 잔해 한가운데에 섭니다. 그녀는 방울을 가볍게 흔들어 그 탁하고 무거운 소리가 철거 구역 전체로 퍼져나가게 합니다. 방울소리가 지맥의 왜곡된 살기와 공명하며, 숨겨진 사악한 기운의 발원지(제단)가 있는 방향으로 짙은 붉은 안개가 소용돌이치기 시작합니다.",
+        "label": "실종된 특수수사팀의 전술 조끼와 호신용 삼단봉 획득",
+        "narrativeSummary": "진흙 속에 반쯤 파묻힌 채 갈기갈기 찢겨나간 경찰용 전술 조끼를 발견했습니다. 짐승의 발톱에 찢긴 듯한 흔적이 선명한 가죽 원단 사이에서, 여전히 견고한 두랄루민 재질의 경찰용 삼단봉과 충전식 고휘도 라이트를 온전히 수거했습니다. 조끼 내부에는 이 지역을 수색하던 특수수사팀의 깨진 무전기가 남겨져 있어, 이 도시에 도사린 위험이 심상치 않음을 시사합니다.",
         "semanticEvents": [
           {
-            "eventId": "EVT_WIS_SEARCH_SUCCESS",
+            "eventId": "evt_pickup_police_baton_001",
             "action": "PICKUP",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
               },
               {
                 "role": "OBJECT",
-                "entityName": "오래된 무쇠 방울"
+                "entityName": "경찰용 삼단봉"
               },
               {
                 "role": "LOCATION",
-                "entityName": "신월 3구역 철거 잔해"
+                "entityName": "찢겨진 경찰 전술조끼"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          },
+          {
+            "eventId": "evt_pickup_police_light_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "시이나 렌"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "고휘도 충전식 라이트"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "찢겨진 경찰 전술조끼"
               }
             ],
             "scope": "CANONICAL",
@@ -289,35 +322,31 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "가문의 저주와 아스카 세이라의 지맥 한기",
-            "신월 3구역의 핏빛 향 냄새와 의문의 제단",
-            "조사 일지에 기록된 실종된 조사관"
+            "seed_missing_police_team: 전술 조끼를 갈기갈기 찢어발긴 기괴한 괴력의 정체와 실종된 경찰들",
+            "seed_broken_radio_signal: 깨진 무전기에서 이따금 흘러나오는 잡음 섞인 신호음"
           ],
           "inventoryChanges": [
             {
-              "name": "오래된 무쇠 방울",
+              "name": "경찰용 삼단봉",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_police_baton_001"
             },
             {
-              "name": "녹슨 철제 노루발못뽑이",
+              "name": "고휘도 충전식 라이트",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
-            },
-            {
-              "name": "철거 예정지 조사 일지",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_police_light_001"
             }
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 무덤이 된 구역"
+            "currentChapter": "서막: 흙 아래의 복선",
+            "upcomingChapters": [
+              "1장: 통제구역 홍련동",
+              "2장: 무덤이 된 가설 가설막"
+            ]
           }
         },
         "candidateId": 3
@@ -325,24 +354,45 @@
     ],
     "parsedCandidates": [
       {
-        "label": "도구를 이용한 잔해 돌파 및 전진",
-        "narrativeSummary": "세이라는 획득한 녹슨 노루발못뽑이를 쥐고, 무너진 철근과 널빤지로 가로막힌 폐가들의 좁은 틈새를 강제로 비집어 열며 신월 3구역의 더 깊은 안쪽으로 진입합니다. 무쇠 방울이 그녀의 걸음마다 미세하게 공명하며 사악한 영들이 깃든 물리적 위험 구역을 경고하듯 흔들립니다.",
+        "label": "붉은 실이 감긴 의식용 대검과 전술 플래시 획득",
+        "narrativeSummary": "어둠 속에서 진흙을 헤치고 꺼낸 것은 낡은 가죽 칼집에 담긴 군용 대검이었습니다. 대검의 손잡이에는 액을 막기 위한 주술적 흔적인 듯 퇴색된 붉은 실이 촘촘히 감겨 있으며, 칼날은 서늘한 기운을 뿜어냅니다. 그 옆에 반쯤 묻혀 있던 방수 전술 플래시를 함께 확보하여, 어둠으로 가득 찬 이 유령 도시를 밝힐 강력한 수단과 최소한의 호신 무기를 손에 넣었습니다.",
         "semanticEvents": [
           {
-            "eventId": "EVT_WIS_SEARCH_SUCCESS",
+            "eventId": "evt_pickup_shamanic_dagger_001",
             "action": "PICKUP",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
               },
               {
                 "role": "OBJECT",
-                "entityName": "오래된 무쇠 방울"
+                "entityName": "붉은 실이 감긴 군용 대검"
               },
               {
                 "role": "LOCATION",
-                "entityName": "신월 3구역 철거 잔해"
+                "entityName": "홍련동 공사현장 진흙더미"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          },
+          {
+            "eventId": "evt_pickup_tactical_flash_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "시이나 렌"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "소형 전술 플래시"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "홍련동 공사현장 진흙더미"
               }
             ],
             "scope": "CANONICAL",
@@ -352,72 +402,75 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "가문의 저주와 아스카 세이라의 지맥 한기",
-            "신월 3구역의 핏빛 향 냄새와 의문의 제단",
-            "조사 일지에 기록된 실종된 조사관"
-          ],
-          "cameraOffscreenEvents": [
-            "오컬트 특수수사팀(OSI) 소속 대원들이 신월 3구역 북쪽 경계선에 접근하여 차량 통제선을 설치하기 시작했습니다."
-          ],
-          "newFactions": [
-            {
-              "name": "오컬트 특수수사팀 (OSI)",
-              "description": "도시 전역의 초자연적 재해와 지맥 왜곡 사건을 비밀리에 추적하고 통제하는 경찰청 산하의 특수 수사부서",
-              "attitudeTowardsPlayer": "미인지 상태"
-            }
+            "seed_shamanic_dagger_origin: 군용 대검에 붉은 실을 감아 의식용으로 사용한 무속인은 누구인가?",
+            "seed_lost_police_gear: 이 공사현장에 방수 전술 플래시를 떨어뜨리고 간 자의 행방"
           ],
           "inventoryChanges": [
             {
-              "name": "오래된 무쇠 방울",
+              "name": "붉은 실이 감긴 군용 대검",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_shamanic_dagger_001"
             },
             {
-              "name": "녹슨 철제 노루발못뽑이",
+              "name": "소형 전술 플래시",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
-            },
-            {
-              "name": "철거 예정지 조사 일지",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_tactical_flash_001"
             }
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 무덤이 된 구역",
+            "currentChapter": "서막: 흙 아래의 복선",
             "upcomingChapters": [
-              "제1장: 붉은 실의 제단",
-              "제2장: 밤을 걷는 순경들"
+              "1장: 지맥을 가른 붉은 흉터",
+              "2장: 방울 소리가 이끄는 밤"
             ]
           }
         },
         "candidateId": 1
       },
       {
-        "label": "조사 일지 해독 및 배후 분석",
-        "narrativeSummary": "세이라는 비를 피할 수 있는 찌그러진 컨테이너 내부로 몸을 숨깁니다. 주머니에서 꺼낸 성냥이나 약한 불빛에 의지해 가쁜 숨을 몰아쉬며, 주운 '철거 예정지 조사 일지'의 피 얼룩진 페이지들을 넘겨 이 구역에 봉인되었던 악귀의 실체와 실종된 인부들의 행방을 해독하기 시작합니다.",
+        "label": "신비로운 황동 무녀 방울과 낡은 신물 대검 획득",
+        "narrativeSummary": "허물어진 가설 무대와 흙더미 속에서 무너져 내린 신당의 흔적을 발견했습니다. 손끝에 걸린 것은 기이하게도 지맥의 부정을 누르기 위해 제작된 두터운 무쇠 대검과, 붉은 매듭끈이 묶인 묵직한 황동 방울이었습니다. 어두운 밤하늘 아래에서 조차 희미하게 공명하는 듯한 이 신물들은 영적인 존재들과 마주했을 때 당신의 감각을 지켜줄 강력한 방패가 되어줄 것입니다.",
         "semanticEvents": [
           {
-            "eventId": "EVT_WIS_SEARCH_SUCCESS",
+            "eventId": "evt_pickup_shamanic_bell_001",
             "action": "PICKUP",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
               },
               {
                 "role": "OBJECT",
-                "entityName": "철거 예정지 조사 일지"
+                "entityName": "붉은 실이 감긴 황동 방울"
               },
               {
                 "role": "LOCATION",
-                "entityName": "신월 3구역 철거 잔해"
+                "entityName": "붕괴된 임시 제단터"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          },
+          {
+            "eventId": "evt_pickup_ritual_blade_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "시이나 렌"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "의식용 무쇠 대검"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "붕괴된 임시 제단터"
               }
             ],
             "scope": "CANONICAL",
@@ -427,58 +480,75 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "가문의 저주와 아스카 세이라의 지맥 한기",
-            "신월 3구역의 핏빛 향 냄새와 의문의 제단",
-            "조사 일지에 기록된 실종된 조사관"
+            "seed_altar_desecration: 제단을 처참하게 부수고 지맥을 터뜨린 거대한 영적 파괴의 주동자",
+            "seed_bell_resonance: 특정한 악귀나 공간에 반응하여 스스로 울리는 황동 방울의 비밀"
           ],
           "inventoryChanges": [
             {
-              "name": "오래된 무쇠 방울",
+              "name": "붉은 실이 감긴 황동 방울",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_shamanic_bell_001"
             },
             {
-              "name": "녹슨 철제 노루발못뽑이",
+              "name": "의식용 무쇠 대검",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
-            },
-            {
-              "name": "철거 예정지 조사 일지",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_ritual_blade_001"
             }
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 무덤이 된 구역"
+            "currentChapter": "서막: 흙 아래의 복선",
+            "upcomingChapters": [
+              "1장: 부정한 제단의 곡소리",
+              "2장: 밤바람을 가르는 무쇠"
+            ]
           }
         },
         "candidateId": 2
       },
       {
-        "label": "무쇠 방울을 이용한 영적 공명 시도",
-        "narrativeSummary": "세이라는 흙과 먼지를 털어낸 오래된 무쇠 방울을 움켜쥐고 잔해 한가운데에 섭니다. 그녀는 방울을 가볍게 흔들어 그 탁하고 무거운 소리가 철거 구역 전체로 퍼져나가게 합니다. 방울소리가 지맥의 왜곡된 살기와 공명하며, 숨겨진 사악한 기운의 발원지(제단)가 있는 방향으로 짙은 붉은 안개가 소용돌이치기 시작합니다.",
+        "label": "실종된 특수수사팀의 전술 조끼와 호신용 삼단봉 획득",
+        "narrativeSummary": "진흙 속에 반쯤 파묻힌 채 갈기갈기 찢겨나간 경찰용 전술 조끼를 발견했습니다. 짐승의 발톱에 찢긴 듯한 흔적이 선명한 가죽 원단 사이에서, 여전히 견고한 두랄루민 재질의 경찰용 삼단봉과 충전식 고휘도 라이트를 온전히 수거했습니다. 조끼 내부에는 이 지역을 수색하던 특수수사팀의 깨진 무전기가 남겨져 있어, 이 도시에 도사린 위험이 심상치 않음을 시사합니다.",
         "semanticEvents": [
           {
-            "eventId": "EVT_WIS_SEARCH_SUCCESS",
+            "eventId": "evt_pickup_police_baton_001",
             "action": "PICKUP",
             "roles": [
               {
                 "role": "SUBJECT",
-                "entityName": "아스카 세이라"
+                "entityName": "시이나 렌"
               },
               {
                 "role": "OBJECT",
-                "entityName": "오래된 무쇠 방울"
+                "entityName": "경찰용 삼단봉"
               },
               {
                 "role": "LOCATION",
-                "entityName": "신월 3구역 철거 잔해"
+                "entityName": "찢겨진 경찰 전술조끼"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          },
+          {
+            "eventId": "evt_pickup_police_light_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "시이나 렌"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "고휘도 충전식 라이트"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "찢겨진 경찰 전술조끼"
               }
             ],
             "scope": "CANONICAL",
@@ -488,35 +558,31 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "가문의 저주와 아스카 세이라의 지맥 한기",
-            "신월 3구역의 핏빛 향 냄새와 의문의 제단",
-            "조사 일지에 기록된 실종된 조사관"
+            "seed_missing_police_team: 전술 조끼를 갈기갈기 찢어발긴 기괴한 괴력의 정체와 실종된 경찰들",
+            "seed_broken_radio_signal: 깨진 무전기에서 이따금 흘러나오는 잡음 섞인 신호음"
           ],
           "inventoryChanges": [
             {
-              "name": "오래된 무쇠 방울",
+              "name": "경찰용 삼단봉",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_police_baton_001"
             },
             {
-              "name": "녹슨 철제 노루발못뽑이",
+              "name": "고휘도 충전식 라이트",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
-            },
-            {
-              "name": "철거 예정지 조사 일지",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+              "verifiedEventId": "evt_pickup_police_light_001"
             }
           ],
           "chapterChanges": {
-            "currentChapter": "서막: 무덤이 된 구역"
+            "currentChapter": "서막: 흙 아래의 복선",
+            "upcomingChapters": [
+              "1장: 통제구역 홍련동",
+              "2장: 무덤이 된 가설 가설막"
+            ]
           }
         },
         "candidateId": 3
@@ -525,24 +591,45 @@
     "recoveryGateResult": {
       "passedCandidates": [
         {
-          "label": "도구를 이용한 잔해 돌파 및 전진",
-          "narrativeSummary": "세이라는 획득한 녹슨 노루발못뽑이를 쥐고, 무너진 철근과 널빤지로 가로막힌 폐가들의 좁은 틈새를 강제로 비집어 열며 신월 3구역의 더 깊은 안쪽으로 진입합니다. 무쇠 방울이 그녀의 걸음마다 미세하게 공명하며 사악한 영들이 깃든 물리적 위험 구역을 경고하듯 흔들립니다.",
+          "label": "붉은 실이 감긴 의식용 대검과 전술 플래시 획득",
+          "narrativeSummary": "어둠 속에서 진흙을 헤치고 꺼낸 것은 낡은 가죽 칼집에 담긴 군용 대검이었습니다. 대검의 손잡이에는 액을 막기 위한 주술적 흔적인 듯 퇴색된 붉은 실이 촘촘히 감겨 있으며, 칼날은 서늘한 기운을 뿜어냅니다. 그 옆에 반쯤 묻혀 있던 방수 전술 플래시를 함께 확보하여, 어둠으로 가득 찬 이 유령 도시를 밝힐 강력한 수단과 최소한의 호신 무기를 손에 넣었습니다.",
           "semanticEvents": [
             {
-              "eventId": "EVT_WIS_SEARCH_SUCCESS",
+              "eventId": "evt_pickup_shamanic_dagger_001",
               "action": "PICKUP",
               "roles": [
                 {
                   "role": "SUBJECT",
-                  "entityName": "아스카 세이라"
+                  "entityName": "시이나 렌"
                 },
                 {
                   "role": "OBJECT",
-                  "entityName": "오래된 무쇠 방울"
+                  "entityName": "붉은 실이 감긴 군용 대검"
                 },
                 {
                   "role": "LOCATION",
-                  "entityName": "신월 3구역 철거 잔해"
+                  "entityName": "홍련동 공사현장 진흙더미"
+                }
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "VERIFIED"
+            },
+            {
+              "eventId": "evt_pickup_tactical_flash_001",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "시이나 렌"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "소형 전술 플래시"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "홍련동 공사현장 진흙더미"
                 }
               ],
               "scope": "CANONICAL",
@@ -552,72 +639,75 @@
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "가문의 저주와 아스카 세이라의 지맥 한기",
-              "신월 3구역의 핏빛 향 냄새와 의문의 제단",
-              "조사 일지에 기록된 실종된 조사관"
-            ],
-            "cameraOffscreenEvents": [
-              "오컬트 특수수사팀(OSI) 소속 대원들이 신월 3구역 북쪽 경계선에 접근하여 차량 통제선을 설치하기 시작했습니다."
-            ],
-            "newFactions": [
-              {
-                "name": "오컬트 특수수사팀 (OSI)",
-                "description": "도시 전역의 초자연적 재해와 지맥 왜곡 사건을 비밀리에 추적하고 통제하는 경찰청 산하의 특수 수사부서",
-                "attitudeTowardsPlayer": "미인지 상태"
-              }
+              "seed_shamanic_dagger_origin: 군용 대검에 붉은 실을 감아 의식용으로 사용한 무속인은 누구인가?",
+              "seed_lost_police_gear: 이 공사현장에 방수 전술 플래시를 떨어뜨리고 간 자의 행방"
             ],
             "inventoryChanges": [
               {
-                "name": "오래된 무쇠 방울",
+                "name": "붉은 실이 감긴 군용 대검",
                 "quantity": 1,
                 "action": "add",
                 "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+                "verifiedEventId": "evt_pickup_shamanic_dagger_001"
               },
               {
-                "name": "녹슨 철제 노루발못뽑이",
+                "name": "소형 전술 플래시",
                 "quantity": 1,
                 "action": "add",
                 "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
-              },
-              {
-                "name": "철거 예정지 조사 일지",
-                "quantity": 1,
-                "action": "add",
-                "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+                "verifiedEventId": "evt_pickup_tactical_flash_001"
               }
             ],
             "chapterChanges": {
-              "currentChapter": "서막: 무덤이 된 구역",
+              "currentChapter": "서막: 흙 아래의 복선",
               "upcomingChapters": [
-                "제1장: 붉은 실의 제단",
-                "제2장: 밤을 걷는 순경들"
+                "1장: 지맥을 가른 붉은 흉터",
+                "2장: 방울 소리가 이끄는 밤"
               ]
             }
           },
           "candidateId": 1
         },
         {
-          "label": "조사 일지 해독 및 배후 분석",
-          "narrativeSummary": "세이라는 비를 피할 수 있는 찌그러진 컨테이너 내부로 몸을 숨깁니다. 주머니에서 꺼낸 성냥이나 약한 불빛에 의지해 가쁜 숨을 몰아쉬며, 주운 '철거 예정지 조사 일지'의 피 얼룩진 페이지들을 넘겨 이 구역에 봉인되었던 악귀의 실체와 실종된 인부들의 행방을 해독하기 시작합니다.",
+          "label": "신비로운 황동 무녀 방울과 낡은 신물 대검 획득",
+          "narrativeSummary": "허물어진 가설 무대와 흙더미 속에서 무너져 내린 신당의 흔적을 발견했습니다. 손끝에 걸린 것은 기이하게도 지맥의 부정을 누르기 위해 제작된 두터운 무쇠 대검과, 붉은 매듭끈이 묶인 묵직한 황동 방울이었습니다. 어두운 밤하늘 아래에서 조차 희미하게 공명하는 듯한 이 신물들은 영적인 존재들과 마주했을 때 당신의 감각을 지켜줄 강력한 방패가 되어줄 것입니다.",
           "semanticEvents": [
             {
-              "eventId": "EVT_WIS_SEARCH_SUCCESS",
+              "eventId": "evt_pickup_shamanic_bell_001",
               "action": "PICKUP",
               "roles": [
                 {
                   "role": "SUBJECT",
-                  "entityName": "아스카 세이라"
+                  "entityName": "시이나 렌"
                 },
                 {
                   "role": "OBJECT",
-                  "entityName": "철거 예정지 조사 일지"
+                  "entityName": "붉은 실이 감긴 황동 방울"
                 },
                 {
                   "role": "LOCATION",
-                  "entityName": "신월 3구역 철거 잔해"
+                  "entityName": "붕괴된 임시 제단터"
+                }
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "VERIFIED"
+            },
+            {
+              "eventId": "evt_pickup_ritual_blade_001",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "시이나 렌"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "의식용 무쇠 대검"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "붕괴된 임시 제단터"
                 }
               ],
               "scope": "CANONICAL",
@@ -627,58 +717,75 @@
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "가문의 저주와 아스카 세이라의 지맥 한기",
-              "신월 3구역의 핏빛 향 냄새와 의문의 제단",
-              "조사 일지에 기록된 실종된 조사관"
+              "seed_altar_desecration: 제단을 처참하게 부수고 지맥을 터뜨린 거대한 영적 파괴의 주동자",
+              "seed_bell_resonance: 특정한 악귀나 공간에 반응하여 스스로 울리는 황동 방울의 비밀"
             ],
             "inventoryChanges": [
               {
-                "name": "오래된 무쇠 방울",
+                "name": "붉은 실이 감긴 황동 방울",
                 "quantity": 1,
                 "action": "add",
                 "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+                "verifiedEventId": "evt_pickup_shamanic_bell_001"
               },
               {
-                "name": "녹슨 철제 노루발못뽑이",
+                "name": "의식용 무쇠 대검",
                 "quantity": 1,
                 "action": "add",
                 "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
-              },
-              {
-                "name": "철거 예정지 조사 일지",
-                "quantity": 1,
-                "action": "add",
-                "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+                "verifiedEventId": "evt_pickup_ritual_blade_001"
               }
             ],
             "chapterChanges": {
-              "currentChapter": "서막: 무덤이 된 구역"
+              "currentChapter": "서막: 흙 아래의 복선",
+              "upcomingChapters": [
+                "1장: 부정한 제단의 곡소리",
+                "2장: 밤바람을 가르는 무쇠"
+              ]
             }
           },
           "candidateId": 2
         },
         {
-          "label": "무쇠 방울을 이용한 영적 공명 시도",
-          "narrativeSummary": "세이라는 흙과 먼지를 털어낸 오래된 무쇠 방울을 움켜쥐고 잔해 한가운데에 섭니다. 그녀는 방울을 가볍게 흔들어 그 탁하고 무거운 소리가 철거 구역 전체로 퍼져나가게 합니다. 방울소리가 지맥의 왜곡된 살기와 공명하며, 숨겨진 사악한 기운의 발원지(제단)가 있는 방향으로 짙은 붉은 안개가 소용돌이치기 시작합니다.",
+          "label": "실종된 특수수사팀의 전술 조끼와 호신용 삼단봉 획득",
+          "narrativeSummary": "진흙 속에 반쯤 파묻힌 채 갈기갈기 찢겨나간 경찰용 전술 조끼를 발견했습니다. 짐승의 발톱에 찢긴 듯한 흔적이 선명한 가죽 원단 사이에서, 여전히 견고한 두랄루민 재질의 경찰용 삼단봉과 충전식 고휘도 라이트를 온전히 수거했습니다. 조끼 내부에는 이 지역을 수색하던 특수수사팀의 깨진 무전기가 남겨져 있어, 이 도시에 도사린 위험이 심상치 않음을 시사합니다.",
           "semanticEvents": [
             {
-              "eventId": "EVT_WIS_SEARCH_SUCCESS",
+              "eventId": "evt_pickup_police_baton_001",
               "action": "PICKUP",
               "roles": [
                 {
                   "role": "SUBJECT",
-                  "entityName": "아스카 세이라"
+                  "entityName": "시이나 렌"
                 },
                 {
                   "role": "OBJECT",
-                  "entityName": "오래된 무쇠 방울"
+                  "entityName": "경찰용 삼단봉"
                 },
                 {
                   "role": "LOCATION",
-                  "entityName": "신월 3구역 철거 잔해"
+                  "entityName": "찢겨진 경찰 전술조끼"
+                }
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "VERIFIED"
+            },
+            {
+              "eventId": "evt_pickup_police_light_001",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "시이나 렌"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "고휘도 충전식 라이트"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "찢겨진 경찰 전술조끼"
                 }
               ],
               "scope": "CANONICAL",
@@ -688,35 +795,31 @@
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "가문의 저주와 아스카 세이라의 지맥 한기",
-              "신월 3구역의 핏빛 향 냄새와 의문의 제단",
-              "조사 일지에 기록된 실종된 조사관"
+              "seed_missing_police_team: 전술 조끼를 갈기갈기 찢어발긴 기괴한 괴력의 정체와 실종된 경찰들",
+              "seed_broken_radio_signal: 깨진 무전기에서 이따금 흘러나오는 잡음 섞인 신호음"
             ],
             "inventoryChanges": [
               {
-                "name": "오래된 무쇠 방울",
+                "name": "경찰용 삼단봉",
                 "quantity": 1,
                 "action": "add",
                 "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+                "verifiedEventId": "evt_pickup_police_baton_001"
               },
               {
-                "name": "녹슨 철제 노루발못뽑이",
+                "name": "고휘도 충전식 라이트",
                 "quantity": 1,
                 "action": "add",
                 "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
-              },
-              {
-                "name": "철거 예정지 조사 일지",
-                "quantity": 1,
-                "action": "add",
-                "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "EVT_WIS_SEARCH_SUCCESS"
+                "verifiedEventId": "evt_pickup_police_light_001"
               }
             ],
             "chapterChanges": {
-              "currentChapter": "서막: 무덤이 된 구역"
+              "currentChapter": "서막: 흙 아래의 복선",
+              "upcomingChapters": [
+                "1장: 통제구역 홍련동",
+                "2장: 무덤이 된 가설 가설막"
+              ]
             }
           },
           "candidateId": 3
@@ -775,11 +878,11 @@
         "offscreenRecords": []
       },
       "character": {
-        "name": "아스카 세이라",
-        "gender": "여성",
-        "age": 17,
-        "appearance": "영력이 감도는 부적과 영도를 든 단정한 제복 차림의 소녀",
-        "goal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것",
+        "name": "시이나 렌",
+        "gender": "남성",
+        "age": 18,
+        "appearance": "교복 위에 가디건을 걸치고 날카롭고 결의에 찬 눈빛의 소년",
+        "goal": "도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것",
         "originBackground": "미상 / 백지 상태 (Tabula Rasa)",
         "backgroundType": "tabula_rasa",
         "flaw": "미상 / 백지 상태 (Tabula Rasa)",
@@ -798,23 +901,23 @@
           "faction": "미상 / 백지 상태 (Tabula Rasa)"
         },
         "stats": {
-          "strength": 14,
-          "agility": 14,
-          "constitution": 7,
-          "intelligence": 11,
-          "wisdom": 12,
+          "strength": 5,
+          "agility": 10,
+          "constitution": 15,
+          "intelligence": 15,
+          "wisdom": 8,
           "charisma": 15,
-          "vitality": 7,
-          "intellect": 11,
-          "insight": 12,
+          "vitality": 15,
+          "intellect": 15,
+          "insight": 8,
           "willpower": 15
         },
         "inventory": [],
         "secret": "",
         "physicalDefect": "",
         "timeline": [],
-        "title": "명문 퇴마사 후계자",
-        "currentGoal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것"
+        "title": "각성한 이능력자",
+        "currentGoal": "도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것"
       }
     },
     "engineState": {
@@ -857,11 +960,11 @@
         "offscreenRecords": []
       },
       "character": {
-        "name": "아스카 세이라",
-        "gender": "여성",
-        "age": 17,
-        "appearance": "영력이 감도는 부적과 영도를 든 단정한 제복 차림의 소녀",
-        "goal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것",
+        "name": "시이나 렌",
+        "gender": "남성",
+        "age": 18,
+        "appearance": "교복 위에 가디건을 걸치고 날카롭고 결의에 찬 눈빛의 소년",
+        "goal": "도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것",
         "originBackground": "미상 / 백지 상태 (Tabula Rasa)",
         "backgroundType": "tabula_rasa",
         "flaw": "미상 / 백지 상태 (Tabula Rasa)",
@@ -880,23 +983,23 @@
           "faction": "미상 / 백지 상태 (Tabula Rasa)"
         },
         "stats": {
-          "strength": 14,
-          "agility": 14,
-          "constitution": 7,
-          "intelligence": 11,
-          "wisdom": 12,
+          "strength": 5,
+          "agility": 10,
+          "constitution": 15,
+          "intelligence": 15,
+          "wisdom": 8,
           "charisma": 15,
-          "vitality": 7,
-          "intellect": 11,
-          "insight": 12,
+          "vitality": 15,
+          "intellect": 15,
+          "insight": 8,
           "willpower": 15
         },
         "inventory": [],
         "secret": "",
         "physicalDefect": "",
         "timeline": [],
-        "title": "명문 퇴마사 후계자",
-        "currentGoal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것"
+        "title": "각성한 이능력자",
+        "currentGoal": "도시를 위협하는 괴이와 침략자로부터 소중한 일상과 친구들을 지키는 것"
       }
     },
     "engineState": {
@@ -916,49 +1019,49 @@
     {
       "step": "T0_PLAYER_INPUT",
       "status": "OK",
-      "timestamp": 1789264810145,
-      "details": "Turn 4 player input: \"싹 다 챙겨서 인벤토리에 넣는다\" (17 chars)"
+      "timestamp": 1789265979047,
+      "details": "Turn 4 player input: \"인벤토리에 챙긴다\" (9 chars)"
     },
     {
       "step": "T1_REQUEST_START",
       "status": "OK",
-      "timestamp": 1789264810146,
+      "timestamp": 1789265979047,
       "details": "Initiating API POST /api/chat with model gemini-3.5-flash"
     },
     {
       "step": "T2_CONTEXT_ASSEMBLED",
       "status": "OK",
-      "timestamp": 1789264810146,
-      "details": "Context prepared with 8 total messages in history"
+      "timestamp": 1789265979047,
+      "details": "Context prepared with 7 total messages in history"
     },
     {
       "step": "T3_GEMINI_START",
       "status": "OK",
-      "timestamp": 1789264810146,
+      "timestamp": 1789265979047,
       "details": "Backend Gemini API request dispatched"
     },
     {
       "step": "T4_GEMINI_RECEIVED",
       "status": "OK",
-      "timestamp": 1789264833580,
-      "details": "Gemini response received (797 chars)"
+      "timestamp": 1789266029231,
+      "details": "Gemini response received (421 chars)"
     },
     {
       "step": "T5_PARSED",
       "status": "OK",
-      "timestamp": 1789264833580,
+      "timestamp": 1789266029231,
       "details": "Metadata block parsed successfully"
     },
     {
       "step": "T6_VALIDATED",
       "status": "SKIPPED",
-      "timestamp": 1789264833580,
+      "timestamp": 1789266029231,
       "details": "No candidate state mutation proposed"
     },
     {
       "step": "T7_COMMITTED",
       "status": "SKIPPED",
-      "timestamp": 1789264833580,
+      "timestamp": 1789266029231,
       "details": "Canonical state unchanged"
     }
   ]
