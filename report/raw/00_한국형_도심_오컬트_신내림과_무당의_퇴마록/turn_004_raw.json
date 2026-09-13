@@ -1,0 +1,926 @@
+{
+  "runId": "run_2026-09-13T01-44-53-569Z_07xdfp",
+  "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
+  "turn": 4,
+  "timestamp": "2026-09-13T01:46:58.135Z",
+  "gitCommit": "6e099653874cebb0fd3db87aa3ed389123effe83",
+  "playerInput": {
+    "rawInput": "싹 다 챙겨서 인벤토리에 넣는다"
+  },
+  "modelRuntime": {
+    "requestedModel": "gemini-3.5-flash",
+    "actualModelVersion": "gemini-3.5-flash",
+    "responseId": "dACmar7HGea30-kPxO-0QQ",
+    "serverTimings": {
+      "t1_requestStart": 1789263988084,
+      "t2_contextAssemblyComplete": 1789263988084,
+      "t3_geminiRequestStart": 1789263988084,
+      "t4_geminiResponseReceived": 1789264018677,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 30593,
+      "inputCharCount": 3802,
+      "outputCharCount": 683,
+      "tokenCount": {
+        "promptTokens": 9710,
+        "candidatesTokens": 2217,
+        "totalTokens": 16086
+      }
+    },
+    "clientLatency": {
+      "turn": 4,
+      "model": "gemini-3.5-flash",
+      "t0_playerInput": 449194.40000000596,
+      "t1_requestStart": 449194.40000000596,
+      "t2_contextAssemblyComplete": 449194.59999999404,
+      "t3_geminiRequestStart": 449194.59999999404,
+      "t4_geminiResponseReceived": 479917.2999999821,
+      "t5_parserComplete": 479917.5,
+      "t6_stateMutationComplete": 479917.5,
+      "t7_uiUpdateComplete": 479917.59999999404,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 30723,
+      "parsingValidationMs": 0,
+      "totalTurnMs": 30723,
+      "inputCharCount": 17,
+      "outputCharCount": 683,
+      "retried": false
+    }
+  },
+  "chatContextForensic": {
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아스카 세이라 (나이: 17, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 11 / AGI 13 / CON 11 / INT 10 / WIS 10 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망",
+    "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+    "seedsContext": "",
+    "offscreenContext": ""
+  },
+  "geminiContentsForensic": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아스카 세이라 (나이: 17, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 11 / AGI 13 / CON 11 / INT 10 / WIS 10 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 4 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아스카 세이라 (나이: 17, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "시월의 늦가을 밤, 뼈마디를 시리게 파고드는 진눈깨비가 붉은 녹이 슨 함석지붕을 무겁게 두드린다.\n\n코를 찌르는 것은 축축하게 썩어가는 흙냄새와 오래 묵은 쑥향, 그리고 타다 남은 향나무 재가 뒤섞인 비릿하고 묵직한 공기다. 사방이 가림막과 포클레인의 궤도 자국으로 짓이겨진 서울 변두리의 재개발 철거촌. 거대한 콘크리트 잔해들 사이에 섬처럼 위태롭게 남겨진 낡은 한옥 신당(神堂)의 문창살 사이로, 흙탕물을 머금은 밤바람이 신음처럼 스며든다.\n\n열일곱 살의 소녀, 아스카 세이라는 차디찬 장판 바닥 위에서 서서히 의식을 수습한다. \n\n머릿속은 짙은 안개가 낀 것처럼 아득하고 과거의 온전한 기억은 침묵 속에 잠겨 있으나, 손끝을 타고 오르는 오한만은 섬뜩할 정도로 생생하다. 신당 안쪽, 칠이 벗겨진 붉은 목조 제단 위에는 녹슨 놋방울과 낡은 명주천에 싸인 작두날 한 자루가 음산한 한기를 뿜어내며 놓여 있다. 벽면에 걸린 무신도(巫神圖) 속 신령들의 눈동자는 마치 살아 숨 쉬는 것처럼 어둠 속에서 번들거린다.\n\n그때, 신당 바닥 깊은 지하—지맥이 찢겨나간 틈새에서 둔탁한 진동과 함께 무언가가 긁는 듯한 낮은 마찰음이 울린다. 동시에 부러진 나뭇가지와 진흙을 밟으며 신당 쪽으로 다가오는 누군가의 묵직한 구두 발소리가 빗소리를 뚫고 들려오기 시작한다.\n\n제단의 낡은 신물들, 손목 안쪽을 옥죄는 서늘한 박동, 그리고 신당 문밖에서 가까워지는 불길한 기척. \n\n세이라, 당신은 이 차가운 어둠 속에서 무엇을 먼저 확인하고 행동하겠습니까?"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "주위를 수색하여 쓸만한 아이템을 확보한 후 인벤토리에 넣는다"
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "당신은 밤바람에 사정없이 흔들리는 문창살의 그림자 속에서, 쿵쾅거리는 심장 소리를 억누르며 몸을 낮춥니다. \n\n흙바닥을 짓밟는 묵직한 구두 발소리는 한 걸음씩 확실하게 신당의 입구를 향해 좁혀져 오고 있고, 발밑 지하 깊은 곳에서는 무언가 단단한 암석층을 손톱으로 긁어내리는 듯한 스산한 진동이 발바닥을 타고 전해집니다. 이 일촉즉발의 긴박함 속에서, 당신은 눈앞의 어둠을 헤치고 쓸 만한 도구나 물건을 확보하기 위해 차가운 흙바닥과 비틀린 궤짝 주변으로 조심스럽게 손을 뻗어 나갑니다.\n\n먼지 쌓인 가구들의 매끄럽지 못한 단면과 축축한 이끼의 감촉이 손끝을 스칩니다. 어둠에 적응하려는 눈동자가 미세하게 흔들리는 순간, 손바닥에 닿는 거칠고 차가운 질감들이 느껴집니다.\n\n당신이 다가오는 불길한 기척을 피해 무사히 주위를 수색하고 쓸 만한 물건을 확보할 수 있을지 결정하기 위해 **판정**이 필요합니다.\n\n*   **판정 종류**: 관찰 판정 (WIS) 또는 지능 판정 (INT) 중 선택\n*   **난이도 (Target DC)**: **11**\n*   **캐릭터 능력치 정보**: WIS 10 (보정치 +0) / INT 10 (보정치 +0)\n\n어떤 판정을 시도하시겠습니까? 주사위 결과(1d20)와 선택한 능력치 보정치를 더한 최종 값을 선언해 주십시오."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "지능 주사위 20"
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "지능 주사위의 눈이 기적처럼 20의 자리에 가닿는 순간, 아스카 세이라의 머릿속을 짓누르던 짙은 안개가 일시적으로 걷히며 극도의 명징함이 찾아옵니다. 심장의 박동은 느려지고, 오감이 비정상적으로 예리해집니다.\n\n빗소리에 가려진 미세한 공기의 흐름, 제단 주위에 쌓인 먼지의 고르지 못한 분포, 그리고 나무 부재들이 맞물린 각도까지 당신의 예리한 시선 아래에 한눈에 해체되듯 드러납니다. 누군가의 발소리가 빗속을 뚫고 툇마루 계단 바로 밑까지 다가오는 일촉즉발의 순간에도, 당신의 손길은 단 한 치의 망설임도 없이 정확한 궤적을 그리며 어둠 속을 파고듭니다.\n\n평범한 사람이라면 결코 깨닫지 못했을 미세한 틈새, 인위적으로 가려진 숨겨진 공간의 감촉이 손끝을 타고 전율처럼 뇌리에 꽂힙니다. 그곳에는 오랜 세월의 지혜 혹은 우연이 숨겨둔 분명하고 유용한 '무언가'가 손안에 쥐어지기를 기다리고 있습니다.\n\n하지만 발소리가 마침내 툇마루 위로 완전히 올라섰습니다. 물기 머금은 낡은 나무 바닥이 삐걱이며 비명을 지르고, 거친 숨소리가 얇은 창호지 문 너머에서 스며 나옵니다. 당신은 어둠 속에서 손끝에 느껴지는 그 가치 있는 소장품들을 움켜쥐고 숨을 죽입니다. \n\n문고리가 서서히 돌아가기 시작하는 지금, 당신은 이 비밀스러운 수색의 결실 중 어떤 것을 품에 안고 첫 대면을 맞이하시겠습니까?"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "싹 다 챙겨서 인벤토리에 넣는다"
+        }
+      ]
+    }
+  ],
+  "llmRawResponse": {
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"신당의 어둠 속에 몸을 숨기고 침입자를 감시하기\",\n    \"narrativeSummary\": \"세이라는 비밀 틈새에서 찾아낸 '녹슨 구리 방울'과 '붉은 실로 묶인 부적'을 신속하게 품에 넣고, 신당 내부의 거대한 신장(神將) 그림 뒤편 어두운 구석으로 몸을 감춥니다. 문이 열리고 담뱃재와 비린 흙냄새를 풍기는 외투 차림의 남자가 안으로 들어옵니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_bell_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\"},\n          {\"role\": \"OBJECT\", \"entityName\": \"녹슨 구리 방울\"},\n          {\"role\": \"LOCATION\", \"entityName\": \"신당 제단 비밀 칸\"}\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      },\n      {\n        \"eventId\": \"evt_pickup_talisman_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\"},\n          {\"role\": \"OBJECT\", \"entityName\": \"붉은 실로 묶인 부적\"},\n          {\"role\": \"LOCATION\", \"entityName\": \"신당 제단 비밀 칸\"}\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"녹슨 구리 방울에 깃든 원혼의 메아리\",\n        \"지하 지맥의 균열에서 흘러나오는 기운\"\n      ],\n      \"newNpcs\": [\n        {\n          \"name\": \"임한준\",\n          \"alias\": \"오컬트 특수수사팀 형사\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"폐허뿐인 이 철거촌 신당에 불빛 하나 없이 누군가가 기척을 숨기고 있다... 원귀인가, 아니면 숨겨진 목격자인가?\",\n          \"metInStory\": true,\n          \"origin\": \"서울\",\n          \"affiliation\": \"경찰청 오컬트 특수수사팀\"\n        }\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 구리 방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_bell_001\"\n        },\n        {\n          \"name\": \"붉은 실로 묶인 부적\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_talisman_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 찢겨진 결계\",\n        \"upcomingChapters\": [\"1장: 철거촌의 어둠\", \"2장: 피로 물든 방울소리\"]\n      }\n    }\n  },\n  {\n    \"label\": \"신물들을 거머쥔 채 정면에서 문을 열고 들어오는 침입자를 마주하기\",\n    \"narrativeSummary\": \"세이라는 어둠 속에서 손에 잡힌 물건들을 단단히 움켜쥐고 제단 앞에 똑바로 섭니다. 문이 열리며 손전등 불빛이 신당 안을 가르고, 불빛은 제단 앞을 당당히 지키고 선 소녀를 비추며 침입자를 경악하게 만듭니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_bell_002\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\"},\n          {\"role\": \"OBJECT\", \"entityName\": \"녹슨 구리 방울\"}\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"세이라의 손목에 반응해 미세하게 떨리는 놋방울\"\n      ],\n      \"newNpcs\": [\n        {\n          \"name\": \"임한준\",\n          \"alias\": \"오컬트 특수수사팀 형사\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"꼬맹이...? 이 위험한 철거 현장에 이런 어린 소녀가 왜 혼자서 제단 앞을 지키고 있는 거지?\",\n          \"metInStory\": true,\n          \"origin\": \"서울\",\n          \"affiliation\": \"경찰청 오컬트 특수수사팀\"\n        }\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 구리 방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_bell_002\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 찢겨진 결계\"\n      }\n    }\n  },\n  {\n    \"label\": \"발견한 도구들을 품에 쑤셔 넣고 제단 뒤편의 좁은 통로로 탈출하기\",\n    \"narrativeSummary\": \"침입자가 앞문을 열기 직전, 세이라는 손안에 잡힌 도구들을 급히 품속에 가둔 뒤 제단 뒤편에 비틀려 열려 있는 좁은 목조 판자 틈새로 몸을 던집니다. 진눈깨비가 들이치는 어두운 뒤뜰로 빠져나가는 순간, 신당 문이 거칠게 열립니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_bell_003\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\"},\n          {\"role\": \"OBJECT\", \"entityName\": \"녹슨 구리 방울\"}\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"뒤뜰 진흙 바닥에 새겨진 거대한 비인간적 발자국\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 구리 방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_bell_003\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 찢겨진 결계\"\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n심연보다 깊은 자각이 채찍질하듯 손끝에 닿자, 당신의 움직임에는 한 치의 지체도 남지 않습니다. 기적과도 같은 명징함 속에서, 당신은 비틀린 목조 제단의 갈라진 틈새 깊숙한 곳으로 거침없이 팔을 밀어 넣습니다. 거친 나무 가시가 손등을 긁고 지나가며 붉은 핏방울이 배어 나오지만, 그 고통조차 어둠 속의 차가운 금속성 감촉에 비하면 사소할 뿐입니다.\n\n손끝에 가장 먼저 걸린 것은 서늘한 놋쇠의 묵직함이 느껴지는 녹슨 구리 방울입니다. 세월의 때와 마른 핏자국이 들러붙은 그것을 쥐는 순간, 고막을 찌르는 듯한 환청 같은 방울소리가 뇌리를 스쳐 갑니다. 이어 손을 더 깊이 뻗자, 오래된 한지에 검붉은 피로 기괴한 문양이 그려진 부적과 그것을 단단히 동여매고 있던 거친 명주 실타래가 손안에 한꺼번에 움켜쥐어집니다. \n\n당신은 이 정체불명의 물건들이 이 폐허 속에서 자신을 지켜줄 유일한 실마리임을 직시하며, 옷자락 안쪽 깊숙한 곳에 소중히 밀어 넣습니다. 거친 삼베 안감 너머로 방울의 차가운 금속기가 살결에 닿아 소름을 돋우는 그 순간—\n\n*삐이익—*\n\n나무 문고리가 비틀리며 내는 불길한 마찰음이 마침내 신당 안의 정적을 완전히 찢어발깁니다. 문틈 사이로 바깥의 축축한 비바람과 함께, 비린 담배 냄새와 눅눅한 가죽 냄새가 훅 끼쳐 들어옵니다. 문 뒤의 그림자가 문턱을 넘어서기까지 남은 시간은 단 한 호흡뿐입니다.\n[ZERO_MUTATION_END]",
+    "rawResponseText": "심연보다 깊은 자각이 채찍질하듯 손끝에 닿자, 당신의 움직임에는 한 치의 지체도 남지 않습니다. 기적과도 같은 명징함 속에서, 당신은 비틀린 목조 제단의 갈라진 틈새 깊숙한 곳으로 거침없이 팔을 밀어 넣습니다. 거친 나무 가시가 손등을 긁고 지나가며 붉은 핏방울이 배어 나오지만, 그 고통조차 어둠 속의 차가운 금속성 감촉에 비하면 사소할 뿐입니다.\n\n손끝에 가장 먼저 걸린 것은 서늘한 놋쇠의 묵직함이 느껴지는 녹슨 구리 방울입니다. 세월의 때와 마른 핏자국이 들러붙은 그것을 쥐는 순간, 고막을 찌르는 듯한 환청 같은 방울소리가 뇌리를 스쳐 갑니다. 이어 손을 더 깊이 뻗자, 오래된 한지에 검붉은 피로 기괴한 문양이 그려진 부적과 그것을 단단히 동여매고 있던 거친 명주 실타래가 손안에 한꺼번에 움켜쥐어집니다. \n\n당신은 이 정체불명의 물건들이 이 폐허 속에서 자신을 지켜줄 유일한 실마리임을 직시하며, 옷자락 안쪽 깊숙한 곳에 소중히 밀어 넣습니다. 거친 삼베 안감 너머로 방울의 차가운 금속기가 살결에 닿아 소름을 돋우는 그 순간—\n\n*삐이익—*\n\n나무 문고리가 비틀리며 내는 불길한 마찰음이 마침내 신당 안의 정적을 완전히 찢어발깁니다. 문틈 사이로 바깥의 축축한 비바람과 함께, 비린 담배 냄새와 눅눅한 가죽 냄새가 훅 끼쳐 들어옵니다. 문 뒤의 그림자가 문턱을 넘어서기까지 남은 시간은 단 한 호흡뿐입니다."
+  },
+  "candidatePipeline": {
+    "rawCandidatesBlock": [
+      {
+        "label": "신당의 어둠 속에 몸을 숨기고 침입자를 감시하기",
+        "narrativeSummary": "세이라는 비밀 틈새에서 찾아낸 '녹슨 구리 방울'과 '붉은 실로 묶인 부적'을 신속하게 품에 넣고, 신당 내부의 거대한 신장(神將) 그림 뒤편 어두운 구석으로 몸을 감춥니다. 문이 열리고 담뱃재와 비린 흙냄새를 풍기는 외투 차림의 남자가 안으로 들어옵니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_bell_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "아스카 세이라"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 구리 방울"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "신당 제단 비밀 칸"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          },
+          {
+            "eventId": "evt_pickup_talisman_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "아스카 세이라"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "붉은 실로 묶인 부적"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "신당 제단 비밀 칸"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "녹슨 구리 방울에 깃든 원혼의 메아리",
+            "지하 지맥의 균열에서 흘러나오는 기운"
+          ],
+          "newNpcs": [
+            {
+              "name": "임한준",
+              "alias": "오컬트 특수수사팀 형사",
+              "npcClass": "Class A",
+              "innerThought": "폐허뿐인 이 철거촌 신당에 불빛 하나 없이 누군가가 기척을 숨기고 있다... 원귀인가, 아니면 숨겨진 목격자인가?",
+              "metInStory": true,
+              "origin": "서울",
+              "affiliation": "경찰청 오컬트 특수수사팀"
+            }
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 구리 방울",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_bell_001"
+            },
+            {
+              "name": "붉은 실로 묶인 부적",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_talisman_001"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 찢겨진 결계",
+            "upcomingChapters": [
+              "1장: 철거촌의 어둠",
+              "2장: 피로 물든 방울소리"
+            ]
+          }
+        },
+        "candidateId": 1
+      },
+      {
+        "label": "신물들을 거머쥔 채 정면에서 문을 열고 들어오는 침입자를 마주하기",
+        "narrativeSummary": "세이라는 어둠 속에서 손에 잡힌 물건들을 단단히 움켜쥐고 제단 앞에 똑바로 섭니다. 문이 열리며 손전등 불빛이 신당 안을 가르고, 불빛은 제단 앞을 당당히 지키고 선 소녀를 비추며 침입자를 경악하게 만듭니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_bell_002",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "아스카 세이라"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 구리 방울"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "세이라의 손목에 반응해 미세하게 떨리는 놋방울"
+          ],
+          "newNpcs": [
+            {
+              "name": "임한준",
+              "alias": "오컬트 특수수사팀 형사",
+              "npcClass": "Class A",
+              "innerThought": "꼬맹이...? 이 위험한 철거 현장에 이런 어린 소녀가 왜 혼자서 제단 앞을 지키고 있는 거지?",
+              "metInStory": true,
+              "origin": "서울",
+              "affiliation": "경찰청 오컬트 특수수사팀"
+            }
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 구리 방울",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_bell_002"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 찢겨진 결계"
+          }
+        },
+        "candidateId": 2
+      },
+      {
+        "label": "발견한 도구들을 품에 쑤셔 넣고 제단 뒤편의 좁은 통로로 탈출하기",
+        "narrativeSummary": "침입자가 앞문을 열기 직전, 세이라는 손안에 잡힌 도구들을 급히 품속에 가둔 뒤 제단 뒤편에 비틀려 열려 있는 좁은 목조 판자 틈새로 몸을 던집니다. 진눈깨비가 들이치는 어두운 뒤뜰로 빠져나가는 순간, 신당 문이 거칠게 열립니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_bell_003",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "아스카 세이라"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 구리 방울"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "뒤뜰 진흙 바닥에 새겨진 거대한 비인간적 발자국"
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 구리 방울",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_bell_003"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 찢겨진 결계"
+          }
+        },
+        "candidateId": 3
+      }
+    ],
+    "parsedCandidates": [
+      {
+        "label": "신당의 어둠 속에 몸을 숨기고 침입자를 감시하기",
+        "narrativeSummary": "세이라는 비밀 틈새에서 찾아낸 '녹슨 구리 방울'과 '붉은 실로 묶인 부적'을 신속하게 품에 넣고, 신당 내부의 거대한 신장(神將) 그림 뒤편 어두운 구석으로 몸을 감춥니다. 문이 열리고 담뱃재와 비린 흙냄새를 풍기는 외투 차림의 남자가 안으로 들어옵니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_bell_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "아스카 세이라"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 구리 방울"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "신당 제단 비밀 칸"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          },
+          {
+            "eventId": "evt_pickup_talisman_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "아스카 세이라"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "붉은 실로 묶인 부적"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "신당 제단 비밀 칸"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "녹슨 구리 방울에 깃든 원혼의 메아리",
+            "지하 지맥의 균열에서 흘러나오는 기운"
+          ],
+          "newNpcs": [
+            {
+              "name": "임한준",
+              "alias": "오컬트 특수수사팀 형사",
+              "npcClass": "Class A",
+              "innerThought": "폐허뿐인 이 철거촌 신당에 불빛 하나 없이 누군가가 기척을 숨기고 있다... 원귀인가, 아니면 숨겨진 목격자인가?",
+              "metInStory": true,
+              "origin": "서울",
+              "affiliation": "경찰청 오컬트 특수수사팀"
+            }
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 구리 방울",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_bell_001"
+            },
+            {
+              "name": "붉은 실로 묶인 부적",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_talisman_001"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 찢겨진 결계",
+            "upcomingChapters": [
+              "1장: 철거촌의 어둠",
+              "2장: 피로 물든 방울소리"
+            ]
+          }
+        },
+        "candidateId": 1
+      },
+      {
+        "label": "신물들을 거머쥔 채 정면에서 문을 열고 들어오는 침입자를 마주하기",
+        "narrativeSummary": "세이라는 어둠 속에서 손에 잡힌 물건들을 단단히 움켜쥐고 제단 앞에 똑바로 섭니다. 문이 열리며 손전등 불빛이 신당 안을 가르고, 불빛은 제단 앞을 당당히 지키고 선 소녀를 비추며 침입자를 경악하게 만듭니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_bell_002",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "아스카 세이라"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 구리 방울"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "세이라의 손목에 반응해 미세하게 떨리는 놋방울"
+          ],
+          "newNpcs": [
+            {
+              "name": "임한준",
+              "alias": "오컬트 특수수사팀 형사",
+              "npcClass": "Class A",
+              "innerThought": "꼬맹이...? 이 위험한 철거 현장에 이런 어린 소녀가 왜 혼자서 제단 앞을 지키고 있는 거지?",
+              "metInStory": true,
+              "origin": "서울",
+              "affiliation": "경찰청 오컬트 특수수사팀"
+            }
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 구리 방울",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_bell_002"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 찢겨진 결계"
+          }
+        },
+        "candidateId": 2
+      },
+      {
+        "label": "발견한 도구들을 품에 쑤셔 넣고 제단 뒤편의 좁은 통로로 탈출하기",
+        "narrativeSummary": "침입자가 앞문을 열기 직전, 세이라는 손안에 잡힌 도구들을 급히 품속에 가둔 뒤 제단 뒤편에 비틀려 열려 있는 좁은 목조 판자 틈새로 몸을 던집니다. 진눈깨비가 들이치는 어두운 뒤뜰로 빠져나가는 순간, 신당 문이 거칠게 열립니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_pickup_bell_003",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "아스카 세이라"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "녹슨 구리 방울"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "뒤뜰 진흙 바닥에 새겨진 거대한 비인간적 발자국"
+          ],
+          "inventoryChanges": [
+            {
+              "name": "녹슨 구리 방울",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "evt_pickup_bell_003"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 찢겨진 결계"
+          }
+        },
+        "candidateId": 3
+      }
+    ],
+    "recoveryGateResult": {
+      "passedCandidates": [],
+      "quarantinedCandidates": [
+        {
+          "index": 0,
+          "candidate": {
+            "label": "신당의 어둠 속에 몸을 숨기고 침입자를 감시하기",
+            "narrativeSummary": "세이라는 비밀 틈새에서 찾아낸 '녹슨 구리 방울'과 '붉은 실로 묶인 부적'을 신속하게 품에 넣고, 신당 내부의 거대한 신장(神將) 그림 뒤편 어두운 구석으로 몸을 감춥니다. 문이 열리고 담뱃재와 비린 흙냄새를 풍기는 외투 차림의 남자가 안으로 들어옵니다.",
+            "semanticEvents": [
+              {
+                "eventId": "evt_pickup_bell_001",
+                "action": "PICKUP",
+                "roles": [
+                  {
+                    "role": "SUBJECT",
+                    "entityName": "아스카 세이라"
+                  },
+                  {
+                    "role": "OBJECT",
+                    "entityName": "녹슨 구리 방울"
+                  },
+                  {
+                    "role": "LOCATION",
+                    "entityName": "신당 제단 비밀 칸"
+                  }
+                ],
+                "scope": "CANONICAL",
+                "polarity": "ASSERTED",
+                "epistemicStatus": "VERIFIED"
+              },
+              {
+                "eventId": "evt_pickup_talisman_001",
+                "action": "PICKUP",
+                "roles": [
+                  {
+                    "role": "SUBJECT",
+                    "entityName": "아스카 세이라"
+                  },
+                  {
+                    "role": "OBJECT",
+                    "entityName": "붉은 실로 묶인 부적"
+                  },
+                  {
+                    "role": "LOCATION",
+                    "entityName": "신당 제단 비밀 칸"
+                  }
+                ],
+                "scope": "CANONICAL",
+                "polarity": "ASSERTED",
+                "epistemicStatus": "VERIFIED"
+              }
+            ],
+            "rawMetadata": {
+              "foreshadowSeeds": [
+                "녹슨 구리 방울에 깃든 원혼의 메아리",
+                "지하 지맥의 균열에서 흘러나오는 기운"
+              ],
+              "newNpcs": [
+                {
+                  "name": "임한준",
+                  "alias": "오컬트 특수수사팀 형사",
+                  "npcClass": "Class A",
+                  "innerThought": "폐허뿐인 이 철거촌 신당에 불빛 하나 없이 누군가가 기척을 숨기고 있다... 원귀인가, 아니면 숨겨진 목격자인가?",
+                  "metInStory": true,
+                  "origin": "서울",
+                  "affiliation": "경찰청 오컬트 특수수사팀"
+                }
+              ],
+              "inventoryChanges": [
+                {
+                  "name": "녹슨 구리 방울",
+                  "quantity": 1,
+                  "action": "add",
+                  "cause": "DISCOVERY_PICKUP",
+                  "verifiedEventId": "evt_pickup_bell_001"
+                },
+                {
+                  "name": "붉은 실로 묶인 부적",
+                  "quantity": 1,
+                  "action": "add",
+                  "cause": "DISCOVERY_PICKUP",
+                  "verifiedEventId": "evt_pickup_talisman_001"
+                }
+              ],
+              "chapterChanges": {
+                "currentChapter": "서막: 찢겨진 결계",
+                "upcomingChapters": [
+                  "1장: 철거촌의 어둠",
+                  "2장: 피로 물든 방울소리"
+                ]
+              }
+            },
+            "candidateId": 1
+          },
+          "reasons": [
+            "inventoryChanges[0].entityReference is required",
+            "inventoryChanges[1].entityReference is required"
+          ]
+        },
+        {
+          "index": 1,
+          "candidate": {
+            "label": "신물들을 거머쥔 채 정면에서 문을 열고 들어오는 침입자를 마주하기",
+            "narrativeSummary": "세이라는 어둠 속에서 손에 잡힌 물건들을 단단히 움켜쥐고 제단 앞에 똑바로 섭니다. 문이 열리며 손전등 불빛이 신당 안을 가르고, 불빛은 제단 앞을 당당히 지키고 선 소녀를 비추며 침입자를 경악하게 만듭니다.",
+            "semanticEvents": [
+              {
+                "eventId": "evt_pickup_bell_002",
+                "action": "PICKUP",
+                "roles": [
+                  {
+                    "role": "SUBJECT",
+                    "entityName": "아스카 세이라"
+                  },
+                  {
+                    "role": "OBJECT",
+                    "entityName": "녹슨 구리 방울"
+                  }
+                ],
+                "scope": "CANONICAL",
+                "polarity": "ASSERTED",
+                "epistemicStatus": "VERIFIED"
+              }
+            ],
+            "rawMetadata": {
+              "foreshadowSeeds": [
+                "세이라의 손목에 반응해 미세하게 떨리는 놋방울"
+              ],
+              "newNpcs": [
+                {
+                  "name": "임한준",
+                  "alias": "오컬트 특수수사팀 형사",
+                  "npcClass": "Class A",
+                  "innerThought": "꼬맹이...? 이 위험한 철거 현장에 이런 어린 소녀가 왜 혼자서 제단 앞을 지키고 있는 거지?",
+                  "metInStory": true,
+                  "origin": "서울",
+                  "affiliation": "경찰청 오컬트 특수수사팀"
+                }
+              ],
+              "inventoryChanges": [
+                {
+                  "name": "녹슨 구리 방울",
+                  "quantity": 1,
+                  "action": "add",
+                  "cause": "DISCOVERY_PICKUP",
+                  "verifiedEventId": "evt_pickup_bell_002"
+                }
+              ],
+              "chapterChanges": {
+                "currentChapter": "서막: 찢겨진 결계"
+              }
+            },
+            "candidateId": 2
+          },
+          "reasons": [
+            "inventoryChanges[0].entityReference is required"
+          ]
+        },
+        {
+          "index": 2,
+          "candidate": {
+            "label": "발견한 도구들을 품에 쑤셔 넣고 제단 뒤편의 좁은 통로로 탈출하기",
+            "narrativeSummary": "침입자가 앞문을 열기 직전, 세이라는 손안에 잡힌 도구들을 급히 품속에 가둔 뒤 제단 뒤편에 비틀려 열려 있는 좁은 목조 판자 틈새로 몸을 던집니다. 진눈깨비가 들이치는 어두운 뒤뜰로 빠져나가는 순간, 신당 문이 거칠게 열립니다.",
+            "semanticEvents": [
+              {
+                "eventId": "evt_pickup_bell_003",
+                "action": "PICKUP",
+                "roles": [
+                  {
+                    "role": "SUBJECT",
+                    "entityName": "아스카 세이라"
+                  },
+                  {
+                    "role": "OBJECT",
+                    "entityName": "녹슨 구리 방울"
+                  }
+                ],
+                "scope": "CANONICAL",
+                "polarity": "ASSERTED",
+                "epistemicStatus": "VERIFIED"
+              }
+            ],
+            "rawMetadata": {
+              "foreshadowSeeds": [
+                "뒤뜰 진흙 바닥에 새겨진 거대한 비인간적 발자국"
+              ],
+              "inventoryChanges": [
+                {
+                  "name": "녹슨 구리 방울",
+                  "quantity": 1,
+                  "action": "add",
+                  "cause": "DISCOVERY_PICKUP",
+                  "verifiedEventId": "evt_pickup_bell_003"
+                }
+              ],
+              "chapterChanges": {
+                "currentChapter": "서막: 찢겨진 결계"
+              }
+            },
+            "candidateId": 3
+          },
+          "reasons": [
+            "inventoryChanges[0].entityReference is required"
+          ]
+        }
+      ],
+      "totalInputCount": 3,
+      "passedCount": 0,
+      "quarantinedCount": 3
+    }
+  },
+  "preAuth": {
+    "preAuthResults": [],
+    "allowedCandidatesCount": 0,
+    "rejectedReasons": []
+  },
+  "authorization": {
+    "isFallbackNonMutation": true
+  },
+  "commit": {
+    "verdict": "NO_CANDIDATE",
+    "rejectedReasons": [],
+    "committedRecordIds": [],
+    "commitResultSummary": "NO_MUTATION"
+  },
+  "stateBefore": {
+    "turn": 4,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
+        "worldType": "popular_genre",
+        "settingDescription": "재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.",
+        "toneStyle": "고딕 오컬트 & 코스믹 호러",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "아스카 세이라",
+        "gender": "여성",
+        "age": 17,
+        "appearance": "영력이 감도는 부적과 영도를 든 단정한 제복 차림의 소녀",
+        "goal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것",
+        "originBackground": "미상 / 백지 상태 (Tabula Rasa)",
+        "backgroundType": "tabula_rasa",
+        "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+        "flawType": "tabula_rasa",
+        "oath": "미상 / 백지 상태 (Tabula Rasa)",
+        "oathType": "tabula_rasa",
+        "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+        "anchorType": "tabula_rasa",
+        "faction": "미상 / 백지 상태 (Tabula Rasa)",
+        "factionType": "tabula_rasa",
+        "metaElements": {
+          "background": "미상 / 백지 상태 (Tabula Rasa)",
+          "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+          "oath": "미상 / 백지 상태 (Tabula Rasa)",
+          "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+          "faction": "미상 / 백지 상태 (Tabula Rasa)"
+        },
+        "stats": {
+          "strength": 11,
+          "agility": 13,
+          "constitution": 11,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 13,
+          "vitality": 11,
+          "intellect": 10,
+          "insight": 10,
+          "willpower": 13
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "명문 퇴마사 후계자",
+        "currentGoal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "stateAfter": {
+    "turn": 4,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
+        "worldType": "popular_genre",
+        "settingDescription": "재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.",
+        "toneStyle": "고딕 오컬트 & 코스믹 호러",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "아스카 세이라",
+        "gender": "여성",
+        "age": 17,
+        "appearance": "영력이 감도는 부적과 영도를 든 단정한 제복 차림의 소녀",
+        "goal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것",
+        "originBackground": "미상 / 백지 상태 (Tabula Rasa)",
+        "backgroundType": "tabula_rasa",
+        "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+        "flawType": "tabula_rasa",
+        "oath": "미상 / 백지 상태 (Tabula Rasa)",
+        "oathType": "tabula_rasa",
+        "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+        "anchorType": "tabula_rasa",
+        "faction": "미상 / 백지 상태 (Tabula Rasa)",
+        "factionType": "tabula_rasa",
+        "metaElements": {
+          "background": "미상 / 백지 상태 (Tabula Rasa)",
+          "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+          "oath": "미상 / 백지 상태 (Tabula Rasa)",
+          "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+          "faction": "미상 / 백지 상태 (Tabula Rasa)"
+        },
+        "stats": {
+          "strength": 11,
+          "agility": 13,
+          "constitution": 11,
+          "intelligence": 10,
+          "wisdom": 10,
+          "charisma": 13,
+          "vitality": 11,
+          "intellect": 10,
+          "insight": 10,
+          "willpower": 13
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "명문 퇴마사 후계자",
+        "currentGoal": "가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "historyDelta": [],
+  "pipelineSteps": [
+    {
+      "step": "T0_PLAYER_INPUT",
+      "status": "OK",
+      "timestamp": 1789263987412,
+      "details": "Turn 4 player input: \"싹 다 챙겨서 인벤토리에 넣는다\" (17 chars)"
+    },
+    {
+      "step": "T1_REQUEST_START",
+      "status": "OK",
+      "timestamp": 1789263987412,
+      "details": "Initiating API POST /api/chat with model gemini-3.5-flash"
+    },
+    {
+      "step": "T2_CONTEXT_ASSEMBLED",
+      "status": "OK",
+      "timestamp": 1789263987412,
+      "details": "Context prepared with 7 total messages in history"
+    },
+    {
+      "step": "T3_GEMINI_START",
+      "status": "OK",
+      "timestamp": 1789263987412,
+      "details": "Backend Gemini API request dispatched"
+    },
+    {
+      "step": "T4_GEMINI_RECEIVED",
+      "status": "OK",
+      "timestamp": 1789264018135,
+      "details": "Gemini response received (683 chars)"
+    },
+    {
+      "step": "T5_PARSED",
+      "status": "OK",
+      "timestamp": 1789264018135,
+      "details": "Metadata block parsed successfully"
+    },
+    {
+      "step": "T6_VALIDATED",
+      "status": "SKIPPED",
+      "timestamp": 1789264018135,
+      "details": "No candidate state mutation proposed"
+    },
+    {
+      "step": "T7_COMMITTED",
+      "status": "SKIPPED",
+      "timestamp": 1789264018135,
+      "details": "Canonical state unchanged"
+    }
+  ]
+}
