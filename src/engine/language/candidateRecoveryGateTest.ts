@@ -709,5 +709,55 @@ export function runCandidateRecoveryGateTests(): TestReport {
     );
   }
 
+  // Scenario 33: inventoryChanges without entityReference MUST PASS Recovery Gate
+  {
+    const cand = {
+      candidateId: 1,
+      label: '황동 방울 획득',
+      narrativeSummary: '황동 방울을 발견하여 획득한다.',
+      rawMetadata: {
+        inventoryChanges: [
+          {
+            name: '황동 방울',
+            quantity: 1,
+            action: 'add',
+            cause: 'DISCOVERY_PICKUP',
+            verifiedEventId: 'event_shaman_item_discovery'
+          }
+        ]
+      }
+    };
+    const res = runCandidateRecoveryGate([cand]);
+    assert(
+      res.passedCount === 1 && res.quarantinedCount === 0,
+      'Scenario 33: inventoryChanges without entityReference MUST PASS Recovery Gate'
+    );
+  }
+
+  // Scenario 34: inventoryChanges with invalid entityReference (null / array / primitive) MUST BE QUARANTINED
+  {
+    const invalidRefs = [null, ['invalid'], 'invalid_string', 123];
+    for (const invalidRef of invalidRefs) {
+      const cand = {
+        candidateId: 1,
+        label: '잘못된 entityReference 테스트',
+        narrativeSummary: 'invalid entityReference',
+        rawMetadata: {
+          inventoryChanges: [
+            {
+              name: '손상된 아이템',
+              entityReference: invalidRef
+            }
+          ]
+        }
+      };
+      const res = runCandidateRecoveryGate([cand]);
+      assert(
+        res.passedCount === 0 && res.quarantinedCount === 1,
+        `Scenario 34: inventoryChanges with invalid entityReference (${typeof invalidRef}) MUST BE QUARANTINED`
+      );
+    }
+  }
+
   return report;
 }
