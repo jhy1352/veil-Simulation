@@ -33,6 +33,14 @@ import {
   setStoredNarrativeLocale,
   getEffectiveNarrativeLocale
 } from './utils/locale';
+import {
+  isForensicRawEnabled,
+  setForensicRawEnabled,
+  getOrInitRunId,
+  resetRunId,
+  dispatchForensicRawCapture,
+  ForensicTurnPacket
+} from './utils/forensicRaw';
 import { CreationPhase } from './components/CreationPhase';
 import { GameInterface } from './components/GameInterface';
 
@@ -51,6 +59,12 @@ export default function App() {
   const [language, setLanguage] = useState<Language>('ko');
   const [narrativeLocale, setNarrativeLocale] = useState<string>(() => getStoredNarrativeLocale());
   const [selectedModel, setSelectedModel] = useState<GeminiModelType>('gemini-3.7-flash');
+  const [isForensicRaw, setIsForensicRaw] = useState<boolean>(() => isForensicRawEnabled());
+
+  const handleToggleForensicRaw = (enabled: boolean) => {
+    setIsForensicRaw(enabled);
+    setForensicRawEnabled(enabled);
+  };
   const [fontSize, setFontSize] = useState<FontSizeLevel>(() => {
     try {
       const saved = localStorage.getItem(FONT_SIZE_STORAGE_KEY);
@@ -418,6 +432,7 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
   // Reset Session to clean creation mode
   const handleResetSession = () => {
     localStorage.removeItem(STORAGE_KEY);
+    resetRunId();
     setCharacter(createEmptyCharacter());
     setWorldInfo(createEmptyWorldInfo());
     setMessages([]);
@@ -835,7 +850,7 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
           turn: effectiveStoryTurnCount,
           timestamp: new Date().toISOString(),
           chapter: currentWorldInfo.chapters?.currentChapter || '서막',
-          narrativeTime: currentWorldInfo.currentTime.formattedTime,
+          narrativeTime: currentWorldInfo.currentTime?.formattedTime || '시간 미상',
           characterStats: {
             STR: currentCharacter.stats.strength,
             AGI: currentCharacter.stats.agility,
@@ -887,6 +902,90 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
       nextEngineState.latencyHistory.push(latencyReport);
       setEngineState(nextEngineState);
 
+      // FORENSIC RAW Evidence Capture (if active)
+      if (isForensicRaw || isForensicRawEnabled()) {
+        const forensicPacket: ForensicTurnPacket = {
+          runId: getOrInitRunId(currentWorldInfo.worldName || effectiveWorldInfo.worldName),
+          worldName: currentWorldInfo.worldName || effectiveWorldInfo.worldName,
+          turn: effectiveStoryTurnCount,
+          timestamp: new Date().toISOString(),
+          gitCommit: data.gitCommit || 'unknown',
+          playerInput: {
+            rawInput: userPrompt,
+            originInputId: data.originInputId
+          },
+          modelRuntime: {
+            requestedModel: selectedModel,
+            actualModelVersion: data.actualModelVersion,
+            responseId: data.forensicCapture?.phase1?.responseId || data.forensicCapture?.phase2?.responseId,
+            serverTimings: data.serverTimings,
+            clientLatency: latencyReport
+          },
+          chatContextForensic: data.forensicCapture?.chatContextForensic,
+          geminiContentsForensic: data.forensicCapture?.geminiContentsForensic,
+          llmRawResponse: {
+            phase1RawText: data.forensicCapture?.phase1?.rawResponseText,
+            phase2RawText: data.forensicCapture?.phase2?.rawResponseText,
+            rawResponseText: rawOutputText
+          },
+          candidatePipeline: {
+            rawCandidatesBlock: data.forensicCapture?.phase1?.rawCandidatesBlock,
+            parsedCandidates: data.forensicCapture?.phase1?.rawCandidatesBlock,
+            recoveryGateResult: data.forensicCapture?.phase1?.recoveryGateResult,
+            meaningTrees: data.forensicCapture?.phase1?.meaningTrees,
+            candidatesToValidate: data.forensicCapture?.phase1?.meaningTrees
+          },
+          preAuth: data.forensicCapture?.preAuth || {
+            preAuthResults: [],
+            allowedCandidatesCount: 0,
+            rejectedReasons: []
+          },
+          authorization: {
+            authorizedCandidateId: data.selectedCandidateId,
+            authorizedCandidate: data.authorizedCandidate,
+            authorizedCandidatePacket: data.authorizedCandidatePacket,
+            authorizedProposal: data.authorizedProposal,
+            isFallbackNonMutation: data.isFallbackNonMutation
+          },
+          commit: {
+            verdict: turnVerdict,
+            rejectedReasons: turnRejections,
+            committedRecordIds: turnCommittedIds,
+            commitResultSummary: hasAuthorizedMutation ? 'COMMITTED' : 'NO_MUTATION'
+          },
+          stateBefore: {
+            turn: effectiveStoryTurnCount,
+            canonicalState: {
+              worldInfo: effectiveWorldInfo,
+              character: effectiveCharacter
+            },
+            engineState: {
+              historicalRecordsCount: effectiveEngineState.historicalRecords?.length || 0,
+              diagnostics: effectiveEngineState.diagnostics
+            },
+            inventory: effectiveCharacter.inventory
+          },
+          stateAfter: {
+            turn: effectiveStoryTurnCount,
+            canonicalState: {
+              worldInfo: currentWorldInfo,
+              character: currentCharacter
+            },
+            engineState: {
+              historicalRecordsCount: nextEngineState.historicalRecords?.length || 0,
+              diagnostics: nextEngineState.diagnostics
+            },
+            inventory: currentCharacter.inventory
+          },
+          historyDelta: nextEngineState.historicalRecords.slice(effectiveEngineState.historicalRecords?.length || 0),
+          pipelineSteps: traceSteps
+        };
+
+        dispatchForensicRawCapture(forensicPacket).catch(err => {
+          console.warn('[Forensic RAW] Async capture dispatch error:', err);
+        });
+      }
+
       // Check if GM requested a dice roll
       if (metaData && metaData.recommendedDC) {
         setWaitingForRoll({
@@ -903,7 +1002,7 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
     } finally {
       setIsGenerating(false);
     }
-  }, [character, worldInfo, engineState, messages, storyTurnCount, isGenerating, selectedModel, narrativeLocale]);
+  }, [character, worldInfo, engineState, messages, storyTurnCount, isGenerating, selectedModel, narrativeLocale, isForensicRaw]);
 
   return (
     <div className="min-h-screen bg-stone-950 text-stone-100 font-sans selection:bg-amber-500/30 selection:text-amber-200">
@@ -942,6 +1041,8 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
           onLoadSession={handleLoadSession}
           isGenerating={isGenerating}
           modelError={modelError}
+          isForensicRaw={isForensicRaw}
+          onToggleForensicRaw={handleToggleForensicRaw}
         />
       )}
     </div>

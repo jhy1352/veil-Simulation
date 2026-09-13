@@ -10,6 +10,8 @@ interface EngineDiagnosticsModalProps {
   engineState?: EngineState;
   selectedModel?: GeminiModelType;
   onSelectModel?: (model: GeminiModelType) => void;
+  isForensicRaw?: boolean;
+  onToggleForensicRaw?: (enabled: boolean) => void;
 }
 
 export function EngineDiagnosticsModal({
@@ -17,7 +19,9 @@ export function EngineDiagnosticsModal({
   onClose,
   engineState,
   selectedModel,
-  onSelectModel
+  onSelectModel,
+  isForensicRaw = false,
+  onToggleForensicRaw
 }: EngineDiagnosticsModalProps) {
   const [activeTab, setActiveTab] = useState<'records' | 'candidates' | 'logs' | 'traces' | 'checkpoints' | 'diet' | 'latency'>('traces');
   const [copiedId, setCopiedId] = useState<string | null>(null);
@@ -70,6 +74,21 @@ export function EngineDiagnosticsModal({
             </div>
 
             <div className="flex items-center gap-2">
+              {onToggleForensicRaw && (
+                <button
+                  id="modal-forensic-raw-toggle-btn"
+                  onClick={() => onToggleForensicRaw(!isForensicRaw)}
+                  className={`px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                    isForensicRaw
+                      ? 'bg-emerald-950/80 border-emerald-500/80 text-emerald-300'
+                      : 'bg-stone-800 hover:bg-stone-700 border-stone-700 text-stone-400'
+                  }`}
+                  title="FORENSIC RAW 원본 증거 자동 보존 토글"
+                >
+                  <span className={`w-2 h-2 rounded-full ${isForensicRaw ? 'bg-emerald-400 animate-pulse' : 'bg-stone-500'}`} />
+                  <span>[FORENSIC RAW] {isForensicRaw ? 'ON' : 'OFF'}</span>
+                </button>
+              )}
               {selectedModel && onSelectModel && (
                 <ModelSelector
                   selectedModel={selectedModel}

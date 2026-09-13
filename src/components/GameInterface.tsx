@@ -74,6 +74,8 @@ interface GameInterfaceProps {
   onLoadSession: (loadedPayload: any) => void;
   isGenerating: boolean;
   modelError?: string | null;
+  isForensicRaw?: boolean;
+  onToggleForensicRaw?: (enabled: boolean) => void;
 }
 
 export function GameInterface({
@@ -98,7 +100,9 @@ export function GameInterface({
   onResetSession,
   onLoadSession,
   isGenerating,
-  modelError
+  modelError,
+  isForensicRaw = false,
+  onToggleForensicRaw
 }: GameInterfaceProps) {
   const [inputText, setInputText] = useState('');
   const [isWorldModalOpen, setIsWorldModalOpen] = useState(false);
@@ -368,6 +372,24 @@ export function GameInterface({
             />
           )}
 
+          {/* FORENSIC RAW Toggle (Dev / Research) */}
+          {onToggleForensicRaw && (
+            <button
+              id="forensic-raw-toggle-btn"
+              onClick={() => onToggleForensicRaw(!isForensicRaw)}
+              className={`px-2.5 py-1.5 rounded-xl border text-xs font-mono font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+                isForensicRaw
+                  ? 'bg-emerald-950/80 border-emerald-500/80 text-emerald-300 shadow-sm shadow-emerald-950/50'
+                  : 'bg-stone-800/80 hover:bg-stone-700/80 border-stone-700 text-stone-400'
+              }`}
+              title="FORENSIC RAW: 턴별 런타임 원본 증거 자동 저장 (/report/raw/)"
+            >
+              <span className={`w-2 h-2 rounded-full ${isForensicRaw ? 'bg-emerald-400 animate-pulse' : 'bg-stone-500'}`} />
+              <span className="hidden md:inline">[FORENSIC RAW]</span>
+              <span>{isForensicRaw ? 'ON' : 'OFF'}</span>
+            </button>
+          )}
+
           {/* World Lore Button (Primary) */}
           <button
             id="open-world-info-btn"
@@ -472,6 +494,28 @@ export function GameInterface({
                     <Activity className="w-4 h-4 text-emerald-400" />
                     <span>실시간 엔진 감사</span>
                   </button>
+
+                  {/* FORENSIC RAW Toggle Inside Menu */}
+                  {onToggleForensicRaw && (
+                    <button
+                      onClick={() => {
+                        onToggleForensicRaw(!isForensicRaw);
+                      }}
+                      className="w-full text-left p-2 rounded-xl hover:bg-stone-800 transition-colors cursor-pointer flex items-center justify-between text-xs text-stone-300"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <span className={`w-2 h-2 rounded-full ${isForensicRaw ? 'bg-emerald-400 animate-pulse' : 'bg-stone-500'}`} />
+                        <span>FORENSIC RAW 저장</span>
+                      </div>
+                      <span className={`font-mono text-[10px] px-1.5 py-0.5 rounded border ${
+                        isForensicRaw
+                          ? 'bg-emerald-950 border-emerald-600 text-emerald-300'
+                          : 'bg-stone-900 border-stone-700 text-stone-400'
+                      }`}>
+                        {isForensicRaw ? 'ON' : 'OFF'}
+                      </span>
+                    </button>
+                  )}
 
                   {/* Cloud Sync Inside Menu */}
                   <button
@@ -812,6 +856,8 @@ export function GameInterface({
         engineState={engineState}
         selectedModel={selectedModel}
         onSelectModel={onSelectModel}
+        isForensicRaw={isForensicRaw}
+        onToggleForensicRaw={onToggleForensicRaw}
       />
 
       <ResetConfirmModal

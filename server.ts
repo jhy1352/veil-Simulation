@@ -1,5 +1,8 @@
 import express from 'express';
 import path from 'path';
+import fs from 'fs';
+import crypto from 'crypto';
+import { execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
 import { createServer as createViteServer } from 'vite';
@@ -22,6 +25,30 @@ export type { VeilCandidate };
 export { parseCandidatesBlock };
 
 app.use(express.json({ limit: '10mb' }));
+
+// Helper to resolve current git commit hash
+function getServerGitCommit(): string {
+  try {
+    return execSync('git rev-parse HEAD', { encoding: 'utf8' }).trim();
+  } catch (e) {
+    return 'unknown_commit';
+  }
+}
+
+// Redact secret credentials from forensic JSON logs
+function sanitizeSecretTokens(obj: any): any {
+  if (!obj || typeof obj !== 'object') return obj;
+  if (Array.isArray(obj)) return obj.map(sanitizeSecretTokens);
+  const sanitized: any = {};
+  for (const [key, value] of Object.entries(obj)) {
+    if (/key|secret|token|auth|password|credential/i.test(key) && typeof value === 'string' && value.length > 8) {
+      sanitized[key] = '[REDACTED_SECRET]';
+    } else {
+      sanitized[key] = sanitizeSecretTokens(value);
+    }
+  }
+  return sanitized;
+}
 
 // In-Memory Cloud Session Store (KV fallback)
 const cloudSessions = new Map<string, any>();
@@ -374,6 +401,37 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
         contextSnapshot: initialContextPrompt,
         actualModelVersion: response.modelVersion,
         requestedModel: targetModel,
+        gitCommit: getServerGitCommit(),
+        forensicCapture: {
+          t0_playerInput: effectiveUserPrompt,
+          chatContextForensic: {
+            initialContextPrompt,
+            kgContext,
+            roadmapContext,
+            seedsContext,
+            offscreenContext
+          },
+          geminiContentsForensic: contents,
+          phase1: {
+            model: targetModel,
+            actualModelVersion: response.modelVersion,
+            responseId: response.responseId,
+            rawResponseText: rawPhase1Response,
+            rawCandidatesBlock: null
+          },
+          preAuth: null,
+          phase2: null,
+          serverTimings: {
+            t1_requestStart,
+            t2_contextAssemblyComplete,
+            t3_geminiRequestStart,
+            t4_geminiResponseReceived,
+            contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
+            geminiGenerationMs: t4_geminiResponseReceived - t3_geminiRequestStart,
+            inputCharCount,
+            outputCharCount
+          }
+        },
         serverTimings: {
           t1_requestStart,
           t2_contextAssemblyComplete,
@@ -415,6 +473,38 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
         contextSnapshot: initialContextPrompt,
         actualModelVersion: response.modelVersion,
         requestedModel: targetModel,
+        gitCommit: getServerGitCommit(),
+        forensicCapture: {
+          t0_playerInput: effectiveUserPrompt,
+          chatContextForensic: {
+            initialContextPrompt,
+            kgContext,
+            roadmapContext,
+            seedsContext,
+            offscreenContext
+          },
+          geminiContentsForensic: contents,
+          phase1: {
+            model: targetModel,
+            actualModelVersion: response.modelVersion,
+            responseId: response.responseId,
+            rawResponseText: rawPhase1Response,
+            rawCandidatesBlock: rawCandidates,
+            recoveryGateResult: gateResult
+          },
+          preAuth: null,
+          phase2: null,
+          serverTimings: {
+            t1_requestStart,
+            t2_contextAssemblyComplete,
+            t3_geminiRequestStart,
+            t4_geminiResponseReceived,
+            contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
+            geminiGenerationMs: t4_geminiResponseReceived - t3_geminiRequestStart,
+            inputCharCount,
+            outputCharCount
+          }
+        },
         serverTimings: {
           t1_requestStart,
           t2_contextAssemblyComplete,
@@ -589,6 +679,52 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
         contextSnapshot: initialContextPrompt,
         actualModelVersion: response.modelVersion,
         requestedModel: targetModel,
+        gitCommit: getServerGitCommit(),
+        forensicCapture: {
+          t0_playerInput: effectiveUserPrompt,
+          chatContextForensic: {
+            initialContextPrompt,
+            kgContext,
+            roadmapContext,
+            seedsContext,
+            offscreenContext
+          },
+          geminiContentsForensic: contents,
+          phase1: {
+            model: targetModel,
+            actualModelVersion: response.modelVersion,
+            responseId: response.responseId,
+            rawResponseText: rawPhase1Response,
+            rawCandidatesBlock: rawCandidates,
+            recoveryGateResult: gateResult,
+            meaningTrees: candidatesToValidate.map(c => ({
+              candidateId: c.candidate.candidateId,
+              meaningTree: c.meaningTree,
+              proposal: c.proposal
+            }))
+          },
+          preAuth: {
+            preAuthResults,
+            allowedCandidatesCount: 0
+          },
+          phase2: null,
+          authorizedResult: {
+            authorizedCandidateId: null,
+            authorizedCandidate: null,
+            authorizedCandidatePacket: null,
+            authorizedProposal: null
+          },
+          serverTimings: {
+            t1_requestStart,
+            t2_contextAssemblyComplete,
+            t3_geminiRequestStart,
+            t4_geminiResponseReceived: Date.now(),
+            contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
+            geminiGenerationMs: Date.now() - t3_geminiRequestStart,
+            inputCharCount,
+            outputCharCount
+          }
+        },
         serverTimings: {
           t1_requestStart,
           t2_contextAssemblyComplete,
@@ -689,6 +825,59 @@ INSTRUCTIONS:
       contextSnapshot: initialContextPrompt,
       actualModelVersion: phase2Response.modelVersion,
       requestedModel: targetModel,
+      gitCommit: getServerGitCommit(),
+      forensicCapture: {
+        t0_playerInput: effectiveUserPrompt,
+        chatContextForensic: {
+          initialContextPrompt,
+          kgContext,
+          roadmapContext,
+          seedsContext,
+          offscreenContext
+        },
+        geminiContentsForensic: contents,
+        phase1: {
+          model: targetModel,
+          actualModelVersion: response.modelVersion,
+          responseId: response.responseId,
+          rawResponseText: rawPhase1Response,
+          rawCandidatesBlock: rawCandidates,
+          recoveryGateResult: gateResult,
+          meaningTrees: candidatesToValidate.map(c => ({
+            candidateId: c.candidate.candidateId,
+            meaningTree: c.meaningTree,
+            proposal: c.proposal
+          }))
+        },
+        preAuth: {
+          preAuthResults,
+          allowedCandidatesCount: allowedCandidates.length
+        },
+        phase2: {
+          contents: phase2Contents,
+          model: targetModel,
+          actualModelVersion: phase2Response.modelVersion,
+          responseId: phase2Response.responseId,
+          rawResponseText: rawPhase2Response,
+          selectedCandidateId: selectedId
+        },
+        authorizedResult: {
+          authorizedCandidateId,
+          authorizedCandidate,
+          authorizedCandidatePacket,
+          authorizedProposal
+        },
+        serverTimings: {
+          t1_requestStart,
+          t2_contextAssemblyComplete,
+          t3_geminiRequestStart,
+          t4_geminiResponseReceived: Date.now(),
+          contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
+          geminiGenerationMs: Date.now() - t3_geminiRequestStart,
+          inputCharCount,
+          outputCharCount
+        }
+      },
       serverTimings: {
         t1_requestStart,
         t2_contextAssemblyComplete,
@@ -787,6 +976,94 @@ app.post('/api/validate-state', (req, res) => {
     return res.json({ success: true, recommendedDc, sanitizedNpcs });
   } catch (e: any) {
     return res.status(500).json({ error: e.message });
+  }
+});
+
+// 5. API: /api/dev/forensic-raw (Write turn raw data to /report/raw/00_<worldName>/)
+app.post('/api/dev/forensic-raw', (req, res) => {
+  try {
+    if (process.env.NODE_ENV === 'production') {
+      return res.status(403).json({ error: 'Forensic raw endpoint disabled in production' });
+    }
+
+    const { runId, worldName, turn, rawPayload } = req.body;
+    if (!rawPayload || typeof turn !== 'number') {
+      return res.status(400).json({ error: 'Missing turn or rawPayload' });
+    }
+
+    const cleanWorldName = (worldName || 'default_world')
+      .replace(/[/\\:*?"<>|\x00-\x1F\x7F]/g, '_')
+      .replace(/\s+/g, '_')
+      .replace(/_{2,}/g, '_')
+      .trim() || 'default_world';
+
+    const targetDir = path.join(process.cwd(), 'report', 'raw', `00_${cleanWorldName}`);
+    if (!fs.existsSync(targetDir)) {
+      fs.mkdirSync(targetDir, { recursive: true });
+    }
+
+    const fileName = `turn_${String(turn).padStart(3, '0')}_raw.json`;
+    const filePath = path.join(targetDir, fileName);
+
+    const sanitizedPayload = sanitizeSecretTokens(rawPayload);
+    const fileContent = JSON.stringify(sanitizedPayload, null, 2);
+    fs.writeFileSync(filePath, fileContent, 'utf8');
+
+    const fileSha256 = crypto.createHash('sha256').update(fileContent).digest('hex');
+
+    // Manifest management
+    const manifestPath = path.join(targetDir, 'manifest.json');
+    let manifest: any = {
+      runId: runId || `run_${Date.now()}`,
+      worldName: worldName || cleanWorldName,
+      sanitizedDir: `00_${cleanWorldName}`,
+      gitCommit: getServerGitCommit(),
+      captureStartedAt: new Date().toISOString(),
+      lastCapturedAt: new Date().toISOString(),
+      turns: []
+    };
+
+    if (fs.existsSync(manifestPath)) {
+      try {
+        const existing = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+        manifest = {
+          ...manifest,
+          ...existing,
+          lastCapturedAt: new Date().toISOString()
+        };
+        if (!manifest.runId && runId) manifest.runId = runId;
+        if (worldName) manifest.worldName = worldName;
+      } catch (e) {
+        console.warn('[Forensic Raw] Existing manifest read error:', e);
+      }
+    }
+
+    const turnIdx = manifest.turns.findIndex((t: any) => t.turn === turn);
+    const turnEntry = {
+      turn,
+      file: fileName,
+      sha256: fileSha256,
+      capturedAt: new Date().toISOString()
+    };
+
+    if (turnIdx >= 0) {
+      manifest.turns[turnIdx] = turnEntry;
+    } else {
+      manifest.turns.push(turnEntry);
+    }
+    manifest.turns.sort((a: any, b: any) => a.turn - b.turn);
+
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
+
+    return res.json({
+      success: true,
+      file: fileName,
+      sha256: fileSha256,
+      dir: `report/raw/00_${cleanWorldName}`
+    });
+  } catch (err: any) {
+    console.error('[Forensic Raw] Write error:', err);
+    return res.status(500).json({ error: err.message });
   }
 });
 
