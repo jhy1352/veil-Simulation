@@ -28,29 +28,88 @@ export interface VeilCandidate {
   preAuthReasons?: string[];
 }
 
+let recoveryCallCount = 0;
+
+export function getRecoveryCallCount(): number {
+  return recoveryCallCount;
+}
+
+export function resetRecoveryCallCount(): void {
+  recoveryCallCount = 0;
+}
+
 export function parseCandidatesBlock(text: string): VeilCandidate[] | null {
   const blockMatch = text.match(/\[CANDIDATES_BLOCK\]([\s\S]*?)\[CANDIDATES_END\]/i);
-  if (!blockMatch) return null;
-  const jsonStr = blockMatch[1].trim();
+  const jsonStr = blockMatch ? blockMatch[1].trim() : text.trim();
+
   const recovered = recoverSyntaxAndParseJson<any>(jsonStr);
   if (!recovered.success || !recovered.data) return null;
+
   const parsed = recovered.data;
   let rawList: any[] | null = null;
   if (Array.isArray(parsed)) rawList = parsed;
-  else if (parsed && Array.isArray(parsed.candidates)) rawList = parsed.candidates;
+  else if (parsed && typeof parsed === 'object' && Array.isArray(parsed.candidates)) {
+    rawList = parsed.candidates;
+  }
   if (!rawList) return null;
 
   // Parser Authority (B-Design): Assign canonical sequential candidateId (1..N, max 5) based on array order.
   // LLM output candidateId is untrusted and ignored. Candidate payloads (label, narrativeSummary, rawMetadata) are preserved.
   const candidateSlice = rawList.slice(0, 5);
   return candidateSlice.map((item, idx) => {
-    if (typeof item === 'object' && item !== null && !Array.isArray(item)) {
-      return {
-        ...item,
-        candidateId: idx + 1
-      };
+    if (typeof item !== 'object' || item === null || Array.isArray(item)) {
+      return item;
     }
-    return item;
+
+    const candidateId = idx + 1;
+
+    // Default modality="NONE" for semanticEvents and normalize scope="CANONICAL" -> "CLAIM"
+    let semanticEvents = item.semanticEvents;
+    if (Array.isArray(semanticEvents)) {
+      semanticEvents = semanticEvents.map((ev: any) => {
+        if (typeof ev === 'object' && ev !== null) {
+          const modality = ev.modality ? String(ev.modality).toUpperCase() : 'NONE';
+          const scope = ev.scope === 'CANONICAL' ? 'CLAIM' : ev.scope;
+          return {
+            ...ev,
+            modality,
+            scope: scope || ev.scope
+          };
+        }
+        return ev;
+      });
+    }
+
+    // Normalize rawMetadata if present
+    let rawMetadata = item.rawMetadata;
+    if (typeof rawMetadata === 'object' && rawMetadata !== null && !Array.isArray(rawMetadata)) {
+      if (Array.isArray(rawMetadata.semanticEvents)) {
+        rawMetadata = {
+          ...rawMetadata,
+          semanticEvents: rawMetadata.semanticEvents.map((ev: any) => {
+            if (typeof ev === 'object' && ev !== null) {
+              const modality = ev.modality ? String(ev.modality).toUpperCase() : 'NONE';
+              const scope = ev.scope === 'CANONICAL' ? 'CLAIM' : ev.scope;
+              return {
+                ...ev,
+                modality,
+                scope: scope || ev.scope
+              };
+            }
+            return ev;
+          })
+        };
+      }
+    } else if (rawMetadata === undefined) {
+      rawMetadata = {};
+    }
+
+    return {
+      ...item,
+      candidateId,
+      semanticEvents,
+      rawMetadata
+    };
   });
 }
 
@@ -485,16 +544,25 @@ export function validateCandidateStructure(candidate: any): CandidateValidationR
  * Candidate Recovery Gate
  * Filters an array of raw candidate objects, quarantining corrupted items while preserving valid ones with Zero-Mutation.
  */
-export function runCandidateRecoveryGate<T = any>(rawCandidates: any): CandidateRecoveryGateResult<T> {
-  // If the rawCandidates is not an array, fail-closed
+export function runCandidateRecoveryGate<T = any>(input: any): CandidateRecoveryGateResult<T> {
+  recoveryCallCount++;
+
+  let rawCandidates: any[] | null = null;
+  if (typeof input === 'string') {
+    rawCandidates = parseCandidatesBlock(input);
+  } else if (Array.isArray(input)) {
+    rawCandidates = input;
+  }
+
+  // If rawCandidates is not an array, fail-closed
   if (!Array.isArray(rawCandidates)) {
     return {
       passedCandidates: [],
       quarantinedCandidates: [
         {
           index: 0,
-          candidate: rawCandidates,
-          reasons: [`Expected candidate list array, received ${rawCandidates === null ? 'null' : typeof rawCandidates}`]
+          candidate: input,
+          reasons: [`Expected candidate list or parseable candidate block string, received ${input === null ? 'null' : typeof input}`]
         }
       ],
       totalInputCount: 0,

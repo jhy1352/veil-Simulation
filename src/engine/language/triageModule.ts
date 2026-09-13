@@ -8,18 +8,13 @@
  * Principles:
  * 1. Single-Execution Guard: Executes ONCE per request. Attaches TRIAGE_STAMP.
  *    If TRIAGE_STAMP is present, bypasses re-execution.
- * 2. Structural Integrity & Default Normalization:
- *    - Default modality="NONE" for semantic events / candidate actions if omitted.
- *    - Normalizes LLM claiming "CANONICAL" to "CLAIM" for downstream Sovereign Engine evaluation.
- *    - Ensures structural non-null rawMetadata and valid candidateId (1..5).
- * 3. Non-Canonical Authority:
- *    - Never invents new facts, entities, causes, consequences, or relationships.
- *    - Never mutates Canonical State directly.
- * 4. Dual Channel Support:
- *    - Normalizes both Candidate list and Zero-Mutation Narrative through Triage.
+ * 2. Zero-Mutation Narrative Isolation:
+ *    - Extracts zero-mutation narrative from [ZERO_MUTATION_NARRATIVE] block or applies fallback.
+ * 3. Candidate Recovery Delegation:
+ *    - Extracts raw candidate block string without running JSON parsing or Recovery.
+ *    - All candidate parsing, syntax recovery, candidate ID assignment, and structural validation
+ *      are strictly delegated to candidateRecoveryGate.ts.
  */
-
-import { parseCandidatesBlock, VeilCandidate } from './candidateRecoveryGate.ts';
 
 export const TRIAGE_STAMP_HEADER = 'TRIAGE_STAMP_V1';
 
@@ -34,7 +29,7 @@ export interface TriageOutput {
   triageNotes: string[];
   rawResponseText: string;
   zeroMutationNarrative: string;
-  rawCandidates: VeilCandidate[] | null;
+  rawCandidatesBlock: string | null;
 }
 
 const DETERMINISTIC_NON_MUTATION_FALLBACK =
@@ -43,7 +38,7 @@ const DETERMINISTIC_NON_MUTATION_FALLBACK =
 /**
  * Executes the Triage Gate pipeline on LLM #1 output.
  * Guarantees 1-shot execution via TRIAGE_STAMP check.
- * Delegates candidate parsing & candidateId assignment to candidateRecoveryGate's single parser authority.
+ * Extracts zero-mutation narrative and raw candidates block string without executing Recovery.
  */
 export function runTriagePipeline(input: string | TriageInput): TriageOutput {
   const rawText = typeof input === 'string' ? input : input.rawResponseText;
@@ -53,7 +48,7 @@ export function runTriagePipeline(input: string | TriageInput): TriageOutput {
   if (existingStamp || rawText.includes(`/* ${TRIAGE_STAMP_HEADER}:`) || rawText.includes(`${TRIAGE_STAMP_HEADER}_`)) {
     const extractedStamp = existingStamp || extractStampFromText(rawText) || `${TRIAGE_STAMP_HEADER}_EXISTING`;
     const zeroMutationNarrative = extractZeroMutationNarrative(rawText);
-    const rawCandidates = parseCandidatesBlock(rawText);
+    const rawCandidatesBlock = extractCandidatesBlock(rawText);
 
     return {
       triageStamp: extractedStamp,
@@ -61,7 +56,7 @@ export function runTriagePipeline(input: string | TriageInput): TriageOutput {
       triageNotes: ['Triage bypassed: TRIAGE_STAMP already present.'],
       rawResponseText: rawText,
       zeroMutationNarrative,
-      rawCandidates
+      rawCandidatesBlock
     };
   }
 
@@ -69,15 +64,16 @@ export function runTriagePipeline(input: string | TriageInput): TriageOutput {
   const stampId = `${TRIAGE_STAMP_HEADER}_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`;
   const notes: string[] = [`TRIAGE_STAMP generated: ${stampId}`];
 
-  // 1. Triage Zero-Mutation Narrative
+  // 1. Extract Zero-Mutation Narrative
   const zeroMutationNarrative = extractZeroMutationNarrative(rawText);
 
-  // 2. Parse candidates using candidateRecoveryGate's single authoritative parser (supports recoverSyntaxAndParseJson)
-  const parsedCandidates = parseCandidatesBlock(rawText);
-
-  // 3. Perform Triage Semantic Normalization (modality=NONE, scope CANONICAL->CLAIM)
-  // Preserves candidateId assigned by parseCandidatesBlock without overriding.
-  const rawCandidates = parsedCandidates ? normalizeCandidateSemantics(parsedCandidates, notes) : null;
+  // 2. Extract Raw Candidates Block String (Recovery delegated entirely to candidateRecoveryGate.ts)
+  const rawCandidatesBlock = extractCandidatesBlock(rawText);
+  if (rawCandidatesBlock) {
+    notes.push('Extracted raw candidates block string for downstream Candidate Recovery Gate.');
+  } else {
+    notes.push('No [CANDIDATES_BLOCK] tag found in input text.');
+  }
 
   // Re-attach TRIAGE_STAMP marker to raw response text for diagnostic traceability
   const triagedRawText = `/* ${stampId} */\n${rawText}`;
@@ -88,16 +84,16 @@ export function runTriagePipeline(input: string | TriageInput): TriageOutput {
     triageNotes: notes,
     rawResponseText: triagedRawText,
     zeroMutationNarrative,
-    rawCandidates
+    rawCandidatesBlock
   };
 }
 
-function extractStampFromText(text: string): string | null {
+export function extractStampFromText(text: string): string | null {
   const match = text.match(/TRIAGE_STAMP_V1_[A-Za-z0-9_]+/);
   return match ? match[0] : null;
 }
 
-function extractZeroMutationNarrative(text: string): string {
+export function extractZeroMutationNarrative(text: string): string {
   const zeroMatch = text.match(/\[ZERO_MUTATION_NARRATIVE\]([\s\S]*?)\[ZERO_MUTATION_END\]/i);
   if (zeroMatch && zeroMatch[1].trim()) {
     return zeroMatch[1].trim();
@@ -105,63 +101,7 @@ function extractZeroMutationNarrative(text: string): string {
   return DETERMINISTIC_NON_MUTATION_FALLBACK;
 }
 
-/**
- * Applies semantic normalization to candidates parsed by parseCandidatesBlock:
- * - Preserves existing candidateId assigned by parseCandidatesBlock authority
- * - Defaults missing modality to "NONE"
- * - Normalizes scope="CANONICAL" to "CLAIM" for downstream Engine evaluation
- * - Does not invent new entities, facts, or candidate IDs
- */
-function normalizeCandidateSemantics(candidates: VeilCandidate[], notes: string[]): VeilCandidate[] {
-  return candidates.map((candidate) => {
-    if (typeof candidate !== 'object' || candidate === null || Array.isArray(candidate)) {
-      return candidate;
-    }
-
-    let semanticEvents = candidate.semanticEvents;
-    if (Array.isArray(semanticEvents)) {
-      semanticEvents = semanticEvents.map((ev: any) => {
-        if (typeof ev === 'object' && ev !== null) {
-          const modality = ev.modality ? String(ev.modality).toUpperCase() : 'NONE';
-          const scope = ev.scope === 'CANONICAL' ? 'CLAIM' : ev.scope;
-          return {
-            ...ev,
-            modality,
-            scope: scope || ev.scope
-          };
-        }
-        return ev;
-      });
-      notes.push(`Candidate ${candidate.candidateId}: normalized ${semanticEvents.length} semanticEvents (modality=NONE, scope=CLAIM)`);
-    }
-
-    let rawMetadata = candidate.rawMetadata;
-    if (typeof rawMetadata === 'object' && rawMetadata !== null && !Array.isArray(rawMetadata)) {
-      if (Array.isArray(rawMetadata.semanticEvents)) {
-        rawMetadata = {
-          ...rawMetadata,
-          semanticEvents: rawMetadata.semanticEvents.map((ev: any) => {
-            if (typeof ev === 'object' && ev !== null) {
-              const modality = ev.modality ? String(ev.modality).toUpperCase() : 'NONE';
-              const scope = ev.scope === 'CANONICAL' ? 'CLAIM' : ev.scope;
-              return {
-                ...ev,
-                modality,
-                scope: scope || ev.scope
-              };
-            }
-            return ev;
-          })
-        };
-      }
-    } else if (rawMetadata === undefined) {
-      rawMetadata = {};
-    }
-
-    return {
-      ...candidate,
-      semanticEvents,
-      rawMetadata
-    };
-  });
+export function extractCandidatesBlock(text: string): string | null {
+  const match = text.match(/\[CANDIDATES_BLOCK\]([\s\S]*?)\[CANDIDATES_END\]/i);
+  return match ? match[0] : null;
 }

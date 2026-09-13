@@ -376,10 +376,10 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
     // Step 1: Execute Triage Gate (Leading Gate: LLM #1 -> Triage -> TRIAGE_STAMP -> Recovery -> Causal Language)
     const triageResult = runTriagePipeline(rawPhase1Response);
     const zeroMutationNarrative = triageResult.zeroMutationNarrative;
-    const rawCandidates = triageResult.rawCandidates;
+    const rawCandidatesBlock = triageResult.rawCandidatesBlock;
 
     // VEIL Enforcement: Check if candidates block is present
-    if (!rawCandidates) {
+    if (!rawCandidatesBlock) {
       // Non-mutation or missing candidates block: return zero-mutation narrative safely
       const outputCharCount = zeroMutationNarrative.length;
       const usageMetadata = (response as any).usageMetadata;
@@ -444,8 +444,8 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
       });
     }
 
-    // VEIL Candidate Recovery Gate: Quarantine corrupted candidates deterministically
-    const gateResult = runCandidateRecoveryGate<VeilCandidate>(rawCandidates);
+    // VEIL Candidate Recovery Gate: Parse & Quarantine corrupted candidates deterministically (Single Recovery Authority)
+    const gateResult = runCandidateRecoveryGate<VeilCandidate>(rawCandidatesBlock);
     if (gateResult.quarantinedCount > 0) {
       console.warn(`[VEIL Candidate Recovery Gate] Quarantined ${gateResult.quarantinedCount} corrupted candidate(s) out of ${gateResult.totalInputCount}:`, gateResult.quarantinedCandidates);
     }
@@ -486,7 +486,7 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
             triageStamp: triageResult.triageStamp,
             triageApplied: triageResult.triageApplied,
             triageNotes: triageResult.triageNotes,
-            rawCandidatesBlock: rawCandidates,
+            rawCandidatesBlock: rawCandidatesBlock,
             recoveryGateResult: gateResult
           },
           preAuth: null,
@@ -591,7 +591,7 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
 
     // Filter to candidates whose Causal Language translation succeeded
     const successfulTranslations = translationResults.filter(
-      (tr): tr is typeof tr & { proposal: StateTransitionProposal; meaningTree: MeaningNode } =>
+      (tr): tr is typeof tr & { proposal: StateTransitionProposal; meaningTree: any } =>
         tr.status === 'COMPILED' && Boolean(tr.proposal) && Boolean(tr.meaningTree)
     );
 
@@ -663,7 +663,7 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
             actualModelVersion: response.modelVersion,
             responseId: response.responseId,
             rawResponseText: rawPhase1Response,
-            rawCandidatesBlock: rawCandidates,
+            rawCandidatesBlock: rawCandidatesBlock,
             recoveryGateResult: gateResult,
             meaningTrees: candidatesToValidate.map(tr => ({
               candidateId: tr.candidate.candidateId,
@@ -812,7 +812,7 @@ INSTRUCTIONS:
           triageStamp: triageResult.triageStamp,
           triageApplied: triageResult.triageApplied,
           triageNotes: triageResult.triageNotes,
-          rawCandidatesBlock: rawCandidates,
+          rawCandidatesBlock: rawCandidatesBlock,
           recoveryGateResult: gateResult,
           meaningTrees: candidatesToValidate.map(c => ({
             candidateId: c.candidate.candidateId,
