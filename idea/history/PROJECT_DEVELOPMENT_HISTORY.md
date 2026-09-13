@@ -11,7 +11,6 @@
   1. **Sajo**: 최초 독립 프로젝트 (현재 3.1 작업과 분리된 초기 단계 작업).
   2. **all trpg**: 후속 기능 확장 및 종합 TRPG 엔진 개발 라인.
   3. **3.1back**: `all trpg` 대규모 업데이트 중 발생한 오류 및 복잡성을 해소하기 위해 보다 원시적이고 견고한 구조로 복원하여 새로 시작한 저장소이자 현재 TRPG 3.1 Sovereign Engine의 직접적 시원(Root Ancestor).
-  4. **3.1upload6 (Current Repository)**: `https://github.com/jhy1352/3.1upload6.git` — Phase 5.x 이후 엔진 주권, 단일 Commit Gate, 정보 비대칭 및 서사 보존 원칙이 결합된 공식 개발 및 감사 런타임 저장소.
 
 ---
 
