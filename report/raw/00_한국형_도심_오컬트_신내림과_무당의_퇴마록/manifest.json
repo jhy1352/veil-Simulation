@@ -4,31 +4,37 @@
   "sanitizedDir": "00_한국형_도심_오컬트_신내림과_무당의_퇴마록",
   "gitCommit": "6e099653874cebb0fd3db87aa3ed389123effe83",
   "captureStartedAt": "2026-09-13T01:44:54.203Z",
-  "lastCapturedAt": "2026-09-13T01:48:17.799Z",
+  "lastCapturedAt": "2026-09-13T02:01:38.466Z",
   "turns": [
+    {
+      "turn": 1,
+      "file": "turn_001_raw.json",
+      "sha256": "69f66290fee0aeaf8753ed9e59deab76601abaff83ac7a39b2c8a81d5c953c96",
+      "capturedAt": "2026-09-13T01:58:09.036Z"
+    },
     {
       "turn": 2,
       "file": "turn_002_raw.json",
-      "sha256": "99e9051f87b51fae7aa2f8cc2bf9ef0be9897f101e0ba696a657d3f7ef05b5dc",
-      "capturedAt": "2026-09-13T01:44:54.203Z"
+      "sha256": "d4dbf0656fc796ab666ae85173b11b43531023711a44913c055977703785ba93",
+      "capturedAt": "2026-09-13T01:58:51.430Z"
     },
     {
       "turn": 3,
       "file": "turn_003_raw.json",
-      "sha256": "5d37ec8493e608be9ec26d5e7fe01badaba76beb95e31eef7e2f69340efbcea4",
-      "capturedAt": "2026-09-13T01:45:53.037Z"
+      "sha256": "5eefb6621c5eef28a54afeb71b1dca670f821415ac6d13378742845179b6b579",
+      "capturedAt": "2026-09-13T01:59:37.155Z"
     },
     {
       "turn": 4,
       "file": "turn_004_raw.json",
-      "sha256": "96befb55519a5e1414d102bdb076c616dcf540f940a88d9592e51ad9541c7815",
-      "capturedAt": "2026-09-13T01:46:58.774Z"
+      "sha256": "aa4cc36a80ee1a61eab69e638e33a532f880b3626f0b973ee81fc60c617a7bb9",
+      "capturedAt": "2026-09-13T02:00:34.228Z"
     },
     {
       "turn": 5,
       "file": "turn_005_raw.json",
-      "sha256": "93ddd8e8245a0d535c03e1f604f3195fcf6aa0a34c496c6b5e60561b189e7fa2",
-      "capturedAt": "2026-09-13T01:48:17.799Z"
+      "sha256": "c1f8c18634c9f76cfda825da01530788be1e42e3864e791aff3ab554ba0ffbd5",
+      "capturedAt": "2026-09-13T02:01:38.466Z"
     }
   ]
 }

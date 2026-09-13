@@ -1,53 +1,53 @@
 {
-  "runId": "run_2026-09-13T01-44-53-569Z_07xdfp",
+  "runId": "run_2026-09-13T01-58-08-391Z_ejddqg",
   "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
   "turn": 3,
-  "timestamp": "2026-09-13T01:45:52.383Z",
-  "gitCommit": "6e099653874cebb0fd3db87aa3ed389123effe83",
+  "timestamp": "2026-09-13T01:59:36.523Z",
+  "gitCommit": "4c341f1c869862e15d6c72319d1784e9a8b71830",
   "playerInput": {
-    "rawInput": "지능 주사위 20"
+    "rawInput": "지혜 주사위 20"
   },
   "modelRuntime": {
     "requestedModel": "gemini-3.5-flash",
     "actualModelVersion": "gemini-3.5-flash",
-    "responseId": "OQCmaoq6NPvJrfcP9dq1sQc",
+    "responseId": "cgOmarlMjeaixQ_0k4vYBA",
     "serverTimings": {
-      "t1_requestStart": 1789263929288,
-      "t2_contextAssemblyComplete": 1789263929288,
-      "t3_geminiRequestStart": 1789263929288,
-      "t4_geminiResponseReceived": 1789263952925,
-      "contextAssemblyMs": 0,
-      "geminiGenerationMs": 23637,
-      "inputCharCount": 3120,
-      "outputCharCount": 665,
+      "t1_requestStart": 1789264753420,
+      "t2_contextAssemblyComplete": 1789264753421,
+      "t3_geminiRequestStart": 1789264753421,
+      "t4_geminiResponseReceived": 1789264777079,
+      "contextAssemblyMs": 1,
+      "geminiGenerationMs": 23658,
+      "inputCharCount": 3658,
+      "outputCharCount": 736,
       "tokenCount": {
-        "promptTokens": 9270,
-        "candidatesTokens": 1945,
-        "totalTokens": 13600
+        "promptTokens": 9578,
+        "candidatesTokens": 1525,
+        "totalTokens": 14510
       }
     },
     "clientLatency": {
       "turn": 3,
       "model": "gemini-3.5-flash",
-      "t0_playerInput": 390301.6999999881,
-      "t1_requestStart": 390301.6999999881,
-      "t2_contextAssemblyComplete": 390301.90000000596,
-      "t3_geminiRequestStart": 390301.90000000596,
-      "t4_geminiResponseReceived": 414165.59999999404,
-      "t5_parserComplete": 414166,
-      "t6_stateMutationComplete": 414166,
-      "t7_uiUpdateComplete": 414166.09999999404,
+      "t0_playerInput": 214897.09999999404,
+      "t1_requestStart": 214897.09999999404,
+      "t2_contextAssemblyComplete": 214897.30000001192,
+      "t3_geminiRequestStart": 214897.30000001192,
+      "t4_geminiResponseReceived": 238630.30000001192,
+      "t5_parserComplete": 238630.59999999404,
+      "t6_stateMutationComplete": 238630.59999999404,
+      "t7_uiUpdateComplete": 238630.59999999404,
       "contextAssemblyMs": 0,
-      "geminiGenerationMs": 23864,
+      "geminiGenerationMs": 23733,
       "parsingValidationMs": 0,
-      "totalTurnMs": 23864,
+      "totalTurnMs": 23734,
       "inputCharCount": 9,
-      "outputCharCount": 665,
+      "outputCharCount": 736,
       "retried": false
     }
   },
   "chatContextForensic": {
-    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아스카 세이라 (나이: 17, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 11 / AGI 13 / CON 11 / INT 10 / WIS 10 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아스카 세이라 (나이: 17, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 14 / AGI 14 / CON 7 / INT 11 / WIS 12 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
     "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망",
     "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
     "seedsContext": "",
@@ -58,7 +58,15 @@
       "role": "user",
       "parts": [
         {
-          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아스카 세이라 (나이: 17, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 11 / AGI 13 / CON 11 / INT 10 / WIS 10 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 3 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아스카 세이라 (나이: 17, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아스카 세이라 (나이: 17, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 14 / AGI 14 / CON 7 / INT 11 / WIS 12 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아스카 세이라 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 3 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아스카 세이라 (나이: 17, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 가문에 내려오는 금지된 저주를 봉인하고 진정한 자유를 얻는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "시작"
         }
       ]
     },
@@ -66,7 +74,7 @@
       "role": "model",
       "parts": [
         {
-          "text": "시월의 늦가을 밤, 뼈마디를 시리게 파고드는 진눈깨비가 붉은 녹이 슨 함석지붕을 무겁게 두드린다.\n\n코를 찌르는 것은 축축하게 썩어가는 흙냄새와 오래 묵은 쑥향, 그리고 타다 남은 향나무 재가 뒤섞인 비릿하고 묵직한 공기다. 사방이 가림막과 포클레인의 궤도 자국으로 짓이겨진 서울 변두리의 재개발 철거촌. 거대한 콘크리트 잔해들 사이에 섬처럼 위태롭게 남겨진 낡은 한옥 신당(神堂)의 문창살 사이로, 흙탕물을 머금은 밤바람이 신음처럼 스며든다.\n\n열일곱 살의 소녀, 아스카 세이라는 차디찬 장판 바닥 위에서 서서히 의식을 수습한다. \n\n머릿속은 짙은 안개가 낀 것처럼 아득하고 과거의 온전한 기억은 침묵 속에 잠겨 있으나, 손끝을 타고 오르는 오한만은 섬뜩할 정도로 생생하다. 신당 안쪽, 칠이 벗겨진 붉은 목조 제단 위에는 녹슨 놋방울과 낡은 명주천에 싸인 작두날 한 자루가 음산한 한기를 뿜어내며 놓여 있다. 벽면에 걸린 무신도(巫神圖) 속 신령들의 눈동자는 마치 살아 숨 쉬는 것처럼 어둠 속에서 번들거린다.\n\n그때, 신당 바닥 깊은 지하—지맥이 찢겨나간 틈새에서 둔탁한 진동과 함께 무언가가 긁는 듯한 낮은 마찰음이 울린다. 동시에 부러진 나뭇가지와 진흙을 밟으며 신당 쪽으로 다가오는 누군가의 묵직한 구두 발소리가 빗소리를 뚫고 들려오기 시작한다.\n\n제단의 낡은 신물들, 손목 안쪽을 옥죄는 서늘한 박동, 그리고 신당 문밖에서 가까워지는 불길한 기척. \n\n세이라, 당신은 이 차가운 어둠 속에서 무엇을 먼저 확인하고 행동하겠습니까?"
+          "text": "하늘은 멍든 것처럼 보랏빛이 도는 잿빛으로 가라앉아 있었고, 낮게 깔린 황사 섞인 안개는 무거운 납덩이처럼 철거 구역의 잔해들을 짓누르고 있었습니다. 서울 도심 한구역, 재개발의 거대한 포크레인 발톱이 파헤치고 간 ‘신월 3구역’은 거대한 짐승의 썩어가는 사체와 다르지 않았습니다. \n\n무너진 붉은 벽돌더미와 앙상한 철근 뼈대 사이로, 젖어 썩어가는 합판과 버려진 세간들이 유해처럼 흩어져 있습니다. 바람이 불 때마다 반쯤 찢어진 방수천이 날카로운 깃발처럼 펄럭이며 기괴한 파열음을 냈고, 공기 중에는 굳지 않은 시멘트 독과 흙이 뒤섞인 비린내가 가득했습니다. 하지만 그 평범한 폐허의 냄새 아래, 폐부를 찌르는 듯한 또 다른 냄새가 섞여 있었습니다. 그것은 오래된 무덤을 파헤쳤을 때나 흘러나올 법한 습한 썩은 내, 그리고 정체 모를 향(香)의 잔향이었습니다.\n\n아스카 세이라. 열일곱의 소녀는 이 황량한 파괴의 중심에 서 있었습니다. 그녀의 기억은 안개에 잠긴 듯 불투명하며, 자신의 과거도, 이곳에 홀로 오게 된 경위도 온전히 떠오르지 않는 백지 상태였습니다. 그러나 가슴께에서 맥박 치는 기묘한 통증만큼은 생생했습니다. 그것은 뼛속까지 시리게 만드는 한기였고, 가문에 내린 금지된 저주의 쇠사슬이 살을 파고드는 듯한 족쇄의 감각이었습니다. \n\n그녀의 발밑에서 돌연, 나지막한 진동이 울렸습니다. 지진이라고 하기엔 지나치게 규칙적이고 음습한, 마치 대지 자체가 억눌린 신음을 내뱉는 듯한 진동이었습니다. 기이하게 비틀린 지맥의 상처에서 흘러나오는 살기(殺氣)가 그녀의 구두창을 타고 올라와 목덜미의 솜털을 꼿꼿이 세웠습니다.\n\n무덤과도 같은 이 정적 속에서, 세이라는 이제 첫걸음을 내딛어야 합니다. 잔해 속에서 뿜어져 나오는 비정상적인 열기와 향 냄새를 쫓을 것인가, 어둠을 가르고 들려오는 기묘한 소리에 귀를 기울일 것인가, 아니면 이 기괴한 장소 자체로부터 벗어날 방도를 찾을 것인가.\n\n어두운 철거 구역의 안개가 서서히 그녀의 발목을 집어삼키기 시작합니다. 당신은 이 어둠 속에서 무엇을 먼저 확인하겠습니까?"
         }
       ]
     },
@@ -82,7 +90,7 @@
       "role": "model",
       "parts": [
         {
-          "text": "당신은 밤바람에 사정없이 흔들리는 문창살의 그림자 속에서, 쿵쾅거리는 심장 소리를 억누르며 몸을 낮춥니다. \n\n흙바닥을 짓밟는 묵직한 구두 발소리는 한 걸음씩 확실하게 신당의 입구를 향해 좁혀져 오고 있고, 발밑 지하 깊은 곳에서는 무언가 단단한 암석층을 손톱으로 긁어내리는 듯한 스산한 진동이 발바닥을 타고 전해집니다. 이 일촉즉발의 긴박함 속에서, 당신은 눈앞의 어둠을 헤치고 쓸 만한 도구나 물건을 확보하기 위해 차가운 흙바닥과 비틀린 궤짝 주변으로 조심스럽게 손을 뻗어 나갑니다.\n\n먼지 쌓인 가구들의 매끄럽지 못한 단면과 축축한 이끼의 감촉이 손끝을 스칩니다. 어둠에 적응하려는 눈동자가 미세하게 흔들리는 순간, 손바닥에 닿는 거칠고 차가운 질감들이 느껴집니다.\n\n당신이 다가오는 불길한 기척을 피해 무사히 주위를 수색하고 쓸 만한 물건을 확보할 수 있을지 결정하기 위해 **판정**이 필요합니다.\n\n*   **판정 종류**: 관찰 판정 (WIS) 또는 지능 판정 (INT) 중 선택\n*   **난이도 (Target DC)**: **11**\n*   **캐릭터 능력치 정보**: WIS 10 (보정치 +0) / INT 10 (보정치 +0)\n\n어떤 판정을 시도하시겠습니까? 주사위 결과(1d20)와 선택한 능력치 보정치를 더한 최종 값을 선언해 주십시오."
+          "text": "세이라는 무릎을 꿇고 허리를 굽혀, 잿빛 먼지가 두껍게 내려앉은 철거 잔해더미 속으로 하얗고 가녀린 손을 뻗었습니다. 차가운 콘크리트 조각과 깨진 기와 틈새를 헤집자, 손가락 끝에 닿는 거친 벽지와 젖어 문드러진 목재의 감촉이 소름 끼치도록 생생하게 전해집니다. 어스름한 안개 너머로, 무너진 천장 기둥 아래 무언가 이질적인 실루엣들이 보이기 시작합니다. \n\n단순한 쓰레기 틈바구니라기엔 지나치게 인위적인 흔적들입니다. 바람이 불 때마다 음습한 흙냄새 사이로 은은한 향(香) 냄새와 비린 철분이 섞여 납빛 공기 중으로 피어오릅니다. 한 걸음만 잘못 디디면 예리한 철근이나 무너지는 붕괴 잔해에 깔릴 수 있는 위험천만한 폐허 속에서, 그녀는 본능적으로 자신의 생존과 잃어버린 기억의 파편을 채워줄 ‘유용한 무언가’를 찾고자 깊숙한 어둠 속을 관찰합니다.\n\n주변의 극도로 위태로운 구조와 어둠을 극복하고 쓸만한 도구를 안전하게 찾아내기 위해, 당신의 세심한 주의력과 직관이 시험대 위에 오릅니다.\n\n**[판정 안내]**\n* **시도 행동**: 폐허 주변 정밀 수색 및 유효 아이템 확보\n* **판정 종류**: 지혜(WIS) 혹은 지능(INT) 판정\n* **목표 난이도 (Target DC)**: **12**\n* **결과 예측**:\n  * **성공 (12 이상)**: 안전하게 잔해를 헤집고 가치 있는 물건 중 하나를 확보하여 가방(인벤토리)에 넣습니다. 또한 그것에 얽힌 기묘한 단서를 발견합니다.\n  * **실패 (11 이하)**: 어둠 속에서 예리한 유리에 손을 베여 가벼운 부상을 입거나, 소란스러운 수색 소리로 인해 이 지맥의 상처 뒤에 숨은 부정한 존재들의 주위를 끌게 됩니다.\n\n주사위(1d20)를 굴려 주십시오. 세이라의 능력치 보정값(지혜 WIS +1 / 지능 INT +0)을 더한 최종 결과를 입력해 주시면 판정이 확정됩니다."
         }
       ]
     },
@@ -90,23 +98,23 @@
       "role": "user",
       "parts": [
         {
-          "text": "지능 주사위 20"
+          "text": "지혜 주사위 20"
         }
       ]
     }
   ],
   "llmRawResponse": {
-    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"신령의 비장품: 벽사 신물과 부적의 획득\",\n    \"narrativeSummary\": \"지능 극대화 판정(20)으로 먼지 한 톨의 궤적마저 읽어낸 당신은, 제단 뒤쪽의 기하학적 비대칭을 간파합니다. 제단 하단의 이중 바닥 숨겨진 틈새를 찾아내어, 낡은 명주천에 싸인 오래된 '황동 방울'과 붉은 경면주사로 쓰인 '벽사 부적'을 안전하게 확보합니다. 그 순간, 신당 앞마당의 흙을 밟는 구두 발소리가 문턱 바로 앞에서 딱 멈춰 섭니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_shaman_item_discovery\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"황동 방울\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"낡은 신당 제단 하단\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_shaman_legacy: 대를 이어 내려오는 신물의 영험함과 방울 소리에 반응하는 악귀들\"\n      ],\n      \"newNpcs\": [\n        {\n          \"name\": \"수수께끼의 방문자\",\n          \"alias\": \"검은 코트의 사내\",\n          \"npcClass\": \"Class A\",\n          \"metInStory\": false,\n          \"origin\": \"서울 변두리 철거촌\",\n          \"affiliation\": \"미상\"\n        }\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"황동 방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"event_shaman_item_discovery\"\n        },\n        {\n          \"name\": \"벽사 부적\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"event_shaman_item_discovery\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"특수수사팀의 잔해: 전술 장비와 수사 기록 획득\",\n    \"narrativeSummary\": \"최근에 누군가 밟아 뭉개놓은 제단 밑바닥 틈새의 미세한 흔적을 통해, 오컬트 특수수사팀 소속의 누군가가 급히 은닉해 둔 '전술 손전등'과 '오컬트팀 수사기록' 사본을 찾아냅니다. 손전등은 즉시 작동 가능하며, 수사 기록에는 이 철거촌 지맥에 대한 섬뜩한 경고가 적혀 있습니다. 문밖의 그림자가 문창살에 길게 투영되기 시작합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_occult_gear_discovery\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"전술 손전등\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_occult_team_trace: 철거촌에서 실종된 오컬트 특수수사팀 대원의 행방\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"전술 손전등\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"event_occult_gear_discovery\"\n        },\n        {\n          \"name\": \"오컬트팀 수사기록\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"event_occult_gear_discovery\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"가문의 흔적: 붉은 보석 은반지의 발견\",\n    \"narrativeSummary\": \"신당 한구석, 오랜 세월 아무도 건드리지 않은 벽돌 틈새의 역학적 균열을 눈으로 쫓던 당신은, 그곳에 숨겨져 있던 검은 목합을 발견합니다. 목합 안에는 기이한 붉은 광채를 내뿜는 '붉은 은반지'가 들어 있습니다. 당신의 손목 안쪽 저주가 이 반지를 마주하자 격렬하게 요동칩니다. 마침내 신당 문고리가 천천히 덜컹거리며 돌아갑니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_family_ring_discovery\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"붉은 은반지\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_family_curse_origin: 붉은 은반지와 가문에 내려오는 핏빛 낙인의 기원\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"붉은 은반지\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"event_family_ring_discovery\"\n        }\n      ]\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n지능 주사위의 눈이 기적처럼 20의 자리에 가닿는 순간, 아스카 세이라의 머릿속을 짓누르던 짙은 안개가 일시적으로 걷히며 극도의 명징함이 찾아옵니다. 심장의 박동은 느려지고, 오감이 비정상적으로 예리해집니다.\n\n빗소리에 가려진 미세한 공기의 흐름, 제단 주위에 쌓인 먼지의 고르지 못한 분포, 그리고 나무 부재들이 맞물린 각도까지 당신의 예리한 시선 아래에 한눈에 해체되듯 드러납니다. 누군가의 발소리가 빗속을 뚫고 툇마루 계단 바로 밑까지 다가오는 일촉즉발의 순간에도, 당신의 손길은 단 한 치의 망설임도 없이 정확한 궤적을 그리며 어둠 속을 파고듭니다.\n\n평범한 사람이라면 결코 깨닫지 못했을 미세한 틈새, 인위적으로 가려진 숨겨진 공간의 감촉이 손끝을 타고 전율처럼 뇌리에 꽂힙니다. 그곳에는 오랜 세월의 지혜 혹은 우연이 숨겨둔 분명하고 유용한 '무언가'가 손안에 쥐어지기를 기다리고 있습니다.\n\n하지만 발소리가 마침내 툇마루 위로 완전히 올라섰습니다. 물기 머금은 낡은 나무 바닥이 삐걱이며 비명을 지르고, 거친 숨소리가 얇은 창호지 문 너머에서 스며 나옵니다. 당신은 어둠 속에서 손끝에 느껴지는 그 가치 있는 소장품들을 움켜쥐고 숨을 죽입니다. \n\n문고리가 서서히 돌아가기 시작하는 지금, 당신은 이 비밀스러운 수색의 결실 중 어떤 것을 품에 안고 첫 대면을 맞이하시겠습니까?\n[ZERO_MUTATION_END]",
-    "rawResponseText": "지능 주사위의 눈이 기적처럼 20의 자리에 가닿는 순간, 아스카 세이라의 머릿속을 짓누르던 짙은 안개가 일시적으로 걷히며 극도의 명징함이 찾아옵니다. 심장의 박동은 느려지고, 오감이 비정상적으로 예리해집니다.\n\n빗소리에 가려진 미세한 공기의 흐름, 제단 주위에 쌓인 먼지의 고르지 못한 분포, 그리고 나무 부재들이 맞물린 각도까지 당신의 예리한 시선 아래에 한눈에 해체되듯 드러납니다. 누군가의 발소리가 빗속을 뚫고 툇마루 계단 바로 밑까지 다가오는 일촉즉발의 순간에도, 당신의 손길은 단 한 치의 망설임도 없이 정확한 궤적을 그리며 어둠 속을 파고듭니다.\n\n평범한 사람이라면 결코 깨닫지 못했을 미세한 틈새, 인위적으로 가려진 숨겨진 공간의 감촉이 손끝을 타고 전율처럼 뇌리에 꽂힙니다. 그곳에는 오랜 세월의 지혜 혹은 우연이 숨겨둔 분명하고 유용한 '무언가'가 손안에 쥐어지기를 기다리고 있습니다.\n\n하지만 발소리가 마침내 툇마루 위로 완전히 올라섰습니다. 물기 머금은 낡은 나무 바닥이 삐걱이며 비명을 지르고, 거친 숨소리가 얇은 창호지 문 너머에서 스며 나옵니다. 당신은 어둠 속에서 손끝에 느껴지는 그 가치 있는 소장품들을 움켜쥐고 숨을 죽입니다. \n\n문고리가 서서히 돌아가기 시작하는 지금, 당신은 이 비밀스러운 수색의 결실 중 어떤 것을 품에 안고 첫 대면을 맞이하시겠습니까?"
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"공명하는 낡은 놋방울\",\n    \"narrativeSummary\": \"무너진 신당의 제단 잔해 속에서 붉은 비단에 소중히 싸여 있던 낡고 금이 간 놋방울을 발견합니다. 손이 닿는 순간, 그녀의 잠재된 영적 직관과 저주가 공명하며 차가운 한기가 조금 누그러집니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"seed_ruined_shrine_relic\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"낡고 금이 간 놋방울\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"신월 3구역 철거 현장\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\"신월동 철거구역에 버려진 신당의 비극\"],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"낡고 금이 간 놋방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_ruined_shrine_relic\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"철거 현장의 무쇠 지렛대\",\n    \"narrativeSummary\": \"뒤집힌 함바집 잔해와 공구함 속에서 단단한 강철 지렛대(크로우바)를 찾아냅니다. 붕괴 위험이 있는 장애물을 물리적으로 돌파하거나 거친 상황에 맞설 수 있는 가장 확실한 무기를 손에 넣습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"seed_abandoned_tools\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"무쇠 지렛대\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\"철거 용역들이 성급히 퇴각한 원인\"],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"무쇠 지렛대\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_abandoned_tools\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"특수수사팀의 기밀 조사 수첩\",\n    \"narrativeSummary\": \"깨진 무전기 잔해와 함께 방수 지퍼백에 밀봉된 채 버려져 있던 가죽 수첩을 발견합니다. 오컬트 특수수사팀 수사관이 남긴 괴기 현상 보고서와 손으로 그린 조잡한 약도가 들어있습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"seed_investigation_log\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아스카 세이라\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"특수수사과 조사 수첩\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\"신월 3구역에 파견되었다 실종된 경찰 수사관\"],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"특수수사과 조사 수첩\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_investigation_log\"\n        }\n      ]\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n주사위의 눈이 기적처럼 고결한 ‘20’을 가리킨 바로 그 순간, 세이라의 전신을 감돌던 한기가 일순간 벼락 같은 직관으로 뒤바뀌었습니다. 지혜의 눈이 떠지듯, 황량한 먼지 안개 속에서 무질서하게 얽혀 있던 잔해들의 틈새가 기하학적이고 명확한 구도로 쪼개져 그녀의 시야에 들어왔습니다. \n\n어디에 무너진 천장의 기둥이 위태롭게 걸쳐 있는지, 어디에 날카로운 깨진 유리와 철사 덤불이 도사리고 있는지, 그녀는 눈으로 보지 않고도 살갗을 스치는 기류의 변화만으로 완벽하게 간파했습니다. 세이라의 손끝은 단 한 점의 주저함도 없이 흙더미 깊숙한 곳, 마치 보이지 않는 실에 이끌리듯 정확한 구렁으로 미끄러져 들어갔습니다. 손가락 하나 다치지 않고, 옷자락에 먼지 한 톨 묻히지 않는 우아하고 기적적인 손길이었습니다.\n\n그리고 그녀의 하얀 손끝이 무너진 콘크리트 상판 아래, 굳게 봉인되어 있던 비밀의 궤적을 마주합니다. 깊은 어둠 속에는 세이라의 기이한 운명과 얽혀 있는 몇 가지 이질적인 도구들이 마치 발견되기를 기다려 왔다는 듯 차가운 빛을 발하고 있습니다. 가문에서 물려받은 혼(魂)의 떨림을 자극하는 오래된 주술적 유물, 생존을 위한 현실적인 무쇠 도구, 혹은 이 불길한 땅에 얽힌 진실을 담고 있는 누군가의 기록.\n\n그녀의 손가락이 닿는 순간, 주변의 불길한 노이즈와 안개가 잠시 숨을 죽였습니다. 기적적인 예지력으로 찾아낸 이 어둠 속의 조각들 중, 세이라가 마침내 움켜쥐어 자신의 것으로 삼을 것은 무엇입니까?\n[ZERO_MUTATION_END]",
+    "rawResponseText": "주사위의 눈이 기적처럼 고결한 ‘20’을 가리킨 바로 그 순간, 세이라의 전신을 감돌던 한기가 일순간 벼락 같은 직관으로 뒤바뀌었습니다. 지혜의 눈이 떠지듯, 황량한 먼지 안개 속에서 무질서하게 얽혀 있던 잔해들의 틈새가 기하학적이고 명확한 구도로 쪼개져 그녀의 시야에 들어왔습니다. \n\n어디에 무너진 천장의 기둥이 위태롭게 걸쳐 있는지, 어디에 날카로운 깨진 유리와 철사 덤불이 도사리고 있는지, 그녀는 눈으로 보지 않고도 살갗을 스치는 기류의 변화만으로 완벽하게 간파했습니다. 세이라의 손끝은 단 한 점의 주저함도 없이 흙더미 깊숙한 곳, 마치 보이지 않는 실에 이끌리듯 정확한 구렁으로 미끄러져 들어갔습니다. 손가락 하나 다치지 않고, 옷자락에 먼지 한 톨 묻히지 않는 우아하고 기적적인 손길이었습니다.\n\n그리고 그녀의 하얀 손끝이 무너진 콘크리트 상판 아래, 굳게 봉인되어 있던 비밀의 궤적을 마주합니다. 깊은 어둠 속에는 세이라의 기이한 운명과 얽혀 있는 몇 가지 이질적인 도구들이 마치 발견되기를 기다려 왔다는 듯 차가운 빛을 발하고 있습니다. 가문에서 물려받은 혼(魂)의 떨림을 자극하는 오래된 주술적 유물, 생존을 위한 현실적인 무쇠 도구, 혹은 이 불길한 땅에 얽힌 진실을 담고 있는 누군가의 기록.\n\n그녀의 손가락이 닿는 순간, 주변의 불길한 노이즈와 안개가 잠시 숨을 죽였습니다. 기적적인 예지력으로 찾아낸 이 어둠 속의 조각들 중, 세이라가 마침내 움켜쥐어 자신의 것으로 삼을 것은 무엇입니까?"
   },
   "candidatePipeline": {
     "rawCandidatesBlock": [
       {
-        "label": "신령의 비장품: 벽사 신물과 부적의 획득",
-        "narrativeSummary": "지능 극대화 판정(20)으로 먼지 한 톨의 궤적마저 읽어낸 당신은, 제단 뒤쪽의 기하학적 비대칭을 간파합니다. 제단 하단의 이중 바닥 숨겨진 틈새를 찾아내어, 낡은 명주천에 싸인 오래된 '황동 방울'과 붉은 경면주사로 쓰인 '벽사 부적'을 안전하게 확보합니다. 그 순간, 신당 앞마당의 흙을 밟는 구두 발소리가 문턱 바로 앞에서 딱 멈춰 섭니다.",
+        "label": "공명하는 낡은 놋방울",
+        "narrativeSummary": "무너진 신당의 제단 잔해 속에서 붉은 비단에 소중히 싸여 있던 낡고 금이 간 놋방울을 발견합니다. 손이 닿는 순간, 그녀의 잠재된 영적 직관과 저주가 공명하며 차가운 한기가 조금 누그러집니다.",
         "semanticEvents": [
           {
-            "eventId": "event_shaman_item_discovery",
+            "eventId": "seed_ruined_shrine_relic",
             "action": "PICKUP",
             "roles": [
               {
@@ -115,11 +123,11 @@
               },
               {
                 "role": "OBJECT",
-                "entityName": "황동 방울"
+                "entityName": "낡고 금이 간 놋방울"
               },
               {
                 "role": "LOCATION",
-                "entityName": "낡은 신당 제단 하단"
+                "entityName": "신월 3구역 철거 현장"
               }
             ],
             "scope": "CANONICAL",
@@ -129,43 +137,26 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "seed_shaman_legacy: 대를 이어 내려오는 신물의 영험함과 방울 소리에 반응하는 악귀들"
-          ],
-          "newNpcs": [
-            {
-              "name": "수수께끼의 방문자",
-              "alias": "검은 코트의 사내",
-              "npcClass": "Class A",
-              "metInStory": false,
-              "origin": "서울 변두리 철거촌",
-              "affiliation": "미상"
-            }
+            "신월동 철거구역에 버려진 신당의 비극"
           ],
           "inventoryChanges": [
             {
-              "name": "황동 방울",
+              "name": "낡고 금이 간 놋방울",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "event_shaman_item_discovery"
-            },
-            {
-              "name": "벽사 부적",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "event_shaman_item_discovery"
+              "verifiedEventId": "seed_ruined_shrine_relic"
             }
           ]
         },
         "candidateId": 1
       },
       {
-        "label": "특수수사팀의 잔해: 전술 장비와 수사 기록 획득",
-        "narrativeSummary": "최근에 누군가 밟아 뭉개놓은 제단 밑바닥 틈새의 미세한 흔적을 통해, 오컬트 특수수사팀 소속의 누군가가 급히 은닉해 둔 '전술 손전등'과 '오컬트팀 수사기록' 사본을 찾아냅니다. 손전등은 즉시 작동 가능하며, 수사 기록에는 이 철거촌 지맥에 대한 섬뜩한 경고가 적혀 있습니다. 문밖의 그림자가 문창살에 길게 투영되기 시작합니다.",
+        "label": "철거 현장의 무쇠 지렛대",
+        "narrativeSummary": "뒤집힌 함바집 잔해와 공구함 속에서 단단한 강철 지렛대(크로우바)를 찾아냅니다. 붕괴 위험이 있는 장애물을 물리적으로 돌파하거나 거친 상황에 맞설 수 있는 가장 확실한 무기를 손에 넣습니다.",
         "semanticEvents": [
           {
-            "eventId": "event_occult_gear_discovery",
+            "eventId": "seed_abandoned_tools",
             "action": "PICKUP",
             "roles": [
               {
@@ -174,7 +165,7 @@
               },
               {
                 "role": "OBJECT",
-                "entityName": "전술 손전등"
+                "entityName": "무쇠 지렛대"
               }
             ],
             "scope": "CANONICAL",
@@ -184,33 +175,26 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "seed_occult_team_trace: 철거촌에서 실종된 오컬트 특수수사팀 대원의 행방"
+            "철거 용역들이 성급히 퇴각한 원인"
           ],
           "inventoryChanges": [
             {
-              "name": "전술 손전등",
+              "name": "무쇠 지렛대",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "event_occult_gear_discovery"
-            },
-            {
-              "name": "오컬트팀 수사기록",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "event_occult_gear_discovery"
+              "verifiedEventId": "seed_abandoned_tools"
             }
           ]
         },
         "candidateId": 2
       },
       {
-        "label": "가문의 흔적: 붉은 보석 은반지의 발견",
-        "narrativeSummary": "신당 한구석, 오랜 세월 아무도 건드리지 않은 벽돌 틈새의 역학적 균열을 눈으로 쫓던 당신은, 그곳에 숨겨져 있던 검은 목합을 발견합니다. 목합 안에는 기이한 붉은 광채를 내뿜는 '붉은 은반지'가 들어 있습니다. 당신의 손목 안쪽 저주가 이 반지를 마주하자 격렬하게 요동칩니다. 마침내 신당 문고리가 천천히 덜컹거리며 돌아갑니다.",
+        "label": "특수수사팀의 기밀 조사 수첩",
+        "narrativeSummary": "깨진 무전기 잔해와 함께 방수 지퍼백에 밀봉된 채 버려져 있던 가죽 수첩을 발견합니다. 오컬트 특수수사팀 수사관이 남긴 괴기 현상 보고서와 손으로 그린 조잡한 약도가 들어있습니다.",
         "semanticEvents": [
           {
-            "eventId": "event_family_ring_discovery",
+            "eventId": "seed_investigation_log",
             "action": "PICKUP",
             "roles": [
               {
@@ -219,7 +203,7 @@
               },
               {
                 "role": "OBJECT",
-                "entityName": "붉은 은반지"
+                "entityName": "특수수사과 조사 수첩"
               }
             ],
             "scope": "CANONICAL",
@@ -229,15 +213,15 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "seed_family_curse_origin: 붉은 은반지와 가문에 내려오는 핏빛 낙인의 기원"
+            "신월 3구역에 파견되었다 실종된 경찰 수사관"
           ],
           "inventoryChanges": [
             {
-              "name": "붉은 은반지",
+              "name": "특수수사과 조사 수첩",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "event_family_ring_discovery"
+              "verifiedEventId": "seed_investigation_log"
             }
           ]
         },
@@ -246,11 +230,11 @@
     ],
     "parsedCandidates": [
       {
-        "label": "신령의 비장품: 벽사 신물과 부적의 획득",
-        "narrativeSummary": "지능 극대화 판정(20)으로 먼지 한 톨의 궤적마저 읽어낸 당신은, 제단 뒤쪽의 기하학적 비대칭을 간파합니다. 제단 하단의 이중 바닥 숨겨진 틈새를 찾아내어, 낡은 명주천에 싸인 오래된 '황동 방울'과 붉은 경면주사로 쓰인 '벽사 부적'을 안전하게 확보합니다. 그 순간, 신당 앞마당의 흙을 밟는 구두 발소리가 문턱 바로 앞에서 딱 멈춰 섭니다.",
+        "label": "공명하는 낡은 놋방울",
+        "narrativeSummary": "무너진 신당의 제단 잔해 속에서 붉은 비단에 소중히 싸여 있던 낡고 금이 간 놋방울을 발견합니다. 손이 닿는 순간, 그녀의 잠재된 영적 직관과 저주가 공명하며 차가운 한기가 조금 누그러집니다.",
         "semanticEvents": [
           {
-            "eventId": "event_shaman_item_discovery",
+            "eventId": "seed_ruined_shrine_relic",
             "action": "PICKUP",
             "roles": [
               {
@@ -259,11 +243,11 @@
               },
               {
                 "role": "OBJECT",
-                "entityName": "황동 방울"
+                "entityName": "낡고 금이 간 놋방울"
               },
               {
                 "role": "LOCATION",
-                "entityName": "낡은 신당 제단 하단"
+                "entityName": "신월 3구역 철거 현장"
               }
             ],
             "scope": "CANONICAL",
@@ -273,43 +257,26 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "seed_shaman_legacy: 대를 이어 내려오는 신물의 영험함과 방울 소리에 반응하는 악귀들"
-          ],
-          "newNpcs": [
-            {
-              "name": "수수께끼의 방문자",
-              "alias": "검은 코트의 사내",
-              "npcClass": "Class A",
-              "metInStory": false,
-              "origin": "서울 변두리 철거촌",
-              "affiliation": "미상"
-            }
+            "신월동 철거구역에 버려진 신당의 비극"
           ],
           "inventoryChanges": [
             {
-              "name": "황동 방울",
+              "name": "낡고 금이 간 놋방울",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "event_shaman_item_discovery"
-            },
-            {
-              "name": "벽사 부적",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "event_shaman_item_discovery"
+              "verifiedEventId": "seed_ruined_shrine_relic"
             }
           ]
         },
         "candidateId": 1
       },
       {
-        "label": "특수수사팀의 잔해: 전술 장비와 수사 기록 획득",
-        "narrativeSummary": "최근에 누군가 밟아 뭉개놓은 제단 밑바닥 틈새의 미세한 흔적을 통해, 오컬트 특수수사팀 소속의 누군가가 급히 은닉해 둔 '전술 손전등'과 '오컬트팀 수사기록' 사본을 찾아냅니다. 손전등은 즉시 작동 가능하며, 수사 기록에는 이 철거촌 지맥에 대한 섬뜩한 경고가 적혀 있습니다. 문밖의 그림자가 문창살에 길게 투영되기 시작합니다.",
+        "label": "철거 현장의 무쇠 지렛대",
+        "narrativeSummary": "뒤집힌 함바집 잔해와 공구함 속에서 단단한 강철 지렛대(크로우바)를 찾아냅니다. 붕괴 위험이 있는 장애물을 물리적으로 돌파하거나 거친 상황에 맞설 수 있는 가장 확실한 무기를 손에 넣습니다.",
         "semanticEvents": [
           {
-            "eventId": "event_occult_gear_discovery",
+            "eventId": "seed_abandoned_tools",
             "action": "PICKUP",
             "roles": [
               {
@@ -318,7 +285,7 @@
               },
               {
                 "role": "OBJECT",
-                "entityName": "전술 손전등"
+                "entityName": "무쇠 지렛대"
               }
             ],
             "scope": "CANONICAL",
@@ -328,33 +295,26 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "seed_occult_team_trace: 철거촌에서 실종된 오컬트 특수수사팀 대원의 행방"
+            "철거 용역들이 성급히 퇴각한 원인"
           ],
           "inventoryChanges": [
             {
-              "name": "전술 손전등",
+              "name": "무쇠 지렛대",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "event_occult_gear_discovery"
-            },
-            {
-              "name": "오컬트팀 수사기록",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "event_occult_gear_discovery"
+              "verifiedEventId": "seed_abandoned_tools"
             }
           ]
         },
         "candidateId": 2
       },
       {
-        "label": "가문의 흔적: 붉은 보석 은반지의 발견",
-        "narrativeSummary": "신당 한구석, 오랜 세월 아무도 건드리지 않은 벽돌 틈새의 역학적 균열을 눈으로 쫓던 당신은, 그곳에 숨겨져 있던 검은 목합을 발견합니다. 목합 안에는 기이한 붉은 광채를 내뿜는 '붉은 은반지'가 들어 있습니다. 당신의 손목 안쪽 저주가 이 반지를 마주하자 격렬하게 요동칩니다. 마침내 신당 문고리가 천천히 덜컹거리며 돌아갑니다.",
+        "label": "특수수사팀의 기밀 조사 수첩",
+        "narrativeSummary": "깨진 무전기 잔해와 함께 방수 지퍼백에 밀봉된 채 버려져 있던 가죽 수첩을 발견합니다. 오컬트 특수수사팀 수사관이 남긴 괴기 현상 보고서와 손으로 그린 조잡한 약도가 들어있습니다.",
         "semanticEvents": [
           {
-            "eventId": "event_family_ring_discovery",
+            "eventId": "seed_investigation_log",
             "action": "PICKUP",
             "roles": [
               {
@@ -363,7 +323,7 @@
               },
               {
                 "role": "OBJECT",
-                "entityName": "붉은 은반지"
+                "entityName": "특수수사과 조사 수첩"
               }
             ],
             "scope": "CANONICAL",
@@ -373,15 +333,15 @@
         ],
         "rawMetadata": {
           "foreshadowSeeds": [
-            "seed_family_curse_origin: 붉은 은반지와 가문에 내려오는 핏빛 낙인의 기원"
+            "신월 3구역에 파견되었다 실종된 경찰 수사관"
           ],
           "inventoryChanges": [
             {
-              "name": "붉은 은반지",
+              "name": "특수수사과 조사 수첩",
               "quantity": 1,
               "action": "add",
               "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "event_family_ring_discovery"
+              "verifiedEventId": "seed_investigation_log"
             }
           ]
         },
@@ -389,182 +349,143 @@
       }
     ],
     "recoveryGateResult": {
-      "passedCandidates": [],
-      "quarantinedCandidates": [
+      "passedCandidates": [
         {
-          "index": 0,
-          "candidate": {
-            "label": "신령의 비장품: 벽사 신물과 부적의 획득",
-            "narrativeSummary": "지능 극대화 판정(20)으로 먼지 한 톨의 궤적마저 읽어낸 당신은, 제단 뒤쪽의 기하학적 비대칭을 간파합니다. 제단 하단의 이중 바닥 숨겨진 틈새를 찾아내어, 낡은 명주천에 싸인 오래된 '황동 방울'과 붉은 경면주사로 쓰인 '벽사 부적'을 안전하게 확보합니다. 그 순간, 신당 앞마당의 흙을 밟는 구두 발소리가 문턱 바로 앞에서 딱 멈춰 섭니다.",
-            "semanticEvents": [
-              {
-                "eventId": "event_shaman_item_discovery",
-                "action": "PICKUP",
-                "roles": [
-                  {
-                    "role": "SUBJECT",
-                    "entityName": "아스카 세이라"
-                  },
-                  {
-                    "role": "OBJECT",
-                    "entityName": "황동 방울"
-                  },
-                  {
-                    "role": "LOCATION",
-                    "entityName": "낡은 신당 제단 하단"
-                  }
-                ],
-                "scope": "CANONICAL",
-                "polarity": "ASSERTED",
-                "epistemicStatus": "VERIFIED"
-              }
-            ],
-            "rawMetadata": {
-              "foreshadowSeeds": [
-                "seed_shaman_legacy: 대를 이어 내려오는 신물의 영험함과 방울 소리에 반응하는 악귀들"
-              ],
-              "newNpcs": [
+          "label": "공명하는 낡은 놋방울",
+          "narrativeSummary": "무너진 신당의 제단 잔해 속에서 붉은 비단에 소중히 싸여 있던 낡고 금이 간 놋방울을 발견합니다. 손이 닿는 순간, 그녀의 잠재된 영적 직관과 저주가 공명하며 차가운 한기가 조금 누그러집니다.",
+          "semanticEvents": [
+            {
+              "eventId": "seed_ruined_shrine_relic",
+              "action": "PICKUP",
+              "roles": [
                 {
-                  "name": "수수께끼의 방문자",
-                  "alias": "검은 코트의 사내",
-                  "npcClass": "Class A",
-                  "metInStory": false,
-                  "origin": "서울 변두리 철거촌",
-                  "affiliation": "미상"
-                }
-              ],
-              "inventoryChanges": [
-                {
-                  "name": "황동 방울",
-                  "quantity": 1,
-                  "action": "add",
-                  "cause": "DISCOVERY_PICKUP",
-                  "verifiedEventId": "event_shaman_item_discovery"
+                  "role": "SUBJECT",
+                  "entityName": "아스카 세이라"
                 },
                 {
-                  "name": "벽사 부적",
-                  "quantity": 1,
-                  "action": "add",
-                  "cause": "DISCOVERY_PICKUP",
-                  "verifiedEventId": "event_shaman_item_discovery"
-                }
-              ]
-            },
-            "candidateId": 1
-          },
-          "reasons": [
-            "inventoryChanges[0].entityReference is required",
-            "inventoryChanges[1].entityReference is required"
-          ]
-        },
-        {
-          "index": 1,
-          "candidate": {
-            "label": "특수수사팀의 잔해: 전술 장비와 수사 기록 획득",
-            "narrativeSummary": "최근에 누군가 밟아 뭉개놓은 제단 밑바닥 틈새의 미세한 흔적을 통해, 오컬트 특수수사팀 소속의 누군가가 급히 은닉해 둔 '전술 손전등'과 '오컬트팀 수사기록' 사본을 찾아냅니다. 손전등은 즉시 작동 가능하며, 수사 기록에는 이 철거촌 지맥에 대한 섬뜩한 경고가 적혀 있습니다. 문밖의 그림자가 문창살에 길게 투영되기 시작합니다.",
-            "semanticEvents": [
-              {
-                "eventId": "event_occult_gear_discovery",
-                "action": "PICKUP",
-                "roles": [
-                  {
-                    "role": "SUBJECT",
-                    "entityName": "아스카 세이라"
-                  },
-                  {
-                    "role": "OBJECT",
-                    "entityName": "전술 손전등"
-                  }
-                ],
-                "scope": "CANONICAL",
-                "polarity": "ASSERTED",
-                "epistemicStatus": "VERIFIED"
-              }
-            ],
-            "rawMetadata": {
-              "foreshadowSeeds": [
-                "seed_occult_team_trace: 철거촌에서 실종된 오컬트 특수수사팀 대원의 행방"
-              ],
-              "inventoryChanges": [
-                {
-                  "name": "전술 손전등",
-                  "quantity": 1,
-                  "action": "add",
-                  "cause": "DISCOVERY_PICKUP",
-                  "verifiedEventId": "event_occult_gear_discovery"
+                  "role": "OBJECT",
+                  "entityName": "낡고 금이 간 놋방울"
                 },
                 {
-                  "name": "오컬트팀 수사기록",
-                  "quantity": 1,
-                  "action": "add",
-                  "cause": "DISCOVERY_PICKUP",
-                  "verifiedEventId": "event_occult_gear_discovery"
+                  "role": "LOCATION",
+                  "entityName": "신월 3구역 철거 현장"
                 }
-              ]
-            },
-            "candidateId": 2
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "VERIFIED"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "신월동 철거구역에 버려진 신당의 비극"
+            ],
+            "inventoryChanges": [
+              {
+                "name": "낡고 금이 간 놋방울",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_ruined_shrine_relic"
+              }
+            ]
           },
-          "reasons": [
-            "inventoryChanges[0].entityReference is required",
-            "inventoryChanges[1].entityReference is required"
-          ]
+          "candidateId": 1
         },
         {
-          "index": 2,
-          "candidate": {
-            "label": "가문의 흔적: 붉은 보석 은반지의 발견",
-            "narrativeSummary": "신당 한구석, 오랜 세월 아무도 건드리지 않은 벽돌 틈새의 역학적 균열을 눈으로 쫓던 당신은, 그곳에 숨겨져 있던 검은 목합을 발견합니다. 목합 안에는 기이한 붉은 광채를 내뿜는 '붉은 은반지'가 들어 있습니다. 당신의 손목 안쪽 저주가 이 반지를 마주하자 격렬하게 요동칩니다. 마침내 신당 문고리가 천천히 덜컹거리며 돌아갑니다.",
-            "semanticEvents": [
-              {
-                "eventId": "event_family_ring_discovery",
-                "action": "PICKUP",
-                "roles": [
-                  {
-                    "role": "SUBJECT",
-                    "entityName": "아스카 세이라"
-                  },
-                  {
-                    "role": "OBJECT",
-                    "entityName": "붉은 은반지"
-                  }
-                ],
-                "scope": "CANONICAL",
-                "polarity": "ASSERTED",
-                "epistemicStatus": "VERIFIED"
-              }
-            ],
-            "rawMetadata": {
-              "foreshadowSeeds": [
-                "seed_family_curse_origin: 붉은 은반지와 가문에 내려오는 핏빛 낙인의 기원"
-              ],
-              "inventoryChanges": [
+          "label": "철거 현장의 무쇠 지렛대",
+          "narrativeSummary": "뒤집힌 함바집 잔해와 공구함 속에서 단단한 강철 지렛대(크로우바)를 찾아냅니다. 붕괴 위험이 있는 장애물을 물리적으로 돌파하거나 거친 상황에 맞설 수 있는 가장 확실한 무기를 손에 넣습니다.",
+          "semanticEvents": [
+            {
+              "eventId": "seed_abandoned_tools",
+              "action": "PICKUP",
+              "roles": [
                 {
-                  "name": "붉은 은반지",
-                  "quantity": 1,
-                  "action": "add",
-                  "cause": "DISCOVERY_PICKUP",
-                  "verifiedEventId": "event_family_ring_discovery"
+                  "role": "SUBJECT",
+                  "entityName": "아스카 세이라"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "무쇠 지렛대"
                 }
-              ]
-            },
-            "candidateId": 3
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "VERIFIED"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "철거 용역들이 성급히 퇴각한 원인"
+            ],
+            "inventoryChanges": [
+              {
+                "name": "무쇠 지렛대",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_abandoned_tools"
+              }
+            ]
           },
-          "reasons": [
-            "inventoryChanges[0].entityReference is required"
-          ]
+          "candidateId": 2
+        },
+        {
+          "label": "특수수사팀의 기밀 조사 수첩",
+          "narrativeSummary": "깨진 무전기 잔해와 함께 방수 지퍼백에 밀봉된 채 버려져 있던 가죽 수첩을 발견합니다. 오컬트 특수수사팀 수사관이 남긴 괴기 현상 보고서와 손으로 그린 조잡한 약도가 들어있습니다.",
+          "semanticEvents": [
+            {
+              "eventId": "seed_investigation_log",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아스카 세이라"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "특수수사과 조사 수첩"
+                }
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "VERIFIED"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "신월 3구역에 파견되었다 실종된 경찰 수사관"
+            ],
+            "inventoryChanges": [
+              {
+                "name": "특수수사과 조사 수첩",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_investigation_log"
+              }
+            ]
+          },
+          "candidateId": 3
         }
       ],
+      "quarantinedCandidates": [],
       "totalInputCount": 3,
-      "passedCount": 0,
-      "quarantinedCount": 3
-    }
+      "passedCount": 3,
+      "quarantinedCount": 0
+    },
+    "meaningTrees": [],
+    "candidatesToValidate": []
   },
   "preAuth": {
     "preAuthResults": [],
-    "allowedCandidatesCount": 0,
-    "rejectedReasons": []
+    "allowedCandidatesCount": 0
   },
   "authorization": {
+    "authorizedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null,
     "isFallbackNonMutation": true
   },
   "commit": {
@@ -624,16 +545,16 @@
           "faction": "미상 / 백지 상태 (Tabula Rasa)"
         },
         "stats": {
-          "strength": 11,
-          "agility": 13,
-          "constitution": 11,
-          "intelligence": 10,
-          "wisdom": 10,
-          "charisma": 13,
-          "vitality": 11,
-          "intellect": 10,
-          "insight": 10,
-          "willpower": 13
+          "strength": 14,
+          "agility": 14,
+          "constitution": 7,
+          "intelligence": 11,
+          "wisdom": 12,
+          "charisma": 15,
+          "vitality": 7,
+          "intellect": 11,
+          "insight": 12,
+          "willpower": 15
         },
         "inventory": [],
         "secret": "",
@@ -706,16 +627,16 @@
           "faction": "미상 / 백지 상태 (Tabula Rasa)"
         },
         "stats": {
-          "strength": 11,
-          "agility": 13,
-          "constitution": 11,
-          "intelligence": 10,
-          "wisdom": 10,
-          "charisma": 13,
-          "vitality": 11,
-          "intellect": 10,
-          "insight": 10,
-          "willpower": 13
+          "strength": 14,
+          "agility": 14,
+          "constitution": 7,
+          "intelligence": 11,
+          "wisdom": 12,
+          "charisma": 15,
+          "vitality": 7,
+          "intellect": 11,
+          "insight": 12,
+          "willpower": 15
         },
         "inventory": [],
         "secret": "",
@@ -742,49 +663,49 @@
     {
       "step": "T0_PLAYER_INPUT",
       "status": "OK",
-      "timestamp": 1789263928519,
-      "details": "Turn 3 player input: \"지능 주사위 20\" (9 chars)"
+      "timestamp": 1789264752789,
+      "details": "Turn 3 player input: \"지혜 주사위 20\" (9 chars)"
     },
     {
       "step": "T1_REQUEST_START",
       "status": "OK",
-      "timestamp": 1789263928519,
+      "timestamp": 1789264752789,
       "details": "Initiating API POST /api/chat with model gemini-3.5-flash"
     },
     {
       "step": "T2_CONTEXT_ASSEMBLED",
       "status": "OK",
-      "timestamp": 1789263928519,
-      "details": "Context prepared with 5 total messages in history"
+      "timestamp": 1789264752789,
+      "details": "Context prepared with 6 total messages in history"
     },
     {
       "step": "T3_GEMINI_START",
       "status": "OK",
-      "timestamp": 1789263928519,
+      "timestamp": 1789264752789,
       "details": "Backend Gemini API request dispatched"
     },
     {
       "step": "T4_GEMINI_RECEIVED",
       "status": "OK",
-      "timestamp": 1789263952383,
-      "details": "Gemini response received (665 chars)"
+      "timestamp": 1789264776522,
+      "details": "Gemini response received (736 chars)"
     },
     {
       "step": "T5_PARSED",
       "status": "OK",
-      "timestamp": 1789263952383,
+      "timestamp": 1789264776523,
       "details": "Metadata block parsed successfully"
     },
     {
       "step": "T6_VALIDATED",
       "status": "SKIPPED",
-      "timestamp": 1789263952383,
+      "timestamp": 1789264776523,
       "details": "No candidate state mutation proposed"
     },
     {
       "step": "T7_COMMITTED",
       "status": "SKIPPED",
-      "timestamp": 1789263952383,
+      "timestamp": 1789264776523,
       "details": "Canonical state unchanged"
     }
   ]
