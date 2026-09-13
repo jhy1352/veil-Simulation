@@ -100,6 +100,29 @@ export function runTriageModuleTestSuite() {
     assert(result.zeroMutationNarrative.includes('선언한 행동을 시도하였으나'), 'Triage 4.1: Missing zero-mutation narrative falls back to deterministic non-mutation text');
   }
 
+  // Test 5: Recovery-fixable JSON syntax error (e.g. trailing comma) passes through parseCandidatesBlock without early deletion
+  {
+    const syntaxRecoverableInput = `
+[ZERO_MUTATION_NARRATIVE]
+정적만이 가득하다.
+[ZERO_MUTATION_END]
+
+[CANDIDATES_BLOCK]
+[
+  {
+    "label": "Trailing Comma Candidate",
+    "narrativeSummary": "Testing syntax recovery delegation",
+  },
+]
+[CANDIDATES_END]
+`;
+
+    const result = runTriagePipeline(syntaxRecoverableInput);
+    assert(Array.isArray(result.rawCandidates) && result.rawCandidates.length === 1, 'Triage 5.1: Syntax-recoverable candidate passed to Recovery gate without early Triage deletion');
+    assert(result.rawCandidates![0].label === 'Trailing Comma Candidate', 'Triage 5.2: Recovered candidate payload preserved');
+    assert(result.rawCandidates![0].candidateId === 1, 'Triage 5.3: candidateId authority retained from parseCandidatesBlock (1)');
+  }
+
   console.log('====================================================');
   console.log('All Triage Module Tests PASSED!');
   console.log('====================================================');
