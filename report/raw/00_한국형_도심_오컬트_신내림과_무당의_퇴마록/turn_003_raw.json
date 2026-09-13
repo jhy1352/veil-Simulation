@@ -1,0 +1,648 @@
+{
+  "runId": "run_2026-09-13T05-30-56-859Z_e5s0a5",
+  "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
+  "turn": 3,
+  "timestamp": "2026-09-13T05:33:15.173Z",
+  "gitCommit": "34d0344572be03d0fe3754b032cda7eafec446d9",
+  "playerInput": {
+    "rawInput": "궤짝을 뒤져보고 안전모, 가죽피혁, 종이뭉치를 살펴보고 인벤토리로 챙긴다"
+  },
+  "modelRuntime": {
+    "requestedModel": "gemini-3.6-flash",
+    "actualModelVersion": "gemini-3.6-flash",
+    "responseId": "hTWmaszlHNf62roPmP7HwQo",
+    "serverTimings": {
+      "t1_requestStart": 1789277572899,
+      "t2_contextAssemblyComplete": 1789277572899,
+      "t3_geminiRequestStart": 1789277572899,
+      "t4_geminiResponseReceived": 1789277596719,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 23820,
+      "inputCharCount": 3458,
+      "outputCharCount": 477,
+      "tokenCount": {
+        "promptTokens": 9615,
+        "candidatesTokens": 2991,
+        "totalTokens": 14523
+      }
+    },
+    "clientLatency": {
+      "turn": 3,
+      "model": "gemini-3.6-flash",
+      "t0_playerInput": 5332017.900000006,
+      "t1_requestStart": 5332017.900000006,
+      "t2_contextAssemblyComplete": 5332018,
+      "t3_geminiRequestStart": 5332018,
+      "t4_geminiResponseReceived": 5355924.5,
+      "t5_parserComplete": 5355924.700000018,
+      "t6_stateMutationComplete": 5355924.700000018,
+      "t7_uiUpdateComplete": 5355924.800000012,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 23907,
+      "parsingValidationMs": 0,
+      "totalTurnMs": 23907,
+      "inputCharCount": 40,
+      "outputCharCount": 477,
+      "retried": false
+    }
+  },
+  "chatContextForensic": {
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 12 / AGI 12 / CON 14 / INT 14 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망",
+    "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+    "seedsContext": "",
+    "offscreenContext": ""
+  },
+  "geminiContentsForensic": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 12 / AGI 12 / CON 14 / INT 14 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 3 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "하늘은 마치 낮게 가라앉은 납빛 수의처럼 서울의 한구석을 무겁게 덮어누르고 있었다. 철거가 진행 중인 청신동 제4구역. 한때 다닥다닥 붙어 숨을 쉬던 달동네의 골목들은 이제 거대한 포크레인의 이빨에 갈려 나간 채, 뼈대만 남은 콘크리트 무덤이 되어 사방에 흩어져 있었다. 무너진 벽면마다 붉은 페인트로 휘갈겨진 '철거'라는 두 글자가 마치 마르지 않은 짐승의 피처럼 음울하게 번져 흘렀다.\n\n봄철의 끈적한 이슬비가 먼지와 섞여 진흙탕을 만들고, 깨진 아스팔트 틈새로는 뒤틀린 나무뿌리처럼 지맥(地脈)의 상처가 거무스름한 흙덩이를 뱉어내고 있었다. 바람이 불 때마다 시멘트 가루와 가죽 썩는 듯한 냄새, 그리고 누군가 태우다 버린 저급한 향의 잔향이 섞여 콧날을 찔렀다. 이 폐허의 한가운데, 낡고 얇은 외투만을 걸친 여덟 살배기 육체의 선을 가진 열여덟의 소녀, 아마미야 쿠로코가 서 있었다.\n\n그녀의 손끝은 빗물과 한기에 곱아 미세하게 떨리고 있었다. 과거의 기억도, 자신이 어디서 왔는지에 대한 증명도 존재하지 않는 백지 상태. 그러나 가슴 가장 깊은 곳, 얼어붙은 심장 밑바닥에서 요동치는 기묘한 갈망만은 벼려진 칼날처럼 선명했다. 부조리로 가득 찬 세상, 그 꼭대기에서 군림하며 타인의 삶을 짓밟는 자들의 안쪽—그들의 일그러지고 썩어 문드러진 '마음의 핵'을 움켜쥐고 도려내어 파멸시키겠다는 차가운 의지였다.\n\n멀지 않은 곳에서 흙더미에 반쯤 깔린 성황당의 부러진 깃대가 빗속에서 삐걱이는 소리를 냈다. 그리고 그 아래, 아주 미세하게, 쇠붙이가 부딪쳐 내는 음습한 소리가 빗소리 사이로 스며들었다. 마치 보이지 않는 끈이 그녀의 목을 잡아끄는 듯한 압박감이 철거 현장 깊은 곳에서부터 밀려들기 시작했다. \n\n아마미야 쿠로코는 젖은 머리칼을 뒤로 넘기며 허공을 응시했다. 이 가라앉는 도시는 그녀에게 무엇을 요구하고 있는가. 차가운 빗방울이 뺨을 타고 흘러내려 턱끝에서 툭, 떨어졌다."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "주변 수색으로 쓸만한 아이템을 찾아 인벤토리에 넣는다"
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "아마미야 쿠로코는 질척이는 진흙 속에 무릎을 꿇었다. 차가운 빗물이 얇은 외투 속으로 스며들어 척추를 따라 소름 끼치도록 흘러내렸지만, 그녀의 신경은 오직 발밑의 폐허에 집중되어 있었다. 부서진 목재와 깨진 콘크리트 조각들이 뒤엉킨 지표면은, 마치 거대한 야수가 이빨로 짓이겨놓은 사체의 단면처럼 참혹했다.\n\n그녀는 하얗게 질린 손가락 끝으로 질척이는 흙더미를 조심스럽게 걷어내기 시작했다. 날카로운 유리의 단면이나 철근 조각이 살갗을 스칠 때마다 미약한 한기가 등뒤를 스쳤지만, 움직임을 멈추지 않았다. 무덤처럼 내려앉은 청신동의 잔해 속에는 수많은 인간의 흔적들이 소화되지 못한 채 널브러져 있었다. \n\n한쪽에는 부러진 신당의 대들보와 형체를 알아볼 수 없이 짓겨진 오방색 천 조각들이 지포스 냄새 나는 진흙 속에 반쯤 묻혀 있었고, 다른 쪽에는 철거 용역들이 황급히 도망치며 쏟아놓은 듯한 깨진 철제 궤짝과 깨진 안전모들이 빗물을 받아내고 있었다. 그리고 그보다 조금 더 깊은 음울한 어둠 속, 깨진 아스팔트의 갈라진 틈새 사이로 정체불명의 가죽 피혁과 종이 뭉치가 젖은 채 끼여 있는 모습도 눈에 들어왔다.\n\n쿠로코의 숨결이 빗속에서 하얗게 흩어졌다. 이 무질서한 파괴의 흔적들 중에서 그녀의 손에 닿아 스스로를 증명할 도구는 무엇이 될 것인가. 차가운 진흙 속에 묻힌 것들은 아직 침묵을 지키고 있었고, 그녀의 손끝은 서늘한 폐허의 표면을 조용히 더듬고 있을 뿐이었다."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "궤짝을 뒤져보고 안전모, 가죽피혁, 종이뭉치를 살펴보고 인벤토리로 챙긴다"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "궤짝을 뒤져보고 안전모, 가죽피혁, 종이뭉치를 살펴보고 인벤토리로 챙긴다"
+        }
+      ]
+    }
+  ],
+  "llmRawResponse": {
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"철거 현장의 비리 장부와 주술적 물품 수거\",\n    \"narrativeSummary\": \"궤짝 안에서 튼튼한 공사장 안전모를 챙기고, 빗물에 젖은 가죽 피혁 속에서 오래된 퇴마용 주술 쌈지와 청신동 재개발 조합의 부패 내역이 적힌 기밀 종이 뭉치를 발견하여 확보합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_search_chest_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"공사장 안전모\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"청신동 제4구역 철거 현장\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_search_chest_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"오래된 가죽 주술 쌈지\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_search_chest_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"재개발 비리 관계자 기밀 장부\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_corruption_ledger: 청신동 재개발 사업에 개입된 부패 권력자들과 정체불명의 오컬트 세력 간의 자금 거래 정황\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_chest_01\"\n        },\n        {\n          \"name\": \"오래된 가죽 주술 쌈지\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_chest_02\"\n        },\n        {\n          \"name\": \"재개발 비리 관계자 기밀 장부\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_chest_03\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 빗속의 잔해\",\n        \"upcomingChapters\": [\n          \"1장: 붉은 페인트와 악귀의 지맥\",\n          \"2장: 권력의 핵을 향한 그림자\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"오컬트 특수수사팀의 유출 보고서와 퇴마 검집 확보\",\n    \"narrativeSummary\": \"궤짝을 해체하여 머리를 보호할 규격 안전모를 얻고, 가죽 피혁이 사실은 칼이나 방울을 차던 무속 도구 집임을 확인합니다. 종이 뭉치는 경찰 오컬트 특수수사팀의 미공개 현장 조사서였습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_inspect_exorcism_kit_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"강화 안전모\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_inspect_exorcism_kit_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"무속용 가죽 칼집\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_inspect_exorcism_kit_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"오컬트 특수수사팀 유출 기밀보고서\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_occult_investigation_report: 경찰 내 오컬트 특수수사팀이 청신동 지맥 훼손 사건을 비밀리에 추적 중이라는 증거\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"강화 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_inspect_exorcism_kit_01\"\n        },\n        {\n          \"name\": \"무속용 가죽 칼집\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_inspect_exorcism_kit_02\"\n        },\n        {\n          \"name\": \"오컬트 특수수사팀 유출 기밀보고서\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_inspect_exorcism_kit_03\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 빗속의 잔해\",\n        \"upcomingChapters\": [\n          \"1장: 특수수사팀의 그림자\",\n          \"2장: 신어머니의 유산\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"신당의 잊혀진 유물과 현장 자원 수습\",\n    \"narrativeSummary\": \"궤짝과 흙더미를 깊이 헤집어 다소 마모되었으나 쓸만한 방호용 안전모와 주술 흔적이 남은 가죽 덮개, 그리고 무당의 정화 의식이 기록된 낡은 부적 뭉치를 신중히 거두어들입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_salvage_shrine_relics_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"산업용 안전모\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_salvage_shrine_relics_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"주사(朱砂) 물든 가죽 조각\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_salvage_shrine_relics_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"신당 의식용 부적 뭉치\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_shrine_ritual_records: 청신동 신당이 파괴되기 직전 집행된 대규모 억누름 굿의 흔적과 남은 위험\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"산업용 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_salvage_shrine_relics_01\"\n        },\n        {\n          \"name\": \"주사(朱砂) 물든 가죽 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_salvage_shrine_relics_02\"\n        },\n        {\n          \"name\": \"신당 의식용 부적 뭉치\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_salvage_shrine_relics_03\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 빗속의 잔해\",\n        \"upcomingChapters\": [\n          \"1장: 깨어진 부적과 원혼\",\n          \"2장: 지맥의 혈맥\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n아마미야 쿠로코는 진흙탕에 손을 밀어 넣고, 반쯤 부서진 철제 궤짝의 녹슨 모서리를 다잡았다. 차가운 빗물이 손가락 마디를 타고 흘러내려 피부를 고통스럽게 시리게 했으나, 그녀의 눈동자는 궤짝 안쪽과 그 주변에 흩어진 물건들에 고정되어 있었다.\n\n궤짝 상판을 들어 올리자 시큼한 기름 냄새와 함께 묵직한 공사장 안전모의 매끄러운 단면이 손끝에 닿았다. 그 곁으로는 흙더미에 짓눌려 있던 가죽 피혁 조각과, 빗물에 적셔져 묵직하게 가라앉은 종이 뭉치가 드러났다. 가죽 조각 표면에는 누군가의 손때와 정체불명의 문양이 희미하게 눌려 찍혀 있었고, 축축하게 젖은 종이 뭉치 겉면에는 붉고 검은 먹자국이 얼룩처럼 번져 있었다.\n\n쿠로코는 떨리는 손끝으로 물건들의 상태를 하나하나 조심스럽게 살폈다. 흙먼지를 털어내고 그 안에 담긴 내용물과 가치를 완전히 확인하여 품에 거두어들이기까지, 차가운 장대비만이 폐허가 된 청신동 골목 위로 소리 없이 내리붓고 있었다.\n[ZERO_MUTATION_END]",
+    "rawResponseText": "아마미야 쿠로코는 진흙탕에 손을 밀어 넣고, 반쯤 부서진 철제 궤짝의 녹슨 모서리를 다잡았다. 차가운 빗물이 손가락 마디를 타고 흘러내려 피부를 고통스럽게 시리게 했으나, 그녀의 눈동자는 궤짝 안쪽과 그 주변에 흩어진 물건들에 고정되어 있었다.\n\n궤짝 상판을 들어 올리자 시큼한 기름 냄새와 함께 묵직한 공사장 안전모의 매끄러운 단면이 손끝에 닿았다. 그 곁으로는 흙더미에 짓눌려 있던 가죽 피혁 조각과, 빗물에 적셔져 묵직하게 가라앉은 종이 뭉치가 드러났다. 가죽 조각 표면에는 누군가의 손때와 정체불명의 문양이 희미하게 눌려 찍혀 있었고, 축축하게 젖은 종이 뭉치 겉면에는 붉고 검은 먹자국이 얼룩처럼 번져 있었다.\n\n쿠로코는 떨리는 손끝으로 물건들의 상태를 하나하나 조심스럽게 살폈다. 흙먼지를 털어내고 그 안에 담긴 내용물과 가치를 완전히 확인하여 품에 거두어들이기까지, 차가운 장대비만이 폐허가 된 청신동 골목 위로 소리 없이 내리붓고 있었다."
+  },
+  "candidatePipeline": {
+    "rawCandidatesBlock": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"철거 현장의 비리 장부와 주술적 물품 수거\",\n    \"narrativeSummary\": \"궤짝 안에서 튼튼한 공사장 안전모를 챙기고, 빗물에 젖은 가죽 피혁 속에서 오래된 퇴마용 주술 쌈지와 청신동 재개발 조합의 부패 내역이 적힌 기밀 종이 뭉치를 발견하여 확보합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_search_chest_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"공사장 안전모\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"청신동 제4구역 철거 현장\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_search_chest_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"오래된 가죽 주술 쌈지\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_search_chest_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"재개발 비리 관계자 기밀 장부\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_corruption_ledger: 청신동 재개발 사업에 개입된 부패 권력자들과 정체불명의 오컬트 세력 간의 자금 거래 정황\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_chest_01\"\n        },\n        {\n          \"name\": \"오래된 가죽 주술 쌈지\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_chest_02\"\n        },\n        {\n          \"name\": \"재개발 비리 관계자 기밀 장부\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_chest_03\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 빗속의 잔해\",\n        \"upcomingChapters\": [\n          \"1장: 붉은 페인트와 악귀의 지맥\",\n          \"2장: 권력의 핵을 향한 그림자\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"오컬트 특수수사팀의 유출 보고서와 퇴마 검집 확보\",\n    \"narrativeSummary\": \"궤짝을 해체하여 머리를 보호할 규격 안전모를 얻고, 가죽 피혁이 사실은 칼이나 방울을 차던 무속 도구 집임을 확인합니다. 종이 뭉치는 경찰 오컬트 특수수사팀의 미공개 현장 조사서였습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_inspect_exorcism_kit_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"강화 안전모\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_inspect_exorcism_kit_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"무속용 가죽 칼집\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_inspect_exorcism_kit_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"오컬트 특수수사팀 유출 기밀보고서\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_occult_investigation_report: 경찰 내 오컬트 특수수사팀이 청신동 지맥 훼손 사건을 비밀리에 추적 중이라는 증거\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"강화 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_inspect_exorcism_kit_01\"\n        },\n        {\n          \"name\": \"무속용 가죽 칼집\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_inspect_exorcism_kit_02\"\n        },\n        {\n          \"name\": \"오컬트 특수수사팀 유출 기밀보고서\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_inspect_exorcism_kit_03\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 빗속의 잔해\",\n        \"upcomingChapters\": [\n          \"1장: 특수수사팀의 그림자\",\n          \"2장: 신어머니의 유산\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"신당의 잊혀진 유물과 현장 자원 수습\",\n    \"narrativeSummary\": \"궤짝과 흙더미를 깊이 헤집어 다소 마모되었으나 쓸만한 방호용 안전모와 주술 흔적이 남은 가죽 덮개, 그리고 무당의 정화 의식이 기록된 낡은 부적 뭉치를 신중히 거두어들입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_salvage_shrine_relics_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"산업용 안전모\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_salvage_shrine_relics_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"주사(朱砂) 물든 가죽 조각\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_salvage_shrine_relics_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"신당 의식용 부적 뭉치\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_shrine_ritual_records: 청신동 신당이 파괴되기 직전 집행된 대규모 억누름 굿의 흔적과 남은 위험\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"산업용 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_salvage_shrine_relics_01\"\n        },\n        {\n          \"name\": \"주사(朱砂) 물든 가죽 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_salvage_shrine_relics_02\"\n        },\n        {\n          \"name\": \"신당 의식용 부적 뭉치\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_salvage_shrine_relics_03\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 빗속의 잔해\",\n        \"upcomingChapters\": [\n          \"1장: 깨어진 부적과 원혼\",\n          \"2장: 지맥의 혈맥\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+    "parsedCandidates": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"철거 현장의 비리 장부와 주술적 물품 수거\",\n    \"narrativeSummary\": \"궤짝 안에서 튼튼한 공사장 안전모를 챙기고, 빗물에 젖은 가죽 피혁 속에서 오래된 퇴마용 주술 쌈지와 청신동 재개발 조합의 부패 내역이 적힌 기밀 종이 뭉치를 발견하여 확보합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_search_chest_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"공사장 안전모\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"청신동 제4구역 철거 현장\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_search_chest_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"오래된 가죽 주술 쌈지\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_search_chest_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"재개발 비리 관계자 기밀 장부\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_corruption_ledger: 청신동 재개발 사업에 개입된 부패 권력자들과 정체불명의 오컬트 세력 간의 자금 거래 정황\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_chest_01\"\n        },\n        {\n          \"name\": \"오래된 가죽 주술 쌈지\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_chest_02\"\n        },\n        {\n          \"name\": \"재개발 비리 관계자 기밀 장부\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_chest_03\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 빗속의 잔해\",\n        \"upcomingChapters\": [\n          \"1장: 붉은 페인트와 악귀의 지맥\",\n          \"2장: 권력의 핵을 향한 그림자\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"오컬트 특수수사팀의 유출 보고서와 퇴마 검집 확보\",\n    \"narrativeSummary\": \"궤짝을 해체하여 머리를 보호할 규격 안전모를 얻고, 가죽 피혁이 사실은 칼이나 방울을 차던 무속 도구 집임을 확인합니다. 종이 뭉치는 경찰 오컬트 특수수사팀의 미공개 현장 조사서였습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_inspect_exorcism_kit_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"강화 안전모\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_inspect_exorcism_kit_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"무속용 가죽 칼집\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_inspect_exorcism_kit_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"오컬트 특수수사팀 유출 기밀보고서\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_occult_investigation_report: 경찰 내 오컬트 특수수사팀이 청신동 지맥 훼손 사건을 비밀리에 추적 중이라는 증거\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"강화 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_inspect_exorcism_kit_01\"\n        },\n        {\n          \"name\": \"무속용 가죽 칼집\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_inspect_exorcism_kit_02\"\n        },\n        {\n          \"name\": \"오컬트 특수수사팀 유출 기밀보고서\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_inspect_exorcism_kit_03\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 빗속의 잔해\",\n        \"upcomingChapters\": [\n          \"1장: 특수수사팀의 그림자\",\n          \"2장: 신어머니의 유산\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"신당의 잊혀진 유물과 현장 자원 수습\",\n    \"narrativeSummary\": \"궤짝과 흙더미를 깊이 헤집어 다소 마모되었으나 쓸만한 방호용 안전모와 주술 흔적이 남은 가죽 덮개, 그리고 무당의 정화 의식이 기록된 낡은 부적 뭉치를 신중히 거두어들입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_salvage_shrine_relics_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"산업용 안전모\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_salvage_shrine_relics_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"주사(朱砂) 물든 가죽 조각\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"evt_salvage_shrine_relics_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"신당 의식용 부적 뭉치\"\n          }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_shrine_ritual_records: 청신동 신당이 파괴되기 직전 집행된 대규모 억누름 굿의 흔적과 남은 위험\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"산업용 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_salvage_shrine_relics_01\"\n        },\n        {\n          \"name\": \"주사(朱砂) 물든 가죽 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_salvage_shrine_relics_02\"\n        },\n        {\n          \"name\": \"신당 의식용 부적 뭉치\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_salvage_shrine_relics_03\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 빗속의 잔해\",\n        \"upcomingChapters\": [\n          \"1장: 깨어진 부적과 원혼\",\n          \"2장: 지맥의 혈맥\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+    "recoveryGateResult": {
+      "passedCandidates": [
+        {
+          "label": "철거 현장의 비리 장부와 주술적 물품 수거",
+          "narrativeSummary": "궤짝 안에서 튼튼한 공사장 안전모를 챙기고, 빗물에 젖은 가죽 피혁 속에서 오래된 퇴마용 주술 쌈지와 청신동 재개발 조합의 부패 내역이 적힌 기밀 종이 뭉치를 발견하여 확보합니다.",
+          "semanticEvents": [
+            {
+              "eventId": "evt_search_chest_01",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "공사장 안전모"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "청신동 제4구역 철거 현장"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "evt_search_chest_02",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "오래된 가죽 주술 쌈지"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "evt_search_chest_03",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "재개발 비리 관계자 기밀 장부"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "seed_cheongsin_corruption_ledger: 청신동 재개발 사업에 개입된 부패 권력자들과 정체불명의 오컬트 세력 간의 자금 거래 정황"
+            ],
+            "inventoryChanges": [
+              {
+                "name": "공사장 안전모",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "evt_search_chest_01"
+              },
+              {
+                "name": "오래된 가죽 주술 쌈지",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "evt_search_chest_02"
+              },
+              {
+                "name": "재개발 비리 관계자 기밀 장부",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "evt_search_chest_03"
+              }
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막: 빗속의 잔해",
+              "upcomingChapters": [
+                "1장: 붉은 페인트와 악귀의 지맥",
+                "2장: 권력의 핵을 향한 그림자"
+              ]
+            }
+          },
+          "candidateId": 1
+        },
+        {
+          "label": "오컬트 특수수사팀의 유출 보고서와 퇴마 검집 확보",
+          "narrativeSummary": "궤짝을 해체하여 머리를 보호할 규격 안전모를 얻고, 가죽 피혁이 사실은 칼이나 방울을 차던 무속 도구 집임을 확인합니다. 종이 뭉치는 경찰 오컬트 특수수사팀의 미공개 현장 조사서였습니다.",
+          "semanticEvents": [
+            {
+              "eventId": "evt_inspect_exorcism_kit_01",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "강화 안전모"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "evt_inspect_exorcism_kit_02",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "무속용 가죽 칼집"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "evt_inspect_exorcism_kit_03",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "오컬트 특수수사팀 유출 기밀보고서"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "seed_occult_investigation_report: 경찰 내 오컬트 특수수사팀이 청신동 지맥 훼손 사건을 비밀리에 추적 중이라는 증거"
+            ],
+            "inventoryChanges": [
+              {
+                "name": "강화 안전모",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "evt_inspect_exorcism_kit_01"
+              },
+              {
+                "name": "무속용 가죽 칼집",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "evt_inspect_exorcism_kit_02"
+              },
+              {
+                "name": "오컬트 특수수사팀 유출 기밀보고서",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "evt_inspect_exorcism_kit_03"
+              }
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막: 빗속의 잔해",
+              "upcomingChapters": [
+                "1장: 특수수사팀의 그림자",
+                "2장: 신어머니의 유산"
+              ]
+            }
+          },
+          "candidateId": 2
+        },
+        {
+          "label": "신당의 잊혀진 유물과 현장 자원 수습",
+          "narrativeSummary": "궤짝과 흙더미를 깊이 헤집어 다소 마모되었으나 쓸만한 방호용 안전모와 주술 흔적이 남은 가죽 덮개, 그리고 무당의 정화 의식이 기록된 낡은 부적 뭉치를 신중히 거두어들입니다.",
+          "semanticEvents": [
+            {
+              "eventId": "evt_salvage_shrine_relics_01",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "산업용 안전모"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "evt_salvage_shrine_relics_02",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "주사(朱砂) 물든 가죽 조각"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "evt_salvage_shrine_relics_03",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "신당 의식용 부적 뭉치"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "seed_shrine_ritual_records: 청신동 신당이 파괴되기 직전 집행된 대규모 억누름 굿의 흔적과 남은 위험"
+            ],
+            "inventoryChanges": [
+              {
+                "name": "산업용 안전모",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "evt_salvage_shrine_relics_01"
+              },
+              {
+                "name": "주사(朱砂) 물든 가죽 조각",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "evt_salvage_shrine_relics_02"
+              },
+              {
+                "name": "신당 의식용 부적 뭉치",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "evt_salvage_shrine_relics_03"
+              }
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막: 빗속의 잔해",
+              "upcomingChapters": [
+                "1장: 깨어진 부적과 원혼",
+                "2장: 지맥의 혈맥"
+              ]
+            }
+          },
+          "candidateId": 3
+        }
+      ],
+      "quarantinedCandidates": [],
+      "totalInputCount": 3,
+      "passedCount": 3,
+      "quarantinedCount": 0
+    },
+    "meaningTrees": [],
+    "candidatesToValidate": []
+  },
+  "preAuth": {
+    "preAuthResults": [],
+    "allowedCandidatesCount": 0
+  },
+  "authorization": {
+    "authorizedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null,
+    "isFallbackNonMutation": true
+  },
+  "commit": {
+    "verdict": "NO_CANDIDATE",
+    "rejectedReasons": [],
+    "committedRecordIds": [],
+    "commitResultSummary": "NO_MUTATION"
+  },
+  "stateBefore": {
+    "turn": 3,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
+        "worldType": "popular_genre",
+        "settingDescription": "재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.",
+        "toneStyle": "고딕 오컬트 & 코스믹 호러",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "아마미야 쿠로코",
+        "gender": "여성",
+        "age": 18,
+        "appearance": "세련된 정장 망토와 실크햇을 쓰고 도회적인 미소를 띤 소녀",
+        "goal": "부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것",
+        "originBackground": "미상 / 백지 상태 (Tabula Rasa)",
+        "backgroundType": "tabula_rasa",
+        "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+        "flawType": "tabula_rasa",
+        "oath": "미상 / 백지 상태 (Tabula Rasa)",
+        "oathType": "tabula_rasa",
+        "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+        "anchorType": "tabula_rasa",
+        "faction": "미상 / 백지 상태 (Tabula Rasa)",
+        "factionType": "tabula_rasa",
+        "metaElements": {
+          "background": "미상 / 백지 상태 (Tabula Rasa)",
+          "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+          "oath": "미상 / 백지 상태 (Tabula Rasa)",
+          "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+          "faction": "미상 / 백지 상태 (Tabula Rasa)"
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 12,
+          "constitution": 14,
+          "intelligence": 14,
+          "wisdom": 8,
+          "charisma": 15,
+          "vitality": 14,
+          "intellect": 14,
+          "insight": 8,
+          "willpower": 15
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "괴도 마술사",
+        "currentGoal": "부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "stateAfter": {
+    "turn": 3,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
+        "worldType": "popular_genre",
+        "settingDescription": "재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.",
+        "toneStyle": "고딕 오컬트 & 코스믹 호러",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "아마미야 쿠로코",
+        "gender": "여성",
+        "age": 18,
+        "appearance": "세련된 정장 망토와 실크햇을 쓰고 도회적인 미소를 띤 소녀",
+        "goal": "부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것",
+        "originBackground": "미상 / 백지 상태 (Tabula Rasa)",
+        "backgroundType": "tabula_rasa",
+        "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+        "flawType": "tabula_rasa",
+        "oath": "미상 / 백지 상태 (Tabula Rasa)",
+        "oathType": "tabula_rasa",
+        "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+        "anchorType": "tabula_rasa",
+        "faction": "미상 / 백지 상태 (Tabula Rasa)",
+        "factionType": "tabula_rasa",
+        "metaElements": {
+          "background": "미상 / 백지 상태 (Tabula Rasa)",
+          "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+          "oath": "미상 / 백지 상태 (Tabula Rasa)",
+          "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+          "faction": "미상 / 백지 상태 (Tabula Rasa)"
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 12,
+          "constitution": 14,
+          "intelligence": 14,
+          "wisdom": 8,
+          "charisma": 15,
+          "vitality": 14,
+          "intellect": 14,
+          "insight": 8,
+          "willpower": 15
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "괴도 마술사",
+        "currentGoal": "부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "historyDelta": [],
+  "pipelineSteps": [
+    {
+      "step": "T0_PLAYER_INPUT",
+      "status": "OK",
+      "timestamp": 1789277571266,
+      "details": "Turn 3 player input: \"궤짝을 뒤져보고 안전모, 가죽피혁, 종이뭉치를 살펴보고 인벤토리로 챙긴다\" (40 chars)"
+    },
+    {
+      "step": "T1_REQUEST_START",
+      "status": "OK",
+      "timestamp": 1789277571266,
+      "details": "Initiating API POST /api/chat with model gemini-3.6-flash"
+    },
+    {
+      "step": "T2_CONTEXT_ASSEMBLED",
+      "status": "OK",
+      "timestamp": 1789277571266,
+      "details": "Context prepared with 6 total messages in history"
+    },
+    {
+      "step": "T3_GEMINI_START",
+      "status": "OK",
+      "timestamp": 1789277571266,
+      "details": "Backend Gemini API request dispatched"
+    },
+    {
+      "step": "T4_GEMINI_RECEIVED",
+      "status": "OK",
+      "timestamp": 1789277595172,
+      "details": "Gemini response received (477 chars)"
+    },
+    {
+      "step": "T5_PARSED",
+      "status": "OK",
+      "timestamp": 1789277595173,
+      "details": "Metadata block parsed successfully"
+    },
+    {
+      "step": "T6_VALIDATED",
+      "status": "SKIPPED",
+      "timestamp": 1789277595173,
+      "details": "No candidate state mutation proposed"
+    },
+    {
+      "step": "T7_COMMITTED",
+      "status": "SKIPPED",
+      "timestamp": 1789277595173,
+      "details": "Canonical state unchanged"
+    }
+  ]
+}

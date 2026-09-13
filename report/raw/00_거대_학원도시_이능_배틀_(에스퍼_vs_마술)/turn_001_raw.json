@@ -1,0 +1,673 @@
+{
+  "runId": "run_2026-09-13T00-19-30-888Z_1oxeau",
+  "worldName": "거대 학원도시 이능 배틀 (에스퍼 vs 마술)",
+  "turn": 1,
+  "timestamp": "2026-09-13T00:19:30.888Z",
+  "gitCommit": "787d49cb2a8dffe012407459800563fdf5b28a0b",
+  "playerInput": {
+    "rawInput": "시작한다"
+  },
+  "modelRuntime": {
+    "requestedModel": "gemini-3.5-flash-lite",
+    "actualModelVersion": "gemini-3.5-flash-lite",
+    "responseId": "DeylatKHO-XarfcP79DGMQ",
+    "serverTimings": {
+      "t1_requestStart": 1789258765567,
+      "t2_contextAssemblyComplete": 1789258765568,
+      "t3_geminiRequestStart": 1789258765568,
+      "t4_geminiResponseReceived": 1789258771418,
+      "contextAssemblyMs": 1,
+      "geminiGenerationMs": 5850,
+      "inputCharCount": 1781,
+      "outputCharCount": 758,
+      "tokenCount": {
+        "promptTokens": 8409,
+        "candidatesTokens": 1286,
+        "totalTokens": 9695
+      }
+    },
+    "clientLatency": {
+      "turn": 1,
+      "model": "gemini-3.5-flash-lite",
+      "t0_playerInput": 112120.40000000596,
+      "t1_requestStart": 112120.40000000596,
+      "t2_contextAssemblyComplete": 112120.59999999404,
+      "t3_geminiRequestStart": 112120.59999999404,
+      "t4_geminiResponseReceived": 119198.80000001192,
+      "t5_parserComplete": 119199.09999999404,
+      "t6_stateMutationComplete": 119199.09999999404,
+      "t7_uiUpdateComplete": 119199.30000001192,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 7078,
+      "parsingValidationMs": 0,
+      "totalTurnMs": 7079,
+      "inputCharCount": 4,
+      "outputCharCount": 758,
+      "retried": false
+    }
+  },
+  "chatContextForensic": {
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 거대 학원도시 이능 배틀 (에스퍼 vs 마술)\n- 세계관 설정: 초능력 개발 프로그램을 이수하는 230만 학원도시의 학생들과, 과학의 이면에 숨어 암약하는 고대 마술 결사 간의 은밀한 충돌과 음모를 다룹니다.\n- 문체 스타일: 열혈 이능 배틀 / J애니메이션 활극\n- 주인공 프로필: 로웬 실버베일 (나이: 23, 성별: 여성)\n  * 출신/배경: [preset] 마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아\n  * 결핍/트라우마: [preset] 자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함\n  * 맹세: [preset] 어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다\n  * 닻: [preset] 위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능\n  * 소속/세력: [preset] 콜로니 독립 해방 전선 [에어로스]\n  * 능력치: STR 12 / AGI 14 / CON 13 / INT 12 / WIS 13 / CHA 16\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 로웬 실버베일 (마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 로웬 실버베일 (마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아)\n- 정사 관계망 (0개): 기본 관계망",
+    "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+    "seedsContext": "",
+    "offscreenContext": ""
+  },
+  "geminiContentsForensic": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "[TRPG Campaign Context]\n- 세계관명: 거대 학원도시 이능 배틀 (에스퍼 vs 마술)\n- 세계관 설정: 초능력 개발 프로그램을 이수하는 230만 학원도시의 학생들과, 과학의 이면에 숨어 암약하는 고대 마술 결사 간의 은밀한 충돌과 음모를 다룹니다.\n- 문체 스타일: 열혈 이능 배틀 / J애니메이션 활극\n- 주인공 프로필: 로웬 실버베일 (나이: 23, 성별: 여성)\n  * 출신/배경: [preset] 마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아\n  * 결핍/트라우마: [preset] 자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함\n  * 맹세: [preset] 어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다\n  * 닻: [preset] 위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능\n  * 소속/세력: [preset] 콜로니 독립 해방 전선 [에어로스]\n  * 능력치: STR 12 / AGI 14 / CON 13 / INT 12 / WIS 13 / CHA 16\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 로웬 실버베일 (마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 1 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 거대 학원도시 이능 배틀 (에스퍼 vs 마술) (열혈 이능 배틀 / J애니메이션 활극)\n시대/배경: 초능력 개발 프로그램을 이수하는 230만 학원도시의 학생들과, 과학의 이면에 숨어 암약하는 고대 마술 결사 간의 은밀한 충돌과 음모를 다룹니다.\n주인공: 로웬 실버베일 (나이: 23, 성별: 여성)\n출신: [preset] 마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아\n결핍: [preset] 자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함\n맹세: [preset] 어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다\n닻: [preset] 위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능\n문파/세력: [preset] 콜로니 독립 해방 전선 [에어로스]\n\n궁극적 목표: 왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "시작한다"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "시작한다"
+        }
+      ]
+    }
+  ],
+  "llmRawResponse": {
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"학원도시의 밤공기를 가르며 자율 주행 오토바이를 타고 지정된 연락책의 은신처로 향한다.\",\n    \"narrativeSummary\": \"네온사인이 비처럼 쏟아지는 거대 학원도시 제7학구의 밤거리를 가로지르며, 로웬은 파트너 인공지능 사역마와 통신하며 첫 번째 접선 장소로 이동한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_001\",\n        \"action\": \"MOVE\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"로웬 실버베일\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"제7학구 은신처\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"제7학구의 뒷골목에서 마술 결사의 은밀한 움직임이 포착되었다.\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 네온과 마력의 교차점\",\n        \"upcomingChapters\": [\n          \"연락책과의 접선과 첫 번째 경고\",\n          \"학원도시 외곽 폐기구역의 마력 반응 조사\",\n          \"추격해오는 안티스킬과의 국지적 충돌\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"공중 정비 구역의 빌딩 옥상에 멈춰 서서, 학원도시 전역을 내려다보며 마력 파동을 스캔한다.\",\n    \"narrativeSummary\": \"오토바이를 멈춘 로웬은 고공의 바람을 맞으며 도시를 스캔한다. 가문의 엄격한 율법을 벗어던진 이 반항적인 퇴마사는 자신의 직감과 힘을 믿고 도사린 위협의 기원을 직접 찾아 나서기로 한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_002\",\n        \"action\": \"SCAN\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"로웬 실버베일\" },\n          { \"role\": \"INSTRUMENT\", \"entityName\": \"마력 스캐너\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"도시 상공에 감지된 이질적인 고대 마술의 결계 파문\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 네온과 마력의 교차점\",\n        \"upcomingChapters\": [\n          \"옥상에서 포착된 이질적인 마력의 진원지 추적\",\n          \"콜로니 독립 해방 전선 내부의 불온한 밀고자 색출\",\n          \"자만심이 불러온 예기치 못한 함정과의 조우\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n거대 학원도시의 상공을 가득 채운 홀로그램 네온사인이 인공의 밤을 낮처럼 밝히고 있었다. 빌딩과 빌딩 사이를 잇는 고속 공중 레일 위로 무수한 초능력자 학생들이 오가는 동안, 그 찬란한 과학의 이면에는 인간의 눈에 닿지 않는 어둠이 짙게 가라앉아 있었다. \n\n콜로니 독립 해방 전선 [에어로스]의 소속인 로웬 실버베일은 차가운 밤바람을 맞으며 거대 빌딩의 옥상 난간에 홀로 서 있었다. 명문 실버베일 가문의 엄격한 가교와 예법을 내팽개치고 이 도시로 도망쳐 나온 지도 어느덧 시간이 흘렀다. 그녀의 허리춤에는 마력을 응축하는 가문의 보검이 차가운 금속음을 내며 매달려 있었고, 귓가에는 파트너 인공지능 사역마의 전자음이 나지막이 울리고 있었다.\n\n\"로웬, 주변 에너지 파장이 심상치 않습니다. 도시 관리 시스템의 은밀한 감시망이 미묘하게 수렴하고 있어요. 자만심에 빠져 주변을 가볍게 여기다간 골치 아파질 겁니다.\"\n\n사역마의 경고는 차갑고 이성적이었으나, 로웬은 그저 입꼬리를 비스듬히 올릴 뿐이었다. 자신의 힘에 대한 절대적인 과신—그것은 그녀를 지탱하는 오만이기도 했고, 동시에 어떤 절망에서도 검을 뽑아들게 만드는 닻이기도 했다. 왕국의 왕좌 뒤에 숨은 부패한 흑막의 실체를 폭로하기 위해, 그리고 가문의 허울 좋은 명예에 복종하기를 거부한 그녀의 반역은 이제 막 방아쇠를 당긴 참이었다.\n\n도시의 밤거리는 여전히 평화로운 가면을 쓴 채 그녀를 내려다보고 있다. 로웬은 검 스톡에 손을 올린 채, 앞으로 펼쳐질 격동의 전장에 뛰어들 준비를 마친다.",
+    "rawResponseText": "거대 학원도시의 상공을 가득 채운 홀로그램 네온사인이 인공의 밤을 낮처럼 밝히고 있었다. 빌딩과 빌딩 사이를 잇는 고속 공중 레일 위로 무수한 초능력자 학생들이 오가는 동안, 그 찬란한 과학의 이면에는 인간의 눈에 닿지 않는 어둠이 짙게 가라앉아 있었다. \n\n콜로니 독립 해방 전선 [에어로스]의 소속인 로웬 실버베일은 차가운 밤바람을 맞으며 거대 빌딩의 옥상 난간에 홀로 서 있었다. 명문 실버베일 가문의 엄격한 가교와 예법을 내팽개치고 이 도시로 도망쳐 나온 지도 어느덧 시간이 흘렀다. 그녀의 허리춤에는 마력을 응축하는 가문의 보검이 차가운 금속음을 내며 매달려 있었고, 귓가에는 파트너 인공지능 사역마의 전자음이 나지막이 울리고 있었다.\n\n\"로웬, 주변 에너지 파장이 심상치 않습니다. 도시 관리 시스템의 은밀한 감시망이 미묘하게 수렴하고 있어요. 자만심에 빠져 주변을 가볍게 여기다간 골치 아파질 겁니다.\"\n\n사역마의 경고는 차갑고 이성적이었으나, 로웬은 그저 입꼬리를 비스듬히 올릴 뿐이었다. 자신의 힘에 대한 절대적인 과신—그것은 그녀를 지탱하는 오만이기도 했고, 동시에 어떤 절망에서도 검을 뽑아들게 만드는 닻이기도 했다. 왕국의 왕좌 뒤에 숨은 부패한 흑막의 실체를 폭로하기 위해, 그리고 가문의 허울 좋은 명예에 복종하기를 거부한 그녀의 반역은 이제 막 방아쇠를 당긴 참이었다.\n\n도시의 밤거리는 여전히 평화로운 가면을 쓴 채 그녀를 내려다보고 있다. 로웬은 검 스톡에 손을 올린 채, 앞으로 펼쳐질 격동의 전장에 뛰어들 준비를 마친다."
+  },
+  "candidatePipeline": {
+    "rawCandidatesBlock": [
+      {
+        "label": "학원도시의 밤공기를 가르며 자율 주행 오토바이를 타고 지정된 연락책의 은신처로 향한다.",
+        "narrativeSummary": "네온사인이 비처럼 쏟아지는 거대 학원도시 제7학구의 밤거리를 가로지르며, 로웬은 파트너 인공지능 사역마와 통신하며 첫 번째 접선 장소로 이동한다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_001",
+            "action": "MOVE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "제7학구 은신처"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "제7학구의 뒷골목에서 마술 결사의 은밀한 움직임이 포착되었다."
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 네온과 마력의 교차점",
+            "upcomingChapters": [
+              "연락책과의 접선과 첫 번째 경고",
+              "학원도시 외곽 폐기구역의 마력 반응 조사",
+              "추격해오는 안티스킬과의 국지적 충돌"
+            ]
+          }
+        },
+        "candidateId": 1
+      },
+      {
+        "label": "공중 정비 구역의 빌딩 옥상에 멈춰 서서, 학원도시 전역을 내려다보며 마력 파동을 스캔한다.",
+        "narrativeSummary": "오토바이를 멈춘 로웬은 고공의 바람을 맞으며 도시를 스캔한다. 가문의 엄격한 율법을 벗어던진 이 반항적인 퇴마사는 자신의 직감과 힘을 믿고 도사린 위협의 기원을 직접 찾아 나서기로 한다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_002",
+            "action": "SCAN",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "INSTRUMENT",
+                "entityName": "마력 스캐너"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "도시 상공에 감지된 이질적인 고대 마술의 결계 파문"
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 네온과 마력의 교차점",
+            "upcomingChapters": [
+              "옥상에서 포착된 이질적인 마력의 진원지 추적",
+              "콜로니 독립 해방 전선 내부의 불온한 밀고자 색출",
+              "자만심이 불러온 예기치 못한 함정과의 조우"
+            ]
+          }
+        },
+        "candidateId": 2
+      }
+    ],
+    "parsedCandidates": [
+      {
+        "label": "학원도시의 밤공기를 가르며 자율 주행 오토바이를 타고 지정된 연락책의 은신처로 향한다.",
+        "narrativeSummary": "네온사인이 비처럼 쏟아지는 거대 학원도시 제7학구의 밤거리를 가로지르며, 로웬은 파트너 인공지능 사역마와 통신하며 첫 번째 접선 장소로 이동한다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_001",
+            "action": "MOVE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "제7학구 은신처"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "제7학구의 뒷골목에서 마술 결사의 은밀한 움직임이 포착되었다."
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 네온과 마력의 교차점",
+            "upcomingChapters": [
+              "연락책과의 접선과 첫 번째 경고",
+              "학원도시 외곽 폐기구역의 마력 반응 조사",
+              "추격해오는 안티스킬과의 국지적 충돌"
+            ]
+          }
+        },
+        "candidateId": 1
+      },
+      {
+        "label": "공중 정비 구역의 빌딩 옥상에 멈춰 서서, 학원도시 전역을 내려다보며 마력 파동을 스캔한다.",
+        "narrativeSummary": "오토바이를 멈춘 로웬은 고공의 바람을 맞으며 도시를 스캔한다. 가문의 엄격한 율법을 벗어던진 이 반항적인 퇴마사는 자신의 직감과 힘을 믿고 도사린 위협의 기원을 직접 찾아 나서기로 한다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_002",
+            "action": "SCAN",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "INSTRUMENT",
+                "entityName": "마력 스캐너"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "도시 상공에 감지된 이질적인 고대 마술의 결계 파문"
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 네온과 마력의 교차점",
+            "upcomingChapters": [
+              "옥상에서 포착된 이질적인 마력의 진원지 추적",
+              "콜로니 독립 해방 전선 내부의 불온한 밀고자 색출",
+              "자만심이 불러온 예기치 못한 함정과의 조우"
+            ]
+          }
+        },
+        "candidateId": 2
+      }
+    ],
+    "recoveryGateResult": {
+      "passedCandidates": [
+        {
+          "label": "학원도시의 밤공기를 가르며 자율 주행 오토바이를 타고 지정된 연락책의 은신처로 향한다.",
+          "narrativeSummary": "네온사인이 비처럼 쏟아지는 거대 학원도시 제7학구의 밤거리를 가로지르며, 로웬은 파트너 인공지능 사역마와 통신하며 첫 번째 접선 장소로 이동한다.",
+          "semanticEvents": [
+            {
+              "eventId": "EVT_001",
+              "action": "MOVE",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "로웬 실버베일"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "제7학구 은신처"
+                }
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "INTENTIONAL"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "제7학구의 뒷골목에서 마술 결사의 은밀한 움직임이 포착되었다."
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막: 네온과 마력의 교차점",
+              "upcomingChapters": [
+                "연락책과의 접선과 첫 번째 경고",
+                "학원도시 외곽 폐기구역의 마력 반응 조사",
+                "추격해오는 안티스킬과의 국지적 충돌"
+              ]
+            }
+          },
+          "candidateId": 1
+        },
+        {
+          "label": "공중 정비 구역의 빌딩 옥상에 멈춰 서서, 학원도시 전역을 내려다보며 마력 파동을 스캔한다.",
+          "narrativeSummary": "오토바이를 멈춘 로웬은 고공의 바람을 맞으며 도시를 스캔한다. 가문의 엄격한 율법을 벗어던진 이 반항적인 퇴마사는 자신의 직감과 힘을 믿고 도사린 위협의 기원을 직접 찾아 나서기로 한다.",
+          "semanticEvents": [
+            {
+              "eventId": "EVT_002",
+              "action": "SCAN",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "로웬 실버베일"
+                },
+                {
+                  "role": "INSTRUMENT",
+                  "entityName": "마력 스캐너"
+                }
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "INTENTIONAL"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "도시 상공에 감지된 이질적인 고대 마술의 결계 파문"
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막: 네온과 마력의 교차점",
+              "upcomingChapters": [
+                "옥상에서 포착된 이질적인 마력의 진원지 추적",
+                "콜로니 독립 해방 전선 내부의 불온한 밀고자 색출",
+                "자만심이 불러온 예기치 못한 함정과의 조우"
+              ]
+            }
+          },
+          "candidateId": 2
+        }
+      ],
+      "quarantinedCandidates": [],
+      "totalInputCount": 2,
+      "passedCount": 2,
+      "quarantinedCount": 0
+    },
+    "meaningTrees": [
+      {
+        "candidateId": 1,
+        "meaningTree": {
+          "atom": "INTENT",
+          "scope": "PROPOSAL",
+          "value": "Turn 1 Candidate State Transition",
+          "children": []
+        },
+        "proposal": {
+          "proposalId": "prop-req-mtz2h3uw-krqdv3",
+          "requestId": "req-mtz2h3uw-krqdv3",
+          "eventId": "evt-mtz2h3uw-15l4w0",
+          "expectedStateVersion": 1,
+          "source": "LLM",
+          "turn": 1,
+          "timestamp": "2026-09-13T00:19:31.400Z",
+          "intentSummary": "Turn 1 Candidate State Transition",
+          "actions": [],
+          "rawClaims": [
+            "{\"foreshadowSeeds\":[\"제7학구의 뒷골목에서 마술 결사의 은밀한 움직임이 포착되었다.\"],\"chapterChanges\":{\"currentChapter\":\"서막: 네온과 마력의 교차점\",\"upcomingChapters\":[\"연락책과의 접선과 첫 번째 경고\",\"학원도시 외곽 폐기구역의 마력 반응 조사\",\"추격해오는 안티스킬과의 국지적 충돌\"]}}"
+          ],
+          "originInputId": "input-mtz2gzcv-yaedrf",
+          "meaningTree": {
+            "atom": "INTENT",
+            "scope": "PROPOSAL",
+            "value": "Turn 1 Candidate State Transition",
+            "children": []
+          },
+          "rejectedReasons": [
+            "Unknown or unregistered action type: MOVE"
+          ]
+        }
+      }
+    ],
+    "candidatesToValidate": [
+      {
+        "candidateId": 1,
+        "meaningTree": {
+          "atom": "INTENT",
+          "scope": "PROPOSAL",
+          "value": "Turn 1 Candidate State Transition",
+          "children": []
+        },
+        "proposal": {
+          "proposalId": "prop-req-mtz2h3uw-krqdv3",
+          "requestId": "req-mtz2h3uw-krqdv3",
+          "eventId": "evt-mtz2h3uw-15l4w0",
+          "expectedStateVersion": 1,
+          "source": "LLM",
+          "turn": 1,
+          "timestamp": "2026-09-13T00:19:31.400Z",
+          "intentSummary": "Turn 1 Candidate State Transition",
+          "actions": [],
+          "rawClaims": [
+            "{\"foreshadowSeeds\":[\"제7학구의 뒷골목에서 마술 결사의 은밀한 움직임이 포착되었다.\"],\"chapterChanges\":{\"currentChapter\":\"서막: 네온과 마력의 교차점\",\"upcomingChapters\":[\"연락책과의 접선과 첫 번째 경고\",\"학원도시 외곽 폐기구역의 마력 반응 조사\",\"추격해오는 안티스킬과의 국지적 충돌\"]}}"
+          ],
+          "originInputId": "input-mtz2gzcv-yaedrf",
+          "meaningTree": {
+            "atom": "INTENT",
+            "scope": "PROPOSAL",
+            "value": "Turn 1 Candidate State Transition",
+            "children": []
+          },
+          "rejectedReasons": [
+            "Unknown or unregistered action type: MOVE"
+          ]
+        }
+      }
+    ]
+  },
+  "preAuth": {
+    "preAuthResults": [
+      {
+        "label": "학원도시의 밤공기를 가르며 자율 주행 오토바이를 타고 지정된 연락책의 은신처로 향한다.",
+        "narrativeSummary": "네온사인이 비처럼 쏟아지는 거대 학원도시 제7학구의 밤거리를 가로지르며, 로웬은 파트너 인공지능 사역마와 통신하며 첫 번째 접선 장소로 이동한다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_001",
+            "action": "MOVE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "제7학구 은신처"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "제7학구의 뒷골목에서 마술 결사의 은밀한 움직임이 포착되었다."
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막: 네온과 마력의 교차점",
+            "upcomingChapters": [
+              "연락책과의 접선과 첫 번째 경고",
+              "학원도시 외곽 폐기구역의 마력 반응 조사",
+              "추격해오는 안티스킬과의 국지적 충돌"
+            ]
+          }
+        },
+        "candidateId": 1,
+        "preAuthStatus": "REJECT",
+        "preAuthReasons": [
+          "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+        ]
+      }
+    ],
+    "allowedCandidatesCount": 0
+  },
+  "authorization": {
+    "authorizedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null,
+    "isFallbackNonMutation": true
+  },
+  "commit": {
+    "verdict": "NO_CANDIDATE",
+    "rejectedReasons": [],
+    "committedRecordIds": [],
+    "commitResultSummary": "NO_MUTATION"
+  },
+  "stateBefore": {
+    "turn": 1,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "거대 학원도시 이능 배틀 (에스퍼 vs 마술)",
+        "worldType": "popular_genre",
+        "settingDescription": "초능력 개발 프로그램을 이수하는 230만 학원도시의 학생들과, 과학의 이면에 숨어 암약하는 고대 마술 결사 간의 은밀한 충돌과 음모를 다룹니다.",
+        "toneStyle": "열혈 이능 배틀 / J애니메이션 활극",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "로웬 실버베일",
+        "gender": "여성",
+        "age": 23,
+        "appearance": "그림자 속에 숨어든 듯한 잿빛 망토와 예리한 비수를 숨긴 첩보원",
+        "goal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것",
+        "originBackground": "마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아",
+        "backgroundType": "preset",
+        "flaw": "자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함",
+        "flawType": "preset",
+        "oath": "어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다",
+        "oathType": "preset",
+        "anchor": "위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능",
+        "anchorType": "preset",
+        "faction": "콜로니 독립 해방 전선 [에어로스]",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아",
+          "flaw": "자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함",
+          "oath": "어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다",
+          "anchor": "위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능",
+          "faction": "콜로니 독립 해방 전선 [에어로스]"
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 13,
+          "intelligence": 12,
+          "wisdom": 13,
+          "charisma": 16,
+          "vitality": 13,
+          "intellect": 12,
+          "insight": 13,
+          "willpower": 16
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "은밀한 정보상",
+        "currentGoal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "stateAfter": {
+    "turn": 1,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "거대 학원도시 이능 배틀 (에스퍼 vs 마술)",
+        "worldType": "popular_genre",
+        "settingDescription": "초능력 개발 프로그램을 이수하는 230만 학원도시의 학생들과, 과학의 이면에 숨어 암약하는 고대 마술 결사 간의 은밀한 충돌과 음모를 다룹니다.",
+        "toneStyle": "열혈 이능 배틀 / J애니메이션 활극",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "로웬 실버베일",
+        "gender": "여성",
+        "age": 23,
+        "appearance": "그림자 속에 숨어든 듯한 잿빛 망토와 예리한 비수를 숨긴 첩보원",
+        "goal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것",
+        "originBackground": "마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아",
+        "backgroundType": "preset",
+        "flaw": "자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함",
+        "flawType": "preset",
+        "oath": "어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다",
+        "oathType": "preset",
+        "anchor": "위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능",
+        "anchorType": "preset",
+        "faction": "콜로니 독립 해방 전선 [에어로스]",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아",
+          "flaw": "자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함",
+          "oath": "어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다",
+          "anchor": "위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능",
+          "faction": "콜로니 독립 해방 전선 [에어로스]"
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 13,
+          "intelligence": 12,
+          "wisdom": 13,
+          "charisma": 16,
+          "vitality": 13,
+          "intellect": 12,
+          "insight": 13,
+          "willpower": 16
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "은밀한 정보상",
+        "currentGoal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "historyDelta": [],
+  "pipelineSteps": [
+    {
+      "step": "T0_PLAYER_INPUT",
+      "status": "OK",
+      "timestamp": 1789258763809,
+      "details": "Turn 1 player input: \"시작한다\" (4 chars)"
+    },
+    {
+      "step": "T1_REQUEST_START",
+      "status": "OK",
+      "timestamp": 1789258763810,
+      "details": "Initiating API POST /api/chat with model gemini-3.5-flash-lite"
+    },
+    {
+      "step": "T2_CONTEXT_ASSEMBLED",
+      "status": "OK",
+      "timestamp": 1789258763810,
+      "details": "Context prepared with 3 total messages in history"
+    },
+    {
+      "step": "T3_GEMINI_START",
+      "status": "OK",
+      "timestamp": 1789258763810,
+      "details": "Backend Gemini API request dispatched"
+    },
+    {
+      "step": "T4_GEMINI_RECEIVED",
+      "status": "OK",
+      "timestamp": 1789258770888,
+      "details": "Gemini response received (758 chars)"
+    },
+    {
+      "step": "T5_PARSED",
+      "status": "OK",
+      "timestamp": 1789258770888,
+      "details": "Metadata block parsed successfully"
+    },
+    {
+      "step": "T6_VALIDATED",
+      "status": "SKIPPED",
+      "timestamp": 1789258770888,
+      "details": "No candidate state mutation proposed"
+    },
+    {
+      "step": "T7_COMMITTED",
+      "status": "SKIPPED",
+      "timestamp": 1789258770888,
+      "details": "Canonical state unchanged"
+    }
+  ]
+}

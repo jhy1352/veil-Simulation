@@ -1,0 +1,46 @@
+{
+  "factualFinding": "인벤토리 변동 없음 (Turn 2 -> Turn 5 내내 [ 은화 20, 낡은 흑철검 1 ] 유지)",
+  "investigation": {
+    "turn2": {
+      "actionBlockPhase1": "ADD_NARRATIVE_SEED (아이템 획득 액션 없음)",
+      "actionBlockPhase2": "[] (빈 액션 배열)",
+      "preAuthResult": "REJECT",
+      "commitResult": "null (Fallback Non-Mutation)",
+      "resultingInventory": [
+        "은화 (20)",
+        "낡은 흑철검 (1)"
+      ]
+    },
+    "turn3": {
+      "actionBlockPhase1": "[] (아이템 획득 액션 없음)",
+      "actionBlockPhase2": "[] (빈 액션 배열)",
+      "preAuthResult": "REJECT",
+      "commitResult": "null (Fallback Non-Mutation)",
+      "resultingInventory": [
+        "은화 (20)",
+        "낡은 흑철검 (1)"
+      ]
+    },
+    "turn4": {
+      "actionBlockPhase1": "[] (아이템 획득 액션 없음)",
+      "actionBlockPhase2": "[] (빈 액션 배열)",
+      "preAuthResult": "REJECT",
+      "commitResult": "null (Fallback Non-Mutation)",
+      "resultingInventory": [
+        "은화 (20)",
+        "낡은 흑철검 (1)"
+      ]
+    },
+    "turn5": {
+      "actionBlockPhase1": "[RECORD_OFFSCREEN_EVENT, ADD_NARRATIVE_SEED] (아이템 획득 액션 없음)",
+      "actionBlockPhase2": "[] (빈 액션 배열)",
+      "preAuthResult": "REJECT",
+      "commitResult": "null (Fallback Non-Mutation)",
+      "resultingInventory": [
+        "은화 (20)",
+        "낡은 흑철검 (1)"
+      ]
+    }
+  },
+  "conclusion": "LLM이 ADD_ITEM 액션을 발행하지 않았고, Engine 또한 아이템 획득 Proposal을 수신하거나 Commit한 바 없음. 따라서 인벤토리가 변하지 않은 것은 엔진의 Canonical State 불변 법칙(제2조, 제12조)에 부합하는 정상적이고 결정론적인 결과임."
+}

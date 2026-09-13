@@ -1,0 +1,93 @@
+{
+  "auditSessionId": "PH29-20260822-095500",
+  "targetCommit": "30a50cff91f41ee7eb8b98703c05b522d2c753d9",
+  "timestamp": "2026-08-21T16:55:00Z",
+  "verdictCounts": {
+    "VERIFIED_ACCURATE": 6,
+    "PARTIALLY_ACCURATE": 3,
+    "INACCURATE_OR_MISQUOTED": 1,
+    "UNSUPPORTED_OR_FABRICATED": 0
+  },
+  "findingsMatrix": [
+    {
+      "id": "F-001",
+      "topic": "SovereignEngine Runtime Disconnect",
+      "previousClaim": "src/engine/state.ts SovereignEngine is not imported or executed in runtime",
+      "adjudication": "VERIFIED_ACCURATE",
+      "primaryEvidence": "grep -rn 'SovereignEngine' src/ server.ts yielded 0 results outside src/engine/",
+      "notes": "Dead code path confirmed"
+    },
+    {
+      "id": "F-002",
+      "topic": "Hardcoded Genre String Contamination",
+      "previousClaim": "server.ts injects hardcoded Murim/Cyberpunk strings (정통 강호, 산성비와 녹슨 크롬)",
+      "adjudication": "VERIFIED_ACCURATE",
+      "primaryEvidence": "server.ts lines 361, 381-383, 390-391 and App.tsx line 137 contain exact literals",
+      "notes": "Violates genre agnosticism"
+    },
+    {
+      "id": "F-003",
+      "topic": "Dead NPC Immutability & Status Field Quoting",
+      "previousClaim": "engineValidator.ts checks existing.currentStatus === 'DEAD' and blocks resurrection",
+      "adjudication": "PARTIALLY_ACCURATE",
+      "primaryEvidence": "src/utils/engineValidator.ts line 165 checks isDeadHistorically and !npcCand.isDead. 'status === DEAD' is in src/engine/validator.ts line 226",
+      "notes": "Code logic exists, but previous report misquoted file location and property names"
+    },
+    {
+      "id": "F-004",
+      "topic": "Stat Clamping & DC Validation",
+      "previousClaim": "Math.max/min clamps player stats and DC to 1-20 in engineValidator.ts",
+      "adjudication": "PARTIALLY_ACCURATE",
+      "primaryEvidence": "src/utils/engineValidator.ts line 231 clamps recommendedDC to 1-20. Player attributes (stats) are NOT clamped via Math.max in engineValidator",
+      "notes": "DC clamping confirmed; Stat clamping claim was inaccurate for engineValidator.ts"
+    },
+    {
+      "id": "F-005",
+      "topic": "Partial Candidate Sanitization vs Atomic Rollback",
+      "previousClaim": "validateEngineCandidate sanitizes parts in-place rather than aborting atomically",
+      "adjudication": "VERIFIED_ACCURATE",
+      "primaryEvidence": "src/utils/engineValidator.ts lines 145-250 mutates sanitizedCandidate and returns isValid=false while App.tsx commits sanitizedCandidate",
+      "notes": "Partial state commit confirmed"
+    },
+    {
+      "id": "F-006",
+      "topic": "Write Path Authority Proliferation",
+      "previousClaim": "Multiple direct state mutations in App.tsx (handleStartGame, handleLoadSession, handleApplyPreset)",
+      "adjudication": "VERIFIED_ACCURATE",
+      "primaryEvidence": "src/App.tsx lines 145-180 directly call setCharacter and setWorldInfo without validateEngineCandidate",
+      "notes": "Bypasses engine validation during session start/load"
+    },
+    {
+      "id": "F-007",
+      "topic": "CSPRNG vs Math.random Compliance",
+      "previousClaim": "All gameplay rolls use window.crypto.getRandomValues; Math.random is strictly avoided in dice",
+      "adjudication": "VERIFIED_ACCURATE",
+      "primaryEvidence": "src/utils/dice.ts lines 14, 40, 121 utilize crypto.getRandomValues. Math.random occurs only in mock/fallback handlers",
+      "notes": "Constitution Article 36 adhered to in dice"
+    },
+    {
+      "id": "F-008",
+      "topic": "CloudSyncModal Wiring & Architecture",
+      "previousClaim": "CloudSyncModal is imported in App.tsx and invokes onSync",
+      "adjudication": "INACCURATE_OR_MISQUOTED",
+      "primaryEvidence": "CloudSyncModal is imported in GameInterface.tsx line 26 with prop onLoadSuccess, routed to App.tsx handleLoadSession",
+      "notes": "Previous audit incorrectly stated App.tsx directly imported CloudSyncModal with onSync"
+    },
+    {
+      "id": "F-009",
+      "topic": "Offscreen Progression & Seed Foreground Cap",
+      "previousClaim": "Max 3 foreground seeds enforced by slicing (-2) + newSeeds",
+      "adjudication": "VERIFIED_ACCURATE",
+      "primaryEvidence": "src/utils/engineValidator.ts line 417: nextWorldInfo.seeds = [...dormantExisting, ...activeExisting, ...newSeeds]; lines 191-196",
+      "notes": "Foreground seed boundary verified"
+    },
+    {
+      "id": "F-010",
+      "topic": "Information Boundary & [미인지 상태] Tag Enforcement",
+      "previousClaim": "NPC innerThought defaults to [미인지 상태] if not metInStory",
+      "adjudication": "VERIFIED_ACCURATE",
+      "primaryEvidence": "src/utils/engineValidator.ts lines 457, 463 enforces innerThought: candNpc.metInStory ? innerThought : '[미인지 상태]'",
+      "notes": "Epistemic firewall verified"
+    }
+  ]
+}

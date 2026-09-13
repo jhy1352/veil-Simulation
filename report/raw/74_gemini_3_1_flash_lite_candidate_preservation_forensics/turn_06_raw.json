@@ -1,0 +1,148 @@
+{
+  "turn": 6,
+  "actionType": "복합 행동(아이템 사용+대화)",
+  "playerPrompt": "노인에게 정중히 인사를 건넨 뒤, 방금 배낭에 챙긴 은화 주머니에서 은화 1닢을 꺼내 카운터에 내밀며 밤에 열리는 비밀 지하 주점 위치를 물어본다.",
+  "apiResponse": {
+    "success": true,
+    "text": "아르카디아 영지의 변두리, 눅눅한 흙내음과 녹슨 철의 비린내가 뒤섞인 국경 도시의 밤은 길고도 무겁다. 하늘을 가린 낮은 구름 사이로 창백한 달빛이 내려앉지만, 좁고 뒤틀린 골목길은 여전히 짙은 그림자 속에 잠겨 있다. 에단은 길가에 덩그러니 놓인 낡은 목조 건물—방랑 모험가들이 종종 소문을 쫓아 모여드는 ‘녹슨 저울’ 주점—앞에 서 있다. \n\n건물 틈새로 흘러나오는 것은 싼값의 저질 밀맥주 냄새와, 거친 사내들의 탁한 웃음소리, 그리고 무엇인가를 갈구하는 듯한 신경질적인 악기 소리다. 에단이 손끝으로 쥐고 있는 오래된 놋쇠 펜던트는 차갑다. 이곳은 아르카디아의 경계이자, 동시에 누군가에겐 일확천금의 기회가, 누군가에겐 영원한 침묵이 시작되는 지점이다. 에단은 주점의 무거운 나무 문을 밀고 들어가기 전, 잠시 멈춰 서서 주위를 둘러본다. 골목 끝에서 불어오는 바람은 무언가 불길한 징조를 품은 듯 날카로운 소리를 내며 지나간다. 지금 이 순간, 에단의 눈앞에는 어떤 선택지도, 확정된 행운도 존재하지 않는다. 오직 차가운 밤공기와 닫힌 문, 그리고 그 너머에서 들려오는 희미한 소음뿐이다.",
+    "rawResponse": "아르카디아 영지의 변두리, 눅눅한 흙내음과 녹슨 철의 비린내가 뒤섞인 국경 도시의 밤은 길고도 무겁다. 하늘을 가린 낮은 구름 사이로 창백한 달빛이 내려앉지만, 좁고 뒤틀린 골목길은 여전히 짙은 그림자 속에 잠겨 있다. 에단은 길가에 덩그러니 놓인 낡은 목조 건물—방랑 모험가들이 종종 소문을 쫓아 모여드는 ‘녹슨 저울’ 주점—앞에 서 있다. \n\n건물 틈새로 흘러나오는 것은 싼값의 저질 밀맥주 냄새와, 거친 사내들의 탁한 웃음소리, 그리고 무엇인가를 갈구하는 듯한 신경질적인 악기 소리다. 에단이 손끝으로 쥐고 있는 오래된 놋쇠 펜던트는 차갑다. 이곳은 아르카디아의 경계이자, 동시에 누군가에겐 일확천금의 기회가, 누군가에겐 영원한 침묵이 시작되는 지점이다. 에단은 주점의 무거운 나무 문을 밀고 들어가기 전, 잠시 멈춰 서서 주위를 둘러본다. 골목 끝에서 불어오는 바람은 무언가 불길한 징조를 품은 듯 날카로운 소리를 내며 지나간다. 지금 이 순간, 에단의 눈앞에는 어떤 선택지도, 확정된 행운도 존재하지 않는다. 오직 차가운 밤공기와 닫힌 문, 그리고 그 너머에서 들려오는 희미한 소음뿐이다.",
+    "isFallbackNonMutation": true,
+    "selectedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null,
+    "preAuthSummary": {
+      "total": 2,
+      "allowed": 0,
+      "rejected": 2
+    },
+    "contextSnapshot": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "actualModelVersion": "gemini-3.1-flash-lite",
+    "requestedModel": "gemini-3.1-flash-lite",
+    "gitCommit": "3a493aa85717dfe47671583c9d27929d5cb7e0d5",
+    "forensicCapture": {
+      "t0_playerInput": "",
+      "chatContextForensic": {
+        "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+        "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망",
+        "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+        "seedsContext": "",
+        "offscreenContext": ""
+      },
+      "geminiContentsForensic": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "text": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 6 PLAYER PROMPT]\n서사를 시작하고 첫 장면을 묘사하라."
+            }
+          ]
+        }
+      ],
+      "phase1": {
+        "model": "gemini-3.1-flash-lite",
+        "actualModelVersion": "gemini-3.1-flash-lite",
+        "responseId": "k7amas6GFZHrrfcP6JfV6QQ",
+        "rawResponseText": "[ZERO_MUTATION_NARRATIVE]\n아르카디아 영지의 변두리, 눅눅한 흙내음과 녹슨 철의 비린내가 뒤섞인 국경 도시의 밤은 길고도 무겁다. 하늘을 가린 낮은 구름 사이로 창백한 달빛이 내려앉지만, 좁고 뒤틀린 골목길은 여전히 짙은 그림자 속에 잠겨 있다. 에단은 길가에 덩그러니 놓인 낡은 목조 건물—방랑 모험가들이 종종 소문을 쫓아 모여드는 ‘녹슨 저울’ 주점—앞에 서 있다. \n\n건물 틈새로 흘러나오는 것은 싼값의 저질 밀맥주 냄새와, 거친 사내들의 탁한 웃음소리, 그리고 무엇인가를 갈구하는 듯한 신경질적인 악기 소리다. 에단이 손끝으로 쥐고 있는 오래된 놋쇠 펜던트는 차갑다. 이곳은 아르카디아의 경계이자, 동시에 누군가에겐 일확천금의 기회가, 누군가에겐 영원한 침묵이 시작되는 지점이다. 에단은 주점의 무거운 나무 문을 밀고 들어가기 전, 잠시 멈춰 서서 주위를 둘러본다. 골목 끝에서 불어오는 바람은 무언가 불길한 징조를 품은 듯 날카로운 소리를 내며 지나간다. 지금 이 순간, 에단의 눈앞에는 어떤 선택지도, 확정된 행운도 존재하지 않는다. 오직 차가운 밤공기와 닫힌 문, 그리고 그 너머에서 들려오는 희미한 소음뿐이다.\n[ZERO_MUTATION_END]\n\n[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"주점 ‘녹슨 저울’ 내부로 진입한다\",\n    \"narrativeSummary\": \"에단은 주점의 문을 열고 들어가 내부의 분위기를 살피고, 현장에 모인 이들의 대화를 통해 유용한 정보나 의뢰를 탐색하려 한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"ENTER_TAVERN_01\",\n        \"action\": \"ENTER\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"주점 녹슨 저울\" }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ]\n  },\n  {\n    \"label\": \"주점 주변을 먼저 배회하며 정찰한다\",\n    \"narrativeSummary\": \"에단은 성급하게 주점으로 들어가는 대신, 건물을 에워싼 어두운 골목을 더 세밀하게 살펴 누군가 자신을 미행하거나 주점 주변을 감시하는 자가 있는지 확인한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"SCOUT_SURROUNDINGS_01\",\n        \"action\": \"SCOUT\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"주점 외부 골목\" }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ]\n  }\n]\n[CANDIDATES_END]\n\n```json\n{\n  \"actions\": [\n    {\n      \"type\": \"ADVANCE_CHAPTER\",\n      \"payload\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 지하 주점의 계약\",\n          \"2장: 비밀 통로의 열쇠\"\n        ]\n      }\n    }\n  ]\n}\n```",
+        "rawCandidatesBlock": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"주점 ‘녹슨 저울’ 내부로 진입한다\",\n    \"narrativeSummary\": \"에단은 주점의 문을 열고 들어가 내부의 분위기를 살피고, 현장에 모인 이들의 대화를 통해 유용한 정보나 의뢰를 탐색하려 한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"ENTER_TAVERN_01\",\n        \"action\": \"ENTER\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"주점 녹슨 저울\" }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ]\n  },\n  {\n    \"label\": \"주점 주변을 먼저 배회하며 정찰한다\",\n    \"narrativeSummary\": \"에단은 성급하게 주점으로 들어가는 대신, 건물을 에워싼 어두운 골목을 더 세밀하게 살펴 누군가 자신을 미행하거나 주점 주변을 감시하는 자가 있는지 확인한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"SCOUT_SURROUNDINGS_01\",\n        \"action\": \"SCOUT\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"주점 외부 골목\" }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ]\n  }\n]\n[CANDIDATES_END]",
+        "recoveryGateResult": {
+          "passedCandidates": [
+            {
+              "label": "주점 ‘녹슨 저울’ 내부로 진입한다",
+              "narrativeSummary": "에단은 주점의 문을 열고 들어가 내부의 분위기를 살피고, 현장에 모인 이들의 대화를 통해 유용한 정보나 의뢰를 탐색하려 한다.",
+              "semanticEvents": [
+                {
+                  "eventId": "ENTER_TAVERN_01",
+                  "action": "ENTER",
+                  "roles": [
+                    {
+                      "role": "SUBJECT",
+                      "entityName": "에단"
+                    },
+                    {
+                      "role": "LOCATION",
+                      "entityName": "주점 녹슨 저울"
+                    }
+                  ],
+                  "scope": "INTENT",
+                  "polarity": "ASSERTED",
+                  "epistemicStatus": "ASSERTED",
+                  "modality": "INTENTIONAL"
+                }
+              ],
+              "candidateId": 1,
+              "rawMetadata": {}
+            },
+            {
+              "label": "주점 주변을 먼저 배회하며 정찰한다",
+              "narrativeSummary": "에단은 성급하게 주점으로 들어가는 대신, 건물을 에워싼 어두운 골목을 더 세밀하게 살펴 누군가 자신을 미행하거나 주점 주변을 감시하는 자가 있는지 확인한다.",
+              "semanticEvents": [
+                {
+                  "eventId": "SCOUT_SURROUNDINGS_01",
+                  "action": "SCOUT",
+                  "roles": [
+                    {
+                      "role": "SUBJECT",
+                      "entityName": "에단"
+                    },
+                    {
+                      "role": "LOCATION",
+                      "entityName": "주점 외부 골목"
+                    }
+                  ],
+                  "scope": "INTENT",
+                  "polarity": "ASSERTED",
+                  "epistemicStatus": "ASSERTED",
+                  "modality": "INTENTIONAL"
+                }
+              ],
+              "candidateId": 2,
+              "rawMetadata": {}
+            }
+          ],
+          "quarantinedCandidates": [],
+          "totalInputCount": 2,
+          "passedCount": 2,
+          "quarantinedCount": 0
+        },
+        "meaningTrees": []
+      },
+      "preAuth": {
+        "preAuthResults": [],
+        "allowedCandidatesCount": 0
+      },
+      "phase2": null,
+      "authorizedResult": {
+        "authorizedCandidateId": null,
+        "authorizedCandidate": null,
+        "authorizedCandidatePacket": null,
+        "authorizedProposal": null
+      },
+      "serverTimings": {
+        "t1_requestStart": 1789310610894,
+        "t2_contextAssemblyComplete": 1789310610894,
+        "t3_geminiRequestStart": 1789310610894,
+        "t4_geminiResponseReceived": 1789310615058,
+        "contextAssemblyMs": 0,
+        "geminiGenerationMs": 4164,
+        "inputCharCount": 984,
+        "outputCharCount": 558
+      }
+    },
+    "serverTimings": {
+      "t1_requestStart": 1789310610894,
+      "t2_contextAssemblyComplete": 1789310610894,
+      "t3_geminiRequestStart": 1789310610894,
+      "t4_geminiResponseReceived": 1789310615058,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 4164,
+      "inputCharCount": 984,
+      "outputCharCount": 558,
+      "tokenCount": {
+        "promptTokens": 8035,
+        "candidatesTokens": 923,
+        "totalTokens": 8958
+      }
+    }
+  }
+}

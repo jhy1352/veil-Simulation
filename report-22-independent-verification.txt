@@ -1,0 +1,747 @@
+=== COMMIT ===
+9c8620b chore: save independent verification evidence for report 22
+=== STATUS ===
+ M report-22-independent-verification.txt
+=== DIFF CHECK ===
+=== BUILD ===
+
+> react-example@0.0.0 build
+> vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs
+
+vite v6.4.3 building for production...
+transforming...
+✓ 2129 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.81 kB │ gzip:   0.40 kB
+dist/assets/index-Bry5LQFo.css   55.05 kB │ gzip:   9.19 kB
+dist/assets/index-KBpYBAV3.js   963.94 kB │ gzip: 265.27 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 6.25s
+
+  dist/server.cjs      269.6kb
+  dist/server.cjs.map  582.3kb
+
+⚡ Done in 55ms
+=== ENGINE ===
+
+> react-example@0.0.0 test:engine
+> tsx src/engine/testRunner.ts
+
+====================================================
+TRPG 3.1 Sovereign Engine Test Suite Execution
+====================================================
+====================================================
+VEIL Engine Language Phase 1 Test Suite Running...
+====================================================
+✅ [PASS] LANG-TEST: 1.1 Exact 11 Core Atoms present in CORE_ATOMS
+✅ [PASS] LANG-TEST: 1.2 All 11 specific core atoms present
+✅ [PASS] LANG-TEST: 1.3 Non-core atom is rejected by Grammar
+✅ [PASS] LANG-TEST: 1.4 Auxiliary tags are cleanly accepted and separated
+✅ [PASS] LANG-TEST: 2.1 Valid scope CLAIM accepted
+✅ [PASS] LANG-TEST: 2.2 Invalid scope rejected
+✅ [PASS] LANG-TEST: 3.1 Illegal composition (VALUE -> ACTION) rejected
+✅ [PASS] LANG-TEST: 4.1 CLAIM -> CLAIM / STATE / ACTION accepted
+✅ [PASS] LANG-TEST: 5.1 CAUSE -> ACTION / STATE accepted
+✅ [PASS] LANG-TEST: 6.1 INTENT -> ACTION accepted
+✅ [PASS] LANG-TEST: 7.1 CONSTRAINT -> STATE / ACTION accepted
+✅ [PASS] LANG-TEST: 8.1 Deep Nesting (15 levels) validated successfully
+✅ [PASS] LANG-TEST: 9.1 Conflicting Scope (CANONICAL direct child HYPOTHETICAL) rejected
+✅ [PASS] LANG-TEST: 10.1 Order-invariant canonical serialization produces identical strings
+✅ [PASS] LANG-TEST: 10.2 areMeaningsSemanticallyEqual returns true for permuted declarations
+✅ [PASS] LANG-TEST: 11.1 Serialize -> Deserialize -> Canonicalize round trip succeeds
+✅ [PASS] LANG-TEST: 12.1 Proposal Adapter extracts actions correctly
+✅ [PASS] LANG-TEST: 12.2 Adapted proposal commits cleanly through SovereignEngine and MutationBoundary
+✅ [PASS] LANG-TEST: 12.3 Canonical state inventory updated through standard boundary
+✅ [PASS] LANG-TEST: 13.1 Causality Firewall strictly rejects unbacked Meaning Tree proposal
+✅ [PASS] LANG-TEST: 13.2 Zero mutation verified on rejected Meaning Tree proposal
+✅ [PASS] LANG-TEST: 14.1 Normal Engine Language passes with zero mutation (recovered=false)
+✅ [PASS] LANG-TEST: 14.2 Markdown code block wrapping recovered cleanly
+✅ [PASS] LANG-TEST: 14.3 Trailing commas in object and array recovered cleanly
+✅ [PASS] LANG-TEST: 14.4 Unclosed terminal brackets at EOF deterministically completed
+✅ [PASS] LANG-TEST: 14.5 Mismatched/ambiguous bracket syntax strictly FAIL-CLOSED
+✅ [PASS] LANG-TEST: 14.6 Missing semantic value token strictly rejects without guessing (FAIL-CLOSED)
+✅ [PASS] LANG-TEST: 14.7 Missing nested field value strictly rejects without guessing (FAIL-CLOSED)
+✅ [PASS] LANG-TEST: 14.8 Recovered syntax violating Grammar (invalid Atom) is rejected FAIL-CLOSED
+✅ [PASS] LANG-TEST: 14.9 Recovered syntax violating Grammar (illegal composition) is rejected FAIL-CLOSED
+✅ [PASS] LANG-TEST: 15.1.1 Live LLM raw block successfully recovered by Syntax Recovery Layer
+✅ [PASS] LANG-TEST: 15.1.2 Exactly 2 actions extracted via Engine Language Grammar & Adapter
+✅ [PASS] LANG-TEST: 15.1.3 SovereignEngine Commit Gate validates and commits recovered proposal
+✅ [PASS] LANG-TEST: 15.1.4 Canonical State reflects committed rumor from recovered LLM raw output
+✅ [PASS] LANG-TEST: 15.2.1 Direct MeaningTree raw output recovered and grammar-checked
+✅ [PASS] LANG-TEST: 15.2.2 Direct MeaningTree action extracted via Adapter
+✅ [PASS] LANG-TEST: 15.2.3 Direct Meaning Tree proposal successfully committed to SovereignEngine
+✅ [PASS] LANG-TEST: 15.3.1 Truncated value in LLM raw output strictly FAIL-CLOSED
+✅ [PASS] LANG-TEST: 15.3.2 Zero mutation on Canonical State verified when recovery fails-closed
+✅ [PASS] LANG-TEST: 15.4.1 Candidate action converts to valid Engine Language Meaning Tree
+✅ [PASS] LANG-TEST: 15.4.2 Candidate proposal adapted through Meaning Tree commits to SovereignEngine
+✅ [PASS] LANG-TEST: 15.4.3 Canonical State contains new NPC from candidate meaning tree adapter
+✅ [PASS] LANG-TEST: 15.5.1 Spoofed claims parsed but actions isolated
+✅ [PASS] LANG-TEST: 16.1 ORDERED [A, B] ≠ ORDERED [B, A] (Order strictly preserved and differentiated)
+✅ [PASS] LANG-TEST: 16.2 UNORDERED [A, B] === UNORDERED [B, A] (Order-independent canonical equality verified)
+✅ [PASS] LANG-TEST: 16.3.1 Nested UNORDERED inside ORDERED preserves inner equivalence
+✅ [PASS] LANG-TEST: 16.3.2 Outer ORDERED differentiation respected across nested subtrees
+✅ [PASS] LANG-TEST: 16.4.1 ORDERED composition preserved across serialize/deserialize round-trip
+✅ [PASS] LANG-TEST: 16.4.2 UNORDERED composition preserved across serialize/deserialize round-trip
+✅ [PASS] LANG-TEST: 16.5.1 Diversity Gate reduces 5 candidates (with 2 duplicates) to exactly 3 unique candidates
+✅ [PASS] LANG-TEST: 16.5.2 First occurrence metadata preserved for Candidate 1
+✅ [PASS] LANG-TEST: 16.5.3 First occurrence metadata preserved for Candidate 2
+✅ [PASS] LANG-TEST: 16.5.4 Unique Candidate 5 preserved
+✅ [PASS] LANG-TEST: 16.6 All identical 5 candidates filtered to exactly 1 candidate (never 0)
+✅ [PASS] LANG-TEST: 16.7 Filtered Meaning Tree seamlessly adapts into StateTransitionProposal with meaningTree attached
+====================================================
+Summary: 55/55 Language & Live Wiring Tests Passed.
+====================================================
+✅ [PASS] TEST-01: Normal Commit: Valid proposal increments stateVersion and commits state atomically
+✅ [PASS] TEST-02: Validation Failure: Invalid stat values or missing entity rejected with reasons
+✅ [PASS] TEST-03: Idempotency: Re-submitting identical requestId is blocked without mutating state
+✅ [PASS] TEST-04: Knowledge Graph: build and traverse knowledge graph safely
+❌ [FAIL] TEST-05: Proposal Builder: CandidatePacket converts accurately to StateTransitionProposal
+   Error: Expected 3 actions generated, got 1
+❌ [FAIL] TEST-06: Narrative Defense: Seed max 3 cap, deduplication, and resolution semantics
+   Error: Expected exactly 1 ADD_NARRATIVE_SEED action due to cap/dedup, got 0
+✅ [PASS] TEST-07: Dice Safety: recommendedDC does not emit RECORD_DICE_RESULT; player DC clamped to 1-20
+✅ [PASS] TEST-08: Stat Safety: Delta clamped to -10~+10, final stat clamped to 1~30
+✅ [PASS] TEST-09: Reject & Safe No-Commit: Invalid proposal leaves snapshot, version, and history completely unmutated
+❌ [FAIL] TEST-10: Hydration Compatibility: Preserves valid stateVersion, avoids history.length fallback, matches projections
+   Error: [HYDRATION_PROVENANCE_VIOLATION] Conflicting stateVersionAfterCommit for proposal 'prop-1' in record 'rec-2'. Expected '2', found '3'.
+✅ [PASS] TEST-11: Adversarial Overwrite: Reject resurrection of historically dead NPC
+✅ [PASS] TEST-12: Snapshot Mutability Defense: External mutation of snapshot/history does not affect Canonical State
+✅ [PASS] TEST-13: Hydration Schema Immunity: Reject malformed snapshots without guessing repair values
+✅ [PASS] TEST-14: Atomic Rollback: Intra-proposal failure leaves Canonical State, History, and Idempotency untouched
+✅ [PASS] TEST-15: Adversarial Character Overwrite: Permanent physicalDefect is preserved and cannot be erased
+✅ [PASS] TEST-16: Source -> Action ACL: Reject unauthorized actions for given proposal source
+✅ [PASS] TEST-A: Prompt Contamination Audit: Engine prompt contains zero hardcoded chapter titles or preset seeds
+✅ [PASS] TEST-B: Empty Roadmap: Engine formats empty upcomingChapters as request for pure dynamic creation
+✅ [PASS] TEST-C: 1-Chapter Roadmap: Engine preserves single chapter and requests dynamic completion of 2 slots
+✅ [PASS] TEST-D: 2-Chapter Roadmap: Engine preserves 2 chapters and requests dynamic completion of 1 slot
+✅ [PASS] TEST-E: Dynamic Roadmap Commit: LLM proposed dynamic 3-chapter roadmap is safely validated and committed
+✅ [PASS] TEST-F: Player Divergence: Player actions divergent from roadmap execute freely without rejection
+✅ [PASS] TEST-G: Genre Isolation: Non-Wuxia genres (Cyberpunk, Sci-Fi) contain zero Wuxia terms in engine fallbacks
+✅ [PASS] TEST-H: Canon Isolation: Engine snapshot strictly contains only canonically committed entities
+❌ [FAIL] TEST-I: New Creation: LLM-proposed new NPCs, narrative seeds, and offscreen events commit seamlessly
+   Error: NPC not added
+✅ [PASS] TEST-J: Error Transparency: Parser handles malformed or failed LLM responses without inventing fake narrative
+✅ [PASS] TEST-K: Roadmap Replanning: Dynamic replanning replaces previous roadmap safely and atomically
+✅ [PASS] TEST-CAUSALITY-A: Causality Defense: Retroactive/unbacked ADD by LLM is rejected without mutating Canonical State
+✅ [PASS] TEST-CAUSALITY-B: Causality Validation: Valid RESOURCE_EXCHANGE deducts cost and adds acquired item atomically
+✅ [PASS] TEST-CAUSALITY-C: Causality Atomicity: Insufficient cost rejects entire proposal without partial state change
+✅ [PASS] TEST-CAUSALITY-D: Causality Defense: RESOURCE_EXCHANGE missing matching atomic REMOVE is rejected
+✅ [PASS] TEST-CAUSALITY-E: Causality Defense: Non-whitelisted cause types (e.g. self-declared MAGIC_SPAWN) rejected
+✅ [PASS] TEST-H4-A: Adversarial Defense: Double-spending 1 REMOVE for multiple ADDs is strictly rejected with zero mutation
+✅ [PASS] TEST-H4-B: Adversarial Defense: Cost name/id mismatch or non-existent cost resource is rejected
+✅ [PASS] TEST-H4-C: Permissiveness: Split REMOVE actions aggregating to total cost succeed atomically
+✅ [PASS] TEST-H4-D: Permissiveness: Multiple independent valid transactions in one proposal succeed atomically
+✅ [PASS] TEST-H4-E: Permissiveness: Inverted ADD/REMOVE order with sufficient total removal succeeds atomically
+✅ [PASS] TEST-H4-F: Adversarial Defense: Overdrafting REMOVE beyond owned inventory is rejected by virtual draft execution
+✅ [PASS] TEST-H4-G: Ownership Boundary: DISCOVERY_PICKUP with valid trusted event grounding commits cleanly to Canonical Inventory
+✅ [PASS] TEST-H4-H: Ownership Boundary: GIFT_REWARD with valid trusted event grounding commits cleanly to Canonical Inventory
+✅ [PASS] TEST-H4-I: Ownership Boundary: LOOT with valid trusted event grounding commits cleanly to Canonical Inventory
+✅ [PASS] TEST-H4-J: Ownership Boundary: GENESIS_STARTER at genesis turn commits cleanly to Canonical Inventory
+✅ [PASS] TEST-H4-K: Adversarial Defense: Unbacked inventory ADD without acquisition cause is strictly rejected
+✅ [PASS] TEST-H4-L: Adversarial Defense: Unsupported acquisition cause is rejected by Validator Firewall
+✅ [PASS] TEST-39: SET_QUANTITY Causality Bypass: LLM/PLAYER cannot use SET_QUANTITY to bypass causality
+✅ [PASS] TEST-40: LLM Dice Result Authority: LLM cannot inject rollValue in RECORD_DICE_RESULT
+✅ [PASS] TEST-41: Permanent Physical Defect Immutability: Established defect cannot be overwritten
+✅ [PASS] TEST-42: Dead NPC State Modification Defense: DEAD NPC cannot be modified via UPDATE_NPC
+✅ [PASS] TEST-43: Yellow Security Boundaries: Narrative seed limit (max 3) and integer stat bounds
+✅ [PASS] TEST-44: RED-01: LLM RECORD_PHYSICAL_DEFECT rejected via ACL; PLAYER/SYSTEM valid defect commits and is immutable
+✅ [PASS] TEST-45: RED-02: LLM RECORD_DICE_RESULT rejected; candidate.recommendedDC does not pollute dcHistory; PLAYER roll commits
+✅ [PASS] TEST-46: RED-03: DEAD NPC cannot be re-mutated via SET_NPC_STATUS; Impression remains unpolluted; Normal NPC status works
+✅ [PASS] TEST-47: YELLOW-01: Unsupported inventory operations (INJECT, OVERWRITE) rejected with INVALID_ACTION; standard ops work
+✅ [PASS] TEST-48: YELLOW-02: Stats outside 1-30 (0, 31, 99, 1.5) rejected; boundary stats (1, 30) commit successfully
+✅ [PASS] TEST-CAUSALITY-A: Adversarial Test A: DISCOVERY_PICKUP with no event grounding is rejected without inventory mutation
+✅ [PASS] TEST-CAUSALITY-B: Adversarial Test B: DISCOVERY_PICKUP with non-existent verifiedEventId is rejected
+✅ [PASS] TEST-CAUSALITY-C: Adversarial Test C: DISCOVERY_PICKUP grounded by actual world event passes with Inventory +1
+✅ [PASS] TEST-CAUSALITY-D: Adversarial Test D: Valid event linked to causally unrelated item is rejected
+✅ [PASS] TEST-CAUSALITY-E: Adversarial Test E: Normal RESOURCE_EXCHANGE with atomic cost deduction succeeds cleanly
+✅ [PASS] TEST-CAUSALITY-F: Adversarial Test F: GIFT_REWARD and LOOT without verified event grounding are rejected
+✅ [PASS] TEST-CAUSALITY-G: Adversarial Test G: Resolved or inactive narrative seeds cannot be used for acquisition
+✅ [PASS] TEST-CAUSALITY-H: Adversarial Test H: Untrusted runtime cannot forge SYSTEM source or retrospective GENESIS_STARTER
+✅ [PASS] TEST-CAUSALITY-I: Adversarial Test I: Grounded discovery ADD followed by transfer/consume REMOVE completes full lifecycle
+✅ [PASS] TEST-CAUSALITY-J: Adversarial Test J: Reusing an already consumed event to spawn duplicate items is rejected
+✅ [PASS] TEST-OVERWRITE-INV-A: Adversarial Defense: Player runtime OVERWRITE_CHARACTER attempting to inject new item is rejected
+✅ [PASS] TEST-OVERWRITE-INV-B: Adversarial Defense: LLM attempting OVERWRITE_CHARACTER is rejected via ACL
+✅ [PASS] TEST-OVERWRITE-INV-C: Genesis & Save Hydration: OVERWRITE_CHARACTER initializes canonical inventory cleanly
+✅ [PASS] TEST-OVERWRITE-INV-D: Player Profile Edit: OVERWRITE_CHARACTER with preserved inventory succeeds cleanly
+✅ [PASS] TEST-OVERWRITE-INV-E: Adversarial Defense: Undefined quantity attack via OVERWRITE_CHARACTER is rejected
+✅ [PASS] TEST-OVERWRITE-INV-F: Adversarial Defense: ID-only cross forgery via OVERWRITE_CHARACTER is rejected
+✅ [PASS] TEST-OVERWRITE-INV-G: Adversarial Defense: Name-only cross forgery via OVERWRITE_CHARACTER is rejected
+✅ [PASS] TEST-OVERWRITE-INV-H: Adversarial Defense: Order permutation via OVERWRITE_CHARACTER is rejected
+✅ [PASS] TEST-SEC-4A-DIRECT-FORGERY: Security Trust Boundary 4-A: Direct submitProposal with privileged sources is rejected
+✅ [PASS] TEST-SEC-4B-INTERNAL-API-ABUSE: Security Trust Boundary 4-B: External caller cannot invoke unexposed or elevated internal APIs
+✅ [PASS] TEST-SEC-4C-CAPABILITY-FORGERY: Security Trust Boundary 4-C: Capability forgery via symbol creation, prototype injection, or object cloning fails
+✅ [PASS] TEST-SEC-4D-GENUINE-INTERNAL-SYSTEM: Security Trust Boundary 4-D: Genuine internal engine execution path commits SYSTEM proposals safely
+✅ [PASS] TEST-94: Article 9/16 Inventory Identity: exact match on ID and SET_QUANTITY cannot invent non-existent items
+✅ [PASS] TEST-95: Temporal Integrity: Proposal turn cannot regress behind current sovereign turn
+✅ [PASS] TEST-96: Temporal Integrity: Proposal timestamp cannot regress earlier than last committed timestamp
+✅ [PASS] TEST-A2-1: Provenance Boundary: UPDATE_NPC without pre-existing canonical entity is rejected
+✅ [PASS] TEST-A2-2: Provenance Boundary: UPDATE_FACTION without pre-existing canonical entity is rejected
+✅ [PASS] TEST-A2-3: Provenance Boundary: SET_WORLD_METADATA from untrusted source (LLM/PLAYER) is rejected
+✅ [PASS] TEST-A2-4: Provenance Boundary: SET_CHARACTER_SECRET from untrusted source (LLM/PLAYER) is rejected
+✅ [PASS] TEST-A2-5: 5.7 Self-Proof Defense: Intra-proposal seed/offscreen action cannot satisfy causality evidence
+✅ [PASS] TEST-A2-6: LLM Creative Freedom: New NPCs, Factions, Narrative Seeds, and Offscreen Events commit cleanly without restriction
+✅ [PASS] TEST-VEC-01-V3-04-SOURCE-FORGERY: VEC-01: Direct submission of SAVE_HYDRATION, CLOUD_RESTORE, or unknown sources is rejected with Zero-Mutation
+✅ [PASS] TEST-VEC-02-V3-05-RETROSPECTIVE-GENESIS: VEC-02: Retrospective GENESIS proposal beyond initial genesis turn is rejected with Zero-Mutation
+✅ [PASS] TEST-VEC-03-V4-01-CAUSAL-TOKEN-OVERLAP: VEC-03: Substring/token overlap without exact item entity grounding is rejected; grounded entity passes
+✅ [PASS] TEST-VEC-04-V2-03-FACTION-INFLUENCE-INVARIANT: VEC-04: ADD_FACTION and OVERWRITE_WORLD_INFO strictly enforce influence boundaries and total cap (<=100)
+✅ [PASS] TEST-VEC-05-V2-04-UPDATE-FACTION-INFLUENCE-INVARIANT: VEC-05: UPDATE_FACTION strictly enforces influence boundaries and cumulative total cap
+✅ [PASS] TEST-ROOT-01-CLAIM-BINDING-BYPASS: Root 1 Remediation: Wildcard (*)/empty claim attributes are rejected by ImmigrationGate, and cannot bypass canonical validation
+✅ [PASS] TEST-ROOT-02-UNCHECKED-CHARACTER-STATS: Root 2 Remediation: Unchecked UPDATE_CHARACTER_STATS from untrusted sources is strictly rejected with Zero-Mutation
+✅ [PASS] TEST-LANG-01: Engine Language Phase 1: Canonical Semantic Representation, Grammar & Adapter Integrity
+✅ [PASS] TEST-HYDRATION-01: Hydration Sovereignty Fail-Closed & Replay Tampering Red Team Suite
+====================================================
+Summary: 90/94 Tests Passed.
+====================================================
+=== CANDIDATE GATE ===
+
+> react-example@0.0.0 test:candidate-gate
+> tsx src/engine/language/runCandidateRecoveryGateSuite.ts
+
+================================================================
+  VEIL CANDIDATE RECOVERY GATE — RED TEAM EXHAUSTIVE SUITE
+================================================================
+
+Executed: 39 total scenarios / assertions
+Passed:   39 PASSED
+Failed:   0 FAILED
+Duration: 17ms
+
+[PASS] #1: Scenario 1: Normal 5 Candidates - All 5 pass
+[PASS] #2: Scenario 1: Zero-Mutation invariant preserved for all normal candidates
+[PASS] #3: Scenario 2: Normal 4 + 1 Float candidateId - 4 passed, 1 quarantined
+[PASS] #4: Scenario 2: Quarantined candidate has correct index and integer reason
+[PASS] #5: Scenario 2: Passed candidates retain correct order and identity
+[PASS] #6: Scenario 3: Normal 3 + 2 Corrupted - 3 passed, 2 quarantined
+[PASS] #7: Scenario 4: Normal 1 + 4 Corrupted - 1 passed, 4 quarantined
+[PASS] #8: Scenario 4: The only valid candidate is #3
+[PASS] #9: Scenario 5: All 5 Corrupt - 0 passed, 5 quarantined (Fail-Closed)
+[PASS] #10: Scenario 6: candidateId 6 rejected (out of bounds)
+[PASS] #11: Scenario 7: candidateId <= 0 rejected
+[PASS] #12: Scenario 8: candidateId type forgeries (bool, str, obj, NaN, Infinity) rejected
+[PASS] #13: Scenario 9: label invalid types / whitespace-only rejected
+[PASS] #14: Scenario 10: narrativeSummary invalid types rejected
+[PASS] #15: Scenario 11: rawMetadata null rejected
+[PASS] #16: Scenario 12: rawMetadata array rejected
+[PASS] #17: Scenario 13: rawMetadata primitive values rejected
+[PASS] #18: Scenario 14: Candidate root non-objects rejected
+[PASS] #19: Scenario 15: Non-array input to gate fails closed immediately
+[PASS] #20: Scenario 16: Custom valid candidate passed
+[PASS] #21: Scenario 16: Reference equality preserved (Zero Mutation)
+[PASS] #22: Scenario 16: All arbitrary valid custom fields completely preserved
+[PASS] #23: Scenario 17: Exactly 2 valid candidates passed (1 and 3)
+[PASS] #24: Scenario 17: Exactly 3 candidates quarantined (2, 4, 5)
+[PASS] #25: Scenario 17: Passed candidates strictly preserve identities without cross-contamination
+[PASS] #26: Scenario 18 Step 1: Gate passed 3, quarantined 2
+[PASS] #27: Scenario 18 Step 3: Successfully translated 3 valid candidates
+[PASS] #28: Scenario 18 Step 4: Diversity filter succeeded
+[PASS] #29: Scenario 18 Step 5: All valid candidate proposals safely validated in PreAuth
+[PASS] #30: Scenario 19: Genuinely distinct 5 candidates - All 5 pass Gate
+[PASS] #31: Scenario 20: Genuinely distinct 4 candidates - All 4 pass Gate
+[PASS] #32: Scenario 21: Genuinely distinct 3 candidates - All 3 pass Gate
+[PASS] #33: Scenario 22: Genuinely distinct 2 candidates - All 2 pass Gate
+[PASS] #34: Scenario 23: Genuinely distinct 1 candidate - 1 passes Gate
+[PASS] #35: Scenario 24 Step 1: All 3 pass structural gate
+[PASS] #36: Scenario 24 Step 2: Surface-only variations deduplicated by Diversity Gate
+[PASS] #37: Scenario 25 Step 1: Structural gate passes both syntactically
+[PASS] #38: Scenario 25 Step 2: Genuine candidate is ALLOWED
+[PASS] #39: Scenario 25 Step 3: Unbacked hallucinated item at Turn 2 is REJECTED by PreAuth Gate
+
+================================================================
+  VERDICT: 100% PASS - ALL 18+ ATTACK SCENARIOS NEUTRALIZED
+================================================================
+=== NOVEL ===
+
+> react-example@0.0.0 test:novel-lifecycle
+> tsx src/engine/index/novelLifecycleTest.ts
+
+=== Running VEIL Novel History / Canon Lifecycle Test Suite ===
+
+--- [Case 8] Existing Active Canon Protection ---
+  ✓ Case 8: "철수" is recognized as Active Canon in current state
+  ✓ Case 8: "철수" is NOT recorded in Novel History (Active Canon Defense)
+  ✓ Case 8: Novel History records remain empty
+  ✓ Case 8: Resolver recovers existing Canon ID
+  ✓ Case 8: Resolved ID is npc-chulsoo
+
+--- [Case 6] UNMET NPC Not Misjudged as Active Canon ---
+  ✓ Case 6: "은둔고수" (metInStory: false) is NOT Active Canon
+  ✓ Case 6: "은둔고수" successfully recorded in Novel History upon encounter
+  ✓ Case 6: Lifecycle is NOVEL
+
+--- [Case 9] Existing Inactive Canon Protection ---
+  ✓ Case 9: Deceased NPC committed to Engine
+  ✓ Case 9: "영희" recognized as Inactive Canon (DEAD)
+  ✓ Case 9: "빈 약병" recognized as Inactive Canon (qty 0)
+  ✓ Case 9: "과거 살인사건의 진상" recognized as Inactive Canon (resolved seed)
+  ✓ Case 9: Deceased NPC blocked from Novel History
+  ✓ Case 9: Resurrection action completely blocked by proposal parser
+
+--- [Case 2] Passive Novel Mention Stays NOVEL ---
+  ✓ Case 2: "지나가던 상인" recorded in Novel History
+  ✓ Case 2: Lifecycle is strictly NOVEL
+  ✓ Case 2: No canonicalId assigned
+  ✓ Case 2: Promoted count is 0
+  ✓ Case 2: evaluateCanonPromotion rejects passive mention
+  ✓ Case 2: Rejection reason is PASSIVE_MENTION_BLOCKED
+
+--- [Case 3] Fake verifiedEventId Rejection ---
+  ✓ Case 3: Fake verifiedEventId produces 0 promotions
+  ✓ Case 3: NPC stays NOVEL
+  ✓ Case 3: No canonicalId assigned
+
+--- [Case 4] Fake sourceNpcId Rejection ---
+  ✓ Case 4: Fake sourceNpcId produces 0 promotions
+  ✓ Case 4: Item stays NOVEL
+  ✓ Case 4: Item canonicalId is undefined
+
+--- [Case 5] Fake evidenceIds Rejection ---
+  ✓ Case 5: Fake evidenceIds produce 0 promotions
+  ✓ Case 5: NPC stays NOVEL
+
+--- [Case 1] New Novel Entity as Active Actor -> Immediately CANON_LINKED ---
+  ✓ Case 1: Sovereign Engine successfully committed active proposal
+  ✓ Case 1: Promoted count >= 2 (both NPC and Item)
+  ✓ Case 1: "약초꾼 노인" found in Novel History
+  ✓ Case 1: "약초꾼 노인" immediately promoted to CANON_LINKED
+  ✓ Case 1: Linked canonical ID is npc-herbalist-elder
+  ✓ Case 1: Linked at turn 4
+  ✓ Case 1: "백년설삼" found in Novel History
+  ✓ Case 1: "백년설삼" immediately promoted to CANON_LINKED
+  ✓ Case 1: Linked canonical ID is item-ginseng
+
+--- [Case 7] Existing Novel Entity Promoted on Subsequent Turn ---
+  ✓ Case 7: Merchant was previously NOVEL
+  ✓ Case 7: Sovereign Engine committed sword proposal
+  ✓ Case 7: Existing Novel merchant promoted to CANON_LINKED
+  ✓ Case 7: Correct canonicalId assigned
+  ✓ Case 7: Linked at turn 5
+
+--- [Case 10] Commit Failure -> Novel History Untouched ---
+  ✓ Case 10: Engine rejects proposal with stale stateVersion
+  ✓ Case 10: Rejected NPC is NOT present in Novel History
+  ✓ Case 10: Novel History count strictly unchanged
+
+--- [Case 11] LLM Signal Injection Block ---
+  ✓ Case 11: Adversarial record created in Novel History
+  ✓ Case 11: Lifecycle remains strictly NOVEL
+  ✓ Case 11: Untrusted relatedSeedId filtered out
+  ✓ Case 11: Untrusted isRelevantToProtagonist filtered out
+  ✓ Case 11: evaluateCanonPromotion rejects spoofed claims
+  ✓ Case 11: Rejection reason is NO_CANON_PROMOTION_SIGNAL
+
+--- [Case 12] CANON_LINKED Permanent Invariant ---
+  ✓ Case 12: Lifecycle remains CANON_LINKED (never demoted)
+  ✓ Case 12: Canonical ID remains intact
+  ✓ Case 12: Seen count incremented
+
+--- [Case 13] Candidate Recovery Gate Failure ---
+  ✓ Case 13: Candidate quarantined by Recovery Gate
+  ✓ Case 13: 0 passed candidates
+  ✓ Case 13: Novel History records remain untouched
+
+--- [Case 14] Real But Unrelated Authoritative Event -> Rejection ---
+  ✓ Case 14: Real authoritative warehouse fire event committed
+  ✓ Case 14: Real inventory commit succeeded on engine
+  ✓ Case 14: Promoted count is strictly 0 for unrelated authoritative event
+  ✓ Case 14: "우연히 마주친 낚시꾼" recorded in Novel History
+  ✓ Case 14: "우연히 마주친 낚시꾼" stays strictly NOVEL
+  ✓ Case 14: No canonicalId assigned to unrelated event actor
+  ✓ Case 14: "낡은 낚싯대" recorded in Novel History
+  ✓ Case 14: "낡은 낚싯대" stays strictly NOVEL
+  ✓ Case 14: No canonicalId assigned to item with unrelated event
+
+--- [Case 15] Real Related Authoritative Event -> Canon Promotion ---
+  ✓ Case 15: Real related boatman rescue event committed
+  ✓ Case 15: Real related gift proposal committed on engine
+  ✓ Case 15: Both NPC and Item promoted for related authoritative event
+  ✓ Case 15: "강가의 뱃사공" found in Novel History
+  ✓ Case 15: "강가의 뱃사공" promoted to CANON_LINKED
+  ✓ Case 15: Canonical ID assigned to boatman
+  ✓ Case 15: "명품 노" found in Novel History
+  ✓ Case 15: "명품 노" promoted to CANON_LINKED
+  ✓ Case 15: Canonical ID assigned to oar
+
+--- [Case 16] Inactive Canon Statuses Are Not Demotion ---
+  ✓ Case 16: DEAD status does not trigger demotion
+  ✓ Case 16: Reason is CANON_INACTIVE_STATUS_NOT_DEMOTION
+  ✓ Case 16: CONSUMED status does not trigger demotion
+  ✓ Case 16: RESOLVED seed does not trigger demotion
+  ✓ Case 16: Pure inactivity does not trigger demotion
+  ✓ Case 16: Reason is INACTIVITY_ONLY_NOT_DEMOTION
+
+--- [Case 17] Unverified LLM Claims and Fake Evidence Rejection ---
+  ✓ Case 17: Pure LLM claim is rejected
+  ✓ Case 17: Reason is LLM_CLAIM_REJECTED
+  ✓ Case 17: Fake invalidation event is rejected
+  ✓ Case 17: Reason is FAKE_OR_UNVERIFIED_EVENT
+
+--- [Case 18] Real But Unrelated Event Invalidation Rejection ---
+  ✓ Case 18: Fire event commit succeeded on engine
+  ✓ Case 18: Unrelated authoritative event is rejected for demotion
+  ✓ Case 18: Reason is UNRELATED_EVENT
+
+--- [Case 19] Authoritative Causal Invalidation & Demotion Lineage Tracking ---
+  ✓ Case 19: Fraud event commit succeeded on engine
+  ✓ Case 19: Authoritative invalidation succeeds
+  ✓ Case 19: Reason is AUTHORITATIVE_CAUSAL_INVALIDATION
+  ✓ Case 19: Lifecycle transitions to DEMOTED_NOVEL
+  ✓ Case 19: demotedAtTurn is correctly recorded
+  ✓ Case 19: demotedFromCanonicalId is preserved
+  ✓ Case 19: transitionHistory is present
+  ✓ Case 19: transitionHistory has 3 entries
+  ✓ Case 19: Last transition fromDomain is CANON
+  ✓ Case 19: Last transition toDomain is NOVEL
+  ✓ Case 19: Version incremented to 3
+  ✓ Case 19: predecessorId is npc-chulsoo
+
+--- [Case 20] Genesis Canon Demotion ---
+  ✓ Case 20: Genesis canon demoted to DEMOTED_NOVEL
+  ✓ Case 20: demotedFromCanonicalId preserved
+  ✓ Case 20: transitionHistory created
+  ✓ Case 20: transitionHistory has 2 entries
+  ✓ Case 20: Initial entry fromDomain is CANON
+  ✓ Case 20: Second entry is CANON -> NOVEL
+  ✓ Case 20: Version is 2
+
+--- [Case 21] Candidate Declaration to Canon Demotion Pipeline ---
+  ✓ Case 21.1: Fraud event successfully committed to Sovereign Engine
+  ✓ Case 21.1: Proposal includes untrusted declarations
+  ✓ Case 21.1: Exactly 1 declaration attached
+  ✓ Case 21.1: Untrusted declaration was NOT promoted to canonical actions
+  ✓ Case 21.1: Untrusted declaration was NOT converted to verifiedClaims
+  ✓ Case 21.1: Successfully demoted 1 Canon entity on committed invalidation
+  ✓ Case 21.1: Demoted record found in updated records
+  ✓ Case 21.1: Lifecycle is DEMOTED_NOVEL
+  ✓ Case 21.1: demotedFromCanonicalId preserved
+  ✓ Case 21.1: sourceEventIds includes fraudEvId
+  ✓ Case 21.1: Duplicate demotion for same event is prevented
+  ✓ Case 21.2: Other entity fraud event successfully committed
+  ✓ Case 21.2: Other entity invalidation must not demote target entity
+  ✓ Case 21.2: Reason is UNRELATED_EVENT
+  ✓ Case 21.3: Keyword-only event without canonical mutation must not demote
+  ✓ Case 21.3: Reason is NON_IDENTITY_INVALIDATION_EVENT
+  ✓ Case 21.4.a: Death must not trigger demotion
+  ✓ Case 21.4.b: Missing must not trigger demotion
+  ✓ Case 21.4.c: Movement must not trigger demotion
+  ✓ Case 21.4.d: Combat/damage must not trigger demotion
+  ✓ Case 21.4.e: Name change must not trigger demotion
+  ✓ Case 21.5: Pure LLM claim demote is false
+  ✓ Case 21.5: Reason is LLM_CLAIM_REJECTED
+  ✓ Case 21.6: Uncommitted event demote is false
+  ✓ Case 21.6: Reason is FAKE_OR_UNVERIFIED_EVENT
+  ✓ Case 21.7: Unrelated event demote is false
+  ✓ Case 21.7: Reason is UNRELATED_EVENT
+  ✓ Case 21.8: Unregistered phrased canonical event committed
+  ✓ Case 21.8: Canonical semantic invalidation succeeds even without registered keywords
+  ✓ Case 21.8: Reason is AUTHORITATIVE_CAUSAL_INVALIDATION
+  ✓ Case 21.8: observeCandidateNovelHistory succeeds with unregistered wording
+  ✓ Case 21.9: Normal entity resolution event successfully committed
+  ✓ Case 21.9: Normal entity resolution MUST NOT trigger identity invalidation demotion
+
+Results: 140 passed, 0 failed.
+
+=== PASSPORT ===
+
+> react-example@0.0.0 test:passport
+> tsx src/engine/index/passportTest.ts
+
+=== Running VEIL Identity Passport Test Suite ===
+
+--- Test Suite 1: Canon baseline ---
+  ✓ Character receives deterministic Canon v1 passportId
+  ✓ Character baseline passport is ACTIVE
+  ✓ Living NPC baseline passport is ACTIVE
+  ✓ Dead NPC baseline passport is RETIRED
+  ✓ Positive-quantity item baseline passport is ACTIVE
+  ✓ Zero-quantity item baseline passport is RETIRED
+  ✓ Active seed baseline passport is ACTIVE
+  ✓ Resolved seed baseline passport is RETIRED
+
+--- Test Suite 2: Inventory history references ---
+  ✓ Inventory item receives a Passport from canonical MODIFY_INVENTORY evidence
+  ✓ Inventory Passport points to the exact immutable History record
+  ✓ Acquisition source NPC is indexed from authoritative evidence
+  ✓ Acquisition cost item is indexed from authoritative evidence
+
+--- Test Suite 3: Novel baseline ---
+  ✓ Pure Novel entity receives deterministic Novel v1 passportId
+  ✓ Pure Novel Passport remains NOVEL domain
+  ✓ Pure Novel Passport starts at version 1
+  ✓ Pure Novel Passport is ACTIVE
+  ✓ Novel Passport references History without copying it
+
+--- Test Suite 4: Promotion creates a real predecessor chain ---
+  ✓ Promotion preserves the original Novel Passport as a lineage node
+  ✓ Promotion creates a new Canon Passport node
+  ✓ Pre-promotion Novel Passport becomes RETIRED
+  ✓ Post-promotion Canon Passport becomes ACTIVE
+  ✓ Canon predecessor points to actual Passport ID, never Novel ID
+  ✓ P1 contains only its History segment
+  ✓ P2 contains only the incremental History segment
+
+--- Test Suite 5: Promotion -> Demotion -> Re-promotion ---
+  ✓ Exactly four expected lineage nodes exist
+  ✓ No duplicate Passport node is created for the same transition
+  ✓ P1 Novel is RETIRED after promotion
+  ✓ P2 Canon is RETIRED after authoritative demotion
+  ✓ P3 Novel is RETIRED after re-promotion
+  ✓ P4 Canon is the single ACTIVE Passport
+  ✓ P2 points to P1
+  ✓ P3 points to P2
+  ✓ P4 points to P3
+  ✓ P1 owns only its delta evidence
+  ✓ P2 owns only its delta evidence
+  ✓ P3 owns only its delta evidence
+  ✓ P4 owns only its delta evidence
+  ✓ All Passport IDs are unique
+
+--- Test Suite 6: Determinism & immutability ---
+  ✓ Passport projection is deterministic regardless of History input order
+  ✓ PassportState is frozen
+  ✓ Every Passport node is frozen
+  ✓ Every Passport stamp collection is frozen
+
+=== Passport tests complete: 42 passed, 0 failed ===
+=== IDENTITY ===
+
+> react-example@0.0.0 test:identity-continuity
+> tsx src/engine/index/entityIdentityResolverTest.ts
+
+
+=== Running VEIL Canonical Entity Identity Resolver Test Suite ===
+
+  ✓ Test A1: Exact match status
+  ✓ Test A2: Canonical ID preserved
+  ✓ Test A3: Proposal contains inventory action
+  ✓ Test A4: Proposal maintains canonical ID
+  ✓ Test B1: Recovered status without LLM ID
+  ✓ Test B2: Recovered exact canonical ID
+  ✓ Test B3: Recovered proposal contains inventory action
+  ✓ Test B4: Recovered ID used in proposal
+  ✓ Test C1: Ambiguous status for multiple matches
+  ✓ Test C2: Ambiguous item mutation is strictly blocked in proposal
+  ✓ Test D1: Conflict on non-existent claimed ID
+  ✓ Test D2: Conflict on name-ID mismatch
+  ✓ Test D3: Conflicting item mutation is blocked in proposal
+  ✓ Test E1: Index miss without evidence is AMBIGUOUS, not NOVEL
+  ✓ Test E2: No canonical ID issued
+  ✓ Test E3: Index miss without evidence is blocked from mutating state
+  ✓ Test F1: NOVEL status granted when positive evidence exists
+  ✓ Test F2: Resolver does NOT issue ID
+  ✓ Test F3: Engine allocates new canonical ID and produces proposal
+  ✓ Test F4: Engine generated item ID prefix
+  ✓ Test F5: Engine transient resolvedEntityId populated
+  ✓ Test F-FP1: Unrelated event existence alone MUST NOT authorize NOVEL (fails closed to AMBIGUOUS)
+  ✓ Test F-FP2: sourceNpcId alone without authoritative verifiedEventId MUST NOT authorize NOVEL
+  ✓ Test F-FP3: Non-existent verifiedEventId MUST NOT authorize NOVEL
+  ✓ Gate Test 1: Complete bundle passes gate
+  ✓ Gate Test 2: Missing entityReference bundle is quarantined
+  ✓ Gate Test 3: LLM-supplied resolvedEntityId is quarantined
+
+--- NPC Identity Continuity Tests ---
+  ✓ NPC Test 1: Exact match status
+  ✓ NPC Test 1: Preserves canonical ID
+  ✓ NPC Test 2: Recovered by alias
+  ✓ NPC Test 2: Matches canonical ID npc-abbot
+  ✓ NPC Test 3: Novel status with valid verifiedEventId
+  ✓ NPC Test 3: Resolver does not issue ID
+  ✓ NPC Test 3-FP: Unrelated event existence alone rejected as AMBIGUOUS
+  ✓ NPC Test 4: Index miss without evidence is AMBIGUOUS
+  ✓ NPC Test 5: Conflict on bogus claimed ID
+
+--- Faction Identity Continuity Tests ---
+  ✓ Faction Test 1: Exact match
+  ✓ Faction Test 1: Preserves fac-shaolin ID
+  ✓ Faction Test 2: Recovered without claimed ID
+  ✓ Faction Test 2: Matches fac-shaolin
+  ✓ Faction Test 3: Novel faction with cause
+  ✓ Faction Test 3-FP: Unrelated event existence alone rejected as AMBIGUOUS
+  ✓ Faction Test 4: Index miss without evidence is AMBIGUOUS
+
+--- Narrative Seed Identity Continuity Tests ---
+  ✓ Seed Test 1: Exact match
+  ✓ Seed Test 1: Matches seed-stolen-manual
+  ✓ Seed Test 2: Novel seed with cause
+  ✓ Seed Test 2-FP: Unrelated event existence alone rejected as AMBIGUOUS
+  ✓ Seed Test 3: Index miss without evidence is AMBIGUOUS
+  ✓ Seed Test 4: Proposal contains RESOLVE_NARRATIVE_SEED
+  ✓ Seed Test 4: Resolves exact seed canonical ID
+
+--- Character Identity Continuity Tests ---
+  ✓ Character Test 1: Matches protagonist without claimed ID
+  ✓ Character Test 1: Canonical ID is protagonist
+  ✓ Character Test 2: Exact match with claimed protagonist ID
+  ✓ Character Test 2: Preserves protagonist ID
+  ✓ Character Test 3: Mismatched character name against claimed protagonist ID produces CONFLICT
+  ✓ Character Test 4: Conflicting character identity strictly blocks character stat mutations
+
+--- Full EOF Pipeline & SovereignEngine Commit Tests ---
+  ✓ EOF Test 1: Candidate passes Recovery Gate
+  ✓ EOF Test 2: Proposal contains all validated actions
+  ✓ EOF Test 3: EngineValidator approves the proposal
+  ✓ EOF Test 4: SovereignEngine successfully commits the proposal
+  ✓ EOF Test 5: Existing 철검 successfully removed
+  ✓ EOF Test 6: Novel 벽력탄 added with Engine-issued ID
+  ✓ EOF Test 7: Canonical NPC innerThought updated
+  ✓ EOF Test 8: Novel NPC added with Engine-issued ID
+  ✓ EOF Test 9: Novel Faction added with Engine-issued ID
+  ✓ EOF Test 10: Novel Seed added with Engine-issued ID
+  ✓ EOF Test 11: Immutable Historical Records created for all actions
+
+--- Red Team Adversarial Attack Tests ---
+  ✓ Red Team 1: Fabricated eventId is rejected as AMBIGUOUS
+  ✓ Red Team 2: Fabricated sourceNpcId is rejected as AMBIGUOUS
+  ✓ Red Team 3: Spoofed claimedEntityId on canonical entity triggers CONFLICT
+
+--- Adversarial Attack Tests: 5-Entity Spoofed Cause/Context/Cost Rejection ---
+  ✓ 5-Entity Attack ITEM: cause/context/cost alone rejected as AMBIGUOUS
+  ✓ 5-Entity Attack ITEM: No canonical ID issued
+  ✓ 5-Entity Attack NPC: cause/context alone rejected as AMBIGUOUS
+  ✓ 5-Entity Attack NPC: No canonical ID issued
+  ✓ 5-Entity Attack FACTION: cause/context alone rejected as AMBIGUOUS
+  ✓ 5-Entity Attack FACTION: No canonical ID issued
+  ✓ 5-Entity Attack SEED: cause/context alone rejected as AMBIGUOUS
+  ✓ 5-Entity Attack SEED: No canonical ID issued
+  ✓ 5-Entity Attack CHARACTER: cause/context alone rejected as AMBIGUOUS
+  ✓ 5-Entity Attack CHARACTER: No canonical ID issued
+  ✓ Adversarial sourceNpcId: Canonical NPC without historical evidence rejected as AMBIGUOUS
+
+--- Positive Authoritative Verification Tests: 5-Entity Authoritative Novelty ---
+  ✓ 5-Entity Positive ITEM: Authoritative event grants NOVEL
+  ✓ 5-Entity Positive ITEM: Resolver does not issue ID
+  ✓ 5-Entity Positive NPC: Authoritative event grants NOVEL
+  ✓ 5-Entity Positive NPC: Resolver does not issue ID
+  ✓ 5-Entity Positive FACTION: Authoritative event grants NOVEL
+  ✓ 5-Entity Positive FACTION: Resolver does not issue ID
+  ✓ 5-Entity Positive SEED: Authoritative event grants NOVEL
+  ✓ 5-Entity Positive SEED: Resolver does not issue ID
+  ✓ 5-Entity Positive CHARACTER: Authoritative event grants NOVEL
+  ✓ 5-Entity Positive CHARACTER: Resolver does not issue ID
+  ✓ Positive sourceNpcId: Canonical NPC with verified historical event grants NOVEL
+
+--- Inventory Cost ID Regression Tests ---
+  ✓ Cost Regression 1: Exact canonical cost item produces valid ADD action
+  ✓ Cost Regression 1: Exact cost confirms canonical ID item-iron-sword, NOT a generated ID
+  ✓ Cost Regression 1: Acquired item retains NOVEL ID generation
+  ✓ Cost Regression 2: Recovered cost item produces valid ADD action
+  ✓ Cost Regression 2: Recovered cost resolves canonical ID item-iron-sword from Engine indices
+  ✓ Cost Regression 3: Fake/spoofed cost ID strictly fails closed (no ADD action produced)
+  ✓ Cost Regression 4: Ambiguous cost item strictly fails closed (no ADD action produced)
+  ✓ Cost Regression 5: Non-existent cost item strictly fails closed (no ADD action produced)
+  ✓ Cost Regression 6: Companion removed item infers cost successfully
+  ✓ Cost Regression 6: Inferred cost resolves canonical ID item-iron-sword without generateProposalId
+
+--- Inventory Cost Ownership / Availability Gate Tests ---
+  ✓ Ownership Gate 1: 보유 1 / 비용 1 -> PASS (거래 승인)
+  ✓ Ownership Gate 1: Canonical cost ID confirmed
+  ✓ Ownership Gate 1: Cost quantity matches 1
+  ✓ Ownership Gate 2: 보유 3 / 비용 2 -> PASS (거래 승인)
+  ✓ Ownership Gate 2: Canonical cost ID confirmed
+  ✓ Ownership Gate 2: Cost quantity matches 2
+  ✓ Ownership Gate 3: 보유 1 / 비용 2 -> FAIL (수량 부족 차단)
+  ✓ Ownership Gate 4: 보유 0 + History 과거 존재 -> FAIL (수량 0 사용 차단)
+  ✓ Ownership Gate 5: 과거 존재했지만 현재 삭제됨 -> FAIL (미보유 차단)
+  ✓ Ownership Gate 6: 동일 이름 AMBIGUOUS -> FAIL (모호성 차단)
+  ✓ Ownership Gate 7: fake ID -> FAIL (미승인 가짜 ID 차단)
+  ✓ Ownership Gate 8a: Cost ID 생략 시 이름으로 Identity 복구 후 보유량 충족 시 PASS
+  ✓ Ownership Gate 8a: Resolved to canonical ID
+  ✓ Ownership Gate 8b: Cost ID 생략 시 Identity 복구되었으나 보유량 0으로 FAIL
+  ✓ Ownership Gate 9: 신규 획득 Item NOVEL ID 생성 -> 기존 동작 유지
+
+Results: 117 passed, 0 failed.
+
+=== CROSS LAYER ===
+
+> react-example@0.0.0 test:player-input-cross-layer
+> tsx src/engine/index/playerInputCrossLayerTest.ts
+
+
+=== Player Input Cross-Layer Provenance Test ===
+
+✓ Phase 2 selection has an eligible ALLOW candidate
+✓ Phase 2 selection cannot select the REJECT candidate
+✓ Player Input ID is distinct from selected Candidate ID
+✓ Server-side Proposal remains source=LLM
+✓ Server-side Proposal carries the server-generated Player Input ID
+✓ Server-side Proposal cannot confuse Candidate ID with Player Input ID
+✓ Selected ALLOW Candidate projects to at least one runtime action
+✓ API response contract preserves the same Player Input ID
+✓ API response identifies the selected ALLOW Candidate
+✓ Authorized selection remains a mutation-capable response
+✓ App-side reconstructed Proposal remains source=LLM
+✓ App-side Proposal preserves the server Player Input ID
+✓ Server and App Proposal provenance are identical
+✓ App-side reconstruction does not fall back to Candidate ID
+✓ App-side reconstructed Proposal remains mutation-capable
+✓ Selected ALLOW Candidate reaches the Sovereign Commit Gate successfully
+✓ Committed History retains the original Player Input provenance
+✓ Committed History never records the Candidate ID as Player Input provenance
+✓ Authorized ALLOW Candidate produces an actual canonical mutation
+✓ Forged Candidate-ID provenance is detectable at Proposal construction
+✓ Forged Candidate-ID provenance cannot be mistaken for the original Player Input ID
+
+=== Player Input Cross-Layer Provenance Test: PASS ===
+
+=== NATURAL LANGUAGE ===
+
+> react-example@0.0.0 test:natural-language-runtime
+> tsx src/engine/index/naturalLanguageRuntimeBoundaryTest.ts
+
+
+=== Natural Language -> Runtime -> Canonical Commit Boundary ===
+
+NOTE: The semantic interpretation below is deterministic test fixture data standing in for an LLM interpretation.
+It does NOT claim to test Gemini inference itself. It tests the real textual parser, MeaningTree recovery, adapter, PLAYER source, Commit Gate, and zero-mutation rejection boundary.
+
+✓ Fixture facts enter CanonicalState through the real internal Commit Gate
+--- Normal Existing-World Natural-Language Action ---
+✓ Player interpretation is extracted for: 대장장이에게 금화 세 닢을 주고 단검 하나를 만들어 달라고 한다.
+✓ Player interpretation passes recovery/grammar for: 대장장이에게 금화 세 닢을 주고 단검 하나를 만들어 달라고 한다.
+✓ MeaningTree exists at the runtime boundary for: 대장장이에게 금화 세 닢을 주고 단검 하나를 만들어 달라고 한다.
+✓ Normal player natural-language action reaches and passes the Sovereign Commit Gate
+✓ Natural-language purchase commits payment and acquired item atomically
+✓ Natural-language purchase produces canonical inventory state
+✓ Natural-language purchase deducts the actual canonical payment
+--- Novel But Legitimate Natural-Language Action ---
+✓ Player interpretation is extracted for: 여관에서 내일 상단이 도착한다고 사람들에게 알린다.
+✓ Player interpretation passes recovery/grammar for: 여관에서 내일 상단이 도착한다고 사람들에게 알린다.
+✓ MeaningTree exists at the runtime boundary for: 여관에서 내일 상단이 도착한다고 사람들에게 알린다.
+✓ Novel player intent is not falsely rejected merely because it is new
+✓ Novel natural-language intent becomes canonical only after Commit Gate acceptance
+--- Genuinely Contradictory Natural-Language Action ---
+✓ Player interpretation is extracted for: 금화 열 닢을 내고 장검을 산다. 실제로는 가진 금화가 일곱 닢뿐이다.
+✓ Player interpretation passes recovery/grammar for: 금화 열 닢을 내고 장검을 산다. 실제로는 가진 금화가 일곱 닢뿐이다.
+✓ MeaningTree exists at the runtime boundary for: 금화 열 닢을 내고 장검을 산다. 실제로는 가진 금화가 일곱 닢뿐이다.
+✓ Contradictory natural-language intent is rejected instead of inventing missing resources
+✓ Contradictory natural-language intent is denied by causality, not by PLAYER source blocking
+✓ Rejected natural-language action preserves CanonicalState byte-for-byte
+✓ Rejected natural-language action cannot leak a forged item into canonical inventory
+
+=== Natural Language -> Runtime -> Canonical Commit: PASS ===
+
+=== OFFSCREEN ===
+
+> react-example@0.0.0 test:offscreen-wake
+> tsx src/engine/index/offscreenHistoricalWakeTest.ts
+
+✓ Wake interval is preserved
+✓ Elapsed turns are calculated without simulating intermediate turns
+✓ Requested anchor scope contains only the selected NPC
+✓ NPC anchor keeps canonical identity
+✓ Anchor exposes the current canonical location
+✓ Anchor baseline excludes history after fromTurn
+✓ Anchor baseline keeps the latest record at or before fromTurn boundary
+✓ Relevant history excludes unrelated and future records
+✓ Relevant history preserves immutable record provenance
+✓ Wake context explicitly limits generation to causal skeletons
+✓ Wake context cannot become world authority
+✓ Context construction does not mutate CanonicalState
+✓ Context construction does not mutate History
+✓ Reverse time interval is rejected closed-gate style
+
+Offscreen Historical Wake: 14 passed, 0 failed

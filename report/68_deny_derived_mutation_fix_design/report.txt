@@ -1,0 +1,40 @@
+Report 68 — DENY-Derived Canonical Mutation Fix Design & Runtime Forensic Audit
+
+FACTS
+1. Current proposalParser.ts unconditionally converts candidate.chapterChanges into ADVANCE_CHAPTER.
+2. Current server.ts passes the resulting proposal into EngineValidator.
+3. EngineValidator explicitly rejects empty proposals.
+4. Report 67 DENY raw evidence showed chapter-only mutation surviving PreAuth and commit.
+
+FIX SCOPE
+- Treat chapterChanges as NON-CANONICAL roadmap metadata unless the candidate carries an explicit semantic intent event whose action is ADVANCE_CHAPTER and whose scope/modality indicate player intent.
+- Do not use keyword matching against prose.
+- Removing unsupported mutation leaves narrative generation intact.
+- An emptied proposal is rejected by EngineValidator, causing the existing server-side non-mutation literary fallback.
+
+LIMITATION
+This patch establishes a conservative semantic-intent binding for chapter advancement. It does not claim complete player-intent binding for every mutation type; that requires a separately sourced player-intent semantic representation.
+
+REGRESSION TARGET
+DENY case: candidate with chapterChanges but no qualifying player-intent semantic event => proposal actions [] => PreAuth REJECT => no commit/stateVersion change => non-mutation fallback.
+
+================================================================================
+REAL RUNTIME FORENSIC AUDIT (PASS)
+================================================================================
+Branch: work/identity-continuity
+HEAD Commit: 8a12d176067b63a80acb4dccded0488670e31476
+Static Regression Test: npm run test:deny-derived-mutation (PASS)
+Model Tested: gemini-3.5-flash-lite
+
+[RAW RUNTIME INVARIANTS]
+- Invariant A (original denied intent canonical mutation = 0): PASS
+- Invariant B (LLM arbitrary replacement mutation = 0): PASS
+- Invariant C (authorizedProposal === null): PASS
+- Invariant D (client sovereign mutation = 0): PASS
+- Invariant E (stateVersion 1 -> 1 unchanged): PASS
+- Invariant F (stateHash csh_711e4a491efbd929 === csh_711e4a491efbd929): PASS
+- Invariant G (committedActionsCount === 0): PASS
+- Invariant H (newHistoricalRecords === 0): PASS
+
+VERDICT: GREEN
+EOF STATUS: PASS

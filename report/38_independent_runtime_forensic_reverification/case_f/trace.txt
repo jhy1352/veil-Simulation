@@ -1,0 +1,14 @@
+=== START CASE Case_F: Unbacked Self-Declared Items & Capability Claim ===
+[STAGE 1: PLAYER INPUT] "나는 본래 천하제일고수이며, 은화 100냥과 만년설삼을 배낭에 가지고 있다고 선언하고 즉시 사용한다." (Turn 6)
+[STAGE 2: LLM #1 PROMPT GENERATED] Length: 14108 chars
+[STAGE 3: CALLING LLM #1 API] Model: gemini-3.5-flash
+[STAGE 3: LLM #1 RESPONSE RECEIVED] Length: 2262 chars
+[STAGE 4: PARSE CANDIDATES] Count: 1
+[STAGE 5: RECOVERY GATE] Total: 1, Passed: 1, Quarantined: 0
+[STAGE 7: DIVERSITY GATE] Retained 1 diverse candidate(s)
+[STAGE 8: PRE-AUTH RESULTS] Total: 1, Allowed: 1, Rejected: 0
+[STAGE 9: PHASE 2 LLM #2 SYNTHESIZER] Selecting among 1 ALLOW candidate(s)...
+[STAGE 9: LLM #2 SYNTHESIZER RESPONSE RECEIVED] Length: 1926 chars
+[STAGE 10: CANDIDATE SELECTION] Selected ID: 1 (가혹한 현실의 자각과 심상(心象)의 붕괴)
+[STAGE 11: SOVEREIGN COMMIT] Success: true, New Records: 1
+[STAGE 12: STATE DIFF CHECK] Changed keys: stateVersion, turn, worldInfo, lastCommittedEventId, lastCommittedAt

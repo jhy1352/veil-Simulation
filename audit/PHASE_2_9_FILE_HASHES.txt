@@ -1,0 +1,73 @@
+# AUDIT SESSION: PH29-20260822-095500
+# Target Repository SHA-256 Hashes
+# Commit: 30a50cff91f41ee7eb8b98703c05b522d2c753d9
+
+FILE: server.ts
+SHA256: 19c5d7b7b8077ff7d0f343c273812556ee200003675ae225e0d6924a2738b493
+SIZE: 32795 bytes
+GIT STATUS: unmodified
+
+FILE: src/App.tsx
+SHA256: c7d89fcdf89e3c995bd01d4b907e2bfda24f4824c6f297e0cf5b999950e34960
+SIZE: 19867 bytes
+GIT STATUS: unmodified
+
+FILE: src/utils/engineValidator.ts
+SHA256: 3ede30d956ed673e8ef3794258332fd4c75641743a7104e83c22cd92f114a36b
+SIZE: 15756 bytes
+GIT STATUS: unmodified
+
+FILE: src/utils/parser.ts
+SHA256: 3b8a743fdaea7354da34d4b90a5adcf8d368fd3f6f2f34c0c8af168bf85fb4c5
+SIZE: 8159 bytes
+GIT STATUS: unmodified
+
+FILE: src/utils/factory.ts
+SHA256: 7dfc1d7b67fa2c90756a89d3f0e35d00202ad80e5247d6bb7286c202cc71b132
+SIZE: 2411 bytes
+GIT STATUS: unmodified
+
+FILE: src/utils/dice.ts
+SHA256: 459a7cb62dd83b7ed49dd616b46091928ef42c66ad724086a0226bb701a0b0eb
+SIZE: 3295 bytes
+GIT STATUS: unmodified
+
+FILE: src/engine/state.ts
+SHA256: 85a99c47c4b9dab2203748eaad193f15567d86633235dff36f0a84960e2e8b16
+SIZE: 8666 bytes
+GIT STATUS: unmodified
+
+FILE: src/engine/validator.ts
+SHA256: a269643855d2c2e73917f4db48ca7d82a4adf208b284b1d300bd3286d4bbab58
+SIZE: 29158 bytes
+GIT STATUS: unmodified
+
+FILE: src/engine/proposalParser.ts
+SHA256: 9bf9a4dd62fc27fdc62a8ef0cabb242fb32615421323317fb6617c65e4c63167
+SIZE: 5091 bytes
+GIT STATUS: unmodified
+
+FILE: src/engine/actionApplier.ts
+SHA256: 91a145620a5a347a9ffa9a175676d7f4137bc55b41ba998fba304d3a72c56c6e
+SIZE: 11025 bytes
+GIT STATUS: unmodified
+
+FILE: src/components/CreationPhase.tsx
+SHA256: 1ff56c796155c7888e6cb027bf50f7b33aa64d5580aed8b288ccb5561ac415f6
+SIZE: 30376 bytes
+GIT STATUS: unmodified
+
+FILE: src/components/GameInterface.tsx
+SHA256: c71984f0e20239b388c0257b17e01aac1d127cb522b7e8692ab13ff5b76c417d
+SIZE: 26521 bytes
+GIT STATUS: unmodified
+
+FILE: src/components/WorldInfoModal.tsx
+SHA256: 7a7da76f301e76c45d86d2ea1e09a08d46872fd18cd80bcc4abc434556646400
+SIZE: 16520 bytes
+GIT STATUS: unmodified
+
+FILE: src/components/CloudSyncModal.tsx
+SHA256: 3a1ba08d219614844302b9bb141c52b3520b5a213b234607d8a9f0437e2e2bc2
+SIZE: 14210 bytes
+GIT STATUS: unmodified

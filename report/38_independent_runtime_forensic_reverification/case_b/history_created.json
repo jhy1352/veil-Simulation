@@ -1,0 +1,61 @@
+[
+  {
+    "recordId": "rec-evt-mtpva5c3-h6bush-1",
+    "eventId": "evt-mtpva5c3-h6bush",
+    "requestId": "req-mtpva5c3-0rtemx",
+    "proposalId": "prop-req-mtpva5c3-0rtemx",
+    "turn": 2,
+    "timestamp": "2026-09-06T13:48:13.827Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "RECORD_OFFSCREEN_EVENT",
+    "details": "{\"id\":\"offscreen-mtpva5c4-2n0nry\",\"eventDescription\":\"서원 내부 감시자들의 시선\",\"timestamp\":\"2026-09-06T13:48:13.828Z\",\"visibility\":\"FACTION_ONLY\"}",
+    "canonicalAction": {
+      "type": "RECORD_OFFSCREEN_EVENT",
+      "payload": {
+        "id": "offscreen-mtpva5c4-2n0nry",
+        "eventDescription": "서원 내부 감시자들의 시선",
+        "timestamp": "2026-09-06T13:48:13.828Z",
+        "visibility": "FACTION_ONLY"
+      }
+    },
+    "stateVersionAfterCommit": 3,
+    "informationAccess": "FACTION_ONLY",
+    "previousStateHash": "csh_f4c366aac8d3808a",
+    "originInputId": "act-Case_B-2"
+  },
+  {
+    "recordId": "rec-evt-mtpva5c3-h6bush-2",
+    "eventId": "evt-mtpva5c3-h6bush",
+    "requestId": "req-mtpva5c3-0rtemx",
+    "proposalId": "prop-req-mtpva5c3-0rtemx",
+    "turn": 2,
+    "timestamp": "2026-09-06T13:48:13.827Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "ADVANCE_CHAPTER",
+    "details": "{\"currentChapter\":\"제1장: 서원의 은밀한 흔적\",\"upcomingChapters\":[\"제2장: 동부 광산의 장막\",\"제3장: 비급의 실마리\"]}",
+    "canonicalAction": {
+      "type": "ADVANCE_CHAPTER",
+      "payload": {
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 동부 광산의 장막",
+          "제3장: 비급의 실마리"
+        ]
+      }
+    },
+    "stateVersionAfterCommit": 3,
+    "informationAccess": "PUBLIC",
+    "previousStateHash": "csh_f4c366aac8d3808a",
+    "originInputId": "act-Case_B-2"
+  }
+]

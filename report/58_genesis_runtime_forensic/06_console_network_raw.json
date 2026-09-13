@@ -1,0 +1,44 @@
+{
+  "timestamp": "2026-09-12T23:29:37.899Z",
+  "actions": [
+    {
+      "action": "Storage Hydration",
+      "result": "Old session (화산비고) was active before reset/creation"
+    },
+    {
+      "action": "handleCompleteCreation() Execution",
+      "stateOverridePassed": {
+        "worldInfo": "아스테리아 제국령",
+        "character": "엘리시아 윈드스톰",
+        "storyTurnCount": 1,
+        "engineStateHistories": 0,
+        "checkpoints": 0,
+        "turnTraces": 0
+      }
+    },
+    {
+      "action": "POST /api/chat (Turn 1 Genesis)",
+      "payloadSummary": {
+        "worldName": "아스테리아 제국령",
+        "characterName": "엘리시아 윈드스톰",
+        "turn": 1,
+        "historicalRecordsCount": 0,
+        "checkpointsCount": 0,
+        "tracesCount": 0
+      },
+      "status": 200
+    },
+    {
+      "action": "POST /api/chat (Turn 2 Regular Play)",
+      "payloadSummary": {
+        "worldName": "아스테리아 제국령",
+        "characterName": "엘리시아 윈드스톰",
+        "turn": 2,
+        "historicalRecordsCount": 0,
+        "checkpointsCount": 1,
+        "tracesCount": 1
+      },
+      "status": 200
+    }
+  ]
+}

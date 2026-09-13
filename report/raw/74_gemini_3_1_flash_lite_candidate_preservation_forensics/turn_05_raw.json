@@ -1,0 +1,166 @@
+{
+  "turn": 5,
+  "actionType": "NPC 상호작용",
+  "playerPrompt": "잡화점 카운터에 앉아 있는 늙은 상인에게 다가가 인사를 건네고 이 주변 골목의 위험이나 소문에 대해 대화를 시도한다.",
+  "apiResponse": {
+    "success": true,
+    "text": "아르카디아 영지의 하늘은 낮게 내려앉은 먹구름으로 인해 늘 회색빛이다. 경계 도시의 차가운 습기는 낡은 외투를 파고들었고, 에단은 주머니 속 놋쇠 펜던트를 손가락으로 꾹 쥐었다. 금속의 서늘한 감촉이 손바닥을 타고 전해진다.\n\n영지 입구에서부터 이어진 소문들은 하나같이 불길한 기운을 내포하고 있었다. 지하의 통로가 열렸다거나, 아무도 모르는 사이에 사라진 상인들의 행방 따위가 오가는 거리에는 긴장감이 팽팽하게 감돌았다. 에단은 길게 숨을 내뱉으며 고개를 들어 올렸다. 눈앞에는 낡은 간판이 삐걱이는 소리를 내며 흔들리는 '녹슨 잔' 주점이, 그리고 그 너머로 어둠이 짙게 깔린 영지의 미로 같은 골목들이 펼쳐져 있다. 지금 그가 내딛는 발걸음 하나하나가, 이 도시가 숨기고 있는 진실에 다가가는 첫 번째 시도일 것이다. 그는 잠시 발걸음을 멈추고 주변의 공기를 살폈다. 무언가, 혹은 누군가가 지켜보고 있는 듯한 미묘한 시선이 뒷덜미를 스치고 지나갔다.",
+    "rawResponse": "아르카디아 영지의 하늘은 낮게 내려앉은 먹구름으로 인해 늘 회색빛이다. 경계 도시의 차가운 습기는 낡은 외투를 파고들었고, 에단은 주머니 속 놋쇠 펜던트를 손가락으로 꾹 쥐었다. 금속의 서늘한 감촉이 손바닥을 타고 전해진다.\n\n영지 입구에서부터 이어진 소문들은 하나같이 불길한 기운을 내포하고 있었다. 지하의 통로가 열렸다거나, 아무도 모르는 사이에 사라진 상인들의 행방 따위가 오가는 거리에는 긴장감이 팽팽하게 감돌았다. 에단은 길게 숨을 내뱉으며 고개를 들어 올렸다. 눈앞에는 낡은 간판이 삐걱이는 소리를 내며 흔들리는 '녹슨 잔' 주점이, 그리고 그 너머로 어둠이 짙게 깔린 영지의 미로 같은 골목들이 펼쳐져 있다. 지금 그가 내딛는 발걸음 하나하나가, 이 도시가 숨기고 있는 진실에 다가가는 첫 번째 시도일 것이다. 그는 잠시 발걸음을 멈추고 주변의 공기를 살폈다. 무언가, 혹은 누군가가 지켜보고 있는 듯한 미묘한 시선이 뒷덜미를 스치고 지나갔다.",
+    "isFallbackNonMutation": true,
+    "selectedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null,
+    "preAuthSummary": {
+      "total": 2,
+      "allowed": 0,
+      "rejected": 2
+    },
+    "contextSnapshot": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "actualModelVersion": "gemini-3.1-flash-lite",
+    "requestedModel": "gemini-3.1-flash-lite",
+    "gitCommit": "3a493aa85717dfe47671583c9d27929d5cb7e0d5",
+    "forensicCapture": {
+      "t0_playerInput": "",
+      "chatContextForensic": {
+        "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+        "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망",
+        "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+        "seedsContext": "",
+        "offscreenContext": ""
+      },
+      "geminiContentsForensic": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "text": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 5 PLAYER PROMPT]\n서사를 시작하고 첫 장면을 묘사하라."
+            }
+          ]
+        }
+      ],
+      "phase1": {
+        "model": "gemini-3.1-flash-lite",
+        "actualModelVersion": "gemini-3.1-flash-lite",
+        "responseId": "jramaur3Msbo2roPtoi6yAY",
+        "rawResponseText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"주점 '녹슨 잔'의 소란스러운 입구\",\n    \"narrativeSummary\": \"에단은 아르카디아 영지의 경계에 위치한 지하 주점 '녹슨 잔'의 육중한 나무 문을 밀고 들어갑니다. 매캐한 담배 연기와 값싼 술 냄새가 섞인 공기가 그를 맞이하며, 한구석에서 모험가들이 나누는 은밀한 대화가 귓가에 스칩니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_001_ENTRANCE\",\n        \"action\": \"ENTER_LOCATION\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"주점 녹슨 잔\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 주점 구석의 의뢰인\",\n          \"2장: 지하수로의 정적\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"영지 외곽 성벽 아래의 우천 현장\",\n    \"narrativeSummary\": \"지독한 안개가 깔린 영지 외곽, 에단은 성벽 아래 버려진 초소에서 누군가 남긴 흔적을 발견합니다. 빗줄기가 쏟아지는 가운데, 놋쇠 펜던트가 희미하게 진동하며 어딘가로 향하는 길을 가리킵니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_002_DISCOVERY\",\n        \"action\": \"INVESTIGATE_SCENE\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"영지 외곽 성벽\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"성벽 아래의 불길한 발자국\",\n        \"놋쇠 펜던트의 이상 반응\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 성벽 너머의 추적\",\n          \"2장: 잊혀진 기록보관소\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n아르카디아 영지의 하늘은 낮게 내려앉은 먹구름으로 인해 늘 회색빛이다. 경계 도시의 차가운 습기는 낡은 외투를 파고들었고, 에단은 주머니 속 놋쇠 펜던트를 손가락으로 꾹 쥐었다. 금속의 서늘한 감촉이 손바닥을 타고 전해진다.\n\n영지 입구에서부터 이어진 소문들은 하나같이 불길한 기운을 내포하고 있었다. 지하의 통로가 열렸다거나, 아무도 모르는 사이에 사라진 상인들의 행방 따위가 오가는 거리에는 긴장감이 팽팽하게 감돌았다. 에단은 길게 숨을 내뱉으며 고개를 들어 올렸다. 눈앞에는 낡은 간판이 삐걱이는 소리를 내며 흔들리는 '녹슨 잔' 주점이, 그리고 그 너머로 어둠이 짙게 깔린 영지의 미로 같은 골목들이 펼쳐져 있다. 지금 그가 내딛는 발걸음 하나하나가, 이 도시가 숨기고 있는 진실에 다가가는 첫 번째 시도일 것이다. 그는 잠시 발걸음을 멈추고 주변의 공기를 살폈다. 무언가, 혹은 누군가가 지켜보고 있는 듯한 미묘한 시선이 뒷덜미를 스치고 지나갔다.\n[ZERO_MUTATION_END]",
+        "rawCandidatesBlock": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"주점 '녹슨 잔'의 소란스러운 입구\",\n    \"narrativeSummary\": \"에단은 아르카디아 영지의 경계에 위치한 지하 주점 '녹슨 잔'의 육중한 나무 문을 밀고 들어갑니다. 매캐한 담배 연기와 값싼 술 냄새가 섞인 공기가 그를 맞이하며, 한구석에서 모험가들이 나누는 은밀한 대화가 귓가에 스칩니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_001_ENTRANCE\",\n        \"action\": \"ENTER_LOCATION\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"주점 녹슨 잔\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 주점 구석의 의뢰인\",\n          \"2장: 지하수로의 정적\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"영지 외곽 성벽 아래의 우천 현장\",\n    \"narrativeSummary\": \"지독한 안개가 깔린 영지 외곽, 에단은 성벽 아래 버려진 초소에서 누군가 남긴 흔적을 발견합니다. 빗줄기가 쏟아지는 가운데, 놋쇠 펜던트가 희미하게 진동하며 어딘가로 향하는 길을 가리킵니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_002_DISCOVERY\",\n        \"action\": \"INVESTIGATE_SCENE\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"영지 외곽 성벽\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"성벽 아래의 불길한 발자국\",\n        \"놋쇠 펜던트의 이상 반응\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 성벽 너머의 추적\",\n          \"2장: 잊혀진 기록보관소\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+        "recoveryGateResult": {
+          "passedCandidates": [
+            {
+              "label": "주점 '녹슨 잔'의 소란스러운 입구",
+              "narrativeSummary": "에단은 아르카디아 영지의 경계에 위치한 지하 주점 '녹슨 잔'의 육중한 나무 문을 밀고 들어갑니다. 매캐한 담배 연기와 값싼 술 냄새가 섞인 공기가 그를 맞이하며, 한구석에서 모험가들이 나누는 은밀한 대화가 귓가에 스칩니다.",
+              "semanticEvents": [
+                {
+                  "eventId": "EVT_001_ENTRANCE",
+                  "action": "ENTER_LOCATION",
+                  "roles": [
+                    {
+                      "role": "SUBJECT",
+                      "entityName": "에단"
+                    },
+                    {
+                      "role": "LOCATION",
+                      "entityName": "주점 녹슨 잔"
+                    }
+                  ],
+                  "scope": "CLAIM",
+                  "epistemicStatus": "OBSERVED",
+                  "modality": "NONE"
+                }
+              ],
+              "rawMetadata": {
+                "chapterChanges": {
+                  "currentChapter": "서막: 기회와 소문",
+                  "upcomingChapters": [
+                    "1장: 주점 구석의 의뢰인",
+                    "2장: 지하수로의 정적"
+                  ]
+                }
+              },
+              "candidateId": 1
+            },
+            {
+              "label": "영지 외곽 성벽 아래의 우천 현장",
+              "narrativeSummary": "지독한 안개가 깔린 영지 외곽, 에단은 성벽 아래 버려진 초소에서 누군가 남긴 흔적을 발견합니다. 빗줄기가 쏟아지는 가운데, 놋쇠 펜던트가 희미하게 진동하며 어딘가로 향하는 길을 가리킵니다.",
+              "semanticEvents": [
+                {
+                  "eventId": "EVT_002_DISCOVERY",
+                  "action": "INVESTIGATE_SCENE",
+                  "roles": [
+                    {
+                      "role": "SUBJECT",
+                      "entityName": "에단"
+                    },
+                    {
+                      "role": "LOCATION",
+                      "entityName": "영지 외곽 성벽"
+                    }
+                  ],
+                  "scope": "CLAIM",
+                  "epistemicStatus": "OBSERVED",
+                  "modality": "NONE"
+                }
+              ],
+              "rawMetadata": {
+                "foreshadowSeeds": [
+                  "성벽 아래의 불길한 발자국",
+                  "놋쇠 펜던트의 이상 반응"
+                ],
+                "chapterChanges": {
+                  "currentChapter": "서막: 기회와 소문",
+                  "upcomingChapters": [
+                    "1장: 성벽 너머의 추적",
+                    "2장: 잊혀진 기록보관소"
+                  ]
+                }
+              },
+              "candidateId": 2
+            }
+          ],
+          "quarantinedCandidates": [],
+          "totalInputCount": 2,
+          "passedCount": 2,
+          "quarantinedCount": 0
+        },
+        "meaningTrees": []
+      },
+      "preAuth": {
+        "preAuthResults": [],
+        "allowedCandidatesCount": 0
+      },
+      "phase2": null,
+      "authorizedResult": {
+        "authorizedCandidateId": null,
+        "authorizedCandidate": null,
+        "authorizedCandidatePacket": null,
+        "authorizedProposal": null
+      },
+      "serverTimings": {
+        "t1_requestStart": 1789310606404,
+        "t2_contextAssemblyComplete": 1789310606404,
+        "t3_geminiRequestStart": 1789310606404,
+        "t4_geminiResponseReceived": 1789310610887,
+        "contextAssemblyMs": 0,
+        "geminiGenerationMs": 4483,
+        "inputCharCount": 984,
+        "outputCharCount": 479
+      }
+    },
+    "serverTimings": {
+      "t1_requestStart": 1789310606404,
+      "t2_contextAssemblyComplete": 1789310606404,
+      "t3_geminiRequestStart": 1789310606404,
+      "t4_geminiResponseReceived": 1789310610887,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 4483,
+      "inputCharCount": 984,
+      "outputCharCount": 479,
+      "tokenCount": {
+        "promptTokens": 8035,
+        "candidatesTokens": 985,
+        "totalTokens": 9020
+      }
+    }
+  }
+}

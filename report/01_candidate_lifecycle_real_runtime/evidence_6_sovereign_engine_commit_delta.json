@@ -1,0 +1,8 @@
+{
+  "authorizedCandidateId": null,
+  "authorizedProposal": null,
+  "isStateCommitted": false,
+  "commitResult": null,
+  "serverSnapshotBefore": null,
+  "serverSnapshotAfter": null
+}

@@ -1,0 +1,128 @@
+{
+  "timestamp": "2026-08-30T15:43:00.006Z",
+  "testSuite": "VEIL Candidate Recovery Gate Exhaustive Suite",
+  "summary": {
+    "total": 29,
+    "passed": 29,
+    "failed": 0,
+    "successRate": "100%"
+  },
+  "details": [
+    {
+      "name": "Scenario 1: Normal 5 Candidates - All 5 pass",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 1: Zero-Mutation invariant preserved for all normal candidates",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 2: Normal 4 + 1 Float candidateId - 4 passed, 1 quarantined",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 2: Quarantined candidate has correct index and integer reason",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 2: Passed candidates retain correct order and identity",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 3: Normal 3 + 2 Corrupted - 3 passed, 2 quarantined",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 4: Normal 1 + 4 Corrupted - 1 passed, 4 quarantined",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 4: The only valid candidate is #3",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 5: All 5 Corrupt - 0 passed, 5 quarantined (Fail-Closed)",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 6: candidateId 6 rejected (out of bounds)",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 7: candidateId <= 0 rejected",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 8: candidateId type forgeries (bool, str, obj, NaN, Infinity) rejected",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 9: label invalid types / whitespace-only rejected",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 10: narrativeSummary invalid types rejected",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 11: rawMetadata null rejected",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 12: rawMetadata array rejected",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 13: rawMetadata primitive values rejected",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 14: Candidate root non-objects rejected",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 15: Non-array input to gate fails closed immediately",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 16: Custom valid candidate passed",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 16: Reference equality preserved (Zero Mutation)",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 16: All arbitrary valid custom fields completely preserved",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 17: Exactly 2 valid candidates passed (1 and 3)",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 17: Exactly 3 candidates quarantined (2, 4, 5)",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 17: Passed candidates strictly preserve identities without cross-contamination",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 18 Step 1: Gate passed 3, quarantined 2",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 18 Step 3: Successfully translated 3 valid candidates",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 18 Step 4: Diversity filter succeeded",
+      "status": "PASSED"
+    },
+    {
+      "name": "Scenario 18 Step 5: All valid candidate proposals safely validated in PreAuth",
+      "status": "PASSED"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+[
+  {
+    "candidateId": 1,
+    "label": "장서각 배후의 사당, 비밀 상자와 어둠 속의 추적자",
+    "narrativeSummary": "소진호는 장서각 뒤편의 퇴락한 사당으로 향해 조사가 뜸한 틈을 타 제단 밑을 수색합니다. 그곳에서 비밀 상자를 발견하고 가문의 문양이 음각된 '신비한 옥패'를 손에 넣는 순간, 차가운 살기와 함께 지붕 위에서 어둠을 두른 흑의인 목영이 나타나 그를 가로막습니다.",
+    "rawMetadata": {
+      "factCheckSummary": "1) [사당의 위치]: 장서각 뒤편 황폐해진 사당 설정 부합. 2) [옥패 획득]: 신비한 옥패 획득 인과율 반영. 3) [목영 등장]: 흑의인 목영의 출현을 통한 갈등 고조.",
+      "foreshadowSeeds": [
+        "seed-mysterious-jade",
+        "seed-mok-yeong-identity"
+      ],
+      "cameraOffscreenEvents": [
+        "숭양서원 규율대원들의 야간 순찰 경로 변경"
+      ],
+      "currentChapter": "제1장: 서원의 은밀한 흔적",
+      "upcomingChapters": [
+        "제2장: 달빛 아래의 검영",
+        "제3장: 흑백의 대치"
+      ],
+      "statChanges": "인벤토리 추가: 신비한 옥패 (item-mysterious-jade)",
+      "recommendedDC": 13,
+      "dcReason": "갑작스럽게 밤공기를 가르고 나타난 목영의 살기를 감지하고 대치 구도를 유지하기 위한 민첩(DEX) 또는 지혜(WIS) 판정",
+      "inventoryAction": {
+        "action": "MODIFY_INVENTORY",
+        "type": "ADD",
+        "item": {
+          "itemId": "item-mysterious-jade",
+          "name": "신비한 옥패",
+          "type": "EQUIPMENT",
+          "description": "장서각 뒤편 사당 밑 비밀 상자에서 발견한 옥패. 희미한 온기가 느껴지며, 낙양 소씨 가문의 상징과 기묘하게 닮은 문양이 정교하게 음각되어 있다."
+        },
+        "acquisition": {
+          "cause": "DISCOVERY_PICKUP",
+          "verifiedEventId": "event-find-mysterious-jade"
+        }
+      },
+      "contextVerificationDeclaration": "정사 맥락 일치"
+    }
+  }
+]

@@ -1,0 +1,53 @@
+{
+  "rawCandidatesBlock": [
+    {
+      "label": "매화의 서릿발이 걷히고",
+      "narrativeSummary": "백연화가 고대 구결과 화산파의 가통 암호를 완벽하게 맞추어 읊조리자, 벽면의 음각이 은은한 도가(道家)의 자청색 빛을 발하며 차가운 안개를 몰아내고 숨겨진 비밀 통로를 열어젖힙니다.",
+      "rawMetadata": {
+        "resolvedSeeds": [
+          {
+            "content": "화산파 무공과 공명하는 기문둔갑",
+            "resolutionSummary": "벽면에 새겨진 고대 구결이 화산파의 무학 가사와 공명하여 기문진법의 일부를 해제하는 데 성공합니다."
+          }
+        ]
+      },
+      "candidateId": 1
+    },
+    {
+      "label": "역류하는 진기와 기문의 반동",
+      "narrativeSummary": "구결의 해석이 미세하게 어긋나며 기문둔갑의 진법이 가차 없이 뒤틀립니다. 차가운 바람이 날카로운 칼날처럼 변해 연화의 피부를 스치고, 역류한 진기의 반동으로 내상(內傷)의 위험에 직면합니다.",
+      "rawMetadata": {},
+      "candidateId": 2
+    },
+    {
+      "label": "불완전한 공명과 기기관문의 경고",
+      "narrativeSummary": "절반의 구결만이 일치하여 바위벽 내부에서 웅장한 돌바퀴가 맞물리는 소리가 나지만, 통로가 완전히 열리지 않고 한 치 앞을 알 수 없는 기이한 봉인 장치만이 드러납니다.",
+      "rawMetadata": {},
+      "candidateId": 3
+    }
+  ],
+  "totalParsedCount": 1,
+  "preAuthResults": [
+    {
+      "candidateId": 1,
+      "label": "매화의 서릿발이 걷히고",
+      "narrativeSummary": "백연화가 고대 구결과 화산파의 가통 암호를 완벽하게 맞추어 읊조리자, 벽면의 음각이 은은한 도가(道家)의 자청색 빛을 발하며 차가운 안개를 몰아내고 숨겨진 비밀 통로를 열어젖힙니다.",
+      "rawMetadata": {
+        "resolvedSeeds": [
+          {
+            "content": "화산파 무공과 공명하는 기문둔갑",
+            "resolutionSummary": "벽면에 새겨진 고대 구결이 화산파의 무학 가사와 공명하여 기문진법의 일부를 해제하는 데 성공합니다."
+          }
+        ]
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    }
+  ],
+  "allowedIds": [],
+  "rejectedIds": [
+    1
+  ]
+}

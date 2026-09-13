@@ -1,0 +1,94 @@
+{
+  "rawCandidatesBlock": [
+    {
+      "label": "빛바랜 무덤, 매화검총의 공동",
+      "narrativeSummary": "백연화가 무거운 돌문을 밀어젖히자, 수십 자 높이의 천장을 가진 거대한 지하 공동이 드러납니다. 바닥에는 수많은 부러진 검들이 무덤처럼 꽂혀 있고, 중앙에는 기이한 제단이 먼지 속에 잠겨 있습니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "지하 공동 중앙의 퇴색된 검제단"
+        ],
+        "cameraOffscreenEvents": [
+          "비고 외부 산자락에서 화산파 수색대의 흔적이 움직이기 시작함"
+        ],
+        "chapterChanges": {
+          "currentChapter": "제1장: 안개 속의 검총",
+          "upcomingChapters": [
+            "제2장: 제단의 붉은 흔적",
+            "제3장: 비고의 파수꾼"
+          ]
+        }
+      },
+      "candidateId": 1
+    },
+    {
+      "label": "한기가 서린 지하 수로의 격벽",
+      "narrativeSummary": "돌문 너머로 드러난 곳은 차가운 지하수가 세차게 흐르는 거대한 석조 수로의 상부 공동입니다. 수면에 반사된 희미한 서기가 천장을 어지럽게 수놓고 있으며, 물살 소리가 귀를 먹먹하게 만듭니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "수로 아래 비치는 기이한 보물 상자의 실루엣"
+        ],
+        "chapterChanges": {
+          "currentChapter": "제1장: 얼어붙은 수로",
+          "upcomingChapters": [
+            "제2장: 수중의 기기관문",
+            "제3장: 비고 심처로의 추락"
+          ]
+        }
+      },
+      "candidateId": 2
+    }
+  ],
+  "totalParsedCount": 2,
+  "preAuthResults": [
+    {
+      "candidateId": 1,
+      "label": "빛바랜 무덤, 매화검총의 공동",
+      "narrativeSummary": "백연화가 무거운 돌문을 밀어젖히자, 수십 자 높이의 천장을 가진 거대한 지하 공동이 드러납니다. 바닥에는 수많은 부러진 검들이 무덤처럼 꽂혀 있고, 중앙에는 기이한 제단이 먼지 속에 잠겨 있습니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "지하 공동 중앙의 퇴색된 검제단"
+        ],
+        "cameraOffscreenEvents": [
+          "비고 외부 산자락에서 화산파 수색대의 흔적이 움직이기 시작함"
+        ],
+        "chapterChanges": {
+          "currentChapter": "제1장: 안개 속의 검총",
+          "upcomingChapters": [
+            "제2장: 제단의 붉은 흔적",
+            "제3장: 비고의 파수꾼"
+          ]
+        }
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    },
+    {
+      "candidateId": 2,
+      "label": "한기가 서린 지하 수로의 격벽",
+      "narrativeSummary": "돌문 너머로 드러난 곳은 차가운 지하수가 세차게 흐르는 거대한 석조 수로의 상부 공동입니다. 수면에 반사된 희미한 서기가 천장을 어지럽게 수놓고 있으며, 물살 소리가 귀를 먹먹하게 만듭니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "수로 아래 비치는 기이한 보물 상자의 실루엣"
+        ],
+        "chapterChanges": {
+          "currentChapter": "제1장: 얼어붙은 수로",
+          "upcomingChapters": [
+            "제2장: 수중의 기기관문",
+            "제3장: 비고 심처로의 추락"
+          ]
+        }
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    }
+  ],
+  "allowedIds": [],
+  "rejectedIds": [
+    1,
+    2
+  ]
+}

@@ -1,0 +1,61 @@
+[
+  {
+    "recordId": "rec-evt-mtpvc2ai-056f26-1",
+    "eventId": "evt-mtpvc2ai-056f26",
+    "requestId": "req-mtpvc2ai-jzqhrk",
+    "proposalId": "prop-req-mtpvc2ai-jzqhrk",
+    "turn": 4,
+    "timestamp": "2026-09-06T13:49:43.194Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "RECORD_OFFSCREEN_EVENT",
+    "details": "{\"id\":\"offscreen-mtpvc2aj-k5tud5\",\"eventDescription\":\"숭양서원 규율대원들의 야간 순찰 경로 변경\",\"timestamp\":\"2026-09-06T13:49:43.195Z\",\"visibility\":\"FACTION_ONLY\"}",
+    "canonicalAction": {
+      "type": "RECORD_OFFSCREEN_EVENT",
+      "payload": {
+        "id": "offscreen-mtpvc2aj-k5tud5",
+        "eventDescription": "숭양서원 규율대원들의 야간 순찰 경로 변경",
+        "timestamp": "2026-09-06T13:49:43.195Z",
+        "visibility": "FACTION_ONLY"
+      }
+    },
+    "stateVersionAfterCommit": 5,
+    "informationAccess": "FACTION_ONLY",
+    "previousStateHash": "csh_91749e50a29126f0",
+    "originInputId": "act-Case_D-4"
+  },
+  {
+    "recordId": "rec-evt-mtpvc2ai-056f26-2",
+    "eventId": "evt-mtpvc2ai-056f26",
+    "requestId": "req-mtpvc2ai-jzqhrk",
+    "proposalId": "prop-req-mtpvc2ai-jzqhrk",
+    "turn": 4,
+    "timestamp": "2026-09-06T13:49:43.194Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "ADVANCE_CHAPTER",
+    "details": "{\"currentChapter\":\"제1장: 서원의 은밀한 흔적\",\"upcomingChapters\":[\"제2장: 달빛 아래의 검영\",\"제3장: 흑백의 대치\"]}",
+    "canonicalAction": {
+      "type": "ADVANCE_CHAPTER",
+      "payload": {
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 달빛 아래의 검영",
+          "제3장: 흑백의 대치"
+        ]
+      }
+    },
+    "stateVersionAfterCommit": 5,
+    "informationAccess": "PUBLIC",
+    "previousStateHash": "csh_91749e50a29126f0",
+    "originInputId": "act-Case_D-4"
+  }
+]

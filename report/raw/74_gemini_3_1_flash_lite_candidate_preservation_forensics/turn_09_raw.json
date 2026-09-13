@@ -1,0 +1,154 @@
+{
+  "turn": 9,
+  "actionType": "아이템 사용",
+  "playerPrompt": "배낭 속 은화 주머니에서 은화 2닢을 꺼내어 문지기 남성에게 통행료로 건네며 주점 안으로 들어갈 수 있는지 요청한다.",
+  "apiResponse": {
+    "success": true,
+    "text": "아르카디아 영지의 경계, 해가 저물어가는 국경 도시의 풍경은 눅눅한 흙냄새와 차가운 철기류의 냄새로 가득하다. 하늘은 짙은 잿빛으로 물들고, 성벽 너머에서 불어오는 바람은 스산하게 거리를 훑고 지나간다. 방랑 모험가 에단, 당신의 발밑으로는 낡은 돌길이 길게 이어져 있다.\n\n길 양옆으로 늘어선 상점들은 하나둘 셔터를 내리고, 거리의 인파는 급격히 줄어들고 있다. 낯선 이방인인 당신의 목에는 낡은 놋쇠 펜던트가 무겁게 매달려 있으며, 그것이 옷깃 위를 스칠 때마다 미세한 마찰음이 귓가를 맴돈다. 도시 곳곳에는 정체 모를 불안감이 기저에 깔려 있고, 사람들은 누군가와 눈을 마주치는 것조차 경계하는 기색이 역력하다. 당신의 눈앞에는 이제 두 갈래로 나뉘는 길목이 보인다. 한쪽은 열기 가득한 지하 주점의 입구로 향하고, 다른 한쪽은 어둠이 짙게 배어든 시장 바닥으로 이어져 있다. 이 도시가 품고 있는 진실은 어디에 숨어 있는가. 당신의 발걸음이 향할 곳을 기다리며, 도시는 무심하게 밤을 맞이하고 있다.",
+    "rawResponse": "아르카디아 영지의 경계, 해가 저물어가는 국경 도시의 풍경은 눅눅한 흙냄새와 차가운 철기류의 냄새로 가득하다. 하늘은 짙은 잿빛으로 물들고, 성벽 너머에서 불어오는 바람은 스산하게 거리를 훑고 지나간다. 방랑 모험가 에단, 당신의 발밑으로는 낡은 돌길이 길게 이어져 있다.\n\n길 양옆으로 늘어선 상점들은 하나둘 셔터를 내리고, 거리의 인파는 급격히 줄어들고 있다. 낯선 이방인인 당신의 목에는 낡은 놋쇠 펜던트가 무겁게 매달려 있으며, 그것이 옷깃 위를 스칠 때마다 미세한 마찰음이 귓가를 맴돈다. 도시 곳곳에는 정체 모를 불안감이 기저에 깔려 있고, 사람들은 누군가와 눈을 마주치는 것조차 경계하는 기색이 역력하다. 당신의 눈앞에는 이제 두 갈래로 나뉘는 길목이 보인다. 한쪽은 열기 가득한 지하 주점의 입구로 향하고, 다른 한쪽은 어둠이 짙게 배어든 시장 바닥으로 이어져 있다. 이 도시가 품고 있는 진실은 어디에 숨어 있는가. 당신의 발걸음이 향할 곳을 기다리며, 도시는 무심하게 밤을 맞이하고 있다.",
+    "isFallbackNonMutation": true,
+    "selectedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null,
+    "preAuthSummary": {
+      "total": 2,
+      "allowed": 0,
+      "rejected": 2
+    },
+    "contextSnapshot": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "actualModelVersion": "gemini-3.1-flash-lite",
+    "requestedModel": "gemini-3.1-flash-lite",
+    "gitCommit": "3a493aa85717dfe47671583c9d27929d5cb7e0d5",
+    "forensicCapture": {
+      "t0_playerInput": "",
+      "chatContextForensic": {
+        "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+        "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망",
+        "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+        "seedsContext": "",
+        "offscreenContext": ""
+      },
+      "geminiContentsForensic": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "text": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 9 PLAYER PROMPT]\n서사를 시작하고 첫 장면을 묘사하라."
+            }
+          ]
+        }
+      ],
+      "phase1": {
+        "model": "gemini-3.1-flash-lite",
+        "actualModelVersion": "gemini-3.1-flash-lite",
+        "responseId": "n7amatPICvKj2roPoNPcuAo",
+        "rawResponseText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"주점 '녹슨 잔' 방문\",\n    \"narrativeSummary\": \"국경 도시의 중심부, 어스름이 깔린 지하 주점으로 향해 정보를 얻거나 의뢰를 탐색한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_001\",\n        \"action\": \"MOVE\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"녹슨 잔 주점\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 지하 주점의 계약\",\n          \"2장: 비밀 통로의 열쇠\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"거리의 소문 조사\",\n    \"narrativeSummary\": \"시장 바닥을 배회하며 도시의 흉흉한 소문과 최근 실종 사건에 대해 민간인들의 이야기를 청해 듣는다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_002\",\n        \"action\": \"INVESTIGATE\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"시장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"epistemicStatus\": \"INFERRED\"\n      }\n    ]\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n아르카디아 영지의 경계, 해가 저물어가는 국경 도시의 풍경은 눅눅한 흙냄새와 차가운 철기류의 냄새로 가득하다. 하늘은 짙은 잿빛으로 물들고, 성벽 너머에서 불어오는 바람은 스산하게 거리를 훑고 지나간다. 방랑 모험가 에단, 당신의 발밑으로는 낡은 돌길이 길게 이어져 있다.\n\n길 양옆으로 늘어선 상점들은 하나둘 셔터를 내리고, 거리의 인파는 급격히 줄어들고 있다. 낯선 이방인인 당신의 목에는 낡은 놋쇠 펜던트가 무겁게 매달려 있으며, 그것이 옷깃 위를 스칠 때마다 미세한 마찰음이 귓가를 맴돈다. 도시 곳곳에는 정체 모를 불안감이 기저에 깔려 있고, 사람들은 누군가와 눈을 마주치는 것조차 경계하는 기색이 역력하다. 당신의 눈앞에는 이제 두 갈래로 나뉘는 길목이 보인다. 한쪽은 열기 가득한 지하 주점의 입구로 향하고, 다른 한쪽은 어둠이 짙게 배어든 시장 바닥으로 이어져 있다. 이 도시가 품고 있는 진실은 어디에 숨어 있는가. 당신의 발걸음이 향할 곳을 기다리며, 도시는 무심하게 밤을 맞이하고 있다.\n[ZERO_MUTATION_END]",
+        "rawCandidatesBlock": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"주점 '녹슨 잔' 방문\",\n    \"narrativeSummary\": \"국경 도시의 중심부, 어스름이 깔린 지하 주점으로 향해 정보를 얻거나 의뢰를 탐색한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_001\",\n        \"action\": \"MOVE\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"녹슨 잔 주점\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 지하 주점의 계약\",\n          \"2장: 비밀 통로의 열쇠\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"거리의 소문 조사\",\n    \"narrativeSummary\": \"시장 바닥을 배회하며 도시의 흉흉한 소문과 최근 실종 사건에 대해 민간인들의 이야기를 청해 듣는다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_002\",\n        \"action\": \"INVESTIGATE\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"에단\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"시장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"epistemicStatus\": \"INFERRED\"\n      }\n    ]\n  }\n]\n[CANDIDATES_END]",
+        "recoveryGateResult": {
+          "passedCandidates": [
+            {
+              "label": "주점 '녹슨 잔' 방문",
+              "narrativeSummary": "국경 도시의 중심부, 어스름이 깔린 지하 주점으로 향해 정보를 얻거나 의뢰를 탐색한다.",
+              "semanticEvents": [
+                {
+                  "eventId": "EVT_001",
+                  "action": "MOVE",
+                  "roles": [
+                    {
+                      "role": "SUBJECT",
+                      "entityName": "에단"
+                    },
+                    {
+                      "role": "LOCATION",
+                      "entityName": "녹슨 잔 주점"
+                    }
+                  ],
+                  "scope": "PROPOSAL",
+                  "epistemicStatus": "OBSERVED",
+                  "modality": "NONE"
+                }
+              ],
+              "rawMetadata": {
+                "chapterChanges": {
+                  "currentChapter": "서막: 기회와 소문",
+                  "upcomingChapters": [
+                    "1장: 지하 주점의 계약",
+                    "2장: 비밀 통로의 열쇠"
+                  ]
+                }
+              },
+              "candidateId": 1
+            },
+            {
+              "label": "거리의 소문 조사",
+              "narrativeSummary": "시장 바닥을 배회하며 도시의 흉흉한 소문과 최근 실종 사건에 대해 민간인들의 이야기를 청해 듣는다.",
+              "semanticEvents": [
+                {
+                  "eventId": "EVT_002",
+                  "action": "INVESTIGATE",
+                  "roles": [
+                    {
+                      "role": "SUBJECT",
+                      "entityName": "에단"
+                    },
+                    {
+                      "role": "OBJECT",
+                      "entityName": "시장"
+                    }
+                  ],
+                  "scope": "PROPOSAL",
+                  "epistemicStatus": "INFERRED",
+                  "modality": "NONE"
+                }
+              ],
+              "candidateId": 2,
+              "rawMetadata": {}
+            }
+          ],
+          "quarantinedCandidates": [],
+          "totalInputCount": 2,
+          "passedCount": 2,
+          "quarantinedCount": 0
+        },
+        "meaningTrees": []
+      },
+      "preAuth": {
+        "preAuthResults": [],
+        "allowedCandidatesCount": 0
+      },
+      "phase2": null,
+      "authorizedResult": {
+        "authorizedCandidateId": null,
+        "authorizedCandidate": null,
+        "authorizedCandidatePacket": null,
+        "authorizedProposal": null
+      },
+      "serverTimings": {
+        "t1_requestStart": 1789310622729,
+        "t2_contextAssemblyComplete": 1789310622729,
+        "t3_geminiRequestStart": 1789310622729,
+        "t4_geminiResponseReceived": 1789310626867,
+        "contextAssemblyMs": 0,
+        "geminiGenerationMs": 4138,
+        "inputCharCount": 984,
+        "outputCharCount": 507
+      }
+    },
+    "serverTimings": {
+      "t1_requestStart": 1789310622729,
+      "t2_contextAssemblyComplete": 1789310622729,
+      "t3_geminiRequestStart": 1789310622729,
+      "t4_geminiResponseReceived": 1789310626867,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 4138,
+      "inputCharCount": 984,
+      "outputCharCount": 507,
+      "tokenCount": {
+        "promptTokens": 8035,
+        "candidatesTokens": 773,
+        "totalTokens": 8808
+      }
+    }
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "genesisTurn": 1,
+  "cleanWorldInfo": {
+    "worldName": "아스테리아 제국령",
+    "worldType": "popular_genre",
+    "settingDescription": "마법과 기계 문명이 교차하는 아스테리아 제국의 변방 도시.",
+    "toneStyle": "냉혹하고 지적인 정통 판타지",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [],
+    "offscreenRecords": []
+  },
+  "cleanCharacter": {
+    "name": "엘리시아 윈드스톰",
+    "gender": "여성",
+    "age": "21",
+    "appearance": "룬 문자가 새겨진 짙은 로브와 마도 지팡이를 든 신비로운 학구파",
+    "goal": "고대 마법 제국의 붕괴 원인이 담긴 유실된 금서를 회수하는 것",
+    "originBackground": "제국 마도 아카데미 수석 졸업생이었으나, 금지된 연구의 진실을 쫓아 파문당함",
+    "backgroundType": "preset",
+    "flaw": "지식에 대한 집착으로 위험을 경시하는 무모함",
+    "flawType": "preset",
+    "oath": "진리의 탐구를 어떤 권력 앞에서도 굽히지 않겠다",
+    "oathType": "preset",
+    "anchor": "스승이 남겨준 부서진 크리스탈 펜던트",
+    "anchorType": "preset",
+    "faction": "마도학회",
+    "factionType": "preset",
+    "metaElements": {
+      "background": "",
+      "flaw": "",
+      "oath": "",
+      "anchor": "",
+      "faction": ""
+    },
+    "stats": {
+      "strength": 8,
+      "agility": 12,
+      "constitution": 10,
+      "intelligence": 18,
+      "wisdom": 15,
+      "charisma": 12
+    },
+    "inventory": [
+      {
+        "id": "inv_staff",
+        "name": "마도 지팡이",
+        "quantity": 1,
+        "type": "무기",
+        "isEquipped": true
+      },
+      {
+        "id": "inv_scroll",
+        "name": "미해독 룬 양피지",
+        "quantity": 1,
+        "type": "소모품",
+        "isEquipped": false
+      }
+    ],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": []
+  },
+  "cleanEngineState": {
+    "historicalRecords": [],
+    "pendingCandidates": [],
+    "validationLogs": [],
+    "latencyHistory": [],
+    "turnTraces": [],
+    "checkpoints": [],
+    "saveDietEvents": [],
+    "lastContextSnapshot": "",
+    "lastRawResponse": "",
+    "passports": {
+      "passports": [
+        {
+          "passportId": "passport:canon:character:protagonist:v1",
+          "entityId": "character:protagonist",
+          "historyDomain": "CANON",
+          "passportVersion": 1,
+          "status": "ACTIVE",
+          "stamps": []
+        },
+        {
+          "passportId": "passport:canon:inv_scroll:v1",
+          "entityId": "inv_scroll",
+          "historyDomain": "CANON",
+          "passportVersion": 1,
+          "status": "ACTIVE",
+          "stamps": []
+        },
+        {
+          "passportId": "passport:canon:inv_staff:v1",
+          "entityId": "inv_staff",
+          "historyDomain": "CANON",
+          "passportVersion": 1,
+          "status": "ACTIVE",
+          "stamps": []
+        }
+      ]
+    },
+    "diagnostics": {
+      "stateVersion": 1,
+      "totalExecutedRequests": 0,
+      "totalRecordedEvents": 0,
+      "totalHistoricalRecords": 0,
+      "lastEventId": null
+    }
+  },
+  "genesisSnapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "아스테리아 제국령",
+      "worldType": "popular_genre",
+      "settingDescription": "마법과 기계 문명이 교차하는 아스테리아 제국의 변방 도시.",
+      "toneStyle": "냉혹하고 지적인 정통 판타지",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "엘리시아 윈드스톰",
+      "gender": "여성",
+      "age": "21",
+      "appearance": "룬 문자가 새겨진 짙은 로브와 마도 지팡이를 든 신비로운 학구파",
+      "goal": "고대 마법 제국의 붕괴 원인이 담긴 유실된 금서를 회수하는 것",
+      "originBackground": "제국 마도 아카데미 수석 졸업생이었으나, 금지된 연구의 진실을 쫓아 파문당함",
+      "backgroundType": "preset",
+      "flaw": "지식에 대한 집착으로 위험을 경시하는 무모함",
+      "flawType": "preset",
+      "oath": "진리의 탐구를 어떤 권력 앞에서도 굽히지 않겠다",
+      "oathType": "preset",
+      "anchor": "스승이 남겨준 부서진 크리스탈 펜던트",
+      "anchorType": "preset",
+      "faction": "마도학회",
+      "factionType": "preset",
+      "metaElements": {
+        "background": "",
+        "flaw": "",
+        "oath": "",
+        "anchor": "",
+        "faction": ""
+      },
+      "stats": {
+        "strength": 8,
+        "agility": 12,
+        "constitution": 10,
+        "intelligence": 18,
+        "wisdom": 15,
+        "charisma": 12
+      },
+      "inventory": [
+        {
+          "id": "inv_staff",
+          "name": "마도 지팡이",
+          "quantity": 1,
+          "type": "무기",
+          "isEquipped": true
+        },
+        {
+          "id": "inv_scroll",
+          "name": "미해독 룬 양피지",
+          "quantity": 1,
+          "type": "소모품",
+          "isEquipped": false
+        }
+      ],
+      "secret": "",
+      "physicalDefect": "",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-09-12T23:29:37.879Z"
+  },
+  "diagnostics": {
+    "stateVersion": 1,
+    "totalExecutedRequests": 0,
+    "totalRecordedEvents": 0,
+    "totalHistoricalRecords": 0,
+    "lastEventId": null
+  },
+  "historicalRecordsLength": 0
+}

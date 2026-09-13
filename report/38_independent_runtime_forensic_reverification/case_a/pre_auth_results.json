@@ -1,0 +1,16 @@
+[
+  {
+    "candidateId": 1,
+    "preAuthStatus": "ALLOW",
+    "rejectedReasons": [],
+    "conflictDetails": [],
+    "actionsCount": 2
+  },
+  {
+    "candidateId": 2,
+    "preAuthStatus": "ALLOW",
+    "rejectedReasons": [],
+    "conflictDetails": [],
+    "actionsCount": 2
+  }
+]

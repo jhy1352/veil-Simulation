@@ -1,0 +1,50 @@
+{
+  "passedCandidates": [
+    {
+      "candidateId": 1,
+      "label": "조경 선생의 신뢰와 동부 광산 투자 계약서의 양도",
+      "narrativeSummary": "조경 선생은 소진호가 낙양 소씨의 후손임을 확신하고, 품속에서 봉인된 '동부 광산 투자 계약서'를 꺼내 건넵니다. 이 문서는 소씨 가문이 몰락하기 전 남겨둔 유산이자 가전 비급의 실마리를 쥔 핵심 단서입니다.",
+      "rawMetadata": {
+        "factCheckSummary": "1) [조경 선생의 비밀 행동]: 정사 맥락에 부합하도록 소씨 가문과의 과거 인연 설정. 2) [동부 광산 계약서]: 신규 아이템으로 등록 추진.",
+        "foreshadowSeeds": [
+          "seed-dongbu-mine-secret"
+        ],
+        "cameraOffscreenEvents": [
+          "서원 내부 감시자들의 시선"
+        ],
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 동부 광산의 장막",
+          "제3장: 비급의 실마리"
+        ],
+        "statChanges": "소지품에 '동부 광산 투자 계약서' 추가",
+        "recommendedDC": 11,
+        "dcReason": "계약서에 숨겨진 이중 장치나 미세한 혈인을 알아채기 위한 지혜(Wisdom) 판정",
+        "contextVerificationDeclaration": "정사 맥락 일치"
+      },
+      "inventoryModifications": [
+        {
+          "action": "ADD",
+          "itemId": "inv-dongbu-contract-1",
+          "itemName": "동부 광산 투자 계약서",
+          "quantity": 1,
+          "acquisition": {
+            "cause": "GIFT_REWARD",
+            "verifiedEventId": "evt-jo-gift-contract"
+          }
+        }
+      ],
+      "seedModifications": [
+        {
+          "action": "ADD",
+          "seedId": "seed-dongbu-mine-secret",
+          "description": "동부 광산 투자 계약서 뒷면에 숨겨진 의문의 혈인과 잃어버린 소가 비급과의 연관성"
+        }
+      ]
+    }
+  ],
+  "quarantinedCandidates": [],
+  "totalInputCount": 1,
+  "passedCount": 1,
+  "quarantinedCount": 0
+}

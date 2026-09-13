@@ -1,0 +1,546 @@
+================================================================================
+TRPG 3.1 — Phase 5.7 Evidence Gap Closure Raw Evidence Collection Log
+TIMESTAMP: 2026-08-29T08:20:23.378Z
+================================================================================
+
+
+[SECTION: RT-01 RAW EVIDENCE]
+TIMESTAMP: 2026-08-29T08:21:07.332Z
+BEFORE: {
+  "character": {
+    "name": "모험가",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "stats": {
+      "strength": 14,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": [],
+    "gold": 50
+  },
+  "worldInfo": {
+    "worldName": "판타지 대륙",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "봄 1년차 12:00"
+    },
+    "npcs": [
+      {
+        "id": "npc-kang",
+        "name": "강장군",
+        "class": "무장",
+        "status": "DEAD",
+        "location": "황릉",
+        "relationship": "조력자",
+        "innerThought": "죽은 자는 말이 없다.",
+        "knownInfo": "전쟁 중 전사함",
+        "protagonistKnowledge": "전사한 영웅으로 알고 있음",
+        "metInStory": true
+      }
+    ],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [],
+    "offscreenRecords": []
+  },
+  "stateVersion": 1,
+  "historyLength": 0
+}
+INPUT: {
+  "playerPrompt": "나는 무덤가를 둘러보고 전설의 마검을 즉시 획득한다. 그리고 죽었던 강장군을 살려낸다.",
+  "requestedModel": "models/gemini-3.7-flash",
+  "httpEndpoint": "http://localhost:3000/api/chat"
+}
+OBSERVED_PATH: [
+  "1. Player Prompt Input: 나는 무덤가를 둘러보고 전설의 마검을 즉시 획득한다. 그리고 죽었던 강장군을 살려낸다.",
+  "2. Dispatch actual HTTP POST to http://localhost:3000/api/chat",
+  "3. HTTP Response Received with status 500"
+]
+PREREQUISITE: {
+  "liveServerRunning": true,
+  "endpointAccessible": true
+}
+HTTP_STATUS: 500
+GEMINI_SUCCESS: false
+ACTUAL_GEMINI_RESPONSE_RAW: {
+  "error": "{\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}"
+}
+ERROR_RAW: {"error":{"code":503,"message":"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.","status":"UNAVAILABLE"}}
+CANDIDATE_RAW: null
+PROPOSAL_RAW: null
+PROPOSAL_ACTIONS_LENGTH: 0
+SUBMIT_PROPOSAL_RESULT: null
+COMMIT_RESULT_RAW: null
+AFTER: {
+  "character": {
+    "name": "모험가",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "stats": {
+      "strength": 14,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": [],
+    "gold": 50
+  },
+  "worldInfo": {
+    "worldName": "판타지 대륙",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "봄 1년차 12:00"
+    },
+    "npcs": [
+      {
+        "id": "npc-kang",
+        "name": "강장군",
+        "class": "무장",
+        "status": "DEAD",
+        "location": "황릉",
+        "relationship": "조력자",
+        "innerThought": "죽은 자는 말이 없다.",
+        "knownInfo": "전쟁 중 전사함",
+        "protagonistKnowledge": "전사한 영웅으로 알고 있음",
+        "metInStory": true
+      }
+    ],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [],
+    "offscreenRecords": []
+  },
+  "stateVersion": 1,
+  "historyLength": 0,
+  "kangNpcStatus": "DEAD",
+  "inventory": []
+}
+UNEXECUTED_STEPS: [
+  "Step 4-8: Gemini call did not return successful text (HTTP 500 / 503 error returned from upstream API)"
+]
+
+[SECTION: RT-02 RAW EVIDENCE (LEGITIMATE HYDRATION & 4 FORGERY ATTACKS)]
+TIMESTAMP: 2026-08-29T08:21:07.337Z
+BEFORE_COMMIT: {
+  "gold": 300,
+  "stateVersion": 1,
+  "historyLength": 0
+}
+LEGIT_COMMIT_RESULT: {
+  "success": true,
+  "stateVersion": 2,
+  "eventId": "evt-legit-01",
+  "committedActionsCount": 1,
+  "rejectedReasons": [],
+  "conflictDetails": [],
+  "newHistoricalRecords": [
+    {
+      "recordId": "rec-evt-legit-01-1",
+      "eventId": "evt-legit-01",
+      "requestId": "req-legit-01",
+      "proposalId": "prop-legit-01",
+      "turn": 1,
+      "timestamp": "2026-08-29T08:21:07.332Z",
+      "narrativeTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "source": "PLAYER",
+      "actionType": "ADD_RUMOR",
+      "details": "{\"rumor\":\"마을에 상인이 도착했다.\"}",
+      "stateVersionAfterCommit": 2,
+      "informationAccess": "RUMOR"
+    }
+  ],
+  "snapshot": {
+    "stateVersion": 2,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "영지",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [],
+      "publicRumors": [
+        "마을에 상인이 도착했다."
+      ],
+      "secretLore": [],
+      "seeds": [],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "영주",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "stats": {
+        "strength": 10,
+        "agility": 10,
+        "constitution": 10,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [],
+      "secret": "",
+      "physicalDefect": "",
+      "timeline": [],
+      "gold": 300
+    },
+    "lastCommittedEventId": "evt-legit-01",
+    "lastCommittedAt": "2026-08-29T08:21:07.332Z"
+  }
+}
+CANONICAL_STATE_AFTER_COMMIT: {
+  "stateVersion": 2,
+  "turn": 1,
+  "worldInfo": {
+    "worldName": "영지",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [
+      "마을에 상인이 도착했다."
+    ],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [],
+    "offscreenRecords": []
+  },
+  "character": {
+    "name": "영주",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": [],
+    "gold": 300
+  },
+  "lastCommittedEventId": "evt-legit-01",
+  "lastCommittedAt": "2026-08-29T08:21:07.332Z"
+}
+RAW_LOCALSTORAGE_PAYLOAD_SAVED: {"character":{"name":"영주","gender":"","age":"","appearance":"","goal":"","originBackground":"","backgroundType":"preset","flaw":"","flawType":"preset","oath":"","oathType":"preset","anchor":"","anchorType":"preset","faction":"","factionType":"preset","stats":{"strength":10,"agility":10,"constitution":10,"intelligence":10,"wisdom":10,"charisma":10},"inventory":[],"secret":"","physicalDefect":"","timeline":[],"gold":300},"worldInfo":{"worldName":"영지","worldType":"popular_genre","settingDescription":"","toneStyle":"원작 고유의 문체 충실 재현","currentTime":{"year":1,"season":"SPRING","formattedTime":"1년 봄"},"npcs":[],"factions":[],"publicRumors":["마을에 상인이 도착했다."],"secretLore":[],"seeds":[],"chapters":{"currentChapter":"서막","upcomingChapters":[]},"dcHistory":[],"unresolvedForeshadows":[],"cameraOffscreenEvents":[],"offscreenRecords":[]},"messages":[{"id":"m1","role":"user","content":"상인 확인","cleanText":"상인 확인","turn":1,"timestamp":"2026-08-29T08:21:07.336Z"},{"id":"m2","role":"assistant","content":"상인이 도착했습니다.","cleanText":"상인이 도착했습니다.","turn":1,"timestamp":"2026-08-29T08:21:07.336Z"}],"engineState":{"historicalRecords":[{"recordId":"rec-evt-legit-01-1","eventId":"evt-legit-01","requestId":"req-legit-01","proposalId":"prop-legit-01","turn":1,"timestamp":"2026-08-29T08:21:07.332Z","narrativeTime":{"year":1,"season":"SPRING","formattedTime":"1년 봄"},"source":"PLAYER","actionType":"ADD_RUMOR","details":"{\"rumor\":\"마을에 상인이 도착했다.\"}","stateVersionAfterCommit":2,"informationAccess":"RUMOR"}],"diagnostics":{"stateVersion":2,"totalExecutedRequests":1,"totalRecordedEvents":1,"totalHistoricalRecords":1,"lastEventId":"evt-legit-01"}},"storyTurnCount":1,"selectedModel":"models/gemini-3.7-flash","createdAt":"2026-08-29T08:21:07.336Z","updatedAt":"2026-08-29T08:21:07.332Z"}
+NORMAL_HYDRATION_OUTCOME: {
+  "rehydratedStateVersion": 2,
+  "rehydratedHistoryLength": 1,
+  "rehydratedCharacterGold": 300,
+  "engineHydrationError": null,
+  "appCaughtError": null
+}
+ATTACK_2_1_VERSION_REGRESSION: {
+  "forgedPayloadSnippet": {
+    "claimedStateVersion": 1,
+    "historyLastVersion": 2
+  },
+  "engineHydrationError": "[HYDRATION_INTEGRITY_VIOLATION] Snapshot stateVersion (1) precedes last history version (2).",
+  "hydratedEngineInstanceCreated": false
+}
+ATTACK_2_2_FORGED_EVENT_ID: {
+  "forgedPayloadSnippet": {
+    "claimedLastEventId": "evt-FORGED-INJECTED-ID-999",
+    "historyLastEventId": "evt-legit-01"
+  },
+  "engineHydrationError": "[HYDRATION_INTEGRITY_VIOLATION] Snapshot lastCommittedEventId 'evt-FORGED-INJECTED-ID-999' does not match last history eventId 'evt-legit-01'.",
+  "hydratedEngineInstanceCreated": false
+}
+ATTACK_2_3_NON_MONOTONIC_HISTORY: {
+  "forgedHistoryVersions": [
+    3,
+    2
+  ],
+  "engineHydrationError": "[HYDRATION_INTEGRITY_VIOLATION] History stateVersion regression at index 1: version 2 precedes version 3.",
+  "hydratedEngineInstanceCreated": false
+}
+ATTACK_2_4_NEGATIVE_STAT: {
+  "injectedStrength": -50,
+  "schemaValidationResult": {
+    "isValid": false,
+    "errors": [
+      "[SCHEMA_VIOLATION] Stat 'strength' must be a finite non-negative number. Received: -50"
+    ]
+  }
+}
+UNEXECUTED_STEPS: []
+
+[SECTION: RT-06 RAW EVIDENCE (FULL E2E TURN PIPELINE & RELOAD HYDRATION)]
+TIMESTAMP: 2026-08-29T08:22:05.877Z
+BEFORE_TURN: {
+  "character": {
+    "name": "아서",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": [],
+    "gold": 100
+  },
+  "worldInfo": {
+    "worldName": "아발론",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "봄 1년차 08:00"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [],
+    "offscreenRecords": []
+  },
+  "stateVersion": 1,
+  "historyLength": 0
+}
+INPUT: {
+  "playerPrompt": "마을 대장간으로 이동하여 검을 수리하고 대장장이에게 인사한다.",
+  "requestedModel": "models/gemini-3.7-flash"
+}
+OBSERVED_PATH: [
+  "1. Player Input: 마을 대장간으로 이동하여 검을 수리하고 대장장이에게 인사한다.",
+  "2. HTTP POST to /api/chat",
+  "3. HTTP Status: 500",
+  "8. Serialized session payload to localStorage (1428 bytes)",
+  "9. Executed App Hydration on fresh instance from localStorage"
+]
+HTTP_STATUS: 500
+GEMINI_SUCCESS: false
+ACTUAL_GEMINI_RESPONSE_RAW: {
+  "error": "{\"error\":{\"code\":503,\"message\":\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\",\"status\":\"UNAVAILABLE\"}}"
+}
+ERROR_RAW: {"error":{"code":503,"message":"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.","status":"UNAVAILABLE"}}
+CANDIDATE_RAW: null
+PROPOSAL_RAW: null
+PROPOSAL_ACTIONS_LENGTH: 0
+SUBMIT_PROPOSAL_RESULT: null
+STATE_AFTER_TURN: {
+  "stateVersion": 1,
+  "turn": 1,
+  "worldInfo": {
+    "worldName": "아발론",
+    "worldType": "popular_genre",
+    "settingDescription": "",
+    "toneStyle": "원작 고유의 문체 충실 재현",
+    "currentTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "봄 1년차 08:00"
+    },
+    "npcs": [],
+    "factions": [],
+    "publicRumors": [],
+    "secretLore": [],
+    "seeds": [],
+    "chapters": {
+      "currentChapter": "서막",
+      "upcomingChapters": []
+    },
+    "dcHistory": [],
+    "unresolvedForeshadows": [],
+    "cameraOffscreenEvents": [],
+    "offscreenRecords": []
+  },
+  "character": {
+    "name": "아서",
+    "gender": "",
+    "age": "",
+    "appearance": "",
+    "goal": "",
+    "originBackground": "",
+    "backgroundType": "preset",
+    "flaw": "",
+    "flawType": "preset",
+    "oath": "",
+    "oathType": "preset",
+    "anchor": "",
+    "anchorType": "preset",
+    "faction": "",
+    "factionType": "preset",
+    "stats": {
+      "strength": 10,
+      "agility": 10,
+      "constitution": 10,
+      "intelligence": 10,
+      "wisdom": 10,
+      "charisma": 10
+    },
+    "inventory": [],
+    "secret": "",
+    "physicalDefect": "",
+    "timeline": [],
+    "gold": 100
+  },
+  "lastCommittedEventId": null,
+  "lastCommittedAt": "2026-08-29T08:21:07.337Z"
+}
+LOCALSTORAGE_SERIALIZED_SIZE_BYTES: 1428
+HYDRATION_EXECUTION_OUTCOME: {
+  "rehydratedStateVersion": 1,
+  "rehydratedHistoryLength": 0,
+  "rehydratedCharacterName": "아서",
+  "rehydratedCharacterGold": 100,
+  "engineHydrationError": null,
+  "appCaughtError": null
+}
+CANONICAL_STATE_MATCH: {
+  "stateVersionMatches": true,
+  "goldMatches": true,
+  "historyLengthMatches": true
+}
+UNEXECUTED_STEPS: [
+  "Step 4-7: Gemini response returned HTTP 500 / 503 error"
+]
+
+================================================================================
+RAW EVIDENCE COLLECTION RUN COMPLETE
+TIMESTAMP: 2026-08-29T08:22:05.878Z
+================================================================================

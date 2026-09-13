@@ -1,0 +1,57 @@
+{
+  "rawCandidatesBlock": [
+    {
+      "label": "석벽의 봉인 해제와 비밀 통로의 개방",
+      "narrativeSummary": "구결을 올바르게 대조하여 읊조리자, 고대 화산파의 진법이 반응하며 굳게 닫혀 있던 석벽의 일부가 묵직한 소리와 함께 열려 새로운 통로가 나타납니다.",
+      "rawMetadata": {
+        "resolvedSeeds": [
+          {
+            "content": "벽면에 새겨진 화산파의 고대 기문둔갑 흔적",
+            "resolutionSummary": "연화가 화산 입문 구결의 가사와 벽면의 암호를 대조하여 기문둔갑의 투로를 해독해 내는 데 성공합니다."
+          }
+        ]
+      },
+      "candidateId": 1
+    },
+    {
+      "label": "진법의 오작동과 한기의 응축",
+      "narrativeSummary": "구결의 해석에 미세한 오차가 발생하여, 벽면에 새겨진 주술적 기운이 폭주합니다. 밤안개 같던 냉기가 푸른 기류로 변해 연화의 주변을 포위하며 그녀의 기맥을 압박합니다.",
+      "rawMetadata": {},
+      "candidateId": 2
+    },
+    {
+      "label": "고대 선배의 유골과 유품 발견",
+      "narrativeSummary": "구결을 읊조리는 목소리가 비고에 울려 퍼지자, 벽면의 특정 부위가 회전하며 오래전 이곳에서 고립되어 숨을 거둔 화산파 선배의 유골과 그가 남긴 낡은 서책이 드러납니다.",
+      "rawMetadata": {
+        "foreshadowSeeds": [
+          "비고에 먼저 발을 들였던 자의 비극적인 최후"
+        ]
+      },
+      "candidateId": 3
+    }
+  ],
+  "totalParsedCount": 1,
+  "preAuthResults": [
+    {
+      "candidateId": 1,
+      "label": "석벽의 봉인 해제와 비밀 통로의 개방",
+      "narrativeSummary": "구결을 올바르게 대조하여 읊조리자, 고대 화산파의 진법이 반응하며 굳게 닫혀 있던 석벽의 일부가 묵직한 소리와 함께 열려 새로운 통로가 나타납니다.",
+      "rawMetadata": {
+        "resolvedSeeds": [
+          {
+            "content": "벽면에 새겨진 화산파의 고대 기문둔갑 흔적",
+            "resolutionSummary": "연화가 화산 입문 구결의 가사와 벽면의 암호를 대조하여 기문둔갑의 투로를 해독해 내는 데 성공합니다."
+          }
+        ]
+      },
+      "preAuthStatus": "REJECT",
+      "preAuthReasons": [
+        "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+      ]
+    }
+  ],
+  "allowedIds": [],
+  "rejectedIds": [
+    1
+  ]
+}

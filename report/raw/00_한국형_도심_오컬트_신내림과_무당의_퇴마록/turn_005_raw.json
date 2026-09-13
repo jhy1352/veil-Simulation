@@ -1,0 +1,667 @@
+{
+  "runId": "run_2026-09-13T05-30-56-859Z_e5s0a5",
+  "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
+  "turn": 5,
+  "timestamp": "2026-09-13T05:36:11.075Z",
+  "gitCommit": "34d0344572be03d0fe3754b032cda7eafec446d9",
+  "playerInput": {
+    "rawInput": "싹 다 거두어들인다"
+  },
+  "modelRuntime": {
+    "requestedModel": "gemini-3.6-flash",
+    "actualModelVersion": "gemini-3.6-flash",
+    "responseId": "Mjamare4LJDkrfcP-fip-Ao",
+    "serverTimings": {
+      "t1_requestStart": 1789277746267,
+      "t2_contextAssemblyComplete": 1789277746268,
+      "t3_geminiRequestStart": 1789277746268,
+      "t4_geminiResponseReceived": 1789277772621,
+      "contextAssemblyMs": 1,
+      "geminiGenerationMs": 26353,
+      "inputCharCount": 4761,
+      "outputCharCount": 549,
+      "tokenCount": {
+        "promptTokens": 10471,
+        "candidatesTokens": 2799,
+        "totalTokens": 14748
+      }
+    },
+    "clientLatency": {
+      "turn": 5,
+      "model": "gemini-3.6-flash",
+      "t0_playerInput": 5504200,
+      "t1_requestStart": 5504200.100000024,
+      "t2_contextAssemblyComplete": 5504200.100000024,
+      "t3_geminiRequestStart": 5504200.100000024,
+      "t4_geminiResponseReceived": 5531826.700000018,
+      "t5_parserComplete": 5531827,
+      "t6_stateMutationComplete": 5531827,
+      "t7_uiUpdateComplete": 5531827.100000024,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 27627,
+      "parsingValidationMs": 0,
+      "totalTurnMs": 27627,
+      "inputCharCount": 10,
+      "outputCharCount": 549,
+      "retried": false
+    }
+  },
+  "chatContextForensic": {
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 12 / AGI 12 / CON 14 / INT 14 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망",
+    "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+    "seedsContext": "",
+    "offscreenContext": ""
+  },
+  "geminiContentsForensic": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 12 / AGI 12 / CON 14 / INT 14 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 5 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "하늘은 마치 낮게 가라앉은 납빛 수의처럼 서울의 한구석을 무겁게 덮어누르고 있었다. 철거가 진행 중인 청신동 제4구역. 한때 다닥다닥 붙어 숨을 쉬던 달동네의 골목들은 이제 거대한 포크레인의 이빨에 갈려 나간 채, 뼈대만 남은 콘크리트 무덤이 되어 사방에 흩어져 있었다. 무너진 벽면마다 붉은 페인트로 휘갈겨진 '철거'라는 두 글자가 마치 마르지 않은 짐승의 피처럼 음울하게 번져 흘렀다.\n\n봄철의 끈적한 이슬비가 먼지와 섞여 진흙탕을 만들고, 깨진 아스팔트 틈새로는 뒤틀린 나무뿌리처럼 지맥(地脈)의 상처가 거무스름한 흙덩이를 뱉어내고 있었다. 바람이 불 때마다 시멘트 가루와 가죽 썩는 듯한 냄새, 그리고 누군가 태우다 버린 저급한 향의 잔향이 섞여 콧날을 찔렀다. 이 폐허의 한가운데, 낡고 얇은 외투만을 걸친 여덟 살배기 육체의 선을 가진 열여덟의 소녀, 아마미야 쿠로코가 서 있었다.\n\n그녀의 손끝은 빗물과 한기에 곱아 미세하게 떨리고 있었다. 과거의 기억도, 자신이 어디서 왔는지에 대한 증명도 존재하지 않는 백지 상태. 그러나 가슴 가장 깊은 곳, 얼어붙은 심장 밑바닥에서 요동치는 기묘한 갈망만은 벼려진 칼날처럼 선명했다. 부조리로 가득 찬 세상, 그 꼭대기에서 군림하며 타인의 삶을 짓밟는 자들의 안쪽—그들의 일그러지고 썩어 문드러진 '마음의 핵'을 움켜쥐고 도려내어 파멸시키겠다는 차가운 의지였다.\n\n멀지 않은 곳에서 흙더미에 반쯤 깔린 성황당의 부러진 깃대가 빗속에서 삐걱이는 소리를 냈다. 그리고 그 아래, 아주 미세하게, 쇠붙이가 부딪쳐 내는 음습한 소리가 빗소리 사이로 스며들었다. 마치 보이지 않는 끈이 그녀의 목을 잡아끄는 듯한 압박감이 철거 현장 깊은 곳에서부터 밀려들기 시작했다. \n\n아마미야 쿠로코는 젖은 머리칼을 뒤로 넘기며 허공을 응시했다. 이 가라앉는 도시는 그녀에게 무엇을 요구하고 있는가. 차가운 빗방울이 뺨을 타고 흘러내려 턱끝에서 툭, 떨어졌다."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "주변 수색으로 쓸만한 아이템을 찾아 인벤토리에 넣는다"
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "아마미야 쿠로코는 질척이는 진흙 속에 무릎을 꿇었다. 차가운 빗물이 얇은 외투 속으로 스며들어 척추를 따라 소름 끼치도록 흘러내렸지만, 그녀의 신경은 오직 발밑의 폐허에 집중되어 있었다. 부서진 목재와 깨진 콘크리트 조각들이 뒤엉킨 지표면은, 마치 거대한 야수가 이빨로 짓이겨놓은 사체의 단면처럼 참혹했다.\n\n그녀는 하얗게 질린 손가락 끝으로 질척이는 흙더미를 조심스럽게 걷어내기 시작했다. 날카로운 유리의 단면이나 철근 조각이 살갗을 스칠 때마다 미약한 한기가 등뒤를 스쳤지만, 움직임을 멈추지 않았다. 무덤처럼 내려앉은 청신동의 잔해 속에는 수많은 인간의 흔적들이 소화되지 못한 채 널브러져 있었다. \n\n한쪽에는 부러진 신당의 대들보와 형체를 알아볼 수 없이 짓겨진 오방색 천 조각들이 지포스 냄새 나는 진흙 속에 반쯤 묻혀 있었고, 다른 쪽에는 철거 용역들이 황급히 도망치며 쏟아놓은 듯한 깨진 철제 궤짝과 깨진 안전모들이 빗물을 받아내고 있었다. 그리고 그보다 조금 더 깊은 음울한 어둠 속, 깨진 아스팔트의 갈라진 틈새 사이로 정체불명의 가죽 피혁과 종이 뭉치가 젖은 채 끼여 있는 모습도 눈에 들어왔다.\n\n쿠로코의 숨결이 빗속에서 하얗게 흩어졌다. 이 무질서한 파괴의 흔적들 중에서 그녀의 손에 닿아 스스로를 증명할 도구는 무엇이 될 것인가. 차가운 진흙 속에 묻힌 것들은 아직 침묵을 지키고 있었고, 그녀의 손끝은 서늘한 폐허의 표면을 조용히 더듬고 있을 뿐이었다."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "궤짝을 뒤져보고 안전모, 가죽피혁, 종이뭉치를 살펴보고 인벤토리로 챙긴다"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "궤짝을 뒤져보고 안전모, 가죽피혁, 종이뭉치를 살펴보고 인벤토리로 챙긴다"
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "아마미야 쿠로코는 진흙탕에 손을 밀어 넣고, 반쯤 부서진 철제 궤짝의 녹슨 모서리를 다잡았다. 차가운 빗물이 손가락 마디를 타고 흘러내려 피부를 고통스럽게 시리게 했으나, 그녀의 눈동자는 궤짝 안쪽과 그 주변에 흩어진 물건들에 고정되어 있었다.\n\n궤짝 상판을 들어 올리자 시큼한 기름 냄새와 함께 묵직한 공사장 안전모의 매끄러운 단면이 손끝에 닿았다. 그 곁으로는 흙더미에 짓눌려 있던 가죽 피혁 조각과, 빗물에 적셔져 묵직하게 가라앉은 종이 뭉치가 드러났다. 가죽 조각 표면에는 누군가의 손때와 정체불명의 문양이 희미하게 눌려 찍혀 있었고, 축축하게 젖은 종이 뭉치 겉면에는 붉고 검은 먹자국이 얼룩처럼 번져 있었다.\n\n쿠로코는 떨리는 손끝으로 물건들의 상태를 하나하나 조심스럽게 살폈다. 흙먼지를 털어내고 그 안에 담긴 내용물과 가치를 완전히 확인하여 품에 거두어들이기까지, 차가운 장대비만이 폐허가 된 청신동 골목 위로 소리 없이 내리붓고 있었다."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "소지품으로 들어온 물품들의 용도를 살핀다"
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "아마미야 쿠로코는 손바닥에 달라붙은 차가운 진흙을 빗물에 대강 씻어내며, 품에 끌어당긴 세 가지 물건의 면면을 면밀히 관찰하기 시작했다.\n\n가장 먼저 손에 잡힌 노란색 공사장 안전모는 외벽에 단단한 충격을 받은 듯 굵은 균열이 가 있었으나, 내부의 턱끈과 충격 완화재는 여전히 형태를 유지하고 있었다. 무너져 내리는 철거 현장의 낙석이나 붕괴 사고로부터 머리를 지켜줄 최소한의 물리적 방호구로서의 가치는 충분해 보였다.\n\n이어 살핀 가죽 피혁은 질긴 억새나 동물 가죽을 독한 향신료와 기름에 무더기로 무두질하여 만든 주머니의 조각이었다. 표면을 손끝으로 더듬자, 놋쇠 방울이나 칼날 따위의 쇠붙이가 오래도록 쓸려 생긴 특유의 팬 자국이 정교하게 박혀 있었다. 단순한 작업 도구가 아닌, 주술적 물품이나 액막이 도구를 담아 보관하던 무속인의 소지품 단면임이 묵직한 가죽 냄새를 타고 전해졌다.\n\n마지막으로 빗물에 적셔져 중량감을 더한 종이 뭉치를 조심스럽게 펼치려 시도했다. 종이는 얇은 한지와 한강 인근의 대량 인쇄용지가 섞여 있었는데, 겉면에는 붉은 경면주사와 검은 먹으로 써 내려간 기이한 문양, 그리고 날짜와 금액, 사람 이름으로 보이는 먹자국이 얼룩처럼 번져 있었다. 이 젖은 기록들 속에는 이 폐허가 단순히 포크레인에 무너진 것이 아니라, 무언가 더 음습하고 부패한 의도에 의해 파괴되었음을 암시하는 단서들이 숨 쉬고 있었다.\n\n쿠로코는 차가운 빗속에서 물건들의 촉감과 냄새, 그리고 거기에 얽힌 인과를 조용히 짚어내며, 이 폐허의 진흙 속에서 무엇을 선별해 거두어들일지 냉철한 눈빛으로 판단을 내리고 있었다."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "싹 다 거두어들인다"
+        }
+      ]
+    }
+  ],
+  "llmRawResponse": {
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"발견한 물품들을 품에 거두고, 젖은 종이 뭉치의 내용부터 정밀히 읽어본다\",\n    \"narrativeSummary\": \"아마미야 쿠로코는 공사장 안전모와 가죽 주머니 조각, 젖은 종이 뭉치를 품속으로 모두 수습합니다. 이어 비를 피해 그늘진 잔해 밑으로 들어가 빗물에 녹아내리는 종이 뭉치의 붉은 먹자국과 이름을 읽어내려가며 철거에 얽힌 내막을 추적하기 시작합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_pickup_debris_items_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"공사장 안전모\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"청신동 제4구역 철거 현장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_debris_items_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"무속 가죽 주머니 조각\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"청신동 제4구역 철거 현장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_debris_items_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"젖은 장부와 부적 조각\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"청신동 제4구역 철거 현장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"무속 가죽 주머니 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"젖은 장부와 부적 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"안전모를 착용하여 신체를 보호하고, 소지품을 챙긴 뒤 성황당 음침한 쇠붙이 소리 방향으로 이동한다\",\n    \"narrativeSummary\": \"균열이 간 안전모를 머리에 쓰고 턱끈을 조여 맸습니다. 가죽 조각과 종이 뭉치를 품에 챙긴 쿠로코는 성황당 부러진 깃대 아래, 기이한 쇠붙이 마찰음이 밀려오는 무너진 신당 지하 구역을 향해 발걸음을 옮깁니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_pickup_and_move_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"공사장 안전모\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_and_move_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"무속 가죽 주머니 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_and_move_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"젖은 장부와 부적 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"무속 가죽 주머니 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"젖은 장부와 부적 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"가죽 주머니 잔해의 주술적 냄새와 흔적을 먼저 감정하며 신중히 거두어들인다\",\n    \"narrativeSummary\": \"가죽 조각에 남아 있는 놋쇠 방울과 쇠붙이의 그을음 흔적을 손끝으로 더듬으며, 이 장소에 존재했던 신어머니 혹은 무속인의 흔적을 되짚어봅니다. 물건들을 챙기며 이 땅에 남겨진 주술적 흉터에 대한 경계를 강화합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_inspect_and_pickup_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"공사장 안전모\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_inspect_and_pickup_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"무속 가죽 주머니 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_inspect_and_pickup_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"젖은 장부와 부적 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"무속 가죽 주머니 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"젖은 장부와 부적 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        }\n      ]\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n아마미야 쿠로코는 망설임 없이 손을 뻗었다. 차가운 진흙더미 속에 절반쯤 묻혀 있던 거친 단면들을 하나씩 움켜쥐는 손길에는 망설임이 없었다. \n\n가장 먼저 억센 손가락 마디로 노란색 공사장 안전모의 미끄러운 표면을 다잡아 끌어당겼다. 모서리가 갈라지고 시멘트 분진이 눌러붙어 있었으나 묵직한 중량감이 손끝을 타고 전해졌다. 이어 찌든 기름과 향 냄새가 엉킨 질긴 가죽 주머니 조각을 틀어쥐었고, 빗물에 적셔져 풀처럼 변해가는 종이 뭉치를 조심스럽게 건져 올려 체온이 닿는 외투 안쪽 품으로 깊숙이 거두어들였다.\n\n차가운 빗방울이 손등의 진흙을 씻어내리며 피부를 고통스럽게 시리게 만들었다. 젖은 종이의 시큼한 먹 냄새와 가죽의 묵직한 오염물 냄새가 코끝을 찔렀지만, 쿠로코는 숨을 조용히 고르며 손에 들린 물건들의 실체적 촉감을 확인할 뿐이었다.\n\n폐허가 된 청신동 제4구역의 아스팔트 바닥은 여전히 거친 빗소리와 함께 으스스한 한기를 토해내고 있었다. 빗물에 젖은 외투 안쪽으로 묵직하게 가라앉은 물건들의 무게를 느끼며, 소녀는 비탈진 잔해 위에서 차분하게 주변의 동태를 살폈다.\n[ZERO_MUTATION_END]",
+    "rawResponseText": "아마미야 쿠로코는 망설임 없이 손을 뻗었다. 차가운 진흙더미 속에 절반쯤 묻혀 있던 거친 단면들을 하나씩 움켜쥐는 손길에는 망설임이 없었다. \n\n가장 먼저 억센 손가락 마디로 노란색 공사장 안전모의 미끄러운 표면을 다잡아 끌어당겼다. 모서리가 갈라지고 시멘트 분진이 눌러붙어 있었으나 묵직한 중량감이 손끝을 타고 전해졌다. 이어 찌든 기름과 향 냄새가 엉킨 질긴 가죽 주머니 조각을 틀어쥐었고, 빗물에 적셔져 풀처럼 변해가는 종이 뭉치를 조심스럽게 건져 올려 체온이 닿는 외투 안쪽 품으로 깊숙이 거두어들였다.\n\n차가운 빗방울이 손등의 진흙을 씻어내리며 피부를 고통스럽게 시리게 만들었다. 젖은 종이의 시큼한 먹 냄새와 가죽의 묵직한 오염물 냄새가 코끝을 찔렀지만, 쿠로코는 숨을 조용히 고르며 손에 들린 물건들의 실체적 촉감을 확인할 뿐이었다.\n\n폐허가 된 청신동 제4구역의 아스팔트 바닥은 여전히 거친 빗소리와 함께 으스스한 한기를 토해내고 있었다. 빗물에 젖은 외투 안쪽으로 묵직하게 가라앉은 물건들의 무게를 느끼며, 소녀는 비탈진 잔해 위에서 차분하게 주변의 동태를 살폈다."
+  },
+  "candidatePipeline": {
+    "rawCandidatesBlock": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"발견한 물품들을 품에 거두고, 젖은 종이 뭉치의 내용부터 정밀히 읽어본다\",\n    \"narrativeSummary\": \"아마미야 쿠로코는 공사장 안전모와 가죽 주머니 조각, 젖은 종이 뭉치를 품속으로 모두 수습합니다. 이어 비를 피해 그늘진 잔해 밑으로 들어가 빗물에 녹아내리는 종이 뭉치의 붉은 먹자국과 이름을 읽어내려가며 철거에 얽힌 내막을 추적하기 시작합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_pickup_debris_items_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"공사장 안전모\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"청신동 제4구역 철거 현장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_debris_items_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"무속 가죽 주머니 조각\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"청신동 제4구역 철거 현장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_debris_items_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"젖은 장부와 부적 조각\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"청신동 제4구역 철거 현장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"무속 가죽 주머니 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"젖은 장부와 부적 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"안전모를 착용하여 신체를 보호하고, 소지품을 챙긴 뒤 성황당 음침한 쇠붙이 소리 방향으로 이동한다\",\n    \"narrativeSummary\": \"균열이 간 안전모를 머리에 쓰고 턱끈을 조여 맸습니다. 가죽 조각과 종이 뭉치를 품에 챙긴 쿠로코는 성황당 부러진 깃대 아래, 기이한 쇠붙이 마찰음이 밀려오는 무너진 신당 지하 구역을 향해 발걸음을 옮깁니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_pickup_and_move_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"공사장 안전모\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_and_move_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"무속 가죽 주머니 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_and_move_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"젖은 장부와 부적 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"무속 가죽 주머니 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"젖은 장부와 부적 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"가죽 주머니 잔해의 주술적 냄새와 흔적을 먼저 감정하며 신중히 거두어들인다\",\n    \"narrativeSummary\": \"가죽 조각에 남아 있는 놋쇠 방울과 쇠붙이의 그을음 흔적을 손끝으로 더듬으며, 이 장소에 존재했던 신어머니 혹은 무속인의 흔적을 되짚어봅니다. 물건들을 챙기며 이 땅에 남겨진 주술적 흉터에 대한 경계를 강화합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_inspect_and_pickup_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"공사장 안전모\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_inspect_and_pickup_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"무속 가죽 주머니 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_inspect_and_pickup_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"젖은 장부와 부적 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"무속 가죽 주머니 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"젖은 장부와 부적 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        }\n      ]\n    }\n  }\n]\n[CANDIDATES_END]",
+    "parsedCandidates": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"발견한 물품들을 품에 거두고, 젖은 종이 뭉치의 내용부터 정밀히 읽어본다\",\n    \"narrativeSummary\": \"아마미야 쿠로코는 공사장 안전모와 가죽 주머니 조각, 젖은 종이 뭉치를 품속으로 모두 수습합니다. 이어 비를 피해 그늘진 잔해 밑으로 들어가 빗물에 녹아내리는 종이 뭉치의 붉은 먹자국과 이름을 읽어내려가며 철거에 얽힌 내막을 추적하기 시작합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_pickup_debris_items_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"공사장 안전모\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"청신동 제4구역 철거 현장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_debris_items_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"무속 가죽 주머니 조각\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"청신동 제4구역 철거 현장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_debris_items_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"젖은 장부와 부적 조각\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"청신동 제4구역 철거 현장\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"무속 가죽 주머니 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"젖은 장부와 부적 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"안전모를 착용하여 신체를 보호하고, 소지품을 챙긴 뒤 성황당 음침한 쇠붙이 소리 방향으로 이동한다\",\n    \"narrativeSummary\": \"균열이 간 안전모를 머리에 쓰고 턱끈을 조여 맸습니다. 가죽 조각과 종이 뭉치를 품에 챙긴 쿠로코는 성황당 부러진 깃대 아래, 기이한 쇠붙이 마찰음이 밀려오는 무너진 신당 지하 구역을 향해 발걸음을 옮깁니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_pickup_and_move_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"공사장 안전모\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_and_move_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"무속 가죽 주머니 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_pickup_and_move_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"젖은 장부와 부적 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"무속 가죽 주머니 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"젖은 장부와 부적 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"가죽 주머니 잔해의 주술적 냄새와 흔적을 먼저 감정하며 신중히 거두어들인다\",\n    \"narrativeSummary\": \"가죽 조각에 남아 있는 놋쇠 방울과 쇠붙이의 그을음 흔적을 손끝으로 더듬으며, 이 장소에 존재했던 신어머니 혹은 무속인의 흔적을 되짚어봅니다. 물건들을 챙기며 이 땅에 남겨진 주술적 흉터에 대한 경계를 강화합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_inspect_and_pickup_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"공사장 안전모\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_inspect_and_pickup_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"무속 가죽 주머니 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      },\n      {\n        \"eventId\": \"event_inspect_and_pickup_03\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"젖은 장부와 부적 조각\" }\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"공사장 안전모\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"무속 가죽 주머니 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        },\n        {\n          \"name\": \"젖은 장부와 부적 조각\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_cheongsin_01\"\n        }\n      ]\n    }\n  }\n]\n[CANDIDATES_END]",
+    "recoveryGateResult": {
+      "passedCandidates": [
+        {
+          "label": "발견한 물품들을 품에 거두고, 젖은 종이 뭉치의 내용부터 정밀히 읽어본다",
+          "narrativeSummary": "아마미야 쿠로코는 공사장 안전모와 가죽 주머니 조각, 젖은 종이 뭉치를 품속으로 모두 수습합니다. 이어 비를 피해 그늘진 잔해 밑으로 들어가 빗물에 녹아내리는 종이 뭉치의 붉은 먹자국과 이름을 읽어내려가며 철거에 얽힌 내막을 추적하기 시작합니다.",
+          "semanticEvents": [
+            {
+              "eventId": "event_pickup_debris_items_01",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "공사장 안전모"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "청신동 제4구역 철거 현장"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "event_pickup_debris_items_02",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "무속 가죽 주머니 조각"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "청신동 제4구역 철거 현장"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "event_pickup_debris_items_03",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "젖은 장부와 부적 조각"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "청신동 제4구역 철거 현장"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적"
+            ],
+            "inventoryChanges": [
+              {
+                "name": "공사장 안전모",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_cheongsin_01"
+              },
+              {
+                "name": "무속 가죽 주머니 조각",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_cheongsin_01"
+              },
+              {
+                "name": "젖은 장부와 부적 조각",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_cheongsin_01"
+              }
+            ]
+          },
+          "candidateId": 1
+        },
+        {
+          "label": "안전모를 착용하여 신체를 보호하고, 소지품을 챙긴 뒤 성황당 음침한 쇠붙이 소리 방향으로 이동한다",
+          "narrativeSummary": "균열이 간 안전모를 머리에 쓰고 턱끈을 조여 맸습니다. 가죽 조각과 종이 뭉치를 품에 챙긴 쿠로코는 성황당 부러진 깃대 아래, 기이한 쇠붙이 마찰음이 밀려오는 무너진 신당 지하 구역을 향해 발걸음을 옮깁니다.",
+          "semanticEvents": [
+            {
+              "eventId": "event_pickup_and_move_01",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "공사장 안전모"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "event_pickup_and_move_02",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "무속 가죽 주머니 조각"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "event_pickup_and_move_03",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "젖은 장부와 부적 조각"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적"
+            ],
+            "inventoryChanges": [
+              {
+                "name": "공사장 안전모",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_cheongsin_01"
+              },
+              {
+                "name": "무속 가죽 주머니 조각",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_cheongsin_01"
+              },
+              {
+                "name": "젖은 장부와 부적 조각",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_cheongsin_01"
+              }
+            ]
+          },
+          "candidateId": 2
+        },
+        {
+          "label": "가죽 주머니 잔해의 주술적 냄새와 흔적을 먼저 감정하며 신중히 거두어들인다",
+          "narrativeSummary": "가죽 조각에 남아 있는 놋쇠 방울과 쇠붙이의 그을음 흔적을 손끝으로 더듬으며, 이 장소에 존재했던 신어머니 혹은 무속인의 흔적을 되짚어봅니다. 물건들을 챙기며 이 땅에 남겨진 주술적 흉터에 대한 경계를 강화합니다.",
+          "semanticEvents": [
+            {
+              "eventId": "event_inspect_and_pickup_01",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "공사장 안전모"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "event_inspect_and_pickup_02",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "무속 가죽 주머니 조각"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            },
+            {
+              "eventId": "event_inspect_and_pickup_03",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "젖은 장부와 부적 조각"
+                }
+              ],
+              "scope": "PROPOSAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "seed_cheongsin_01: 청신동 철거구역 잔해 속에 은폐된 부적과 비리 장부의 흔적"
+            ],
+            "inventoryChanges": [
+              {
+                "name": "공사장 안전모",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_cheongsin_01"
+              },
+              {
+                "name": "무속 가죽 주머니 조각",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_cheongsin_01"
+              },
+              {
+                "name": "젖은 장부와 부적 조각",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "seed_cheongsin_01"
+              }
+            ]
+          },
+          "candidateId": 3
+        }
+      ],
+      "quarantinedCandidates": [],
+      "totalInputCount": 3,
+      "passedCount": 3,
+      "quarantinedCount": 0
+    },
+    "meaningTrees": [],
+    "candidatesToValidate": []
+  },
+  "preAuth": {
+    "preAuthResults": [],
+    "allowedCandidatesCount": 0
+  },
+  "authorization": {
+    "authorizedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null,
+    "isFallbackNonMutation": true
+  },
+  "commit": {
+    "verdict": "NO_CANDIDATE",
+    "rejectedReasons": [],
+    "committedRecordIds": [],
+    "commitResultSummary": "NO_MUTATION"
+  },
+  "stateBefore": {
+    "turn": 5,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
+        "worldType": "popular_genre",
+        "settingDescription": "재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.",
+        "toneStyle": "고딕 오컬트 & 코스믹 호러",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "아마미야 쿠로코",
+        "gender": "여성",
+        "age": 18,
+        "appearance": "세련된 정장 망토와 실크햇을 쓰고 도회적인 미소를 띤 소녀",
+        "goal": "부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것",
+        "originBackground": "미상 / 백지 상태 (Tabula Rasa)",
+        "backgroundType": "tabula_rasa",
+        "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+        "flawType": "tabula_rasa",
+        "oath": "미상 / 백지 상태 (Tabula Rasa)",
+        "oathType": "tabula_rasa",
+        "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+        "anchorType": "tabula_rasa",
+        "faction": "미상 / 백지 상태 (Tabula Rasa)",
+        "factionType": "tabula_rasa",
+        "metaElements": {
+          "background": "미상 / 백지 상태 (Tabula Rasa)",
+          "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+          "oath": "미상 / 백지 상태 (Tabula Rasa)",
+          "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+          "faction": "미상 / 백지 상태 (Tabula Rasa)"
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 12,
+          "constitution": 14,
+          "intelligence": 14,
+          "wisdom": 8,
+          "charisma": 15,
+          "vitality": 14,
+          "intellect": 14,
+          "insight": 8,
+          "willpower": 15
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "괴도 마술사",
+        "currentGoal": "부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "stateAfter": {
+    "turn": 5,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
+        "worldType": "popular_genre",
+        "settingDescription": "재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.",
+        "toneStyle": "고딕 오컬트 & 코스믹 호러",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "아마미야 쿠로코",
+        "gender": "여성",
+        "age": 18,
+        "appearance": "세련된 정장 망토와 실크햇을 쓰고 도회적인 미소를 띤 소녀",
+        "goal": "부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것",
+        "originBackground": "미상 / 백지 상태 (Tabula Rasa)",
+        "backgroundType": "tabula_rasa",
+        "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+        "flawType": "tabula_rasa",
+        "oath": "미상 / 백지 상태 (Tabula Rasa)",
+        "oathType": "tabula_rasa",
+        "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+        "anchorType": "tabula_rasa",
+        "faction": "미상 / 백지 상태 (Tabula Rasa)",
+        "factionType": "tabula_rasa",
+        "metaElements": {
+          "background": "미상 / 백지 상태 (Tabula Rasa)",
+          "flaw": "미상 / 백지 상태 (Tabula Rasa)",
+          "oath": "미상 / 백지 상태 (Tabula Rasa)",
+          "anchor": "미상 / 백지 상태 (Tabula Rasa)",
+          "faction": "미상 / 백지 상태 (Tabula Rasa)"
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 12,
+          "constitution": 14,
+          "intelligence": 14,
+          "wisdom": 8,
+          "charisma": 15,
+          "vitality": 14,
+          "intellect": 14,
+          "insight": 8,
+          "willpower": 15
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "괴도 마술사",
+        "currentGoal": "부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "historyDelta": [],
+  "pipelineSteps": [
+    {
+      "step": "T0_PLAYER_INPUT",
+      "status": "OK",
+      "timestamp": 1789277743448,
+      "details": "Turn 5 player input: \"싹 다 거두어들인다\" (10 chars)"
+    },
+    {
+      "step": "T1_REQUEST_START",
+      "status": "OK",
+      "timestamp": 1789277743448,
+      "details": "Initiating API POST /api/chat with model gemini-3.6-flash"
+    },
+    {
+      "step": "T2_CONTEXT_ASSEMBLED",
+      "status": "OK",
+      "timestamp": 1789277743448,
+      "details": "Context prepared with 10 total messages in history"
+    },
+    {
+      "step": "T3_GEMINI_START",
+      "status": "OK",
+      "timestamp": 1789277743448,
+      "details": "Backend Gemini API request dispatched"
+    },
+    {
+      "step": "T4_GEMINI_RECEIVED",
+      "status": "OK",
+      "timestamp": 1789277771075,
+      "details": "Gemini response received (549 chars)"
+    },
+    {
+      "step": "T5_PARSED",
+      "status": "OK",
+      "timestamp": 1789277771075,
+      "details": "Metadata block parsed successfully"
+    },
+    {
+      "step": "T6_VALIDATED",
+      "status": "SKIPPED",
+      "timestamp": 1789277771075,
+      "details": "No candidate state mutation proposed"
+    },
+    {
+      "step": "T7_COMMITTED",
+      "status": "SKIPPED",
+      "timestamp": 1789277771075,
+      "details": "Canonical state unchanged"
+    }
+  ]
+}

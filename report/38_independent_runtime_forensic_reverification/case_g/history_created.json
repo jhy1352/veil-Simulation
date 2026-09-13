@@ -1,0 +1,61 @@
+[
+  {
+    "recordId": "rec-evt-mtpves4z-2wq5nz-1",
+    "eventId": "evt-mtpves4z-2wq5nz",
+    "requestId": "req-mtpves4z-vk1omu",
+    "proposalId": "prop-req-mtpves4z-vk1omu",
+    "turn": 7,
+    "timestamp": "2026-09-06T13:51:50.003Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "RECORD_OFFSCREEN_EVENT",
+    "details": "{\"id\":\"offscreen-mtpves50-koj8l6\",\"eventDescription\":\"묵영이 어둠 속에서 소진호의 행보를 주시함\",\"timestamp\":\"2026-09-06T13:51:50.004Z\",\"visibility\":\"FACTION_ONLY\"}",
+    "canonicalAction": {
+      "type": "RECORD_OFFSCREEN_EVENT",
+      "payload": {
+        "id": "offscreen-mtpves50-koj8l6",
+        "eventDescription": "묵영이 어둠 속에서 소진호의 행보를 주시함",
+        "timestamp": "2026-09-06T13:51:50.004Z",
+        "visibility": "FACTION_ONLY"
+      }
+    },
+    "stateVersionAfterCommit": 8,
+    "informationAccess": "FACTION_ONLY",
+    "previousStateHash": "csh_2e079e3ec023d6de",
+    "originInputId": "act-Case_G-7"
+  },
+  {
+    "recordId": "rec-evt-mtpves4z-2wq5nz-2",
+    "eventId": "evt-mtpves4z-2wq5nz",
+    "requestId": "req-mtpves4z-vk1omu",
+    "proposalId": "prop-req-mtpves4z-vk1omu",
+    "turn": 7,
+    "timestamp": "2026-09-06T13:51:50.003Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "ADVANCE_CHAPTER",
+    "details": "{\"currentChapter\":\"제1장: 서원의 은밀한 흔적\",\"upcomingChapters\":[\"제2장: 심야의 서고\",\"제3장: 은밀한 대결\"]}",
+    "canonicalAction": {
+      "type": "ADVANCE_CHAPTER",
+      "payload": {
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 심야의 서고",
+          "제3장: 은밀한 대결"
+        ]
+      }
+    },
+    "stateVersionAfterCommit": 8,
+    "informationAccess": "PUBLIC",
+    "previousStateHash": "csh_2e079e3ec023d6de",
+    "originInputId": "act-Case_G-7"
+  }
+]

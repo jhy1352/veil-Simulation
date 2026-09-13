@@ -1,0 +1,46 @@
+{
+  "runId": "run_2026-09-13T01-44-53-569Z_07xdfp",
+  "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
+  "sanitizedDir": "00_한국형_도심_오컬트_신내림과_무당의_퇴마록",
+  "gitCommit": "6e099653874cebb0fd3db87aa3ed389123effe83",
+  "captureStartedAt": "2026-09-13T01:44:54.203Z",
+  "lastCapturedAt": "2026-09-13T05:36:12.713Z",
+  "turns": [
+    {
+      "turn": 1,
+      "file": "turn_001_raw.json",
+      "sha256": "ab64300039266bf1b9b50aa6c20d684c6742c92c429e68bed3fcb36bb41ad612",
+      "capturedAt": "2026-09-13T05:30:58.487Z"
+    },
+    {
+      "turn": 2,
+      "file": "turn_002_raw.json",
+      "sha256": "441feb023b2c609b64e43d771b7a886ce781186c2c01cfb3440204e12b814ef6",
+      "capturedAt": "2026-09-13T05:31:52.740Z"
+    },
+    {
+      "turn": 3,
+      "file": "turn_003_raw.json",
+      "sha256": "5e2f65fab0bcf9de750a41d4c86a95789b2784a98326c3d183be30243b9d3c43",
+      "capturedAt": "2026-09-13T05:33:16.817Z"
+    },
+    {
+      "turn": 4,
+      "file": "turn_004_raw.json",
+      "sha256": "82c6850e2818b54ea82882656b05b1a48c09d0ca9683b15f7ccc28a57c0af0f3",
+      "capturedAt": "2026-09-13T05:34:07.878Z"
+    },
+    {
+      "turn": 5,
+      "file": "turn_005_raw.json",
+      "sha256": "e507a9ccd7f88539d966ea0cbd795d6b4b87d123b45ddfb11b1220db2c279989",
+      "capturedAt": "2026-09-13T05:36:12.713Z"
+    },
+    {
+      "turn": 6,
+      "file": "turn_006_raw.json",
+      "sha256": "50308f6e6a54fd2ecccdf243aab55eabb4b1493563f0073b5bde36743afbaeb3",
+      "capturedAt": "2026-09-13T02:23:00.625Z"
+    }
+  ]
+}

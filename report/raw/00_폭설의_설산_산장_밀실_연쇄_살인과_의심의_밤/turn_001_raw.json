@@ -1,0 +1,801 @@
+{
+  "runId": "run_2026-09-13T00-17-23-150Z_0vwnv5",
+  "worldName": "폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤",
+  "turn": 1,
+  "timestamp": "2026-09-13T00:17:23.150Z",
+  "gitCommit": "787d49cb2a8dffe012407459800563fdf5b28a0b",
+  "playerInput": {
+    "rawInput": "[서사 개막 선언]\n세계관: 폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤 (대문호의 정통 고전 문학체)\n시대/배경: 통신과 도로가 끊긴 폭설 속, 유산 상속을 위해 모인 8명의 인물들. 하나씩 살해당하는 밀실 트릭과 살인마를 찾아내야 하는 본격 정통 추리극입니다.\n주인공: 로웬 실버베일 (나이: 23, 성별: 여성)\n출신: [preset] 엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수\n결핍: [preset] 과거의 배신으로 인해 그 누구도 온전히 신뢰하지 못하는 깊은 냉소와 불신\n맹세: [preset] 빛을 잃어버린 황폐한 대륙에 고대 태양신의 성화를 다시 타오르게 한다\n닻: [preset] 치명상을 입었을 때 목숨을 살려준 숲속 엘프 소녀와의 재회 약속\n문파/세력: [preset] 암흑 경매장 뒷골목 길드 [까마귀]\n\n궁극적 목표: 왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+  },
+  "modelRuntime": {
+    "requestedModel": "gemini-3.7-flash",
+    "actualModelVersion": "gemini-3.7-flash",
+    "responseId": "iOulaq82_aP20w_iu-ngCA",
+    "serverTimings": {
+      "t1_requestStart": 1789258631610,
+      "t2_contextAssemblyComplete": 1789258631613,
+      "t3_geminiRequestStart": 1789258631613,
+      "t4_geminiResponseReceived": 1789258643679,
+      "contextAssemblyMs": 3,
+      "geminiGenerationMs": 12066,
+      "inputCharCount": 2282,
+      "outputCharCount": 574,
+      "tokenCount": {
+        "promptTokens": 8740,
+        "candidatesTokens": 1942,
+        "totalTokens": 11309
+      }
+    },
+    "clientLatency": {
+      "turn": 1,
+      "model": "gemini-3.7-flash",
+      "t0_playerInput": 30184.40000000596,
+      "t1_requestStart": 30184.40000000596,
+      "t2_contextAssemblyComplete": 30184.5,
+      "t3_geminiRequestStart": 30184.5,
+      "t4_geminiResponseReceived": 42393.09999999404,
+      "t5_parserComplete": 42393.5,
+      "t6_stateMutationComplete": 42393.5,
+      "t7_uiUpdateComplete": 42393.59999999404,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 12209,
+      "parsingValidationMs": 0,
+      "totalTurnMs": 12209,
+      "inputCharCount": 522,
+      "outputCharCount": 574,
+      "retried": false
+    }
+  },
+  "chatContextForensic": {
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤\n- 세계관 설정: 통신과 도로가 끊긴 폭설 속, 유산 상속을 위해 모인 8명의 인물들. 하나씩 살해당하는 밀실 트릭과 살인마를 찾아내야 하는 본격 정통 추리극입니다.\n- 문체 스타일: 대문호의 정통 고전 문학체\n- 주인공 프로필: 로웬 실버베일 (나이: 23, 성별: 여성)\n  * 출신/배경: [preset] 엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수\n  * 결핍/트라우마: [preset] 과거의 배신으로 인해 그 누구도 온전히 신뢰하지 못하는 깊은 냉소와 불신\n  * 맹세: [preset] 빛을 잃어버린 황폐한 대륙에 고대 태양신의 성화를 다시 타오르게 한다\n  * 닻: [preset] 치명상을 입었을 때 목숨을 살려준 숲속 엘프 소녀와의 재회 약속\n  * 소속/세력: [preset] 암흑 경매장 뒷골목 길드 [까마귀]\n  * 능력치: STR 8 / AGI 10 / CON 11 / INT 15 / WIS 13 / CHA 11\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 로웬 실버베일 (엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 로웬 실버베일 (엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수)\n- 정사 관계망 (0개): 기본 관계망",
+    "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+    "seedsContext": "",
+    "offscreenContext": ""
+  },
+  "geminiContentsForensic": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "[TRPG Campaign Context]\n- 세계관명: 폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤\n- 세계관 설정: 통신과 도로가 끊긴 폭설 속, 유산 상속을 위해 모인 8명의 인물들. 하나씩 살해당하는 밀실 트릭과 살인마를 찾아내야 하는 본격 정통 추리극입니다.\n- 문체 스타일: 대문호의 정통 고전 문학체\n- 주인공 프로필: 로웬 실버베일 (나이: 23, 성별: 여성)\n  * 출신/배경: [preset] 엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수\n  * 결핍/트라우마: [preset] 과거의 배신으로 인해 그 누구도 온전히 신뢰하지 못하는 깊은 냉소와 불신\n  * 맹세: [preset] 빛을 잃어버린 황폐한 대륙에 고대 태양신의 성화를 다시 타오르게 한다\n  * 닻: [preset] 치명상을 입었을 때 목숨을 살려준 숲속 엘프 소녀와의 재회 약속\n  * 소속/세력: [preset] 암흑 경매장 뒷골목 길드 [까마귀]\n  * 능력치: STR 8 / AGI 10 / CON 11 / INT 15 / WIS 13 / CHA 11\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 로웬 실버베일 (엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 1 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤 (대문호의 정통 고전 문학체)\n시대/배경: 통신과 도로가 끊긴 폭설 속, 유산 상속을 위해 모인 8명의 인물들. 하나씩 살해당하는 밀실 트릭과 살인마를 찾아내야 하는 본격 정통 추리극입니다.\n주인공: 로웬 실버베일 (나이: 23, 성별: 여성)\n출신: [preset] 엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수\n결핍: [preset] 과거의 배신으로 인해 그 누구도 온전히 신뢰하지 못하는 깊은 냉소와 불신\n맹세: [preset] 빛을 잃어버린 황폐한 대륙에 고대 태양신의 성화를 다시 타오르게 한다\n닻: [preset] 치명상을 입었을 때 목숨을 살려준 숲속 엘프 소녀와의 재회 약속\n문파/세력: [preset] 암흑 경매장 뒷골목 길드 [까마귀]\n\n궁극적 목표: 왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오.\n\n[ADDITIONAL ACTION]\n[서사 개막 선언]\n세계관: 폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤 (대문호의 정통 고전 문학체)\n시대/배경: 통신과 도로가 끊긴 폭설 속, 유산 상속을 위해 모인 8명의 인물들. 하나씩 살해당하는 밀실 트릭과 살인마를 찾아내야 하는 본격 정통 추리극입니다.\n주인공: 로웬 실버베일 (나이: 23, 성별: 여성)\n출신: [preset] 엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수\n결핍: [preset] 과거의 배신으로 인해 그 누구도 온전히 신뢰하지 못하는 깊은 냉소와 불신\n맹세: [preset] 빛을 잃어버린 황폐한 대륙에 고대 태양신의 성화를 다시 타오르게 한다\n닻: [preset] 치명상을 입었을 때 목숨을 살려준 숲속 엘프 소녀와의 재회 약속\n문파/세력: [preset] 암흑 경매장 뒷골목 길드 [까마귀]\n\n궁극적 목표: 왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+        }
+      ]
+    }
+  ],
+  "llmRawResponse": {
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"벽난로 그늘에서 참석자들의 역학 관계와 언동 관찰하기\",\n    \"narrativeSummary\": \"로웬은 홀 구석 어두운 가죽 의자에 몸을 묻은 채, 화염 너머로 서로를 경계하는 상속인들의 시선 교환과 미세한 긴장감을 면밀히 살핍니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_turn1_observe_guests\",\n        \"action\": \"OBSERVE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"로웬 실버베일\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"산장에 모인 8인의 인물들\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"산장 중앙 대홀 벽난로가\"\n          }\n        ],\n        \"scope\": \"OBSERVATION\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"상속인들 사이에 감도는 해묵은 원한과 숨겨진 채무 관계\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 눈보라에 갇힌 유언장\",\n        \"upcomingChapters\": [\n          \"제2장: 첫 번째 피의 밀실\",\n          \"제3장: 의심과 알리바이의 균열\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"산장의 출입문과 외부 연결 통로의 물리적 봉쇄 상태 점검하기\",\n    \"narrativeSummary\": \"로웬은 거실을 벗어나 육중한 참나무 정문과 창문의 덧창, 외부로 이어지는 유일한 현수교 방향의 설황을 확인하여 완전한 고립 여부를 검증합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_turn1_inspect_exits\",\n        \"action\": \"INSPECT\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"로웬 실버베일\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"산장 정문 및 외부 통로\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"산장 현관 통로\"\n          }\n        ],\n        \"scope\": \"OBSERVATION\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"폭설로 인해 외부와 단절된 유일한 현수교의 위태로운 상태\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 눈보라에 갇힌 유언장\",\n        \"upcomingChapters\": [\n          \"제2장: 첫 번째 피의 밀실\",\n          \"제3장: 의심과 알리바이의 균열\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"상속 집행을 주관하는 저택 관리인에게 접근하여 유언장 개봉 절차 묻기\",\n    \"narrativeSummary\": \"로웬은 찻잔을 든 채 홀 한편에서 시계를 확인하는 늙은 집사에게 다가가, 본 모임의 정식 식순과 고인의 유언장이 공개될 시점을 공식적으로 질의합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_turn1_inquire_butler\",\n        \"action\": \"INQUIRE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"로웬 실버베일\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"산장 집사\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"산장 중앙 대홀\"\n          }\n        ],\n        \"scope\": \"OBSERVATION\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"자정에 정식 개봉되기로 정해진 망자의 밀봉된 유언장\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"제1장: 눈보라에 갇힌 유언장\",\n        \"upcomingChapters\": [\n          \"제2장: 첫 번째 피의 밀실\",\n          \"제3장: 의심과 알리바이의 균열\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n```json\n{\n  \"actions\": [\n    {\n      \"type\": \"SET_WORLD_METADATA\",\n      \"payload\": {\n        \"worldName\": \"폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤\",\n        \"settingDescription\": \"통신과 도로가 끊긴 폭설 속, 유산 상속을 위해 모인 8명의 인물들. 하나씩 살해당하는 밀실 트릭과 살인마를 찾아내야 하는 본격 정통 추리극\",\n        \"toneStyle\": \"대문호의 정통 고전 문학체\"\n      }\n    },\n    {\n      \"type\": \"ADVANCE_CHAPTER\",\n      \"payload\": {\n        \"currentChapter\": \"제1장: 눈보라에 갇힌 유언장\",\n        \"upcomingChapters\": [\n          \"제2장: 첫 번째 피의 밀실\",\n          \"제3장: 의심과 알리바이의 균열\"\n        ]\n      }\n    },\n    {\n      \"type\": \"ADD_NARRATIVE_SEED\",\n      \"payload\": {\n        \"id\": \"seed_manor_isolation\",\n        \"seedType\": \"MAIN\",\n        \"title\": \"폭설의 고립과 여덟 상속인\",\n        \"clueText\": \"산아래로 향하는 유일한 유선 전화선과 현수교가 거센 설폭에 파묻혀, 저택은 완전한 육지의 고도로 변했다.\",\n        \"status\": \"ACTIVE\"\n      }\n    }\n  ]\n}\n```\n\n[ZERO_MUTATION_NARRATIVE]\n유리창을 사납게 후려치는 설풍의 비명이 산장의 육중한 돌벽을 타고 전율처럼 번져나갑니다. 바깥세상은 온통 휘몰아치는 백색의 장막에 삼켜져 한 치 앞의 능선조차 분간할 수 없으며, 저택으로 통하는 유일한 벼랑길은 이미 허리 높이까지 쌓인 적설 아래 자취를 감추었습니다. 실내의 유일한 온기인 벽난로 속 붉은 장작더미만이 쉼 없이 딱딱거리며, 홀 안의 침묵을 더욱 무겁게 짓누를 뿐입니다.\n\n중앙 홀의 거대한 참나무 탁자 주위에는 제각기 초조함과 계산된 무관심을 가장한 인물들이 자리를 잡고 있습니다. 망자가 남긴 막대한 유산과 미지의 증여 목록을 둘러싸고 모여든 여덟 명의 얼굴 위로, 너울거리는 화염의 그림자가 드리워집니다. 시계추가 둔탁한 궤적을 그리며 밤의 중심을 향해 나아가는 가운데, 탁자 위에 놓인 밀랍 봉인의 서류철과 아직 채 식지 않은 홍차 잔들이 위태로운 정적을 증언하고 있습니다.\n\n로웬 실버베일, 냉소 섞인 침묵 속에서 당신은 이 폐쇄된 공간의 공기를 가득 채운 인간들의 숨겨진 탐욕과 은밀한 경계를 직시합니다. 눈보라에 갇힌 저택 안에서, 당신은 어떤 방식으로 이 위험천만한 의심의 밤에 발을 내딛겠습니까?\n[ZERO_MUTATION_END]",
+    "rawResponseText": "유리창을 사납게 후려치는 설풍의 비명이 산장의 육중한 돌벽을 타고 전율처럼 번져나갑니다. 바깥세상은 온통 휘몰아치는 백색의 장막에 삼켜져 한 치 앞의 능선조차 분간할 수 없으며, 저택으로 통하는 유일한 벼랑길은 이미 허리 높이까지 쌓인 적설 아래 자취를 감추었습니다. 실내의 유일한 온기인 벽난로 속 붉은 장작더미만이 쉼 없이 딱딱거리며, 홀 안의 침묵을 더욱 무겁게 짓누를 뿐입니다.\n\n중앙 홀의 거대한 참나무 탁자 주위에는 제각기 초조함과 계산된 무관심을 가장한 인물들이 자리를 잡고 있습니다. 망자가 남긴 막대한 유산과 미지의 증여 목록을 둘러싸고 모여든 여덟 명의 얼굴 위로, 너울거리는 화염의 그림자가 드리워집니다. 시계추가 둔탁한 궤적을 그리며 밤의 중심을 향해 나아가는 가운데, 탁자 위에 놓인 밀랍 봉인의 서류철과 아직 채 식지 않은 홍차 잔들이 위태로운 정적을 증언하고 있습니다.\n\n로웬 실버베일, 냉소 섞인 침묵 속에서 당신은 이 폐쇄된 공간의 공기를 가득 채운 인간들의 숨겨진 탐욕과 은밀한 경계를 직시합니다. 눈보라에 갇힌 저택 안에서, 당신은 어떤 방식으로 이 위험천만한 의심의 밤에 발을 내딛겠습니까?"
+  },
+  "candidatePipeline": {
+    "rawCandidatesBlock": [
+      {
+        "label": "벽난로 그늘에서 참석자들의 역학 관계와 언동 관찰하기",
+        "narrativeSummary": "로웬은 홀 구석 어두운 가죽 의자에 몸을 묻은 채, 화염 너머로 서로를 경계하는 상속인들의 시선 교환과 미세한 긴장감을 면밀히 살핍니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_turn1_observe_guests",
+            "action": "OBSERVE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "TARGET",
+                "entityName": "산장에 모인 8인의 인물들"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "산장 중앙 대홀 벽난로가"
+              }
+            ],
+            "scope": "OBSERVATION",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "상속인들 사이에 감도는 해묵은 원한과 숨겨진 채무 관계"
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 눈보라에 갇힌 유언장",
+            "upcomingChapters": [
+              "제2장: 첫 번째 피의 밀실",
+              "제3장: 의심과 알리바이의 균열"
+            ]
+          }
+        },
+        "candidateId": 1
+      },
+      {
+        "label": "산장의 출입문과 외부 연결 통로의 물리적 봉쇄 상태 점검하기",
+        "narrativeSummary": "로웬은 거실을 벗어나 육중한 참나무 정문과 창문의 덧창, 외부로 이어지는 유일한 현수교 방향의 설황을 확인하여 완전한 고립 여부를 검증합니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_turn1_inspect_exits",
+            "action": "INSPECT",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "TARGET",
+                "entityName": "산장 정문 및 외부 통로"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "산장 현관 통로"
+              }
+            ],
+            "scope": "OBSERVATION",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "폭설로 인해 외부와 단절된 유일한 현수교의 위태로운 상태"
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 눈보라에 갇힌 유언장",
+            "upcomingChapters": [
+              "제2장: 첫 번째 피의 밀실",
+              "제3장: 의심과 알리바이의 균열"
+            ]
+          }
+        },
+        "candidateId": 2
+      },
+      {
+        "label": "상속 집행을 주관하는 저택 관리인에게 접근하여 유언장 개봉 절차 묻기",
+        "narrativeSummary": "로웬은 찻잔을 든 채 홀 한편에서 시계를 확인하는 늙은 집사에게 다가가, 본 모임의 정식 식순과 고인의 유언장이 공개될 시점을 공식적으로 질의합니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_turn1_inquire_butler",
+            "action": "INQUIRE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "TARGET",
+                "entityName": "산장 집사"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "산장 중앙 대홀"
+              }
+            ],
+            "scope": "OBSERVATION",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "자정에 정식 개봉되기로 정해진 망자의 밀봉된 유언장"
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 눈보라에 갇힌 유언장",
+            "upcomingChapters": [
+              "제2장: 첫 번째 피의 밀실",
+              "제3장: 의심과 알리바이의 균열"
+            ]
+          }
+        },
+        "candidateId": 3
+      }
+    ],
+    "parsedCandidates": [
+      {
+        "label": "벽난로 그늘에서 참석자들의 역학 관계와 언동 관찰하기",
+        "narrativeSummary": "로웬은 홀 구석 어두운 가죽 의자에 몸을 묻은 채, 화염 너머로 서로를 경계하는 상속인들의 시선 교환과 미세한 긴장감을 면밀히 살핍니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_turn1_observe_guests",
+            "action": "OBSERVE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "TARGET",
+                "entityName": "산장에 모인 8인의 인물들"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "산장 중앙 대홀 벽난로가"
+              }
+            ],
+            "scope": "OBSERVATION",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "상속인들 사이에 감도는 해묵은 원한과 숨겨진 채무 관계"
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 눈보라에 갇힌 유언장",
+            "upcomingChapters": [
+              "제2장: 첫 번째 피의 밀실",
+              "제3장: 의심과 알리바이의 균열"
+            ]
+          }
+        },
+        "candidateId": 1
+      },
+      {
+        "label": "산장의 출입문과 외부 연결 통로의 물리적 봉쇄 상태 점검하기",
+        "narrativeSummary": "로웬은 거실을 벗어나 육중한 참나무 정문과 창문의 덧창, 외부로 이어지는 유일한 현수교 방향의 설황을 확인하여 완전한 고립 여부를 검증합니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_turn1_inspect_exits",
+            "action": "INSPECT",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "TARGET",
+                "entityName": "산장 정문 및 외부 통로"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "산장 현관 통로"
+              }
+            ],
+            "scope": "OBSERVATION",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "폭설로 인해 외부와 단절된 유일한 현수교의 위태로운 상태"
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 눈보라에 갇힌 유언장",
+            "upcomingChapters": [
+              "제2장: 첫 번째 피의 밀실",
+              "제3장: 의심과 알리바이의 균열"
+            ]
+          }
+        },
+        "candidateId": 2
+      },
+      {
+        "label": "상속 집행을 주관하는 저택 관리인에게 접근하여 유언장 개봉 절차 묻기",
+        "narrativeSummary": "로웬은 찻잔을 든 채 홀 한편에서 시계를 확인하는 늙은 집사에게 다가가, 본 모임의 정식 식순과 고인의 유언장이 공개될 시점을 공식적으로 질의합니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_turn1_inquire_butler",
+            "action": "INQUIRE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "TARGET",
+                "entityName": "산장 집사"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "산장 중앙 대홀"
+              }
+            ],
+            "scope": "OBSERVATION",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "자정에 정식 개봉되기로 정해진 망자의 밀봉된 유언장"
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 눈보라에 갇힌 유언장",
+            "upcomingChapters": [
+              "제2장: 첫 번째 피의 밀실",
+              "제3장: 의심과 알리바이의 균열"
+            ]
+          }
+        },
+        "candidateId": 3
+      }
+    ],
+    "recoveryGateResult": {
+      "passedCandidates": [
+        {
+          "label": "벽난로 그늘에서 참석자들의 역학 관계와 언동 관찰하기",
+          "narrativeSummary": "로웬은 홀 구석 어두운 가죽 의자에 몸을 묻은 채, 화염 너머로 서로를 경계하는 상속인들의 시선 교환과 미세한 긴장감을 면밀히 살핍니다.",
+          "semanticEvents": [
+            {
+              "eventId": "evt_turn1_observe_guests",
+              "action": "OBSERVE",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "로웬 실버베일"
+                },
+                {
+                  "role": "TARGET",
+                  "entityName": "산장에 모인 8인의 인물들"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "산장 중앙 대홀 벽난로가"
+                }
+              ],
+              "scope": "OBSERVATION",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "INTENTIONAL"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "상속인들 사이에 감도는 해묵은 원한과 숨겨진 채무 관계"
+            ],
+            "chapterChanges": {
+              "currentChapter": "제1장: 눈보라에 갇힌 유언장",
+              "upcomingChapters": [
+                "제2장: 첫 번째 피의 밀실",
+                "제3장: 의심과 알리바이의 균열"
+              ]
+            }
+          },
+          "candidateId": 1
+        },
+        {
+          "label": "산장의 출입문과 외부 연결 통로의 물리적 봉쇄 상태 점검하기",
+          "narrativeSummary": "로웬은 거실을 벗어나 육중한 참나무 정문과 창문의 덧창, 외부로 이어지는 유일한 현수교 방향의 설황을 확인하여 완전한 고립 여부를 검증합니다.",
+          "semanticEvents": [
+            {
+              "eventId": "evt_turn1_inspect_exits",
+              "action": "INSPECT",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "로웬 실버베일"
+                },
+                {
+                  "role": "TARGET",
+                  "entityName": "산장 정문 및 외부 통로"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "산장 현관 통로"
+                }
+              ],
+              "scope": "OBSERVATION",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "INTENTIONAL"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "폭설로 인해 외부와 단절된 유일한 현수교의 위태로운 상태"
+            ],
+            "chapterChanges": {
+              "currentChapter": "제1장: 눈보라에 갇힌 유언장",
+              "upcomingChapters": [
+                "제2장: 첫 번째 피의 밀실",
+                "제3장: 의심과 알리바이의 균열"
+              ]
+            }
+          },
+          "candidateId": 2
+        },
+        {
+          "label": "상속 집행을 주관하는 저택 관리인에게 접근하여 유언장 개봉 절차 묻기",
+          "narrativeSummary": "로웬은 찻잔을 든 채 홀 한편에서 시계를 확인하는 늙은 집사에게 다가가, 본 모임의 정식 식순과 고인의 유언장이 공개될 시점을 공식적으로 질의합니다.",
+          "semanticEvents": [
+            {
+              "eventId": "evt_turn1_inquire_butler",
+              "action": "INQUIRE",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "로웬 실버베일"
+                },
+                {
+                  "role": "TARGET",
+                  "entityName": "산장 집사"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "산장 중앙 대홀"
+                }
+              ],
+              "scope": "OBSERVATION",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "INTENTIONAL"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "자정에 정식 개봉되기로 정해진 망자의 밀봉된 유언장"
+            ],
+            "chapterChanges": {
+              "currentChapter": "제1장: 눈보라에 갇힌 유언장",
+              "upcomingChapters": [
+                "제2장: 첫 번째 피의 밀실",
+                "제3장: 의심과 알리바이의 균열"
+              ]
+            }
+          },
+          "candidateId": 3
+        }
+      ],
+      "quarantinedCandidates": [],
+      "totalInputCount": 3,
+      "passedCount": 3,
+      "quarantinedCount": 0
+    },
+    "meaningTrees": [
+      {
+        "candidateId": 1,
+        "meaningTree": {
+          "atom": "INTENT",
+          "scope": "PROPOSAL",
+          "value": "Turn 1 Candidate State Transition",
+          "children": []
+        },
+        "proposal": {
+          "proposalId": "prop-req-mtz2edag-llg454",
+          "requestId": "req-mtz2edag-llg454",
+          "eventId": "evt-mtz2edag-g9px2d",
+          "expectedStateVersion": 1,
+          "source": "LLM",
+          "turn": 1,
+          "timestamp": "2026-09-13T00:17:23.655Z",
+          "intentSummary": "Turn 1 Candidate State Transition",
+          "actions": [],
+          "rawClaims": [
+            "{\"foreshadowSeeds\":[\"상속인들 사이에 감도는 해묵은 원한과 숨겨진 채무 관계\"],\"chapterChanges\":{\"currentChapter\":\"제1장: 눈보라에 갇힌 유언장\",\"upcomingChapters\":[\"제2장: 첫 번째 피의 밀실\",\"제3장: 의심과 알리바이의 균열\"]}}"
+          ],
+          "originInputId": "input-mtz2e3zu-gjgpq1",
+          "meaningTree": {
+            "atom": "INTENT",
+            "scope": "PROPOSAL",
+            "value": "Turn 1 Candidate State Transition",
+            "children": []
+          },
+          "rejectedReasons": [
+            "Unknown or unregistered action type: OBSERVE"
+          ]
+        }
+      }
+    ],
+    "candidatesToValidate": [
+      {
+        "candidateId": 1,
+        "meaningTree": {
+          "atom": "INTENT",
+          "scope": "PROPOSAL",
+          "value": "Turn 1 Candidate State Transition",
+          "children": []
+        },
+        "proposal": {
+          "proposalId": "prop-req-mtz2edag-llg454",
+          "requestId": "req-mtz2edag-llg454",
+          "eventId": "evt-mtz2edag-g9px2d",
+          "expectedStateVersion": 1,
+          "source": "LLM",
+          "turn": 1,
+          "timestamp": "2026-09-13T00:17:23.655Z",
+          "intentSummary": "Turn 1 Candidate State Transition",
+          "actions": [],
+          "rawClaims": [
+            "{\"foreshadowSeeds\":[\"상속인들 사이에 감도는 해묵은 원한과 숨겨진 채무 관계\"],\"chapterChanges\":{\"currentChapter\":\"제1장: 눈보라에 갇힌 유언장\",\"upcomingChapters\":[\"제2장: 첫 번째 피의 밀실\",\"제3장: 의심과 알리바이의 균열\"]}}"
+          ],
+          "originInputId": "input-mtz2e3zu-gjgpq1",
+          "meaningTree": {
+            "atom": "INTENT",
+            "scope": "PROPOSAL",
+            "value": "Turn 1 Candidate State Transition",
+            "children": []
+          },
+          "rejectedReasons": [
+            "Unknown or unregistered action type: OBSERVE"
+          ]
+        }
+      }
+    ]
+  },
+  "preAuth": {
+    "preAuthResults": [
+      {
+        "label": "벽난로 그늘에서 참석자들의 역학 관계와 언동 관찰하기",
+        "narrativeSummary": "로웬은 홀 구석 어두운 가죽 의자에 몸을 묻은 채, 화염 너머로 서로를 경계하는 상속인들의 시선 교환과 미세한 긴장감을 면밀히 살핍니다.",
+        "semanticEvents": [
+          {
+            "eventId": "evt_turn1_observe_guests",
+            "action": "OBSERVE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "TARGET",
+                "entityName": "산장에 모인 8인의 인물들"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "산장 중앙 대홀 벽난로가"
+              }
+            ],
+            "scope": "OBSERVATION",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "INTENTIONAL"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "상속인들 사이에 감도는 해묵은 원한과 숨겨진 채무 관계"
+          ],
+          "chapterChanges": {
+            "currentChapter": "제1장: 눈보라에 갇힌 유언장",
+            "upcomingChapters": [
+              "제2장: 첫 번째 피의 밀실",
+              "제3장: 의심과 알리바이의 균열"
+            ]
+          }
+        },
+        "candidateId": 1,
+        "preAuthStatus": "REJECT",
+        "preAuthReasons": [
+          "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+        ]
+      }
+    ],
+    "allowedCandidatesCount": 0
+  },
+  "authorization": {
+    "authorizedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null,
+    "isFallbackNonMutation": true
+  },
+  "commit": {
+    "verdict": "NO_CANDIDATE",
+    "rejectedReasons": [],
+    "committedRecordIds": [],
+    "commitResultSummary": "NO_MUTATION"
+  },
+  "stateBefore": {
+    "turn": 1,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤",
+        "worldType": "popular_genre",
+        "settingDescription": "통신과 도로가 끊긴 폭설 속, 유산 상속을 위해 모인 8명의 인물들. 하나씩 살해당하는 밀실 트릭과 살인마를 찾아내야 하는 본격 정통 추리극입니다.",
+        "toneStyle": "대문호의 정통 고전 문학체",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "로웬 실버베일",
+        "gender": "여성",
+        "age": 23,
+        "appearance": "그림자 속에 숨어든 듯한 잿빛 망토와 예리한 비수를 숨긴 첩보원",
+        "goal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것",
+        "originBackground": "엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수",
+        "backgroundType": "preset",
+        "flaw": "과거의 배신으로 인해 그 누구도 온전히 신뢰하지 못하는 깊은 냉소와 불신",
+        "flawType": "preset",
+        "oath": "빛을 잃어버린 황폐한 대륙에 고대 태양신의 성화를 다시 타오르게 한다",
+        "oathType": "preset",
+        "anchor": "치명상을 입었을 때 목숨을 살려준 숲속 엘프 소녀와의 재회 약속",
+        "anchorType": "preset",
+        "faction": "암흑 경매장 뒷골목 길드 [까마귀]",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수",
+          "flaw": "과거의 배신으로 인해 그 누구도 온전히 신뢰하지 못하는 깊은 냉소와 불신",
+          "oath": "빛을 잃어버린 황폐한 대륙에 고대 태양신의 성화를 다시 타오르게 한다",
+          "anchor": "치명상을 입었을 때 목숨을 살려준 숲속 엘프 소녀와의 재회 약속",
+          "faction": "암흑 경매장 뒷골목 길드 [까마귀]"
+        },
+        "stats": {
+          "strength": 8,
+          "agility": 10,
+          "constitution": 11,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11,
+          "vitality": 11,
+          "intellect": 15,
+          "insight": 13,
+          "willpower": 11
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "은밀한 정보상",
+        "currentGoal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "stateAfter": {
+    "turn": 1,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤",
+        "worldType": "popular_genre",
+        "settingDescription": "통신과 도로가 끊긴 폭설 속, 유산 상속을 위해 모인 8명의 인물들. 하나씩 살해당하는 밀실 트릭과 살인마를 찾아내야 하는 본격 정통 추리극입니다.",
+        "toneStyle": "대문호의 정통 고전 문학체",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "로웬 실버베일",
+        "gender": "여성",
+        "age": 23,
+        "appearance": "그림자 속에 숨어든 듯한 잿빛 망토와 예리한 비수를 숨긴 첩보원",
+        "goal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것",
+        "originBackground": "엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수",
+        "backgroundType": "preset",
+        "flaw": "과거의 배신으로 인해 그 누구도 온전히 신뢰하지 못하는 깊은 냉소와 불신",
+        "flawType": "preset",
+        "oath": "빛을 잃어버린 황폐한 대륙에 고대 태양신의 성화를 다시 타오르게 한다",
+        "oathType": "preset",
+        "anchor": "치명상을 입었을 때 목숨을 살려준 숲속 엘프 소녀와의 재회 약속",
+        "anchorType": "preset",
+        "faction": "암흑 경매장 뒷골목 길드 [까마귀]",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "엘프 왕국의 은둔림을 떠나 인간 세상의 탐욕과 마주한 달빛 궁수",
+          "flaw": "과거의 배신으로 인해 그 누구도 온전히 신뢰하지 못하는 깊은 냉소와 불신",
+          "oath": "빛을 잃어버린 황폐한 대륙에 고대 태양신의 성화를 다시 타오르게 한다",
+          "anchor": "치명상을 입었을 때 목숨을 살려준 숲속 엘프 소녀와의 재회 약속",
+          "faction": "암흑 경매장 뒷골목 길드 [까마귀]"
+        },
+        "stats": {
+          "strength": 8,
+          "agility": 10,
+          "constitution": 11,
+          "intelligence": 15,
+          "wisdom": 13,
+          "charisma": 11,
+          "vitality": 11,
+          "intellect": 15,
+          "insight": 13,
+          "willpower": 11
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "은밀한 정보상",
+        "currentGoal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "historyDelta": [],
+  "pipelineSteps": [
+    {
+      "step": "T0_PLAYER_INPUT",
+      "status": "OK",
+      "timestamp": 1789258630941,
+      "details": "Turn 1 player input: \"[서사 개막 선언]\n세계관: 폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤 (대문호의 정...\" (522 chars)"
+    },
+    {
+      "step": "T1_REQUEST_START",
+      "status": "OK",
+      "timestamp": 1789258630941,
+      "details": "Initiating API POST /api/chat with model gemini-3.7-flash"
+    },
+    {
+      "step": "T2_CONTEXT_ASSEMBLED",
+      "status": "OK",
+      "timestamp": 1789258630941,
+      "details": "Context prepared with 1 total messages in history"
+    },
+    {
+      "step": "T3_GEMINI_START",
+      "status": "OK",
+      "timestamp": 1789258630941,
+      "details": "Backend Gemini API request dispatched"
+    },
+    {
+      "step": "T4_GEMINI_RECEIVED",
+      "status": "OK",
+      "timestamp": 1789258643149,
+      "details": "Gemini response received (574 chars)"
+    },
+    {
+      "step": "T5_PARSED",
+      "status": "OK",
+      "timestamp": 1789258643150,
+      "details": "Metadata block parsed successfully"
+    },
+    {
+      "step": "T6_VALIDATED",
+      "status": "SKIPPED",
+      "timestamp": 1789258643150,
+      "details": "No candidate state mutation proposed"
+    },
+    {
+      "step": "T7_COMMITTED",
+      "status": "SKIPPED",
+      "timestamp": 1789258643150,
+      "details": "Canonical state unchanged"
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "stateVersion": {
+    "before": 5,
+    "after": 6
+  },
+  "turn": {
+    "before": 4,
+    "after": 5
+  },
+  "worldInfo": {
+    "before": {
+      "worldName": "낙양 숭양서원",
+      "worldType": "popular_genre",
+      "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+      "toneStyle": "묵직하고 유려한 정통 무협 필치",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [],
+      "chapters": {
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 달빛 아래의 검영",
+          "제3장: 흑백의 대치"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [
+        "숭양서원 원장과 의문의 무림 인사의 서신 왕래",
+        "서원 내부 감시자들의 시선",
+        "숭양서원 규율대원들의 야간 순찰 경로 변경"
+      ],
+      "offscreenRecords": [
+        {
+          "id": "offscreen-mtpv941x-bh8g6v",
+          "eventDescription": "숭양서원 원장과 의문의 무림 인사의 서신 왕래",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-09-06T13:47:25.509Z",
+          "visibility": "FACTION_ONLY"
+        },
+        {
+          "id": "offscreen-mtpva5c4-2n0nry",
+          "eventDescription": "서원 내부 감시자들의 시선",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-09-06T13:48:13.828Z",
+          "visibility": "FACTION_ONLY"
+        },
+        {
+          "id": "offscreen-mtpvc2aj-k5tud5",
+          "eventDescription": "숭양서원 규율대원들의 야간 순찰 경로 변경",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-09-06T13:49:43.195Z",
+          "visibility": "FACTION_ONLY"
+        }
+      ]
+    },
+    "after": {
+      "worldName": "낙양 숭양서원",
+      "worldType": "popular_genre",
+      "settingDescription": "남송 말기 정통 무협 세계관, 낙양의 숭양서원",
+      "toneStyle": "묵직하고 유려한 정통 무협 필치",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [],
+      "chapters": {
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 심야의 서고",
+          "제3장: 음모의 배후"
+        ]
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [
+        "숭양서원 원장과 의문의 무림 인사의 서신 왕래",
+        "서원 내부 감시자들의 시선",
+        "숭양서원 규율대원들의 야간 순찰 경로 변경",
+        "숭양서원 수호 세력의 야간 순찰"
+      ],
+      "offscreenRecords": [
+        {
+          "id": "offscreen-mtpv941x-bh8g6v",
+          "eventDescription": "숭양서원 원장과 의문의 무림 인사의 서신 왕래",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-09-06T13:47:25.509Z",
+          "visibility": "FACTION_ONLY"
+        },
+        {
+          "id": "offscreen-mtpva5c4-2n0nry",
+          "eventDescription": "서원 내부 감시자들의 시선",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-09-06T13:48:13.828Z",
+          "visibility": "FACTION_ONLY"
+        },
+        {
+          "id": "offscreen-mtpvc2aj-k5tud5",
+          "eventDescription": "숭양서원 규율대원들의 야간 순찰 경로 변경",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-09-06T13:49:43.195Z",
+          "visibility": "FACTION_ONLY"
+        },
+        {
+          "id": "offscreen-mtpvd137-lr30yl",
+          "eventDescription": "숭양서원 수호 세력의 야간 순찰",
+          "narrativeTime": {
+            "year": 1,
+            "season": "SPRING",
+            "formattedTime": "1년 봄"
+          },
+          "timestamp": "2026-09-06T13:50:28.291Z",
+          "visibility": "FACTION_ONLY"
+        }
+      ]
+    }
+  },
+  "lastCommittedEventId": {
+    "before": "evt-mtpvc2ai-056f26",
+    "after": "evt-mtpvd136-pvdv6a"
+  },
+  "lastCommittedAt": {
+    "before": "2026-09-06T13:49:43.194Z",
+    "after": "2026-09-06T13:50:28.290Z"
+  }
+}

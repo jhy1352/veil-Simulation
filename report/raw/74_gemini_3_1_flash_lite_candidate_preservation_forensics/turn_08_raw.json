@@ -1,0 +1,124 @@
+{
+  "turn": 8,
+  "actionType": "인과 후속 행동",
+  "playerPrompt": "주점 입구를 막아서고 있는 거구의 문지기 사내와 문 옆의 열쇠 구멍, 그리고 주변 기류를 가만히 정찰한다.",
+  "apiResponse": {
+    "success": true,
+    "text": "아르카디아 영지의 북쪽 국경, 차가운 빗줄기가 대지를 적시고 있다. 먹구름이 낮게 깔린 하늘 아래, 성벽의 틈새로 스며드는 습한 바람은 낡은 돌담을 타고 눅눅한 이끼 냄새를 실어 나른다. 당신, 에단은 놋쇠 펜던트를 가슴 안쪽에 단단히 쥔 채 길가에 서 있다. \n\n눈앞에는 이 국경 도시의 어두운 이면을 대변하듯, 불빛이 희미하게 새어 나오는 주점 '녹슨 잔'의 육중한 나무 문이 굳게 닫혀 있다. 그 너머로 들려오는 것은 투박한 웃음소리와 무거운 술잔이 부딪히는 소리, 그리고 정체를 알 수 없는 타인들의 거친 대화뿐이다. 마을 광장 반대편에서는 비를 피하기 위해 천막을 급히 접는 상인들의 소란스러운 고함이 들려온다. 영지는 겉보기엔 평온해 보이나, 공기 중에는 설명할 수 없는 긴장감과 낡은 소문들의 잔향이 섞여 있다. 당신의 발걸음이 향할 곳은 어디인가.",
+    "rawResponse": "아르카디아 영지의 북쪽 국경, 차가운 빗줄기가 대지를 적시고 있다. 먹구름이 낮게 깔린 하늘 아래, 성벽의 틈새로 스며드는 습한 바람은 낡은 돌담을 타고 눅눅한 이끼 냄새를 실어 나른다. 당신, 에단은 놋쇠 펜던트를 가슴 안쪽에 단단히 쥔 채 길가에 서 있다. \n\n눈앞에는 이 국경 도시의 어두운 이면을 대변하듯, 불빛이 희미하게 새어 나오는 주점 '녹슨 잔'의 육중한 나무 문이 굳게 닫혀 있다. 그 너머로 들려오는 것은 투박한 웃음소리와 무거운 술잔이 부딪히는 소리, 그리고 정체를 알 수 없는 타인들의 거친 대화뿐이다. 마을 광장 반대편에서는 비를 피하기 위해 천막을 급히 접는 상인들의 소란스러운 고함이 들려온다. 영지는 겉보기엔 평온해 보이나, 공기 중에는 설명할 수 없는 긴장감과 낡은 소문들의 잔향이 섞여 있다. 당신의 발걸음이 향할 곳은 어디인가.",
+    "isFallbackNonMutation": true,
+    "selectedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null,
+    "preAuthSummary": {
+      "total": 2,
+      "allowed": 0,
+      "rejected": 2
+    },
+    "contextSnapshot": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "actualModelVersion": "gemini-3.1-flash-lite",
+    "requestedModel": "gemini-3.1-flash-lite",
+    "gitCommit": "3a493aa85717dfe47671583c9d27929d5cb7e0d5",
+    "forensicCapture": {
+      "t0_playerInput": "",
+      "chatContextForensic": {
+        "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+        "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망",
+        "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+        "seedsContext": "",
+        "offscreenContext": ""
+      },
+      "geminiContentsForensic": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "text": "[TRPG Campaign Context]\n- 세계관명: 아르카디아 영지\n- 세계관 설정: 중세 판타지 영지, 마법과 소문이 교차하는 위험한 국경 도시\n- 문체 스타일: 진중하고 세밀한 클래식 판타지 서사\n- 주인공 프로필: 에단 (나이: 24, 성별: 남성)\n  * 출신/배경: [preset] 방랑 모험가\n  * 결핍/트라우마: [preset] 지나친 호기심\n  * 맹세: [preset] 약자를 보호하고 진실을 탐구한다\n  * 닻: [preset] 오래된 놋쇠 펜던트\n  * 소속/세력: [preset] 자유 모험가 길드\n  * 능력치: STR 12 / AGI 14 / CON 12 / INT 15 / WIS 11 / CHA 13\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 에단 (방랑 모험가)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막: 기회와 소문\n- 이전 턴 예정 로드맵:\n  1. 1장: 지하 주점의 계약\n  2. 2장: 비밀 통로의 열쇠\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 8 PLAYER PROMPT]\n서사를 시작하고 첫 장면을 묘사하라."
+            }
+          ]
+        }
+      ],
+      "phase1": {
+        "model": "gemini-3.1-flash-lite",
+        "actualModelVersion": "gemini-3.1-flash-lite",
+        "responseId": "m7amasWIK9ix0-kPx9qhiAo",
+        "rawResponseText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"주점 '녹슨 잔'의 소란스러운 입구로 향한다\",\n    \"narrativeSummary\": \"아르카디아 영지의 경계, 비 내리는 거리에서 가장 악명 높은 주점인 '녹슨 잔'으로 발걸음을 옮겨, 길드 게시판의 의뢰를 확인한다.\",\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 지하 주점의 계약\",\n          \"2장: 비밀 통로의 열쇠\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"마을 광장의 유랑 상인을 조사한다\",\n    \"narrativeSummary\": \"성벽 아래 광장에서 수상한 물건을 팔고 있는 상인에게 접근하여 최근 영지에 퍼진 소문의 진위를 확인한다.\",\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 은밀한 거래\",\n          \"2장: 금지된 지식의 파편\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n아르카디아 영지의 북쪽 국경, 차가운 빗줄기가 대지를 적시고 있다. 먹구름이 낮게 깔린 하늘 아래, 성벽의 틈새로 스며드는 습한 바람은 낡은 돌담을 타고 눅눅한 이끼 냄새를 실어 나른다. 당신, 에단은 놋쇠 펜던트를 가슴 안쪽에 단단히 쥔 채 길가에 서 있다. \n\n눈앞에는 이 국경 도시의 어두운 이면을 대변하듯, 불빛이 희미하게 새어 나오는 주점 '녹슨 잔'의 육중한 나무 문이 굳게 닫혀 있다. 그 너머로 들려오는 것은 투박한 웃음소리와 무거운 술잔이 부딪히는 소리, 그리고 정체를 알 수 없는 타인들의 거친 대화뿐이다. 마을 광장 반대편에서는 비를 피하기 위해 천막을 급히 접는 상인들의 소란스러운 고함이 들려온다. 영지는 겉보기엔 평온해 보이나, 공기 중에는 설명할 수 없는 긴장감과 낡은 소문들의 잔향이 섞여 있다. 당신의 발걸음이 향할 곳은 어디인가.\n[ZERO_MUTATION_END]",
+        "rawCandidatesBlock": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"주점 '녹슨 잔'의 소란스러운 입구로 향한다\",\n    \"narrativeSummary\": \"아르카디아 영지의 경계, 비 내리는 거리에서 가장 악명 높은 주점인 '녹슨 잔'으로 발걸음을 옮겨, 길드 게시판의 의뢰를 확인한다.\",\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 지하 주점의 계약\",\n          \"2장: 비밀 통로의 열쇠\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"마을 광장의 유랑 상인을 조사한다\",\n    \"narrativeSummary\": \"성벽 아래 광장에서 수상한 물건을 팔고 있는 상인에게 접근하여 최근 영지에 퍼진 소문의 진위를 확인한다.\",\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 기회와 소문\",\n        \"upcomingChapters\": [\n          \"1장: 은밀한 거래\",\n          \"2장: 금지된 지식의 파편\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+        "recoveryGateResult": {
+          "passedCandidates": [
+            {
+              "label": "주점 '녹슨 잔'의 소란스러운 입구로 향한다",
+              "narrativeSummary": "아르카디아 영지의 경계, 비 내리는 거리에서 가장 악명 높은 주점인 '녹슨 잔'으로 발걸음을 옮겨, 길드 게시판의 의뢰를 확인한다.",
+              "rawMetadata": {
+                "chapterChanges": {
+                  "currentChapter": "서막: 기회와 소문",
+                  "upcomingChapters": [
+                    "1장: 지하 주점의 계약",
+                    "2장: 비밀 통로의 열쇠"
+                  ]
+                }
+              },
+              "candidateId": 1
+            },
+            {
+              "label": "마을 광장의 유랑 상인을 조사한다",
+              "narrativeSummary": "성벽 아래 광장에서 수상한 물건을 팔고 있는 상인에게 접근하여 최근 영지에 퍼진 소문의 진위를 확인한다.",
+              "rawMetadata": {
+                "chapterChanges": {
+                  "currentChapter": "서막: 기회와 소문",
+                  "upcomingChapters": [
+                    "1장: 은밀한 거래",
+                    "2장: 금지된 지식의 파편"
+                  ]
+                }
+              },
+              "candidateId": 2
+            }
+          ],
+          "quarantinedCandidates": [],
+          "totalInputCount": 2,
+          "passedCount": 2,
+          "quarantinedCount": 0
+        },
+        "meaningTrees": []
+      },
+      "preAuth": {
+        "preAuthResults": [],
+        "allowedCandidatesCount": 0
+      },
+      "phase2": null,
+      "authorizedResult": {
+        "authorizedCandidateId": null,
+        "authorizedCandidate": null,
+        "authorizedCandidatePacket": null,
+        "authorizedProposal": null
+      },
+      "serverTimings": {
+        "t1_requestStart": 1789310619274,
+        "t2_contextAssemblyComplete": 1789310619274,
+        "t3_geminiRequestStart": 1789310619274,
+        "t4_geminiResponseReceived": 1789310622720,
+        "contextAssemblyMs": 0,
+        "geminiGenerationMs": 3446,
+        "inputCharCount": 984,
+        "outputCharCount": 426
+      }
+    },
+    "serverTimings": {
+      "t1_requestStart": 1789310619274,
+      "t2_contextAssemblyComplete": 1789310619274,
+      "t3_geminiRequestStart": 1789310619274,
+      "t4_geminiResponseReceived": 1789310622720,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 3446,
+      "inputCharCount": 984,
+      "outputCharCount": 426,
+      "tokenCount": {
+        "promptTokens": 8035,
+        "candidatesTokens": 608,
+        "totalTokens": 8643
+      }
+    }
+  }
+}

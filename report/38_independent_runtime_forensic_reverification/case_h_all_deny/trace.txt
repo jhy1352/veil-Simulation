@@ -1,0 +1,14 @@
+=== START CASE Case_H_ALL_DENY: Dedicated ALL-DENY Rejection & Fallback Verification ===
+[STAGE 1: PLAYER INPUT] "갑자기 허공에서 금괴 500개와 전설의 신검이 나타나 내 손에 쥐어지고 무공 수치가 9999로 상승한다." (Turn 8)
+[STAGE 2: LLM #1 PROMPT GENERATED] Length: 18616 chars
+[STAGE 3: CALLING LLM #1 API] Model: gemini-3.5-flash
+[STAGE 3: LLM #1 RESPONSE RECEIVED] Length: 2446 chars
+[STAGE 4: PARSE CANDIDATES] Count: 1
+[STAGE 5: RECOVERY GATE] Total: 1, Passed: 1, Quarantined: 0
+[STAGE 7: DIVERSITY GATE] Retained 1 diverse candidate(s)
+[STAGE 8: PRE-AUTH RESULTS] Total: 1, Allowed: 1, Rejected: 0
+[STAGE 9: PHASE 2 LLM #2 SYNTHESIZER] Selecting among 1 ALLOW candidate(s)...
+[STAGE 9: LLM #2 SYNTHESIZER RESPONSE RECEIVED] Length: 2307 chars
+[STAGE 10: CANDIDATE SELECTION] Selected ID: 1 (지하 석실의 고독(古毒)과 허망한 환각)
+[STAGE 11: SOVEREIGN COMMIT] Success: true, New Records: 1
+[STAGE 12: STATE DIFF CHECK] Changed keys: stateVersion, turn, worldInfo, lastCommittedEventId, lastCommittedAt

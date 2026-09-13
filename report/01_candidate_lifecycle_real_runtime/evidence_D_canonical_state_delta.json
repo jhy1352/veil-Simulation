@@ -1,0 +1,74 @@
+{
+  "authorizedProposal": null,
+  "selectedCandidateId": null,
+  "commitExecutedOnClientEngine": false,
+  "commitSuccess": false,
+  "commitResult": null,
+  "beforeSnapshot": {
+    "stateVersion": 1,
+    "turn": 1,
+    "worldInfo": {
+      "worldName": "",
+      "worldType": "popular_genre",
+      "settingDescription": "",
+      "toneStyle": "원작 고유의 문체 충실 재현",
+      "currentTime": {
+        "year": 1,
+        "season": "SPRING",
+        "formattedTime": "1년 봄"
+      },
+      "npcs": [],
+      "factions": [],
+      "publicRumors": [],
+      "secretLore": [],
+      "seeds": [],
+      "chapters": {
+        "currentChapter": "서막",
+        "upcomingChapters": []
+      },
+      "dcHistory": [],
+      "unresolvedForeshadows": [],
+      "cameraOffscreenEvents": [],
+      "offscreenRecords": []
+    },
+    "character": {
+      "name": "",
+      "gender": "",
+      "age": "",
+      "appearance": "",
+      "goal": "",
+      "originBackground": "",
+      "backgroundType": "preset",
+      "flaw": "",
+      "flawType": "preset",
+      "oath": "",
+      "oathType": "preset",
+      "anchor": "",
+      "anchorType": "preset",
+      "faction": "",
+      "factionType": "preset",
+      "metaElements": {
+        "background": "",
+        "flaw": "",
+        "oath": "",
+        "anchor": "",
+        "faction": ""
+      },
+      "stats": {
+        "strength": 10,
+        "agility": 10,
+        "constitution": 10,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": [],
+      "secret": "",
+      "physicalDefect": "",
+      "timeline": []
+    },
+    "lastCommittedEventId": null,
+    "lastCommittedAt": "2026-09-13T15:57:19.169Z"
+  },
+  "afterSnapshot": null
+}

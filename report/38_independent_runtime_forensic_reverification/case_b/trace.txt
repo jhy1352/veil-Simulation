@@ -1,0 +1,14 @@
+=== START CASE Case_B: Item Reception / Contract Action (Preview Problem) ===
+[STAGE 1: PLAYER INPUT] "조경 선생에게 동부 광산 투자 계약서를 받아서 소지품에 넣는다." (Turn 2)
+[STAGE 2: LLM #1 PROMPT GENERATED] Length: 2878 chars
+[STAGE 3: CALLING LLM #1 API] Model: gemini-3.5-flash
+[STAGE 3: LLM #1 RESPONSE RECEIVED] Length: 2358 chars
+[STAGE 4: PARSE CANDIDATES] Count: 1
+[STAGE 5: RECOVERY GATE] Total: 1, Passed: 1, Quarantined: 0
+[STAGE 7: DIVERSITY GATE] Retained 1 diverse candidate(s)
+[STAGE 8: PRE-AUTH RESULTS] Total: 1, Allowed: 1, Rejected: 0
+[STAGE 9: PHASE 2 LLM #2 SYNTHESIZER] Selecting among 1 ALLOW candidate(s)...
+[STAGE 9: LLM #2 SYNTHESIZER RESPONSE RECEIVED] Length: 2038 chars
+[STAGE 10: CANDIDATE SELECTION] Selected ID: 1 (조경 선생의 신뢰와 동부 광산 투자 계약서의 양도)
+[STAGE 11: SOVEREIGN COMMIT] Success: true, New Records: 2
+[STAGE 12: STATE DIFF CHECK] Changed keys: stateVersion, turn, worldInfo, lastCommittedEventId, lastCommittedAt

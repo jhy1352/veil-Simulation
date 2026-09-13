@@ -1,0 +1,10 @@
+{
+  "playerInput": "돌판 옆 좁은 틈새에서 차가운 밤안개 같은 냉기가 흘러나오는 곳을 향해 검끝을 가리키며 천천히 전진한다.",
+  "storyTurnCount": 3,
+  "timestamp": "2026-09-10T02:35:40.360Z",
+  "sessionConfig": {
+    "worldPreset": "화산비고",
+    "characterName": "백연화",
+    "model": "gemini-3.5-flash"
+  }
+}

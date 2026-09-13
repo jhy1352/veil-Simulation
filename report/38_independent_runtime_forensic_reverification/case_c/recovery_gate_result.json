@@ -1,0 +1,65 @@
+{
+  "passedCandidates": [
+    {
+      "candidateId": 1,
+      "label": "묵향 속에 가려진 연원과 법식의 교환",
+      "narrativeSummary": "소진호가 탁자 위 서첩에 눈길을 주자, 조경 선생은 그것이 비급의 잔해이되 구결이 태반이나 유실된 '훼손된 도인법 서첩'임을 일러주며 흔쾌히 가질 것을 허락합니다. 이어 소진호는 은화 1냥을 건네고 숭양산의 산세가 그려진 수묵화를 구매하여 품에 넣습니다.",
+      "rawMetadata": {
+        "factCheckSummary": "1) [비급 발견 선언 조율]: 장서각 탁자 위에 방치된 책이 천하의 온전한 기공 비급일 수는 없으므로, 구결의 태반이 소실된 '훼손된 고대 도인법 서첩'으로 조율하여 정사에 편입함. 2) [은화 소모]: 소지품 은화 5개 중 1개 소모 반영.",
+        "foreshadowSeeds": [
+          "seed-painting-hidden-route"
+        ],
+        "cameraOffscreenEvents": [],
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 심야의 서고"
+        ],
+        "statChanges": "은화 1개 소모, 수묵화 1장 획득, 훼손된 고대 도인법 서첩 획득",
+        "inventoryActions": [
+          {
+            "action": "MODIFY_INVENTORY",
+            "type": "REMOVE",
+            "itemId": "inv-silver-1",
+            "quantity": 1,
+            "reason": "RESOURCE_EXCHANGE"
+          },
+          {
+            "action": "MODIFY_INVENTORY",
+            "type": "ADD",
+            "item": {
+              "itemId": "item-ink-painting",
+              "name": "숭양산수도(嵩陽山水圖)",
+              "type": "ITEM",
+              "description": "조경 선생이 직접 그린 것으로 보이는 숭양산의 수묵화. 거친 필선 속에 묘하게 뒤틀린 산길의 흔적이 묘사되어 있다."
+            },
+            "acquisition": {
+              "cause": "RESOURCE_EXCHANGE",
+              "verifiedEventId": "event-purchase-painting"
+            }
+          },
+          {
+            "action": "MODIFY_INVENTORY",
+            "type": "ADD",
+            "item": {
+              "itemId": "item-damaged-breathing-manual",
+              "name": "훼손된 고대 도인법 서첩",
+              "type": "DOCUMENT",
+              "description": "세월의 풍파로 표지가 닳아 없어진 고서철. 본래 심오한 기공의 도인법이 적혀 있었던 듯하나, 현재는 앞부분의 기초적인 토납법 일부만 간신히 판독할 수 있다."
+            },
+            "acquisition": {
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "event-discover-damaged-manual"
+            }
+          }
+        ],
+        "recommendedDC": 13,
+        "dcReason": "수묵화에 쓰인 특이한 묵법(墨法)과 필선의 흐름이 단순한 미적 표현인지, 혹은 서원 후방의 숨겨진 길을 가리키는 지도인지 간파하기 위한 지능(Intelligence) 판정",
+        "contextVerificationDeclaration": "정사 맥락 일치"
+      }
+    }
+  ],
+  "quarantinedCandidates": [],
+  "totalInputCount": 1,
+  "passedCount": 1,
+  "quarantinedCount": 0
+}

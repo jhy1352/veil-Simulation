@@ -1,0 +1,147 @@
+{
+  "requestId": "input-mu07u53n-zl9h46",
+  "turn": 1,
+  "blockExtraction": {
+    "extracted": true,
+    "rawBlockLength": 1392
+  },
+  "rawCandidateCount": 2,
+  "candidates": [
+    {
+      "candidateKey": "input-mu07u53n-zl9h46_1",
+      "requestId": "input-mu07u53n-zl9h46",
+      "candidateId": 1,
+      "label": "객잔 '태백루'의 소란스러운 아침",
+      "stages": {
+        "STAGE_0_EXTRACTION": {
+          "stage": "STAGE_0_EXTRACTION",
+          "status": "PASS",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        },
+        "STAGE_1_RECOVERY_GATE": {
+          "stage": "STAGE_1_RECOVERY_GATE",
+          "status": "PASS",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        },
+        "STAGE_2_SEMANTIC_TRANSLATION": {
+          "stage": "STAGE_2_SEMANTIC_TRANSLATION",
+          "status": "REJECT",
+          "reason": "No semanticEvents provided for candidate",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        },
+        "STAGE_3_DIVERSITY_GATE": {
+          "stage": "STAGE_3_DIVERSITY_GATE",
+          "status": "NOT_REACHED",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        },
+        "STAGE_4_ENGINE_PREAUTH": {
+          "stage": "STAGE_4_ENGINE_PREAUTH",
+          "status": "NOT_REACHED",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        },
+        "STAGE_5_COMMIT_GATE": {
+          "stage": "STAGE_5_COMMIT_GATE",
+          "status": "NOT_REACHED",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        }
+      },
+      "finalDisposition": "REJECT",
+      "terminalStage": "STAGE_2_SEMANTIC_TRANSLATION"
+    },
+    {
+      "candidateKey": "input-mu07u53n-zl9h46_2",
+      "requestId": "input-mu07u53n-zl9h46",
+      "candidateId": 2,
+      "label": "한적한 성곽길에서의 조우",
+      "stages": {
+        "STAGE_0_EXTRACTION": {
+          "stage": "STAGE_0_EXTRACTION",
+          "status": "PASS",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        },
+        "STAGE_1_RECOVERY_GATE": {
+          "stage": "STAGE_1_RECOVERY_GATE",
+          "status": "PASS",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        },
+        "STAGE_2_SEMANTIC_TRANSLATION": {
+          "stage": "STAGE_2_SEMANTIC_TRANSLATION",
+          "status": "REJECT",
+          "reason": "No semanticEvents provided for candidate",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        },
+        "STAGE_3_DIVERSITY_GATE": {
+          "stage": "STAGE_3_DIVERSITY_GATE",
+          "status": "NOT_REACHED",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        },
+        "STAGE_4_ENGINE_PREAUTH": {
+          "stage": "STAGE_4_ENGINE_PREAUTH",
+          "status": "NOT_REACHED",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        },
+        "STAGE_5_COMMIT_GATE": {
+          "stage": "STAGE_5_COMMIT_GATE",
+          "status": "NOT_REACHED",
+          "timestamp": "2026-09-13T19:37:27.485Z"
+        }
+      },
+      "finalDisposition": "REJECT",
+      "terminalStage": "STAGE_2_SEMANTIC_TRANSLATION"
+    }
+  ],
+  "invariants": {
+    "valid": true,
+    "violations": []
+  },
+  "matrix": {
+    "STAGE_0_EXTRACTION": {
+      "PASS": 2,
+      "REJECT": 0,
+      "QUARANTINED": 0,
+      "NOT_REACHED": 0,
+      "NOT_SELECTED": 0,
+      "COMMITTED": 0
+    },
+    "STAGE_1_RECOVERY_GATE": {
+      "PASS": 2,
+      "REJECT": 0,
+      "QUARANTINED": 0,
+      "NOT_REACHED": 0,
+      "NOT_SELECTED": 0,
+      "COMMITTED": 0
+    },
+    "STAGE_2_SEMANTIC_TRANSLATION": {
+      "PASS": 0,
+      "REJECT": 2,
+      "QUARANTINED": 0,
+      "NOT_REACHED": 0,
+      "NOT_SELECTED": 0,
+      "COMMITTED": 0
+    },
+    "STAGE_3_DIVERSITY_GATE": {
+      "PASS": 0,
+      "REJECT": 0,
+      "QUARANTINED": 0,
+      "NOT_REACHED": 2,
+      "NOT_SELECTED": 0,
+      "COMMITTED": 0
+    },
+    "STAGE_4_ENGINE_PREAUTH": {
+      "PASS": 0,
+      "REJECT": 0,
+      "QUARANTINED": 0,
+      "NOT_REACHED": 2,
+      "NOT_SELECTED": 0,
+      "COMMITTED": 0
+    },
+    "STAGE_5_COMMIT_GATE": {
+      "PASS": 0,
+      "REJECT": 0,
+      "QUARANTINED": 0,
+      "NOT_REACHED": 2,
+      "NOT_SELECTED": 0,
+      "COMMITTED": 0
+    }
+  }
+}

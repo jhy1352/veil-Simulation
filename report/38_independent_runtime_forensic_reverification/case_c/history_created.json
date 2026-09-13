@@ -1,0 +1,31 @@
+[
+  {
+    "recordId": "rec-evt-mtpvb4s6-g83wab-1",
+    "eventId": "evt-mtpvb4s6-g83wab",
+    "requestId": "req-mtpvb4s6-0ybguf",
+    "proposalId": "prop-req-mtpvb4s6-0ybguf",
+    "turn": 3,
+    "timestamp": "2026-09-06T13:48:59.765Z",
+    "narrativeTime": {
+      "year": 1,
+      "season": "SPRING",
+      "formattedTime": "1년 봄"
+    },
+    "source": "LLM",
+    "actionType": "ADVANCE_CHAPTER",
+    "details": "{\"currentChapter\":\"제1장: 서원의 은밀한 흔적\",\"upcomingChapters\":[\"제2장: 심야의 서고\"]}",
+    "canonicalAction": {
+      "type": "ADVANCE_CHAPTER",
+      "payload": {
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 심야의 서고"
+        ]
+      }
+    },
+    "stateVersionAfterCommit": 4,
+    "informationAccess": "PUBLIC",
+    "previousStateHash": "csh_6d363d935f498ab3",
+    "originInputId": "act-Case_C-3"
+  }
+]

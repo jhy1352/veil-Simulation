@@ -1,0 +1,55 @@
+{
+  "passedCandidates": [
+    {
+      "candidateId": 1,
+      "label": "조경 선생의 온화한 환대와 장서각의 은밀한 안개",
+      "narrativeSummary": "소진호가 예를 갖추어 묻자, 장서각의 늙은 서생 조경은 차를 따르며 숭양서원 장서각이 단순한 학문의 전당이 아닌, 과거 무림의 풍파 속에서 기인들의 비급과 정수를 보존하기 위해 세워진 보루였음을 은밀히 암시합니다. 또한, 소진호의 성씨에 기묘한 반응을 보입니다.",
+      "rawMetadata": {
+        "factCheckSummary": "1) [배경 검증]: 남송 말기 숭양서원은 실제 성리학의 중심지이자 무협적 재해석이 용이한 공간. 2) [인물 검증]: '조경'은 서원의 장서각을 지키는 은거 기인 혹은 깐깐한 노학자로 설정 가능.",
+        "foreshadowSeeds": [
+          "seed-library-secret",
+          "seed-cho-kyung-regard"
+        ],
+        "cameraOffscreenEvents": [
+          "숭양서원 원장과 의문의 무림 인사의 서신 왕래"
+        ],
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 묵향 뒤에 숨은 검결",
+          "제3장: 무너진 서고의 비밀"
+        ],
+        "statChanges": "변동 없음",
+        "recommendedDC": 12,
+        "dcReason": "상대의 경계심을 풀고 더 깊은 정보를 얻기 위한 지혜(Wisdom) 혹은 매력(Charisma) 판정 필요.",
+        "contextVerificationDeclaration": "정사 맥락 일치"
+      }
+    },
+    {
+      "candidateId": 2,
+      "label": "조경 선생의 깐깐한 시험과 낙양 소씨 가문에 대한 언급",
+      "narrativeSummary": "조경은 소진호의 인사를 차갑게 받으며, 학문적 깊이가 없는 자는 장서각의 깊은 뜻을 이해할 수 없다고 훈계합니다. 그러나 소진호가 몰락한 낙양 서생 가문의 자제임을 알아채고, 과거 그의 조부가 장서각에 기증했던 한 고서에 대해 의문스러운 질문을 던집니다.",
+      "rawMetadata": {
+        "factCheckSummary": "1) [가문 배경]: 소진호는 몰락한 낙양 서생 출신으로, 가문과 숭양서원 간의 과거 인연을 배치하여 개연성 부여.",
+        "foreshadowSeeds": [
+          "seed-ancestral-book",
+          "seed-cho-kyung-test"
+        ],
+        "cameraOffscreenEvents": [
+          "서원 내부 규율 감독관의 순찰"
+        ],
+        "currentChapter": "제1장: 서원의 은밀한 흔적",
+        "upcomingChapters": [
+          "제2장: 고서 속의 혈인(血印)"
+        ],
+        "statChanges": "변동 없음",
+        "recommendedDC": 14,
+        "dcReason": "조경의 까다로운 유교적 질문에 답하기 위한 지능(Intelligence) 혹은 지혜(Wisdom) 판정 필요.",
+        "contextVerificationDeclaration": "정사 맥락 일치"
+      }
+    }
+  ],
+  "quarantinedCandidates": [],
+  "totalInputCount": 2,
+  "passedCount": 2,
+  "quarantinedCount": 0
+}

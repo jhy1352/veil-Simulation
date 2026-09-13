@@ -1,0 +1,272 @@
+{
+  "t0_playerInput": "",
+  "telemetryReport": {
+    "requestId": "input-mu07u53n-zl9h46",
+    "turn": 1,
+    "blockExtraction": {
+      "extracted": true,
+      "rawBlockLength": 1392
+    },
+    "rawCandidateCount": 2,
+    "candidates": [
+      {
+        "candidateKey": "input-mu07u53n-zl9h46_1",
+        "requestId": "input-mu07u53n-zl9h46",
+        "candidateId": 1,
+        "label": "객잔 '태백루'의 소란스러운 아침",
+        "stages": {
+          "STAGE_0_EXTRACTION": {
+            "stage": "STAGE_0_EXTRACTION",
+            "status": "PASS",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          },
+          "STAGE_1_RECOVERY_GATE": {
+            "stage": "STAGE_1_RECOVERY_GATE",
+            "status": "PASS",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          },
+          "STAGE_2_SEMANTIC_TRANSLATION": {
+            "stage": "STAGE_2_SEMANTIC_TRANSLATION",
+            "status": "REJECT",
+            "reason": "No semanticEvents provided for candidate",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          },
+          "STAGE_3_DIVERSITY_GATE": {
+            "stage": "STAGE_3_DIVERSITY_GATE",
+            "status": "NOT_REACHED",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          },
+          "STAGE_4_ENGINE_PREAUTH": {
+            "stage": "STAGE_4_ENGINE_PREAUTH",
+            "status": "NOT_REACHED",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          },
+          "STAGE_5_COMMIT_GATE": {
+            "stage": "STAGE_5_COMMIT_GATE",
+            "status": "NOT_REACHED",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          }
+        },
+        "finalDisposition": "REJECT",
+        "terminalStage": "STAGE_2_SEMANTIC_TRANSLATION"
+      },
+      {
+        "candidateKey": "input-mu07u53n-zl9h46_2",
+        "requestId": "input-mu07u53n-zl9h46",
+        "candidateId": 2,
+        "label": "한적한 성곽길에서의 조우",
+        "stages": {
+          "STAGE_0_EXTRACTION": {
+            "stage": "STAGE_0_EXTRACTION",
+            "status": "PASS",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          },
+          "STAGE_1_RECOVERY_GATE": {
+            "stage": "STAGE_1_RECOVERY_GATE",
+            "status": "PASS",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          },
+          "STAGE_2_SEMANTIC_TRANSLATION": {
+            "stage": "STAGE_2_SEMANTIC_TRANSLATION",
+            "status": "REJECT",
+            "reason": "No semanticEvents provided for candidate",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          },
+          "STAGE_3_DIVERSITY_GATE": {
+            "stage": "STAGE_3_DIVERSITY_GATE",
+            "status": "NOT_REACHED",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          },
+          "STAGE_4_ENGINE_PREAUTH": {
+            "stage": "STAGE_4_ENGINE_PREAUTH",
+            "status": "NOT_REACHED",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          },
+          "STAGE_5_COMMIT_GATE": {
+            "stage": "STAGE_5_COMMIT_GATE",
+            "status": "NOT_REACHED",
+            "timestamp": "2026-09-13T19:37:27.485Z"
+          }
+        },
+        "finalDisposition": "REJECT",
+        "terminalStage": "STAGE_2_SEMANTIC_TRANSLATION"
+      }
+    ],
+    "invariants": {
+      "valid": true,
+      "violations": []
+    },
+    "matrix": {
+      "STAGE_0_EXTRACTION": {
+        "PASS": 2,
+        "REJECT": 0,
+        "QUARANTINED": 0,
+        "NOT_REACHED": 0,
+        "NOT_SELECTED": 0,
+        "COMMITTED": 0
+      },
+      "STAGE_1_RECOVERY_GATE": {
+        "PASS": 2,
+        "REJECT": 0,
+        "QUARANTINED": 0,
+        "NOT_REACHED": 0,
+        "NOT_SELECTED": 0,
+        "COMMITTED": 0
+      },
+      "STAGE_2_SEMANTIC_TRANSLATION": {
+        "PASS": 0,
+        "REJECT": 2,
+        "QUARANTINED": 0,
+        "NOT_REACHED": 0,
+        "NOT_SELECTED": 0,
+        "COMMITTED": 0
+      },
+      "STAGE_3_DIVERSITY_GATE": {
+        "PASS": 0,
+        "REJECT": 0,
+        "QUARANTINED": 0,
+        "NOT_REACHED": 2,
+        "NOT_SELECTED": 0,
+        "COMMITTED": 0
+      },
+      "STAGE_4_ENGINE_PREAUTH": {
+        "PASS": 0,
+        "REJECT": 0,
+        "QUARANTINED": 0,
+        "NOT_REACHED": 2,
+        "NOT_SELECTED": 0,
+        "COMMITTED": 0
+      },
+      "STAGE_5_COMMIT_GATE": {
+        "PASS": 0,
+        "REJECT": 0,
+        "QUARANTINED": 0,
+        "NOT_REACHED": 2,
+        "NOT_SELECTED": 0,
+        "COMMITTED": 0
+      }
+    }
+  },
+  "chatContextForensic": {
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 무림 외사\n- 세계관 설정: 중원 무림의 저잣거리와 객잔\n- 문체 스타일: 원작 고유의 문체 충실 재현\n- 주인공 프로필: 남궁소선 (나이: 미상, 성별: 미상)\n  * 출신/배경: [preset] 미상\n  * 결핍/트라우마: [preset] 없음\n  * 맹세: [preset] 없음\n  * 닻: [preset] 없음\n  * 소속/세력: [preset] 무소속\n  * 능력치: STR 10 / AGI 10 / CON 10 / INT 10 / WIS 10 / CHA 10\n  * 소장품: 금화 주머니(x1)\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (2개): [CHARACTER] 남궁소선 (Protagonist), [ITEM] 금화 주머니 (Qty: 1)\n- 정사 관계망 (1개): protagonist --[OWNS]--> item_gold_pouch\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (2개): [CHARACTER] 남궁소선 (Protagonist), [ITEM] 금화 주머니 (Qty: 1)\n- 정사 관계망 (1개): protagonist --[OWNS]--> item_gold_pouch",
+    "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+    "seedsContext": "",
+    "offscreenContext": ""
+  },
+  "geminiContentsForensic": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "[TRPG Campaign Context]\n- 세계관명: 무림 외사\n- 세계관 설정: 중원 무림의 저잣거리와 객잔\n- 문체 스타일: 원작 고유의 문체 충실 재현\n- 주인공 프로필: 남궁소선 (나이: 미상, 성별: 미상)\n  * 출신/배경: [preset] 미상\n  * 결핍/트라우마: [preset] 없음\n  * 맹세: [preset] 없음\n  * 닻: [preset] 없음\n  * 소속/세력: [preset] 무소속\n  * 능력치: STR 10 / AGI 10 / CON 10 / INT 10 / WIS 10 / CHA 10\n  * 소장품: 금화 주머니(x1)\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (2개): [CHARACTER] 남궁소선 (Protagonist), [ITEM] 금화 주머니 (Qty: 1)\n- 정사 관계망 (1개): protagonist --[OWNS]--> item_gold_pouch\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 1 PLAYER PROMPT]\n서사를 시작하고 첫 장면을 묘사하라."
+        }
+      ]
+    }
+  ],
+  "phase1": {
+    "model": "gemini-3.1-flash-lite",
+    "actualModelVersion": "gemini-3.1-flash-lite",
+    "responseId": "dPumaozQDI_s2roPqJm_6Qw",
+    "rawResponseText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"객잔 '태백루'의 소란스러운 아침\",\n    \"narrativeSummary\": \"남궁소선이 중원 무림의 활기가 감도는 태백루 객잔에 들어서며 본격적인 여정을 시작한다. 손님들의 소란과 술 향기 사이에서 정보와 기회를 탐색한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_entry_taebaekru\",\n        \"action\": \"ENTER\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"남궁소선\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"태백루\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 태백루의 이방인\",\n        \"upcomingChapters\": [\n          \"객잔의 소문\",\n          \"무림의 그림자\",\n          \"첫 번째 의뢰\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"한적한 성곽길에서의 조우\",\n    \"narrativeSummary\": \"번화한 객잔 대신, 성곽 너머 외딴 길을 걷던 중 정체불명의 여행객과 마주친다. 긴장감이 흐르는 가운데 대화를 시도하거나 관찰한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_entry_fortress_road\",\n        \"action\": \"TRAVEL\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"남궁소선\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"성곽길\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 성곽 너머의 길\",\n        \"upcomingChapters\": [\n          \"낯선 동행\",\n          \"버려진 암자\",\n          \"의문의 발자취\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n황사 섞인 바람이 눅눅한 흙먼지를 몰고 지나가는 중원의 아침입니다. 태양은 아직 지평선 근처에서 옅은 빛을 발하고 있으나, 객잔 ‘태백루’의 낡은 문틈 사이로는 벌써부터 진득한 술 향기와 왁자지껄한 욕설, 그리고 투박한 젓가락이 사발에 부딪히는 소리가 새어 나옵니다. \n\n남궁소선은 객잔 앞 길목에 서서, 허리춤에 묵직하게 매달린 금화 주머니의 감촉을 확인합니다. 주변으로는 봇짐을 멘 행상인들이 땀을 닦으며 지나가고, 저 멀리 관가에서 파견된 포졸들이 창을 비스듬히 멘 채 게으르게 하품을 하며 거리를 순찰하는 모습이 보입니다. 누구도 멈춰 서서 이방인인 당신을 주목하지 않습니다. 세상은 무심히 흘러가고, 당신의 첫걸음은 여전히 갈림길 위에 놓여 있습니다.\n[ZERO_MUTATION_END]",
+    "rawCandidatesBlock": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"객잔 '태백루'의 소란스러운 아침\",\n    \"narrativeSummary\": \"남궁소선이 중원 무림의 활기가 감도는 태백루 객잔에 들어서며 본격적인 여정을 시작한다. 손님들의 소란과 술 향기 사이에서 정보와 기회를 탐색한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_entry_taebaekru\",\n        \"action\": \"ENTER\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"남궁소선\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"태백루\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 태백루의 이방인\",\n        \"upcomingChapters\": [\n          \"객잔의 소문\",\n          \"무림의 그림자\",\n          \"첫 번째 의뢰\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"한적한 성곽길에서의 조우\",\n    \"narrativeSummary\": \"번화한 객잔 대신, 성곽 너머 외딴 길을 걷던 중 정체불명의 여행객과 마주친다. 긴장감이 흐르는 가운데 대화를 시도하거나 관찰한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_entry_fortress_road\",\n        \"action\": \"TRAVEL\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"남궁소선\" },\n          { \"role\": \"LOCATION\", \"entityName\": \"성곽길\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 성곽 너머의 길\",\n        \"upcomingChapters\": [\n          \"낯선 동행\",\n          \"버려진 암자\",\n          \"의문의 발자취\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+    "recoveryGateResult": {
+      "passedCandidates": [
+        {
+          "label": "객잔 '태백루'의 소란스러운 아침",
+          "narrativeSummary": "남궁소선이 중원 무림의 활기가 감도는 태백루 객잔에 들어서며 본격적인 여정을 시작한다. 손님들의 소란과 술 향기 사이에서 정보와 기회를 탐색한다.",
+          "semanticEvents": [
+            {
+              "eventId": "event_entry_taebaekru",
+              "action": "ENTER",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "남궁소선"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "태백루"
+                }
+              ],
+              "scope": "CLAIM",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "chapterChanges": {
+              "currentChapter": "서막: 태백루의 이방인",
+              "upcomingChapters": [
+                "객잔의 소문",
+                "무림의 그림자",
+                "첫 번째 의뢰"
+              ]
+            }
+          },
+          "candidateId": 1
+        },
+        {
+          "label": "한적한 성곽길에서의 조우",
+          "narrativeSummary": "번화한 객잔 대신, 성곽 너머 외딴 길을 걷던 중 정체불명의 여행객과 마주친다. 긴장감이 흐르는 가운데 대화를 시도하거나 관찰한다.",
+          "semanticEvents": [
+            {
+              "eventId": "event_entry_fortress_road",
+              "action": "TRAVEL",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "남궁소선"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "성곽길"
+                }
+              ],
+              "scope": "CLAIM",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "chapterChanges": {
+              "currentChapter": "서막: 성곽 너머의 길",
+              "upcomingChapters": [
+                "낯선 동행",
+                "버려진 암자",
+                "의문의 발자취"
+              ]
+            }
+          },
+          "candidateId": 2
+        }
+      ],
+      "quarantinedCandidates": [],
+      "totalInputCount": 2,
+      "passedCount": 2,
+      "quarantinedCount": 0
+    },
+    "meaningTrees": []
+  },
+  "preAuth": {
+    "preAuthResults": [],
+    "allowedCandidatesCount": 0
+  },
+  "phase2": null,
+  "authorizedResult": {
+    "authorizedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null
+  },
+  "serverTimings": {
+    "t1_requestStart": 1789328243795,
+    "t2_contextAssemblyComplete": 1789328243795,
+    "t3_geminiRequestStart": 1789328243795,
+    "t4_geminiResponseReceived": 1789328247496,
+    "contextAssemblyMs": 0,
+    "geminiGenerationMs": 3701,
+    "inputCharCount": 1029,
+    "outputCharCount": 369
+  }
+}

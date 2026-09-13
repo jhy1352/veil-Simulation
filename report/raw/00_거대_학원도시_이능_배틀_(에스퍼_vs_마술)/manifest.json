@@ -1,0 +1,34 @@
+{
+  "runId": "run_2026-09-13T00-19-30-888Z_1oxeau",
+  "worldName": "거대 학원도시 이능 배틀 (에스퍼 vs 마술)",
+  "sanitizedDir": "00_거대_학원도시_이능_배틀_(에스퍼_vs_마술)",
+  "gitCommit": "787d49cb2a8dffe012407459800563fdf5b28a0b",
+  "captureStartedAt": "2026-09-13T00:19:31.508Z",
+  "lastCapturedAt": "2026-09-13T00:21:05.687Z",
+  "turns": [
+    {
+      "turn": 1,
+      "file": "turn_001_raw.json",
+      "sha256": "73e6b215fb3fcd410ca293332a132bcd8be347db8f72acfff68dddd96ec34182",
+      "capturedAt": "2026-09-13T00:19:31.508Z"
+    },
+    {
+      "turn": 2,
+      "file": "turn_002_raw.json",
+      "sha256": "c4d11267d78473a2cbbcf6622ade6170a386ec1cf609d68c2045a41234aedc4a",
+      "capturedAt": "2026-09-13T00:20:04.502Z"
+    },
+    {
+      "turn": 3,
+      "file": "turn_003_raw.json",
+      "sha256": "10bbc0cb00e5e03527d0d6a06f8060ec5f4ca61b9a4752d3aeedade3de276911",
+      "capturedAt": "2026-09-13T00:20:31.271Z"
+    },
+    {
+      "turn": 4,
+      "file": "turn_004_raw.json",
+      "sha256": "a670f7a82288fcc6db599a791fe9d463f9c88fd9e492071d367267aec274e0b9",
+      "capturedAt": "2026-09-13T00:21:05.687Z"
+    }
+  ]
+}

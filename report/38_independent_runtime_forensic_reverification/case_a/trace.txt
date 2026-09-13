@@ -1,0 +1,14 @@
+=== START CASE Case_A: NPC Normal Interaction / Dialogue ===
+[STAGE 1: PLAYER INPUT] "장서각에서 조경 선생에게 인사하고 장서각의 유래에 대해 물어본다." (Turn 1)
+[STAGE 2: LLM #1 PROMPT GENERATED] Length: 516 chars
+[STAGE 3: CALLING LLM #1 API] Model: gemini-3.5-flash
+[STAGE 3: LLM #1 RESPONSE RECEIVED] Length: 3106 chars
+[STAGE 4: PARSE CANDIDATES] Count: 2
+[STAGE 5: RECOVERY GATE] Total: 2, Passed: 2, Quarantined: 0
+[STAGE 7: DIVERSITY GATE] Retained 2 diverse candidate(s)
+[STAGE 8: PRE-AUTH RESULTS] Total: 2, Allowed: 2, Rejected: 0
+[STAGE 9: PHASE 2 LLM #2 SYNTHESIZER] Selecting among 2 ALLOW candidate(s)...
+[STAGE 9: LLM #2 SYNTHESIZER RESPONSE RECEIVED] Length: 2085 chars
+[STAGE 10: CANDIDATE SELECTION] Selected ID: 1 (조경 선생의 온화한 환대와 장서각의 은밀한 안개)
+[STAGE 11: SOVEREIGN COMMIT] Success: true, New Records: 2
+[STAGE 12: STATE DIFF CHECK] Changed keys: stateVersion, worldInfo, lastCommittedEventId, lastCommittedAt
