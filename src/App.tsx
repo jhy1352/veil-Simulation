@@ -81,6 +81,8 @@ export default function App() {
 
   // Sovereign Engine reference as single authoritative Commit Gate
   const sovereignEngineRef = useRef<SovereignEngine | null>(null);
+  const sessionEpochRef = useRef<number>(0);
+  const activeRequestControllerRef = useRef<AbortController | null>(null);
 
   const getOrInitEngine = (
     curWorld: WorldInfo,
@@ -354,6 +356,13 @@ export default function App() {
 
   // Complete Creation Phase and Launch Campaign
   const handleCompleteCreation = async () => {
+    sessionEpochRef.current += 1;
+    if (activeRequestControllerRef.current) {
+      activeRequestControllerRef.current.abort();
+      activeRequestControllerRef.current = null;
+    }
+    setIsGenerating(false);
+
     console.log('[CREATION_STATE_FORENSIC]', JSON.stringify({
       worldInfo,
       character,
@@ -431,6 +440,13 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
 
   // Reset Session to clean creation mode
   const handleResetSession = () => {
+    sessionEpochRef.current += 1;
+    if (activeRequestControllerRef.current) {
+      activeRequestControllerRef.current.abort();
+      activeRequestControllerRef.current = null;
+    }
+    setIsGenerating(false);
+
     localStorage.removeItem(STORAGE_KEY);
     resetRunId();
     setCharacter(createEmptyCharacter());
@@ -453,6 +469,13 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
   // Load Session from Cloud or Code (Strict Sovereign Verification Before UI Mutation)
   const handleLoadSession = (loadedPayload: SessionPayload) => {
     if (loadedPayload.character && loadedPayload.worldInfo) {
+      sessionEpochRef.current += 1;
+      if (activeRequestControllerRef.current) {
+        activeRequestControllerRef.current.abort();
+        activeRequestControllerRef.current = null;
+      }
+      setIsGenerating(false);
+
       try {
         const loadedWorld = deepMerge(createEmptyWorldInfo(), loadedPayload.worldInfo);
         const loadedChar = deepMerge(createEmptyCharacter(), loadedPayload.character);
@@ -523,6 +546,14 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
     }
   ) => {
     if (isGenerating) return;
+
+    if (activeRequestControllerRef.current) {
+      activeRequestControllerRef.current.abort();
+      activeRequestControllerRef.current = null;
+    }
+    const controller = new AbortController();
+    activeRequestControllerRef.current = controller;
+    const requestEpoch = sessionEpochRef.current;
 
     const effectiveWorldInfo = stateOverride?.worldInfo ?? worldInfo;
     const effectiveCharacter = stateOverride?.character ?? character;
@@ -611,15 +642,21 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
           userPrompt,
           selectedModel,
           narrativeLocale: effectiveLoc
-        })
+        }),
+        signal: controller.signal
       });
+
+      if (requestEpoch !== sessionEpochRef.current) return;
 
       if (!response.ok) {
         const errJson = await response.json().catch(() => ({}));
+        if (requestEpoch !== sessionEpochRef.current) return;
         throw new Error(errJson.error || `HTTP ${response.status}: API 호출 실패`);
       }
 
       const data = await response.json();
+      if (requestEpoch !== sessionEpochRef.current) return;
+
       const rawOutputText: string = data.text || data.rawResponse || '';
       const contextSnapshot: string = data.contextSnapshot || '';
 
@@ -997,10 +1034,18 @@ ${cleanCharacter.physicalDefect ? `신체 결손/낭만 돌파구: ${cleanCharac
         setWaitingForRoll(null);
       }
     } catch (err: any) {
+      if (err.name === 'AbortError' || requestEpoch !== sessionEpochRef.current) {
+        return;
+      }
       console.error('[API Turn Execution Error]', err);
       setModelError(err.message || '요청 처리 중 오류가 발생했습니다.');
     } finally {
-      setIsGenerating(false);
+      if (activeRequestControllerRef.current === controller) {
+        activeRequestControllerRef.current = null;
+      }
+      if (requestEpoch === sessionEpochRef.current) {
+        setIsGenerating(false);
+      }
     }
   }, [character, worldInfo, engineState, messages, storyTurnCount, isGenerating, selectedModel, narrativeLocale, isForensicRaw]);
 
