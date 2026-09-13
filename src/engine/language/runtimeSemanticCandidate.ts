@@ -13,6 +13,7 @@
 
 import type { CanonicalState, ImmutableHistoricalRecord, StateTransitionProposal, TransitionAction } from '../types';
 import type { MeaningNode, SemanticEvent, SemanticEventRole } from './types';
+import type { VeilCandidate } from './candidateRecoveryGate';
 import { compileSemanticEventsToMeaningTree } from './causalCompiler';
 import {
   semanticEventsToRuntimeActions,
@@ -146,9 +147,9 @@ export function createEngineSemanticBridgeContext(
           id: canonicalId,
           name: existing?.name || entity?.name || itemName,
           quantity: 1,
-          description: existing?.description || (entity?.details as any)?.description,
-          category: existing?.category || (entity?.details as any)?.category,
-          rarity: existing?.rarity || (entity?.details as any)?.rarity,
+          description: existing?.description || (entity as any)?.details?.description,
+          category: existing?.category || (entity as any)?.details?.category,
+          rarity: existing?.rarity || (entity as any)?.details?.rarity,
         };
       }
 
@@ -239,6 +240,109 @@ export function integrateSemanticEventsIntoProposal(
   return {
     status: 'MAPPABLE',
     proposal: integratedProposal,
+    meaningTree,
+    errors: [],
+  };
+}
+
+export interface CandidateTranslationResult {
+  readonly status:
+    | 'COMPILED'
+    | 'TRANSLATION_MISSING'
+    | 'SHAPE_INVALID'
+    | 'COMPILER_FAILED'
+    | 'UNSUPPORTED'
+    | 'INVALID'
+    | 'AMBIGUOUS'
+    | 'UNKNOWN';
+  readonly candidate: VeilCandidate;
+  readonly proposal?: StateTransitionProposal;
+  readonly meaningTree?: MeaningNode;
+  readonly errors: readonly string[];
+}
+
+/**
+ * Direct Causal Language Pipeline for Candidate:
+ * Candidate -> SemanticEvent[] -> CausalCompiler -> MeaningTree -> Runtime Bridge -> StateTransitionProposal
+ *
+ * Enforces the single mandatory path for runtime Candidates.
+ * Reuses validateSemanticEventShape, compileSemanticEventsToMeaningTree,
+ * semanticEventsToRuntimeActions, and buildProposalMeaningTree.
+ */
+export function compileCandidateToProposal(
+  candidate: VeilCandidate,
+  semanticEvents: readonly SemanticEvent[] | undefined,
+  canonicalState: CanonicalState,
+  storyTurnCount: number,
+  historicalRecords: readonly ImmutableHistoricalRecord[] = [],
+  playerInputId: string,
+  context: SemanticRuntimeBridgeContext
+): CandidateTranslationResult {
+  if (!semanticEvents || semanticEvents.length === 0) {
+    return {
+      status: 'TRANSLATION_MISSING',
+      candidate,
+      errors: ['No semanticEvents provided for candidate'],
+    };
+  }
+
+  // 1. Validate Shape
+  const shapeErrors = semanticEvents.flatMap((event, index) => validateSemanticEventShape(event, index));
+  if (shapeErrors.length > 0) {
+    return {
+      status: 'SHAPE_INVALID',
+      candidate,
+      errors: shapeErrors,
+    };
+  }
+
+  // 2. CausalCompiler: SemanticEvent[] -> MeaningTree
+  const compilation = compileSemanticEventsToMeaningTree(semanticEvents);
+  if (compilation.status !== 'COMPILED' && compilation.status !== 'RECONCILIATION_REQUIRED') {
+    return {
+      status: (compilation.status as any) || 'COMPILER_FAILED',
+      candidate,
+      errors: compilation.errors || [`CausalCompiler status: ${compilation.status}`],
+    };
+  }
+
+  // 3. Runtime Bridge: SemanticEvent[] -> Runtime Actions
+  const bridge = semanticEventsToRuntimeActions(semanticEvents, context);
+  if (bridge.status !== 'MAPPABLE') {
+    return {
+      status: (bridge.status as any) || 'UNSUPPORTED',
+      candidate,
+      errors: bridge.errors,
+    };
+  }
+
+  // 4. Construct StateTransitionProposal
+  const proposalId = generateProposalId('candidate');
+  const eventId = generateProposalId('event');
+  const actions = bridge.actions as TransitionAction[];
+
+  const proposal: StateTransitionProposal = {
+    proposalId,
+    requestId: playerInputId,
+    eventId,
+    expectedStateVersion: canonicalState.stateVersion,
+    source: 'LLM',
+    turn: storyTurnCount,
+    timestamp: new Date().toISOString(),
+    intentSummary: candidate.narrativeSummary || candidate.label || `Candidate ${candidate.candidateId}`,
+    recommendedDC: candidate.recommendedDC,
+    dcReason: candidate.dcReason,
+    actions,
+    originInputId: playerInputId,
+  };
+
+  const meaningTree = compilation.meaningTree || buildProposalMeaningTree(actions, proposal);
+  proposal.meaningTree = meaningTree;
+
+  return {
+    status: 'COMPILED',
+    candidate,
+    proposal,
     meaningTree,
     errors: [],
   };

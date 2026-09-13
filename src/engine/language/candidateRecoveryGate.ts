@@ -365,10 +365,11 @@ export function validateCandidateStructure(candidate: any): CandidateValidationR
             }
           }
           const ref = inv.entityReference;
-          if (ref !== undefined) {
-            if (typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
-              reasons.push(`inventoryChanges[${i}].entityReference must be a non-null object`);
-            } else {
+          if (ref === undefined) {
+            reasons.push(`inventoryChanges[${i}].entityReference is required`);
+          } else if (typeof ref !== 'object' || ref === null || Array.isArray(ref)) {
+            reasons.push(`inventoryChanges[${i}].entityReference must be a non-null object`);
+          } else {
               if (ref.entityType !== undefined && ref.entityType !== 'ITEM') {
                 reasons.push(`inventoryChanges[${i}].entityReference.entityType must be ITEM`);
               }
@@ -384,7 +385,6 @@ export function validateCandidateStructure(candidate: any): CandidateValidationR
                 }
               }
             }
-          }
           }
         }
       }

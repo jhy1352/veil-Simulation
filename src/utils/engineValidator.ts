@@ -219,6 +219,18 @@ export function extractCandidatesFromMetadata(
     statChanges,
     characterChanges,
     recommendedDC,
+    ...(chapterChanges ? {
+      semanticEvents: [
+        {
+          eventId: generateRecordId('sem-chapter'),
+          action: 'ADVANCE_CHAPTER',
+          scope: 'INTENT',
+          polarity: 'ASSERTED',
+          epistemicStatus: 'ASSERTED',
+          modality: 'INTENTIONAL'
+        }
+      ]
+    } : {}),
     rawMetadataBlock: metaData ? JSON.stringify(metaData) : undefined
   };
 }

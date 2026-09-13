@@ -15,7 +15,7 @@ import { CanonicalState, StateTransitionProposal } from './src/engine/types.ts';
 import { recoverSyntaxAndParseJson } from './src/engine/language/recovery.ts';
 import { filterDiverseCandidates } from './src/engine/language/diversity.ts';
 import { runCandidateRecoveryGate, parseCandidatesBlock, VeilCandidate } from './src/engine/language/candidateRecoveryGate.ts';
-import { integrateSemanticEventsIntoProposal, createEngineSemanticBridgeContext } from './src/engine/language/runtimeSemanticCandidate.ts';
+import { integrateSemanticEventsIntoProposal, createEngineSemanticBridgeContext, compileCandidateToProposal } from './src/engine/language/runtimeSemanticCandidate.ts';
 import { getCandidateSemanticEvents } from './src/engine/language/semanticCandidateContract.ts';
 
 const app = express();
@@ -572,75 +572,46 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
       ? engineState.historicalRecords
       : [];
 
-    // 1. Translation: Candidate -> Meaning Tree & Proposal
+    // 1. Translation: Candidate -> SemanticEvent[] -> CausalCompiler -> MeaningTree -> Runtime Bridge -> StateTransitionProposal
     const bridgeContext = createEngineSemanticBridgeContext(canonicalState, historicalRecords);
 
-    const translatedCandidates = candidates.map(c => {
-      const candidatePacket = extractCandidatesFromMetadata(
-        c.rawMetadata || {},
-        storyTurnCount,
-        worldInfo?.currentTime?.formattedTime || '1년차 봄 1일',
-        c.candidateId
-      );
-      const proposal: StateTransitionProposal = buildSafeProposalFromCandidate(
-        canonicalState,
-        candidatePacket,
-        storyTurnCount,
-        historicalRecords,
-        playerInputId
-      );
-
+    const translationResults = candidates.map(c => {
       const rawSemanticEvents = getCandidateSemanticEvents(c);
       const semanticEvents = rawSemanticEvents.length > 0
         ? rawSemanticEvents
         : getCandidateSemanticEvents(c.rawMetadata);
 
-      let finalProposal = proposal;
-      let finalMeaningTree = proposal.meaningTree!;
-
-      if (semanticEvents.length > 0) {
-        const integration = integrateSemanticEventsIntoProposal(
-          proposal,
-          semanticEvents,
-          bridgeContext
-        );
-
-        if (integration.status === 'MAPPABLE') {
-          finalProposal = integration.proposal;
-          finalMeaningTree = integration.meaningTree || finalProposal.meaningTree!;
-        } else if (integration.status === 'REJECTED') {
-          // Fail-closed for invalid / unsupported / ambiguous semantic events
-          finalProposal = {
-            ...proposal,
-            actions: [],
-            rejectedReasons: [...((proposal as any).rejectedReasons || []), ...integration.errors],
-          } as any;
-          finalMeaningTree = finalProposal.meaningTree!;
-        }
-      }
-
-      return {
-        candidate: c,
-        candidatePacket,
-        proposal: finalProposal,
-        meaningTree: finalMeaningTree
-      };
+      return compileCandidateToProposal(
+        c,
+        semanticEvents,
+        canonicalState,
+        storyTurnCount,
+        historicalRecords,
+        playerInputId,
+        bridgeContext
+      );
     });
+
+    // Filter to candidates whose Causal Language translation succeeded
+    const successfulTranslations = translationResults.filter(
+      (tr): tr is typeof tr & { proposal: StateTransitionProposal; meaningTree: MeaningNode } =>
+        tr.status === 'COMPILED' && Boolean(tr.proposal) && Boolean(tr.meaningTree)
+    );
 
     // 2. Diversity Gate: Deduplicate structurally identical Meaning Trees
     const diverseCandidatesWithTrees = filterDiverseCandidates(
-      translatedCandidates.map(tc => ({ candidate: tc.candidatePacket, meaningTree: tc.meaningTree }))
+      successfulTranslations.map(tr => ({ candidate: tr.candidate as any, meaningTree: tr.meaningTree }))
     );
 
     // Keep only translated candidates that were retained by the diversity gate
-    const candidatesToValidate = translatedCandidates.filter(tc =>
-      diverseCandidatesWithTrees.some(d => d.candidate === tc.candidatePacket)
+    const candidatesToValidate = successfulTranslations.filter(tr =>
+      diverseCandidatesWithTrees.some(d => d.candidate === (tr.candidate as any))
     );
 
     // 3. Sovereign Pre-Authorization Validation (ALLOW / REJECT)
-    const preAuthResults: VeilCandidate[] = candidatesToValidate.map(tc => {
+    const preAuthResults: VeilCandidate[] = candidatesToValidate.map(tr => {
       const validation = EngineValidator.validate(
-        tc.proposal,
+        tr.proposal,
         canonicalState,
         executedRequestIds,
         recordedEventIds,
@@ -648,7 +619,7 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
       );
 
       return {
-        ...tc.candidate,
+        ...tr.candidate,
         preAuthStatus: validation.isValid ? ('ALLOW' as const) : ('REJECT' as const),
         preAuthReasons: validation.isValid ? [] : [...validation.rejectedReasons, ...validation.conflictDetails]
       };
@@ -697,10 +668,10 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
             rawResponseText: rawPhase1Response,
             rawCandidatesBlock: rawCandidates,
             recoveryGateResult: gateResult,
-            meaningTrees: candidatesToValidate.map(c => ({
-              candidateId: c.candidate.candidateId,
-              meaningTree: c.meaningTree,
-              proposal: c.proposal
+            meaningTrees: candidatesToValidate.map(tr => ({
+              candidateId: tr.candidate.candidateId,
+              meaningTree: tr.meaningTree,
+              proposal: tr.proposal
             }))
           },
           preAuth: {
@@ -779,7 +750,7 @@ INSTRUCTIONS:
     const selectedId = selectMatch ? parseInt(selectMatch[1], 10) : null;
     const selectedCandidate = selectedId !== null ? (allowedCandidates.find(c => c.candidateId === selectedId) || null) : null;
     const selectedTranslated = selectedCandidate
-      ? candidatesToValidate.find(tc => tc.candidate.candidateId === selectedCandidate.candidateId) || null
+      ? candidatesToValidate.find(tr => tr.candidate.candidateId === selectedCandidate.candidateId) || null
       : null;
 
     let finalResponseText = '';
@@ -788,11 +759,11 @@ INSTRUCTIONS:
     let authorizedCandidatePacket: any | null = null;
     let authorizedProposal: StateTransitionProposal | null = null;
 
-    if (selectedCandidate && selectedTranslated) {
+    if (selectedCandidate && selectedTranslated && selectedTranslated.proposal) {
       // Authorized Candidate exact match: issue approved candidate raw metadata and authorized proposal
       authorizedCandidateId = selectedCandidate.candidateId;
       authorizedCandidate = selectedTranslated.candidate;
-      authorizedCandidatePacket = selectedTranslated.candidatePacket;
+      authorizedCandidatePacket = selectedTranslated.candidate;
       authorizedProposal = selectedTranslated.proposal;
 
       const metaJson = JSON.stringify(selectedCandidate.rawMetadata, null, 2);

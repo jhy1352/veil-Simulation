@@ -367,7 +367,7 @@ export function compileSemanticEventsToMeaningTree(events: readonly SemanticEven
     );
     return {
       status: hasAmbiguity ? 'RECONCILIATION_REQUIRED' : 'INVALID',
-      events,
+      events: events as SemanticEvent[],
       errors,
       warnings,
     };
@@ -376,7 +376,7 @@ export function compileSemanticEventsToMeaningTree(events: readonly SemanticEven
   // Construct MeaningTree using the 11 Core Atoms
   const eventNodes: MeaningNode[] = events.map((ev) => {
     const roleNodes: MeaningNode[] = ev.roles.map((r) => ({
-      atom: 'ROLE',
+      atom: 'ROLE' as const,
       scope: ev.scope,
       value: r.role,
       fields: {
@@ -387,7 +387,7 @@ export function compileSemanticEventsToMeaningTree(events: readonly SemanticEven
       children: r.entityName
         ? [
             {
-              atom: 'ENTITY',
+              atom: 'ENTITY' as const,
               scope: ev.scope,
               value: r.entityName,
               id: r.entityId,
@@ -400,28 +400,28 @@ export function compileSemanticEventsToMeaningTree(events: readonly SemanticEven
     // ALLOWED_COMPOSITIONS['ACTION']: ['ENTITY', 'STATE', 'VALUE', 'TIME', 'ROLE', 'RELATION', 'CAUSE', 'CONSTRAINT', 'ACTION']
 
     const stateNodes: MeaningNode[] = (ev.states || []).map((st, idx) => ({
-      atom: 'STATE',
+      atom: 'STATE' as const,
       scope: ev.scope,
       value: typeof st.name === 'string' ? st.name : (st.key ? String(st.key) : `state-${idx}`),
       fields: st,
     }));
 
     const relationNodes: MeaningNode[] = (ev.relations || []).map((rel, idx) => ({
-      atom: 'RELATION',
+      atom: 'RELATION' as const,
       scope: ev.scope,
       value: typeof rel.type === 'string' ? rel.type : (rel.name ? String(rel.name) : `relation-${idx}`),
       fields: rel,
     }));
 
     const valueNodes: MeaningNode[] = (ev.values || []).map((val, idx) => ({
-      atom: 'VALUE',
+      atom: 'VALUE' as const,
       scope: ev.scope,
       value: (val.value !== undefined ? (val.value as any) : (val.amount !== undefined ? (val.amount as any) : `value-${idx}`)),
       fields: val,
     }));
 
     const timeNodes: MeaningNode[] = (ev.times || []).map((tm, idx) => ({
-      atom: 'TIME',
+      atom: 'TIME' as const,
       scope: ev.scope,
       value: typeof tm.timestamp === 'string' ? tm.timestamp : (tm.value ? String(tm.value) : `time-${idx}`),
       fields: {
@@ -433,7 +433,7 @@ export function compileSemanticEventsToMeaningTree(events: readonly SemanticEven
     // If temporalPrecision is specified without explicit times array, emit a TIME atom to preserve temporal precision
     if ((!ev.times || ev.times.length === 0) && ev.temporalPrecision) {
       timeNodes.push({
-        atom: 'TIME',
+        atom: 'TIME' as const,
         scope: ev.scope,
         value: ev.temporalPrecision,
         fields: { temporalPrecision: ev.temporalPrecision },
@@ -441,14 +441,14 @@ export function compileSemanticEventsToMeaningTree(events: readonly SemanticEven
     }
 
     const causeNodes: MeaningNode[] = (ev.causes || []).map((cs, idx) => ({
-      atom: 'CAUSE',
+      atom: 'CAUSE' as const,
       scope: ev.scope,
       value: typeof cs.reason === 'string' ? cs.reason : (cs.type ? String(cs.type) : (cs.causeId ? String(cs.causeId) : `cause-${idx}`)),
       fields: cs,
     }));
 
     const constraintNodes: MeaningNode[] = (ev.constraints || []).map((cn, idx) => ({
-      atom: 'CONSTRAINT',
+      atom: 'CONSTRAINT' as const,
       scope: ev.scope,
       value: typeof cn.rule === 'string' ? cn.rule : (cn.name ? String(cn.name) : `constraint-${idx}`),
       fields: cn,
@@ -466,7 +466,7 @@ export function compileSemanticEventsToMeaningTree(events: readonly SemanticEven
 
     return {
       id: ev.eventId,
-      atom: 'ACTION',
+      atom: 'ACTION' as const,
       scope: ev.scope,
       value: ev.action,
       fields: {
@@ -485,7 +485,7 @@ export function compileSemanticEventsToMeaningTree(events: readonly SemanticEven
   });
 
   const rootNode: MeaningNode = {
-    atom: 'ACTION',
+    atom: 'ACTION' as const,
     scope: events[0].scope,
     composition: 'ORDERED',
     value: 'COMPOUND_EVENT_SEQUENCE',
@@ -494,7 +494,7 @@ export function compileSemanticEventsToMeaningTree(events: readonly SemanticEven
 
   return {
     status: 'COMPILED',
-    events,
+    events: events as SemanticEvent[],
     meaningTree: rootNode,
     warnings,
   };
