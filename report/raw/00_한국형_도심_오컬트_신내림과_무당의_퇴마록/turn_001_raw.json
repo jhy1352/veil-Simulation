@@ -1,53 +1,53 @@
 {
-  "runId": "run_2026-09-13T02-41-25-224Z_vogdi3",
+  "runId": "run_2026-09-13T05-30-56-859Z_e5s0a5",
   "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
   "turn": 1,
-  "timestamp": "2026-09-13T02:41:25.224Z",
-  "gitCommit": "d0b2c48a27d77c13232ae24f67209783522e4c51",
+  "timestamp": "2026-09-13T05:30:56.859Z",
+  "gitCommit": "34d0344572be03d0fe3754b032cda7eafec446d9",
   "playerInput": {
     "rawInput": "[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
   },
   "modelRuntime": {
     "requestedModel": "gemini-3.5-flash",
     "actualModelVersion": "gemini-3.5-flash",
-    "responseId": "PQ2mar3eDdmM1e8PvIyfqAc",
+    "responseId": "_DSmap6GNNmavr0Pvbu78AU",
     "serverTimings": {
-      "t1_requestStart": 1789267260802,
-      "t2_contextAssemblyComplete": 1789267260808,
-      "t3_geminiRequestStart": 1789267260808,
-      "t4_geminiResponseReceived": 1789267285789,
-      "contextAssemblyMs": 6,
-      "geminiGenerationMs": 24981,
+      "t1_requestStart": 1789277436409,
+      "t2_contextAssemblyComplete": 1789277436412,
+      "t3_geminiRequestStart": 1789277436412,
+      "t4_geminiResponseReceived": 1789277458401,
+      "contextAssemblyMs": 3,
+      "geminiGenerationMs": 21989,
       "inputCharCount": 2215,
-      "outputCharCount": 1019,
+      "outputCharCount": 947,
       "tokenCount": {
-        "promptTokens": 8636,
-        "candidatesTokens": 1995,
-        "totalTokens": 12653
+        "promptTokens": 8744,
+        "candidatesTokens": 2203,
+        "totalTokens": 12468
       }
     },
     "clientLatency": {
       "turn": 1,
       "model": "gemini-3.5-flash",
-      "t0_playerInput": 205878.59999999404,
-      "t1_requestStart": 205878.59999999404,
-      "t2_contextAssemblyComplete": 205878.69999998808,
-      "t3_geminiRequestStart": 205878.69999998808,
-      "t4_geminiResponseReceived": 231048,
-      "t5_parserComplete": 231048.5,
-      "t6_stateMutationComplete": 231048.5,
-      "t7_uiUpdateComplete": 231048.59999999404,
+      "t0_playerInput": 5191158.800000012,
+      "t1_requestStart": 5191158.800000012,
+      "t2_contextAssemblyComplete": 5191158.900000006,
+      "t3_geminiRequestStart": 5191158.900000006,
+      "t4_geminiResponseReceived": 5217610.5,
+      "t5_parserComplete": 5217611,
+      "t6_stateMutationComplete": 5217611,
+      "t7_uiUpdateComplete": 5217611.200000018,
       "contextAssemblyMs": 0,
-      "geminiGenerationMs": 25169,
+      "geminiGenerationMs": 26452,
       "parsingValidationMs": 1,
-      "totalTurnMs": 25170,
+      "totalTurnMs": 26452,
       "inputCharCount": 506,
-      "outputCharCount": 1019,
+      "outputCharCount": 947,
       "retried": false
     }
   },
   "chatContextForensic": {
-    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 13 / AGI 7 / CON 12 / INT 15 / WIS 13 / CHA 14\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 12 / AGI 12 / CON 14 / INT 14 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
     "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망",
     "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
     "seedsContext": "",
@@ -58,257 +58,27 @@
       "role": "user",
       "parts": [
         {
-          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 13 / AGI 7 / CON 12 / INT 15 / WIS 13 / CHA 14\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 1 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오.\n\n[ADDITIONAL ACTION]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 12 / AGI 12 / CON 14 / INT 14 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 1 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오.\n\n[ADDITIONAL ACTION]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
         }
       ]
     }
   ],
   "llmRawResponse": {
-    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"철거 예정인 신당 지하로의 침투\",\n    \"narrativeSummary\": \"쿠로코는 수사팀의 불빛을 피해 오방색 천이 찢겨나간 신당의 반파된 문을 열고 어둠이 짙게 깔린 지하 밀실로 숨어듭니다. 지하에서는 부패한 권력자가 바친 것으로 보이는 기괴한 제단과 액막이용 부적이 가득한 상자가 놓여 있습니다. 어둠 속에서 지맥의 한기가 뼈를 찌릅니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_ENTER_SHRINE_BASEMENT\",\n        \"action\": \"INFILTRATE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"만월동 재개발 3구역 신당 지하\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"UNVERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"지하 제단에 숨겨진 부패한 권력자의 기물\",\n        \"신당 지하 깊은 곳에서 꿈틀거리는 부정(不淨)의 존재\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 붉은 지맥의 울음\",\n        \"upcomingChapters\": [\n          \"1장: 살(煞)을 삼킨 소녀\",\n          \"2장: 어둠 속의 특수수사반\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"빗속의 잠복과 특수수사팀 관찰\",\n    \"narrativeSummary\": \"접근하는 서치라이트 불빛을 경계하며 무너진 콘크리트 잔해 더미 뒤편의 그림자 속으로 몸을 숨깁니다. 빗소리에 숨소리를 묻은 채 접근하는 이들의 복장과 대화를 관찰하여, 그들이 단순한 철거 용역이 아닌 정부 소속의 '오컬트 특수수사팀'임을 확인하고 정보를 수집하려 합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_OBSERVE_INVESTIGATORS\",\n        \"action\": \"OBSERVE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"오컬트 특수수사팀 수색대\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"UNVERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"오컬트 특수수사팀이 추적 중인 '지맥 균열 사건'의 보고서\",\n        \"수사팀 내부에 암약하는 정체불명의 조력자\"\n      ],\n      \"cameraOffscreenEvents\": [\n        \"특수수사팀 본부에서 만월동 지역에 3등급 영적 경보를 발령함\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 붉은 지맥의 울음\",\n        \"upcomingChapters\": [\n          \"1장: 빗속의 대치\",\n          \"2장: 뒤틀린 법령의 궤적\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"방울 소리를 따라 지맥의 균열로 이동\",\n    \"narrativeSummary\": \"이명이 들리듯 머릿속을 찌르는 둔탁한 방울 소리를 따라, 대지가 쩍 갈라져 붉은 안개가 피어오르는 재개발 구역 한가운데의 균열로 발걸음을 옮깁니다. 그곳에는 지맥을 억누르기 위해 박아 넣은 녹슨 쇠말뚝과 핏빛 액체가 흘러나오는 흙구덩이가 존재합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_FOLLOW_BELL_SOUND\",\n        \"action\": \"APPROACH\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"지맥 균열의 중심부\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"UNVERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"지맥을 파괴하여 부를 축적한 건설사 회장의 일그러진 마음의 핵\",\n        \"터져 나온 지맥이 요구하는 피의 대가\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 붉은 지맥의 울음\",\n        \"upcomingChapters\": [\n          \"1장: 쇠말뚝과 피의 제례\",\n          \"2장: 신내림의 불꽃\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n하늘을 온통 짓누른 납빛 먹구름 사이로 거친 가을비가 장대처럼 쏟아집니다. 빗방울은 철거가 반쯤 진행되어 흉물스럽게 무너진 만월동 재개발 3구역의 콘크리트 더미를 사정없이 두들기며, 도시의 가장 어둡고 은밀한 치부를 씻어내듯 흘러내립니다. 무너진 벽면 틈새로 기괴하게 휘어지며 삐져나온 붉은 철근들은, 마치 대지라는 이름의 거대한 괴수가 살을 찢고 뼈를 드러낸 형상과도 같습니다. \n\n아마미야 쿠로코. 열여덟의 소녀는 비바람이 사납게 들이치는 어느 반파된 무당집 처마 밑에 서서 그 광경을 묵묵히 응시하고 있습니다. 바람이 세차게 불 때마다 녹슨 대문에 걸린 퇴색된 오방색 천 조각들이 비명 같은 마찰음을 내며 요동치고, 썩은 목조 대들보 틈새에 매달린 녹슨 놋쇠 방울 하나가 둔탁하고 불규칙한 소리로 울립니다. 댕, 대그랑... 그 기이한 울림은 귓전을 맴도는 이명처럼 뇌리를 가라앉힙니다.\n\n지맥이 찢어진 대지의 틈바구니에서는 퀴퀴한 유황 냄새와 비린내가 뒤섞인 더운 김이 핏빛 안개처럼 희뿌옇게 솟아오르고 있습니다. 이곳은 단순한 재개발 현장이 아닙니다. 돈과 권력에 눈이 먼 부패한 인간들이 영험한 대지의 맥을 억지로 끊어내고, 그 위로 자신들의 비틀린 염원을 쌓아 올리려다 결국 참화를 부른 신성모독의 현장입니다. 쿠로코의 뺨을 타고 흐르는 차가운 빗물은 그녀의 눈빛을 더욱더 차갑고 예리하게 벼려놓을 뿐입니다. \n\n그때, 거센 빗줄기 너머로 어둠을 거칠게 가르는 서치라이트 불빛 몇 줄기가 이쪽을 향해 서서히 좁혀 들어오기 시작합니다. 질척이는 진흙을 밟는 무거운 군화 소리, 그리고 나직한 라디오 잡음이 공기를 타고 흐릅니다.\n\"여기는 만월 3구역 진입로. 잔류 영적 파동 감지 중. 전원 경계를 늦추지 마라.\"\n\n부패한 이들의 뒤를 쫓는 특수수사팀의 발자국 소리인가, 아니면 이 비극을 파묻으려는 또 다른 권력의 사냥개들인가. \n\n아마미야 쿠로코의 앞에는 무거운 침묵과 차가운 기운이 내려앉은 세 갈래의 선택지가 놓여 있습니다. 어둠 속에서 진실의 핵을 훔치기 위한 그녀의 첫 발걸음은 어디로 향하겠습니까?\n[ZERO_MUTATION_END]",
-    "rawResponseText": "하늘을 온통 짓누른 납빛 먹구름 사이로 거친 가을비가 장대처럼 쏟아집니다. 빗방울은 철거가 반쯤 진행되어 흉물스럽게 무너진 만월동 재개발 3구역의 콘크리트 더미를 사정없이 두들기며, 도시의 가장 어둡고 은밀한 치부를 씻어내듯 흘러내립니다. 무너진 벽면 틈새로 기괴하게 휘어지며 삐져나온 붉은 철근들은, 마치 대지라는 이름의 거대한 괴수가 살을 찢고 뼈를 드러낸 형상과도 같습니다. \n\n아마미야 쿠로코. 열여덟의 소녀는 비바람이 사납게 들이치는 어느 반파된 무당집 처마 밑에 서서 그 광경을 묵묵히 응시하고 있습니다. 바람이 세차게 불 때마다 녹슨 대문에 걸린 퇴색된 오방색 천 조각들이 비명 같은 마찰음을 내며 요동치고, 썩은 목조 대들보 틈새에 매달린 녹슨 놋쇠 방울 하나가 둔탁하고 불규칙한 소리로 울립니다. 댕, 대그랑... 그 기이한 울림은 귓전을 맴도는 이명처럼 뇌리를 가라앉힙니다.\n\n지맥이 찢어진 대지의 틈바구니에서는 퀴퀴한 유황 냄새와 비린내가 뒤섞인 더운 김이 핏빛 안개처럼 희뿌옇게 솟아오르고 있습니다. 이곳은 단순한 재개발 현장이 아닙니다. 돈과 권력에 눈이 먼 부패한 인간들이 영험한 대지의 맥을 억지로 끊어내고, 그 위로 자신들의 비틀린 염원을 쌓아 올리려다 결국 참화를 부른 신성모독의 현장입니다. 쿠로코의 뺨을 타고 흐르는 차가운 빗물은 그녀의 눈빛을 더욱더 차갑고 예리하게 벼려놓을 뿐입니다. \n\n그때, 거센 빗줄기 너머로 어둠을 거칠게 가르는 서치라이트 불빛 몇 줄기가 이쪽을 향해 서서히 좁혀 들어오기 시작합니다. 질척이는 진흙을 밟는 무거운 군화 소리, 그리고 나직한 라디오 잡음이 공기를 타고 흐릅니다.\n\"여기는 만월 3구역 진입로. 잔류 영적 파동 감지 중. 전원 경계를 늦추지 마라.\"\n\n부패한 이들의 뒤를 쫓는 특수수사팀의 발자국 소리인가, 아니면 이 비극을 파묻으려는 또 다른 권력의 사냥개들인가. \n\n아마미야 쿠로코의 앞에는 무거운 침묵과 차가운 기운이 내려앉은 세 갈래의 선택지가 놓여 있습니다. 어둠 속에서 진실의 핵을 훔치기 위한 그녀의 첫 발걸음은 어디로 향하겠습니까?"
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"찢겨진 지맥의 틈새로 향하기\",\n    \"narrativeSummary\": \"재개발 공사장 한가운데, 마치 거대한 짐승의 아가리처럼 입을 벌리고 있는 지맥의 파열 구역으로 향합니다. 그 깊은 구덩이 안쪽에서 뿜어져 나오는, 인간의 감각을 마비시키는 차가운 악취와 어두운 기운의 정체를 파헤치고자 합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_APPROACH_RUPTURE\",\n        \"action\": \"INVESTIGATE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"청신동 제4구역 지맥 파열 구덩이\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"지맥의 균열 깊은 곳에서 요동치는, 소유자를 알 수 없는 거대하고 일그러진 집념의 파동\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 흙 아래의 울음소리\",\n        \"upcomingChapters\": [\n          \"1장: 살을 찢는 비명\",\n          \"2장: 철거 구역의 망령들\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"무너진 신당(神堂)의 잔해 탐색하기\",\n    \"narrativeSummary\": \"포크레인에 찍혀 반쯤 무너진 고목과 그 아래 깔린 간이 신당의 잔해를 조사합니다. 부서진 붉은 칠 가구와 흙먼지 속에서, 바람이 불지 않음에도 미세하게 떨리는 쇠붙이 소리의 진원지를 찾습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_SEARCH_SHRINE\",\n        \"action\": \"SEARCH\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"반파된 성황당 잔해\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"신어머니가 남긴 것으로 추정되는, 부서진 제단 틈새의 놋방울\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 부서진 신당의 잔향\",\n        \"upcomingChapters\": [\n          \"1장: 첫 번째 방울소리\",\n          \"2장: 지맥의 신벌\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"철거 구역에 진입하는 정체불명의 차량 감시하기\",\n    \"narrativeSummary\": \"먼지 날리는 비포장도로를 따라 라이트도 켜지 않은 채 은밀하게 진입하는 검은 외제 세단을 경계하며 몸을 숨깁니다. 차창 너머로 흘러나오는 기괴할 정도로 왜곡된 인간의 욕망, 즉 '일그러진 마음의 핵'이 내뿜는 중압감을 멀리서 가늠합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_OBSERVE_VEHICLE\",\n        \"action\": \"OBSERVE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"검은 세단\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"검은 세단에 타고 있는, 썩은 바다 냄새를 풍기는 부패한 권력의 하수인\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 검은 바퀴와 썩은 냄새\",\n        \"upcomingChapters\": [\n          \"1장: 사냥감의 윤곽\",\n          \"2장: 철거 용역의 밤\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"공사장 외곽의 깜빡이는 편의점으로 물러나 상황 살피기\",\n    \"narrativeSummary\": \"기괴한 공기가 지배하는 공사 현장을 잠시 벗어나, 경계선 너머 홀로 불을 밝히고 있는 낡은 편의점 건물로 향합니다. 비를 피하며 현장의 구조를 파악하고, 이곳을 맴도는 인간들의 흔적과 소문을 수집하고자 합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_RETREAT_OUTSKIRTS\",\n        \"action\": \"MOVE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"공사장 외곽 편의점\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"편의점 유리창 너머로 보이는, 기괴하게 몸을 비틀며 걸어 다니는 야간 인부들의 소문\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 경계선 상의 휴식\",\n        \"upcomingChapters\": [\n          \"1장: 불면의 밤\",\n          \"2장: 기괴한 계약서\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n하늘은 마치 낮게 가라앉은 납빛 수의처럼 서울의 한구석을 무겁게 덮어누르고 있었다. 철거가 진행 중인 청신동 제4구역. 한때 다닥다닥 붙어 숨을 쉬던 달동네의 골목들은 이제 거대한 포크레인의 이빨에 갈려 나간 채, 뼈대만 남은 콘크리트 무덤이 되어 사방에 흩어져 있었다. 무너진 벽면마다 붉은 페인트로 휘갈겨진 '철거'라는 두 글자가 마치 마르지 않은 짐승의 피처럼 음울하게 번져 흘렀다.\n\n봄철의 끈적한 이슬비가 먼지와 섞여 진흙탕을 만들고, 깨진 아스팔트 틈새로는 뒤틀린 나무뿌리처럼 지맥(地脈)의 상처가 거무스름한 흙덩이를 뱉어내고 있었다. 바람이 불 때마다 시멘트 가루와 가죽 썩는 듯한 냄새, 그리고 누군가 태우다 버린 저급한 향의 잔향이 섞여 콧날을 찔렀다. 이 폐허의 한가운데, 낡고 얇은 외투만을 걸친 여덟 살배기 육체의 선을 가진 열여덟의 소녀, 아마미야 쿠로코가 서 있었다.\n\n그녀의 손끝은 빗물과 한기에 곱아 미세하게 떨리고 있었다. 과거의 기억도, 자신이 어디서 왔는지에 대한 증명도 존재하지 않는 백지 상태. 그러나 가슴 가장 깊은 곳, 얼어붙은 심장 밑바닥에서 요동치는 기묘한 갈망만은 벼려진 칼날처럼 선명했다. 부조리로 가득 찬 세상, 그 꼭대기에서 군림하며 타인의 삶을 짓밟는 자들의 안쪽—그들의 일그러지고 썩어 문드러진 '마음의 핵'을 움켜쥐고 도려내어 파멸시키겠다는 차가운 의지였다.\n\n멀지 않은 곳에서 흙더미에 반쯤 깔린 성황당의 부러진 깃대가 빗속에서 삐걱이는 소리를 냈다. 그리고 그 아래, 아주 미세하게, 쇠붙이가 부딪쳐 내는 음습한 소리가 빗소리 사이로 스며들었다. 마치 보이지 않는 끈이 그녀의 목을 잡아끄는 듯한 압박감이 철거 현장 깊은 곳에서부터 밀려들기 시작했다. \n\n아마미야 쿠로코는 젖은 머리칼을 뒤로 넘기며 허공을 응시했다. 이 가라앉는 도시는 그녀에게 무엇을 요구하고 있는가. 차가운 빗방울이 뺨을 타고 흘러내려 턱끝에서 툭, 떨어졌다.\n[ZERO_MUTATION_END]",
+    "rawResponseText": "하늘은 마치 낮게 가라앉은 납빛 수의처럼 서울의 한구석을 무겁게 덮어누르고 있었다. 철거가 진행 중인 청신동 제4구역. 한때 다닥다닥 붙어 숨을 쉬던 달동네의 골목들은 이제 거대한 포크레인의 이빨에 갈려 나간 채, 뼈대만 남은 콘크리트 무덤이 되어 사방에 흩어져 있었다. 무너진 벽면마다 붉은 페인트로 휘갈겨진 '철거'라는 두 글자가 마치 마르지 않은 짐승의 피처럼 음울하게 번져 흘렀다.\n\n봄철의 끈적한 이슬비가 먼지와 섞여 진흙탕을 만들고, 깨진 아스팔트 틈새로는 뒤틀린 나무뿌리처럼 지맥(地脈)의 상처가 거무스름한 흙덩이를 뱉어내고 있었다. 바람이 불 때마다 시멘트 가루와 가죽 썩는 듯한 냄새, 그리고 누군가 태우다 버린 저급한 향의 잔향이 섞여 콧날을 찔렀다. 이 폐허의 한가운데, 낡고 얇은 외투만을 걸친 여덟 살배기 육체의 선을 가진 열여덟의 소녀, 아마미야 쿠로코가 서 있었다.\n\n그녀의 손끝은 빗물과 한기에 곱아 미세하게 떨리고 있었다. 과거의 기억도, 자신이 어디서 왔는지에 대한 증명도 존재하지 않는 백지 상태. 그러나 가슴 가장 깊은 곳, 얼어붙은 심장 밑바닥에서 요동치는 기묘한 갈망만은 벼려진 칼날처럼 선명했다. 부조리로 가득 찬 세상, 그 꼭대기에서 군림하며 타인의 삶을 짓밟는 자들의 안쪽—그들의 일그러지고 썩어 문드러진 '마음의 핵'을 움켜쥐고 도려내어 파멸시키겠다는 차가운 의지였다.\n\n멀지 않은 곳에서 흙더미에 반쯤 깔린 성황당의 부러진 깃대가 빗속에서 삐걱이는 소리를 냈다. 그리고 그 아래, 아주 미세하게, 쇠붙이가 부딪쳐 내는 음습한 소리가 빗소리 사이로 스며들었다. 마치 보이지 않는 끈이 그녀의 목을 잡아끄는 듯한 압박감이 철거 현장 깊은 곳에서부터 밀려들기 시작했다. \n\n아마미야 쿠로코는 젖은 머리칼을 뒤로 넘기며 허공을 응시했다. 이 가라앉는 도시는 그녀에게 무엇을 요구하고 있는가. 차가운 빗방울이 뺨을 타고 흘러내려 턱끝에서 툭, 떨어졌다."
   },
   "candidatePipeline": {
-    "rawCandidatesBlock": [
-      {
-        "label": "철거 예정인 신당 지하로의 침투",
-        "narrativeSummary": "쿠로코는 수사팀의 불빛을 피해 오방색 천이 찢겨나간 신당의 반파된 문을 열고 어둠이 짙게 깔린 지하 밀실로 숨어듭니다. 지하에서는 부패한 권력자가 바친 것으로 보이는 기괴한 제단과 액막이용 부적이 가득한 상자가 놓여 있습니다. 어둠 속에서 지맥의 한기가 뼈를 찌릅니다.",
-        "semanticEvents": [
-          {
-            "eventId": "EVT_ENTER_SHRINE_BASEMENT",
-            "action": "INFILTRATE",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "LOCATION",
-                "entityName": "만월동 재개발 3구역 신당 지하"
-              }
-            ],
-            "scope": "INTENT",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "foreshadowSeeds": [
-            "지하 제단에 숨겨진 부패한 권력자의 기물",
-            "신당 지하 깊은 곳에서 꿈틀거리는 부정(不淨)의 존재"
-          ],
-          "chapterChanges": {
-            "currentChapter": "서막: 붉은 지맥의 울음",
-            "upcomingChapters": [
-              "1장: 살(煞)을 삼킨 소녀",
-              "2장: 어둠 속의 특수수사반"
-            ]
-          }
-        },
-        "candidateId": 1
-      },
-      {
-        "label": "빗속의 잠복과 특수수사팀 관찰",
-        "narrativeSummary": "접근하는 서치라이트 불빛을 경계하며 무너진 콘크리트 잔해 더미 뒤편의 그림자 속으로 몸을 숨깁니다. 빗소리에 숨소리를 묻은 채 접근하는 이들의 복장과 대화를 관찰하여, 그들이 단순한 철거 용역이 아닌 정부 소속의 '오컬트 특수수사팀'임을 확인하고 정보를 수집하려 합니다.",
-        "semanticEvents": [
-          {
-            "eventId": "EVT_OBSERVE_INVESTIGATORS",
-            "action": "OBSERVE",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "TARGET",
-                "entityName": "오컬트 특수수사팀 수색대"
-              }
-            ],
-            "scope": "INTENT",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "foreshadowSeeds": [
-            "오컬트 특수수사팀이 추적 중인 '지맥 균열 사건'의 보고서",
-            "수사팀 내부에 암약하는 정체불명의 조력자"
-          ],
-          "cameraOffscreenEvents": [
-            "특수수사팀 본부에서 만월동 지역에 3등급 영적 경보를 발령함"
-          ],
-          "chapterChanges": {
-            "currentChapter": "서막: 붉은 지맥의 울음",
-            "upcomingChapters": [
-              "1장: 빗속의 대치",
-              "2장: 뒤틀린 법령의 궤적"
-            ]
-          }
-        },
-        "candidateId": 2
-      },
-      {
-        "label": "방울 소리를 따라 지맥의 균열로 이동",
-        "narrativeSummary": "이명이 들리듯 머릿속을 찌르는 둔탁한 방울 소리를 따라, 대지가 쩍 갈라져 붉은 안개가 피어오르는 재개발 구역 한가운데의 균열로 발걸음을 옮깁니다. 그곳에는 지맥을 억누르기 위해 박아 넣은 녹슨 쇠말뚝과 핏빛 액체가 흘러나오는 흙구덩이가 존재합니다.",
-        "semanticEvents": [
-          {
-            "eventId": "EVT_FOLLOW_BELL_SOUND",
-            "action": "APPROACH",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "TARGET",
-                "entityName": "지맥 균열의 중심부"
-              }
-            ],
-            "scope": "INTENT",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "foreshadowSeeds": [
-            "지맥을 파괴하여 부를 축적한 건설사 회장의 일그러진 마음의 핵",
-            "터져 나온 지맥이 요구하는 피의 대가"
-          ],
-          "chapterChanges": {
-            "currentChapter": "서막: 붉은 지맥의 울음",
-            "upcomingChapters": [
-              "1장: 쇠말뚝과 피의 제례",
-              "2장: 신내림의 불꽃"
-            ]
-          }
-        },
-        "candidateId": 3
-      }
-    ],
-    "parsedCandidates": [
-      {
-        "label": "철거 예정인 신당 지하로의 침투",
-        "narrativeSummary": "쿠로코는 수사팀의 불빛을 피해 오방색 천이 찢겨나간 신당의 반파된 문을 열고 어둠이 짙게 깔린 지하 밀실로 숨어듭니다. 지하에서는 부패한 권력자가 바친 것으로 보이는 기괴한 제단과 액막이용 부적이 가득한 상자가 놓여 있습니다. 어둠 속에서 지맥의 한기가 뼈를 찌릅니다.",
-        "semanticEvents": [
-          {
-            "eventId": "EVT_ENTER_SHRINE_BASEMENT",
-            "action": "INFILTRATE",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "LOCATION",
-                "entityName": "만월동 재개발 3구역 신당 지하"
-              }
-            ],
-            "scope": "INTENT",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "foreshadowSeeds": [
-            "지하 제단에 숨겨진 부패한 권력자의 기물",
-            "신당 지하 깊은 곳에서 꿈틀거리는 부정(不淨)의 존재"
-          ],
-          "chapterChanges": {
-            "currentChapter": "서막: 붉은 지맥의 울음",
-            "upcomingChapters": [
-              "1장: 살(煞)을 삼킨 소녀",
-              "2장: 어둠 속의 특수수사반"
-            ]
-          }
-        },
-        "candidateId": 1
-      },
-      {
-        "label": "빗속의 잠복과 특수수사팀 관찰",
-        "narrativeSummary": "접근하는 서치라이트 불빛을 경계하며 무너진 콘크리트 잔해 더미 뒤편의 그림자 속으로 몸을 숨깁니다. 빗소리에 숨소리를 묻은 채 접근하는 이들의 복장과 대화를 관찰하여, 그들이 단순한 철거 용역이 아닌 정부 소속의 '오컬트 특수수사팀'임을 확인하고 정보를 수집하려 합니다.",
-        "semanticEvents": [
-          {
-            "eventId": "EVT_OBSERVE_INVESTIGATORS",
-            "action": "OBSERVE",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "TARGET",
-                "entityName": "오컬트 특수수사팀 수색대"
-              }
-            ],
-            "scope": "INTENT",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "foreshadowSeeds": [
-            "오컬트 특수수사팀이 추적 중인 '지맥 균열 사건'의 보고서",
-            "수사팀 내부에 암약하는 정체불명의 조력자"
-          ],
-          "cameraOffscreenEvents": [
-            "특수수사팀 본부에서 만월동 지역에 3등급 영적 경보를 발령함"
-          ],
-          "chapterChanges": {
-            "currentChapter": "서막: 붉은 지맥의 울음",
-            "upcomingChapters": [
-              "1장: 빗속의 대치",
-              "2장: 뒤틀린 법령의 궤적"
-            ]
-          }
-        },
-        "candidateId": 2
-      },
-      {
-        "label": "방울 소리를 따라 지맥의 균열로 이동",
-        "narrativeSummary": "이명이 들리듯 머릿속을 찌르는 둔탁한 방울 소리를 따라, 대지가 쩍 갈라져 붉은 안개가 피어오르는 재개발 구역 한가운데의 균열로 발걸음을 옮깁니다. 그곳에는 지맥을 억누르기 위해 박아 넣은 녹슨 쇠말뚝과 핏빛 액체가 흘러나오는 흙구덩이가 존재합니다.",
-        "semanticEvents": [
-          {
-            "eventId": "EVT_FOLLOW_BELL_SOUND",
-            "action": "APPROACH",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "TARGET",
-                "entityName": "지맥 균열의 중심부"
-              }
-            ],
-            "scope": "INTENT",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "foreshadowSeeds": [
-            "지맥을 파괴하여 부를 축적한 건설사 회장의 일그러진 마음의 핵",
-            "터져 나온 지맥이 요구하는 피의 대가"
-          ],
-          "chapterChanges": {
-            "currentChapter": "서막: 붉은 지맥의 울음",
-            "upcomingChapters": [
-              "1장: 쇠말뚝과 피의 제례",
-              "2장: 신내림의 불꽃"
-            ]
-          }
-        },
-        "candidateId": 3
-      }
-    ],
+    "rawCandidatesBlock": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"찢겨진 지맥의 틈새로 향하기\",\n    \"narrativeSummary\": \"재개발 공사장 한가운데, 마치 거대한 짐승의 아가리처럼 입을 벌리고 있는 지맥의 파열 구역으로 향합니다. 그 깊은 구덩이 안쪽에서 뿜어져 나오는, 인간의 감각을 마비시키는 차가운 악취와 어두운 기운의 정체를 파헤치고자 합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_APPROACH_RUPTURE\",\n        \"action\": \"INVESTIGATE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"청신동 제4구역 지맥 파열 구덩이\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"지맥의 균열 깊은 곳에서 요동치는, 소유자를 알 수 없는 거대하고 일그러진 집념의 파동\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 흙 아래의 울음소리\",\n        \"upcomingChapters\": [\n          \"1장: 살을 찢는 비명\",\n          \"2장: 철거 구역의 망령들\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"무너진 신당(神堂)의 잔해 탐색하기\",\n    \"narrativeSummary\": \"포크레인에 찍혀 반쯤 무너진 고목과 그 아래 깔린 간이 신당의 잔해를 조사합니다. 부서진 붉은 칠 가구와 흙먼지 속에서, 바람이 불지 않음에도 미세하게 떨리는 쇠붙이 소리의 진원지를 찾습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_SEARCH_SHRINE\",\n        \"action\": \"SEARCH\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"반파된 성황당 잔해\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"신어머니가 남긴 것으로 추정되는, 부서진 제단 틈새의 놋방울\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 부서진 신당의 잔향\",\n        \"upcomingChapters\": [\n          \"1장: 첫 번째 방울소리\",\n          \"2장: 지맥의 신벌\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"철거 구역에 진입하는 정체불명의 차량 감시하기\",\n    \"narrativeSummary\": \"먼지 날리는 비포장도로를 따라 라이트도 켜지 않은 채 은밀하게 진입하는 검은 외제 세단을 경계하며 몸을 숨깁니다. 차창 너머로 흘러나오는 기괴할 정도로 왜곡된 인간의 욕망, 즉 '일그러진 마음의 핵'이 내뿜는 중압감을 멀리서 가늠합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_OBSERVE_VEHICLE\",\n        \"action\": \"OBSERVE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"검은 세단\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"검은 세단에 타고 있는, 썩은 바다 냄새를 풍기는 부패한 권력의 하수인\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 검은 바퀴와 썩은 냄새\",\n        \"upcomingChapters\": [\n          \"1장: 사냥감의 윤곽\",\n          \"2장: 철거 용역의 밤\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"공사장 외곽의 깜빡이는 편의점으로 물러나 상황 살피기\",\n    \"narrativeSummary\": \"기괴한 공기가 지배하는 공사 현장을 잠시 벗어나, 경계선 너머 홀로 불을 밝히고 있는 낡은 편의점 건물로 향합니다. 비를 피하며 현장의 구조를 파악하고, 이곳을 맴도는 인간들의 흔적과 소문을 수집하고자 합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_RETREAT_OUTSKIRTS\",\n        \"action\": \"MOVE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"공사장 외곽 편의점\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"편의점 유리창 너머로 보이는, 기괴하게 몸을 비틀며 걸어 다니는 야간 인부들의 소문\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 경계선 상의 휴식\",\n        \"upcomingChapters\": [\n          \"1장: 불면의 밤\",\n          \"2장: 기괴한 계약서\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+    "parsedCandidates": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"찢겨진 지맥의 틈새로 향하기\",\n    \"narrativeSummary\": \"재개발 공사장 한가운데, 마치 거대한 짐승의 아가리처럼 입을 벌리고 있는 지맥의 파열 구역으로 향합니다. 그 깊은 구덩이 안쪽에서 뿜어져 나오는, 인간의 감각을 마비시키는 차가운 악취와 어두운 기운의 정체를 파헤치고자 합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_APPROACH_RUPTURE\",\n        \"action\": \"INVESTIGATE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"청신동 제4구역 지맥 파열 구덩이\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"지맥의 균열 깊은 곳에서 요동치는, 소유자를 알 수 없는 거대하고 일그러진 집념의 파동\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 흙 아래의 울음소리\",\n        \"upcomingChapters\": [\n          \"1장: 살을 찢는 비명\",\n          \"2장: 철거 구역의 망령들\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"무너진 신당(神堂)의 잔해 탐색하기\",\n    \"narrativeSummary\": \"포크레인에 찍혀 반쯤 무너진 고목과 그 아래 깔린 간이 신당의 잔해를 조사합니다. 부서진 붉은 칠 가구와 흙먼지 속에서, 바람이 불지 않음에도 미세하게 떨리는 쇠붙이 소리의 진원지를 찾습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_SEARCH_SHRINE\",\n        \"action\": \"SEARCH\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"반파된 성황당 잔해\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"신어머니가 남긴 것으로 추정되는, 부서진 제단 틈새의 놋방울\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 부서진 신당의 잔향\",\n        \"upcomingChapters\": [\n          \"1장: 첫 번째 방울소리\",\n          \"2장: 지맥의 신벌\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"철거 구역에 진입하는 정체불명의 차량 감시하기\",\n    \"narrativeSummary\": \"먼지 날리는 비포장도로를 따라 라이트도 켜지 않은 채 은밀하게 진입하는 검은 외제 세단을 경계하며 몸을 숨깁니다. 차창 너머로 흘러나오는 기괴할 정도로 왜곡된 인간의 욕망, 즉 '일그러진 마음의 핵'이 내뿜는 중압감을 멀리서 가늠합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_OBSERVE_VEHICLE\",\n        \"action\": \"OBSERVE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"검은 세단\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"검은 세단에 타고 있는, 썩은 바다 냄새를 풍기는 부패한 권력의 하수인\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 검은 바퀴와 썩은 냄새\",\n        \"upcomingChapters\": [\n          \"1장: 사냥감의 윤곽\",\n          \"2장: 철거 용역의 밤\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"공사장 외곽의 깜빡이는 편의점으로 물러나 상황 살피기\",\n    \"narrativeSummary\": \"기괴한 공기가 지배하는 공사 현장을 잠시 벗어나, 경계선 너머 홀로 불을 밝히고 있는 낡은 편의점 건물로 향합니다. 비를 피하며 현장의 구조를 파악하고, 이곳을 맴도는 인간들의 흔적과 소문을 수집하고자 합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_RETREAT_OUTSKIRTS\",\n        \"action\": \"MOVE\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"공사장 외곽 편의점\"\n          }\n        ],\n        \"scope\": \"INTENT\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"편의점 유리창 너머로 보이는, 기괴하게 몸을 비틀며 걸어 다니는 야간 인부들의 소문\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 경계선 상의 휴식\",\n        \"upcomingChapters\": [\n          \"1장: 불면의 밤\",\n          \"2장: 기괴한 계약서\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
     "recoveryGateResult": {
       "passedCandidates": [
         {
-          "label": "철거 예정인 신당 지하로의 침투",
-          "narrativeSummary": "쿠로코는 수사팀의 불빛을 피해 오방색 천이 찢겨나간 신당의 반파된 문을 열고 어둠이 짙게 깔린 지하 밀실로 숨어듭니다. 지하에서는 부패한 권력자가 바친 것으로 보이는 기괴한 제단과 액막이용 부적이 가득한 상자가 놓여 있습니다. 어둠 속에서 지맥의 한기가 뼈를 찌릅니다.",
+          "label": "찢겨진 지맥의 틈새로 향하기",
+          "narrativeSummary": "재개발 공사장 한가운데, 마치 거대한 짐승의 아가리처럼 입을 벌리고 있는 지맥의 파열 구역으로 향합니다. 그 깊은 구덩이 안쪽에서 뿜어져 나오는, 인간의 감각을 마비시키는 차가운 악취와 어두운 기운의 정체를 파헤치고자 합니다.",
           "semanticEvents": [
             {
-              "eventId": "EVT_ENTER_SHRINE_BASEMENT",
-              "action": "INFILTRATE",
+              "eventId": "EVT_APPROACH_RUPTURE",
+              "action": "INVESTIGATE",
               "roles": [
                 {
                   "role": "SUBJECT",
@@ -316,35 +86,72 @@
                 },
                 {
                   "role": "LOCATION",
-                  "entityName": "만월동 재개발 3구역 신당 지하"
+                  "entityName": "청신동 제4구역 지맥 파열 구덩이"
                 }
               ],
               "scope": "INTENT",
               "polarity": "ASSERTED",
-              "epistemicStatus": "UNVERIFIED"
+              "epistemicStatus": "ASSERTED",
+              "modality": "INTENTIONAL"
             }
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "지하 제단에 숨겨진 부패한 권력자의 기물",
-              "신당 지하 깊은 곳에서 꿈틀거리는 부정(不淨)의 존재"
+              "지맥의 균열 깊은 곳에서 요동치는, 소유자를 알 수 없는 거대하고 일그러진 집념의 파동"
             ],
             "chapterChanges": {
-              "currentChapter": "서막: 붉은 지맥의 울음",
+              "currentChapter": "서막: 흙 아래의 울음소리",
               "upcomingChapters": [
-                "1장: 살(煞)을 삼킨 소녀",
-                "2장: 어둠 속의 특수수사반"
+                "1장: 살을 찢는 비명",
+                "2장: 철거 구역의 망령들"
               ]
             }
           },
           "candidateId": 1
         },
         {
-          "label": "빗속의 잠복과 특수수사팀 관찰",
-          "narrativeSummary": "접근하는 서치라이트 불빛을 경계하며 무너진 콘크리트 잔해 더미 뒤편의 그림자 속으로 몸을 숨깁니다. 빗소리에 숨소리를 묻은 채 접근하는 이들의 복장과 대화를 관찰하여, 그들이 단순한 철거 용역이 아닌 정부 소속의 '오컬트 특수수사팀'임을 확인하고 정보를 수집하려 합니다.",
+          "label": "무너진 신당(神堂)의 잔해 탐색하기",
+          "narrativeSummary": "포크레인에 찍혀 반쯤 무너진 고목과 그 아래 깔린 간이 신당의 잔해를 조사합니다. 부서진 붉은 칠 가구와 흙먼지 속에서, 바람이 불지 않음에도 미세하게 떨리는 쇠붙이 소리의 진원지를 찾습니다.",
           "semanticEvents": [
             {
-              "eventId": "EVT_OBSERVE_INVESTIGATORS",
+              "eventId": "EVT_SEARCH_SHRINE",
+              "action": "SEARCH",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "반파된 성황당 잔해"
+                }
+              ],
+              "scope": "INTENT",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "ASSERTED",
+              "modality": "INTENTIONAL"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "신어머니가 남긴 것으로 추정되는, 부서진 제단 틈새의 놋방울"
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막: 부서진 신당의 잔향",
+              "upcomingChapters": [
+                "1장: 첫 번째 방울소리",
+                "2장: 지맥의 신벌"
+              ]
+            }
+          },
+          "candidateId": 2
+        },
+        {
+          "label": "철거 구역에 진입하는 정체불명의 차량 감시하기",
+          "narrativeSummary": "먼지 날리는 비포장도로를 따라 라이트도 켜지 않은 채 은밀하게 진입하는 검은 외제 세단을 경계하며 몸을 숨깁니다. 차창 너머로 흘러나오는 기괴할 정도로 왜곡된 인간의 욕망, 즉 '일그러진 마음의 핵'이 내뿜는 중압감을 멀리서 가늠합니다.",
+          "semanticEvents": [
+            {
+              "eventId": "EVT_OBSERVE_VEHICLE",
               "action": "OBSERVE",
               "roles": [
                 {
@@ -353,73 +160,70 @@
                 },
                 {
                   "role": "TARGET",
-                  "entityName": "오컬트 특수수사팀 수색대"
+                  "entityName": "검은 세단"
                 }
               ],
               "scope": "INTENT",
               "polarity": "ASSERTED",
-              "epistemicStatus": "UNVERIFIED"
+              "epistemicStatus": "ASSERTED",
+              "modality": "INTENTIONAL"
             }
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "오컬트 특수수사팀이 추적 중인 '지맥 균열 사건'의 보고서",
-              "수사팀 내부에 암약하는 정체불명의 조력자"
-            ],
-            "cameraOffscreenEvents": [
-              "특수수사팀 본부에서 만월동 지역에 3등급 영적 경보를 발령함"
+              "검은 세단에 타고 있는, 썩은 바다 냄새를 풍기는 부패한 권력의 하수인"
             ],
             "chapterChanges": {
-              "currentChapter": "서막: 붉은 지맥의 울음",
+              "currentChapter": "서막: 검은 바퀴와 썩은 냄새",
               "upcomingChapters": [
-                "1장: 빗속의 대치",
-                "2장: 뒤틀린 법령의 궤적"
+                "1장: 사냥감의 윤곽",
+                "2장: 철거 용역의 밤"
               ]
             }
           },
-          "candidateId": 2
+          "candidateId": 3
         },
         {
-          "label": "방울 소리를 따라 지맥의 균열로 이동",
-          "narrativeSummary": "이명이 들리듯 머릿속을 찌르는 둔탁한 방울 소리를 따라, 대지가 쩍 갈라져 붉은 안개가 피어오르는 재개발 구역 한가운데의 균열로 발걸음을 옮깁니다. 그곳에는 지맥을 억누르기 위해 박아 넣은 녹슨 쇠말뚝과 핏빛 액체가 흘러나오는 흙구덩이가 존재합니다.",
+          "label": "공사장 외곽의 깜빡이는 편의점으로 물러나 상황 살피기",
+          "narrativeSummary": "기괴한 공기가 지배하는 공사 현장을 잠시 벗어나, 경계선 너머 홀로 불을 밝히고 있는 낡은 편의점 건물로 향합니다. 비를 피하며 현장의 구조를 파악하고, 이곳을 맴도는 인간들의 흔적과 소문을 수집하고자 합니다.",
           "semanticEvents": [
             {
-              "eventId": "EVT_FOLLOW_BELL_SOUND",
-              "action": "APPROACH",
+              "eventId": "EVT_RETREAT_OUTSKIRTS",
+              "action": "MOVE",
               "roles": [
                 {
                   "role": "SUBJECT",
                   "entityName": "아마미야 쿠로코"
                 },
                 {
-                  "role": "TARGET",
-                  "entityName": "지맥 균열의 중심부"
+                  "role": "LOCATION",
+                  "entityName": "공사장 외곽 편의점"
                 }
               ],
               "scope": "INTENT",
               "polarity": "ASSERTED",
-              "epistemicStatus": "UNVERIFIED"
+              "epistemicStatus": "ASSERTED",
+              "modality": "INTENTIONAL"
             }
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "지맥을 파괴하여 부를 축적한 건설사 회장의 일그러진 마음의 핵",
-              "터져 나온 지맥이 요구하는 피의 대가"
+              "편의점 유리창 너머로 보이는, 기괴하게 몸을 비틀며 걸어 다니는 야간 인부들의 소문"
             ],
             "chapterChanges": {
-              "currentChapter": "서막: 붉은 지맥의 울음",
+              "currentChapter": "서막: 경계선 상의 휴식",
               "upcomingChapters": [
-                "1장: 쇠말뚝과 피의 제례",
-                "2장: 신내림의 불꽃"
+                "1장: 불면의 밤",
+                "2장: 기괴한 계약서"
               ]
             }
           },
-          "candidateId": 3
+          "candidateId": 4
         }
       ],
       "quarantinedCandidates": [],
-      "totalInputCount": 3,
-      "passedCount": 3,
+      "totalInputCount": 4,
+      "passedCount": 4,
       "quarantinedCount": 0
     },
     "meaningTrees": [],
@@ -493,16 +297,16 @@
           "faction": "미상 / 백지 상태 (Tabula Rasa)"
         },
         "stats": {
-          "strength": 13,
-          "agility": 7,
-          "constitution": 12,
-          "intelligence": 15,
-          "wisdom": 13,
-          "charisma": 14,
-          "vitality": 12,
-          "intellect": 15,
-          "insight": 13,
-          "willpower": 14
+          "strength": 12,
+          "agility": 12,
+          "constitution": 14,
+          "intelligence": 14,
+          "wisdom": 8,
+          "charisma": 15,
+          "vitality": 14,
+          "intellect": 14,
+          "insight": 8,
+          "willpower": 15
         },
         "inventory": [],
         "secret": "",
@@ -575,16 +379,16 @@
           "faction": "미상 / 백지 상태 (Tabula Rasa)"
         },
         "stats": {
-          "strength": 13,
-          "agility": 7,
-          "constitution": 12,
-          "intelligence": 15,
-          "wisdom": 13,
-          "charisma": 14,
-          "vitality": 12,
-          "intellect": 15,
-          "insight": 13,
-          "willpower": 14
+          "strength": 12,
+          "agility": 12,
+          "constitution": 14,
+          "intelligence": 14,
+          "wisdom": 8,
+          "charisma": 15,
+          "vitality": 14,
+          "intellect": 14,
+          "insight": 8,
+          "willpower": 15
         },
         "inventory": [],
         "secret": "",
@@ -611,49 +415,49 @@
     {
       "step": "T0_PLAYER_INPUT",
       "status": "OK",
-      "timestamp": 1789267260054,
+      "timestamp": 1789277430407,
       "details": "Turn 1 player input: \"[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 &...\" (506 chars)"
     },
     {
       "step": "T1_REQUEST_START",
       "status": "OK",
-      "timestamp": 1789267260054,
+      "timestamp": 1789277430407,
       "details": "Initiating API POST /api/chat with model gemini-3.5-flash"
     },
     {
       "step": "T2_CONTEXT_ASSEMBLED",
       "status": "OK",
-      "timestamp": 1789267260054,
+      "timestamp": 1789277430407,
       "details": "Context prepared with 1 total messages in history"
     },
     {
       "step": "T3_GEMINI_START",
       "status": "OK",
-      "timestamp": 1789267260054,
+      "timestamp": 1789277430407,
       "details": "Backend Gemini API request dispatched"
     },
     {
       "step": "T4_GEMINI_RECEIVED",
       "status": "OK",
-      "timestamp": 1789267285223,
-      "details": "Gemini response received (1019 chars)"
+      "timestamp": 1789277456859,
+      "details": "Gemini response received (947 chars)"
     },
     {
       "step": "T5_PARSED",
       "status": "OK",
-      "timestamp": 1789267285224,
+      "timestamp": 1789277456859,
       "details": "Metadata block parsed successfully"
     },
     {
       "step": "T6_VALIDATED",
       "status": "SKIPPED",
-      "timestamp": 1789267285224,
+      "timestamp": 1789277456859,
       "details": "No candidate state mutation proposed"
     },
     {
       "step": "T7_COMMITTED",
       "status": "SKIPPED",
-      "timestamp": 1789267285224,
+      "timestamp": 1789277456859,
       "details": "Canonical state unchanged"
     }
   ]

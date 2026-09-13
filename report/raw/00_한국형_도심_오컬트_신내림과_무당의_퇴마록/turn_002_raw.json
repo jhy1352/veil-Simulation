@@ -1,53 +1,53 @@
 {
-  "runId": "run_2026-09-13T02-41-25-224Z_vogdi3",
+  "runId": "run_2026-09-13T05-30-56-859Z_e5s0a5",
   "worldName": "한국형 도심 오컬트: 신내림과 무당의 퇴마록",
   "turn": 2,
-  "timestamp": "2026-09-13T02:42:08.415Z",
-  "gitCommit": "d0b2c48a27d77c13232ae24f67209783522e4c51",
+  "timestamp": "2026-09-13T05:31:51.108Z",
+  "gitCommit": "34d0344572be03d0fe3754b032cda7eafec446d9",
   "playerInput": {
-    "rawInput": "주변을 수색해서 유용한 아이템을 찾아서 인벤토리에 넣는다"
+    "rawInput": "주변 수색으로 쓸만한 아이템을 찾아 인벤토리에 넣는다"
   },
   "modelRuntime": {
     "requestedModel": "gemini-3.5-flash",
     "actualModelVersion": "gemini-3.5-flash",
-    "responseId": "ag2mao_eB9rQ1e8P55-YqAY",
+    "responseId": "MzWmaqCwNt232roPoaiD2Aw",
     "serverTimings": {
-      "t1_requestStart": 1789267305737,
-      "t2_contextAssemblyComplete": 1789267305742,
-      "t3_geminiRequestStart": 1789267305742,
-      "t4_geminiResponseReceived": 1789267328983,
-      "contextAssemblyMs": 5,
-      "geminiGenerationMs": 23241,
-      "inputCharCount": 2737,
-      "outputCharCount": 1032,
+      "t1_requestStart": 1789277491512,
+      "t2_contextAssemblyComplete": 1789277491513,
+      "t3_geminiRequestStart": 1789277491513,
+      "t4_geminiResponseReceived": 1789277512649,
+      "contextAssemblyMs": 1,
+      "geminiGenerationMs": 21136,
+      "inputCharCount": 2663,
+      "outputCharCount": 715,
       "tokenCount": {
-        "promptTokens": 9032,
-        "candidatesTokens": 1685,
-        "totalTokens": 13602
+        "promptTokens": 9083,
+        "candidatesTokens": 2000,
+        "totalTokens": 13456
       }
     },
     "clientLatency": {
       "turn": 2,
       "model": "gemini-3.5-flash",
-      "t0_playerInput": 250929.5,
-      "t1_requestStart": 250929.5,
-      "t2_contextAssemblyComplete": 250929.69999998808,
-      "t3_geminiRequestStart": 250929.69999998808,
-      "t4_geminiResponseReceived": 274239.39999997616,
-      "t5_parserComplete": 274239.59999999404,
-      "t6_stateMutationComplete": 274239.59999999404,
-      "t7_uiUpdateComplete": 274239.6999999881,
+      "t0_playerInput": 5250605.100000024,
+      "t1_requestStart": 5250605.100000024,
+      "t2_contextAssemblyComplete": 5250605.200000018,
+      "t3_geminiRequestStart": 5250605.200000018,
+      "t4_geminiResponseReceived": 5271859.200000018,
+      "t5_parserComplete": 5271859.400000006,
+      "t6_stateMutationComplete": 5271859.400000006,
+      "t7_uiUpdateComplete": 5271859.5,
       "contextAssemblyMs": 0,
-      "geminiGenerationMs": 23310,
+      "geminiGenerationMs": 21254,
       "parsingValidationMs": 0,
-      "totalTurnMs": 23310,
-      "inputCharCount": 31,
-      "outputCharCount": 1032,
+      "totalTurnMs": 21254,
+      "inputCharCount": 29,
+      "outputCharCount": 715,
       "retried": false
     }
   },
   "chatContextForensic": {
-    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 13 / AGI 7 / CON 12 / INT 15 / WIS 13 / CHA 14\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 12 / AGI 12 / CON 14 / INT 14 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
     "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망",
     "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
     "seedsContext": "",
@@ -58,7 +58,7 @@
       "role": "user",
       "parts": [
         {
-          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 13 / AGI 7 / CON 12 / INT 15 / WIS 13 / CHA 14\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 2 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+          "text": "[TRPG Campaign Context]\n- 세계관명: 한국형 도심 오컬트: 신내림과 무당의 퇴마록\n- 세계관 설정: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n- 문체 스타일: 고딕 오컬트 & 코스믹 호러\n- 주인공 프로필: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n  * 출신/배경: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 결핍/트라우마: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 소속/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n  * 능력치: STR 12 / AGI 12 / CON 14 / INT 14 / WIS 8 / CHA 15\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 아마미야 쿠로코 (미상 / 백지 상태 (Tabula Rasa))\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 2 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 한국형 도심 오컬트: 신내림과 무당의 퇴마록 (고딕 오컬트 & 코스믹 호러)\n시대/배경: 재개발로 터진 지맥의 악귀와 원혼들. 신어머니의 작두와 방울을 이어받은 무속인과 오컬트 특수수사팀이 마주하는 처절한 원한과 퇴마의 기록입니다.\n주인공: 아마미야 쿠로코 (나이: 18, 성별: 여성)\n출신: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n결핍: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n맹세: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n닻: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n문파/세력: [tabula_rasa] 미상 / 백지 상태 (Tabula Rasa)\n\n궁극적 목표: 부패한 권력자들의 일그러진 마음의 핵을 훔쳐 세상의 부조리를 바로잡는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
         }
       ]
     },
@@ -66,7 +66,7 @@
       "role": "model",
       "parts": [
         {
-          "text": "하늘을 온통 짓누른 납빛 먹구름 사이로 거친 가을비가 장대처럼 쏟아집니다. 빗방울은 철거가 반쯤 진행되어 흉물스럽게 무너진 만월동 재개발 3구역의 콘크리트 더미를 사정없이 두들기며, 도시의 가장 어둡고 은밀한 치부를 씻어내듯 흘러내립니다. 무너진 벽면 틈새로 기괴하게 휘어지며 삐져나온 붉은 철근들은, 마치 대지라는 이름의 거대한 괴수가 살을 찢고 뼈를 드러낸 형상과도 같습니다. \n\n아마미야 쿠로코. 열여덟의 소녀는 비바람이 사납게 들이치는 어느 반파된 무당집 처마 밑에 서서 그 광경을 묵묵히 응시하고 있습니다. 바람이 세차게 불 때마다 녹슨 대문에 걸린 퇴색된 오방색 천 조각들이 비명 같은 마찰음을 내며 요동치고, 썩은 목조 대들보 틈새에 매달린 녹슨 놋쇠 방울 하나가 둔탁하고 불규칙한 소리로 울립니다. 댕, 대그랑... 그 기이한 울림은 귓전을 맴도는 이명처럼 뇌리를 가라앉힙니다.\n\n지맥이 찢어진 대지의 틈바구니에서는 퀴퀴한 유황 냄새와 비린내가 뒤섞인 더운 김이 핏빛 안개처럼 희뿌옇게 솟아오르고 있습니다. 이곳은 단순한 재개발 현장이 아닙니다. 돈과 권력에 눈이 먼 부패한 인간들이 영험한 대지의 맥을 억지로 끊어내고, 그 위로 자신들의 비틀린 염원을 쌓아 올리려다 결국 참화를 부른 신성모독의 현장입니다. 쿠로코의 뺨을 타고 흐르는 차가운 빗물은 그녀의 눈빛을 더욱더 차갑고 예리하게 벼려놓을 뿐입니다. \n\n그때, 거센 빗줄기 너머로 어둠을 거칠게 가르는 서치라이트 불빛 몇 줄기가 이쪽을 향해 서서히 좁혀 들어오기 시작합니다. 질척이는 진흙을 밟는 무거운 군화 소리, 그리고 나직한 라디오 잡음이 공기를 타고 흐릅니다.\n\"여기는 만월 3구역 진입로. 잔류 영적 파동 감지 중. 전원 경계를 늦추지 마라.\"\n\n부패한 이들의 뒤를 쫓는 특수수사팀의 발자국 소리인가, 아니면 이 비극을 파묻으려는 또 다른 권력의 사냥개들인가. \n\n아마미야 쿠로코의 앞에는 무거운 침묵과 차가운 기운이 내려앉은 세 갈래의 선택지가 놓여 있습니다. 어둠 속에서 진실의 핵을 훔치기 위한 그녀의 첫 발걸음은 어디로 향하겠습니까?"
+          "text": "하늘은 마치 낮게 가라앉은 납빛 수의처럼 서울의 한구석을 무겁게 덮어누르고 있었다. 철거가 진행 중인 청신동 제4구역. 한때 다닥다닥 붙어 숨을 쉬던 달동네의 골목들은 이제 거대한 포크레인의 이빨에 갈려 나간 채, 뼈대만 남은 콘크리트 무덤이 되어 사방에 흩어져 있었다. 무너진 벽면마다 붉은 페인트로 휘갈겨진 '철거'라는 두 글자가 마치 마르지 않은 짐승의 피처럼 음울하게 번져 흘렀다.\n\n봄철의 끈적한 이슬비가 먼지와 섞여 진흙탕을 만들고, 깨진 아스팔트 틈새로는 뒤틀린 나무뿌리처럼 지맥(地脈)의 상처가 거무스름한 흙덩이를 뱉어내고 있었다. 바람이 불 때마다 시멘트 가루와 가죽 썩는 듯한 냄새, 그리고 누군가 태우다 버린 저급한 향의 잔향이 섞여 콧날을 찔렀다. 이 폐허의 한가운데, 낡고 얇은 외투만을 걸친 여덟 살배기 육체의 선을 가진 열여덟의 소녀, 아마미야 쿠로코가 서 있었다.\n\n그녀의 손끝은 빗물과 한기에 곱아 미세하게 떨리고 있었다. 과거의 기억도, 자신이 어디서 왔는지에 대한 증명도 존재하지 않는 백지 상태. 그러나 가슴 가장 깊은 곳, 얼어붙은 심장 밑바닥에서 요동치는 기묘한 갈망만은 벼려진 칼날처럼 선명했다. 부조리로 가득 찬 세상, 그 꼭대기에서 군림하며 타인의 삶을 짓밟는 자들의 안쪽—그들의 일그러지고 썩어 문드러진 '마음의 핵'을 움켜쥐고 도려내어 파멸시키겠다는 차가운 의지였다.\n\n멀지 않은 곳에서 흙더미에 반쯤 깔린 성황당의 부러진 깃대가 빗속에서 삐걱이는 소리를 냈다. 그리고 그 아래, 아주 미세하게, 쇠붙이가 부딪쳐 내는 음습한 소리가 빗소리 사이로 스며들었다. 마치 보이지 않는 끈이 그녀의 목을 잡아끄는 듯한 압박감이 철거 현장 깊은 곳에서부터 밀려들기 시작했다. \n\n아마미야 쿠로코는 젖은 머리칼을 뒤로 넘기며 허공을 응시했다. 이 가라앉는 도시는 그녀에게 무엇을 요구하고 있는가. 차가운 빗방울이 뺨을 타고 흘러내려 턱끝에서 툭, 떨어졌다."
         }
       ]
     },
@@ -74,274 +74,26 @@
       "role": "user",
       "parts": [
         {
-          "text": "주변을 수색해서 유용한 아이템을 찾아서 인벤토리에 넣는다"
+          "text": "주변 수색으로 쓸만한 아이템을 찾아 인벤토리에 넣는다"
         }
       ]
     }
   ],
   "llmRawResponse": {
-    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"신당 안쪽 제단의 잔해 수색\",\n    \"narrativeSummary\": \"아마미야 쿠로코는 빗물이 새어드는 신당 내부로 조심스럽게 발을 들입니다. 무너진 신단 아래에서 차갑게 식어가는 영적 기운과 함께, 반쯤 흙에 파묻힌 물건을 발견합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_search_altar_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\"},\n          {\"role\": \"OBJECT\", \"entityName\": \"녹슨 황동 방울\"},\n          {\"role\": \"LOCATION\", \"entityName\": \"만월동 무당집 신당\"}\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"UNVERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\"무녀의 유품: 신당 지하에 잠든 비기(祕記)에 대한 단서\"],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"녹슨 황동 방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_altar_01\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"마당 구석의 무너진 창고 수색\",\n    \"narrativeSummary\": \"쿠로코는 빗줄기를 뚫고 마당 한구석에 반쯤 붕괴한 도구 창고로 향합니다. 잔해를 헤집던 중, 물리적으로 유용하게 쓸 수 있는 연장을 발견하지만 소음이 발생할 위험이 있습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_search_shed_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\"},\n          {\"role\": \"OBJECT\", \"entityName\": \"무쇠 장도리\"},\n          {\"role\": \"LOCATION\", \"entityName\": \"만월동 무당집 창고\"}\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"UNVERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"inventoryChanges\": [\n        {\n          \"name\": \"무쇠 장도리\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_shed_01\"\n        }\n      ]\n    }\n  },\n  {\n    \"label\": \"순찰대 접근 경로 주변 수색\",\n    \"narrativeSummary\": \"쿠로코는 자신을 옥죄어오는 서치라이트의 사각지대를 파고들며, 순찰대원들이 방금 지나쳐 온 진입로 주변을 수색합니다. 그들이 실수로 떨어뜨렸거나 흘린 정보를 포착하려 시도합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_search_path_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\"role\": \"SUBJECT\", \"entityName\": \"아마미야 쿠로코\"},\n          {\"role\": \"OBJECT\", \"entityName\": \"비에 젖은 무전 기록지\"},\n          {\"role\": \"LOCATION\", \"entityName\": \"만월동 3구역 진입로\"}\n        ],\n        \"scope\": \"PROPOSAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"UNVERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\"특수수사팀의 비밀 작전 계획\"],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"비에 젖은 무전 기록지\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_search_path_01\"\n        }\n      ]\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n아마미야 쿠로코는 무너진 처마 밑에서 숨을 죽인 채, 거세게 휘몰아치는 빗줄기 너머를 응시합니다. 저 멀리서 번뜩이는 서치라이트의 날카로운 궤적이 빗방울을 투과하며 허공을 가르고 있습니다. 군화가 진흙을 헤집는 소리는 서서히 이 폐허의 심장부로 조여옵니다. 시간이 많지 않습니다. 이 폭우 속에서 맨손으로 불청객이나 악귀를 상대할 수는 없는 법, 쿠로코는 본능적으로 주변의 잔해 속에서 쓸만하고 유용한 도구를 찾아야겠다고 결심합니다.\n\n그녀의 시선이 차갑고 기민하게 움직입니다. 어둡고 퀴퀴한 냄새가 뿜어져 나오는 반파된 신당 안쪽, 비바람에 삐걱거리는 마당 구석의 붕괴한 목조 창고, 그리고 어쩌면 순찰대의 감시망 바로 밑에 떨어져 있을지 모르는 단서들까지. \n\n무엇을 찾아내느냐에 따라 앞으로의 행보와 생존 확률이 결정될 것입니다. 그러나 수색 중 발생하는 작은 소음 하나도 순찰대의 이목을 끌 수 있는 일촉즉발의 상황입니다.\n\n쿠로코가 어느 곳을 집중적으로 수색할지 결정하면, 수색의 성공 여부와 도구의 획득을 판가름하기 위한 주사위 판정이 진행됩니다.\n\n**[판정 안내]**\n아래의 선택지 중 하나를 골라 주사위(1d20)를 굴려 주십시오. 각 선택지에 따른 난이도(DC)는 다음과 같습니다.\n\n1. **신당 안쪽 제단의 잔해 수색** (지혜 WIS / 관찰 판정, **목표 DC: 12**)\n   - 무녀가 남긴 영적인 물건이나 숨겨진 유품을 찾아냅니다. 영적 방어구나 신비로운 도구를 얻을 가능성이 있습니다.\n2. **마당 구석의 무너진 창고 수색** (근력 STR 또는 지혜 WIS 판정, **목표 DC: 10**)\n   - 무거운 잔해를 치우고 물리적인 연장이나 생존 도구를 찾아냅니다. 소음이 다소 발생할 수 있습니다.\n3. **순찰대 접근 경로 주변 수색** (민첩 AGI 또는 지능 INT 판정, **목표 DC: 14**)\n   - 위험을 무릅쓰고 적들의 사각지대에서 흘린 정보나 장비를 탈취합니다. 난이도가 높지만 가치 있는 정보를 얻을 수 있습니다.\n\n원하시는 행동을 선택하고 주사위(1d20) 결과값을 제안해 주십시오.\n[ZERO_MUTATION_END]",
-    "rawResponseText": "아마미야 쿠로코는 무너진 처마 밑에서 숨을 죽인 채, 거세게 휘몰아치는 빗줄기 너머를 응시합니다. 저 멀리서 번뜩이는 서치라이트의 날카로운 궤적이 빗방울을 투과하며 허공을 가르고 있습니다. 군화가 진흙을 헤집는 소리는 서서히 이 폐허의 심장부로 조여옵니다. 시간이 많지 않습니다. 이 폭우 속에서 맨손으로 불청객이나 악귀를 상대할 수는 없는 법, 쿠로코는 본능적으로 주변의 잔해 속에서 쓸만하고 유용한 도구를 찾아야겠다고 결심합니다.\n\n그녀의 시선이 차갑고 기민하게 움직입니다. 어둡고 퀴퀴한 냄새가 뿜어져 나오는 반파된 신당 안쪽, 비바람에 삐걱거리는 마당 구석의 붕괴한 목조 창고, 그리고 어쩌면 순찰대의 감시망 바로 밑에 떨어져 있을지 모르는 단서들까지. \n\n무엇을 찾아내느냐에 따라 앞으로의 행보와 생존 확률이 결정될 것입니다. 그러나 수색 중 발생하는 작은 소음 하나도 순찰대의 이목을 끌 수 있는 일촉즉발의 상황입니다.\n\n쿠로코가 어느 곳을 집중적으로 수색할지 결정하면, 수색의 성공 여부와 도구의 획득을 판가름하기 위한 주사위 판정이 진행됩니다.\n\n**[판정 안내]**\n아래의 선택지 중 하나를 골라 주사위(1d20)를 굴려 주십시오. 각 선택지에 따른 난이도(DC)는 다음과 같습니다.\n\n1. **신당 안쪽 제단의 잔해 수색** (지혜 WIS / 관찰 판정, **목표 DC: 12**)\n   - 무녀가 남긴 영적인 물건이나 숨겨진 유품을 찾아냅니다. 영적 방어구나 신비로운 도구를 얻을 가능성이 있습니다.\n2. **마당 구석의 무너진 창고 수색** (근력 STR 또는 지혜 WIS 판정, **목표 DC: 10**)\n   - 무거운 잔해를 치우고 물리적인 연장이나 생존 도구를 찾아냅니다. 소음이 다소 발생할 수 있습니다.\n3. **순찰대 접근 경로 주변 수색** (민첩 AGI 또는 지능 INT 판정, **목표 DC: 14**)\n   - 위험을 무릅쓰고 적들의 사각지대에서 흘린 정보나 장비를 탈취합니다. 난이도가 높지만 가치 있는 정보를 얻을 수 있습니다.\n\n원하시는 행동을 선택하고 주사위(1d20) 결과값을 제안해 주십시오."
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"신당 잔해 속 금이 간 놋방울 발견\",\n    \"narrativeSummary\": \"흙더미에 짓눌린 성황당 터를 뒤지던 중, 깨진 기와 틈새에서 붉은 실에 묶인 채 버려진 금이 간 놋방울을 발견합니다. 방울을 쥐는 순간 손가락을 타고 스며드는 불길한 냉기는 평범한 쇠붙이가 아님을 암시합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_DISCOVER_BELL_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"금이 간 놋방울\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"청신동 성황당 잔해\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"SEED_SHAMAN_TRACE_001: 성황당 터의 신내림 방울과 지맥에서 뿜어 나오는 원혼의 신호\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"금이 간 놋방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"SEED_SHAMAN_TRACE_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 터전\",\n        \"upcomingChapters\": [\n          \"1장: 신내림의 잔향\",\n          \"2장: 그림자 수사망\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"특수수사대원증과 얼룩진 수첩 습득\",\n    \"narrativeSummary\": \"허물어진 가포장 도로 구석, 흙먼지에 더럽혀진 가죽 수첩과 깨진 경찰 공무원증을 발견합니다. 오컬트 특수수사팀 소속의 인물이 남긴 것으로 보이는 이 수첩에는 청신동 재개발 구역에서 벌어지는 기이한 실종 사건의 단서들이 삐뚤빼뚤하게 기록되어 있습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_DISCOVER_NOTE_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"오컬트 수사대의 얼룩진 수첩\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"깨진 아스팔트 틈새\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"SEED_POLICE_NOTE_001: 수첩에 적힌 마지막 위경도 좌표와 실종된 수사관의 행방\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"오컬트 수사대의 얼룩진 수첩\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"SEED_POLICE_NOTE_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 터전\",\n        \"upcomingChapters\": [\n          \"1장: 지워진 경계선\",\n          \"2장: 지맥의 포효\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"철거 현장 연장통 속 녹슨 쇠지레 획득\",\n    \"narrativeSummary\": \"내동댕이쳐진 가포장 컨테이너 사무실 뒤편에서 투박한 무쇠 쇠지레(빠루)를 찾아냅니다. 묵직하고 끝이 날카롭게 갈라진 이 철제 도구는 허물어진 건물 잔해를 억지로 헤집거나, 어두운 폐허 속에서 최소한의 호신용 무기로 사용하기에 충분해 보입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_DISCOVER_CROWBAR_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"단단한 쇠지레\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"컨테이너 뒤 철제 함\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"SEED_STREET_TOOL_001: 철거 용역들이 황급히 장비를 버려두고 도망쳐야 했던 밤의 진실\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"단단한 쇠지레\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"SEED_STREET_TOOL_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 터전\",\n        \"upcomingChapters\": [\n          \"1장: 폐허의 불청객\",\n          \"2장: 붉은 페인트의 경고\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n아마미야 쿠로코는 질척이는 진흙 속에 무릎을 꿇었다. 차가운 빗물이 얇은 외투 속으로 스며들어 척추를 따라 소름 끼치도록 흘러내렸지만, 그녀의 신경은 오직 발밑의 폐허에 집중되어 있었다. 부서진 목재와 깨진 콘크리트 조각들이 뒤엉킨 지표면은, 마치 거대한 야수가 이빨로 짓이겨놓은 사체의 단면처럼 참혹했다.\n\n그녀는 하얗게 질린 손가락 끝으로 질척이는 흙더미를 조심스럽게 걷어내기 시작했다. 날카로운 유리의 단면이나 철근 조각이 살갗을 스칠 때마다 미약한 한기가 등뒤를 스쳤지만, 움직임을 멈추지 않았다. 무덤처럼 내려앉은 청신동의 잔해 속에는 수많은 인간의 흔적들이 소화되지 못한 채 널브러져 있었다. \n\n한쪽에는 부러진 신당의 대들보와 형체를 알아볼 수 없이 짓겨진 오방색 천 조각들이 지포스 냄새 나는 진흙 속에 반쯤 묻혀 있었고, 다른 쪽에는 철거 용역들이 황급히 도망치며 쏟아놓은 듯한 깨진 철제 궤짝과 깨진 안전모들이 빗물을 받아내고 있었다. 그리고 그보다 조금 더 깊은 음울한 어둠 속, 깨진 아스팔트의 갈라진 틈새 사이로 정체불명의 가죽 피혁과 종이 뭉치가 젖은 채 끼여 있는 모습도 눈에 들어왔다.\n\n쿠로코의 숨결이 빗속에서 하얗게 흩어졌다. 이 무질서한 파괴의 흔적들 중에서 그녀의 손에 닿아 스스로를 증명할 도구는 무엇이 될 것인가. 차가운 진흙 속에 묻힌 것들은 아직 침묵을 지키고 있었고, 그녀의 손끝은 서늘한 폐허의 표면을 조용히 더듬고 있을 뿐이었다.\n[ZERO_MUTATION_END]",
+    "rawResponseText": "아마미야 쿠로코는 질척이는 진흙 속에 무릎을 꿇었다. 차가운 빗물이 얇은 외투 속으로 스며들어 척추를 따라 소름 끼치도록 흘러내렸지만, 그녀의 신경은 오직 발밑의 폐허에 집중되어 있었다. 부서진 목재와 깨진 콘크리트 조각들이 뒤엉킨 지표면은, 마치 거대한 야수가 이빨로 짓이겨놓은 사체의 단면처럼 참혹했다.\n\n그녀는 하얗게 질린 손가락 끝으로 질척이는 흙더미를 조심스럽게 걷어내기 시작했다. 날카로운 유리의 단면이나 철근 조각이 살갗을 스칠 때마다 미약한 한기가 등뒤를 스쳤지만, 움직임을 멈추지 않았다. 무덤처럼 내려앉은 청신동의 잔해 속에는 수많은 인간의 흔적들이 소화되지 못한 채 널브러져 있었다. \n\n한쪽에는 부러진 신당의 대들보와 형체를 알아볼 수 없이 짓겨진 오방색 천 조각들이 지포스 냄새 나는 진흙 속에 반쯤 묻혀 있었고, 다른 쪽에는 철거 용역들이 황급히 도망치며 쏟아놓은 듯한 깨진 철제 궤짝과 깨진 안전모들이 빗물을 받아내고 있었다. 그리고 그보다 조금 더 깊은 음울한 어둠 속, 깨진 아스팔트의 갈라진 틈새 사이로 정체불명의 가죽 피혁과 종이 뭉치가 젖은 채 끼여 있는 모습도 눈에 들어왔다.\n\n쿠로코의 숨결이 빗속에서 하얗게 흩어졌다. 이 무질서한 파괴의 흔적들 중에서 그녀의 손에 닿아 스스로를 증명할 도구는 무엇이 될 것인가. 차가운 진흙 속에 묻힌 것들은 아직 침묵을 지키고 있었고, 그녀의 손끝은 서늘한 폐허의 표면을 조용히 더듬고 있을 뿐이었다."
   },
   "candidatePipeline": {
-    "rawCandidatesBlock": [
-      {
-        "label": "신당 안쪽 제단의 잔해 수색",
-        "narrativeSummary": "아마미야 쿠로코는 빗물이 새어드는 신당 내부로 조심스럽게 발을 들입니다. 무너진 신단 아래에서 차갑게 식어가는 영적 기운과 함께, 반쯤 흙에 파묻힌 물건을 발견합니다.",
-        "semanticEvents": [
-          {
-            "eventId": "evt_search_altar_01",
-            "action": "PICKUP",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "OBJECT",
-                "entityName": "녹슨 황동 방울"
-              },
-              {
-                "role": "LOCATION",
-                "entityName": "만월동 무당집 신당"
-              }
-            ],
-            "scope": "PROPOSAL",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "foreshadowSeeds": [
-            "무녀의 유품: 신당 지하에 잠든 비기(祕記)에 대한 단서"
-          ],
-          "inventoryChanges": [
-            {
-              "name": "녹슨 황동 방울",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "evt_search_altar_01"
-            }
-          ]
-        },
-        "candidateId": 1
-      },
-      {
-        "label": "마당 구석의 무너진 창고 수색",
-        "narrativeSummary": "쿠로코는 빗줄기를 뚫고 마당 한구석에 반쯤 붕괴한 도구 창고로 향합니다. 잔해를 헤집던 중, 물리적으로 유용하게 쓸 수 있는 연장을 발견하지만 소음이 발생할 위험이 있습니다.",
-        "semanticEvents": [
-          {
-            "eventId": "evt_search_shed_01",
-            "action": "PICKUP",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "OBJECT",
-                "entityName": "무쇠 장도리"
-              },
-              {
-                "role": "LOCATION",
-                "entityName": "만월동 무당집 창고"
-              }
-            ],
-            "scope": "PROPOSAL",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "inventoryChanges": [
-            {
-              "name": "무쇠 장도리",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "evt_search_shed_01"
-            }
-          ]
-        },
-        "candidateId": 2
-      },
-      {
-        "label": "순찰대 접근 경로 주변 수색",
-        "narrativeSummary": "쿠로코는 자신을 옥죄어오는 서치라이트의 사각지대를 파고들며, 순찰대원들이 방금 지나쳐 온 진입로 주변을 수색합니다. 그들이 실수로 떨어뜨렸거나 흘린 정보를 포착하려 시도합니다.",
-        "semanticEvents": [
-          {
-            "eventId": "evt_search_path_01",
-            "action": "PICKUP",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "OBJECT",
-                "entityName": "비에 젖은 무전 기록지"
-              },
-              {
-                "role": "LOCATION",
-                "entityName": "만월동 3구역 진입로"
-              }
-            ],
-            "scope": "PROPOSAL",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "foreshadowSeeds": [
-            "특수수사팀의 비밀 작전 계획"
-          ],
-          "inventoryChanges": [
-            {
-              "name": "비에 젖은 무전 기록지",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "evt_search_path_01"
-            }
-          ]
-        },
-        "candidateId": 3
-      }
-    ],
-    "parsedCandidates": [
-      {
-        "label": "신당 안쪽 제단의 잔해 수색",
-        "narrativeSummary": "아마미야 쿠로코는 빗물이 새어드는 신당 내부로 조심스럽게 발을 들입니다. 무너진 신단 아래에서 차갑게 식어가는 영적 기운과 함께, 반쯤 흙에 파묻힌 물건을 발견합니다.",
-        "semanticEvents": [
-          {
-            "eventId": "evt_search_altar_01",
-            "action": "PICKUP",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "OBJECT",
-                "entityName": "녹슨 황동 방울"
-              },
-              {
-                "role": "LOCATION",
-                "entityName": "만월동 무당집 신당"
-              }
-            ],
-            "scope": "PROPOSAL",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "foreshadowSeeds": [
-            "무녀의 유품: 신당 지하에 잠든 비기(祕記)에 대한 단서"
-          ],
-          "inventoryChanges": [
-            {
-              "name": "녹슨 황동 방울",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "evt_search_altar_01"
-            }
-          ]
-        },
-        "candidateId": 1
-      },
-      {
-        "label": "마당 구석의 무너진 창고 수색",
-        "narrativeSummary": "쿠로코는 빗줄기를 뚫고 마당 한구석에 반쯤 붕괴한 도구 창고로 향합니다. 잔해를 헤집던 중, 물리적으로 유용하게 쓸 수 있는 연장을 발견하지만 소음이 발생할 위험이 있습니다.",
-        "semanticEvents": [
-          {
-            "eventId": "evt_search_shed_01",
-            "action": "PICKUP",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "OBJECT",
-                "entityName": "무쇠 장도리"
-              },
-              {
-                "role": "LOCATION",
-                "entityName": "만월동 무당집 창고"
-              }
-            ],
-            "scope": "PROPOSAL",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "inventoryChanges": [
-            {
-              "name": "무쇠 장도리",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "evt_search_shed_01"
-            }
-          ]
-        },
-        "candidateId": 2
-      },
-      {
-        "label": "순찰대 접근 경로 주변 수색",
-        "narrativeSummary": "쿠로코는 자신을 옥죄어오는 서치라이트의 사각지대를 파고들며, 순찰대원들이 방금 지나쳐 온 진입로 주변을 수색합니다. 그들이 실수로 떨어뜨렸거나 흘린 정보를 포착하려 시도합니다.",
-        "semanticEvents": [
-          {
-            "eventId": "evt_search_path_01",
-            "action": "PICKUP",
-            "roles": [
-              {
-                "role": "SUBJECT",
-                "entityName": "아마미야 쿠로코"
-              },
-              {
-                "role": "OBJECT",
-                "entityName": "비에 젖은 무전 기록지"
-              },
-              {
-                "role": "LOCATION",
-                "entityName": "만월동 3구역 진입로"
-              }
-            ],
-            "scope": "PROPOSAL",
-            "polarity": "ASSERTED",
-            "epistemicStatus": "UNVERIFIED"
-          }
-        ],
-        "rawMetadata": {
-          "foreshadowSeeds": [
-            "특수수사팀의 비밀 작전 계획"
-          ],
-          "inventoryChanges": [
-            {
-              "name": "비에 젖은 무전 기록지",
-              "quantity": 1,
-              "action": "add",
-              "cause": "DISCOVERY_PICKUP",
-              "verifiedEventId": "evt_search_path_01"
-            }
-          ]
-        },
-        "candidateId": 3
-      }
-    ],
+    "rawCandidatesBlock": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"신당 잔해 속 금이 간 놋방울 발견\",\n    \"narrativeSummary\": \"흙더미에 짓눌린 성황당 터를 뒤지던 중, 깨진 기와 틈새에서 붉은 실에 묶인 채 버려진 금이 간 놋방울을 발견합니다. 방울을 쥐는 순간 손가락을 타고 스며드는 불길한 냉기는 평범한 쇠붙이가 아님을 암시합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_DISCOVER_BELL_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"금이 간 놋방울\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"청신동 성황당 잔해\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"SEED_SHAMAN_TRACE_001: 성황당 터의 신내림 방울과 지맥에서 뿜어 나오는 원혼의 신호\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"금이 간 놋방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"SEED_SHAMAN_TRACE_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 터전\",\n        \"upcomingChapters\": [\n          \"1장: 신내림의 잔향\",\n          \"2장: 그림자 수사망\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"특수수사대원증과 얼룩진 수첩 습득\",\n    \"narrativeSummary\": \"허물어진 가포장 도로 구석, 흙먼지에 더럽혀진 가죽 수첩과 깨진 경찰 공무원증을 발견합니다. 오컬트 특수수사팀 소속의 인물이 남긴 것으로 보이는 이 수첩에는 청신동 재개발 구역에서 벌어지는 기이한 실종 사건의 단서들이 삐뚤빼뚤하게 기록되어 있습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_DISCOVER_NOTE_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"오컬트 수사대의 얼룩진 수첩\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"깨진 아스팔트 틈새\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"SEED_POLICE_NOTE_001: 수첩에 적힌 마지막 위경도 좌표와 실종된 수사관의 행방\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"오컬트 수사대의 얼룩진 수첩\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"SEED_POLICE_NOTE_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 터전\",\n        \"upcomingChapters\": [\n          \"1장: 지워진 경계선\",\n          \"2장: 지맥의 포효\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"철거 현장 연장통 속 녹슨 쇠지레 획득\",\n    \"narrativeSummary\": \"내동댕이쳐진 가포장 컨테이너 사무실 뒤편에서 투박한 무쇠 쇠지레(빠루)를 찾아냅니다. 묵직하고 끝이 날카롭게 갈라진 이 철제 도구는 허물어진 건물 잔해를 억지로 헤집거나, 어두운 폐허 속에서 최소한의 호신용 무기로 사용하기에 충분해 보입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_DISCOVER_CROWBAR_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"단단한 쇠지레\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"컨테이너 뒤 철제 함\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"SEED_STREET_TOOL_001: 철거 용역들이 황급히 장비를 버려두고 도망쳐야 했던 밤의 진실\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"단단한 쇠지레\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"SEED_STREET_TOOL_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 터전\",\n        \"upcomingChapters\": [\n          \"1장: 폐허의 불청객\",\n          \"2장: 붉은 페인트의 경고\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+    "parsedCandidates": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"신당 잔해 속 금이 간 놋방울 발견\",\n    \"narrativeSummary\": \"흙더미에 짓눌린 성황당 터를 뒤지던 중, 깨진 기와 틈새에서 붉은 실에 묶인 채 버려진 금이 간 놋방울을 발견합니다. 방울을 쥐는 순간 손가락을 타고 스며드는 불길한 냉기는 평범한 쇠붙이가 아님을 암시합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_DISCOVER_BELL_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"금이 간 놋방울\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"청신동 성황당 잔해\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"SEED_SHAMAN_TRACE_001: 성황당 터의 신내림 방울과 지맥에서 뿜어 나오는 원혼의 신호\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"금이 간 놋방울\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"SEED_SHAMAN_TRACE_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 터전\",\n        \"upcomingChapters\": [\n          \"1장: 신내림의 잔향\",\n          \"2장: 그림자 수사망\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"특수수사대원증과 얼룩진 수첩 습득\",\n    \"narrativeSummary\": \"허물어진 가포장 도로 구석, 흙먼지에 더럽혀진 가죽 수첩과 깨진 경찰 공무원증을 발견합니다. 오컬트 특수수사팀 소속의 인물이 남긴 것으로 보이는 이 수첩에는 청신동 재개발 구역에서 벌어지는 기이한 실종 사건의 단서들이 삐뚤빼뚤하게 기록되어 있습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_DISCOVER_NOTE_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"오컬트 수사대의 얼룩진 수첩\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"깨진 아스팔트 틈새\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"SEED_POLICE_NOTE_001: 수첩에 적힌 마지막 위경도 좌표와 실종된 수사관의 행방\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"오컬트 수사대의 얼룩진 수첩\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"SEED_POLICE_NOTE_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 터전\",\n        \"upcomingChapters\": [\n          \"1장: 지워진 경계선\",\n          \"2장: 지맥의 포효\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"철거 현장 연장통 속 녹슨 쇠지레 획득\",\n    \"narrativeSummary\": \"내동댕이쳐진 가포장 컨테이너 사무실 뒤편에서 투박한 무쇠 쇠지레(빠루)를 찾아냅니다. 묵직하고 끝이 날카롭게 갈라진 이 철제 도구는 허물어진 건물 잔해를 억지로 헤집거나, 어두운 폐허 속에서 최소한의 호신용 무기로 사용하기에 충분해 보입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_DISCOVER_CROWBAR_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"아마미야 쿠로코\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"단단한 쇠지레\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"컨테이너 뒤 철제 함\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"SEED_STREET_TOOL_001: 철거 용역들이 황급히 장비를 버려두고 도망쳐야 했던 밤의 진실\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"단단한 쇠지레\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"SEED_STREET_TOOL_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 무덤이 된 터전\",\n        \"upcomingChapters\": [\n          \"1장: 폐허의 불청객\",\n          \"2장: 붉은 페인트의 경고\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
     "recoveryGateResult": {
       "passedCandidates": [
         {
-          "label": "신당 안쪽 제단의 잔해 수색",
-          "narrativeSummary": "아마미야 쿠로코는 빗물이 새어드는 신당 내부로 조심스럽게 발을 들입니다. 무너진 신단 아래에서 차갑게 식어가는 영적 기운과 함께, 반쯤 흙에 파묻힌 물건을 발견합니다.",
+          "label": "신당 잔해 속 금이 간 놋방울 발견",
+          "narrativeSummary": "흙더미에 짓눌린 성황당 터를 뒤지던 중, 깨진 기와 틈새에서 붉은 실에 묶인 채 버려진 금이 간 놋방울을 발견합니다. 방울을 쥐는 순간 손가락을 타고 스며드는 불길한 냉기는 평범한 쇠붙이가 아님을 암시합니다.",
           "semanticEvents": [
             {
-              "eventId": "evt_search_altar_01",
+              "eventId": "EVT_DISCOVER_BELL_001",
               "action": "PICKUP",
               "roles": [
                 {
@@ -350,40 +102,48 @@
                 },
                 {
                   "role": "OBJECT",
-                  "entityName": "녹슨 황동 방울"
+                  "entityName": "금이 간 놋방울"
                 },
                 {
                   "role": "LOCATION",
-                  "entityName": "만월동 무당집 신당"
+                  "entityName": "청신동 성황당 잔해"
                 }
               ],
-              "scope": "PROPOSAL",
+              "scope": "CLAIM",
               "polarity": "ASSERTED",
-              "epistemicStatus": "UNVERIFIED"
+              "epistemicStatus": "VERIFIED",
+              "modality": "NONE"
             }
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "무녀의 유품: 신당 지하에 잠든 비기(祕記)에 대한 단서"
+              "SEED_SHAMAN_TRACE_001: 성황당 터의 신내림 방울과 지맥에서 뿜어 나오는 원혼의 신호"
             ],
             "inventoryChanges": [
               {
-                "name": "녹슨 황동 방울",
+                "name": "금이 간 놋방울",
                 "quantity": 1,
                 "action": "add",
                 "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "evt_search_altar_01"
+                "verifiedEventId": "SEED_SHAMAN_TRACE_001"
               }
-            ]
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막: 무덤이 된 터전",
+              "upcomingChapters": [
+                "1장: 신내림의 잔향",
+                "2장: 그림자 수사망"
+              ]
+            }
           },
           "candidateId": 1
         },
         {
-          "label": "마당 구석의 무너진 창고 수색",
-          "narrativeSummary": "쿠로코는 빗줄기를 뚫고 마당 한구석에 반쯤 붕괴한 도구 창고로 향합니다. 잔해를 헤집던 중, 물리적으로 유용하게 쓸 수 있는 연장을 발견하지만 소음이 발생할 위험이 있습니다.",
+          "label": "특수수사대원증과 얼룩진 수첩 습득",
+          "narrativeSummary": "허물어진 가포장 도로 구석, 흙먼지에 더럽혀진 가죽 수첩과 깨진 경찰 공무원증을 발견합니다. 오컬트 특수수사팀 소속의 인물이 남긴 것으로 보이는 이 수첩에는 청신동 재개발 구역에서 벌어지는 기이한 실종 사건의 단서들이 삐뚤빼뚤하게 기록되어 있습니다.",
           "semanticEvents": [
             {
-              "eventId": "evt_search_shed_01",
+              "eventId": "EVT_DISCOVER_NOTE_001",
               "action": "PICKUP",
               "roles": [
                 {
@@ -392,70 +152,89 @@
                 },
                 {
                   "role": "OBJECT",
-                  "entityName": "무쇠 장도리"
+                  "entityName": "오컬트 수사대의 얼룩진 수첩"
                 },
                 {
                   "role": "LOCATION",
-                  "entityName": "만월동 무당집 창고"
+                  "entityName": "깨진 아스팔트 틈새"
                 }
               ],
-              "scope": "PROPOSAL",
+              "scope": "CLAIM",
               "polarity": "ASSERTED",
-              "epistemicStatus": "UNVERIFIED"
-            }
-          ],
-          "rawMetadata": {
-            "inventoryChanges": [
-              {
-                "name": "무쇠 장도리",
-                "quantity": 1,
-                "action": "add",
-                "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "evt_search_shed_01"
-              }
-            ]
-          },
-          "candidateId": 2
-        },
-        {
-          "label": "순찰대 접근 경로 주변 수색",
-          "narrativeSummary": "쿠로코는 자신을 옥죄어오는 서치라이트의 사각지대를 파고들며, 순찰대원들이 방금 지나쳐 온 진입로 주변을 수색합니다. 그들이 실수로 떨어뜨렸거나 흘린 정보를 포착하려 시도합니다.",
-          "semanticEvents": [
-            {
-              "eventId": "evt_search_path_01",
-              "action": "PICKUP",
-              "roles": [
-                {
-                  "role": "SUBJECT",
-                  "entityName": "아마미야 쿠로코"
-                },
-                {
-                  "role": "OBJECT",
-                  "entityName": "비에 젖은 무전 기록지"
-                },
-                {
-                  "role": "LOCATION",
-                  "entityName": "만월동 3구역 진입로"
-                }
-              ],
-              "scope": "PROPOSAL",
-              "polarity": "ASSERTED",
-              "epistemicStatus": "UNVERIFIED"
+              "epistemicStatus": "VERIFIED",
+              "modality": "NONE"
             }
           ],
           "rawMetadata": {
             "foreshadowSeeds": [
-              "특수수사팀의 비밀 작전 계획"
+              "SEED_POLICE_NOTE_001: 수첩에 적힌 마지막 위경도 좌표와 실종된 수사관의 행방"
             ],
             "inventoryChanges": [
               {
-                "name": "비에 젖은 무전 기록지",
+                "name": "오컬트 수사대의 얼룩진 수첩",
                 "quantity": 1,
                 "action": "add",
                 "cause": "DISCOVERY_PICKUP",
-                "verifiedEventId": "evt_search_path_01"
+                "verifiedEventId": "SEED_POLICE_NOTE_001"
               }
-            ]
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막: 무덤이 된 터전",
+              "upcomingChapters": [
+                "1장: 지워진 경계선",
+                "2장: 지맥의 포효"
+              ]
+            }
+          },
+          "candidateId": 2
+        },
+        {
+          "label": "철거 현장 연장통 속 녹슨 쇠지레 획득",
+          "narrativeSummary": "내동댕이쳐진 가포장 컨테이너 사무실 뒤편에서 투박한 무쇠 쇠지레(빠루)를 찾아냅니다. 묵직하고 끝이 날카롭게 갈라진 이 철제 도구는 허물어진 건물 잔해를 억지로 헤집거나, 어두운 폐허 속에서 최소한의 호신용 무기로 사용하기에 충분해 보입니다.",
+          "semanticEvents": [
+            {
+              "eventId": "EVT_DISCOVER_CROWBAR_001",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "아마미야 쿠로코"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "단단한 쇠지레"
+                },
+                {
+                  "role": "LOCATION",
+                  "entityName": "컨테이너 뒤 철제 함"
+                }
+              ],
+              "scope": "CLAIM",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "VERIFIED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "SEED_STREET_TOOL_001: 철거 용역들이 황급히 장비를 버려두고 도망쳐야 했던 밤의 진실"
+            ],
+            "inventoryChanges": [
+              {
+                "name": "단단한 쇠지레",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "SEED_STREET_TOOL_001"
+              }
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막: 무덤이 된 터전",
+              "upcomingChapters": [
+                "1장: 폐허의 불청객",
+                "2장: 붉은 페인트의 경고"
+              ]
+            }
           },
           "candidateId": 3
         }
@@ -536,16 +315,16 @@
           "faction": "미상 / 백지 상태 (Tabula Rasa)"
         },
         "stats": {
-          "strength": 13,
-          "agility": 7,
-          "constitution": 12,
-          "intelligence": 15,
-          "wisdom": 13,
-          "charisma": 14,
-          "vitality": 12,
-          "intellect": 15,
-          "insight": 13,
-          "willpower": 14
+          "strength": 12,
+          "agility": 12,
+          "constitution": 14,
+          "intelligence": 14,
+          "wisdom": 8,
+          "charisma": 15,
+          "vitality": 14,
+          "intellect": 14,
+          "insight": 8,
+          "willpower": 15
         },
         "inventory": [],
         "secret": "",
@@ -618,16 +397,16 @@
           "faction": "미상 / 백지 상태 (Tabula Rasa)"
         },
         "stats": {
-          "strength": 13,
-          "agility": 7,
-          "constitution": 12,
-          "intelligence": 15,
-          "wisdom": 13,
-          "charisma": 14,
-          "vitality": 12,
-          "intellect": 15,
-          "insight": 13,
-          "willpower": 14
+          "strength": 12,
+          "agility": 12,
+          "constitution": 14,
+          "intelligence": 14,
+          "wisdom": 8,
+          "charisma": 15,
+          "vitality": 14,
+          "intellect": 14,
+          "insight": 8,
+          "willpower": 15
         },
         "inventory": [],
         "secret": "",
@@ -654,49 +433,49 @@
     {
       "step": "T0_PLAYER_INPUT",
       "status": "OK",
-      "timestamp": 1789267305105,
-      "details": "Turn 2 player input: \"주변을 수색해서 유용한 아이템을 찾아서 인벤토리에 넣는다\" (31 chars)"
+      "timestamp": 1789277489853,
+      "details": "Turn 2 player input: \"주변 수색으로 쓸만한 아이템을 찾아 인벤토리에 넣는다\" (29 chars)"
     },
     {
       "step": "T1_REQUEST_START",
       "status": "OK",
-      "timestamp": 1789267305105,
+      "timestamp": 1789277489853,
       "details": "Initiating API POST /api/chat with model gemini-3.5-flash"
     },
     {
       "step": "T2_CONTEXT_ASSEMBLED",
       "status": "OK",
-      "timestamp": 1789267305105,
+      "timestamp": 1789277489853,
       "details": "Context prepared with 3 total messages in history"
     },
     {
       "step": "T3_GEMINI_START",
       "status": "OK",
-      "timestamp": 1789267305105,
+      "timestamp": 1789277489853,
       "details": "Backend Gemini API request dispatched"
     },
     {
       "step": "T4_GEMINI_RECEIVED",
       "status": "OK",
-      "timestamp": 1789267328415,
-      "details": "Gemini response received (1032 chars)"
+      "timestamp": 1789277511107,
+      "details": "Gemini response received (715 chars)"
     },
     {
       "step": "T5_PARSED",
       "status": "OK",
-      "timestamp": 1789267328415,
+      "timestamp": 1789277511107,
       "details": "Metadata block parsed successfully"
     },
     {
       "step": "T6_VALIDATED",
       "status": "SKIPPED",
-      "timestamp": 1789267328415,
+      "timestamp": 1789277511107,
       "details": "No candidate state mutation proposed"
     },
     {
       "step": "T7_COMMITTED",
       "status": "SKIPPED",
-      "timestamp": 1789267328415,
+      "timestamp": 1789277511107,
       "details": "Canonical state unchanged"
     }
   ]
