@@ -15,6 +15,7 @@ import { CanonicalState, StateTransitionProposal } from './src/engine/types.ts';
 import { recoverSyntaxAndParseJson } from './src/engine/language/recovery.ts';
 import { filterDiverseCandidates } from './src/engine/language/diversity.ts';
 import { runCandidateRecoveryGate, parseCandidatesBlock, VeilCandidate } from './src/engine/language/candidateRecoveryGate.ts';
+import { runTriagePipeline } from './src/engine/language/triageModule.ts';
 import { integrateSemanticEventsIntoProposal, createEngineSemanticBridgeContext, compileCandidateToProposal } from './src/engine/language/runtimeSemanticCandidate.ts';
 import { getCandidateSemanticEvents } from './src/engine/language/semanticCandidateContract.ts';
 
@@ -372,17 +373,10 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
 
     const rawPhase1Response = response.text || '';
 
-    // Extract Zero-Mutation Narrative strictly from marker; fail-closed to deterministic non-mutation fallback if missing/malformed.
-    const DETERMINISTIC_NON_MUTATION_FALLBACK = '선언한 행동을 시도하였으나, 즉각적인 세계 상태의 변화는 발생하지 않았다. 침묵과 정적 속에서 주변 상황을 다시 관찰할 수 있다.';
-    let zeroMutationNarrative = '';
-    const zeroMatch = rawPhase1Response.match(/\[ZERO_MUTATION_NARRATIVE\]([\s\S]*?)\[ZERO_MUTATION_END\]/i);
-    if (zeroMatch && zeroMatch[1].trim()) {
-      zeroMutationNarrative = zeroMatch[1].trim();
-    } else {
-      zeroMutationNarrative = DETERMINISTIC_NON_MUTATION_FALLBACK;
-    }
-
-    const rawCandidates = parseCandidatesBlock(rawPhase1Response);
+    // Step 1: Execute Triage Gate (Leading Gate: LLM #1 -> Triage -> TRIAGE_STAMP -> Recovery -> Causal Language)
+    const triageResult = runTriagePipeline(rawPhase1Response);
+    const zeroMutationNarrative = triageResult.zeroMutationNarrative;
+    const rawCandidates = triageResult.rawCandidates;
 
     // VEIL Enforcement: Check if candidates block is present
     if (!rawCandidates) {
@@ -413,7 +407,10 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
             model: targetModel,
             actualModelVersion: response.modelVersion,
             responseId: response.responseId,
-            rawResponseText: rawPhase1Response,
+            rawResponseText: triageResult.rawResponseText,
+            triageStamp: triageResult.triageStamp,
+            triageApplied: triageResult.triageApplied,
+            triageNotes: triageResult.triageNotes,
             rawCandidatesBlock: null
           },
           preAuth: null,
@@ -485,7 +482,10 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
             model: targetModel,
             actualModelVersion: response.modelVersion,
             responseId: response.responseId,
-            rawResponseText: rawPhase1Response,
+            rawResponseText: triageResult.rawResponseText,
+            triageStamp: triageResult.triageStamp,
+            triageApplied: triageResult.triageApplied,
+            triageNotes: triageResult.triageNotes,
             rawCandidatesBlock: rawCandidates,
             recoveryGateResult: gateResult
           },
@@ -808,7 +808,10 @@ INSTRUCTIONS:
           model: targetModel,
           actualModelVersion: response.modelVersion,
           responseId: response.responseId,
-          rawResponseText: rawPhase1Response,
+          rawResponseText: triageResult.rawResponseText,
+          triageStamp: triageResult.triageStamp,
+          triageApplied: triageResult.triageApplied,
+          triageNotes: triageResult.triageNotes,
           rawCandidatesBlock: rawCandidates,
           recoveryGateResult: gateResult,
           meaningTrees: candidatesToValidate.map(c => ({

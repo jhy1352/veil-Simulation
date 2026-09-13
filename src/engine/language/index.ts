@@ -16,3 +16,4 @@ export * from './semanticEventRuntimeBridge';
 export * from './semanticCandidateContract';
 export * from './runtimeSemanticCandidate';
 export * from './semanticRuntimeIntegrationGuard';
+export * from './triageModule';
