@@ -1,0 +1,908 @@
+{
+  "runId": "run_2026-09-13T00-19-30-888Z_1oxeau",
+  "worldName": "거대 학원도시 이능 배틀 (에스퍼 vs 마술)",
+  "turn": 4,
+  "timestamp": "2026-09-13T00:21:05.069Z",
+  "gitCommit": "787d49cb2a8dffe012407459800563fdf5b28a0b",
+  "playerInput": {
+    "rawInput": "그래서 건질만한 물건은 없는가?"
+  },
+  "modelRuntime": {
+    "requestedModel": "gemini-3.5-flash-lite",
+    "actualModelVersion": "gemini-3.5-flash-lite",
+    "responseId": "a-ylasGGLb2r1e8P0auVwQc",
+    "serverTimings": {
+      "t1_requestStart": 1789258859132,
+      "t2_contextAssemblyComplete": 1789258859132,
+      "t3_geminiRequestStart": 1789258859132,
+      "t4_geminiResponseReceived": 1789258865596,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 6464,
+      "inputCharCount": 3443,
+      "outputCharCount": 445,
+      "tokenCount": {
+        "promptTokens": 9478,
+        "candidatesTokens": 1639,
+        "totalTokens": 11117
+      }
+    },
+    "clientLatency": {
+      "turn": 4,
+      "model": "gemini-3.5-flash-lite",
+      "t0_playerInput": 206843.30000001192,
+      "t1_requestStart": 206843.30000001192,
+      "t2_contextAssemblyComplete": 206843.40000000596,
+      "t3_geminiRequestStart": 206843.40000000596,
+      "t4_geminiResponseReceived": 213379.90000000596,
+      "t5_parserComplete": 213380.09999999404,
+      "t6_stateMutationComplete": 213380.09999999404,
+      "t7_uiUpdateComplete": 213380.20000001788,
+      "contextAssemblyMs": 0,
+      "geminiGenerationMs": 6537,
+      "parsingValidationMs": 0,
+      "totalTurnMs": 6537,
+      "inputCharCount": 17,
+      "outputCharCount": 445,
+      "retried": false
+    }
+  },
+  "chatContextForensic": {
+    "initialContextPrompt": "[TRPG Campaign Context]\n- 세계관명: 거대 학원도시 이능 배틀 (에스퍼 vs 마술)\n- 세계관 설정: 초능력 개발 프로그램을 이수하는 230만 학원도시의 학생들과, 과학의 이면에 숨어 암약하는 고대 마술 결사 간의 은밀한 충돌과 음모를 다룹니다.\n- 문체 스타일: 열혈 이능 배틀 / J애니메이션 활극\n- 주인공 프로필: 로웬 실버베일 (나이: 23, 성별: 여성)\n  * 출신/배경: [preset] 마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아\n  * 결핍/트라우마: [preset] 자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함\n  * 맹세: [preset] 어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다\n  * 닻: [preset] 위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능\n  * 소속/세력: [preset] 콜로니 독립 해방 전선 [에어로스]\n  * 능력치: STR 12 / AGI 14 / CON 13 / INT 12 / WIS 13 / CHA 16\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 로웬 실버베일 (마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n",
+    "kgContext": "\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 로웬 실버베일 (마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아)\n- 정사 관계망 (0개): 기본 관계망",
+    "roadmapContext": "\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.",
+    "seedsContext": "",
+    "offscreenContext": ""
+  },
+  "geminiContentsForensic": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "[TRPG Campaign Context]\n- 세계관명: 거대 학원도시 이능 배틀 (에스퍼 vs 마술)\n- 세계관 설정: 초능력 개발 프로그램을 이수하는 230만 학원도시의 학생들과, 과학의 이면에 숨어 암약하는 고대 마술 결사 간의 은밀한 충돌과 음모를 다룹니다.\n- 문체 스타일: 열혈 이능 배틀 / J애니메이션 활극\n- 주인공 프로필: 로웬 실버베일 (나이: 23, 성별: 여성)\n  * 출신/배경: [preset] 마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아\n  * 결핍/트라우마: [preset] 자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함\n  * 맹세: [preset] 어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다\n  * 닻: [preset] 위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능\n  * 소속/세력: [preset] 콜로니 독립 해방 전선 [에어로스]\n  * 능력치: STR 12 / AGI 14 / CON 13 / INT 12 / WIS 13 / CHA 16\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 로웬 실버베일 (마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 4 PLAYER PROMPT]\n[서사 개막 선언]\n세계관: 거대 학원도시 이능 배틀 (에스퍼 vs 마술) (열혈 이능 배틀 / J애니메이션 활극)\n시대/배경: 초능력 개발 프로그램을 이수하는 230만 학원도시의 학생들과, 과학의 이면에 숨어 암약하는 고대 마술 결사 간의 은밀한 충돌과 음모를 다룹니다.\n주인공: 로웬 실버베일 (나이: 23, 성별: 여성)\n출신: [preset] 마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아\n결핍: [preset] 자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함\n맹세: [preset] 어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다\n닻: [preset] 위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능\n문파/세력: [preset] 콜로니 독립 해방 전선 [에어로스]\n\n궁극적 목표: 왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것\n\n대문호의 필치로 주인공이 마주한 첫 시작 장면의 정취와 상황을 묘사하고, 주인공에게 행동 기회를 제시하십시오."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "시작한다"
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "시작한다"
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "거대 학원도시의 상공을 가득 채운 홀로그램 네온사인이 인공의 밤을 낮처럼 밝히고 있었다. 빌딩과 빌딩 사이를 잇는 고속 공중 레일 위로 무수한 초능력자 학생들이 오가는 동안, 그 찬란한 과학의 이면에는 인간의 눈에 닿지 않는 어둠이 짙게 가라앉아 있었다. \n\n콜로니 독립 해방 전선 [에어로스]의 소속인 로웬 실버베일은 차가운 밤바람을 맞으며 거대 빌딩의 옥상 난간에 홀로 서 있었다. 명문 실버베일 가문의 엄격한 가교와 예법을 내팽개치고 이 도시로 도망쳐 나온 지도 어느덧 시간이 흘렀다. 그녀의 허리춤에는 마력을 응축하는 가문의 보검이 차가운 금속음을 내며 매달려 있었고, 귓가에는 파트너 인공지능 사역마의 전자음이 나지막이 울리고 있었다.\n\n\"로웬, 주변 에너지 파장이 심상치 않습니다. 도시 관리 시스템의 은밀한 감시망이 미묘하게 수렴하고 있어요. 자만심에 빠져 주변을 가볍게 여기다간 골치 아파질 겁니다.\"\n\n사역마의 경고는 차갑고 이성적이었으나, 로웬은 그저 입꼬리를 비스듬히 올릴 뿐이었다. 자신의 힘에 대한 절대적인 과신—그것은 그녀를 지탱하는 오만이기도 했고, 동시에 어떤 절망에서도 검을 뽑아들게 만드는 닻이기도 했다. 왕국의 왕좌 뒤에 숨은 부패한 흑막의 실체를 폭로하기 위해, 그리고 가문의 허울 좋은 명예에 복종하기를 거부한 그녀의 반역은 이제 막 방아쇠를 당긴 참이었다.\n\n도시의 밤거리는 여전히 평화로운 가면을 쓴 채 그녀를 내려다보고 있다. 로웬은 검 스톡에 손을 올린 채, 앞으로 펼쳐질 격동의 전장에 뛰어들 준비를 마친다."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "주위를 수색하여 유용한 아이템을 획득하고 인벤토리에 넣는다"
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "로웬은 발걸음을 멈추고 낮게 엎드려 차가운 철제 옥상 바닥과 통신 장비 사이를 꼼꼼하게 살피기 시작했다. 밤바람이 그녀의 머리칼을 거칠게 헤집는 동안, 파트너 인공지능 사역마가 귓가에서 주파수 파장을 증폭하며 주변의 은닉된 물리적 흔적을 탐색한다. 당장 눈에 띄는 화려한 전리품이나 값비싼 보물은 없었으나, 거대 학원도시의 철저한 감시망 속에서 버려진 유지보수 박스와 통신 단말기의 잔해가 그녀의 예리한 시선에 걸려든다. 비록 한 번에 완벽한 무기를 찾아낸 것은 아니지만, 이 거대한 강철 정글의 이면에 숨겨진 단서들을 하나씩 엮어내려는 그녀의 탐색은 도시의 어둠 속에서 조용히 숨통을 조여오기 시작한다."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "인공지능 사역마에게 아이템 수색을 명한다"
+        }
+      ]
+    },
+    {
+      "role": "model",
+      "parts": [
+        {
+          "text": "로웬은 허리춤에 손을 올린 채, 귓가에 울리는 사역마의 주파수 단말을 가볍게 두드리며 명령을 내렸다. \n\"이봐, 자만할 새가 있다면 그 고성능 센서나 풀가동해서 주변에 건질만한 물건이나 단서가 더 있는지 싹 뒤져봐. 감시망을 피하려면 우리 쪽도 패를 좀 쥐고 있어야 할 테니까.\"\n\n사역마의 내부에 내장된 푸른빛의 광학 센서가 미세하게 떨리며 이진수의 데이터 스트림을 전송하기 시작했다. \"요청 수락. 주변 15미터 반경 내 비인가 마력 잔류물과 폐기된 통신 터미널의 주파수를 스캔합니다. 데이터 손실률 14%, 잔류 로그 추출까지 잠시 대기하십시오.\" \n\n차가운 밤공기 속에서 사역마가 투사한 홀로그램 스크린이 허공에 덧그려지고, 학원도시의 복잡다단한 네트워크 밑바닥에서 은밀하게 흐르는 암호화된 신호의 파장이 조금씩 로웬의 시야로 들어오기 시작했다. 당장 목숨을 위협하는 적습은 없었으나, 도시의 이면에 숨겨진 거대한 음모의 단서가 비로소 그녀의 손아귀에 잡힐 듯 다가오고 있었다."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "그래서 건질만한 물건은 없는가?"
+        }
+      ]
+    }
+  ],
+  "llmRawResponse": {
+    "phase1RawText": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"사역마의 스캔을 통해 감시망 암호화 키가 담긴 소형 데이터칩을 발견하고 획득한다\",\n    \"narrativeSummary\": \"사역마가 끈질기게 주파수를 추적한 끝에, 인근 정비함의 이중 잠금장치 속에서 구형 학원도시 감시망의 암호화 키가 기록된 소형 데이터칩을 찾아낸다. 로웬은 그것을 집어 들며 미소를 짓는다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_SCAN_CHIP_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"로웬 실버베일\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"감시망 암호화 키 데이터칩\" },\n          { \"role\": \"INSTRUMENT\", \"entityName\": \"사역마 인공지능\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"NONE\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"구형 감시망 암호화 키로 인해 도시 하이브 마인드의 숨겨진 백도어에 접근할 수 있게 되었다.\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"감시망 암호화 키 데이터칩\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_SCAN_CHIP_01\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막\",\n        \"upcomingChapters\": [\n          \"암호화 키를 이용한 학원도시 하층부 잠입\",\n          \"에스퍼 치안부대의 추적과 첫 번째 마술적 충돌\",\n          \"흑막의 그림자가 드리워진 지하 구역의 진실\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"마력 잔류물을 추적하여 버려진 마술적 보급품(비상용 마력 파편)을 노획한다\",\n    \"narrativeSummary\": \"사역마의 심층 센서가 일반적이지 않은 마력의 잔류 파장을 감지해낸다. 로웬은 그 파장을 따라 옥상 환기구 구석에서 가문의 규율을 벗어난 자들이 남긴 비상용 마력 파편을 발견한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_SCAN_MANA_02\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"로웬 실버베일\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"비상용 마력 파편\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"NONE\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"버려진 마력 파편의 출처가 도시 내부의 또 다른 마술 결사와 연관되어 있다.\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"비상용 마력 파편\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"EVT_SCAN_MANA_02\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막\",\n        \"upcomingChapters\": [\n          \"마력 파편의 잔류 파장을 추적하여 동맹 세력과 접촉\",\n          \"학원도시 에스퍼들의 기습적인 포위망 돌파\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"아무런 유용한 물품도 찾지 못한 채, 사역마의 경고를 무시하고 독단적으로 이동한다\",\n    \"narrativeSummary\": \"철저한 스캔에도 불구하고 주변은 이미 다른 누군가에 의해 싹 쓸려간 뒤였다. 건질 것이 없다는 사역마의 보고에도 로웬은 자신의 오만함을 발휘하며 단독으로 전진을 선언한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_SCAN_EMPTY_03\",\n        \"action\": \"OBSERVE\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"로웬 실버베일\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"빈 정비 구역\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"NONE\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"이미 누군가 이 지역을 거쳐 갔으며, 로웬의 행동이 적의 함정에 노출되었을 가능성이 높다.\"\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막\",\n        \"upcomingChapters\": [\n          \"경고를 무시한 대가로 맞닥뜨리는 적의 매복\",\n          \"고독한 전장에서의 첫 번째 검격 교환\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n[ZERO_MUTATION_NARRATIVE]\n사역마의 푸른빛 광학 센서가 옥상 전역을 몇 번이나 훑고 지나간 끝에, 차가운 전자음이 로웬의 귓가를 두드렸다. \n\n\"스캔 완료. 안타깝지만 로웬, 기대했던 화려한 보물이나 즉시 전력으로 쓸 만한 마법 병기는 검출되지 않았습니다. 도시 관리 시스템이 최근에 대대적인 구역 청소를 단행한 모양이군요. 남은 건 고장 난 터미널의 잔해와 쓸모없는 데이터 파편뿐입니다.\"\n\n사역마의 냉정한 진단에 로웬은 콧방귀를 뀌며 허리춤의 검 스톡을 가볍게 손가락으로 튕겼다. 손에 쥐어지는 확실한 물건이 없다는 사실은 그녀의 오만을 자극하기에 충분했다. 하지만 그 역경 속에서도 그녀는 포기라는 단어를 입에 올릴 생각조차 하지 않았다. 물질적인 전리품이 없다면, 이 거대한 철의 도시 자체를 뜯어내서라도 단서를 찾아내면 그만인 것이다. 로웬은 밤바람을 가르며 다음 목적지를 향해 거침없이 발걸음을 옮기기 시작했다.\n[ZERO_MUTATION_END]",
+    "rawResponseText": "사역마의 푸른빛 광학 센서가 옥상 전역을 몇 번이나 훑고 지나간 끝에, 차가운 전자음이 로웬의 귓가를 두드렸다. \n\n\"스캔 완료. 안타깝지만 로웬, 기대했던 화려한 보물이나 즉시 전력으로 쓸 만한 마법 병기는 검출되지 않았습니다. 도시 관리 시스템이 최근에 대대적인 구역 청소를 단행한 모양이군요. 남은 건 고장 난 터미널의 잔해와 쓸모없는 데이터 파편뿐입니다.\"\n\n사역마의 냉정한 진단에 로웬은 콧방귀를 뀌며 허리춤의 검 스톡을 가볍게 손가락으로 튕겼다. 손에 쥐어지는 확실한 물건이 없다는 사실은 그녀의 오만을 자극하기에 충분했다. 하지만 그 역경 속에서도 그녀는 포기라는 단어를 입에 올릴 생각조차 하지 않았다. 물질적인 전리품이 없다면, 이 거대한 철의 도시 자체를 뜯어내서라도 단서를 찾아내면 그만인 것이다. 로웬은 밤바람을 가르며 다음 목적지를 향해 거침없이 발걸음을 옮기기 시작했다."
+  },
+  "candidatePipeline": {
+    "rawCandidatesBlock": [
+      {
+        "label": "사역마의 스캔을 통해 감시망 암호화 키가 담긴 소형 데이터칩을 발견하고 획득한다",
+        "narrativeSummary": "사역마가 끈질기게 주파수를 추적한 끝에, 인근 정비함의 이중 잠금장치 속에서 구형 학원도시 감시망의 암호화 키가 기록된 소형 데이터칩을 찾아낸다. 로웬은 그것을 집어 들며 미소를 짓는다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_SCAN_CHIP_01",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "감시망 암호화 키 데이터칩"
+              },
+              {
+                "role": "INSTRUMENT",
+                "entityName": "사역마 인공지능"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "구형 감시망 암호화 키로 인해 도시 하이브 마인드의 숨겨진 백도어에 접근할 수 있게 되었다."
+          ],
+          "inventoryChanges": [
+            {
+              "name": "감시망 암호화 키 데이터칩",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "EVT_SCAN_CHIP_01"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막",
+            "upcomingChapters": [
+              "암호화 키를 이용한 학원도시 하층부 잠입",
+              "에스퍼 치안부대의 추적과 첫 번째 마술적 충돌",
+              "흑막의 그림자가 드리워진 지하 구역의 진실"
+            ]
+          }
+        },
+        "candidateId": 1
+      },
+      {
+        "label": "마력 잔류물을 추적하여 버려진 마술적 보급품(비상용 마력 파편)을 노획한다",
+        "narrativeSummary": "사역마의 심층 센서가 일반적이지 않은 마력의 잔류 파장을 감지해낸다. 로웬은 그 파장을 따라 옥상 환기구 구석에서 가문의 규율을 벗어난 자들이 남긴 비상용 마력 파편을 발견한다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_SCAN_MANA_02",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "비상용 마력 파편"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "버려진 마력 파편의 출처가 도시 내부의 또 다른 마술 결사와 연관되어 있다."
+          ],
+          "inventoryChanges": [
+            {
+              "name": "비상용 마력 파편",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "EVT_SCAN_MANA_02"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막",
+            "upcomingChapters": [
+              "마력 파편의 잔류 파장을 추적하여 동맹 세력과 접촉",
+              "학원도시 에스퍼들의 기습적인 포위망 돌파"
+            ]
+          }
+        },
+        "candidateId": 2
+      },
+      {
+        "label": "아무런 유용한 물품도 찾지 못한 채, 사역마의 경고를 무시하고 독단적으로 이동한다",
+        "narrativeSummary": "철저한 스캔에도 불구하고 주변은 이미 다른 누군가에 의해 싹 쓸려간 뒤였다. 건질 것이 없다는 사역마의 보고에도 로웬은 자신의 오만함을 발휘하며 단독으로 전진을 선언한다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_SCAN_EMPTY_03",
+            "action": "OBSERVE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "빈 정비 구역"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "이미 누군가 이 지역을 거쳐 갔으며, 로웬의 행동이 적의 함정에 노출되었을 가능성이 높다."
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막",
+            "upcomingChapters": [
+              "경고를 무시한 대가로 맞닥뜨리는 적의 매복",
+              "고독한 전장에서의 첫 번째 검격 교환"
+            ]
+          }
+        },
+        "candidateId": 3
+      }
+    ],
+    "parsedCandidates": [
+      {
+        "label": "사역마의 스캔을 통해 감시망 암호화 키가 담긴 소형 데이터칩을 발견하고 획득한다",
+        "narrativeSummary": "사역마가 끈질기게 주파수를 추적한 끝에, 인근 정비함의 이중 잠금장치 속에서 구형 학원도시 감시망의 암호화 키가 기록된 소형 데이터칩을 찾아낸다. 로웬은 그것을 집어 들며 미소를 짓는다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_SCAN_CHIP_01",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "감시망 암호화 키 데이터칩"
+              },
+              {
+                "role": "INSTRUMENT",
+                "entityName": "사역마 인공지능"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "구형 감시망 암호화 키로 인해 도시 하이브 마인드의 숨겨진 백도어에 접근할 수 있게 되었다."
+          ],
+          "inventoryChanges": [
+            {
+              "name": "감시망 암호화 키 데이터칩",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "EVT_SCAN_CHIP_01"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막",
+            "upcomingChapters": [
+              "암호화 키를 이용한 학원도시 하층부 잠입",
+              "에스퍼 치안부대의 추적과 첫 번째 마술적 충돌",
+              "흑막의 그림자가 드리워진 지하 구역의 진실"
+            ]
+          }
+        },
+        "candidateId": 1
+      },
+      {
+        "label": "마력 잔류물을 추적하여 버려진 마술적 보급품(비상용 마력 파편)을 노획한다",
+        "narrativeSummary": "사역마의 심층 센서가 일반적이지 않은 마력의 잔류 파장을 감지해낸다. 로웬은 그 파장을 따라 옥상 환기구 구석에서 가문의 규율을 벗어난 자들이 남긴 비상용 마력 파편을 발견한다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_SCAN_MANA_02",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "비상용 마력 파편"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "버려진 마력 파편의 출처가 도시 내부의 또 다른 마술 결사와 연관되어 있다."
+          ],
+          "inventoryChanges": [
+            {
+              "name": "비상용 마력 파편",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "EVT_SCAN_MANA_02"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막",
+            "upcomingChapters": [
+              "마력 파편의 잔류 파장을 추적하여 동맹 세력과 접촉",
+              "학원도시 에스퍼들의 기습적인 포위망 돌파"
+            ]
+          }
+        },
+        "candidateId": 2
+      },
+      {
+        "label": "아무런 유용한 물품도 찾지 못한 채, 사역마의 경고를 무시하고 독단적으로 이동한다",
+        "narrativeSummary": "철저한 스캔에도 불구하고 주변은 이미 다른 누군가에 의해 싹 쓸려간 뒤였다. 건질 것이 없다는 사역마의 보고에도 로웬은 자신의 오만함을 발휘하며 단독으로 전진을 선언한다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_SCAN_EMPTY_03",
+            "action": "OBSERVE",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "빈 정비 구역"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "이미 누군가 이 지역을 거쳐 갔으며, 로웬의 행동이 적의 함정에 노출되었을 가능성이 높다."
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막",
+            "upcomingChapters": [
+              "경고를 무시한 대가로 맞닥뜨리는 적의 매복",
+              "고독한 전장에서의 첫 번째 검격 교환"
+            ]
+          }
+        },
+        "candidateId": 3
+      }
+    ],
+    "recoveryGateResult": {
+      "passedCandidates": [
+        {
+          "label": "사역마의 스캔을 통해 감시망 암호화 키가 담긴 소형 데이터칩을 발견하고 획득한다",
+          "narrativeSummary": "사역마가 끈질기게 주파수를 추적한 끝에, 인근 정비함의 이중 잠금장치 속에서 구형 학원도시 감시망의 암호화 키가 기록된 소형 데이터칩을 찾아낸다. 로웬은 그것을 집어 들며 미소를 짓는다.",
+          "semanticEvents": [
+            {
+              "eventId": "EVT_SCAN_CHIP_01",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "로웬 실버베일"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "감시망 암호화 키 데이터칩"
+                },
+                {
+                  "role": "INSTRUMENT",
+                  "entityName": "사역마 인공지능"
+                }
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "구형 감시망 암호화 키로 인해 도시 하이브 마인드의 숨겨진 백도어에 접근할 수 있게 되었다."
+            ],
+            "inventoryChanges": [
+              {
+                "name": "감시망 암호화 키 데이터칩",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "EVT_SCAN_CHIP_01"
+              }
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막",
+              "upcomingChapters": [
+                "암호화 키를 이용한 학원도시 하층부 잠입",
+                "에스퍼 치안부대의 추적과 첫 번째 마술적 충돌",
+                "흑막의 그림자가 드리워진 지하 구역의 진실"
+              ]
+            }
+          },
+          "candidateId": 1
+        },
+        {
+          "label": "마력 잔류물을 추적하여 버려진 마술적 보급품(비상용 마력 파편)을 노획한다",
+          "narrativeSummary": "사역마의 심층 센서가 일반적이지 않은 마력의 잔류 파장을 감지해낸다. 로웬은 그 파장을 따라 옥상 환기구 구석에서 가문의 규율을 벗어난 자들이 남긴 비상용 마력 파편을 발견한다.",
+          "semanticEvents": [
+            {
+              "eventId": "EVT_SCAN_MANA_02",
+              "action": "PICKUP",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "로웬 실버베일"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "비상용 마력 파편"
+                }
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "버려진 마력 파편의 출처가 도시 내부의 또 다른 마술 결사와 연관되어 있다."
+            ],
+            "inventoryChanges": [
+              {
+                "name": "비상용 마력 파편",
+                "quantity": 1,
+                "action": "add",
+                "cause": "DISCOVERY_PICKUP",
+                "verifiedEventId": "EVT_SCAN_MANA_02"
+              }
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막",
+              "upcomingChapters": [
+                "마력 파편의 잔류 파장을 추적하여 동맹 세력과 접촉",
+                "학원도시 에스퍼들의 기습적인 포위망 돌파"
+              ]
+            }
+          },
+          "candidateId": 2
+        },
+        {
+          "label": "아무런 유용한 물품도 찾지 못한 채, 사역마의 경고를 무시하고 독단적으로 이동한다",
+          "narrativeSummary": "철저한 스캔에도 불구하고 주변은 이미 다른 누군가에 의해 싹 쓸려간 뒤였다. 건질 것이 없다는 사역마의 보고에도 로웬은 자신의 오만함을 발휘하며 단독으로 전진을 선언한다.",
+          "semanticEvents": [
+            {
+              "eventId": "EVT_SCAN_EMPTY_03",
+              "action": "OBSERVE",
+              "roles": [
+                {
+                  "role": "SUBJECT",
+                  "entityName": "로웬 실버베일"
+                },
+                {
+                  "role": "OBJECT",
+                  "entityName": "빈 정비 구역"
+                }
+              ],
+              "scope": "CANONICAL",
+              "polarity": "ASSERTED",
+              "epistemicStatus": "OBSERVED",
+              "modality": "NONE"
+            }
+          ],
+          "rawMetadata": {
+            "foreshadowSeeds": [
+              "이미 누군가 이 지역을 거쳐 갔으며, 로웬의 행동이 적의 함정에 노출되었을 가능성이 높다."
+            ],
+            "chapterChanges": {
+              "currentChapter": "서막",
+              "upcomingChapters": [
+                "경고를 무시한 대가로 맞닥뜨리는 적의 매복",
+                "고독한 전장에서의 첫 번째 검격 교환"
+              ]
+            }
+          },
+          "candidateId": 3
+        }
+      ],
+      "quarantinedCandidates": [],
+      "totalInputCount": 3,
+      "passedCount": 3,
+      "quarantinedCount": 0
+    },
+    "meaningTrees": [
+      {
+        "candidateId": 1,
+        "meaningTree": {
+          "atom": "INTENT",
+          "scope": "PROPOSAL",
+          "value": "Turn 4 Candidate State Transition",
+          "children": []
+        },
+        "proposal": {
+          "proposalId": "prop-req-mtz2j4j3-qf26e9",
+          "requestId": "req-mtz2j4j3-qf26e9",
+          "eventId": "evt-mtz2j4j3-iq2ikl",
+          "expectedStateVersion": 4,
+          "source": "LLM",
+          "turn": 4,
+          "timestamp": "2026-09-13T00:21:05.583Z",
+          "intentSummary": "Turn 4 Candidate State Transition",
+          "actions": [],
+          "rawClaims": [
+            "{\"foreshadowSeeds\":[\"구형 감시망 암호화 키로 인해 도시 하이브 마인드의 숨겨진 백도어에 접근할 수 있게 되었다.\"],\"inventoryChanges\":[{\"name\":\"감시망 암호화 키 데이터칩\",\"quantity\":1,\"action\":\"add\",\"cause\":\"DISCOVERY_PICKUP\",\"verifiedEventId\":\"EVT_SCAN_CHIP_01\"}],\"chapterChanges\":{\"currentChapter\":\"서막\",\"upcomingChapters\":[\"암호화 키를 이용한 학원도시 하층부 잠입\",\"에스퍼 치안부대의 추적과 첫 번째 마술적 충돌\",\"흑막의 그림자가 드리워진 지하 구역의 진실\"]}}"
+          ],
+          "originInputId": "input-mtz2izjw-8edmdg",
+          "meaningTree": {
+            "atom": "INTENT",
+            "scope": "PROPOSAL",
+            "value": "Turn 4 Candidate State Transition",
+            "children": []
+          },
+          "rejectedReasons": [
+            "[EVT_SCAN_CHIP_01] OBJECT '감시망 암호화 키 데이터칩' is not canonically resolvable to an inventory item."
+          ]
+        }
+      }
+    ],
+    "candidatesToValidate": [
+      {
+        "candidateId": 1,
+        "meaningTree": {
+          "atom": "INTENT",
+          "scope": "PROPOSAL",
+          "value": "Turn 4 Candidate State Transition",
+          "children": []
+        },
+        "proposal": {
+          "proposalId": "prop-req-mtz2j4j3-qf26e9",
+          "requestId": "req-mtz2j4j3-qf26e9",
+          "eventId": "evt-mtz2j4j3-iq2ikl",
+          "expectedStateVersion": 4,
+          "source": "LLM",
+          "turn": 4,
+          "timestamp": "2026-09-13T00:21:05.583Z",
+          "intentSummary": "Turn 4 Candidate State Transition",
+          "actions": [],
+          "rawClaims": [
+            "{\"foreshadowSeeds\":[\"구형 감시망 암호화 키로 인해 도시 하이브 마인드의 숨겨진 백도어에 접근할 수 있게 되었다.\"],\"inventoryChanges\":[{\"name\":\"감시망 암호화 키 데이터칩\",\"quantity\":1,\"action\":\"add\",\"cause\":\"DISCOVERY_PICKUP\",\"verifiedEventId\":\"EVT_SCAN_CHIP_01\"}],\"chapterChanges\":{\"currentChapter\":\"서막\",\"upcomingChapters\":[\"암호화 키를 이용한 학원도시 하층부 잠입\",\"에스퍼 치안부대의 추적과 첫 번째 마술적 충돌\",\"흑막의 그림자가 드리워진 지하 구역의 진실\"]}}"
+          ],
+          "originInputId": "input-mtz2izjw-8edmdg",
+          "meaningTree": {
+            "atom": "INTENT",
+            "scope": "PROPOSAL",
+            "value": "Turn 4 Candidate State Transition",
+            "children": []
+          },
+          "rejectedReasons": [
+            "[EVT_SCAN_CHIP_01] OBJECT '감시망 암호화 키 데이터칩' is not canonically resolvable to an inventory item."
+          ]
+        }
+      }
+    ]
+  },
+  "preAuth": {
+    "preAuthResults": [
+      {
+        "label": "사역마의 스캔을 통해 감시망 암호화 키가 담긴 소형 데이터칩을 발견하고 획득한다",
+        "narrativeSummary": "사역마가 끈질기게 주파수를 추적한 끝에, 인근 정비함의 이중 잠금장치 속에서 구형 학원도시 감시망의 암호화 키가 기록된 소형 데이터칩을 찾아낸다. 로웬은 그것을 집어 들며 미소를 짓는다.",
+        "semanticEvents": [
+          {
+            "eventId": "EVT_SCAN_CHIP_01",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "로웬 실버베일"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "감시망 암호화 키 데이터칩"
+              },
+              {
+                "role": "INSTRUMENT",
+                "entityName": "사역마 인공지능"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "OBSERVED",
+            "modality": "NONE"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "구형 감시망 암호화 키로 인해 도시 하이브 마인드의 숨겨진 백도어에 접근할 수 있게 되었다."
+          ],
+          "inventoryChanges": [
+            {
+              "name": "감시망 암호화 키 데이터칩",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "EVT_SCAN_CHIP_01"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "서막",
+            "upcomingChapters": [
+              "암호화 키를 이용한 학원도시 하층부 잠입",
+              "에스퍼 치안부대의 추적과 첫 번째 마술적 충돌",
+              "흑막의 그림자가 드리워진 지하 구역의 진실"
+            ]
+          }
+        },
+        "candidateId": 1,
+        "preAuthStatus": "REJECT",
+        "preAuthReasons": [
+          "[EMPTY_PROPOSAL_REJECTED] State transition proposal contains no actions."
+        ]
+      }
+    ],
+    "allowedCandidatesCount": 0
+  },
+  "authorization": {
+    "authorizedCandidateId": null,
+    "authorizedCandidate": null,
+    "authorizedCandidatePacket": null,
+    "authorizedProposal": null,
+    "isFallbackNonMutation": true
+  },
+  "commit": {
+    "verdict": "NO_CANDIDATE",
+    "rejectedReasons": [],
+    "committedRecordIds": [],
+    "commitResultSummary": "NO_MUTATION"
+  },
+  "stateBefore": {
+    "turn": 4,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "거대 학원도시 이능 배틀 (에스퍼 vs 마술)",
+        "worldType": "popular_genre",
+        "settingDescription": "초능력 개발 프로그램을 이수하는 230만 학원도시의 학생들과, 과학의 이면에 숨어 암약하는 고대 마술 결사 간의 은밀한 충돌과 음모를 다룹니다.",
+        "toneStyle": "열혈 이능 배틀 / J애니메이션 활극",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "로웬 실버베일",
+        "gender": "여성",
+        "age": 23,
+        "appearance": "그림자 속에 숨어든 듯한 잿빛 망토와 예리한 비수를 숨긴 첩보원",
+        "goal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것",
+        "originBackground": "마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아",
+        "backgroundType": "preset",
+        "flaw": "자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함",
+        "flawType": "preset",
+        "oath": "어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다",
+        "oathType": "preset",
+        "anchor": "위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능",
+        "anchorType": "preset",
+        "faction": "콜로니 독립 해방 전선 [에어로스]",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아",
+          "flaw": "자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함",
+          "oath": "어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다",
+          "anchor": "위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능",
+          "faction": "콜로니 독립 해방 전선 [에어로스]"
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 13,
+          "intelligence": 12,
+          "wisdom": 13,
+          "charisma": 16,
+          "vitality": 13,
+          "intellect": 12,
+          "insight": 13,
+          "willpower": 16
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "은밀한 정보상",
+        "currentGoal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "stateAfter": {
+    "turn": 4,
+    "canonicalState": {
+      "worldInfo": {
+        "worldName": "거대 학원도시 이능 배틀 (에스퍼 vs 마술)",
+        "worldType": "popular_genre",
+        "settingDescription": "초능력 개발 프로그램을 이수하는 230만 학원도시의 학생들과, 과학의 이면에 숨어 암약하는 고대 마술 결사 간의 은밀한 충돌과 음모를 다룹니다.",
+        "toneStyle": "열혈 이능 배틀 / J애니메이션 활극",
+        "currentTime": {
+          "year": 1,
+          "season": "SPRING",
+          "formattedTime": "1년 봄"
+        },
+        "npcs": [],
+        "factions": [],
+        "publicRumors": [],
+        "secretLore": [],
+        "seeds": [],
+        "chapters": {
+          "currentChapter": "서막",
+          "upcomingChapters": []
+        },
+        "dcHistory": [],
+        "unresolvedForeshadows": [],
+        "cameraOffscreenEvents": [],
+        "offscreenRecords": []
+      },
+      "character": {
+        "name": "로웬 실버베일",
+        "gender": "여성",
+        "age": 23,
+        "appearance": "그림자 속에 숨어든 듯한 잿빛 망토와 예리한 비수를 숨긴 첩보원",
+        "goal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것",
+        "originBackground": "마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아",
+        "backgroundType": "preset",
+        "flaw": "자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함",
+        "flawType": "preset",
+        "oath": "어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다",
+        "oathType": "preset",
+        "anchor": "위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능",
+        "anchorType": "preset",
+        "faction": "콜로니 독립 해방 전선 [에어로스]",
+        "factionType": "preset",
+        "metaElements": {
+          "background": "마법소녀/퇴마사 명가의 막내로 태어나 가문의 엄격한 규율에 반발하는 반항아",
+          "flaw": "자신의 힘에 대한 과신으로 경고를 무시하다 위기를 자초하는 오만함",
+          "oath": "어떤 절망적인 상황에서도 포기라는 단어를 입에 담지 않고 끝까지 검을 휘두른다",
+          "anchor": "위기 때마다 따뜻한 조언으로 마음을 다잡아 주는 사역마/파트너 인공지능",
+          "faction": "콜로니 독립 해방 전선 [에어로스]"
+        },
+        "stats": {
+          "strength": 12,
+          "agility": 14,
+          "constitution": 13,
+          "intelligence": 12,
+          "wisdom": 13,
+          "charisma": 16,
+          "vitality": 13,
+          "intellect": 12,
+          "insight": 13,
+          "willpower": 16
+        },
+        "inventory": [],
+        "secret": "",
+        "physicalDefect": "",
+        "timeline": [],
+        "title": "은밀한 정보상",
+        "currentGoal": "왕국의 왕좌 뒤에 숨은 부패한 흑막의 음모를 폭로하는 것"
+      }
+    },
+    "engineState": {
+      "historicalRecordsCount": 0,
+      "diagnostics": {
+        "stateVersion": 1,
+        "totalExecutedRequests": 0,
+        "totalRecordedEvents": 0,
+        "totalHistoricalRecords": 0,
+        "lastEventId": null
+      }
+    },
+    "inventory": []
+  },
+  "historyDelta": [],
+  "pipelineSteps": [
+    {
+      "step": "T0_PLAYER_INPUT",
+      "status": "OK",
+      "timestamp": 1789258858532,
+      "details": "Turn 4 player input: \"그래서 건질만한 물건은 없는가?\" (17 chars)"
+    },
+    {
+      "step": "T1_REQUEST_START",
+      "status": "OK",
+      "timestamp": 1789258858532,
+      "details": "Initiating API POST /api/chat with model gemini-3.5-flash-lite"
+    },
+    {
+      "step": "T2_CONTEXT_ASSEMBLED",
+      "status": "OK",
+      "timestamp": 1789258858532,
+      "details": "Context prepared with 9 total messages in history"
+    },
+    {
+      "step": "T3_GEMINI_START",
+      "status": "OK",
+      "timestamp": 1789258858532,
+      "details": "Backend Gemini API request dispatched"
+    },
+    {
+      "step": "T4_GEMINI_RECEIVED",
+      "status": "OK",
+      "timestamp": 1789258865069,
+      "details": "Gemini response received (445 chars)"
+    },
+    {
+      "step": "T5_PARSED",
+      "status": "OK",
+      "timestamp": 1789258865069,
+      "details": "Metadata block parsed successfully"
+    },
+    {
+      "step": "T6_VALIDATED",
+      "status": "SKIPPED",
+      "timestamp": 1789258865069,
+      "details": "No candidate state mutation proposed"
+    },
+    {
+      "step": "T7_COMMITTED",
+      "status": "SKIPPED",
+      "timestamp": 1789258865069,
+      "details": "Canonical state unchanged"
+    }
+  ]
+}

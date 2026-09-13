@@ -1,0 +1,16 @@
+{
+  "runId": "run_2026-09-13T00-17-23-150Z_0vwnv5",
+  "worldName": "폭설의 설산 산장: 밀실 연쇄 살인과 의심의 밤",
+  "sanitizedDir": "00_폭설의_설산_산장_밀실_연쇄_살인과_의심의_밤",
+  "gitCommit": "787d49cb2a8dffe012407459800563fdf5b28a0b",
+  "captureStartedAt": "2026-09-13T00:17:23.769Z",
+  "lastCapturedAt": "2026-09-13T00:17:23.769Z",
+  "turns": [
+    {
+      "turn": 1,
+      "file": "turn_001_raw.json",
+      "sha256": "576130f03dfecd57ad863e75a74c06d6f50df7020ae3534670144d94c470e81a",
+      "capturedAt": "2026-09-13T00:17:23.769Z"
+    }
+  ]
+}
