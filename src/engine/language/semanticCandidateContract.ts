@@ -183,9 +183,19 @@ function validateEvent(event: unknown, index: number, errors: string[]): event i
   return true;
 }
 
+function normalizeSemanticEvent(event: unknown): unknown {
+  if (!isRecord(event) || event.modality !== undefined) return event;
+  return {
+    ...event,
+    modality: 'NONE' as Modality,
+  };
+}
+
 /**
  * Structural-only validation for the LLM #1 semantic payload.
  * It intentionally does not determine whether an event is causally valid.
+ * Missing modality uses the neutral NONE default at this transport boundary;
+ * explicit modality values are preserved and invalid values remain rejected.
  */
 export function validateSemanticCandidateOutput(value: unknown): {
   valid: boolean;
@@ -207,8 +217,10 @@ export function validateSemanticCandidateOutput(value: unknown): {
   }
 
   const eventIds = new Set<string>();
-  for (let index = 0; index < value.semanticEvents.length; index++) {
-    const event = value.semanticEvents[index];
+  const normalizedEvents = value.semanticEvents.map(normalizeSemanticEvent);
+
+  for (let index = 0; index < normalizedEvents.length; index++) {
+    const event = normalizedEvents[index];
     validateEvent(event, index, errors);
     if (isRecord(event) && isNonEmptyString(event.eventId)) {
       const eventId = event.eventId.trim();
@@ -222,7 +234,7 @@ export function validateSemanticCandidateOutput(value: unknown): {
 
   return {
     valid: errors.length === 0,
-    semanticEvents: errors.length === 0 ? (value.semanticEvents as SemanticEvent[]) : [],
+    semanticEvents: errors.length === 0 ? (normalizedEvents as SemanticEvent[]) : [],
     errors,
   };
 }
