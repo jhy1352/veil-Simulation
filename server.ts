@@ -372,17 +372,14 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
 
     const rawPhase1Response = response.text || '';
 
-    // Extract Zero-Mutation Narrative
+    // Extract Zero-Mutation Narrative strictly from marker; fail-closed to deterministic non-mutation fallback if missing/malformed.
+    const DETERMINISTIC_NON_MUTATION_FALLBACK = '선언한 행동을 시도하였으나, 즉각적인 세계 상태의 변화는 발생하지 않았다. 침묵과 정적 속에서 주변 상황을 다시 관찰할 수 있다.';
     let zeroMutationNarrative = '';
     const zeroMatch = rawPhase1Response.match(/\[ZERO_MUTATION_NARRATIVE\]([\s\S]*?)\[ZERO_MUTATION_END\]/i);
-    if (zeroMatch) {
+    if (zeroMatch && zeroMatch[1].trim()) {
       zeroMutationNarrative = zeroMatch[1].trim();
     } else {
-      let cleaned = rawPhase1Response.replace(/\[CANDIDATES_BLOCK\][\s\S]*?\[CANDIDATES_END\]/gi, '');
-      cleaned = cleaned.replace(/\[ZERO_MUTATION_NARRATIVE\]/gi, '');
-      cleaned = cleaned.replace(/\[ZERO_MUTATION_END\]/gi, '');
-      cleaned = cleaned.replace(/```json[\s\S]*?```/gi, '');
-      zeroMutationNarrative = cleaned.trim();
+      zeroMutationNarrative = DETERMINISTIC_NON_MUTATION_FALLBACK;
     }
 
     const rawCandidates = parseCandidatesBlock(rawPhase1Response);
