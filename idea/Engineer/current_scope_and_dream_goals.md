@@ -47,6 +47,17 @@
    - 특히 장기 플레이에서 localStorage SessionPayload 확장과 저장 실패에 따른 in-memory / persisted-state divergence를 해결한다.
    - 저장 실패를 단순 경고로 끝내지 않고, 사용자에게 명확한 실패 상태를 전달하거나 저장 성공을 보장하는 구조를 확립한다.
 
+10. **최종 전투: LLM의 근본적 실패를 세계 시뮬레이션 안에서 제어하기**
+   - VEIL의 장기적인 핵심 목표는 단순히 더 강한 LLM을 사용하는 것이 아니라, LLM이 본질적으로 만들어내는 잘못된 해석·억지 인과·AI 클리셰·세계 규칙 위반·정보 비대칭 위반·맥락 망각·부자연스러운 결과를 엔진 구조로 통제하는 것이다.
+   - 플레이어는 개발자가 미리 정의한 버튼 목록이 아니라 **현실적으로 가능한 인간의 행동 범위**를 자연어로 시도할 수 있어야 한다. 이것은 초월적인 전능함이 아니라 세계의 물리·사회·규칙적 제약 안에서 가능한 행위의 개방성을 의미한다.
+   - 행동이 기존에 정의되지 않은 인물·물건·관계·사건을 요구하더라도 엔진은 단순히 "모른다"는 이유로 이를 거부하지 않는다. NOVEL은 Narrative Existence를 가질 수 있으며, Canonical Mutation Authority는 별도로 검증한다.
+   - NOVEL은 필요에 따라 이후 사건·관계·상태·인과를 축적할 수 있고, 충분한 causal/world basis가 형성된 경우에만 Canonical State로 승격될 수 있다.
+   - 목표 Runtime은 다음을 만족해야 한다:
+     `Player Intent → LLM Interpretation → Semantic/Causal Representation → World/History Validation → Canonical Consequence → Persistent Future Effect`
+   - LLM은 무엇을 서사적으로 시도할지 제안하지만 Canonical Truth를 결정하지 않는다. Engine은 무엇이 정사로 기록될 수 있는지만 판정한다.
+   - 최종 품질 기준은 "LLM이 실수하지 않는다"가 아니다. **LLM이 실수하더라도 그 오류가 Canonical World를 오염시키지 않고, 플레이어 의도가 보존되며, 결과가 세계의 인과·역사·상태와 자연스럽게 이어지고, 장기 플레이에서 누적 붕괴가 발생하지 않는가**가 기준이다.
+   - 이 목표가 실제 장기 플레이에서 입증된다면 TRPG 3.1은 단순한 AI TRPG를 넘어, 자연어 기반의 개방형 플레이어 행동과 장기적인 세계 정합성을 동시에 제공하는 범용 Narrative/World Runtime을 지향할 수 있다.
+
 ### 1.2 현재 완료 판정에 필요한 핵심 검증
 
 다음 항목은 "코드가 존재한다"만으로 PASS하지 않는다. 실제 Runtime 또는 재현 가능한 실행 증거가 필요하다.
@@ -57,6 +68,8 @@
 - Commit 이후 narrative prose가 canonical facts와 충돌하지 않는지
 - 장기 SessionPayload 저장/복원 및 저장 실패 시 divergence 방지
 - 장기 history에서 Passport / Identity / Inventory / Validator scan 비용의 실용적 한계
+- **자연어로 제시된 비정형 플레이어 행동이 의도 보존 → 의미/인과 표현 → 검증 → 지속적 결과로 실제 연결되는지**
+- **LLM의 부자연스러운 결과·억지 인과·클리셰·맥락 오류가 장기 플레이에서 누적되어 세계 정합성을 붕괴시키지 않는지**
 
 ---
 
