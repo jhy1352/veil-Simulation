@@ -341,7 +341,7 @@ export function compileCandidateToProposal(
     status: 'COMPILED',
     candidate,
     proposal,
-    meaningTree,
+    meaningTree: compilation.meaningTree || meaningTree,
     errors: [],
   };
 }

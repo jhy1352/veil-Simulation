@@ -83,6 +83,13 @@ export const ACTION_SIGNATURES: Record<string, ActionSignature> = {
     optionalRoles: ['TIME', 'LOCATION'],
     allowedModalities: ['COMMITMENT', 'INTENTIONAL'],
   },
+  QUERY: {
+    action: 'QUERY',
+    requiredRoles: ['SUBJECT'],
+    forbiddenRoles: [],
+    optionalRoles: ['TARGET', 'COUNTERPARTY', 'RECIPIENT', 'OBJECT', 'LOCATION', 'TIME', 'VALUE', 'SPEAKER'],
+    allowedModalities: ['NONE', 'INTENTIONAL', 'POSSIBLE'],
+  },
   UPDATE_STATE: {
     action: 'UPDATE_STATE',
     requiredRoles: ['TARGET'],

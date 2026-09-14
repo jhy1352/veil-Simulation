@@ -162,6 +162,190 @@ export function runCandidateCausalPipelineTests() {
     console.log('[PASS] Scenario 3: Candidate with invalid shape -> SHAPE_INVALID (Candidate preserved)');
   }
 
+  // Scenario 4: Candidate with QUERY semanticEvent -> COMPILED, 0 actions, Candidate preserved
+  {
+    const candidate: VeilCandidate = {
+      candidateId: 4,
+      label: '마을 주민에게 질문',
+      narrativeSummary: '마을 주민에게 길을 묻는다.',
+      rawMetadata: {},
+    };
+
+    const queryEvents: SemanticEvent[] = [
+      {
+        eventId: 'ev_query_1',
+        action: 'QUERY',
+        scope: 'CANONICAL',
+        polarity: 'ASSERTED',
+        epistemicStatus: 'OBSERVED',
+        modality: 'NONE',
+        provenance: 'evt-001',
+        roles: [
+          { role: 'SUBJECT', entityName: '주인공' },
+          { role: 'TARGET', entityName: '주민' }
+        ]
+      }
+    ];
+
+    const result = compileCandidateToProposal(
+      candidate,
+      queryEvents,
+      canonicalState,
+      3,
+      [],
+      'req-004',
+      bridgeContext
+    );
+
+    assert(result.status === 'COMPILED', 'Scenario 4: Candidate with QUERY must be COMPILED');
+    assert(Boolean(result.proposal), 'Scenario 4: Proposal must be generated');
+    assert(Boolean(result.meaningTree), 'Scenario 4: MeaningTree must be generated');
+    assert(result.proposal?.actions.length === 0, 'Scenario 4: QUERY must produce 0 runtime actions (non-mutating)');
+    assert(result.candidate.candidateId === 4, 'Scenario 4: Candidate object must be preserved');
+    console.log('[PASS] Scenario 4: Candidate with QUERY -> COMPILED, actions: [], Candidate preserved');
+  }
+
+  // Scenario 5: Candidate with HEARSAY semanticEvent -> COMPILED, 0 actions, Candidate preserved
+  {
+    const candidate: VeilCandidate = {
+      candidateId: 5,
+      label: '소문 듣기',
+      narrativeSummary: '상인이 보물을 숨겼다는 소문을 듣는다.',
+      rawMetadata: {},
+    };
+
+    const hearsayEvents: SemanticEvent[] = [
+      {
+        eventId: 'ev_hearsay_1',
+        action: 'GIFT',
+        scope: 'CANONICAL',
+        polarity: 'ASSERTED',
+        epistemicStatus: 'HEARSAY',
+        modality: 'NONE',
+        provenance: 'evt-001',
+        roles: [
+          { role: 'SUBJECT', entityName: '상인' },
+          { role: 'RECIPIENT', entityName: '주인공' },
+          { role: 'OBJECT', entityName: '보물' }
+        ]
+      }
+    ];
+
+    const result = compileCandidateToProposal(
+      candidate,
+      hearsayEvents,
+      canonicalState,
+      3,
+      [],
+      'req-005',
+      bridgeContext
+    );
+
+    assert(result.status === 'COMPILED', 'Scenario 5: Candidate with HEARSAY must be COMPILED');
+    assert(Boolean(result.proposal), 'Scenario 5: Proposal must be generated');
+    assert(Boolean(result.meaningTree), 'Scenario 5: MeaningTree must be generated');
+    assert(result.proposal?.actions.length === 0, 'Scenario 5: HEARSAY must produce 0 runtime actions (non-canonical)');
+    assert(result.candidate.candidateId === 5, 'Scenario 5: Candidate object must be preserved');
+    console.log('[PASS] Scenario 5: Candidate with HEARSAY -> COMPILED, actions: [], Candidate preserved');
+  }
+
+  // Scenario 6: Candidate with compound [PICKUP, QUERY] -> COMPILED, 1 action, both preserved in MeaningTree
+  {
+    const candidate: VeilCandidate = {
+      candidateId: 6,
+      label: '약초 채집 후 주민에게 문의',
+      narrativeSummary: '약초를 채집하고 주민에게 쓰임새를 묻는다.',
+      rawMetadata: {},
+    };
+
+    const compoundEvents: SemanticEvent[] = [
+      {
+        eventId: 'ev_herb_pickup',
+        action: 'PICKUP',
+        scope: 'CANONICAL',
+        polarity: 'ASSERTED',
+        epistemicStatus: 'OBSERVED',
+        modality: 'NONE',
+        provenance: 'evt-001',
+        roles: [
+          { role: 'SUBJECT', entityName: '주인공' },
+          { role: 'OBJECT', entityName: '약초' }
+        ]
+      },
+      {
+        eventId: 'ev_herb_query',
+        action: 'QUERY',
+        scope: 'CANONICAL',
+        polarity: 'ASSERTED',
+        epistemicStatus: 'OBSERVED',
+        modality: 'NONE',
+        provenance: 'evt-001',
+        roles: [
+          { role: 'SUBJECT', entityName: '주인공' },
+          { role: 'TARGET', entityName: '주민' }
+        ]
+      }
+    ];
+
+    const result = compileCandidateToProposal(
+      candidate,
+      compoundEvents,
+      canonicalState,
+      3,
+      [],
+      'req-006',
+      bridgeContext
+    );
+
+    assert(result.status === 'COMPILED', 'Scenario 6: Compound [PICKUP, QUERY] candidate must be COMPILED');
+    assert(Boolean(result.proposal), 'Scenario 6: Proposal must be generated');
+    assert(result.proposal?.actions.length === 1, 'Scenario 6: Only executable PICKUP projects to runtime action');
+    assert(result.proposal?.actions[0].type === 'MODIFY_INVENTORY', 'Scenario 6: Action must be MODIFY_INVENTORY');
+    assert(result.candidate.candidateId === 6, 'Scenario 6: Candidate object must be preserved');
+    console.log('[PASS] Scenario 6: Compound [PICKUP, QUERY] -> COMPILED, 1 action, Candidate preserved');
+  }
+
+  // Scenario 7: Truly invalid/unmapped action -> Fail Closed, Candidate preserved
+  {
+    const candidate: VeilCandidate = {
+      candidateId: 7,
+      label: '알 수 없는 조작',
+      narrativeSummary: '미등록 액션 실행 시도',
+      rawMetadata: {},
+    };
+
+    const invalidActionEvents: SemanticEvent[] = [
+      {
+        eventId: 'ev_unmapped_1',
+        action: 'UNSUPPORTED_FRONTEND_ACTION' as any,
+        scope: 'CANONICAL',
+        polarity: 'ASSERTED',
+        epistemicStatus: 'OBSERVED',
+        modality: 'NONE',
+        provenance: 'evt-001',
+        roles: [
+          { role: 'SUBJECT', entityName: '주인공' }
+        ]
+      }
+    ];
+
+    const result = compileCandidateToProposal(
+      candidate,
+      invalidActionEvents,
+      canonicalState,
+      3,
+      [],
+      'req-007',
+      bridgeContext
+    );
+
+    assert(result.status === 'INVALID' || result.status === 'UNSUPPORTED', 'Scenario 7: Unmapped action must return INVALID or UNSUPPORTED');
+    assert(result.proposal === undefined, 'Scenario 7: Proposal MUST NOT be generated for unmapped action');
+    assert(result.candidate.candidateId === 7, 'Scenario 7: Candidate object must be preserved');
+    assert(result.errors.length > 0, 'Scenario 7: Errors must be recorded');
+    console.log('[PASS] Scenario 7: Unmapped action -> INVALID / UNSUPPORTED, Fail-Closed, Candidate preserved');
+  }
+
   console.log('=== All Candidate Causal Pipeline Tests PASSED ===');
 }
 

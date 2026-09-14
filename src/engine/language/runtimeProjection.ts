@@ -164,6 +164,9 @@ function projectNode(
     node.fields?.epistemicStatus === 'UNKNOWN' ||
     node.fields?.epistemicStatus === 'DENIED';
   const hasBlockingDependency = node.atom === 'ACTION' && hasBlockingExecutionDependency(node);
+  const isNonMutatingSemanticAction =
+    node.atom === 'ACTION' &&
+    (node.value === 'QUERY' || node.fields?.action === 'QUERY');
 
   const currentNonExecutable =
     isNonExecutableContext ||
@@ -173,7 +176,8 @@ function projectNode(
     isUnproven ||
     isNonCanonicalModality ||
     isNonCanonicalEpistemic ||
-    hasBlockingDependency;
+    hasBlockingDependency ||
+    isNonMutatingSemanticAction;
 
   if (node.atom === 'ACTION' && !isCompoundWrapper && !currentNonExecutable) {
     if (isCompiledSemanticAction(node)) {

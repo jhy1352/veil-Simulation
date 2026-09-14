@@ -173,13 +173,21 @@ export function semanticEventToRuntimeActions(
 
   if (event.polarity === 'NEGATED' || event.modality === 'INTENTIONAL') {
     return {
-      status: 'UNSUPPORTED',
+      status: 'MAPPABLE',
       actions: [],
-      errors: [`${action} is non-executable because polarity/modality does not assert a committed state change.`],
+      errors: [],
     };
   }
 
-  if (event.epistemicStatus === 'HEARSAY' || event.epistemicStatus === 'UNVERIFIED' || event.epistemicStatus === 'UNKNOWN') {
+  if (event.epistemicStatus === 'HEARSAY') {
+    return {
+      status: 'MAPPABLE',
+      actions: [],
+      errors: [],
+    };
+  }
+
+  if (event.epistemicStatus === 'UNVERIFIED' || event.epistemicStatus === 'UNKNOWN') {
     return {
       status: 'UNSUPPORTED',
       actions: [],
@@ -191,6 +199,13 @@ export function semanticEventToRuntimeActions(
     case 'PICKUP':
     case 'GIFT':
       return mapInventoryAcquisition(event, context);
+
+    case 'QUERY':
+      return {
+        status: 'MAPPABLE',
+        actions: [],
+        errors: [],
+      };
 
     default:
       return {
