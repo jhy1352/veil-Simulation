@@ -154,15 +154,8 @@ export function createEngineSemanticBridgeContext(
         };
       }
 
-      if (resolution.status === 'NOVEL') {
-        const newId = generateProposalId('item');
-        return {
-          id: newId,
-          name: itemName,
-          quantity: 1,
-        };
-      }
-
+      // NOVEL, AMBIGUOUS, CONFLICT: Identity resolution result does not constitute canonical creation.
+      // Runtime semantic bridge must not preempt canonical identity or issue pseudo-canonical IDs.
       return undefined;
     },
     resolveVerifiedEventId: (event: SemanticEvent): string | undefined => {

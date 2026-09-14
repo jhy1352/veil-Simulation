@@ -371,6 +371,49 @@ export function runCandidateCausalPipelineTests() {
     console.log('[PASS] Scenario 7: Unmapped action -> INVALID / UNSUPPORTED, Fail-Closed, Candidate preserved');
   }
 
+  // Scenario 8: P0-5 Defense - SemanticEvent with NOVEL item -> Fail Closed (UNSUPPORTED), NO premature ID issuance
+  {
+    const candidate: VeilCandidate = {
+      candidateId: 8,
+      label: '존재하지 않는 가상 아이템 습득',
+      narrativeSummary: '미지의 신비석 습득 시도',
+      rawMetadata: {},
+    };
+
+    const novelItemEvents: SemanticEvent[] = [
+      {
+        eventId: 'ev_novel_item_1',
+        action: 'PICKUP',
+        scope: 'CANONICAL',
+        polarity: 'ASSERTED',
+        epistemicStatus: 'OBSERVED',
+        modality: 'NONE',
+        provenance: 'evt-001',
+        roles: [
+          { role: 'SUBJECT', entityName: '주인공' },
+          { role: 'OBJECT', entityName: '미지의_신비석' }
+        ]
+      }
+    ];
+
+    const result = compileCandidateToProposal(
+      candidate,
+      novelItemEvents,
+      canonicalState,
+      3,
+      [],
+      'req-008',
+      bridgeContext
+    );
+
+    assert(result.status === 'UNSUPPORTED' || result.status === 'INVALID', 'Scenario 8: NOVEL item SemanticEvent must fail closed');
+    assert(result.proposal === undefined, 'Scenario 8: Proposal MUST NOT be generated without canonical entity resolution');
+    assert(result.candidate.candidateId === 8, 'Scenario 8: Candidate object must be preserved');
+    assert(result.errors.length > 0, 'Scenario 8: Error must indicate unresolvable item');
+    assert(result.errors.some(e => e.includes('미지의_신비석') || e.includes('canonically resolvable')), 'Scenario 8: Error message must reference unresolvable item');
+    console.log('[PASS] Scenario 8: NOVEL item -> UNSUPPORTED, Zero premature ID issuance, Candidate preserved');
+  }
+
   console.log('=== All Candidate Causal Pipeline Tests PASSED ===');
 }
 
