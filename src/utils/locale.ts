@@ -119,7 +119,7 @@ export function constructSystemInstructionWithLocale(baseInstruction: string, ra
 1. Target Narrative Language (${targetLocale}):
    - All generated natural-language outputs (including candidate labels, narrativeSummaries, full GM narrative text, character dialogue, sensory descriptions, and non-mutation fallback prose) MUST be written in the specified target locale (${targetLocale}).
 2. Engine Contract & Semantic Event Immutability:
-   - Do NOT translate, alter, or mutate language-neutral SemanticEvent action strings (e.g. "PICKUP", "GIFT", "ADVANCE_TIME"), role names (e.g. "SUBJECT", "TARGET", "OBJECT"), JSON schema property keys, or engine structural flags.
+   - Do NOT translate, alter, or mutate language-neutral SemanticEvent action strings, role names, JSON schema property keys, or engine structural flags.
    - All structured JSON contracts (CandidateOutput array, rawMetadata, actions, etc.) must adhere strictly to their language-neutral schema definitions.
 3. Epistemic & Authority Isolation:
    - The output locale (${targetLocale}) is strictly transport/presentation metadata.

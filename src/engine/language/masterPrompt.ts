@@ -154,7 +154,7 @@ type CandidateOutput = {
   narrativeSummary: string; // Detailed narrative summary of the branch's developments
   semanticEvents?: {
     eventId: string; // Unique event identifier
-    action: "PICKUP" | "GIFT" | string; // Language-neutral semantic action type (e.g. PICKUP, GIFT)
+    action: "PICKUP" | "GIFT" | string; // Language-neutral semantic action type
     roles: {
       role: "SUBJECT" | "TARGET" | "OBJECT" | "RECIPIENT" | "SOURCE" | "COUNTERPARTY" | "LOCATION" | "INSTRUMENT" | "BENEFICIARY" | "SPEAKER" | "OBSERVER" | "HOLDER" | "OWNER" | "TIME" | "CAUSE" | "VALUE" | "STATE" | "CONSTRAINT";
       entityName?: string; // Entity or item name
@@ -176,7 +176,7 @@ type CandidateOutput = {
     newNpcs?: {
       name: string; // The canonical name of the NPC
       alias?: string; // Optional alias
-      npcClass?: "Class A" | "Class B" | "Class S"; // Defaults to "Class A"
+      npcClass?: "Class A" | "Class B" | "Class C"; // Defaults to "Class A"
       innerThought?: string; // Psychological state or hidden thoughts (Only visible if metInStory is true, otherwise forces "[미인지 상태]")
       metInStory?: boolean; // Whether the player meets the NPC in this branch
       origin?: string; // NPC's region or background of origin
@@ -312,7 +312,7 @@ type CandidateOutput = {
   - SET_WORLD_METADATA: { worldName?, settingDescription?, toneStyle? }
   - ADVANCE_TIME: { targetTime: { year?, month?, day?, timeOfDay? }, reason? }
   - ADD_RUMOR: { rumor: string, sourceContext?: string }
-  - ADD_NPC: { id: string, name: string, npcClass: 'Class A'|'Class B'|'Class S', innerThought?: string, currentStatus?: 'ALIVE'|'DEAD'|'MISSING' }
+  - ADD_NPC: { id: string, name: string, npcClass: 'Class A'|'Class B'|'Class C', innerThought?: string, currentStatus?: 'ALIVE'|'DEAD'|'MISSING' }
   - UPDATE_NPC: { id: string, changes: { ... } }
   - SET_NPC_STATUS: { id: string, status: 'ALIVE'|'DEAD'|'MISSING'|'UNMET'|'MET', reason: string }
   - ADD_FACTION: { id: string, name: string, description: string, attitudeTowardsPlayer?: string }
