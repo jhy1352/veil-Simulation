@@ -24,10 +24,6 @@ export function runTriageModuleTestSuite() {
   {
     resetRecoveryCallCount();
     const rawInput = `
-[ZERO_MUTATION_NARRATIVE]
-주변을 주의 깊게 둘러보았으나 특별한 변화는 일어나지 않았다.
-[ZERO_MUTATION_END]
-
 [CANDIDATES_BLOCK]
 [
   {
@@ -50,31 +46,26 @@ export function runTriageModuleTestSuite() {
     const triageRes = runTriagePipeline(rawInput);
     assert(triageRes.triageApplied === true, 'Test 1.1: triageApplied is true for untriaged input');
     assert(Boolean(triageRes.triageStamp && triageRes.triageStamp.startsWith(TRIAGE_STAMP_HEADER)), 'Test 1.2: TRIAGE_STAMP generated correctly');
-    assert(triageRes.zeroMutationNarrative === '주변을 주의 깊게 둘러보았으나 특별한 변화는 일어나지 않았다.', 'Test 1.3: Zero-Mutation narrative extracted correctly');
-    assert(typeof triageRes.rawCandidatesBlock === 'string', 'Test 1.4: rawCandidatesBlock extracted as raw string');
+    assert(typeof triageRes.rawCandidatesBlock === 'string', 'Test 1.3: rawCandidatesBlock extracted as raw string');
 
     // Prove Triage alone did NOT call Recovery Gate
-    assert(getRecoveryCallCount() === 0, 'Test 1.5: Triage alone does not invoke Recovery Gate');
+    assert(getRecoveryCallCount() === 0, 'Test 1.4: Triage alone does not invoke Recovery Gate');
 
     // Run Recovery Gate as the single authority
     const gateRes = runCandidateRecoveryGate(triageRes.rawCandidatesBlock);
-    assert(gateRes.passedCount === 1, 'Test 1.6: Recovery Gate passed valid candidate');
-    assert(getRecoveryCallCount() === 1, 'Test 1.7: Recovery Gate call count is exactly 1');
+    assert(gateRes.passedCount === 1, 'Test 1.5: Recovery Gate passed valid candidate');
+    assert(getRecoveryCallCount() === 1, 'Test 1.6: Recovery Gate call count is exactly 1');
 
     const candidate1 = gateRes.passedCandidates[0];
-    assert(candidate1.candidateId === 1, 'Test 1.8: Canonical candidateId assigned as 1');
-    assert(candidate1.semanticEvents![0].modality === undefined, 'Test 1.9: Omitted modality remains undefined');
-    assert(candidate1.semanticEvents![0].scope === 'CANONICAL', 'Test 1.10: CANONICAL scope remains CANONICAL');
+    assert(candidate1.candidateId === 1, 'Test 1.7: Canonical candidateId assigned as 1');
+    assert(candidate1.semanticEvents![0].modality === undefined, 'Test 1.8: Omitted modality remains undefined');
+    assert(candidate1.semanticEvents![0].scope === 'CANONICAL', 'Test 1.9: CANONICAL scope remains CANONICAL');
   }
 
   // Test 2: Syntax-Recoverable JSON (Trailing Comma)
   {
     resetRecoveryCallCount();
     const syntaxRecoverableInput = `
-[ZERO_MUTATION_NARRATIVE]
-정적만이 가득하다.
-[ZERO_MUTATION_END]
-
 [CANDIDATES_BLOCK]
 [
   {
@@ -99,10 +90,6 @@ export function runTriageModuleTestSuite() {
   {
     resetRecoveryCallCount();
     const partialCorruptInput = `
-[ZERO_MUTATION_NARRATIVE]
-정적만이 가득하다.
-[ZERO_MUTATION_END]
-
 [CANDIDATES_BLOCK]
 [
   {
@@ -135,28 +122,23 @@ export function runTriageModuleTestSuite() {
     assert(getRecoveryCallCount() === 1, 'Test 3.6: Recovery call count is 1');
   }
 
-  // Test 4: Zero-Mutation Only Input (Missing CANDIDATES_BLOCK)
+  // Test 4: Missing CANDIDATES_BLOCK
   {
     resetRecoveryCallCount();
-    const zeroOnlyInput = `
-[ZERO_MUTATION_NARRATIVE]
+    const noCandidatesInput = `
 바람 소리만이 고요히 들려온다.
-[ZERO_MUTATION_END]
 `;
 
-    const triageRes = runTriagePipeline(zeroOnlyInput);
-    assert(triageRes.zeroMutationNarrative === '바람 소리만이 고요히 들려온다.', 'Test 4.1: Zero-mutation narrative extracted');
-    assert(triageRes.rawCandidatesBlock === null, 'Test 4.2: rawCandidatesBlock is null when tag is absent');
-    assert(getRecoveryCallCount() === 0, 'Test 4.3: Recovery Gate not called for zero-mutation only input');
+    const triageRes = runTriagePipeline(noCandidatesInput);
+    assert(triageRes.rawCandidatesBlock === null, 'Test 4.1: rawCandidatesBlock is null when tag is absent');
+    assert(getRecoveryCallCount() === 0, 'Test 4.2: Recovery Gate not called when CANDIDATES_BLOCK is absent');
   }
 
   // Test 5: 1-Shot Guard on Stamped Input
   {
     resetRecoveryCallCount();
     const stampedInput = `/* TRIAGE_STAMP_V1_12345678_abcdef */
-[ZERO_MUTATION_NARRATIVE]
 아무런 일도 일어나지 않았다.
-[ZERO_MUTATION_END]
 `;
 
     const result = runTriagePipeline({ rawResponseText: stampedInput, triageStamp: 'TRIAGE_STAMP_V1_12345678_abcdef' });

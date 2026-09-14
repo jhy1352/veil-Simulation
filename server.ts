@@ -378,181 +378,21 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
 
     // Step 1: Execute Triage Gate (Leading Gate: LLM #1 -> Triage -> TRIAGE_STAMP -> Recovery -> Causal Language)
     const triageResult = runTriagePipeline(rawPhase1Response);
-    const zeroMutationNarrative = triageResult.zeroMutationNarrative;
     const rawCandidatesBlock = triageResult.rawCandidatesBlock;
 
     const collector = new CandidateLifecycleCollector(playerInputId, storyTurnCount);
     collector.initExtraction(rawCandidatesBlock);
 
-    // VEIL Enforcement: Check if candidates block is present
-    if (!rawCandidatesBlock) {
-      // Non-mutation or missing candidates block: return zero-mutation narrative safely
-      const outputCharCount = zeroMutationNarrative.length;
-      const usageMetadata = (response as any).usageMetadata;
-      const telemetryReport = collector.generateReport();
-
-      return res.json({
-        success: true,
-        text: zeroMutationNarrative,
-        rawResponse: zeroMutationNarrative,
-        isFallbackNonMutation: true,
-        telemetryReport,
-        contextSnapshot: initialContextPrompt,
-        actualModelVersion: response.modelVersion,
-        requestedModel: targetModel,
-        gitCommit: getServerGitCommit(),
-        forensicCapture: {
-          t0_playerInput: effectiveUserPrompt,
-          telemetryReport,
-          chatContextForensic: {
-            initialContextPrompt,
-            kgContext,
-            roadmapContext,
-            seedsContext,
-            offscreenContext
-          },
-          geminiContentsForensic: contents,
-          phase1: {
-            model: targetModel,
-            actualModelVersion: response.modelVersion,
-            responseId: response.responseId,
-            rawResponseText: triageResult.rawResponseText,
-            triageStamp: triageResult.triageStamp,
-            triageApplied: triageResult.triageApplied,
-            triageNotes: triageResult.triageNotes,
-            rawCandidatesBlock: null
-          },
-          preAuth: null,
-          phase2: null,
-          serverTimings: {
-            t1_requestStart,
-            t2_contextAssemblyComplete,
-            t3_geminiRequestStart,
-            t4_geminiResponseReceived,
-            contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
-            geminiGenerationMs: t4_geminiResponseReceived - t3_geminiRequestStart,
-            inputCharCount,
-            outputCharCount
-          }
-        },
-        serverTimings: {
-          t1_requestStart,
-          t2_contextAssemblyComplete,
-          t3_geminiRequestStart,
-          t4_geminiResponseReceived,
-          contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
-          geminiGenerationMs: t4_geminiResponseReceived - t3_geminiRequestStart,
-          inputCharCount,
-          outputCharCount,
-          tokenCount: usageMetadata ? {
-            promptTokens: usageMetadata.promptTokenCount,
-            candidatesTokens: usageMetadata.candidatesTokenCount,
-            totalTokens: usageMetadata.totalTokenCount
-          } : undefined
-        }
-      });
-    }
-
     // VEIL Candidate Recovery Gate: Parse & Quarantine corrupted candidates deterministically (Single Recovery Authority)
-    const gateResult = runCandidateRecoveryGate<VeilCandidate>(rawCandidatesBlock);
+    const gateResult = rawCandidatesBlock
+      ? runCandidateRecoveryGate<VeilCandidate>(rawCandidatesBlock)
+      : { totalInputCount: 0, passedCandidates: [], quarantinedCandidates: [], passedCount: 0, quarantinedCount: 0, rawBlockPresent: false, syntaxErrors: [] };
     collector.recordStage0And1(gateResult);
     if (gateResult.quarantinedCount > 0) {
       console.warn(`[VEIL Candidate Recovery Gate] Quarantined ${gateResult.quarantinedCount} corrupted candidate(s) out of ${gateResult.totalInputCount}:`, gateResult.quarantinedCandidates);
     }
 
     const candidates = gateResult.passedCandidates;
-
-    // Fail-Closed: If 0 candidates passed gate, return non-mutation narrative safely
-    if (candidates.length === 0) {
-      console.warn('[VEIL Candidate Recovery Gate] All candidates quarantined. Failing closed to non-mutation.');
-      const outputCharCount = zeroMutationNarrative.length;
-      const usageMetadata = (response as any).usageMetadata;
-
-      return res.json({
-        success: true,
-        text: zeroMutationNarrative,
-        rawResponse: zeroMutationNarrative,
-        isFallbackNonMutation: true,
-        quarantinedCount: gateResult.quarantinedCount,
-        contextSnapshot: initialContextPrompt,
-        actualModelVersion: response.modelVersion,
-        requestedModel: targetModel,
-        gitCommit: getServerGitCommit(),
-        forensicCapture: {
-          t0_playerInput: effectiveUserPrompt,
-          chatContextForensic: {
-            initialContextPrompt,
-            kgContext,
-            roadmapContext,
-            seedsContext,
-            offscreenContext
-          },
-          geminiContentsForensic: contents,
-          phase1: {
-            model: targetModel,
-            actualModelVersion: response.modelVersion,
-            responseId: response.responseId,
-            rawResponseText: triageResult.rawResponseText,
-            triageStamp: triageResult.triageStamp,
-            triageApplied: triageResult.triageApplied,
-            triageNotes: triageResult.triageNotes,
-            rawCandidatesBlock: rawCandidatesBlock,
-            recoveryGateResult: gateResult
-          },
-          preAuth: null,
-          phase2: null,
-          serverTimings: {
-            t1_requestStart,
-            t2_contextAssemblyComplete,
-            t3_geminiRequestStart,
-            t4_geminiResponseReceived,
-            contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
-            geminiGenerationMs: t4_geminiResponseReceived - t3_geminiRequestStart,
-            inputCharCount,
-            outputCharCount
-          }
-        },
-        serverTimings: {
-          t1_requestStart,
-          t2_contextAssemblyComplete,
-          t3_geminiRequestStart,
-          t4_geminiResponseReceived,
-          contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
-          geminiGenerationMs: t4_geminiResponseReceived - t3_geminiRequestStart,
-          inputCharCount,
-          outputCharCount,
-          tokenCount: usageMetadata ? {
-            promptTokens: usageMetadata.promptTokenCount,
-            candidatesTokens: usageMetadata.candidatesTokenCount,
-            totalTokens: usageMetadata.totalTokenCount
-          } : undefined
-        }
-      });
-    }
-
-    // VEIL Constraint: 1 to 5 candidate packets (ceiling of 5)
-    if (candidates.length < 1 || candidates.length > 5) {
-      console.warn(`[VEIL Candidate Recovery Gate] Invalid candidate count: ${candidates.length}. Failing closed to non-mutation.`);
-      return res.json({
-        success: true,
-        text: zeroMutationNarrative,
-        rawResponse: zeroMutationNarrative,
-        isFallbackNonMutation: true,
-        contextSnapshot: initialContextPrompt,
-        actualModelVersion: response.modelVersion,
-        requestedModel: targetModel,
-        serverTimings: {
-          t1_requestStart,
-          t2_contextAssemblyComplete,
-          t3_geminiRequestStart,
-          t4_geminiResponseReceived,
-          contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
-          geminiGenerationMs: t4_geminiResponseReceived - t3_geminiRequestStart,
-          inputCharCount,
-          outputCharCount: zeroMutationNarrative.length
-        }
-      });
-    }
 
     // Phase 1.5: Translation -> Diversity Gate -> Sovereign Pre-Authorization Gate
     const engineState = req.body.engineState;
@@ -579,162 +419,75 @@ ${summaryPacket ? `\n${summaryPacket}` : ''}`;
       ? engineState.historicalRecords
       : [];
 
-    // 1. Translation: Candidate -> SemanticEvent[] -> CausalCompiler -> MeaningTree -> Runtime Bridge -> StateTransitionProposal
-    const bridgeContext = createEngineSemanticBridgeContext(canonicalState, historicalRecords);
+    let translationResults: any[] = [];
+    let candidatesToValidate: any[] = [];
+    let preAuthResults: VeilCandidate[] = [];
+    let allowedCandidates: VeilCandidate[] = [];
 
-    const translationResults = candidates.map(c => {
-      const rawSemanticEvents = getCandidateSemanticEvents(c);
-      const semanticEvents = rawSemanticEvents.length > 0
-        ? rawSemanticEvents
-        : getCandidateSemanticEvents(c.rawMetadata);
+    if (candidates.length > 0) {
+      // 1. Translation: Candidate -> SemanticEvent[] -> CausalCompiler -> MeaningTree -> Runtime Bridge -> StateTransitionProposal
+      const bridgeContext = createEngineSemanticBridgeContext(canonicalState, historicalRecords);
 
-      return compileCandidateToProposal(
-        c,
-        semanticEvents,
-        canonicalState,
-        storyTurnCount,
-        historicalRecords,
-        playerInputId,
-        bridgeContext
-      );
-    });
+      translationResults = candidates.map(c => {
+        const rawSemanticEvents = getCandidateSemanticEvents(c);
+        const semanticEvents = rawSemanticEvents.length > 0
+          ? rawSemanticEvents
+          : getCandidateSemanticEvents(c.rawMetadata);
 
-    // Filter to candidates whose Causal Language translation succeeded
-    const successfulTranslations = translationResults.filter(
-      (tr): tr is typeof tr & { proposal: StateTransitionProposal; meaningTree: any } =>
-        tr.status === 'COMPILED' && Boolean(tr.proposal) && Boolean(tr.meaningTree)
-    );
+        return compileCandidateToProposal(
+          c,
+          semanticEvents,
+          canonicalState,
+          storyTurnCount,
+          historicalRecords,
+          playerInputId,
+          bridgeContext
+        );
+      });
 
-    // 2. Diversity Gate: Deduplicate structurally identical Meaning Trees
-    const diverseCandidatesWithTrees = filterDiverseCandidates(
-      successfulTranslations.map(tr => ({ candidate: tr.candidate as any, meaningTree: tr.meaningTree }))
-    );
-
-    // Keep only translated candidates that were retained by the diversity gate
-    const candidatesToValidate = successfulTranslations.filter(tr =>
-      diverseCandidatesWithTrees.some(d => d.candidate === (tr.candidate as any))
-    );
-
-    // 3. Sovereign Pre-Authorization Validation (ALLOW / REJECT)
-    const preAuthResults: VeilCandidate[] = candidatesToValidate.map(tr => {
-      const validation = EngineValidator.validate(
-        tr.proposal,
-        canonicalState,
-        executedRequestIds,
-        recordedEventIds,
-        historicalRecords
+      // Filter to candidates whose Causal Language translation succeeded
+      const successfulTranslations = translationResults.filter(
+        (tr): tr is typeof tr & { proposal: StateTransitionProposal; meaningTree: any } =>
+          tr.status === 'COMPILED' && Boolean(tr.proposal) && Boolean(tr.meaningTree)
       );
 
-      return {
-        ...tr.candidate,
-        preAuthStatus: validation.isValid ? ('ALLOW' as const) : ('REJECT' as const),
-        preAuthReasons: validation.isValid ? [] : [...validation.rejectedReasons, ...validation.conflictDetails]
-      };
-    });
+      // 2. Diversity Gate: Deduplicate structurally identical Meaning Trees
+      const diverseCandidatesWithTrees = filterDiverseCandidates(
+        successfulTranslations.map(tr => ({ candidate: tr.candidate as any, meaningTree: tr.meaningTree }))
+      );
 
-    const allowedCandidates = preAuthResults.filter(c => Boolean(c) && c.preAuthStatus === 'ALLOW');
+      // Keep only translated candidates that were retained by the diversity gate
+      candidatesToValidate = successfulTranslations.filter(tr =>
+        diverseCandidatesWithTrees.some(d => d.candidate === (tr.candidate as any))
+      );
+
+      // 3. Sovereign Pre-Authorization Validation (ALLOW / REJECT)
+      preAuthResults = candidatesToValidate.map(tr => {
+        const validation = EngineValidator.validate(
+          tr.proposal,
+          canonicalState,
+          executedRequestIds,
+          recordedEventIds,
+          historicalRecords
+        );
+
+        return {
+          ...tr.candidate,
+          preAuthStatus: validation.isValid ? ('ALLOW' as const) : ('REJECT' as const),
+          preAuthReasons: validation.isValid ? [] : [...validation.rejectedReasons, ...validation.conflictDetails]
+        };
+      });
+
+      allowedCandidates = preAuthResults.filter(c => Boolean(c) && c.preAuthStatus === 'ALLOW');
+    }
 
     collector.recordStage2SemanticTranslation(translationResults);
     collector.recordStage3DiversityGate(candidatesToValidate);
     collector.recordStage4PreAuth(preAuthResults);
 
-    // Requirement 6: ALL REJECT fallback -> NO_CANONICAL_MUTATION with clean literary fallback
-    if (allowedCandidates.length === 0) {
-      console.log('[VEIL Pre-Authorization Gate] All candidates REJECTED. Returning pre-generated Zero-Mutation Narrative...');
-      const outputCharCount = zeroMutationNarrative.length;
-      const usageMetadata = (response as any).usageMetadata;
-      collector.recordStage5Commit(null, false);
-      const telemetryReport = collector.generateReport();
-
-      return res.json({
-        success: true,
-        text: zeroMutationNarrative,
-        rawResponse: zeroMutationNarrative,
-        isFallbackNonMutation: true,
-        telemetryReport,
-        selectedCandidateId: null,
-        authorizedCandidate: null,
-        authorizedCandidatePacket: null,
-        authorizedProposal: null,
-        preAuthSummary: {
-          total: candidates.length,
-          allowed: 0,
-          rejected: candidates.length
-        },
-        contextSnapshot: initialContextPrompt,
-        actualModelVersion: response.modelVersion,
-        requestedModel: targetModel,
-        gitCommit: getServerGitCommit(),
-        forensicCapture: {
-          t0_playerInput: effectiveUserPrompt,
-          telemetryReport,
-          chatContextForensic: {
-            initialContextPrompt,
-            kgContext,
-            roadmapContext,
-            seedsContext,
-            offscreenContext
-          },
-          geminiContentsForensic: contents,
-          phase1: {
-            model: targetModel,
-            actualModelVersion: response.modelVersion,
-            responseId: response.responseId,
-            rawResponseText: rawPhase1Response,
-            rawCandidatesBlock: rawCandidatesBlock,
-            recoveryGateResult: gateResult,
-            meaningTrees: candidatesToValidate.map(tr => ({
-              candidateId: tr.candidate.candidateId,
-              meaningTree: tr.meaningTree,
-              proposal: tr.proposal
-            }))
-          },
-          preAuth: {
-            preAuthResults,
-            allowedCandidatesCount: 0
-          },
-          phase2: null,
-          authorizedResult: {
-            authorizedCandidateId: null,
-            authorizedCandidate: null,
-            authorizedCandidatePacket: null,
-            authorizedProposal: null
-          },
-          serverTimings: {
-            t1_requestStart,
-            t2_contextAssemblyComplete,
-            t3_geminiRequestStart,
-            t4_geminiResponseReceived: Date.now(),
-            contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
-            geminiGenerationMs: Date.now() - t3_geminiRequestStart,
-            inputCharCount,
-            outputCharCount
-          }
-        },
-        serverTimings: {
-          t1_requestStart,
-          t2_contextAssemblyComplete,
-          t3_geminiRequestStart,
-          t4_geminiResponseReceived: Date.now(),
-          contextAssemblyMs: t2_contextAssemblyComplete - t1_requestStart,
-          geminiGenerationMs: Date.now() - t3_geminiRequestStart,
-          inputCharCount,
-          outputCharCount,
-          tokenCount: usageMetadata ? {
-            promptTokens: usageMetadata.promptTokenCount,
-            candidatesTokens: usageMetadata.candidatesTokenCount,
-            totalTokens: usageMetadata.totalTokenCount
-          } : undefined
-        }
-      });
-    }
-
     // Phase 2: LLM #2 Narrative Synthesizer (Choice restricted strictly to ALLOW candidates)
-    const phase2Prompt = `[SOVEREIGN VEIL PIPELINE - PHASE 2 NARRATIVE SYNTHESIZER & INTENT FIDELITY JUDGE]
-ORIGINAL PLAYER INPUT (PROVENANCE & FIDELITY REFERENCE ONLY - NOT CANONICAL WORLD TRUTH):
-${effectiveUserPrompt ? `"${effectiveUserPrompt}"` : '(No explicit player prompt — scene continuation)'}
-
-PRE-AUTHORIZED ALLOW CANDIDATES (ONLY THESE MAY BE SELECTED):
+    const candidatesText = allowedCandidates.length > 0
+      ? `PRE-AUTHORIZED ALLOW CANDIDATES (ONLY THESE MAY BE SELECTED):
 ${allowedCandidates.map(c => `[Candidate ${c.candidateId}] "${c.label}"\nSummary: ${c.narrativeSummary}`).join('\n\n')}
 
 INSTRUCTIONS:
@@ -742,7 +495,20 @@ INSTRUCTIONS:
 2. Select the single candidate from the ALLOWED list that is most faithful to the player's intended action declaration and request.
 3. Output a single JSON line specifying the selected candidate ID: {"selectedCandidateId": <number>}
 4. Output the full narrative text for this turn describing the selected turn sequence.
-5. Do NOT introduce new state changes outside the selected candidate.`;
+5. Do NOT introduce new state changes outside the selected candidate.`
+      : `PRE-AUTHORIZED ALLOW CANDIDATES:
+(None. No candidate was pre-authorized for canonical state changes.)
+
+INSTRUCTIONS:
+1. The player attempted the action described in the Original Player Input, but no canonical state changes were authorized or occurred.
+2. Output a single JSON line: {"selectedCandidateId": null}
+3. Output the full narrative text for this turn depicting the player's attempt, observations, sensory atmosphere, delay, or failure, WITHOUT introducing or asserting ANY new canonical state changes.`;
+
+    const phase2Prompt = `[SOVEREIGN VEIL PIPELINE - PHASE 2 NARRATIVE SYNTHESIZER & INTENT FIDELITY JUDGE]
+ORIGINAL PLAYER INPUT (PROVENANCE & FIDELITY REFERENCE ONLY - NOT CANONICAL WORLD TRUTH):
+${effectiveUserPrompt ? `"${effectiveUserPrompt}"` : '(No explicit player prompt — scene continuation)'}
+
+${candidatesText}`;
 
     const phase2Contents = [
       ...contents,
@@ -798,7 +564,7 @@ INSTRUCTIONS:
         );
         serverSnapshotBefore = serverEngine.getSnapshot();
 
-        commitResult = serverEngine.submitProposal(authorizedProposal);
+        commitResult = serverEngine.submitProposal(selectedTranslated.proposal);
         if (commitResult.success) {
           serverSnapshotAfter = serverEngine.getSnapshot();
           const actionsCount = commitResult.committedActionsCount || 0;
@@ -813,12 +579,15 @@ INSTRUCTIONS:
       }
 
       const metaJson = JSON.stringify(selectedCandidate.rawMetadata, null, 2);
-      const finalNarrative = rawPhase2Response.replace(/\{"selectedCandidateId"\s*:\s*\d+\}/i, '').trim();
+      const finalNarrative = rawPhase2Response.replace(/\{"selectedCandidateId"\s*:\s*(?:\d+|null)\}/i, '').trim();
       finalResponseText = `\`\`\`markdown\n${selectedCandidate.rawMetadata?.factCheckSummary || '1) [검증]: 완료'}\n\`\`\`\n\`\`\`json\n${metaJson}\n\`\`\`\n\n${finalNarrative}`;
     } else {
-      // FAIL-CLOSED: Missing / UNKNOWN / REJECTED ID or selection parsing failure -> NO mutation metadata issued.
-      console.warn(`[VEIL Phase 2] selectedCandidateId '${selectedId}' not found in PreAuth ALLOW list (Allowed IDs: [${allowedCandidates.map(c => c.candidateId).join(', ')}]). Failing closed to non-mutation.`);
-      finalResponseText = zeroMutationNarrative;
+      // FAIL-CLOSED: Missing / UNKNOWN / REJECTED ID, non-mutation, or selection parsing failure -> NO mutation metadata issued.
+      if (selectedId !== null && selectedId !== undefined) {
+        console.warn(`[VEIL Phase 2] selectedCandidateId '${selectedId}' not in PreAuth ALLOW list (Allowed IDs: [${allowedCandidates.map(c => c.candidateId).join(', ')}]). Failing closed to non-mutation.`);
+      }
+      const finalNarrative = rawPhase2Response.replace(/\{"selectedCandidateId"\s*:\s*(?:\d+|null)\}/i, '').trim();
+      finalResponseText = finalNarrative || '선언한 행동을 시도하였으나, 즉각적인 세계 상태의 변화는 발생하지 않았다.';
     }
 
     const outputCharCount = finalResponseText.length;
