@@ -112,10 +112,43 @@ function isCompiledSemanticAction(node: MeaningNode): boolean {
     !node.fields?.actionType;
 }
 
+function reconstructSemanticEventFromNode(node: MeaningNode): SemanticEvent | undefined {
+  if (node.atom !== 'ACTION' || !node.fields?.eventId) return undefined;
+  const eventId = String(node.fields.eventId);
+  const action = String(node.fields.action || node.value || '');
+  const roles: any[] = [];
+  if (Array.isArray(node.children)) {
+    for (const child of node.children) {
+      if (child.atom === 'ROLE' && typeof child.value === 'string') {
+        roles.push({
+          role: child.value,
+          entityName: child.fields?.entityName as string | undefined,
+          entityId: (child.fields?.entityId as string | undefined) || child.id,
+          status: (child.fields?.status as any) || 'RESOLVED',
+        });
+      }
+    }
+  }
+  return {
+    eventId,
+    action,
+    roles,
+    scope: node.scope,
+    polarity: (node.fields.polarity as any) || 'ASSERTED',
+    epistemicStatus: (node.fields.epistemicStatus as any) || 'OBSERVED',
+    modality: (node.fields.modality as any) || 'NONE',
+    provenance: node.fields.provenance as string | undefined,
+    intent: node.fields.intent as string | undefined,
+  };
+}
+
 function findSemanticEvent(node: MeaningNode, context?: RuntimeProjectionContext): SemanticEvent | undefined {
   const eventId = node.fields?.eventId;
   if (typeof eventId !== 'string' || !eventId.trim()) return undefined;
-  return context?.semanticEvents?.find(event => event.eventId === eventId);
+  if (context && 'semanticEvents' in context && context.semanticEvents !== undefined) {
+    return context.semanticEvents.find(event => event.eventId === eventId);
+  }
+  return reconstructSemanticEventFromNode(node);
 }
 
 function projectCompiledSemanticAction(

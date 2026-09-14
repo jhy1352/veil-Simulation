@@ -16,6 +16,7 @@ import type { MeaningNode, SemanticEvent, SemanticEventRole } from './types';
 import type { VeilCandidate } from './candidateRecoveryGate';
 import { compileSemanticEventsToMeaningTree } from './causalCompiler';
 import {
+  semanticEventToRuntimeActions,
   semanticEventsToRuntimeActions,
   type SemanticRuntimeBridgeContext,
 } from './semanticEventRuntimeBridge';
@@ -178,6 +179,50 @@ export function createEngineSemanticBridgeContext(
   };
 }
 
+function enrichMeaningTreeWithRuntimeActions(
+  root: MeaningNode,
+  events: readonly SemanticEvent[],
+  context: SemanticRuntimeBridgeContext
+): MeaningNode {
+  const eventActionMap = new Map<string, TransitionAction>();
+  for (const event of events) {
+    const res = semanticEventToRuntimeActions(event, context);
+    if (res.status === 'MAPPABLE' && res.actions.length === 1) {
+      eventActionMap.set(event.eventId, res.actions[0]);
+    }
+  }
+
+  function walk(node: MeaningNode): MeaningNode {
+    let updatedNode = node;
+    const eventId = node.fields?.eventId as string | undefined;
+    if (node.atom === 'ACTION' && eventId && eventActionMap.has(eventId)) {
+      const act = eventActionMap.get(eventId)!;
+      updatedNode = {
+        ...node,
+        fields: {
+          ...node.fields,
+          actionType: act.type,
+          payload: act.payload,
+          description: act.description,
+          category: act.category,
+        },
+      };
+    }
+
+    if (updatedNode.children && updatedNode.children.length > 0) {
+      const newChildren = updatedNode.children.map(walk);
+      return {
+        ...updatedNode,
+        children: newChildren,
+      };
+    }
+
+    return updatedNode;
+  }
+
+  return walk(root);
+}
+
 /**
  * Integrate optional LLM-produced SemanticEvents into the existing proposal.
  *
@@ -230,7 +275,9 @@ export function integrateSemanticEventsIntoProposal(
   });
 
   const actions = [...retainedActions, ...bridge.actions];
-  const meaningTree = buildProposalMeaningTree(actions, proposal);
+  const meaningTree = compilation.meaningTree
+    ? enrichMeaningTreeWithRuntimeActions(compilation.meaningTree, semanticEvents, context)
+    : buildProposalMeaningTree(actions, proposal);
   const integratedProposal: StateTransitionProposal = {
     ...proposal,
     actions,
@@ -334,14 +381,16 @@ export function compileCandidateToProposal(
     originInputId: playerInputId,
   };
 
-  const meaningTree = buildProposalMeaningTree(actions, proposal);
+  const meaningTree = compilation.meaningTree
+    ? enrichMeaningTreeWithRuntimeActions(compilation.meaningTree, semanticEvents, context)
+    : buildProposalMeaningTree(actions, proposal);
   proposal.meaningTree = meaningTree;
 
   return {
     status: 'COMPILED',
     candidate,
     proposal,
-    meaningTree: compilation.meaningTree || meaningTree,
+    meaningTree,
     errors: [],
   };
 }

@@ -5,6 +5,7 @@
 
 import { compileCandidateToProposal } from './runtimeSemanticCandidate';
 import { createEngineSemanticBridgeContext } from './runtimeSemanticCandidate';
+import { checkMeaningTreeProjectionConsistency, projectMeaningTreeToRuntimeActions } from './runtimeProjection';
 import { CanonicalState } from '../types';
 import { VeilCandidate } from './candidateRecoveryGate';
 import { SemanticEvent } from './types';
@@ -99,6 +100,9 @@ export function runCandidateCausalPipelineTests() {
     assert(result.candidate.candidateId === 1, 'Scenario 1: Candidate object must be preserved');
     assert(result.proposal?.actions.length === 1, 'Scenario 1: Proposal must contain mapped action');
     assert(result.proposal?.actions[0].type === 'MODIFY_INVENTORY', 'Scenario 1: Action type must be MODIFY_INVENTORY');
+    assert(result.proposal?.meaningTree === result.meaningTree, 'Scenario 1: proposal.meaningTree must strictly match result.meaningTree');
+    const consistency1 = checkMeaningTreeProjectionConsistency(result.proposal?.meaningTree, result.proposal?.actions || []);
+    assert(consistency1.isConsistent, 'Scenario 1: proposal.meaningTree must project consistently to actions');
     console.log('[PASS] Scenario 1: Valid candidate -> Causal Language -> Proposal successful');
   }
 
@@ -202,7 +206,20 @@ export function runCandidateCausalPipelineTests() {
     assert(Boolean(result.meaningTree), 'Scenario 4: MeaningTree must be generated');
     assert(result.proposal?.actions.length === 0, 'Scenario 4: QUERY must produce 0 runtime actions (non-mutating)');
     assert(result.candidate.candidateId === 4, 'Scenario 4: Candidate object must be preserved');
-    console.log('[PASS] Scenario 4: Candidate with QUERY -> COMPILED, actions: [], Candidate preserved');
+    assert(result.proposal?.meaningTree === result.meaningTree, 'Scenario 4: proposal.meaningTree must strictly match result.meaningTree without loss');
+    const queryChild = result.proposal?.meaningTree?.children?.find(c => c.value === 'QUERY' || (c as any).fields?.action === 'QUERY');
+    assert(Boolean(queryChild), 'Scenario 4: proposal.meaningTree must preserve QUERY action node');
+    assert(
+      Boolean(
+        queryChild?.children?.some(
+          c => c.atom === 'ROLE' && c.value === 'TARGET' && c.fields?.entityName === '주민'
+        )
+      ),
+      'Scenario 4: proposal.meaningTree must preserve TARGET role in MeaningTree'
+    );
+    const consistency4 = checkMeaningTreeProjectionConsistency(result.proposal?.meaningTree, result.proposal?.actions || []);
+    assert(consistency4.isConsistent, 'Scenario 4: proposal.meaningTree must project consistently to actions');
+    console.log('[PASS] Scenario 4: Candidate with QUERY -> COMPILED, actions: [], Candidate preserved, proposal.meaningTree preserved');
   }
 
   // Scenario 5: Candidate with HEARSAY semanticEvent -> COMPILED, 0 actions, Candidate preserved
@@ -246,7 +263,11 @@ export function runCandidateCausalPipelineTests() {
     assert(Boolean(result.meaningTree), 'Scenario 5: MeaningTree must be generated');
     assert(result.proposal?.actions.length === 0, 'Scenario 5: HEARSAY must produce 0 runtime actions (non-canonical)');
     assert(result.candidate.candidateId === 5, 'Scenario 5: Candidate object must be preserved');
-    console.log('[PASS] Scenario 5: Candidate with HEARSAY -> COMPILED, actions: [], Candidate preserved');
+    assert(result.proposal?.meaningTree === result.meaningTree, 'Scenario 5: proposal.meaningTree must strictly match result.meaningTree without loss');
+    assert(Boolean(result.proposal?.meaningTree?.children?.some(c => (c as any).fields?.epistemicStatus === 'HEARSAY')), 'Scenario 5: proposal.meaningTree must preserve HEARSAY epistemicStatus');
+    const consistency5 = checkMeaningTreeProjectionConsistency(result.proposal?.meaningTree, result.proposal?.actions || []);
+    assert(consistency5.isConsistent, 'Scenario 5: proposal.meaningTree must project consistently to actions');
+    console.log('[PASS] Scenario 5: Candidate with HEARSAY -> COMPILED, actions: [], Candidate preserved, proposal.meaningTree preserved');
   }
 
   // Scenario 6: Candidate with compound [PICKUP, QUERY] -> COMPILED, 1 action, both preserved in MeaningTree
@@ -302,7 +323,11 @@ export function runCandidateCausalPipelineTests() {
     assert(result.proposal?.actions.length === 1, 'Scenario 6: Only executable PICKUP projects to runtime action');
     assert(result.proposal?.actions[0].type === 'MODIFY_INVENTORY', 'Scenario 6: Action must be MODIFY_INVENTORY');
     assert(result.candidate.candidateId === 6, 'Scenario 6: Candidate object must be preserved');
-    console.log('[PASS] Scenario 6: Compound [PICKUP, QUERY] -> COMPILED, 1 action, Candidate preserved');
+    assert(result.proposal?.meaningTree === result.meaningTree, 'Scenario 6: proposal.meaningTree must strictly match result.meaningTree without loss');
+    assert(result.proposal?.meaningTree?.children?.length === 2, 'Scenario 6: proposal.meaningTree must preserve both PICKUP and QUERY atoms');
+    const consistency6 = checkMeaningTreeProjectionConsistency(result.proposal?.meaningTree, result.proposal?.actions || []);
+    assert(consistency6.isConsistent, 'Scenario 6: proposal.meaningTree must project consistently to actions');
+    console.log('[PASS] Scenario 6: Compound [PICKUP, QUERY] -> COMPILED, 1 action, Candidate preserved, proposal.meaningTree preserved');
   }
 
   // Scenario 7: Truly invalid/unmapped action -> Fail Closed, Candidate preserved
