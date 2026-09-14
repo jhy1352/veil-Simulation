@@ -34,6 +34,7 @@ export function runTriageModuleTestSuite() {
     "candidateId": 1,
     "label": "수첩 확인",
     "narrativeSummary": "수첩을 열어 적힌 내용을 읽는다.",
+    "rawMetadata": {},
     "semanticEvents": [
       {
         "atom": "CLAIM",
@@ -62,8 +63,8 @@ export function runTriageModuleTestSuite() {
 
     const candidate1 = gateRes.passedCandidates[0];
     assert(candidate1.candidateId === 1, 'Test 1.8: Canonical candidateId assigned as 1');
-    assert(candidate1.semanticEvents![0].modality === 'NONE', 'Test 1.9: Omitted modality defaulted to NONE');
-    assert(candidate1.semanticEvents![0].scope === 'CLAIM', 'Test 1.10: CANONICAL scope normalized to CLAIM');
+    assert(candidate1.semanticEvents![0].modality === undefined, 'Test 1.9: Omitted modality remains undefined');
+    assert(candidate1.semanticEvents![0].scope === 'CANONICAL', 'Test 1.10: CANONICAL scope remains CANONICAL');
   }
 
   // Test 2: Syntax-Recoverable JSON (Trailing Comma)
@@ -79,6 +80,7 @@ export function runTriageModuleTestSuite() {
   {
     "label": "Trailing Comma Candidate",
     "narrativeSummary": "Testing syntax recovery delegation",
+    "rawMetadata": {}
   },
 ]
 [CANDIDATES_END]
@@ -105,15 +107,18 @@ export function runTriageModuleTestSuite() {
 [
   {
     "label": "Valid Candidate 1",
-    "narrativeSummary": "Summary 1"
+    "narrativeSummary": "Summary 1",
+    "rawMetadata": {}
   },
   {
     "label": 12345,
-    "narrativeSummary": "Invalid non-string label candidate"
+    "narrativeSummary": "Invalid non-string label candidate",
+    "rawMetadata": {}
   },
   {
     "label": "Valid Candidate 3",
-    "narrativeSummary": "Summary 3"
+    "narrativeSummary": "Summary 3",
+    "rawMetadata": {}
   }
 ]
 [CANDIDATES_END]

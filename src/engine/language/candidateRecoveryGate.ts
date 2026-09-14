@@ -63,52 +63,9 @@ export function parseCandidatesBlock(text: string): VeilCandidate[] | null {
 
     const candidateId = idx + 1;
 
-    // Default modality="NONE" for semanticEvents and normalize scope="CANONICAL" -> "CLAIM"
-    let semanticEvents = item.semanticEvents;
-    if (Array.isArray(semanticEvents)) {
-      semanticEvents = semanticEvents.map((ev: any) => {
-        if (typeof ev === 'object' && ev !== null) {
-          const modality = ev.modality ? String(ev.modality).toUpperCase() : 'NONE';
-          const scope = ev.scope === 'CANONICAL' ? 'CLAIM' : ev.scope;
-          return {
-            ...ev,
-            modality,
-            scope: scope || ev.scope
-          };
-        }
-        return ev;
-      });
-    }
-
-    // Normalize rawMetadata if present
-    let rawMetadata = item.rawMetadata;
-    if (typeof rawMetadata === 'object' && rawMetadata !== null && !Array.isArray(rawMetadata)) {
-      if (Array.isArray(rawMetadata.semanticEvents)) {
-        rawMetadata = {
-          ...rawMetadata,
-          semanticEvents: rawMetadata.semanticEvents.map((ev: any) => {
-            if (typeof ev === 'object' && ev !== null) {
-              const modality = ev.modality ? String(ev.modality).toUpperCase() : 'NONE';
-              const scope = ev.scope === 'CANONICAL' ? 'CLAIM' : ev.scope;
-              return {
-                ...ev,
-                modality,
-                scope: scope || ev.scope
-              };
-            }
-            return ev;
-          })
-        };
-      }
-    } else if (rawMetadata === undefined) {
-      rawMetadata = {};
-    }
-
     return {
       ...item,
-      candidateId,
-      semanticEvents,
-      rawMetadata
+      candidateId
     };
   });
 }
