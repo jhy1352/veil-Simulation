@@ -219,10 +219,12 @@ export function semanticEventToRuntimeActions(
 /**
  * Translate a compiled SemanticEvent sequence conservatively.
  *
- * Unsupported events are non-executable, not invalid. Their semantic meaning
- * is preserved by the CausalCompiler/MeaningTree and they contribute no runtime
- * actions. Invalid events still fail closed because they indicate malformed or
- * contradictory input rather than a merely unsupported capability.
+ * Unsupported events do not invalidate the other executable events in a
+ * Candidate. They contribute no runtime actions and remain represented by the
+ * CausalCompiler/MeaningTree. If the sequence contains only unsupported
+ * executable events, the whole sequence remains UNSUPPORTED so canonical
+ * mutation cannot be manufactured for an unmapped action or unresolved entity.
+ * Invalid events still fail closed.
  */
 export function semanticEventsToRuntimeActions(
   events: readonly SemanticEvent[],
@@ -230,6 +232,7 @@ export function semanticEventsToRuntimeActions(
 ): SemanticRuntimeBridgeResult {
   const actions: TransitionAction[] = [];
   const errors: string[] = [];
+  let unsupportedCount = 0;
 
   for (const event of events) {
     const result = semanticEventToRuntimeActions(event, context);
@@ -244,13 +247,20 @@ export function semanticEventsToRuntimeActions(
     }
 
     if (result.status === 'UNSUPPORTED') {
-      // Preserve the SemanticEvent in the compiled MeaningTree, but do not
-      // invent a Runtime Action for an ontology the Sovereign engine cannot execute.
+      unsupportedCount += 1;
       errors.push(...result.errors.map((error) => `[${event.eventId}] ${error}`));
       continue;
     }
 
     actions.push(...result.actions);
+  }
+
+  if (unsupportedCount > 0 && actions.length === 0) {
+    return {
+      status: 'UNSUPPORTED',
+      actions: [],
+      errors,
+    };
   }
 
   return {
