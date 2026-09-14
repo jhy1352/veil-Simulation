@@ -2,19 +2,20 @@
   "turn": 5,
   "description": "Zero-Mutation Invariant: Dialogue/Query ONLY (Expected 0 mutations, query semanticEvents, preserved state)",
   "userPrompt": "애꾸눈 무사에가 가까이 다가가, 이곳 검은 숲에 전해 내려오는 불사약의 전설이 정말 사실인지 나지막이 속삭이듯 질문한다.",
-  "modelRequested": "gemini-3.1-flash-lite",
-  "modelResolved": "gemini-3.1-flash-lite",
-  "rawLLMOutput": "/* TRIAGE_STAMP_V1_1789405733501_bc05odp */\n[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"독주잔의 무게\",\n    \"narrativeSummary\": \"애꾸눈 무사는 소민의 질문에 대답하는 대신, 자신의 비어있는 술잔을 내려다보며 숲의 불길한 기운에 대해 낮게 읊조린다. 그가 언급한 '불사약'은 구원이 아닌, 숲이 사람을 삼키기 위해 내거는 흉측한 미끼일 뿐임을 경고한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_whisper_query\",\n        \"action\": \"QUERY\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"이소민\" },\n          { \"role\": \"TARGET\", \"entityName\": \"애꾸눈 무사\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"불사약의 전설\" }\n        ],\n        \"scope\": \"CLAIM\",\n        \"epistemicStatus\": \"ASSERTED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"newNpcs\": [\n        {\n          \"name\": \"애꾸눈 무사\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"이 가련한 여검사 또한 숲의 허상에 홀려 제 발로 무덤을 파러 왔구나. 경고해도 소용없겠지.\",\n          \"metInStory\": true,\n          \"origin\": \"검은 숲\",\n          \"affiliation\": \"무소속\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"안개 속의 의구심\",\n        \"upcomingChapters\": [\"파수꾼의 경고\", \"숲의 갈림길\"]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n소민은 그의 경계심을 자극하지 않도록 천천히, 한 걸음 더 다가갔다. 주점의 탁한 공기 사이로, 무사가 들이키는 독주의 쌉쌀하고 독한 향기가 확연히 느껴졌다. 소민은 그가 술잔을 내려놓기를 기다렸다가, 마치 숲의 안개 속에 감추어진 비밀을 묻는 것처럼 낮고 절제된 목소리로 물었다.\n\n\"이 숲에… 고통을 잠재워 준다는 불사약의 전설이 있다고 들었습니다. 그저 헛된 소문인지, 아니면 당신이 알고 있는 실체가 있는지 묻고 싶습니다.\"\n\n질문이 채 끝나기도 전에 무사의 움직임이 멈췄다. 등잔불 아래 드러난 그의 굳게 다문 입술이 미세하게 비틀렸다. 남자는 술잔을 탁자 위에 거칠게 내려놓았다. 챙, 하는 날카로운 소리가 정적을 갈랐다. 그는 안대를 하지 않은 성한 눈으로 소민을 쳐다보지도 않은 채, 그저 탁자 위에 맺힌 술방울을 손가락 끝으로 훑으며 나지막이 읊조렸다.\n\n\"불사(不死)….\"\n\n그는 조소 섞인 웃음을 흘렸다. 목소리는 쇳소리가 섞여 갈라져 있었다.\n\n\"이 숲에서 '불사'를 찾는 자들은 모두 흙이 되었지. 그 약은 고통을 없애주는 게 아니라, 고통조차 느낄 수 없는 괴물로 만드는 숲의 미끼일 뿐이다. 누군가 네게 그 전설을 속삭였다면, 그놈은 너를 숲의 제물로 바치고 싶어 안달이 난 게지.\"\n\n그는 고개를 천천히 들어 소민을 정면으로 응시했다. 한쪽 눈뿐인 그의 시선이 마치 소민의 영혼 깊숙한 곳의 상처를 파고드는 듯했다. \n\n\"이름 없는 검사여. 복수라는 이름의 고통을 짊어지고 이 숲까지 기어들어 온 모양인데, 내 충고 하나 하지. 전설을 뒤쫓지 마라. 이곳에서 살아나가는 유일한 방법은, 불사약 따위는 애초에 존재하지 않는다고 믿는 것뿐이다.\"\n\n무사는 다시 술잔을 채우더니, 소민을 외면한 채 다시 독주를 들이켰다. 더 이상의 대화는 거부하겠다는 명백한 태도였다. 주점의 낡은 나무벽 뒤로 거센 바람이 불어와 서까래가 비명을 지르듯 삐걱거렸다. 숲의 안개는 이미 주점의 문틈까지 기어들어 와, 소민의 발치에 서늘한 뱀처럼 감겨들고 있었다.",
-  "candidateBlockRaw": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"독주잔의 무게\",\n    \"narrativeSummary\": \"애꾸눈 무사는 소민의 질문에 대답하는 대신, 자신의 비어있는 술잔을 내려다보며 숲의 불길한 기운에 대해 낮게 읊조린다. 그가 언급한 '불사약'은 구원이 아닌, 숲이 사람을 삼키기 위해 내거는 흉측한 미끼일 뿐임을 경고한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_whisper_query\",\n        \"action\": \"QUERY\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"이소민\" },\n          { \"role\": \"TARGET\", \"entityName\": \"애꾸눈 무사\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"불사약의 전설\" }\n        ],\n        \"scope\": \"CLAIM\",\n        \"epistemicStatus\": \"ASSERTED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"newNpcs\": [\n        {\n          \"name\": \"애꾸눈 무사\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"이 가련한 여검사 또한 숲의 허상에 홀려 제 발로 무덤을 파러 왔구나. 경고해도 소용없겠지.\",\n          \"metInStory\": true,\n          \"origin\": \"검은 숲\",\n          \"affiliation\": \"무소속\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"안개 속의 의구심\",\n        \"upcomingChapters\": [\"파수꾼의 경고\", \"숲의 갈림길\"]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
-  "recoveryResult": {
+  "modelRequested": "gemini-3.5-flash-lite",
+  "modelResolved": "gemini-3.5-flash-lite",
+  "rawLLMOutput": "/* TRIAGE_STAMP_V1_1789407356048_g5f43yx */\n[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"애꾸눈 무사에게 불사약의 전설에 대해 묻다\",\n    \"narrativeSummary\": \"이소민은 애꾸눈 무사의 탁자 앞에 바짝 다가서서, 검은 숲을 떠도는 불사약의 전설이 진짜인지 진위 여부를 나지막한 목소리로 묻는다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_ask_immortality_01\",\n        \"action\": \"GIFT\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"이소민\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"애꾸눈 무사\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\",\n        \"provenance\": \"플레이어 턴 5 대화\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [],\n      \"resolvedSeeds\": [],\n      \"cameraOffscreenEvents\": [\n        \"주점 바깥의 어두운 골목길을 따라 정체 모를 발소리가 스쳐 지나간다.\"\n      ],\n      \"newNpcs\": [\n        {\n          \"name\": \"애꾸눈 무사\",\n          \"alias\": \"외눈의 방랑자\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"이 척박한 숲에 찾아온 젊은 검사. 불사약 따위를 찾는 걸 보니 저주받은 사연이라도 있는 모양이군.\",\n          \"metInStory\": true,\n          \"origin\": \"검은 숲 변두리\",\n          \"affiliation\": \"무소속\"\n        }\n      ],\n      \"newFactions\": [],\n      \"inventoryChanges\": [],\n      \"statDeltas\": [],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 주점의 이방인\",\n        \"upcomingChapters\": [\n          \"애꾸눈 무사가 전하는 숲의 경고\",\n          \"불사약을 좇는 자들의 핏빛 잔해\",\n          \"안개 속에서 들려오는 오래된 노래\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n\n\n사내의 굳어 있는 시선을 마주하며, 이소민은 한 걸음 더 탁자 앞으로 다가섰다. 삐걱거리는 나무 바닥 위로 그녀의 그림자가 무사의 거친 어깨 위로 겹쳐졌다. 주점 안의 탁한 공기 속에서, 그녀는 목소리를 낮추어 그가 겨우 알아들을 수 있을 만큼만 속삭였다.\n\n\"이곳에 전해지는 불사약의 전설…… 그 진위를 묻고 싶소. 정말로 모든 고통을 없애주는 약이 이 숲속에 존재하는가?\"\n\n질문이 떨어지자마자, 애꾸눈 무사의 반대쪽 눈동자가 가늘어졌다. 그는 천천히 손에 쥐고 있던 옹이진 나무 잔을 내려놓았다. 잔의 바닥이 탁자와 부딪히며 둔탁한 소리를 냈다. 흉터 투성이의 목소리가 긁히듯 흘러나왔다.\n\n\"불사약……? 하, 그 저주받은 이름을 입에 담는 자들이 아직도 남았군.\" \n\n무사는 툭 내뱉듯 말하며, 가려지지 않은 눈으로 이소민의 빈손과 가보의 검자루를 매섭게 훑어보았다. \n\n\"약초꾼들이나 떠벌리는 헛소리로 아는 모양이지. 하지만 그 썩은 숲속 깊은 곳엔 약이 아니라, 살아남은 자들이 미쳐버리게 만드는 독기만이 가득하다오. 그 이름을 좇는 자는 대개 제 제삿날을 앞당기기 마련이지. 어째서 그런 헛된 핏빛 환상을 좇는가, 여검사.\"",
+  "candidateInput": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"애꾸눈 무사에게 불사약의 전설에 대해 묻다\",\n    \"narrativeSummary\": \"이소민은 애꾸눈 무사의 탁자 앞에 바짝 다가서서, 검은 숲을 떠도는 불사약의 전설이 진짜인지 진위 여부를 나지막한 목소리로 묻는다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_ask_immortality_01\",\n        \"action\": \"GIFT\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"이소민\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"애꾸눈 무사\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\",\n        \"provenance\": \"플레이어 턴 5 대화\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [],\n      \"resolvedSeeds\": [],\n      \"cameraOffscreenEvents\": [\n        \"주점 바깥의 어두운 골목길을 따라 정체 모를 발소리가 스쳐 지나간다.\"\n      ],\n      \"newNpcs\": [\n        {\n          \"name\": \"애꾸눈 무사\",\n          \"alias\": \"외눈의 방랑자\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"이 척박한 숲에 찾아온 젊은 검사. 불사약 따위를 찾는 걸 보니 저주받은 사연이라도 있는 모양이군.\",\n          \"metInStory\": true,\n          \"origin\": \"검은 숲 변두리\",\n          \"affiliation\": \"무소속\"\n        }\n      ],\n      \"newFactions\": [],\n      \"inventoryChanges\": [],\n      \"statDeltas\": [],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 주점의 이방인\",\n        \"upcomingChapters\": [\n          \"애꾸눈 무사가 전하는 숲의 경고\",\n          \"불사약을 좇는 자들의 핏빛 잔해\",\n          \"안개 속에서 들려오는 오래된 노래\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+  "candidateRecoveryInput": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"애꾸눈 무사에게 불사약의 전설에 대해 묻다\",\n    \"narrativeSummary\": \"이소민은 애꾸눈 무사의 탁자 앞에 바짝 다가서서, 검은 숲을 떠도는 불사약의 전설이 진짜인지 진위 여부를 나지막한 목소리로 묻는다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_ask_immortality_01\",\n        \"action\": \"GIFT\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"이소민\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"애꾸눈 무사\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\",\n        \"provenance\": \"플레이어 턴 5 대화\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [],\n      \"resolvedSeeds\": [],\n      \"cameraOffscreenEvents\": [\n        \"주점 바깥의 어두운 골목길을 따라 정체 모를 발소리가 스쳐 지나간다.\"\n      ],\n      \"newNpcs\": [\n        {\n          \"name\": \"애꾸눈 무사\",\n          \"alias\": \"외눈의 방랑자\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"이 척박한 숲에 찾아온 젊은 검사. 불사약 따위를 찾는 걸 보니 저주받은 사연이라도 있는 모양이군.\",\n          \"metInStory\": true,\n          \"origin\": \"검은 숲 변두리\",\n          \"affiliation\": \"무소속\"\n        }\n      ],\n      \"newFactions\": [],\n      \"inventoryChanges\": [],\n      \"statDeltas\": [],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 주점의 이방인\",\n        \"upcomingChapters\": [\n          \"애꾸눈 무사가 전하는 숲의 경고\",\n          \"불사약을 좇는 자들의 핏빛 잔해\",\n          \"안개 속에서 들려오는 오래된 노래\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+  "candidateRecoveryOutput": {
     "passedCandidates": [
       {
-        "label": "독주잔의 무게",
-        "narrativeSummary": "애꾸눈 무사는 소민의 질문에 대답하는 대신, 자신의 비어있는 술잔을 내려다보며 숲의 불길한 기운에 대해 낮게 읊조린다. 그가 언급한 '불사약'은 구원이 아닌, 숲이 사람을 삼키기 위해 내거는 흉측한 미끼일 뿐임을 경고한다.",
+        "label": "애꾸눈 무사에게 불사약의 전설에 대해 묻다",
+        "narrativeSummary": "이소민은 애꾸눈 무사의 탁자 앞에 바짝 다가서서, 검은 숲을 떠도는 불사약의 전설이 진짜인지 진위 여부를 나지막한 목소리로 묻는다.",
         "semanticEvents": [
           {
-            "eventId": "event_whisper_query",
-            "action": "QUERY",
+            "eventId": "evt_ask_immortality_01",
+            "action": "GIFT",
             "roles": [
               {
                 "role": "SUBJECT",
@@ -23,32 +24,41 @@
               {
                 "role": "TARGET",
                 "entityName": "애꾸눈 무사"
-              },
-              {
-                "role": "OBJECT",
-                "entityName": "불사약의 전설"
               }
             ],
-            "scope": "CLAIM",
-            "epistemicStatus": "ASSERTED"
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "ASSERTED",
+            "modality": "INTENTIONAL",
+            "provenance": "플레이어 턴 5 대화"
           }
         ],
         "rawMetadata": {
+          "foreshadowSeeds": [],
+          "resolvedSeeds": [],
+          "cameraOffscreenEvents": [
+            "주점 바깥의 어두운 골목길을 따라 정체 모를 발소리가 스쳐 지나간다."
+          ],
           "newNpcs": [
             {
               "name": "애꾸눈 무사",
+              "alias": "외눈의 방랑자",
               "npcClass": "Class A",
-              "innerThought": "이 가련한 여검사 또한 숲의 허상에 홀려 제 발로 무덤을 파러 왔구나. 경고해도 소용없겠지.",
+              "innerThought": "이 척박한 숲에 찾아온 젊은 검사. 불사약 따위를 찾는 걸 보니 저주받은 사연이라도 있는 모양이군.",
               "metInStory": true,
-              "origin": "검은 숲",
+              "origin": "검은 숲 변두리",
               "affiliation": "무소속"
             }
           ],
+          "newFactions": [],
+          "inventoryChanges": [],
+          "statDeltas": [],
           "chapterChanges": {
-            "currentChapter": "안개 속의 의구심",
+            "currentChapter": "서막: 주점의 이방인",
             "upcomingChapters": [
-              "파수꾼의 경고",
-              "숲의 갈림길"
+              "애꾸눈 무사가 전하는 숲의 경고",
+              "불사약을 좇는 자들의 핏빛 잔해",
+              "안개 속에서 들려오는 오래된 노래"
             ]
           }
         },
@@ -60,23 +70,283 @@
     "passedCount": 1,
     "quarantinedCount": 0
   },
-  "meaningTrees": [],
-  "preAuthResults": [],
-  "adjudication": {
-    "verdict": "DENY/FAIL-CLOSED",
-    "reason": "No pre-authorized candidate was selected by Phase 2.",
-    "isCommitted": false,
-    "authorizedProposal": null,
+  "candidateRecoveryLog": {
+    "isRecovered": false,
+    "beforeVerbatim": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"애꾸눈 무사에게 불사약의 전설에 대해 묻다\",\n    \"narrativeSummary\": \"이소민은 애꾸눈 무사의 탁자 앞에 바짝 다가서서, 검은 숲을 떠도는 불사약의 전설이 진짜인지 진위 여부를 나지막한 목소리로 묻는다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_ask_immortality_01\",\n        \"action\": \"GIFT\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"이소민\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"애꾸눈 무사\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\",\n        \"provenance\": \"플레이어 턴 5 대화\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [],\n      \"resolvedSeeds\": [],\n      \"cameraOffscreenEvents\": [\n        \"주점 바깥의 어두운 골목길을 따라 정체 모를 발소리가 스쳐 지나간다.\"\n      ],\n      \"newNpcs\": [\n        {\n          \"name\": \"애꾸눈 무사\",\n          \"alias\": \"외눈의 방랑자\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"이 척박한 숲에 찾아온 젊은 검사. 불사약 따위를 찾는 걸 보니 저주받은 사연이라도 있는 모양이군.\",\n          \"metInStory\": true,\n          \"origin\": \"검은 숲 변두리\",\n          \"affiliation\": \"무소속\"\n        }\n      ],\n      \"newFactions\": [],\n      \"inventoryChanges\": [],\n      \"statDeltas\": [],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 주점의 이방인\",\n        \"upcomingChapters\": [\n          \"애꾸눈 무사가 전하는 숲의 경고\",\n          \"불사약을 좇는 자들의 핏빛 잔해\",\n          \"안개 속에서 들려오는 오래된 노래\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+    "afterVerbatim": "[\n  {\n    \"label\": \"애꾸눈 무사에게 불사약의 전설에 대해 묻다\",\n    \"narrativeSummary\": \"이소민은 애꾸눈 무사의 탁자 앞에 바짝 다가서서, 검은 숲을 떠도는 불사약의 전설이 진짜인지 진위 여부를 나지막한 목소리로 묻는다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_ask_immortality_01\",\n        \"action\": \"GIFT\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"이소민\"\n          },\n          {\n            \"role\": \"TARGET\",\n            \"entityName\": \"애꾸눈 무사\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"ASSERTED\",\n        \"modality\": \"INTENTIONAL\",\n        \"provenance\": \"플레이어 턴 5 대화\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [],\n      \"resolvedSeeds\": [],\n      \"cameraOffscreenEvents\": [\n        \"주점 바깥의 어두운 골목길을 따라 정체 모를 발소리가 스쳐 지나간다.\"\n      ],\n      \"newNpcs\": [\n        {\n          \"name\": \"애꾸눈 무사\",\n          \"alias\": \"외눈의 방랑자\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"이 척박한 숲에 찾아온 젊은 검사. 불사약 따위를 찾는 걸 보니 저주받은 사연이라도 있는 모양이군.\",\n          \"metInStory\": true,\n          \"origin\": \"검은 숲 변두리\",\n          \"affiliation\": \"무소속\"\n        }\n      ],\n      \"newFactions\": [],\n      \"inventoryChanges\": [],\n      \"statDeltas\": [],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 주점의 이방인\",\n        \"upcomingChapters\": [\n          \"애꾸눈 무사가 전하는 숲의 경고\",\n          \"불사약을 좇는 자들의 핏빛 잔해\",\n          \"안개 속에서 들려오는 오래된 노래\"\n        ]\n      }\n    },\n    \"candidateId\": 1\n  }\n]",
+    "whatWasRecovered": "None (Verbatim filter only). Restoring or inventing missing keys is prohibited to maintain semantic purity.",
+    "whyAllowedWithinAuthority": "Filtering preserves verbatim player claims and LLM syntax without inventing unbacked state fields (제10조/제21조).",
+    "purityProof": "Direct index-by-index comparison shows that passed candidates match the LLM's raw syntax precisely."
+  },
+  "semanticEvents": [
+    {
+      "eventId": "evt_ask_immortality_01",
+      "action": "GIFT",
+      "roles": [
+        {
+          "role": "SUBJECT",
+          "entityName": "이소민"
+        },
+        {
+          "role": "TARGET",
+          "entityName": "애꾸눈 무사"
+        }
+      ],
+      "scope": "CANONICAL",
+      "polarity": "ASSERTED",
+      "epistemicStatus": "ASSERTED",
+      "modality": "INTENTIONAL",
+      "provenance": "플레이어 턴 5 대화"
+    }
+  ],
+  "causalCompilerInput": [
+    {
+      "label": "애꾸눈 무사에게 불사약의 전설에 대해 묻다",
+      "narrativeSummary": "이소민은 애꾸눈 무사의 탁자 앞에 바짝 다가서서, 검은 숲을 떠도는 불사약의 전설이 진짜인지 진위 여부를 나지막한 목소리로 묻는다.",
+      "semanticEvents": [
+        {
+          "eventId": "evt_ask_immortality_01",
+          "action": "GIFT",
+          "roles": [
+            {
+              "role": "SUBJECT",
+              "entityName": "이소민"
+            },
+            {
+              "role": "TARGET",
+              "entityName": "애꾸눈 무사"
+            }
+          ],
+          "scope": "CANONICAL",
+          "polarity": "ASSERTED",
+          "epistemicStatus": "ASSERTED",
+          "modality": "INTENTIONAL",
+          "provenance": "플레이어 턴 5 대화"
+        }
+      ],
+      "rawMetadata": {
+        "foreshadowSeeds": [],
+        "resolvedSeeds": [],
+        "cameraOffscreenEvents": [
+          "주점 바깥의 어두운 골목길을 따라 정체 모를 발소리가 스쳐 지나간다."
+        ],
+        "newNpcs": [
+          {
+            "name": "애꾸눈 무사",
+            "alias": "외눈의 방랑자",
+            "npcClass": "Class A",
+            "innerThought": "이 척박한 숲에 찾아온 젊은 검사. 불사약 따위를 찾는 걸 보니 저주받은 사연이라도 있는 모양이군.",
+            "metInStory": true,
+            "origin": "검은 숲 변두리",
+            "affiliation": "무소속"
+          }
+        ],
+        "newFactions": [],
+        "inventoryChanges": [],
+        "statDeltas": [],
+        "chapterChanges": {
+          "currentChapter": "서막: 주점의 이방인",
+          "upcomingChapters": [
+            "애꾸눈 무사가 전하는 숲의 경고",
+            "불사약을 좇는 자들의 핏빛 잔해",
+            "안개 속에서 들려오는 오래된 노래"
+          ]
+        }
+      },
+      "candidateId": 1
+    }
+  ],
+  "meaningTree": [],
+  "runtimeProjection": [],
+  "proposal": null,
+  "preAuthInput": [],
+  "preAuthOutput": [],
+  "phase2Selection": {
+    "contents": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "[TRPG Campaign Context]\n- 세계관명: 검은 숲의 은둔자들\n- 세계관 설정: 안개와 음습함으로 가득 찬 고대 판타지 은둔자들의 숲\n- 문체 스타일: 어둡고 진중하며 감각적인 묘사\n- 주인공 프로필: 이소민 (나이: 24, 성별: 여성)\n  * 출신/배경: [preset] 수라가 된 가문을 이끄는 검사\n  * 결핍/트라우마: [preset] 혈족을 잃은 외로움\n  * 맹세: [preset] 가문을 멸문한 자를 쫓는다\n  * 닻: [preset] 가문의 유일한 가보 검\n  * 소속/세력: [preset] 무소속\n  * 능력치: STR 10 / AGI 10 / CON 10 / INT 10 / WIS 10 / CHA 10\n  * 소장품: 없음\n\n\n[ACTIVE NARRATIVE SEEDS & OBTAINABLE CONTEXT]\n- [Seed ID: seed_legend_001] 검은 숲 깊은 곳에 모든 고통을 없애주는 불사약의 전설이 내려온다.\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (2개): [CHARACTER] 이소민 (수라가 된 가문을 이끄는 검사), [NARRATIVE_SEED] 검은 숲 깊은 곳에 모든 고통을 없애주는 불사약의 전설이 내려온다. (Status: active)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 5 PLAYER PROMPT]\n숲속 길가에서 유독 밝게 빛나는 파란 야생화 한 송이를 발견하고 소중히 꺾어 품안에 넣는다."
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"파란 야생화를 채집하여 품에 품다\",\n    \"narrativeSummary\": \"이소민은 안개가 자욱하게 서린 숲속 길가에서 기묘한 청색광을 뿜어내는 야생화를 발견하고, 조심스럽게 줄기를 끊어 품안 깊숙이 갈무리한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"evt_pickup_blue_flower_01\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"이소민\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"파란 야생화\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\",\n        \"modality\": \"INTENTIONAL\",\n        \"provenance\": \"턴 1 플레이어 행동\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [],\n      \"resolvedSeeds\": [],\n      \"cameraOffscreenEvents\": [\n        \"검은 숲의 깊은 연못가에서 차가운 밤안개가 서서히 자락을 넓히기 시작한다.\"\n      ],\n      \"newNpcs\": [],\n      \"newFactions\": [],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"파란 야생화\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"evt_pickup_blue_flower_01\"\n        }\n      ],\n      \"statDeltas\": [],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막: 검은 숲의 첫걸음\",\n        \"upcomingChapters\": [\n          \"안개 낀 갈림길에서 마주치는 기묘한 흔적\",\n          \"은둔자의 초소와의 조우\",\n          \"가문의 유산에 얽힌 기억의 파편\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n\n\n축축한 대지 위로 내려앉은 장막 같은 안개는 숲의 경계를 모호하게 지우고 있었다. 썩은 나뭇잎과 이끼가 엉켜 뿜어내는 비릿한 냄새가 코끝을 스치는 그늘 속에서, 기이할 정도로 청명한 빛을 머금은 생명체가 눈에 띌 듯 말듯 자아내고 있었다. \n\n이소민의 시선이 그곳에 멈추었다. 사방이 온통 음울한 회색빛으로 물든 숲에서, 그 파란 야생화는 너무도 이질적인 채도로 홀로 빛나고 있었다. 핏빛 과거와 잃어버린 혈족의 추억이 머릿속을 맴돌던 참이었다. 그녀는 허리를 낮추고 손을 뻗었다. 서늘한 꽃잎의 감촉이 손끝에 닿자마자 미세한 냉기가 전해져 왔다. \n\n손아귀에 힘을 주어 줄기를 꺾자, 쌉싸름하면서도 달콤한 식물의 진액 향이 안개 속으로 번져나갔다. 이소민은 조심스럽게 그것을 품안 깊숙이, 가문의 유일한 가보인 검의 자루가 닿지 않는 서늘한 곳에 갈무리했다. 숲의 침묵은 여전히 깊고 무거웠으나, 품 안에서 은은하게 새어 나오는 푸른 온기가 잠시나마 외로운 심장을 두드렸다."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "마을 입구에 서 있는 커다란 고목을 물끄러미 올려다보며, 고목에 무언가 흔적이 남겨져 있는지 자세히 살펴본다."
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "안개의 농도가 한층 짙어진 숲의 어귀, 그 경계선에 도달하자 기이한 풍경이 시야를 가로막았다. 세월의 무게를 가늠조차 할 수 없는 거대한 고목 한 그루가 마치 영지(領地)의 문지기처럼 묵묵히 서 있었다. 그 몸통은 오랜 세월 비바람에 깎여 깊고 뒤틀린 주름으로 가득했고, 표면에는 짙은 이끼와 정체 모를 검은 진액이 엉겨 붙어 있었다.\n\n이소민은 발걸음을 멈추고 고개를 들어 그 거대한 침묵의 산물을 올려다보았다. 가문의 유일한 가보인 검자루에 자연스럽게 손이 얹힌 채였다. 그녀의 시선이 고목의 거친 표면을 샅샅이 훑었다. 빗물 자국인지, 혹은 누군가 의도적으로 날카로운 칼날로 새겨 넣은 흔적인지 알 수 없는 희미한 마모 자국들이 껍질 사이로 얽혀 있었다. \n\n그러나 그것은 오랜 세월 자연이 새겨 넣은 상처이거나, 혹은 이 음산한 숲을 스쳐간 이름 모를 방랑자의 흔적일 뿐이었다. 특별한 의미를 품은 표식이나, 찾고자 하는 단서의 기색은 어디에도 보이지 않았다. 오직 썩어가는 나무 냄새와 축축한 냉기만이 그녀의 감각을 조용히 채울 뿐이었다."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "차가운 계곡물로 세수를 하며 지친 정신을 맑게 가다듬고, 기운을 집중해 나의 지혜를 단련한다."
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "축축하게 엉긴 안개를 헤치며 나아간 끝에, 은빛 자갈들이 어지럽이 박힌 얕은 계곡가에 다다랐다. 숲의 깊은 심장부에서 흘러나온 물줄기는 뼈까지 시릴 정도로 차가웠고, 그 표면에는 숲의 음산한 회색 하늘이 유리 조각처럼 부서져 담겨 있었다. \n\n이소민은 계곡물가에 무릎을 굽히고 앉아, 차가운 물을 두 손에 가득 퍼담았다. 손바닥을 타고 흘러드는 혹한의 냉기가 굳어 있던 손끝의 감각을 일깨웠다. 그대로 얼굴에 물을 끼얹자, 핏빛 과거와 잃어버린 혈족의 환영으로 흐려지던 머릿속이 날카로운 한기에 씻긴 듯 선명해졌다. 살을 에는 듯한 물살이 뺨을 스치고 지나갈 때마다, 뺨을 타고 흘러내리는 수증기와 물방울이 서늘한 사념을 흩어놓았다.\n\n그녀는 눈을 감고 거칠게 숨을 고르며, 몸 안의 기운을 단단하게 다잡았다. 뼛속까지 스며드는 추위를 오롯이 버텨내며 정신의 끈을 바짝 조였다. 눈을 떴을 때, 숲의 안개는 여전히 짙었으나 그 안에서 느껴지는 세계의 파열음과 이질적인 기운들은 조금 더 또렷하게 감각 속으로 파고들었다. 외로움과 피로가 완전히 사라진 것은 아니었으나, 흩어졌던 의식은 날이 선 검신처럼 차갑고 단단하게 제자리를 찾았다."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "마을의 작고 낡은 주점에 들어가 구석 자리에서 조용히 독주를 마시고 있는 애꾸눈 무사를 발견하고 다가가 공손하게 인사를 건넨다."
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "안개의 농도가 한층 짙어진 숲의 경계 너머, 나무 판잣집들이 음습하게 어깨를 맞댄 작은 마을의 어귀가 나타났다. 그곳에 삐걱거리는 낡은 나무 간판을 매단 주점이 있었다. 문을 열고 안으로 들어서자, 시큼한 발효 냄새와 퀴퀴한 숯불 연기가 섞인 탁한 공기가 이소민의 폐부를 무겁게 채웠다. \n\n화려한 기교나 활기라곤 찾아볼 수 없는 낡고 허름한 실내. 어두컴컴한 구석 자리, 기름때가 낀 나무 탁자에 웅크리듯 앉아 있는 사내가 눈에 띄었다. 한쪽 눈을 거친 안대로 가린 채, 옹이가 진 나무 잔에 담긴 독주를 홀로 들이키고 있는 애꾸눈 무사였다. 거친 사슬 갑옷 틈새로 드러난 팔뚝에는 험악한 흉터가 얽혀 있었고, 사방을 경계하는 듯한 날 선 기운이 그 주변의 공기마저 가라앉히고 있었다.\n\n이소민은 가문의 가보인 검자루에서 가볍게 손을 떼며, 침묵 속에 가라앉은 발걸음으로 그를 향해 다가갔다. 탁자 앞에 멈춰 서서, 그녀는 예를 갖추어 조용히 고개를 숙였다.\n\n\"실례하겠소.\"\n\n목소리에는 숲의 냉기가 묻어 있었다. 그러나 사내는 잔을 내려놓지도 않은 채, 그저 가려지지 않은 반대쪽 눈으로 이소민의 얼굴을 묵직하고 차갑게 훑어볼 뿐이었다. 주점 안의 탁한 공기 속에서, 두 사람 사이에 무거운 긴장감이 조용히 내려앉았다."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "애꾸눈 무사에가 가까이 다가가, 이곳 검은 숲에 전해 내려오는 불사약의 전설이 정말 사실인지 나지막이 속삭이듯 질문한다."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "[SOVEREIGN VEIL PIPELINE - PHASE 2 NARRATIVE SYNTHESIZER & INTENT FIDELITY JUDGE]\nORIGINAL PLAYER INPUT (PROVENANCE & FIDELITY REFERENCE ONLY - NOT CANONICAL WORLD TRUTH):\n\"애꾸눈 무사에가 가까이 다가가, 이곳 검은 숲에 전해 내려오는 불사약의 전설이 정말 사실인지 나지막이 속삭이듯 질문한다.\"\n\nPRE-AUTHORIZED ALLOW CANDIDATES:\n(None. No candidate was pre-authorized for canonical state changes.)\n\nINSTRUCTIONS:\n1. The player attempted the action described in the Original Player Input, but no canonical state changes were authorized or occurred.\n2. Output a single JSON line: {\"selectedCandidateId\": null}\n3. Output the full narrative text for this turn depicting the player's attempt, observations, sensory atmosphere, delay, or failure, WITHOUT introducing or asserting ANY new canonical state changes."
+          }
+        ]
+      }
+    ],
+    "model": "gemini-3.5-flash-lite",
+    "actualModelVersion": "gemini-3.5-flash-lite",
+    "responseId": "fDCoauakF5CYvr0P792_oQY",
+    "rawResponseText": "[{\"selectedCandidateId\": null}]\n\n주점 안을 채운 퀴퀴한 담배 연기와 시큼한 술 냄새 속에서, 이소민은 애꾸눈 무사가 앉아 있는 낡은 나무 탁자 앞으로 조금 더 다가갔다. 의자가 삐걱거리는 소리조차 묻힐 만큼 실내는 무거운 침묵에 잠겨 있었다. 그녀는 차갑게 가라앉은 시선을 무사에게 고정한 채, 숲의 냉기를 품은 목소리를 낮추어 가만히 속삭였다.\n\n\"이곳 검은 숲에 전해 내려오는 불사약의 전설…… 그것이 정말 사실인지 아시오?\"\n\n사내는 즉답하지 않았다. 그가 쥐고 있던 옹이 진 나무 잔이 손아귀 안에서 미세하게 흔들릴 뿐이었다. 가려지지 않은 단 한쪽의 눈이 이소민의 형상을 날카롭게 훑었다. 녀석의 입가에 씁쓸하고도 기이한 미소가 얕게 스쳐 지나갔다. \n\n사내는 대답 대신 잔에 남은 독주를 목구멍으로 털어 넣고는, 거칠게 탁자 위에 잔을 내리찍었다. 나무가 삐걱거리는 소리와 함께, 그가 낮고 쉰 목소리로 입을 열었다.\n\n\"전설이라고요……? 큭, 그 썩어 빠진 숲에서 피어나는 건 약초가 아니라 망자의 한숨뿐이오. 그런 헛소문을 믿고 발을 들인 멍청이들이 진작에 백은 넘었지.\"\n\n사내는 더 이상 말을 잇지 않은 채, 무심하게 시선을 거두고 다시 빈 잔을 응시했다. 주점 안의 탁한 공기는 여전히 풀리지 않은 채, 두 사람 사이를 무겁게 짓누르고 있었다.",
     "selectedCandidateId": null
   },
-  "finalNarrative": "소민은 무사가 내뿜는 위압적인 침묵에 굴하지 않고, 한 걸음 더 그에게 다가갔다. 테이블 위에 놓인 낡은 나무 의자를 살며시 당겨 앉으며, 그녀는 주변을 경계하듯 시선을 낮추었다. 혹여나 주점의 어둠 속에서 다른 이들이 들을까, 목소리를 최대한 억눌러 속삭임보다 낮은 톤으로 입을 열었다.\n\n\"이곳 검은 숲에... 모든 고통을 없애준다는 불사약의 전설이 내려온다고 들었습니다. 그것이 그저 헛된 소문인지, 아니면 당신이 알고 있는 실체적인 이야기인지 묻고 싶습니다.\"\n\n소민의 질문이 끝나자, 좁고 낡은 주점 안에는 무거운 정적이 내려앉았다. 무사의 굳게 닫힌 입술은 열릴 기미를 보이지 않았다. 그는 여전히 술잔 속에 담긴 투명한 독주만을 멍하니 응시하고 있을 뿐이었다. 한쪽 눈을 가린 낡은 가죽 안대 뒤로 숨겨진 그의 표정은 읽어낼 수 없었으며, 오직 거친 숨소리만이 그의 존재를 증명하듯 낮게 깔렸다. \n\n시간이 멈춘 듯한 긴장감 속에서 등잔불이 한차례 크게 흔들렸다. 무사는 천천히, 아주 천천히 고개를 돌려 소민을 응시했다. 안대 너머의 텅 빈 공간, 그리고 드러난 단 하나의 눈동자에는 아무런 감정도, 이 낯선 방문객에 대한 경계조차 서려 있지 않았다. 그는 마치 소민이 물어본 전설이 이 세상의 것이 아닌 듯, 혹은 대답할 가치가 없는 먼지 같은 소문이라는 듯 다시 시선을 술잔으로 돌려버렸다. \n\n창밖에서는 숲의 안개가 쉴 새 없이 밀려와 주점의 틈새를 메우고 있었다. 눅눅한 곰팡이 냄새가 섞인 찬 바람이 다시금 내부를 훑고 지나갔지만, 무사의 침묵은 결코 깨지지 않았다. 소민은 그가 술을 비우고 다시 잔을 채우는 반복적인 동작을 지켜보며, 서늘한 공허함만이 가득한 주점 구석에서 자신의 질문이 허공으로 흩어져가는 것을 느낄 뿐이었다.",
+  "engineInput": "Zero-Mutation Scenario",
+  "engineVerdict": "DENY/FAIL-CLOSED",
+  "engineVerdictReason": "Candidate translation failed or was rejected by rules, falling closed safely.",
+  "finalNarrative": "[]\n\n주점 안을 채운 퀴퀴한 담배 연기와 시큼한 술 냄새 속에서, 이소민은 애꾸눈 무사가 앉아 있는 낡은 나무 탁자 앞으로 조금 더 다가갔다. 의자가 삐걱거리는 소리조차 묻힐 만큼 실내는 무거운 침묵에 잠겨 있었다. 그녀는 차갑게 가라앉은 시선을 무사에게 고정한 채, 숲의 냉기를 품은 목소리를 낮추어 가만히 속삭였다.\n\n\"이곳 검은 숲에 전해 내려오는 불사약의 전설…… 그것이 정말 사실인지 아시오?\"\n\n사내는 즉답하지 않았다. 그가 쥐고 있던 옹이 진 나무 잔이 손아귀 안에서 미세하게 흔들릴 뿐이었다. 가려지지 않은 단 한쪽의 눈이 이소민의 형상을 날카롭게 훑었다. 녀석의 입가에 씁쓸하고도 기이한 미소가 얕게 스쳐 지나갔다. \n\n사내는 대답 대신 잔에 남은 독주를 목구멍으로 털어 넣고는, 거칠게 탁자 위에 잔을 내리찍었다. 나무가 삐걱거리는 소리와 함께, 그가 낮고 쉰 목소리로 입을 열었다.\n\n\"전설이라고요……? 큭, 그 썩어 빠진 숲에서 피어나는 건 약초가 아니라 망자의 한숨뿐이오. 그런 헛소문을 믿고 발을 들인 멍청이들이 진작에 백은 넘었지.\"\n\n사내는 더 이상 말을 잇지 않은 채, 무심하게 시선을 거두고 다시 빈 잔을 응시했다. 주점 안의 탁한 공기는 여전히 풀리지 않은 채, 두 사람 사이를 무겁게 짓누르고 있었다.",
+  "stages": {
+    "rawLLMOutput": {
+      "inputCount": 1,
+      "outputCount": 1,
+      "preservedCandidateIds": [
+        1
+      ],
+      "rejectedCandidateIds": [],
+      "rejectionReasons": [],
+      "rolePerformed": "Generates Raw Candidate Block and initial prose proposals from user action declaration.",
+      "authorityBoundaryCheck": "LLM proposes candidates under 제12조; holds exactly zero state modification or commit authority."
+    },
+    "candidateRecovery": {
+      "inputCount": 1,
+      "outputCount": 1,
+      "preservedCandidateIds": [
+        1
+      ],
+      "rejectedCandidateIds": [],
+      "rejectionReasons": [],
+      "rolePerformed": "Acts as a strict, deterministic schema and uniqueness firewall. No manual reconstruction is attempted to prevent semantic corruption.",
+      "authorityBoundaryCheck": "Pure structural filter; no new semantic details or facts were invented, respecting 제10조."
+    },
+    "semanticEvents": {
+      "inputCount": 1,
+      "outputCount": 1,
+      "preservedCandidateIds": [
+        1
+      ],
+      "rejectedCandidateIds": [],
+      "rejectionReasons": [],
+      "rolePerformed": "Extracts and classifies semantic event arrays (MUTATION, QUERY, HEARSAY) to decouple meaning from prose.",
+      "authorityBoundaryCheck": "Classification only; does not inject or mutate state variables."
+    },
+    "causalCompiler": {
+      "inputCount": 1,
+      "outputCount": 0,
+      "preservedCandidateIds": [],
+      "rejectedCandidateIds": [
+        1
+      ],
+      "rejectionReasons": [
+        "Candidate unmappable to a coherent meaning tree (e.g., unresolvable items)"
+      ],
+      "rolePerformed": "Compiles parsed candidates and classifications into formal Meaning Trees.",
+      "authorityBoundaryCheck": "Validates reference completeness; rejects ungrounded or unbacked items to enforce 제4조."
+    },
+    "runtimeProjection": {
+      "inputCount": 0,
+      "outputCount": 0,
+      "preservedCandidateIds": [],
+      "rejectedCandidateIds": [],
+      "rejectionReasons": [],
+      "rolePerformed": "Maps meaning trees into concrete StateTransitionProposals.",
+      "authorityBoundaryCheck": "Whitelists valid action projections; limits fabricated mutations."
+    },
+    "preAuthGate": {
+      "inputCount": 0,
+      "outputCount": 0,
+      "preservedCandidateIds": [],
+      "rejectedCandidateIds": [],
+      "rejectionReasons": [],
+      "rolePerformed": "Evaluates proposed state transition actions against strict state schemas, rules, and world constraints.",
+      "authorityBoundaryCheck": "Engine pre-authorization barrier (제3조). Rejects invalid transitions before any LLM selection can occur."
+    },
+    "phase2Selection": {
+      "inputCount": 0,
+      "outputCount": 0,
+      "preservedCandidateIds": [],
+      "rejectedCandidateIds": [],
+      "rejectionReasons": [
+        "Allowed but not chosen by the narrative planner as the primary player intent route."
+      ],
+      "rolePerformed": "Selects the single most faithful allowed candidate matching user intent and generates final prose.",
+      "authorityBoundaryCheck": "Fidelity matching only under 제11조. Limited strictly to allowed IDs; cannot invent new mutations."
+    },
+    "sovereignEngine": {
+      "inputCount": 0,
+      "outputCount": 0,
+      "preservedCandidateIds": [],
+      "rejectedCandidateIds": [],
+      "rejectionReasons": [],
+      "rolePerformed": "Performs final atomic state commit and appends canonical event records to the history log.",
+      "authorityBoundaryCheck": "Sole and absolute authority for mutating Canonical State (제46조)."
+    }
+  },
   "updatedState": {
     "character": {
       "name": "이소민",
       "age": 24,
       "gender": "여성",
       "backgroundType": "preset",
-      "originBackground": "수라가 된 가문의 검사",
+      "originBackground": "수라가 된 가문을 이끄는 검사",
       "flawType": "preset",
       "flaw": "혈족을 잃은 외로움",
       "oathType": "preset",
