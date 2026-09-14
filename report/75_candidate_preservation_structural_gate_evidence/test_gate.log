@@ -1,0 +1,71 @@
+
+> react-example@0.0.0 test:candidate-gate
+> tsx src/engine/language/runCandidateRecoveryGateSuite.ts
+
+================================================================
+  VEIL CANDIDATE RECOVERY GATE — RED TEAM EXHAUSTIVE SUITE
+================================================================
+
+Executed: 54 total scenarios / assertions
+Passed:   54 PASSED
+Failed:   0 FAILED
+Duration: 21ms
+
+[PASS] #1: Scenario 1: Normal 5 Candidates - All 5 pass
+[PASS] #2: Scenario 1: Zero-Mutation invariant preserved for all normal candidates
+[PASS] #3: Scenario 2: Normal 4 + 1 Float candidateId - 4 passed, 1 quarantined
+[PASS] #4: Scenario 2: Quarantined candidate has correct index and integer reason
+[PASS] #5: Scenario 2: Passed candidates retain correct order and identity
+[PASS] #6: Scenario 3: Normal 3 + 2 Corrupted - 3 passed, 2 quarantined
+[PASS] #7: Scenario 4: Normal 1 + 4 Corrupted - 1 passed, 4 quarantined
+[PASS] #8: Scenario 4: The only valid candidate is #3
+[PASS] #9: Scenario 5: All 5 Corrupt - 0 passed, 5 quarantined (Fail-Closed)
+[PASS] #10: Scenario 6: candidateId 6 rejected (out of bounds)
+[PASS] #11: Scenario 7: candidateId <= 0 rejected
+[PASS] #12: Scenario 8: candidateId type forgeries (bool, str, obj, NaN, Infinity) rejected
+[PASS] #13: Scenario 9: label invalid types / whitespace-only rejected
+[PASS] #14: Scenario 10: narrativeSummary invalid types rejected
+[PASS] #15: Scenario 11: rawMetadata null rejected
+[PASS] #16: Scenario 12: rawMetadata array rejected
+[PASS] #17: Scenario 13: rawMetadata primitive values rejected
+[PASS] #18: Scenario 14: Candidate root non-objects rejected
+[PASS] #19: Scenario 15: Non-array input to gate fails closed immediately
+[PASS] #20: Scenario 16: Custom valid candidate passed
+[PASS] #21: Scenario 16: Reference equality preserved (Zero Mutation)
+[PASS] #22: Scenario 16: All valid fields and root extra properties completely preserved
+[PASS] #23: Scenario 17: Exactly 2 valid candidates passed (1 and 3)
+[PASS] #24: Scenario 17: Exactly 3 candidates quarantined (2, 4, 5)
+[PASS] #25: Scenario 17: Passed candidates strictly preserve identities without cross-contamination
+[PASS] #26: Scenario 18 Step 1: Gate passed 3, quarantined 2
+[PASS] #27: Scenario 18 Step 3: Successfully translated 3 valid candidates
+[PASS] #28: Scenario 18 Step 4: Diversity filter succeeded
+[PASS] #29: Scenario 18 Step 5: All valid candidate proposals safely validated in PreAuth
+[PASS] #30: Scenario 19: Genuinely distinct 5 candidates - All 5 pass Gate
+[PASS] #31: Scenario 20: Genuinely distinct 4 candidates - All 4 pass Gate
+[PASS] #32: Scenario 21: Genuinely distinct 3 candidates - All 3 pass Gate
+[PASS] #33: Scenario 22: Genuinely distinct 2 candidates - All 2 pass Gate
+[PASS] #34: Scenario 23: Genuinely distinct 1 candidate - 1 passes Gate
+[PASS] #35: Scenario 24 Step 1: All 3 pass structural gate
+[PASS] #36: Scenario 24 Step 2: Surface-only variations deduplicated by Diversity Gate
+[PASS] #37: Scenario 25 Step 1: Structural gate passes both syntactically
+[PASS] #38: Scenario 25 Step 2: Genuine candidate is ALLOWED
+[PASS] #39: Scenario 25 Step 3: Unbacked hallucinated item at Turn 2 is REJECTED by PreAuth Gate
+[PASS] #40: Scenario 26: rawMetadata.inventoryModifications strictly quarantined
+[PASS] #41: Scenario 26: Quarantine reason explicitly states UNKNOWN_FIELD violation for inventoryModifications
+[PASS] #42: Scenario 27: rawMetadata.statChanges strictly quarantined as UNKNOWN_FIELD
+[PASS] #43: Scenario 28: Top-level currentChapter in rawMetadata strictly quarantined
+[PASS] #44: Scenario 28: Explicit UNKNOWN_FIELD quarantine reason for top-level currentChapter
+[PASS] #45: Scenario 29: rawMetadata.recommendedDC / dcReason strictly quarantined
+[PASS] #46: Scenario 30: factCheckSummary / contextVerificationDeclaration strictly quarantined
+[PASS] #47: Scenario 31: candidate.resolvedEntityId strictly rejected and quarantined
+[PASS] #48: Scenario 31: Reason clearly identifies prohibited engine-owned resolvedEntityId
+[PASS] #49: Scenario 32: newNpcs[0].resolvedEntityId strictly rejected and quarantined
+[PASS] #50: Scenario 33: inventoryChanges without entityReference MUST PASS Recovery Gate
+[PASS] #51: Scenario 34: inventoryChanges with invalid entityReference (object) MUST BE QUARANTINED
+[PASS] #52: Scenario 34: inventoryChanges with invalid entityReference (object) MUST BE QUARANTINED
+[PASS] #53: Scenario 34: inventoryChanges with invalid entityReference (string) MUST BE QUARANTINED
+[PASS] #54: Scenario 34: inventoryChanges with invalid entityReference (number) MUST BE QUARANTINED
+
+================================================================
+  VERDICT: 100% PASS - ALL 18+ ATTACK SCENARIOS NEUTRALIZED
+================================================================
