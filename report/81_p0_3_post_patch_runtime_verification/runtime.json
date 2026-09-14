@@ -1,0 +1,25 @@
+{
+  "baseCommit": "3eee9f3",
+  "testTimestamp": "2026-09-14T19:18:41.588Z",
+  "requestedModel": "gemini-3.1-flash-lite",
+  "actualModelVersion": "gemini-3.1-flash-lite",
+  "userPrompt": "애꾸눈 무사에게 불사약의 전설에 대해 묻는다.",
+  "httpStatus": 200,
+  "durationMs": 9675,
+  "serverTimings": {
+    "t1_requestStart": 1789413512022,
+    "t2_contextAssemblyComplete": 1789413512023,
+    "t3_geminiRequestStart": 1789413512023,
+    "t4_geminiResponseReceived": 1789413521575,
+    "contextAssemblyMs": 1,
+    "geminiGenerationMs": 9552,
+    "inputCharCount": 999,
+    "outputCharCount": 1246,
+    "tokenCount": {
+      "promptTokens": 7918,
+      "candidatesTokens": 612,
+      "totalTokens": 8530
+    }
+  },
+  "responseId": "iEioav6bGbfT1e8PtK2M-A0"
+}

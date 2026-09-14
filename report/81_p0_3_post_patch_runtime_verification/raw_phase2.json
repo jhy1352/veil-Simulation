@@ -1,0 +1,26 @@
+{
+  "phase2Executed": true,
+  "contents": [
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "[TRPG Campaign Context]\n- 세계관명: 기본 세계\n- 세계관 설정: \n- 문체 스타일: 원작 고유의 문체 충실 재현\n- 주인공 프로필: 주인공 (나이: 미상, 성별: 미상)\n  * 출신/배경: [preset] 미상\n  * 결핍/트라우마: [preset] 없음\n  * 맹세: [preset] 없음\n  * 닻: [preset] 없음\n  * 소속/세력: [preset] 무소속\n  * 능력치: STR 10 / AGI 10 / CON 10 / INT 10 / WIS 10 / CHA 10\n  * 소장품: 없음\n\n\n\n\n[DERIVED KNOWLEDGE GRAPH — READ-ONLY ENGINE INDEX]\n- 활성 정사 엔티티 (1개): [CHARACTER] 주인공 (Protagonist)\n- 정사 관계망 (0개): 기본 관계망\n\n[PLANNED NARRATIVE ROADMAP — NON-CANONICAL]\n- 현재 챕터: 서막\n- 이전 턴 예정 로드맵:\n  (현재 등록된 예정 로드맵 없음 — 현재 세계 상태와 플레이어 행동을 바탕으로 이어질 비정사적 미래 예정 로드맵을 자유롭게 재계획하십시오)\n※ 권한 및 행동 우선순위:\n1위: Engine Canonical State (세계 법칙/사실) > 2위: 플레이어의 최신 행동 선언 > 3위: 실제 발생한 사건 결과 > 4위: NPC/세계 정세 > 5위: 활성 복선 > 6위: 이전 턴 로드맵(참고자료)\n※ Dynamic Re-planning 수칙:\n위 예정 챕터는 비정사적 가설(Non-Canonical Roadmap)입니다. 플레이어가 기존 로드맵과 다른 행동을 하더라도 행동을 절대 제한·거부·왜곡하지 마십시오. 플레이어 행동을 먼저 해결하여 세계 상태를 갱신한 후, 새로운 세계 상태에 맞추어 미래 예정 챕터들을 자유롭게 재계획하십시오.\n\n\n[TURN 1 PLAYER PROMPT]\n애꾸눈 무사에게 불사약의 전설에 대해 묻는다.\n\n[ADDITIONAL ACTION]\n애꾸눈 무사에게 불사약의 전설에 대해 묻는다."
+        }
+      ]
+    },
+    {
+      "role": "user",
+      "parts": [
+        {
+          "text": "[SOVEREIGN VEIL PIPELINE - PHASE 2 NARRATIVE SYNTHESIZER & INTENT FIDELITY JUDGE]\nORIGINAL PLAYER INPUT (PROVENANCE & FIDELITY REFERENCE ONLY - NOT CANONICAL WORLD TRUTH):\n\"애꾸눈 무사에게 불사약의 전설에 대해 묻는다.\"\n\nPRE-AUTHORIZED ALLOW CANDIDATES:\n(None. No candidate was pre-authorized for canonical state changes.)\n\nINSTRUCTIONS:\n1. The player attempted the action described in the Original Player Input, but no canonical state changes were authorized or occurred.\n2. Output a single JSON line: {\"selectedCandidateId\": null}\n3. Output the full narrative text for this turn depicting the player's attempt, observations, sensory atmosphere, delay, or failure, WITHOUT introducing or asserting ANY new canonical state changes."
+        }
+      ]
+    }
+  ],
+  "rawGeminiResponse": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"애꾸눈 무사에게 불사약에 관해 질문하기\",\n    \"narrativeSummary\": \"주인공은 눈앞의 애꾸눈 무사에게 '불사약'에 대한 전설을 아는지 묻는다. 무사는 즉답하지 않고 주인공을 잠시 응시한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_QUERY_001\",\n        \"action\": \"QUERY\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"주인공\" },\n          { \"role\": \"TARGET\", \"entityName\": \"애꾸눈 무사\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"불사약의 전설\" }\n        ],\n        \"scope\": \"CLAIM\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막\",\n        \"upcomingChapters\": [\n          \"무사의 침묵과 정보의 대가\",\n          \"불사약을 쫓는 자들의 흔적\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n\n\n낡은 술잔을 내려놓은 탁자 위로 먼지가 부유한다. 주인공은 맞은편에 앉은 사내, 왼쪽 눈을 깊은 흉터로 덮어버린 무사를 향해 낮게 읊조렸다. \n\n\"불사약의 전설에 대해 들어본 적 있나.\"\n\n무사의 반응은 더뎠다. 그는 거친 나무 식탁 위에 올려진 칼자루를 손가락으로 툭툭 두드렸다. 성한 오른쪽 눈동자가 주인공의 얼굴을 서늘하게 훑고 지나간다. 그의 망토 끝자락에서는 오랫동안 묵은 습기와 흙내음이 섞인 비릿한 냄새가 났다. \n\n그는 바로 대답하지 않았다. 다만, 무사는 창밖의 어둑한 거리를 한 번 내다보고는, 다시금 주인공에게 시선을 고정했다. 주위의 소란스러운 객잔 소음마저 두 사람 사이에서는 희미하게 멀어지는 듯한 착각이 들었다. \n\n무사의 입술이 비틀리며, 작게 갈라진 목소리가 낮게 깔렸다.\n\n\"그 헛된 이름은 이미 오래전에 무덤 속으로 들어갔어야 할 물건이지. 너는 왜 하필, 저주받은 이들만이 찾는 그 이름을 입에 올리는 거지?\"",
+  "selectedCandidateId": null,
+  "finalNarrative": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"애꾸눈 무사에게 불사약에 관해 질문하기\",\n    \"narrativeSummary\": \"주인공은 눈앞의 애꾸눈 무사에게 '불사약'에 대한 전설을 아는지 묻는다. 무사는 즉답하지 않고 주인공을 잠시 응시한다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"EVT_QUERY_001\",\n        \"action\": \"QUERY\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"주인공\" },\n          { \"role\": \"TARGET\", \"entityName\": \"애꾸눈 무사\" },\n          { \"role\": \"OBJECT\", \"entityName\": \"불사약의 전설\" }\n        ],\n        \"scope\": \"CLAIM\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막\",\n        \"upcomingChapters\": [\n          \"무사의 침묵과 정보의 대가\",\n          \"불사약을 쫓는 자들의 흔적\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n\n\n낡은 술잔을 내려놓은 탁자 위로 먼지가 부유한다. 주인공은 맞은편에 앉은 사내, 왼쪽 눈을 깊은 흉터로 덮어버린 무사를 향해 낮게 읊조렸다. \n\n\"불사약의 전설에 대해 들어본 적 있나.\"\n\n무사의 반응은 더뎠다. 그는 거친 나무 식탁 위에 올려진 칼자루를 손가락으로 툭툭 두드렸다. 성한 오른쪽 눈동자가 주인공의 얼굴을 서늘하게 훑고 지나간다. 그의 망토 끝자락에서는 오랫동안 묵은 습기와 흙내음이 섞인 비릿한 냄새가 났다. \n\n그는 바로 대답하지 않았다. 다만, 무사는 창밖의 어둑한 거리를 한 번 내다보고는, 다시금 주인공에게 시선을 고정했다. 주위의 소란스러운 객잔 소음마저 두 사람 사이에서는 희미하게 멀어지는 듯한 착각이 들었다. \n\n무사의 입술이 비틀리며, 작게 갈라진 목소리가 낮게 깔렸다.\n\n\"그 헛된 이름은 이미 오래전에 무덤 속으로 들어갔어야 할 물건이지. 너는 왜 하필, 저주받은 이들만이 찾는 그 이름을 입에 올리는 거지?\"",
+  "proposedNewCanonicalState": false,
+  "engineApproved": false
+}
