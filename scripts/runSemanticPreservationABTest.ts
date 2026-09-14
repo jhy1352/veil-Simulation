@@ -89,7 +89,7 @@ async function run() {
   }
 
   const ai = new GoogleGenAI({ apiKey });
-  const modelName = 'gemini-3.5-flash';
+  const modelName = 'gemini-3.1-flash-lite';
   const generationConfig = {
     // Model default generation params
   };
