@@ -218,7 +218,11 @@ export function semanticEventToRuntimeActions(
 
 /**
  * Translate a compiled SemanticEvent sequence conservatively.
- * Any unsupported/invalid event prevents partial silent projection.
+ *
+ * Unsupported events are non-executable, not invalid. Their semantic meaning
+ * is preserved by the CausalCompiler/MeaningTree and they contribute no runtime
+ * actions. Invalid events still fail closed because they indicate malformed or
+ * contradictory input rather than a merely unsupported capability.
  */
 export function semanticEventsToRuntimeActions(
   events: readonly SemanticEvent[],
@@ -229,14 +233,23 @@ export function semanticEventsToRuntimeActions(
 
   for (const event of events) {
     const result = semanticEventToRuntimeActions(event, context);
-    if (result.status !== 'MAPPABLE') {
+
+    if (result.status === 'INVALID') {
       errors.push(...result.errors.map((error) => `[${event.eventId}] ${error}`));
       return {
-        status: result.status,
+        status: 'INVALID',
         actions: [],
         errors,
       };
     }
+
+    if (result.status === 'UNSUPPORTED') {
+      // Preserve the SemanticEvent in the compiled MeaningTree, but do not
+      // invent a Runtime Action for an ontology the Sovereign engine cannot execute.
+      errors.push(...result.errors.map((error) => `[${event.eventId}] ${error}`));
+      continue;
+    }
+
     actions.push(...result.actions);
   }
 
