@@ -180,7 +180,7 @@ export function runCandidateIdentityBDesignSuite(): BDesignTestReport {
     assert(gate.passedCount === 5, 'T3.4: All 5 pass gate cleanly due to Parser ID authority');
   }
 
-  // Test 4: Cardinality ceiling clamp (7 candidates -> 5 candidates with canonical IDs 1..5)
+  // Test 4: Cardinality non-truncation verification (7 candidates parsed, excess explicitly quarantined in Recovery Gate)
   {
     const rawList = [];
     for (let i = 0; i < 7; i++) {
@@ -194,9 +194,16 @@ export function runCandidateIdentityBDesignSuite(): BDesignTestReport {
 
     const rawBlock = `[CANDIDATES_BLOCK]\n${JSON.stringify(rawList)}\n[CANDIDATES_END]`;
     const parsed = parseCandidatesBlock(rawBlock);
-    assert(parsed !== null && parsed.length === 5, 'T4.1: Parsed candidates clamped strictly to ceiling of 5');
-    assert(parsed!.map(c => c.candidateId).join(',') === '1,2,3,4,5', 'T4.2: Clamped candidates assigned canonical 1..5');
-    assert(parsed![4].label === '행동 5', 'T4.3: 5th candidate is preserved');
+    assert(parsed !== null && parsed.length === 7, 'T4.1: Parsed candidates are not truncated silently');
+    assert(parsed!.map(c => c.candidateId).join(',') === '1,2,3,4,5,6,7', 'T4.2: Candidates sequentialized beyond 5');
+    assert(parsed![6].label === '행동 7', 'T4.3: Last candidate is preserved');
+
+    // Run recovery gate on the 7 parsed candidates
+    const gate = runCandidateRecoveryGate(parsed);
+    assert(gate.passedCount === 5, 'T4.4: Exactly 5 candidates pass the structural ceiling check');
+    assert(gate.quarantinedCount === 2, 'T4.5: Excess 2 candidates are explicitly quarantined');
+    assert(gate.quarantinedCandidates[0].index === 5, 'T4.6: 6th candidate is quarantined');
+    assert(gate.quarantinedCandidates[0].reasons[0].includes('out of bounds'), 'T4.7: Explicit out of bounds quarantine reason recorded');
   }
 
   // Test 5: End-to-End Pipeline & LLM #2 selectedCandidateId Resolution Integrity

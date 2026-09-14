@@ -53,10 +53,9 @@ export function parseCandidatesBlock(text: string): VeilCandidate[] | null {
   }
   if (!rawList) return null;
 
-  // Parser Authority (B-Design): Assign canonical sequential candidateId (1..N, max 5) based on array order.
+  // Parser Authority (B-Design): Assign canonical sequential candidateId (1..N) based on array order.
   // LLM output candidateId is untrusted and ignored. Candidate payloads (label, narrativeSummary, rawMetadata) are preserved.
-  const candidateSlice = rawList.slice(0, 5);
-  return candidateSlice.map((item, idx) => {
+  return rawList.map((item, idx) => {
     if (typeof item !== 'object' || item === null || Array.isArray(item)) {
       return item;
     }
