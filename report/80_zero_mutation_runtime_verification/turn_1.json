@@ -1,0 +1,179 @@
+{
+  "turn": 1,
+  "description": "Normal Mutation: Item Pickup (Expected to add the flower)",
+  "userPrompt": "숲속 길가에서 유독 밝게 빛나는 파란 야생화 한 송이를 발견하고 소중히 꺾어 품안에 넣는다.",
+  "modelRequested": "gemini-3.5-flash",
+  "modelResolved": "gemini-3.5-flash",
+  "rawLLMOutput": "/* TRIAGE_STAMP_V1_1789405644082_eek5mab */\n[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"고요한 수집\",\n    \"narrativeSummary\": \"이소민은 차가운 안개 속에서 유독 푸르게 빛나던 야생화를 조심스럽게 꺾어 품에 넣습니다. 꽃을 꺾자 손끝으로 서늘한 한기가 스며들고, 숲의 고요는 깨어지지 않은 채 밤 안개만이 그녀의 발목을 부드럽게 감싸 안습니다. 꺾인 꽃은 품속에서 미약한 빛을 유지하며 주변의 습기를 서서히 빨아들여 건조하게 유지되는 기묘한 성질을 보입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"seed_blue_flower_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"이소민\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"푸른 야생화\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"검은 숲 길가\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_blue_flower_001: 검은 숲 길가에서 발견한 푸른 야생화는 주변의 미약한 수분을 흡수하며 차가운 빛을 유지한다. 이 기묘한 성질은 숲의 독특한 환경이나 불사약의 전설과 관련이 있을지도 모른다.\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"푸른 야생화\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_blue_flower_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"1장: 안개 덮인 길목\",\n        \"upcomingChapters\": [\n          \"2장: 깊어지는 음습함\",\n          \"3장: 불사의 흔적\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"어둠 속의 응시\",\n    \"narrativeSummary\": \"야생화의 줄기를 꺾는 순간, 푸른 빛이 격렬하게 흔들리더니 이내 희미하게 사그라집니다. 동시에 사방을 메우고 있던 짙은 안개 너머, 울창한 덤불 뒤편에서 바스락거리는 기묘한 마찰음이 들려옵니다. 누군가 혹은 무언가가 꺾인 꽃의 마지막 빛이 꺼지는 순간을 어둠 속에서 숨을 죽인 채 가만히 지켜보고 있었습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"seed_forest_watcher_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"이소민\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"빛 바랜 푸른 야생화\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"검은 숲 길가\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_forest_watcher_001: 푸른 야생화의 빛이 꺼지면서 발생한 소동으로 인해 안개 속의 미지의 관찰자가 자극받았다. 꺾인 꽃에서 흘러나온 냄새나 흔적이 추적의 단서가 될 수 있다.\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"빛 바랜 푸른 야생화\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_forest_watcher_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"1장: 안개 속의 시선\",\n        \"upcomingChapters\": [\n          \"2장: 그림자 추적자\",\n          \"3장: 숲의 지배자\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n질퍽거리는 흙바닥은 걸음을 옮길 때마다 늪처럼 무겁게 발을 잡아끌고, 낮게 가라앉은 안개는 숨을 쉴 때마다 차가운 습기를 허파 깊숙한 곳까지 밀어 넣습니다. 고대부터 은둔자들의 영역이라 불려온 검은 숲의 초입은 소리조차 썩어 들어가는 것처럼 지독하게 고요합니다. 사방을 둘러싸고 있는 거대하고 기괴하게 뒤틀린 참나무들의 둥치는 마치 이방인을 경계하는 늙은 파수꾼들의 몸짓 같습니다.\n\n길이라고 부르기도 민망할 정도로 흐릿하게 다져진 흙길 한편, 썩은 침엽수 잎사귀와 검푸른 이끼들 사이에서 홀로 이질적인 존재감을 드러내는 것이 있었습니다. 유독 맑고 투명한 푸른빛을 흘려보내는 야생화 한 송이. 안개의 잿빛 세계를 단번에 찢어버릴 듯한 그 푸른빛은 미약하지만 분명하게 제 주변을 비추고 있었습니다. \n\n가문의 멸문 이후 홀로 검을 쥔 채 거친 세파를 걸어온 당신에게, 그 차갑고 맑은 빛은 기묘하게도 시선을 잡아끕니다. 당신은 가만히 무릎을 굽히고 서늘한 진흙 위로 앉아 자세를 낮춥니다. 손끝이 젖은 줄기에 닿자, 식물이라고는 믿기지 않을 정도로 얼음장 같은 냉기가 손가락을 타고 올라옵니다. \n\n조심스럽게 줄기를 꺾어 올리자 툭, 하는 나직한 파열음과 함께 투명한 수액이 흘러나옵니다. 비릿하면서도 끝맛이 쇠 냄새 같은 기이한 향취가 코끝을 스칩니다. 당신은 가슴팍 옷자락 안쪽에 꽃을 안전하게 밀어 넣습니다. 겹겹이 껴입은 얇은 옷감 너머로 차가운 온기가 가슴가에 머무릅니다. \n\n꽃을 꺾어 품에 넣은 이 순간, 검은 숲의 안개는 여전히 침묵을 지키고 있으나, 당신이 내딛는 발걸음 아래로 흐르는 공기가 미세하게 일렁이기 시작합니다. 이 기묘한 생명력은 숲의 침묵 속에 숨은 누군가의 호기심을 자극했을지도 모릅니다.",
+  "candidateBlockRaw": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"고요한 수집\",\n    \"narrativeSummary\": \"이소민은 차가운 안개 속에서 유독 푸르게 빛나던 야생화를 조심스럽게 꺾어 품에 넣습니다. 꽃을 꺾자 손끝으로 서늘한 한기가 스며들고, 숲의 고요는 깨어지지 않은 채 밤 안개만이 그녀의 발목을 부드럽게 감싸 안습니다. 꺾인 꽃은 품속에서 미약한 빛을 유지하며 주변의 습기를 서서히 빨아들여 건조하게 유지되는 기묘한 성질을 보입니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"seed_blue_flower_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"이소민\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"푸른 야생화\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"검은 숲 길가\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_blue_flower_001: 검은 숲 길가에서 발견한 푸른 야생화는 주변의 미약한 수분을 흡수하며 차가운 빛을 유지한다. 이 기묘한 성질은 숲의 독특한 환경이나 불사약의 전설과 관련이 있을지도 모른다.\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"푸른 야생화\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_blue_flower_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"1장: 안개 덮인 길목\",\n        \"upcomingChapters\": [\n          \"2장: 깊어지는 음습함\",\n          \"3장: 불사의 흔적\"\n        ]\n      }\n    }\n  },\n  {\n    \"label\": \"어둠 속의 응시\",\n    \"narrativeSummary\": \"야생화의 줄기를 꺾는 순간, 푸른 빛이 격렬하게 흔들리더니 이내 희미하게 사그라집니다. 동시에 사방을 메우고 있던 짙은 안개 너머, 울창한 덤불 뒤편에서 바스락거리는 기묘한 마찰음이 들려옵니다. 누군가 혹은 무언가가 꺾인 꽃의 마지막 빛이 꺼지는 순간을 어둠 속에서 숨을 죽인 채 가만히 지켜보고 있었습니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"seed_forest_watcher_001\",\n        \"action\": \"PICKUP\",\n        \"roles\": [\n          {\n            \"role\": \"SUBJECT\",\n            \"entityName\": \"이소민\"\n          },\n          {\n            \"role\": \"OBJECT\",\n            \"entityName\": \"빛 바랜 푸른 야생화\"\n          },\n          {\n            \"role\": \"LOCATION\",\n            \"entityName\": \"검은 숲 길가\"\n          }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"polarity\": \"ASSERTED\",\n        \"epistemicStatus\": \"VERIFIED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [\n        \"seed_forest_watcher_001: 푸른 야생화의 빛이 꺼지면서 발생한 소동으로 인해 안개 속의 미지의 관찰자가 자극받았다. 꺾인 꽃에서 흘러나온 냄새나 흔적이 추적의 단서가 될 수 있다.\"\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"빛 바랜 푸른 야생화\",\n          \"quantity\": 1,\n          \"action\": \"add\",\n          \"cause\": \"DISCOVERY_PICKUP\",\n          \"verifiedEventId\": \"seed_forest_watcher_001\"\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"1장: 안개 속의 시선\",\n        \"upcomingChapters\": [\n          \"2장: 그림자 추적자\",\n          \"3장: 숲의 지배자\"\n        ]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+  "recoveryResult": {
+    "passedCandidates": [
+      {
+        "label": "고요한 수집",
+        "narrativeSummary": "이소민은 차가운 안개 속에서 유독 푸르게 빛나던 야생화를 조심스럽게 꺾어 품에 넣습니다. 꽃을 꺾자 손끝으로 서늘한 한기가 스며들고, 숲의 고요는 깨어지지 않은 채 밤 안개만이 그녀의 발목을 부드럽게 감싸 안습니다. 꺾인 꽃은 품속에서 미약한 빛을 유지하며 주변의 습기를 서서히 빨아들여 건조하게 유지되는 기묘한 성질을 보입니다.",
+        "semanticEvents": [
+          {
+            "eventId": "seed_blue_flower_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "이소민"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "푸른 야생화"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "검은 숲 길가"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "seed_blue_flower_001: 검은 숲 길가에서 발견한 푸른 야생화는 주변의 미약한 수분을 흡수하며 차가운 빛을 유지한다. 이 기묘한 성질은 숲의 독특한 환경이나 불사약의 전설과 관련이 있을지도 모른다."
+          ],
+          "inventoryChanges": [
+            {
+              "name": "푸른 야생화",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "seed_blue_flower_001"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "1장: 안개 덮인 길목",
+            "upcomingChapters": [
+              "2장: 깊어지는 음습함",
+              "3장: 불사의 흔적"
+            ]
+          }
+        },
+        "candidateId": 1
+      },
+      {
+        "label": "어둠 속의 응시",
+        "narrativeSummary": "야생화의 줄기를 꺾는 순간, 푸른 빛이 격렬하게 흔들리더니 이내 희미하게 사그라집니다. 동시에 사방을 메우고 있던 짙은 안개 너머, 울창한 덤불 뒤편에서 바스락거리는 기묘한 마찰음이 들려옵니다. 누군가 혹은 무언가가 꺾인 꽃의 마지막 빛이 꺼지는 순간을 어둠 속에서 숨을 죽인 채 가만히 지켜보고 있었습니다.",
+        "semanticEvents": [
+          {
+            "eventId": "seed_forest_watcher_001",
+            "action": "PICKUP",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "이소민"
+              },
+              {
+                "role": "OBJECT",
+                "entityName": "빛 바랜 푸른 야생화"
+              },
+              {
+                "role": "LOCATION",
+                "entityName": "검은 숲 길가"
+              }
+            ],
+            "scope": "CANONICAL",
+            "polarity": "ASSERTED",
+            "epistemicStatus": "VERIFIED"
+          }
+        ],
+        "rawMetadata": {
+          "foreshadowSeeds": [
+            "seed_forest_watcher_001: 푸른 야생화의 빛이 꺼지면서 발생한 소동으로 인해 안개 속의 미지의 관찰자가 자극받았다. 꺾인 꽃에서 흘러나온 냄새나 흔적이 추적의 단서가 될 수 있다."
+          ],
+          "inventoryChanges": [
+            {
+              "name": "빛 바랜 푸른 야생화",
+              "quantity": 1,
+              "action": "add",
+              "cause": "DISCOVERY_PICKUP",
+              "verifiedEventId": "seed_forest_watcher_001"
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "1장: 안개 속의 시선",
+            "upcomingChapters": [
+              "2장: 그림자 추적자",
+              "3장: 숲의 지배자"
+            ]
+          }
+        },
+        "candidateId": 2
+      }
+    ],
+    "quarantinedCandidates": [],
+    "totalInputCount": 2,
+    "passedCount": 2,
+    "quarantinedCount": 0
+  },
+  "meaningTrees": [],
+  "preAuthResults": [],
+  "adjudication": {
+    "verdict": "DENY/FAIL-CLOSED",
+    "reason": "No pre-authorized candidate was selected by Phase 2.",
+    "isCommitted": false,
+    "authorizedProposal": null,
+    "selectedCandidateId": null
+  },
+  "finalNarrative": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"안개 속의 푸른 빛\",\n    \"narrativeSummary\": \"길가에서 유독 밝게 빛나던 파란 야생화에 손을 뻗어 꺾으려 시도하지만, 손끝이 닿는 순간 꽃은 차가운 안개로 변해 스러져 버리고 품바닥에는 서늘한 습기만이 남습니다.\",\n    \"rawMetadata\": {\n      \"foreshadowSeeds\": [],\n      \"resolvedSeeds\": [],\n      \"cameraOffscreenEvents\": [],\n      \"newNpcs\": [],\n      \"newFactions\": [],\n      \"inventoryChanges\": [],\n      \"statDeltas\": [],\n      \"chapterChanges\": {\n        \"currentChapter\": \"서막\",\n        \"upcomingChapters\": [\"안개 낀 길목\", \"숲의 속삭임\"]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n검은 숲의 안개는 살아 숨 쉬는 짐승처럼 끈적하게 피부에 달라붙는다. 사방을 에워싼 고목들은 기괴하게 뒤틀린 채 침묵하고 있으며, 발을 디딜 때마다 이끼 낀 썩은 흙에서 축축하고 비린 내음이 피어올랐다. 혈족을 잃고 홀로 남겨진 이소민의 등 뒤로 오직 가문의 가보인 검만이 서늘한 무게감으로 척추를 누르고 있을 뿐이다. 사방은 기이할 정도로 고요하여, 제 가쁜 숨소리조차 숲의 침묵에 삼켜지는 듯했다.\n\n얼어붙은 회색빛 세계를 묵묵히 걷던 소민의 눈에, 문득 이질적인 광경이 들어왔다.\n\n길가의 허물어진 고목 뿌리 틈새, 짙은 음습함 속에서 유독 선명하고 밝게 빛나는 파란 야생화 한 송이가 피어 있었다. 마치 스스로 빛을 내뿜는 것처럼 은은한 푸른 지열을 두른 꽃잎은, 가문을 잃은 후 단 한 번도 온기를 느끼지 못했던 소민의 가슴속에 묘한 파문을 일으켰다. 이 황량한 은둔자들의 숲에서 발견한 유일한 아름다움이자 생명의 흔적이었다.\n\n소민은 흙바닥에 한쪽 무릎을 꿇었다. 가죽 장갑을 벗어던진 손가락이 미세하게 떨렸다. 검은 안개 속에서 유독 푸르게 일렁이는 꽃송이를 소중히 품에 안고자, 조심스럽게 손을 뻗어 그 가녀린 줄기를 쥐려 했다.\n\n그러나 손끝이 꽃잎에 닿는 바로 그 순간, 손끝을 타고 오른 것은 식물의 온기가 아닌 소름 끼치도록 차가운 냉기였다. \n\n파란 야생화는 꺾이기도 전에, 마치 애초부터 실체가 없었던 신기루처럼 스러지기 시작했다. 푸른 빛줄기는 잘디고 서늘한 물방울이 되어 허공으로 산산이 흩어졌고, 줄기를 잡으려던 소민의 손바닥에는 오직 축축하고 시린 물기만이 묻어날 뿐이었다. 품 안으로 밀어 넣으려던 손은 허공을 움켜쥐었고, 차가운 안개 입자만이 손가락 사이로 허망하게 빠져나갔다. \n\n손바닥에 맺힌 차가운 이슬을 내려다보는 소민의 귓가에, 숲의 젖은 바람 소리만이 한층 더 깊은 쓸쓸함을 품고 흘러간다. 여전히 사방은 어둡고, 숲은 아무런 대답도 들려주지 않는다.",
+  "updatedState": {
+    "character": {
+      "name": "이소민",
+      "age": 24,
+      "gender": "여성",
+      "backgroundType": "preset",
+      "originBackground": "수라가 된 가문의 검사",
+      "flawType": "preset",
+      "flaw": "혈족을 잃은 외로움",
+      "oathType": "preset",
+      "oath": "가문을 멸문한 자를 쫓는다",
+      "anchorType": "preset",
+      "anchor": "가문의 유일한 가보 검",
+      "factionType": "preset",
+      "faction": "무소속",
+      "stats": {
+        "strength": 10,
+        "agility": 10,
+        "constitution": 10,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": []
+    },
+    "worldInfo": {
+      "worldName": "검은 숲의 은둔자들",
+      "settingDescription": "안개와 음습함으로 가득 찬 고대 판타지 은둔자들의 숲",
+      "toneStyle": "어둡고 진중하며 감각적인 묘사",
+      "currentTime": {
+        "year": 1,
+        "month": 1,
+        "day": 1,
+        "timeOfDay": "낮",
+        "formattedTime": "1년차 봄 1일"
+      },
+      "currentLocation": "숲속 길목",
+      "currentChapter": "서막: 안개 낀 입구",
+      "upcomingChapters": [
+        "1장: 은둔자의 오두막",
+        "2장: 검은 사원의 심장"
+      ],
+      "seeds": [
+        {
+          "id": "seed_legend_001",
+          "content": "검은 숲 깊은 곳에 모든 고통을 없애주는 불사약의 전설이 내려온다.",
+          "status": "active"
+        }
+      ],
+      "offscreenRecords": [],
+      "npcs": [],
+      "factions": []
+    }
+  }
+}

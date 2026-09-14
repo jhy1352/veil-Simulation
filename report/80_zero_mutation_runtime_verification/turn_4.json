@@ -1,0 +1,139 @@
+{
+  "turn": 4,
+  "description": "Normal Mutation: Encounter/Create NPC",
+  "userPrompt": "마을의 작고 낡은 주점에 들어가 구석 자리에서 조용히 독주를 마시고 있는 애꾸눈 무사를 발견하고 다가가 공손하게 인사를 건넨다.",
+  "modelRequested": "gemini-3.1-flash-lite",
+  "modelResolved": "gemini-3.1-flash-lite",
+  "rawLLMOutput": "/* TRIAGE_STAMP_V1_1789405725142_fnouzu8 */\n[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"애꾸눈 무사와의 조우\",\n    \"narrativeSummary\": \"주점 구석에서 독주를 마시는 애꾸눈 무사에게 다가가 인사를 건네자, 그는 잔을 멈추고 거친 눈매로 이소민을 응시합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_meet_001\",\n        \"action\": \"APPROACH\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"이소민\" },\n          { \"role\": \"TARGET\", \"entityName\": \"애꾸눈 무사\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"newNpcs\": [\n        {\n          \"name\": \"알 수 없는 무사\",\n          \"alias\": \"애꾸눈 무사\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"[미인지 상태]\",\n          \"metInStory\": true,\n          \"origin\": \"검은 숲 외곽\",\n          \"affiliation\": \"무소속\"\n        }\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"독주\",\n          \"quantity\": 1,\n          \"action\": \"remove\",\n          \"cause\": \"RESOURCE_EXCHANGE\",\n          \"verifiedEventId\": \"event_drink_001\"\n        }\n      ],\n      \"statDeltas\": [\n        {\n          \"stat\": \"intelligence\",\n          \"delta\": 1\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"안개 속의 주점\",\n        \"upcomingChapters\": [\"무사의 경고\", \"숲의 의뢰\"]\n      }\n    }\n  }\n]\n[CANDIDATES_END]\n\n계곡을 벗어나 얼마 지나지 않아, 안개 속에 반쯤 잠긴 채 기울어진 낡은 목조 건물이 나타났다. 빛바랜 간판은 이미 형체를 알아볼 수 없었지만, 문틈 사이로 희미한 등불 빛이 새어 나오고 있었다. 문을 밀고 들어가자 퀴퀴한 곰팡내와 묵은 술 냄새가 소민의 코를 찔렀다. 내부는 비어 있었고, 유일한 손님은 가장 어두운 구석 자리에 앉아 독주를 들이켜고 있는 한 사내뿐이었다.\n\n그는 검은 가죽 안대로 왼쪽 눈을 가리고 있었다. 낡고 해진 검복 위로 세월의 풍파가 묻어났고, 탁자 위에는 그가 찬 것과 비슷하게 낡은 장검 한 자루가 놓여 있었다. 소민은 그에게서 느껴지는 서늘한 경계심을 읽어내며, 가문의 예법에 따라 조심스럽게 다가갔다.\n\n소민은 그의 탁자로부터 두 걸음 떨어진 곳에서 멈춰 섰다. 허리를 반듯하게 세우고, 정중하게 머리를 숙였다.\n\n\"실례하겠습니다.\"\n\n소민의 목소리는 주점의 정적을 깨고 낮게 울렸다. \n\n\"이 근방을 지나던 길입니다. 잠시 숲의 사정에 대해 여쭙고 싶은 것이 있는데, 괜찮으시겠습니까?\"\n\n애꾸눈 무사는 술잔을 입가로 가져가다 말고 멈췄다. 그는 곧바로 대답하지 않았다. 대신 천천히 고개를 돌려, 가려지지 않은 단 한쪽 눈으로 소민을 위아래로 훑어내렸다. 그의 눈빛은 숲의 안개만큼이나 탁하고 차가웠으며, 동시에 노련한 검객 특유의 날카로운 예기가 서려 있었다. \n\n잠시 동안 무거운 침묵이 흘렀다. 그가 술잔을 탁자에 '탁' 소리가 나게 내려놓았다. \n\n\"이 숲에 발을 들이는 것은 보통 미친 짓이거나, 죽으러 온 놈들뿐이지.\"\n\n그의 목소리는 갈라진 쇳소리처럼 긁히는 듯했다. 그는 남은 술을 마저 비우며 소민의 시선을 피하지 않았다. \n\n\"무엇을 알고 싶은 거냐. 그 검에 맺힌 원한을 풀기 위한 대답이라도 찾으러 온 건가?\"",
+  "candidateBlockRaw": "[CANDIDATES_BLOCK]\n[\n  {\n    \"label\": \"애꾸눈 무사와의 조우\",\n    \"narrativeSummary\": \"주점 구석에서 독주를 마시는 애꾸눈 무사에게 다가가 인사를 건네자, 그는 잔을 멈추고 거친 눈매로 이소민을 응시합니다.\",\n    \"semanticEvents\": [\n      {\n        \"eventId\": \"event_meet_001\",\n        \"action\": \"APPROACH\",\n        \"roles\": [\n          { \"role\": \"SUBJECT\", \"entityName\": \"이소민\" },\n          { \"role\": \"TARGET\", \"entityName\": \"애꾸눈 무사\" }\n        ],\n        \"scope\": \"CANONICAL\",\n        \"epistemicStatus\": \"OBSERVED\"\n      }\n    ],\n    \"rawMetadata\": {\n      \"newNpcs\": [\n        {\n          \"name\": \"알 수 없는 무사\",\n          \"alias\": \"애꾸눈 무사\",\n          \"npcClass\": \"Class A\",\n          \"innerThought\": \"[미인지 상태]\",\n          \"metInStory\": true,\n          \"origin\": \"검은 숲 외곽\",\n          \"affiliation\": \"무소속\"\n        }\n      ],\n      \"inventoryChanges\": [\n        {\n          \"name\": \"독주\",\n          \"quantity\": 1,\n          \"action\": \"remove\",\n          \"cause\": \"RESOURCE_EXCHANGE\",\n          \"verifiedEventId\": \"event_drink_001\"\n        }\n      ],\n      \"statDeltas\": [\n        {\n          \"stat\": \"intelligence\",\n          \"delta\": 1\n        }\n      ],\n      \"chapterChanges\": {\n        \"currentChapter\": \"안개 속의 주점\",\n        \"upcomingChapters\": [\"무사의 경고\", \"숲의 의뢰\"]\n      }\n    }\n  }\n]\n[CANDIDATES_END]",
+  "recoveryResult": {
+    "passedCandidates": [
+      {
+        "label": "애꾸눈 무사와의 조우",
+        "narrativeSummary": "주점 구석에서 독주를 마시는 애꾸눈 무사에게 다가가 인사를 건네자, 그는 잔을 멈추고 거친 눈매로 이소민을 응시합니다.",
+        "semanticEvents": [
+          {
+            "eventId": "event_meet_001",
+            "action": "APPROACH",
+            "roles": [
+              {
+                "role": "SUBJECT",
+                "entityName": "이소민"
+              },
+              {
+                "role": "TARGET",
+                "entityName": "애꾸눈 무사"
+              }
+            ],
+            "scope": "CANONICAL",
+            "epistemicStatus": "OBSERVED"
+          }
+        ],
+        "rawMetadata": {
+          "newNpcs": [
+            {
+              "name": "알 수 없는 무사",
+              "alias": "애꾸눈 무사",
+              "npcClass": "Class A",
+              "innerThought": "[미인지 상태]",
+              "metInStory": true,
+              "origin": "검은 숲 외곽",
+              "affiliation": "무소속"
+            }
+          ],
+          "inventoryChanges": [
+            {
+              "name": "독주",
+              "quantity": 1,
+              "action": "remove",
+              "cause": "RESOURCE_EXCHANGE",
+              "verifiedEventId": "event_drink_001"
+            }
+          ],
+          "statDeltas": [
+            {
+              "stat": "intelligence",
+              "delta": 1
+            }
+          ],
+          "chapterChanges": {
+            "currentChapter": "안개 속의 주점",
+            "upcomingChapters": [
+              "무사의 경고",
+              "숲의 의뢰"
+            ]
+          }
+        },
+        "candidateId": 1
+      }
+    ],
+    "quarantinedCandidates": [],
+    "totalInputCount": 1,
+    "passedCount": 1,
+    "quarantinedCount": 0
+  },
+  "meaningTrees": [],
+  "preAuthResults": [],
+  "adjudication": {
+    "verdict": "DENY/FAIL-CLOSED",
+    "reason": "No pre-authorized candidate was selected by Phase 2.",
+    "isCommitted": false,
+    "authorizedProposal": null,
+    "selectedCandidateId": null
+  },
+  "finalNarrative": "계곡을 떠나 안개를 헤치며 걷던 중, 숲의 기괴한 침묵을 뚫고 삐걱거리는 나무 문소리가 들려왔다. 마을의 외곽, 무너져 가는 지붕을 겨우 지탱하고 있는 낡은 주점이었다. 안으로 들어서자 썩은 나무 냄새와 묵은 술 냄새가 뒤섞인 탁한 공기가 코끝을 찔렀다. 내부는 희미한 등잔불 하나가 위태롭게 흔들릴 뿐, 주인도 없이 고요함만이 가득했다.\n\n구석진 탁자에 낡은 외투를 걸친 채 혼자 앉아 독주를 마시고 있는 남자가 보였다. 검은 안대를 차고 있는 그의 얼굴은 깊은 주름과 흉터로 얼룩져 있었고, 술잔을 쥐고 있는 손은 굳은살로 딱딱하게 굳어 있었다. 한눈에 보아도 숲의 거친 삶을 버텨온 무사의 풍모였다.\n\n소민은 그가 품고 있을지도 모를 숲의 정보, 혹은 자신의 복수를 도울 단서를 기대하며 천천히 다가갔다. 발소리를 죽이고 그의 탁자 앞에 멈춰 서서, 예의를 갖추어 가볍게 고개를 숙였다.\n\n\"실례합니다. 지나가는 길에 잠시 목을 축이고자 들렀습니다.\"\n\n소민의 차분한 목소리가 주점 내부의 적막을 깼다. 그러나 애꾸눈 무사는 술잔을 입가로 가져가던 동작조차 멈추지 않았다. 그는 소민의 존재를 마치 허공의 먼지나 안개 정도로 여기는 듯, 텅 빈 눈동자로 술잔 속의 독주만을 응시하고 있었다. 등잔불이 불길하게 일렁이며 벽면에 그의 길쭉한 그림자를 기괴하게 늘어뜨렸다. 대답은 없었다. 오직 그가 술잔을 내려놓는 둔탁한 소리와, 숲에서 불어온 찬 바람이 창틈을 울리는 소리만이 주점 안을 맴돌 뿐이었다.",
+  "updatedState": {
+    "character": {
+      "name": "이소민",
+      "age": 24,
+      "gender": "여성",
+      "backgroundType": "preset",
+      "originBackground": "수라가 된 가문의 검사",
+      "flawType": "preset",
+      "flaw": "혈족을 잃은 외로움",
+      "oathType": "preset",
+      "oath": "가문을 멸문한 자를 쫓는다",
+      "anchorType": "preset",
+      "anchor": "가문의 유일한 가보 검",
+      "factionType": "preset",
+      "faction": "무소속",
+      "stats": {
+        "strength": 10,
+        "agility": 10,
+        "constitution": 10,
+        "intelligence": 10,
+        "wisdom": 10,
+        "charisma": 10
+      },
+      "inventory": []
+    },
+    "worldInfo": {
+      "worldName": "검은 숲의 은둔자들",
+      "settingDescription": "안개와 음습함으로 가득 찬 고대 판타지 은둔자들의 숲",
+      "toneStyle": "어둡고 진중하며 감각적인 묘사",
+      "currentTime": {
+        "year": 1,
+        "month": 1,
+        "day": 1,
+        "timeOfDay": "낮",
+        "formattedTime": "1년차 봄 1일"
+      },
+      "currentLocation": "숲속 길목",
+      "currentChapter": "서막: 안개 낀 입구",
+      "upcomingChapters": [
+        "1장: 은둔자의 오두막",
+        "2장: 검은 사원의 심장"
+      ],
+      "seeds": [
+        {
+          "id": "seed_legend_001",
+          "content": "검은 숲 깊은 곳에 모든 고통을 없애주는 불사약의 전설이 내려온다.",
+          "status": "active"
+        }
+      ],
+      "offscreenRecords": [],
+      "npcs": [],
+      "factions": []
+    }
+  }
+}
