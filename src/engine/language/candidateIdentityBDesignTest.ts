@@ -180,7 +180,7 @@ export function runCandidateIdentityBDesignSuite(): BDesignTestReport {
     assert(gate.passedCount === 5, 'T3.4: All 5 pass gate cleanly due to Parser ID authority');
   }
 
-  // Test 4: Cardinality non-truncation verification (7 candidates parsed, excess explicitly quarantined in Recovery Gate)
+  // Test 4: Cardinality non-truncation and 1..N verification (7 candidates parsed, all 7 pass without artificial ceiling)
   {
     const rawList = [];
     for (let i = 0; i < 7; i++) {
@@ -200,10 +200,8 @@ export function runCandidateIdentityBDesignSuite(): BDesignTestReport {
 
     // Run recovery gate on the 7 parsed candidates
     const gate = runCandidateRecoveryGate(parsed);
-    assert(gate.passedCount === 5, 'T4.4: Exactly 5 candidates pass the structural ceiling check');
-    assert(gate.quarantinedCount === 2, 'T4.5: Excess 2 candidates are explicitly quarantined');
-    assert(gate.quarantinedCandidates[0].index === 5, 'T4.6: 6th candidate is quarantined');
-    assert(gate.quarantinedCandidates[0].reasons[0].includes('out of bounds'), 'T4.7: Explicit out of bounds quarantine reason recorded');
+    assert(gate.passedCount === 7, 'T4.4: All 7 candidates pass the gate under 1..N cardinality');
+    assert(gate.quarantinedCount === 0, 'T4.5: Zero candidates quarantined');
   }
 
   // Test 5: End-to-End Pipeline & LLM #2 selectedCandidateId Resolution Integrity
@@ -379,7 +377,7 @@ export function runCandidateIdentityBDesignSuite(): BDesignTestReport {
     );
 
     assert(finalPacket.candidateId === '4', 'T6.7: Final CandidatePacket identity strictly matches selectedCandidateId "4"');
-    assert(finalPacket.statChanges.length === 1 && finalPacket.statChanges[0].stat === 'wisdom', 'T6.8: Final CandidatePacket payload zero mutation');
+    assert(Boolean(finalPacket.statChanges && finalPacket.statChanges.length === 1 && finalPacket.statChanges[0]?.stat === 'wisdom'), 'T6.8: Final CandidatePacket payload zero mutation');
 
     // 6. Proposal generation preserves originInputId = "4"
     const proposal = buildSafeProposalFromCandidate(canonicalState, finalPacket, 1, []);

@@ -11,7 +11,7 @@
  * 3. NO natural language / label / summary / style similarity heuristics.
  * 4. Strictly deduplicates identical MeaningNodes.
  * 5. Preserves the first occurring candidate's natural language metadata.
- * 6. Returns 1 to 5 candidates (never 0 if input is non-empty).
+ * 6. Returns 1..N candidates (never 0 if input is non-empty).
  * 7. ZERO re-invocation / re-generation of LLM.
  * 8. Pure filter: Does NOT perform ALLOW / DENY / Mutation / Authority decisions.
  */

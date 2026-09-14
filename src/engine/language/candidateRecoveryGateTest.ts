@@ -150,11 +150,13 @@ export function runCandidateRecoveryGateTests(): TestReport {
     );
   }
 
-  // Scenario 6: CandidateId Out of Bounds Upper (id = 6)
+  // Scenario 6: CandidateId Cardinality 1..N (id >= 1 valid, e.g. id = 6, 10)
   {
-    const c = { ...makeValidCandidate(1), candidateId: 6 };
-    const res = validateCandidateStructure(c);
-    assert(!res.valid && res.reasons.some(r => r.includes('out of bounds')), 'Scenario 6: candidateId 6 rejected (out of bounds)');
+    const c6 = { ...makeValidCandidate(1), candidateId: 6 };
+    const c10 = { ...makeValidCandidate(1), candidateId: 10 };
+    const res6 = validateCandidateStructure(c6);
+    const res10 = validateCandidateStructure(c10);
+    assert(res6.valid && res10.valid, 'Scenario 6: candidateId 6 and 10 valid under 1..N cardinality');
   }
 
   // Scenario 7: CandidateId Out of Bounds Lower (id = 0, -1)
@@ -294,7 +296,7 @@ export function runCandidateRecoveryGateTests(): TestReport {
   {
     const rawPhase1Candidates = [
       makeValidCandidate(1, '전진 탐색'),
-      { candidateId: 99, label: 'Corrupted ID', narrativeSummary: 'bad', rawMetadata: {} }, // Corrupted
+      { candidateId: -99, label: 'Corrupted ID', narrativeSummary: 'bad', rawMetadata: {} }, // Corrupted (< 1)
       makeValidCandidate(2, '측면 우회'),
       { candidateId: 3, label: null, narrativeSummary: 'bad', rawMetadata: {} }, // Corrupted
       makeValidCandidate(4, '매복 관측')
@@ -378,7 +380,7 @@ export function runCandidateRecoveryGateTests(): TestReport {
     );
   }
 
-  // Scenario 19: Genuinely distinct 5 candidates (Ceiling = 5) -> All 5 preserved through Pipeline
+  // Scenario 19: Genuinely distinct 5 candidates (1..N cardinality) -> All 5 preserved through Pipeline
   {
     const candidates5 = [
       makeValidCandidate(1, '정면 돌파'),
@@ -391,7 +393,22 @@ export function runCandidateRecoveryGateTests(): TestReport {
     assert(gateRes.passedCount === 5 && gateRes.quarantinedCount === 0, 'Scenario 19: Genuinely distinct 5 candidates - All 5 pass Gate');
   }
 
-  // Scenario 20: Genuinely distinct 4 candidates (Ceiling = 5, not a quota) -> All 4 preserved
+  // Scenario 19.1: Genuinely distinct 7 candidates (1..N cardinality) -> All 7 preserved through Pipeline
+  {
+    const candidates7 = [
+      makeValidCandidate(1, '정면 돌파'),
+      makeValidCandidate(2, '측면 우회'),
+      makeValidCandidate(3, '협상 시도'),
+      makeValidCandidate(4, '은밀 잠입'),
+      makeValidCandidate(5, '후퇴 및 정보 수집'),
+      makeValidCandidate(6, '지원 요청'),
+      makeValidCandidate(7, '정찰 유지')
+    ];
+    const gateRes = runCandidateRecoveryGate(candidates7);
+    assert(gateRes.passedCount === 7 && gateRes.quarantinedCount === 0, 'Scenario 19.1: Genuinely distinct 7 candidates - All 7 pass Gate');
+  }
+
+  // Scenario 20: Genuinely distinct 4 candidates (1..N cardinality) -> All 4 preserved
   {
     const candidates4 = [
       makeValidCandidate(1, '성문 접근'),

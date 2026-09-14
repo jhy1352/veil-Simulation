@@ -6,11 +6,11 @@
  * LLM #1 -> parseCandidatesBlock() -> recoverSyntaxAndParseJson() -> Candidate[] -> [CANDIDATE RECOVERY GATE] -> extractCandidatesFromMetadata() -> Translation -> Diversity -> PreAuth -> LLM #2 -> Engine
  * 
  * Core Invariants:
- * 1. Valid Candidate Zero-Mutation: Normal candidates pass through completely unmodified. No normalization, rewriting, or correction of fields.
+ * 1. Valid Candidate Preservation: Normal candidates pass through completely unmodified (preserving candidate proposal verbatim for engine adjudication).
  * 2. Independent Evaluation: Corruption in candidate N never cascades to or invalidates candidate M.
  * 3. Strict Fail-Closed Isolation: Corrupted candidates are quarantined with clear diagnostic reasons; never guessed or reconstructed.
  * 4. Deterministic Type & Boundary Verification:
- *    - candidateId: integer, in valid range [1, 5]
+ *    - candidateId: positive integer (>= 1, 1..N)
  *    - label: string (non-empty)
  *    - narrativeSummary: string
  *    - rawMetadata: non-null, non-array object
@@ -123,11 +123,11 @@ export function validateCandidateStructure(candidate: any): CandidateValidationR
     };
   }
 
-  // 2. candidateId must be an integer within valid range [1, 5]
+  // 2. candidateId must be a positive integer (>= 1, 1..N)
   if (typeof candidate.candidateId !== 'number' || !Number.isInteger(candidate.candidateId)) {
     reasons.push(`candidateId must be an integer (got ${typeof candidate.candidateId === 'number' ? 'float ' + candidate.candidateId : typeof candidate.candidateId})`);
-  } else if (candidate.candidateId < 1 || candidate.candidateId > 5) {
-    reasons.push(`candidateId out of bounds [1, 5] (got ${candidate.candidateId})`);
+  } else if (candidate.candidateId < 1) {
+    reasons.push(`candidateId must be a positive integer >= 1 (got ${candidate.candidateId})`);
   }
 
   // Prohibit top-level engine-owned fields from LLM
@@ -498,7 +498,7 @@ export function validateCandidateStructure(candidate: any): CandidateValidationR
 
 /**
  * Candidate Recovery Gate
- * Filters an array of raw candidate objects, quarantining corrupted items while preserving valid ones with Zero-Mutation.
+ * Filters an array of raw candidate objects, quarantining corrupted items while preserving valid candidate proposals verbatim.
  */
 export function runCandidateRecoveryGate<T = any>(input: any): CandidateRecoveryGateResult<T> {
   recoveryCallCount++;
@@ -569,7 +569,7 @@ export function runCandidateRecoveryGate<T = any>(input: any): CandidateRecovery
         reasons: [`Duplicate candidateId detected (${entry.candidateId} appears ${count} times). All instances quarantined.`]
       });
     } else {
-      // Zero-Mutation: Pass unique valid candidate reference verbatim
+      // Candidate Preservation: Pass unique valid candidate reference verbatim for engine adjudication
       passedCandidates.push(entry.candidate);
     }
   }
