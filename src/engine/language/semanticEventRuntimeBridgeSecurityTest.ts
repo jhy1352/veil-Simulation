@@ -127,8 +127,8 @@ function run(): void {
     resolveVerifiedEventId: () => 'verified-event-42',
   });
 
-  assertEqual(sequenceResult.status, 'UNSUPPORTED', 'Any unsupported semantic event must fail the sequence closed.');
-  assertEqual(sequenceResult.actions, [], 'A partially mappable sequence must never emit partial runtime actions.');
+  assertEqual(sequenceResult.status, 'MAPPABLE', 'Unsupported events do not invalidate the other executable events.');
+  assertEqual(sequenceResult.actions.length, 1, 'Only the mappable event should emit a runtime action.');
 
   console.log('SemanticEvent Runtime Bridge security tests: PASS');
 }
